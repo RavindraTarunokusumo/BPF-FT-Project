@@ -1,0 +1,12 @@
+{
+  "candidate_id": "xdp_antigravity_b01_t09_drop_udp_dns_amplification_c00",
+  "task_id": "xdp_antigravity_b01_t09_drop_udp_dns_amplification",
+  "authoring_harness": "antigravity",
+  "authoring_model": "gemini-3.7-flash",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "a9f23289c27a5a3ad173dab6df133551cee5bfa0212878a7ed74019727165e1b"
+}

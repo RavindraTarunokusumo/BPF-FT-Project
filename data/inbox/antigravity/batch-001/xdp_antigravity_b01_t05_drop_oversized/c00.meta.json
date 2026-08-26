@@ -1,0 +1,12 @@
+{
+  "candidate_id": "xdp_antigravity_b01_t05_drop_oversized_c00",
+  "task_id": "xdp_antigravity_b01_t05_drop_oversized",
+  "authoring_harness": "antigravity",
+  "authoring_model": "gemini-3.7-flash",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "1a4fe9b564db624a1fde9c6c2c7a097c528c6c85adbd5be801d42608c3ffa011"
+}

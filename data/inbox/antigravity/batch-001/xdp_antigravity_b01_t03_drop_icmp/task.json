@@ -1,0 +1,46 @@
+{
+  "task_id": "xdp_antigravity_b01_t03_drop_icmp",
+  "template_family": "ipv4_protocol_filter",
+  "semantic_signature": "ipv4+proto_icmp+drop",
+  "difficulty": "basic",
+  "split": "train",
+  "instruction": "Write a complete XDP/eBPF C program that drops all IPv4 ICMP packets (IP protocol 1) and passes every other packet. Ensure safe bounds checking.",
+  "requirements": [
+    "Return complete C source only",
+    "Check bounds for Ethernet and IPv4 headers",
+    "Pass non-IPv4 and non-ICMP packets"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "positive_icmp_drop",
+      "description": "IPv4 ICMP ping should be dropped",
+      "packet_hex": "52540012345652540065432108004500002004d2000040010000c0a8010ac0a80114080000000000000050494e47",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "negative_tcp_pass",
+      "description": "IPv4 TCP packet should pass",
+      "packet_hex": "52540012345652540065432108004500002c04d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff0000000044415441",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "negative_udp_pass",
+      "description": "IPv4 UDP packet should pass",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801143039003500110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "negative_arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "boundary_short_pass",
+      "description": "Short packet should safely pass",
+      "packet_hex": "001122334455",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}
