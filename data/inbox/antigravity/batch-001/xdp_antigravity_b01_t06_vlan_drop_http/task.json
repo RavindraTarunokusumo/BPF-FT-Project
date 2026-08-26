@@ -41,7 +41,7 @@
     {
       "name": "boundary_short_vlan_pass",
       "description": "Truncated VLAN packet (<18 bytes) should safely pass",
-      "packet_hex": "52540012345652540065432181000064",
+      "packet_hex": "525400123456525400654321810000640800",
       "expected_action": "XDP_PASS"
     }
   ]

@@ -40,7 +40,7 @@
     {
       "name": "boundary_short_pass",
       "description": "Short packet should safely pass",
-      "packet_hex": "525400123456525400",
+      "packet_hex": "5254001234565254006543210800",
       "expected_action": "XDP_PASS"
     }
   ]

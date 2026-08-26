@@ -28,7 +28,7 @@
     {
       "name": "count_short_packet_pass",
       "description": "Arbitrary short packet counted and passed",
-      "packet_hex": "01020304",
+      "packet_hex": "5254001234565254006543210800",
       "expected_action": "XDP_PASS"
     }
   ]

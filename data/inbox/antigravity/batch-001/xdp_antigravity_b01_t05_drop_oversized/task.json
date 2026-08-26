@@ -11,7 +11,7 @@
     "Drop if length > 1400",
     "Pass if length <= 1400"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t05_drop_oversized_c00",
   "tests": [
     {
       "name": "positive_oversized_drop",
