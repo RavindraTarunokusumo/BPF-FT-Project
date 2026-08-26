@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b03_t09_drop_invalid_tcp_flags_zero_window_c00_r01",
+  "task_id": "xdp_b03_t09_drop_invalid_tcp_flags_zero_window",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "xdp_b03_t09_drop_invalid_tcp_flags_zero_window_c00",
+  "repair_attempt": 1,
+  "failure_diagnostic": "Behavioral tests failed:\nTest 'unnamed_test' failed: expected XDP_DROP (1), got XDP_PASS (2)",
+  "claimed_status": "unvalidated",
+  "source_sha256": "b60172ef4b550912172c17c90f9bd4b507ea9f403abb36546169d4d9f4d59852"
+}

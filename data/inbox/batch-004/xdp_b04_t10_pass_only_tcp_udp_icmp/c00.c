@@ -6,27 +6,13 @@
 #include <bpf/bpf_endian.h>
 
 SEC("xdp")
-int xdp_allow_tcp_udp_icmp(struct xdp_md *ctx) {
-    void *data = (void *)(long)ctx->data;
-    void *data_end = (void *)(long)ctx->data_end;
-
+int xdp_pass(struct xdp_md *ctx) {
+    void *data = (void *)(long)ctx->data, *data_end = (void *)(long)ctx->data_end;
     struct ethhdr *eth = data;
-    if ((void *)(eth + 1) > data_end)
-        return XDP_PASS;
-
-    if (eth->h_proto != bpf_htons(ETH_P_IP))
-        return XDP_PASS;
-
+    if ((void *)(eth + 1) > data_end || eth->h_proto != bpf_htons(ETH_P_IP)) return XDP_PASS;
     struct iphdr *ip = (void *)(eth + 1);
-    if ((void *)(ip + 1) > data_end)
-        return XDP_PASS;
-
-    if (ip->protocol == IPPROTO_TCP ||
-        ip->protocol == IPPROTO_UDP ||
-        ip->protocol == IPPROTO_ICMP)
-        return XDP_PASS;
-
-    return XDP_DROP;
+    if ((void *)(ip + 1) > data_end) return XDP_PASS;
+    if (ip->protocol != IPPROTO_TCP && ip->protocol != IPPROTO_UDP && ip->protocol != IPPROTO_ICMP) return XDP_DROP;
+    return XDP_PASS;
 }
-
 char _license[] SEC("license") = "GPL";

@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b03_t08_drop_syn_ack_unsolicited_c00_r01",
+  "task_id": "xdp_b03_t08_drop_syn_ack_unsolicited",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "xdp_b03_t08_drop_syn_ack_unsolicited_c00",
+  "repair_attempt": 1,
+  "failure_diagnostic": "Behavioral tests failed:\nTest 'unnamed_test' failed: expected XDP_DROP (1), got XDP_PASS (2)",
+  "claimed_status": "unvalidated",
+  "source_sha256": "1480912a4894c08bd34978e2b77245a09226a078b21968d26d969ebf9343602d"
+}

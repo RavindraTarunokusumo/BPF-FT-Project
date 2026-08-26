@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b03_t10_drop_psh_without_ack_c00_r01",
+  "task_id": "xdp_b03_t10_drop_psh_without_ack",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "xdp_b03_t10_drop_psh_without_ack_c00",
+  "repair_attempt": 1,
+  "failure_diagnostic": "Behavioral tests failed:\nTest 'unnamed_test' failed: expected XDP_DROP (1), got XDP_PASS (2)",
+  "claimed_status": "unvalidated",
+  "source_sha256": "b4d94473ba22d67dca9611d805e4e6a2ceeb24b1bea3cb1c81b490a6ec187f12"
+}

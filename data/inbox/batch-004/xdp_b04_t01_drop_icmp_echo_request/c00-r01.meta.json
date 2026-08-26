@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b04_t01_drop_icmp_echo_request_c00_r01",
+  "task_id": "xdp_b04_t01_drop_icmp_echo_request",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "xdp_b04_t01_drop_icmp_echo_request_c00",
+  "repair_attempt": 1,
+  "failure_diagnostic": "Compilation failed:\nIn file included from /root/BPF-FT-Project/data/inbox/batch-004/xdp_b04_t01_drop_icmp_echo_request/c00.c:8:\nIn file included from /usr/include/linux/icmp.h:23:\nIn file included from /usr/include/linux/if.h:28:\nIn file included from /usr/include/x86_64-linux-gnu/sys/socket.h:22:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated.",
+  "claimed_status": "unvalidated",
+  "source_sha256": "d7a7ab19f4b1883d5e7fc4ad4c5bad8a7a56e801aa16856a11d61b1866d6c626"
+}
