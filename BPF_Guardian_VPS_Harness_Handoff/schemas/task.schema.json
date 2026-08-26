@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bpf-guardian.local/schemas/task.schema.json",
+  "title": "BPF-Guardian task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "learning_mode",
+    "application_category",
+    "task_family",
+    "difficulty",
+    "instruction",
+    "program_contract"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{2,127}$"},
+    "learning_mode": {"enum": ["synthesis", "repair"]},
+    "application_category": {
+      "enum": [
+        "packet_filtering_security",
+        "network_routing_forwarding",
+        "packet_inspection_telemetry",
+        "protocol_transformation"
+      ]
+    },
+    "task_family": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{2,127}$"},
+    "difficulty": {"enum": ["level_1", "level_2", "level_3"]},
+    "template_family": {"type": "string", "minLength": 1},
+    "semantic_signature": {"type": "string", "minLength": 1},
+    "instruction": {"type": "string", "minLength": 20},
+    "requirements": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "program_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "program_type": {"const": "xdp"},
+        "section": {"const": "xdp"},
+        "max_source_bytes": {"type": "integer", "minimum": 1, "maximum": 262144}
+      },
+      "required": ["program_type", "section"]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_filter_tcp23",
+  "validators": [
+    {
+      "type": "packet_action",
+      "cases": [
+        {
+          "case_id": "missing_packet_must_error",
+          "input": {"packet_path": "acceptance/generated/does_not_exist.bin"},
+          "expected": {"action": "XDP_PASS"}
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_live_forward",
+  "learning_mode": "synthesis",
+  "application_category": "network_routing_forwarding",
+  "task_family": "configured_interface_redirect",
+  "difficulty": "level_2",
+  "template_family": "array_configured_xdp_redirect",
+  "semantic_signature": "redirect_all_to_configured_veth",
+  "instruction": "Redirect packets to the interface index stored at key zero in forwarding_config.",
+  "requirements": ["Abort if the configuration entry is absent or zero"],
+  "program_contract": {"program_type": "xdp", "section": "xdp"}
+}

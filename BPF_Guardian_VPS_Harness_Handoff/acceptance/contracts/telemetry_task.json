@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_telemetry_protocol",
+  "learning_mode": "synthesis",
+  "application_category": "packet_inspection_telemetry",
+  "task_family": "protocol_packet_counters",
+  "difficulty": "level_2",
+  "template_family": "percpu_protocol_counter",
+  "semantic_signature": "percpu_array_ipv4_tcp_udp_other_nonipv4",
+  "instruction": "Count packets by protocol in a per-CPU array and pass every packet.",
+  "requirements": ["Increment exactly one counter per packet"],
+  "program_contract": {"program_type": "xdp", "section": "xdp"}
+}

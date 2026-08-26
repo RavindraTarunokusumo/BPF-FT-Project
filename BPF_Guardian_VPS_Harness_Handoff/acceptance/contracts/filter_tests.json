@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_filter_tcp23",
+  "validators": [
+    {
+      "type": "packet_action",
+      "cases": [
+        {
+          "case_id": "drop_tcp23",
+          "input": {"packet_path": "acceptance/generated/tcp23.bin"},
+          "expected": {"action": "XDP_DROP"}
+        },
+        {
+          "case_id": "pass_tcp80",
+          "input": {"packet_path": "acceptance/generated/tcp80.bin"},
+          "expected": {"action": "XDP_PASS"}
+        },
+        {
+          "case_id": "pass_non_ipv4",
+          "input": {"packet_path": "acceptance/generated/non_ipv4.bin"},
+          "expected": {"action": "XDP_PASS"}
+        },
+        {
+          "case_id": "safe_truncated",
+          "input": {"packet_path": "acceptance/generated/truncated.bin"},
+          "expected": {"action": "XDP_PASS"}
+        }
+      ]
+    }
+  ]
+}

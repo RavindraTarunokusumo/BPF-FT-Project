@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_filter_tcp23",
+  "validators": [
+    {
+      "type": "imaginary_validator",
+      "cases": [
+        {
+          "case_id": "unsupported_validator_must_error",
+          "input": {"packet_path": "acceptance/generated/tcp80.bin"},
+          "expected": {"action": "XDP_PASS"}
+        }
+      ]
+    }
+  ]
+}

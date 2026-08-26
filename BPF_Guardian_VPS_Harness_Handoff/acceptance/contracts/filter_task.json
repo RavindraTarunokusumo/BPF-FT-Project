@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_filter_tcp23",
+  "learning_mode": "synthesis",
+  "application_category": "packet_filtering_security",
+  "task_family": "tcp_destination_port_filter",
+  "difficulty": "level_1",
+  "template_family": "ipv4_tcp_destination_filter",
+  "semantic_signature": "ipv4_tcp_dport_single_drop",
+  "instruction": "Drop IPv4 TCP packets whose destination port is 23 and pass every other packet.",
+  "requirements": [
+    "Check packet bounds",
+    "Handle variable IPv4 header length",
+    "Return complete XDP source"
+  ],
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  }
+}

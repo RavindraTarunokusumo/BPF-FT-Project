@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_telemetry_protocol",
+  "validators": [
+    {
+      "type": "map_state",
+      "cases": [
+        {
+          "case_id": "protocol_counts_are_isolated",
+          "input": {
+            "map": {
+              "name": "protocol_counts",
+              "type": "percpu_array",
+              "key_size": 4,
+              "value_size": 8,
+              "reset": "zero_all"
+            },
+            "packet_sequence": [
+              {"packet_path": "acceptance/generated/tcp23.bin", "repeat": 2},
+              {"packet_path": "acceptance/generated/udp53.bin", "repeat": 3},
+              {"packet_path": "acceptance/generated/non_ipv4.bin", "repeat": 1}
+            ]
+          },
+          "expected": {
+            "percpu_sum": {"0": 2, "1": 3, "2": 0, "3": 1},
+            "all_actions": "XDP_PASS"
+          }
+        },
+        {
+          "case_id": "map_reset_prevents_state_leakage",
+          "input": {
+            "map": {
+              "name": "protocol_counts",
+              "type": "percpu_array",
+              "key_size": 4,
+              "value_size": 8,
+              "reset": "zero_all"
+            },
+            "packet_sequence": [
+              {"packet_path": "acceptance/generated/tcp80.bin", "repeat": 1}
+            ]
+          },
+          "expected": {
+            "percpu_sum": {"0": 1, "1": 0, "2": 0, "3": 0},
+            "all_actions": "XDP_PASS"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_live_forward",
+  "validators": [
+    {
+      "type": "live_forward",
+      "cases": [
+        {
+          "case_id": "packet_reaches_only_configured_egress",
+          "input": {
+            "packet_path": "acceptance/generated/forward.bin",
+            "topology": {
+              "namespace_prefix": "bpfg_accept",
+              "ingress_alias": "ingress",
+              "egress_aliases": ["expected", "wrong"],
+              "mtu": 1500
+            },
+            "map_initialization": [
+              {
+                "map_name": "forwarding_config",
+                "key_u32": 0,
+                "value_from": "topology.expected.ifindex"
+              }
+            ]
+          },
+          "expected": {
+            "action": "XDP_REDIRECT",
+            "egress_alias": "expected",
+            "packet_count": 1,
+            "exact_packet_path": "acceptance/generated/forward.bin",
+            "absent_on": ["wrong"]
+          }
+        }
+      ]
+    }
+  ]
+}

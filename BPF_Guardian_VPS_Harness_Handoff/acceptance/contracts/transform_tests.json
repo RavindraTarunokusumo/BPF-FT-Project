@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_transform_mac",
+  "validators": [
+    {
+      "type": "packet_action",
+      "cases": [
+        {
+          "case_id": "transformation_pass_action",
+          "input": {"packet_path": "acceptance/generated/swap_input.bin"},
+          "expected": {"action": "XDP_PASS"}
+        }
+      ]
+    },
+    {
+      "type": "packet_bytes",
+      "cases": [
+        {
+          "case_id": "mac_addresses_swapped",
+          "input": {"packet_path": "acceptance/generated/swap_input.bin"},
+          "expected": {
+            "exact_packet_path": "acceptance/generated/swap_expected.bin",
+            "output_length": 54,
+            "ethernet": {
+              "source": "02:00:00:00:00:02",
+              "destination": "02:00:00:00:00:01",
+              "ethertype": 2048
+            },
+            "unchanged_ranges": [{"start": 12, "end": 54}]
+          }
+        }
+      ]
+    }
+  ]
+}

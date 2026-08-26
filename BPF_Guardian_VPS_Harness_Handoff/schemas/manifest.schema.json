@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bpf-guardian.local/schemas/manifest.schema.json",
+  "title": "BPF-Guardian candidate manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "task_id",
+    "source_path",
+    "source_sha256",
+    "authoring_harness",
+    "claimed_status"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "candidate_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{2,127}$"},
+    "task_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{2,127}$"},
+    "source_path": {"type": "string", "minLength": 1},
+    "source_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "authoring_harness": {"type": "string", "minLength": 1},
+    "authoring_model": {"type": ["string", "null"]},
+    "generation_prompt_version": {"type": "string", "minLength": 1},
+    "parent_candidate_id": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{2,127}$"}
+      ]
+    },
+    "repair_attempt": {"type": "integer", "minimum": 0},
+    "claimed_status": {"const": "unvalidated"}
+  }
+}

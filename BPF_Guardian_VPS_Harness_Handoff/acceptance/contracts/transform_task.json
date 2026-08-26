@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "task_id": "accept_transform_mac",
+  "learning_mode": "synthesis",
+  "application_category": "protocol_transformation",
+  "task_family": "ethernet_mac_swap",
+  "difficulty": "level_1",
+  "template_family": "ethernet_fixed_header_rewrite",
+  "semantic_signature": "ethernet_swap_source_destination_mac",
+  "instruction": "Swap Ethernet source and destination MAC addresses and pass the packet.",
+  "requirements": [
+    "Check the complete Ethernet header",
+    "Preserve all bytes after the Ethernet addresses"
+  ],
+  "program_contract": {"program_type": "xdp", "section": "xdp"}
+}
