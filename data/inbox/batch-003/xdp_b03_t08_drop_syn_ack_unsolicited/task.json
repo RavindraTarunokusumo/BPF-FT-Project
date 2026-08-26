@@ -10,7 +10,7 @@
     "Verifier-safe",
     "Bounds-checks"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b03_t08_drop_syn_ack_unsolicited_c00_r01",
   "tests": [
     {
       "name": "syn_ack_8080_drop",

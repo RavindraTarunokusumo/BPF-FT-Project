@@ -10,7 +10,7 @@
     "Verifier-safe",
     "Bounds-checks"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b03_t06_pass_syn_only_web_c00_r01",
   "tests": [
     {
       "name": "web_syn_pass",

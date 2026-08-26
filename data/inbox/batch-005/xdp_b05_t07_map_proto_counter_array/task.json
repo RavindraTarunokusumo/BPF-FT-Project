@@ -1,12 +1,13 @@
 {
-    "task_id": "xdp_b05_t07_map_proto_counter_array",
-    "template_family": "xdp_map_filter",
-    "difficulty": "medium",
-    "split": "train",
-    "tests": [
-        {
-            "packet_hex": "ffffffffffff00000000000008004500001400010000401100007f0000017f000001",
-            "expected_action": "XDP_PASS"
-        }
-    ]
+  "task_id": "xdp_b05_t07_map_proto_counter_array",
+  "template_family": "xdp_map_filter",
+  "difficulty": "medium",
+  "split": "train",
+  "tests": [
+    {
+      "packet_hex": "ffffffffffff00000000000008004500001400010000401100007f0000017f000001",
+      "expected_action": "XDP_PASS"
+    }
+  ],
+  "gold_candidate_id": "xdp_b05_t07_map_proto_counter_array_c00"
 }

@@ -8,5 +8,6 @@
       "packet_hex": "ffffffffffff00000000000008004500003c00010000401100007f0000017f0000010000000000280000",
       "expected_action": "XDP_PASS"
     }
-  ]
+  ],
+  "gold_candidate_id": "xdp_b02_t05_drop_udp_snmp_c00"
 }

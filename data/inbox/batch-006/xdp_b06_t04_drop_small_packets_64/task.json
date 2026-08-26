@@ -1,19 +1,19 @@
 {
-    "task_id": "xdp_b06_t04_drop_small_packets_64",
-    "template_family": "xdp",
-    "semantic_signature": "Drop < 64 bytes",
-    "difficulty": "medium",
-    "split": "train",
-    "instruction": "Drop < 64 bytes",
-    "requirements": [
-        "bounds_check",
-        "ethernet_parsing"
-    ],
-    "gold_candidate_id": null,
-    "tests": [
-        {
-            "packet_hex": "ffffffffffff00000000000008004500001c00004000401100000a0000010a000002",
-            "expected_action": "XDP_PASS"
-        }
-    ]
+  "task_id": "xdp_b06_t04_drop_small_packets_64",
+  "template_family": "xdp",
+  "semantic_signature": "Drop < 64 bytes",
+  "difficulty": "medium",
+  "split": "train",
+  "instruction": "Drop < 64 bytes",
+  "requirements": [
+    "bounds_check",
+    "ethernet_parsing"
+  ],
+  "gold_candidate_id": "xdp_b06_t04_drop_small_packets_64_c00",
+  "tests": [
+    {
+      "packet_hex": "ffffffffffff00000000000008004500001c00004000401100000a0000010a000002",
+      "expected_action": "XDP_PASS"
+    }
+  ]
 }

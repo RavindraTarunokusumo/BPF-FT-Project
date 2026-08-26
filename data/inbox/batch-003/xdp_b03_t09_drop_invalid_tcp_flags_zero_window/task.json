@@ -10,7 +10,7 @@
     "Verifier-safe",
     "Bounds-checks"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b03_t09_drop_invalid_tcp_flags_zero_window_c00_r01",
   "tests": [
     {
       "name": "syn_zero_win_drop",

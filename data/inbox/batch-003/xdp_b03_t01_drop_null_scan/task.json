@@ -10,7 +10,7 @@
     "Verifier-safe",
     "Bounds-checks"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b03_t01_drop_null_scan_c00_r01",
   "tests": [
     {
       "name": "null_scan_drop",

@@ -1,16 +1,16 @@
 {
-    "task_id": "xdp_b04_t08_drop_dscp_cs6",
-    "template_family": "xdp_filter",
-    "semantic_signature": "packet_filtering",
-    "difficulty": "beginner",
-    "split": "train",
-    "instruction": "Drop IPv4 packets with DSCP CS6",
-    "requirements": [],
-    "gold_candidate_id": null,
-    "tests": [
-        {
-            "packet_hex": "ffffffffffff000000000000080045c0001400000000401100000a0000010a000002",
-            "expected_action": "XDP_DROP"
-        }
-    ]
+  "task_id": "xdp_b04_t08_drop_dscp_cs6",
+  "template_family": "xdp_filter",
+  "semantic_signature": "packet_filtering",
+  "difficulty": "beginner",
+  "split": "train",
+  "instruction": "Drop IPv4 packets with DSCP CS6",
+  "requirements": [],
+  "gold_candidate_id": "xdp_b04_t08_drop_dscp_cs6_c00",
+  "tests": [
+    {
+      "packet_hex": "ffffffffffff000000000000080045c0001400000000401100000a0000010a000002",
+      "expected_action": "XDP_DROP"
+    }
+  ]
 }
