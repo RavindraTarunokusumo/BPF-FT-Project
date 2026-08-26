@@ -10,7 +10,7 @@
     "Parse TCP dport",
     "Lookup port in map and drop if found"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t03_map_tcp_dport_denylist_c00",
   "tests": [
     {
       "name": "tcp_pass_default",

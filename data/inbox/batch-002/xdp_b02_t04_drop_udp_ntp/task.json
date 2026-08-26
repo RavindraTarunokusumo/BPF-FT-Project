@@ -11,7 +11,7 @@
     "Check udp->dest == bpf_htons(123)",
     "Pass non-NTP packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t04_drop_udp_ntp_c00",
   "tests": [
     {
       "name": "ntp_drop",

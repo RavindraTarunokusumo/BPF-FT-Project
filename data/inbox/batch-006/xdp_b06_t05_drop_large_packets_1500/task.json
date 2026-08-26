@@ -10,7 +10,7 @@
     "If length > 1500 return XDP_DROP",
     "Return XDP_PASS for length <= 1500"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t05_drop_large_packets_1500_c00",
   "tests": [
     {
       "name": "large_1514b_drop",

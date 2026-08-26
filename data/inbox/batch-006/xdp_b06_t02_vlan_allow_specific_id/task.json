@@ -11,7 +11,7 @@
     "If VLAN ID == 100 return XDP_PASS, else XDP_DROP for tagged frames",
     "Pass untagged traffic"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t02_vlan_allow_specific_id_c00",
   "tests": [
     {
       "name": "vlan_100_pass",

@@ -11,7 +11,7 @@
     "If protocol == 47 return XDP_DROP; else XDP_PASS",
     "Pass non-IP packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b04_t03_drop_gre_protocol_c00",
   "tests": [
     {
       "name": "gre_drop",

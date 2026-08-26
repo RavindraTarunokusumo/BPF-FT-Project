@@ -11,7 +11,7 @@
     "If protocol == 50 (IPPROTO_ESP) return XDP_DROP",
     "Pass non-IP and other protocol packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b04_t04_drop_ipsec_esp_c00",
   "tests": [
     {
       "name": "esp_drop",

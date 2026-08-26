@@ -11,7 +11,7 @@
     "Inspect ICMP type byte at offset after IPv4 header",
     "If type == 3 return XDP_DROP; else XDP_PASS"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b04_t02_drop_icmp_unreachable_c00",
   "tests": [
     {
       "name": "unreachable_drop",

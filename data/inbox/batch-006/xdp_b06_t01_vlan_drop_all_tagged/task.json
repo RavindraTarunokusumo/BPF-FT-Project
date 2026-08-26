@@ -10,7 +10,7 @@
     "If eth->h_proto == bpf_htons(ETH_P_8021Q), return XDP_DROP",
     "Pass untagged traffic"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t01_vlan_drop_all_tagged_c00",
   "tests": [
     {
       "name": "vlan_drop",

@@ -10,7 +10,7 @@
     "Parse UDP dport",
     "Lookup port in map and drop if found"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t04_map_udp_dport_denylist_c00",
   "tests": [
     {
       "name": "udp_pass_default",

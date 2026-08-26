@@ -11,7 +11,7 @@
     "If (ip->tos & 0xFC) == 0xC0 return XDP_DROP",
     "Pass other traffic with XDP_PASS"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b04_t08_drop_dscp_cs6_c00",
   "tests": [
     {
       "name": "dscp_cs6_drop",

@@ -11,7 +11,7 @@
     "If tot_len < 40 return XDP_DROP",
     "Pass other traffic"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t07_drop_tiny_ip_payload_c00",
   "tests": [
     {
       "name": "tiny_ip_28b_drop",

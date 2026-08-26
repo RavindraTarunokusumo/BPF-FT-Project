@@ -11,7 +11,7 @@
     "Check tcp->dest == bpf_htons(139) or bpf_htons(445)",
     "Return XDP_DROP for SMB, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t06_drop_tcp_smb_c00",
   "tests": [
     {
       "name": "smb_445_drop",

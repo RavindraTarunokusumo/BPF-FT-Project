@@ -12,7 +12,7 @@
     "Return XDP_DROP for other IPv4 protocols",
     "Pass non-IPv4 traffic"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b04_t10_pass_only_tcp_udp_icmp_c00",
   "tests": [
     {
       "name": "tcp_pass",

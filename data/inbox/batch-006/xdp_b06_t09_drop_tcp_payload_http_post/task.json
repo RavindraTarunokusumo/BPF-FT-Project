@@ -11,7 +11,7 @@
     "Check payload bounds for at least 5 bytes",
     "If payload starts with 'POST ', return XDP_DROP"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t09_drop_tcp_payload_http_post_c00",
   "tests": [
     {
       "name": "post_drop",

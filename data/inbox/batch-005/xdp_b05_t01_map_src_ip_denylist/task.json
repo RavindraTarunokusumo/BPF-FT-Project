@@ -10,7 +10,7 @@
     "Perform bpf_map_lookup_elem on ip->saddr",
     "If value != NULL, return XDP_DROP; else XDP_PASS"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t01_map_src_ip_denylist_c00",
   "tests": [
     {
       "name": "src_ip_denied_drop",

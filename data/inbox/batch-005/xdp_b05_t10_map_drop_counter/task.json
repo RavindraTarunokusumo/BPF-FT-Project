@@ -11,7 +11,7 @@
     "If port == 53, increment drop counter at key 0 and return XDP_DROP",
     "Pass other traffic with XDP_PASS"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t10_map_drop_counter_c00",
   "tests": [
     {
       "name": "dns_drop",

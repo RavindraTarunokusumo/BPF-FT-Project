@@ -10,7 +10,7 @@
     "If length < 64 return XDP_DROP",
     "Return XDP_PASS for length >= 64"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t04_drop_small_packets_64_c00",
   "tests": [
     {
       "name": "small_34b_drop",

@@ -11,7 +11,7 @@
     "Check udp->dest == bpf_htons(161) or bpf_htons(162)",
     "Return XDP_DROP for SNMP, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t05_drop_udp_snmp_c00",
   "tests": [
     {
       "name": "snmp_161_drop",

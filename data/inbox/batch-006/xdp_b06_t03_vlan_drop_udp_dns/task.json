@@ -11,7 +11,7 @@
     "Verify UDP protocol and dport 53",
     "Return XDP_DROP for inner DNS, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t03_vlan_drop_udp_dns_c00",
   "tests": [
     {
       "name": "vlan_dns_drop",

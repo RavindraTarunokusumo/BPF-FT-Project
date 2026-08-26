@@ -10,7 +10,7 @@
     "Lookup ip->daddr in map",
     "Drop if found, pass otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t02_map_dst_ip_denylist_c00",
   "tests": [
     {
       "name": "dst_ip_pass_default",

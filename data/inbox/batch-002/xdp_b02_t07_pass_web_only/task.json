@@ -11,7 +11,7 @@
     "If TCP, allow only ports 80 and 443; drop other TCP",
     "Pass non-TCP and non-IP packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t07_pass_web_only_c00",
   "tests": [
     {
       "name": "http_80_pass",

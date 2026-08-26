@@ -11,7 +11,7 @@
     "Check tcp->dest == bpf_htons(3306)",
     "Return XDP_DROP for MySQL, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t02_drop_tcp_mysql_c00",
   "tests": [
     {
       "name": "mysql_drop",

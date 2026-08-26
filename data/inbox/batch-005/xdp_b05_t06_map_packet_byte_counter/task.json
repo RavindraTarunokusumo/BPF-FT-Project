@@ -11,7 +11,7 @@
     "Atomically add packet length to index 1",
     "Pass all traffic with XDP_PASS"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t06_map_packet_byte_counter_c00",
   "tests": [
     {
       "name": "tcp_pass",

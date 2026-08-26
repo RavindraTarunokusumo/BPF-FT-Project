@@ -11,7 +11,7 @@
     "Check if inner ip->protocol == IPPROTO_ICMP",
     "Return XDP_DROP for inner ICMP, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t08_vlan_drop_icmp_c00",
   "tests": [
     {
       "name": "vlan_icmp_drop",

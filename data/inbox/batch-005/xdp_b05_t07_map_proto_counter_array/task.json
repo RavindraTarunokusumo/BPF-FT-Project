@@ -11,7 +11,7 @@
     "Atomically increment counter at matched index",
     "Return XDP_PASS"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t07_map_proto_counter_array_c00",
   "tests": [
     {
       "name": "tcp_pass",

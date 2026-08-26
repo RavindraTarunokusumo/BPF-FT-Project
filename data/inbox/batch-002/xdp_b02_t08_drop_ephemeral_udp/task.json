@@ -11,7 +11,7 @@
     "Check bpf_ntohs(udp->source) >= 1024 && bpf_ntohs(udp->dest) >= 1024",
     "Return XDP_DROP for matching ephemeral UDP, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t08_drop_ephemeral_udp_c00",
   "tests": [
     {
       "name": "ephemeral_udp_drop",

@@ -10,7 +10,7 @@
     "Lookup ip->protocol in map",
     "Drop if present, pass otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t05_map_ip_proto_denylist_c00",
   "tests": [
     {
       "name": "ip_proto_pass_default",

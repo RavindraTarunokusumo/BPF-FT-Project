@@ -10,7 +10,7 @@
     "If eth->h_proto == bpf_htons(ETH_P_8021AD / 0x88A8), return XDP_DROP",
     "Pass other frames with XDP_PASS"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t10_double_vlan_drop_all_c00",
   "tests": [
     {
       "name": "qinq_drop",

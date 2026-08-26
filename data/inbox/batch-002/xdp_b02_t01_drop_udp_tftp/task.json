@@ -11,7 +11,7 @@
     "Check udp->dest == bpf_htons(69)",
     "Return XDP_DROP for TFTP, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t01_drop_udp_tftp_c00",
   "tests": [
     {
       "name": "tftp_drop",

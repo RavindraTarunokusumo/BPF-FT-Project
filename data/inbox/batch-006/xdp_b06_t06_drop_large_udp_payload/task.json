@@ -11,7 +11,7 @@
     "If udp_len > 1024 return XDP_DROP",
     "Pass other traffic"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b06_t06_drop_large_udp_payload_c00",
   "tests": [
     {
       "name": "large_udp_drop",

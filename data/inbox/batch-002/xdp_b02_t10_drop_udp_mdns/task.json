@@ -11,7 +11,7 @@
     "Check udp->dest == bpf_htons(5353)",
     "Return XDP_DROP for mDNS, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t10_drop_udp_mdns_c00",
   "tests": [
     {
       "name": "mdns_drop",

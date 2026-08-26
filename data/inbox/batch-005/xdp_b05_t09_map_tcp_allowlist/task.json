@@ -11,7 +11,7 @@
     "Drop TCP packet if port not found in map",
     "Pass non-TCP traffic"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b05_t09_map_tcp_allowlist_c00",
   "tests": [
     {
       "name": "tcp_unlisted_port_drop",

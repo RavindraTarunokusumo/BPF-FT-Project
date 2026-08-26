@@ -11,7 +11,7 @@
     "Convert tcp->dest with bpf_ntohs",
     "Drop if port >= 6000 and port <= 6005"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t09_drop_tcp_range_6000_6005_c00",
   "tests": [
     {
       "name": "tcp_6000_drop",

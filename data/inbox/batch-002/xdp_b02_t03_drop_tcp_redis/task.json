@@ -11,7 +11,7 @@
     "Check tcp->dest == bpf_htons(6379)",
     "Return XDP_DROP for Redis, XDP_PASS otherwise"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_b02_t03_drop_tcp_redis_c00",
   "tests": [
     {
       "name": "redis_drop",
