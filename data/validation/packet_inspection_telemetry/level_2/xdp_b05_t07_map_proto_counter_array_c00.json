@@ -1,0 +1,37 @@
+{
+  "task_id": "xdp_b05_t07_map_proto_counter_array",
+  "candidate_id": "xdp_b05_t07_map_proto_counter_array_c00",
+  "source_path": "/root/BPF-FT-Project/data/inbox/packet_inspection_telemetry/level_2/xdp_b05_t07_map_proto_counter_array/c00.c",
+  "source_sha256": "57156d6075d4492b1bdba1d1ebf64919b68399ee53b2f26c6ff508c877e4c97f",
+  "timestamp": "2026-08-26T00:46:29.436174+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/inbox/batch-005/xdp_b05_t07_map_proto_counter_array/c00.c:27:12: warning: unused variable 'val' [-Wunused-variable]\n   27 |     __u32 *val = bpf_map_lookup_elem(&proto_counter_array_map, &key);\n      |            ^~~\n1 warning generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_hrc581ne/candidate.o\nlibbpf: elf: section(3) xdp, size 176, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_prog' at insn offset 0 (0 bytes), code size 22 insns (176 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_hrc581ne/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1085, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 240, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'proto_counter_array_map': at sec_idx 5, offset 0.\nlibbpf: map 'proto_counter_array_map': found type = 2.\nlibbpf: map 'proto_counter_array_map': found key [8], sz = 4.\nlibbpf: map 'proto_counter_array_map': found value [8], sz = 4.\nlibbpf: map 'proto_counter_array_map': found max_entries = 1024.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #17 against 'proto_counter_array_map'\nlibbpf: prog 'xdp_prog': found map 0 (proto_counter_array_map, sec 5, off 0) for insn #17\nlibbpf: map 'proto_counter_array_map': created successfully, fd=4\nlibbpf: prog 'xdp_prog': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end) return XDP_PASS;\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end) return XDP_PASS;\n4: (2d) if r3 > r2 goto pc+15         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP)) return XDP_PASS;\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP)) return XDP_PASS;\n9: (55) if r3 != 0x8 goto pc+10       ; R3_w=8\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n12: (2d) if r3 > r2 goto pc+7         ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 key = ip->saddr;\n13: (61) r1 = *(u32 *)(r1 +26)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 key = ip->saddr;\n14: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n15: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 key = ip->saddr;\n16: (07) r2 += -4                     ; R2_w=fp-4\n; __u32 *val = bpf_map_lookup_elem(&proto_counter_array_map, &key);\n17: (18) r1 = 0xff2125b7a28c0000      ; R1_w=map_ptr(map=proto_counter_a,ks=4,vs=4)\n19: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=1,map=proto_counter_a,ks=4,vs=4)\n; }\n20: (b7) r0 = 2                       ; R0_w=2\n21: (95) exit\n\nfrom 12 to 20: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n20: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n20: (b7) r0 = 2                       ; R0_w=2\n21: (95) exit\n\nfrom 9 to 20: safe\n\nfrom 4 to 20: safe\nverification time 242 usec\nstack depth 8\nprocessed 25 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 1,
+    "total_tests": 1,
+    "details": [
+      {
+        "name": "unnamed_test",
+        "description": "",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null,
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2"
+}

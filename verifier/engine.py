@@ -164,18 +164,21 @@ class BPFValidator:
 
     def validate_candidate(
         self,
-        batch_id: str,
         task_id: str,
         candidate_id: str,
         source_path: Path,
         task_spec: Dict[str, Any],
+        category: Optional[str] = None,
+        level: Optional[str] = None,
+        batch_id: Optional[str] = None,
     ) -> Dict[str, Any]:
         """Performs full validation (compile, verifier load, behavioral test) on a candidate."""
         source_sha256 = compute_sha256(source_path)
         timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
         result: Dict[str, Any] = {
-            "batch_id": batch_id,
+            "application_category": category or task_spec.get("application_category", "unknown"),
+            "difficulty": level or task_spec.get("difficulty", "unknown"),
             "task_id": task_id,
             "candidate_id": candidate_id,
             "source_path": str(source_path).replace("\\", "/"),

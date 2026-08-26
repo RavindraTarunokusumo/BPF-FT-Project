@@ -1,0 +1,35 @@
+{
+  "task_id": "xdp_b05_t04_map_udp_dport_denylist",
+  "template_family": "xdp_hash_map_filter",
+  "semantic_signature": "ipv4+udp+map_dport_denylist+drop",
+  "difficulty": "level_2",
+  "split": "train",
+  "instruction": "Write an XDP program that uses a BPF hash map with __u16 port keys to denylist UDP destination ports.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_HASH with __u16 key",
+    "Parse UDP dport",
+    "Lookup port in map and drop if found"
+  ],
+  "gold_candidate_id": "xdp_b05_t04_map_udp_dport_denylist_c00",
+  "tests": [
+    {
+      "name": "udp_pass_default",
+      "description": "Default UDP packet passes",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801143039003500110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passes",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430390035000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP passes",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
+    }
+  ],
+  "application_category": "packet_filtering_security"
+}

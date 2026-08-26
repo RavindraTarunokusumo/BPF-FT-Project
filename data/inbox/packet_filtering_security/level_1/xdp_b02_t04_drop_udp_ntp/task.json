@@ -1,0 +1,36 @@
+{
+  "task_id": "xdp_b02_t04_drop_udp_ntp",
+  "template_family": "udp_port_filter",
+  "semantic_signature": "ipv4+udp_dport_123+drop",
+  "difficulty": "level_1",
+  "split": "train",
+  "instruction": "Write a complete XDP/eBPF program that drops UDP packets destined for port 123 (NTP), passing all other traffic.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify ip->protocol == IPPROTO_UDP",
+    "Check udp->dest == bpf_htons(123)",
+    "Pass non-NTP packets"
+  ],
+  "gold_candidate_id": "xdp_b02_t04_drop_udp_ntp_c00",
+  "tests": [
+    {
+      "name": "ntp_drop",
+      "description": "UDP dport 123 should drop",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801143039007b00110000444e535f5155455259",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "dns_pass",
+      "description": "UDP dport 53 should pass",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801143039003500110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
+    }
+  ],
+  "application_category": "packet_filtering_security"
+}

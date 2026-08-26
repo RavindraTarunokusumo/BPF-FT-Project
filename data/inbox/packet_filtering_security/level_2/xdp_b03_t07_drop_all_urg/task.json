@@ -1,0 +1,35 @@
+{
+  "task_id": "xdp_b03_t07_drop_all_urg",
+  "template_family": "xdp_tcp_flags",
+  "semantic_signature": "Drop any TCP packet with URG flag set",
+  "difficulty": "level_2",
+  "split": "train",
+  "instruction": "Drop any TCP packet with URG flag set",
+  "requirements": [
+    "C-code",
+    "Verifier-safe",
+    "Bounds-checks"
+  ],
+  "gold_candidate_id": "xdp_b03_t07_drop_all_urg_c00_r01",
+  "tests": [
+    {
+      "name": "urg_drop",
+      "description": "URG flag set should drop",
+      "packet_hex": "52540012345652540065432108004500002c04d2000040060000c0a8010ac0a8011430390050000003e8000000005020ffff0000000044415441",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "ack_pass",
+      "description": "Normal ACK should pass",
+      "packet_hex": "52540012345652540065432108004500002c04d2000040060000c0a8010ac0a8011430390050000003e8000000005010ffff0000000044415441",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
+    }
+  ],
+  "application_category": "packet_filtering_security"
+}

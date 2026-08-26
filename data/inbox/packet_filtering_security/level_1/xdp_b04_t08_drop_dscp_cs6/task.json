@@ -1,0 +1,42 @@
+{
+  "task_id": "xdp_b04_t08_drop_dscp_cs6",
+  "template_family": "ipv4_tos_dscp_filter",
+  "semantic_signature": "ipv4+tos_dscp_cs6+drop",
+  "difficulty": "level_1",
+  "split": "train",
+  "instruction": "Write a complete XDP/eBPF program that drops IPv4 packets whose DSCP field matches CS6 (TOS & 0xFC == 0xC0), passing all other traffic.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Inspect ip->tos",
+    "If (ip->tos & 0xFC) == 0xC0 return XDP_DROP",
+    "Pass other traffic with XDP_PASS"
+  ],
+  "gold_candidate_id": "xdp_b04_t08_drop_dscp_cs6_c00",
+  "tests": [
+    {
+      "name": "dscp_cs6_drop",
+      "description": "DSCP CS6 (TOS 0xC0) should drop",
+      "packet_hex": "525400123456525400654321080045c0001804d2000040060000c0a8010ac0a8011444415441",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "dscp_cs0_pass",
+      "description": "Normal TOS 0x00 should pass",
+      "packet_hex": "52540012345652540065432108004500001804d2000040060000c0a8010ac0a8011444415441",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dscp_ef_pass",
+      "description": "DSCP EF (TOS 0xB8) should pass",
+      "packet_hex": "525400123456525400654321080045b8001804d2000040060000c0a8010ac0a8011444415441",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
+    }
+  ],
+  "application_category": "packet_filtering_security"
+}

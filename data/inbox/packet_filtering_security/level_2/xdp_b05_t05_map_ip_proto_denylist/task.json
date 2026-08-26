@@ -1,0 +1,35 @@
+{
+  "task_id": "xdp_b05_t05_map_ip_proto_denylist",
+  "template_family": "xdp_hash_map_filter",
+  "semantic_signature": "ipv4+map_proto_denylist+drop",
+  "difficulty": "level_2",
+  "split": "train",
+  "instruction": "Write an XDP program that uses a BPF hash map with __u8 keys to denylist specific IP protocols.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_HASH with __u8 key",
+    "Lookup ip->protocol in map",
+    "Drop if present, pass otherwise"
+  ],
+  "gold_candidate_id": "xdp_b05_t05_map_ip_proto_denylist_c00",
+  "tests": [
+    {
+      "name": "ip_proto_pass_default",
+      "description": "Default protocol passes",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP passes",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "boundary_pass",
+      "description": "Boundary packet passes",
+      "packet_hex": "5254001234565254006543210800",
+      "expected_action": "XDP_PASS"
+    }
+  ],
+  "application_category": "packet_filtering_security"
+}

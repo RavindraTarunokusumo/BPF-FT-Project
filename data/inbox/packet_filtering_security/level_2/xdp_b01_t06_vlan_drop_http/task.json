@@ -1,0 +1,49 @@
+{
+  "task_id": "xdp_b01_t06_vlan_drop_http",
+  "template_family": "vlan_header_parsing",
+  "semantic_signature": "vlan_8021q+ipv4+tcp+dport_8080+drop",
+  "difficulty": "level_2",
+  "split": "train",
+  "instruction": "Write a complete XDP/eBPF C program that parses 802.1Q VLAN tagged frames (EtherType 0x8100). If the encapsulated packet is IPv4 TCP destined for port 8080, drop it. Untagged packets and non-8080 traffic must be passed.",
+  "requirements": [
+    "Return complete C source only",
+    "Parse 802.1Q header after Ethernet",
+    "Check bounds for Ethernet, VLAN, IPv4, and TCP headers",
+    "Apply correct byte order conversions using bpf_htons",
+    "Pass untagged and non-matching traffic"
+  ],
+  "gold_candidate_id": "xdp_b01_t06_vlan_drop_http_c00_r02",
+  "tests": [
+    {
+      "name": "positive_vlan_8080_drop",
+      "description": "VLAN tagged IPv4 TCP dport=8080 should be dropped",
+      "packet_hex": "5254001234565254006543218100006408004500002c04d2000040060000c0a8010ac0a8011430391f90000003e8000000005002ffff0000000044415441",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "negative_vlan_80_pass",
+      "description": "VLAN tagged IPv4 TCP dport=80 should pass",
+      "packet_hex": "5254001234565254006543218100006408004500002c04d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff0000000044415441",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "negative_untagged_8080_pass",
+      "description": "Untagged IPv4 TCP dport=8080 should pass",
+      "packet_hex": "52540012345652540065432108004500002c04d2000040060000c0a8010ac0a8011430391f90000003e8000000005002ffff0000000044415441",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "negative_vlan_udp_pass",
+      "description": "VLAN tagged IPv4 UDP packet should pass",
+      "packet_hex": "5254001234565254006543218100006408004500002504d2000040110000c0a8010ac0a8011430391f9000110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "boundary_short_vlan_pass",
+      "description": "Truncated VLAN packet (<18 bytes) should safely pass",
+      "packet_hex": "525400123456525400654321810000640800",
+      "expected_action": "XDP_PASS"
+    }
+  ],
+  "application_category": "packet_filtering_security"
+}

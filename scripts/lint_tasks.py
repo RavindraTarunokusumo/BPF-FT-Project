@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-Lint and validate task.json specifications across all batches in data/inbox/
+Lint and validate task.json specifications across all categories and levels in data/inbox/
 
 Enforces:
 1. All required fields are present and non-empty:
    - task_id (str)
    - template_family (str)
    - semantic_signature (str)
-   - difficulty (str: "basic" | "beginner" | "intermediate" | "advanced" | "medium")
+   - application_category (str: "packet_filtering_security" | "network_routing_forwarding" | "packet_inspection_telemetry" | "protocol_transformation")
+   - difficulty (str: "level_1" | "level_2" | "level_3")
    - split (str: "train" | "val" | "test")
    - instruction (str, len >= 10)
    - requirements (list of str, len >= 1)
@@ -18,7 +19,7 @@ Enforces:
    - packet_hex (str, valid hex, length >= 28 hex chars / 14 bytes)
    - expected_action (str: "XDP_PASS" | "XDP_DROP" | "XDP_TX" | "XDP_REDIRECT" | "XDP_ABORTED")
 3. Test suite diversity:
-   - Must contain at least one "XDP_PASS" and at least one "XDP_DROP" (for filtering tasks).
+   - Must contain at least one "XDP_PASS" and at least one "XDP_DROP" for filtering tasks.
 """
 
 from __future__ import annotations
@@ -32,18 +33,27 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 INBOX_DIR = PROJECT_ROOT / "data" / "inbox"
 
+VALID_CATEGORIES = {
+    "packet_filtering_security",
+    "network_routing_forwarding",
+    "packet_inspection_telemetry",
+    "protocol_transformation",
+}
+
+VALID_DIFFICULTIES = {"level_1", "level_2", "level_3"}
+VALID_ACTIONS = {"XDP_PASS", "XDP_DROP", "XDP_TX", "XDP_REDIRECT", "XDP_ABORTED"}
+
 REQUIRED_TOP_FIELDS = [
     ("task_id", str),
     ("template_family", str),
     ("semantic_signature", str),
+    ("application_category", str),
     ("difficulty", str),
     ("split", str),
     ("instruction", str),
     ("requirements", list),
     ("tests", list),
 ]
-
-VALID_ACTIONS = {"XDP_PASS", "XDP_DROP", "XDP_TX", "XDP_REDIRECT", "XDP_ABORTED"}
 
 
 def lint_task_json(task_path: Path) -> list[str]:
@@ -65,6 +75,13 @@ def lint_task_json(task_path: Path) -> list[str]:
 
     if errors:
         return errors
+
+    # Check category and difficulty values
+    if data.get("application_category") not in VALID_CATEGORIES:
+        errors.append(f"Invalid application_category '{data.get('application_category')}' (expected one of {VALID_CATEGORIES})")
+
+    if data.get("difficulty") not in VALID_DIFFICULTIES:
+        errors.append(f"Invalid difficulty '{data.get('difficulty')}' (expected one of {VALID_DIFFICULTIES})")
 
     # Check task_id matches directory name
     expected_task_id = task_path.parent.name
@@ -116,16 +133,18 @@ def lint_task_json(task_path: Path) -> list[str]:
         else:
             actions_seen.add(expected_action)
 
-    # For standard filter tasks, expect both pass and drop tests
-    if len(actions_seen) < 2 and "xdp_filter" in data.get("template_family", ""):
+    # For standard filter tasks (excluding map-based lookups which default to pass when empty), expect action diversity
+    is_map_filter = "map" in data.get("template_family", "") or "map" in data.get("semantic_signature", "")
+    if len(actions_seen) < 2 and data.get("application_category") == "packet_filtering_security" and not is_map_filter:
         errors.append(f"Test suite lacks action diversity (only saw: {actions_seen})")
 
     return errors
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Lint all task.json files in data/inbox/")
-    parser.add_argument("--batch-id", help="Optional specific batch to lint (e.g. batch-002)")
+    parser = argparse.ArgumentParser(description="Lint all task.json files across categories/levels")
+    parser.add_argument("--category", help="Optional specific category to lint")
+    parser.add_argument("--level", help="Optional specific level to lint")
     args = parser.parse_args()
 
     total_tasks = 0
@@ -133,37 +152,39 @@ def main() -> int:
     failed_tasks = 0
 
     print("=" * 60)
-    print("XDP Task Specification Linter (task.json)")
+    print("XDP Task Specification Linter (Taxonomy-Based)")
     print("=" * 60)
 
-    batch_dirs = [INBOX_DIR / args.batch_id] if args.batch_id else sorted(INBOX_DIR.iterdir())
-
-    for batch_dir in batch_dirs:
-        if not batch_dir.is_dir() or not batch_dir.name.startswith("batch-"):
+    for cat_dir in sorted(INBOX_DIR.iterdir()):
+        if not cat_dir.is_dir() or (args.category and cat_dir.name != args.category):
             continue
 
-        print(f"\n[*] Scanning batch: {batch_dir.name}")
-        for task_dir in sorted(batch_dir.iterdir()):
-            if not task_dir.is_dir():
+        for lvl_dir in sorted(cat_dir.iterdir()):
+            if not lvl_dir.is_dir() or (args.level and lvl_dir.name != args.level):
                 continue
 
-            task_json_path = task_dir / "task.json"
-            total_tasks += 1
+            print(f"\n[*] Scanning: {cat_dir.name} / {lvl_dir.name}")
+            for task_dir in sorted(lvl_dir.iterdir()):
+                if not task_dir.is_dir():
+                    continue
 
-            if not task_json_path.exists():
-                print(f"  [-] FAIL: {task_dir.name} -> task.json NOT FOUND")
-                failed_tasks += 1
-                continue
+                task_json_path = task_dir / "task.json"
+                total_tasks += 1
 
-            errors = lint_task_json(task_json_path)
-            if errors:
-                print(f"  [-] FAIL: {task_dir.name}")
-                for err in errors:
-                    print(f"      - {err}")
-                failed_tasks += 1
-            else:
-                print(f"  [+] PASS: {task_dir.name}")
-                passed_tasks += 1
+                if not task_json_path.exists():
+                    print(f"  [-] FAIL: {task_dir.name} -> task.json NOT FOUND")
+                    failed_tasks += 1
+                    continue
+
+                errors = lint_task_json(task_json_path)
+                if errors:
+                    print(f"  [-] FAIL: {task_dir.name}")
+                    for err in errors:
+                        print(f"      - {err}")
+                    failed_tasks += 1
+                else:
+                    print(f"  [+] PASS: {task_dir.name}")
+                    passed_tasks += 1
 
     print("\n" + "=" * 60)
     print(f"Linter Summary: Total: {total_tasks} | Passed: {passed_tasks} | Failed: {failed_tasks}")
