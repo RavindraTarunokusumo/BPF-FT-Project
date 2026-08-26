@@ -1,0 +1,28 @@
+{
+  "batch_id": "batch-004",
+  "task_id": "xdp_b04_t01_drop_icmp_echo_request",
+  "candidate_id": "xdp_b04_t01_drop_icmp_echo_request_c00",
+  "source_path": "/root/BPF-FT-Project/data/inbox/batch-004/xdp_b04_t01_drop_icmp_echo_request/c00.c",
+  "source_sha256": "19df3def777e71363272c67d514c0d5de9f883394a879e39b43d8ca992d7947f",
+  "timestamp": "2026-08-26T00:46:27.998907+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "In file included from /root/BPF-FT-Project/data/inbox/batch-004/xdp_b04_t01_drop_icmp_echo_request/c00.c:8:\nIn file included from /usr/include/linux/icmp.h:23:\nIn file included from /usr/include/linux/if.h:28:\nIn file included from /usr/include/x86_64-linux-gnu/sys/socket.h:22:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nIn file included from /root/BPF-FT-Project/data/inbox/batch-004/xdp_b04_t01_drop_icmp_echo_request/c00.c:8:\nIn file included from /usr/include/linux/icmp.h:23:\nIn file included from /usr/include/linux/if.h:28:\nIn file included from /usr/include/x86_64-linux-gnu/sys/socket.h:22:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated."
+}

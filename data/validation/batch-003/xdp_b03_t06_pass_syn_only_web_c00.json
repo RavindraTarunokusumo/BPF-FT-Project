@@ -1,0 +1,28 @@
+{
+  "batch_id": "batch-003",
+  "task_id": "xdp_b03_t06_pass_syn_only_web",
+  "candidate_id": "xdp_b03_t06_pass_syn_only_web_c00",
+  "source_path": "/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c",
+  "source_sha256": "a9c22a4926a775926545a60bf92d5a018e6189df35ecabf55b56fac9fecec655",
+  "timestamp": "2026-08-26T00:46:27.543881+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:5: error: use of undeclared identifier 'uint16_t'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |     ^\n/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:48: error: use of undeclared identifier 'dport'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |                                                ^\n/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:63: error: use of undeclared identifier 'dport'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |                                                               ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:5: error: use of undeclared identifier 'uint16_t'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |     ^\n/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:48: error: use of undeclared identifier 'dport'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |                                                ^\n/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:63: error: use of undeclared identifier 'dport'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |                                                               ^\n3 errors generated."
+}

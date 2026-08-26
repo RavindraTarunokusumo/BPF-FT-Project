@@ -1,0 +1,36 @@
+{
+  "batch_id": "batch-006",
+  "task_id": "xdp_b06_t07_drop_tiny_ip_payload",
+  "candidate_id": "xdp_b06_t07_drop_tiny_ip_payload_c00",
+  "source_path": "/root/BPF-FT-Project/data/inbox/batch-006/xdp_b06_t07_drop_tiny_ip_payload/c00.c",
+  "source_sha256": "23f41952d32341c9f1e18a3916482d243e1c13ade23e17835eac30106dff5c5b",
+  "timestamp": "2026-08-26T00:46:30.274711+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_0al75zsl/candidate.o\nlibbpf: elf: section(3) xdp, size 16, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_prog' at insn offset 0 (0 bytes), code size 2 insns (16 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_0al75zsl/candidate.o is GPL\nlibbpf: elf: section(13) .BTF, size 535, link 0, flags 0, type=1\nlibbpf: elf: section(15) .BTF.ext, size 80, link 0, flags 0, type=1\nlibbpf: elf: section(23) .symtab, size 288, link 1, flags 0, type=2\nlibbpf: looking for externs among 12 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_prog': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; }\n0: (b7) r0 = 2                        ; R0_w=2\n1: (95) exit\nverification time 23 usec\nstack depth 0\nprocessed 2 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 1,
+    "total_tests": 1,
+    "details": [
+      {
+        "name": "unnamed_test",
+        "description": "",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}
