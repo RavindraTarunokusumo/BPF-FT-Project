@@ -24,7 +24,7 @@ The existing Linux VPS will perform three roles:
 
 Tinker will perform the remote GPU operations: forward/backward passes, optimizer steps, sampling, and checkpoint storage. The production SFT implementation will use the documented `tinker_cookbook.supervised.train.Config` and `train.main()` pipeline rather than a custom training loop.
 
-Dataset synthesis will not call model APIs from a Python generation loop. Claude Code, Codex, Antigravity, and the Grok coding harness will work directly inside the repository. They will create task specifications, candidate C files, test specifications, mutations, and repairs in assigned folders. Deterministic VPS checks—not agent confidence or an LLM judge—will decide which examples enter SFT.
+Dataset synthesis will not call model APIs from a Python generation loop. Coding harnesses and autonomous agents will work directly inside the repository. They will create task specifications, candidate C files, test specifications, mutations, and repairs in assigned folders. Deterministic VPS checks—not agent confidence or an LLM judge—will decide which examples enter SFT.
 
 The production training workflow has no separate manual preflight job. After the environment and dataset have been prepared once, one command performs local fail-fast validation and then starts or resumes the complete Tinker run:
 
@@ -81,7 +81,7 @@ DPO remains a possible v0.2 experiment after sufficient high-quality preference 
 
 ```mermaid
 flowchart TD
-    A["Claude Code, Codex, Antigravity, Grok"] --> B["Repository inbox: tasks, candidates, tests, repairs"]
+    A["Coding-agent harnesses"] --> B["Repository inbox: tasks, candidates, tests, repairs"]
     B --> C["VPS: Clang, kernel verifier, packet tests, mutations"]
     C --> D["Frozen train and validation JSONL"]
     D --> E["VPS: one-shot Tinker controller"]
@@ -203,7 +203,7 @@ The executable benchmark is never passed to the SFT controller.
 
 ### 6.1 Operating Principle
 
-Claude Code, Codex, Antigravity, and Grok act as repository-writing agents. The maintainer starts each harness and gives it a bounded assignment file. Each harness writes artifacts directly into the project folder.
+Coding-agent harnesses act as repository-writing agents. The maintainer starts each harness and gives it a bounded assignment file. Each harness writes artifacts directly into the project folder.
 
 Python is used for schema validation, hashing, deduplication, JSONL assembly, compilation orchestration, and result analysis. It does not silently call a model API to generate tasks or candidates.
 
@@ -211,10 +211,10 @@ Python is used for schema validation, hashing, deduplication, JSONL assembly, co
 
 | Harness | Primary assignment | Secondary assignment |
 |---|---|---|
-| Claude Code | Complete task/reference/test bundles | Difficult verifier repairs |
-| Codex | Bounds checks, byte order, maps, and evaluator review | Find reward and test loopholes |
-| Antigravity | Systematic task diversity and repository-scale variants | Coverage and clarity review |
-| Grok | Adversarial candidates, mutations, and unusual failure modes | Diagnostic-based repair |
+| Harness Tier A | Complete task/reference/test bundles | Difficult verifier repairs |
+| Harness Tier B | Bounds checks, byte order, maps, and evaluator review | Find reward and test loopholes |
+| Harness Tier C | Systematic task diversity and repository-scale variants | Coverage and clarity review |
+| Harness Tier D | Adversarial candidates, mutations, and unusual failure modes | Diagnostic-based repair |
 
 Each task should receive candidates from at least two harnesses where practical. A different harness should review or repair the original author's work.
 
@@ -272,7 +272,7 @@ Assignments reserve task-ID ranges and directories. Agents must not edit another
 {
   "candidate_id": "xdp_tcp_dport_drop_001_codex_01",
   "task_id": "xdp_tcp_dport_drop_001",
-  "authoring_harness": "codex",
+  "authoring_harness": "agent",
   "authoring_model": "record-if-visible",
   "generation_prompt_version": "agent-generation-v3",
   "source_path": "program.c",

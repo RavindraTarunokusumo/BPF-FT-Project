@@ -33,7 +33,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--inbox-root",
         type=Path,
-        default=PROJECT_ROOT / "data" / "inbox" / "antigravity",
+        default=PROJECT_ROOT / "data" / "inbox",
         help="Root inbox directory for harness",
     )
     parser.add_argument(

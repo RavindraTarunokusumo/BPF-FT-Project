@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b01_t08_count_packets_map_c00_r01",
+  "task_id": "xdp_b01_t08_count_packets_map",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "xdp_b01_t08_count_packets_map_c00",
+  "repair_attempt": 1,
+  "failure_diagnostic": "Behavioral tests failed:\nTest 'count_short_packet_pass' failed: expected XDP_PASS (2), got ERROR (None)",
+  "claimed_status": "unvalidated",
+  "source_sha256": "e7b753a82971535529cc41e51ca94c434079e85bf4efa5d5ac9b1fb7d394dc20"
+}

@@ -1,0 +1,12 @@
+{
+  "candidate_id": "xdp_b01_t06_vlan_drop_http_c00",
+  "task_id": "xdp_b01_t06_vlan_drop_http",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "532e6385d28c41a41330e7be8b7179d3d9ac9d4ab41c7d147881478085cdadce"
+}

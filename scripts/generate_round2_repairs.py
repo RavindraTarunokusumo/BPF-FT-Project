@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-BATCH_DIR = PROJECT_ROOT / "data" / "inbox" / "antigravity" / "batch-001"
+BATCH_DIR = PROJECT_ROOT / "data" / "inbox" / "batch-001"
 VAL_DIR = PROJECT_ROOT / "data" / "validation" / "batch-001"
 
 
@@ -52,8 +52,8 @@ def write_repair(
     meta_data = {
         "candidate_id": cand_id,
         "task_id": task_id,
-        "authoring_harness": "antigravity",
-        "authoring_model": "gemini-3.7-flash",
+        "authoring_harness": "agent",
+        "authoring_model": "instruction_model",
         "generation_prompt_version": "agent-repair-v2",
         "source_path": f"{cand_suffix}.c",
         "parent_candidate_id": parent_cand_id,
@@ -68,7 +68,7 @@ def write_repair(
 
 def main() -> None:
     # --- Task 2: Drop UDP 53 (r02 fixes UDP bounds checking) ---
-    t2_id = "xdp_antigravity_b01_t02_drop_udp_port"
+    t2_id = "xdp_b01_t02_drop_udp_port"
     t2_r02_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -115,7 +115,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t2_id, "c00-r02", t2_r02_c, "c00-r01", 2, get_r01_diagnostic(t2_id))
 
     # --- Task 6: VLAN Drop HTTP (r02 fixes port endianness bug) ---
-    t6_id = "xdp_antigravity_b01_t06_vlan_drop_http"
+    t6_id = "xdp_b01_t06_vlan_drop_http"
     t6_r02_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -175,7 +175,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t6_id, "c00-r02", t6_r02_c, "c00-r01", 2, get_r01_diagnostic(t6_id))
 
     # --- Task 9: Drop UDP DNS Amplification (r02 fixes UDP bounds checking) ---
-    t9_id = "xdp_antigravity_b01_t09_drop_udp_dns_amplification"
+    t9_id = "xdp_b01_t09_drop_udp_dns_amplification"
     t9_r02_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>

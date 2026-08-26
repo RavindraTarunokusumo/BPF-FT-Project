@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b01_t03_drop_icmp_c00_r01",
+  "task_id": "xdp_b01_t03_drop_icmp",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "xdp_b01_t03_drop_icmp_c00",
+  "repair_attempt": 1,
+  "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t03_drop_icmp/c00.c:23:25: error: use of undeclared identifier 'IPPROTO_ICMP'\n   23 |     if (ip->protocol == IPPROTO_ICMP)\n      |                         ^\n1 error generated.",
+  "claimed_status": "unvalidated",
+  "source_sha256": "e0b2fe13d7d7342ea8bbc723e5c8b36d21a7ab7eaf868f4e86222b02e8e55dc2"
+}

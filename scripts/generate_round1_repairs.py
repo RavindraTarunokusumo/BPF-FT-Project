@@ -12,7 +12,7 @@ import struct
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-BATCH_DIR = PROJECT_ROOT / "data" / "inbox" / "antigravity" / "batch-001"
+BATCH_DIR = PROJECT_ROOT / "data" / "inbox" / "batch-001"
 VAL_DIR = PROJECT_ROOT / "data" / "validation" / "batch-001"
 
 
@@ -45,39 +45,39 @@ def get_c00_diagnostic(task_id: str) -> str:
 
 def main() -> None:
     # 1. Update boundary packets in task.json for tasks that used sub-14 byte boundary packets
-    t1_task = json.loads((BATCH_DIR / "xdp_antigravity_b01_t01_drop_tcp_port" / "task.json").read_text(encoding="utf-8"))
+    t1_task = json.loads((BATCH_DIR / "xdp_b01_t01_drop_tcp_port" / "task.json").read_text(encoding="utf-8"))
     t1_task["tests"][-1]["packet_hex"] = make_eth_packet(0x0800, b"").hex()
-    (BATCH_DIR / "xdp_antigravity_b01_t01_drop_tcp_port" / "task.json").write_text(json.dumps(t1_task, indent=2), encoding="utf-8")
+    (BATCH_DIR / "xdp_b01_t01_drop_tcp_port" / "task.json").write_text(json.dumps(t1_task, indent=2), encoding="utf-8")
 
-    t2_task = json.loads((BATCH_DIR / "xdp_antigravity_b01_t02_drop_udp_port" / "task.json").read_text(encoding="utf-8"))
+    t2_task = json.loads((BATCH_DIR / "xdp_b01_t02_drop_udp_port" / "task.json").read_text(encoding="utf-8"))
     t2_task["tests"][-1]["packet_hex"] = make_eth_packet(0x0800, b"").hex()
-    (BATCH_DIR / "xdp_antigravity_b01_t02_drop_udp_port" / "task.json").write_text(json.dumps(t2_task, indent=2), encoding="utf-8")
+    (BATCH_DIR / "xdp_b01_t02_drop_udp_port" / "task.json").write_text(json.dumps(t2_task, indent=2), encoding="utf-8")
 
-    t3_task = json.loads((BATCH_DIR / "xdp_antigravity_b01_t03_drop_icmp" / "task.json").read_text(encoding="utf-8"))
+    t3_task = json.loads((BATCH_DIR / "xdp_b01_t03_drop_icmp" / "task.json").read_text(encoding="utf-8"))
     t3_task["tests"][-1]["packet_hex"] = make_eth_packet(0x0800, b"").hex()
-    (BATCH_DIR / "xdp_antigravity_b01_t03_drop_icmp" / "task.json").write_text(json.dumps(t3_task, indent=2), encoding="utf-8")
+    (BATCH_DIR / "xdp_b01_t03_drop_icmp" / "task.json").write_text(json.dumps(t3_task, indent=2), encoding="utf-8")
 
-    t6_task = json.loads((BATCH_DIR / "xdp_antigravity_b01_t06_vlan_drop_http" / "task.json").read_text(encoding="utf-8"))
+    t6_task = json.loads((BATCH_DIR / "xdp_b01_t06_vlan_drop_http" / "task.json").read_text(encoding="utf-8"))
     t6_task["tests"][-1]["packet_hex"] = make_vlan_eth_packet(100, 0x0800, b"").hex()
-    (BATCH_DIR / "xdp_antigravity_b01_t06_vlan_drop_http" / "task.json").write_text(json.dumps(t6_task, indent=2), encoding="utf-8")
+    (BATCH_DIR / "xdp_b01_t06_vlan_drop_http" / "task.json").write_text(json.dumps(t6_task, indent=2), encoding="utf-8")
 
-    t7_task = json.loads((BATCH_DIR / "xdp_antigravity_b01_t07_src_ip_denylist_map" / "task.json").read_text(encoding="utf-8"))
+    t7_task = json.loads((BATCH_DIR / "xdp_b01_t07_src_ip_denylist_map" / "task.json").read_text(encoding="utf-8"))
     t7_task["tests"][-1]["packet_hex"] = make_eth_packet(0x0800, b"").hex()
-    (BATCH_DIR / "xdp_antigravity_b01_t07_src_ip_denylist_map" / "task.json").write_text(json.dumps(t7_task, indent=2), encoding="utf-8")
+    (BATCH_DIR / "xdp_b01_t07_src_ip_denylist_map" / "task.json").write_text(json.dumps(t7_task, indent=2), encoding="utf-8")
 
-    t8_task = json.loads((BATCH_DIR / "xdp_antigravity_b01_t08_count_packets_map" / "task.json").read_text(encoding="utf-8"))
+    t8_task = json.loads((BATCH_DIR / "xdp_b01_t08_count_packets_map" / "task.json").read_text(encoding="utf-8"))
     t8_task["tests"][-1]["packet_hex"] = make_eth_packet(0x0800, b"").hex()
-    (BATCH_DIR / "xdp_antigravity_b01_t08_count_packets_map" / "task.json").write_text(json.dumps(t8_task, indent=2), encoding="utf-8")
+    (BATCH_DIR / "xdp_b01_t08_count_packets_map" / "task.json").write_text(json.dumps(t8_task, indent=2), encoding="utf-8")
 
     # Task 5 passed on c00, set its gold candidate
-    t5_task = json.loads((BATCH_DIR / "xdp_antigravity_b01_t05_drop_oversized" / "task.json").read_text(encoding="utf-8"))
-    t5_task["gold_candidate_id"] = "xdp_antigravity_b01_t05_drop_oversized_c00"
-    (BATCH_DIR / "xdp_antigravity_b01_t05_drop_oversized" / "task.json").write_text(json.dumps(t5_task, indent=2), encoding="utf-8")
+    t5_task = json.loads((BATCH_DIR / "xdp_b01_t05_drop_oversized" / "task.json").read_text(encoding="utf-8"))
+    t5_task["gold_candidate_id"] = "xdp_b01_t05_drop_oversized_c00"
+    (BATCH_DIR / "xdp_b01_t05_drop_oversized" / "task.json").write_text(json.dumps(t5_task, indent=2), encoding="utf-8")
 
     # 2. Generate repairs for failed candidates
 
     # --- Task 1: Drop TCP 23 ---
-    t1_id = "xdp_antigravity_b01_t01_drop_tcp_port"
+    t1_id = "xdp_b01_t01_drop_tcp_port"
     t1_r01_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -127,7 +127,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t1_id, "c00-r01", t1_r01_c, "c00", 1, get_c00_diagnostic(t1_id))
 
     # --- Task 2: Drop UDP 53 (r01 fixes include, retains verifier bug) ---
-    t2_id = "xdp_antigravity_b01_t02_drop_udp_port"
+    t2_id = "xdp_b01_t02_drop_udp_port"
     t2_r01_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -168,7 +168,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t2_id, "c00-r01", t2_r01_c, "c00", 1, get_c00_diagnostic(t2_id))
 
     # --- Task 3: Drop ICMP ---
-    t3_id = "xdp_antigravity_b01_t03_drop_icmp"
+    t3_id = "xdp_b01_t03_drop_icmp"
     t3_r01_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -203,7 +203,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t3_id, "c00-r01", t3_r01_c, "c00", 1, get_c00_diagnostic(t3_id))
 
     # --- Task 4: Drop SYN+FIN ---
-    t4_id = "xdp_antigravity_b01_t04_drop_syn_fin"
+    t4_id = "xdp_b01_t04_drop_syn_fin"
     t4_r01_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -252,7 +252,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t4_id, "c00-r01", t4_r01_c, "c00", 1, get_c00_diagnostic(t4_id))
 
     # --- Task 6: VLAN Drop HTTP (r01 fixes include, retains port comparison endianness bug) ---
-    t6_id = "xdp_antigravity_b01_t06_vlan_drop_http"
+    t6_id = "xdp_b01_t06_vlan_drop_http"
     t6_r01_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -312,7 +312,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t6_id, "c00-r01", t6_r01_c, "c00", 1, get_c00_diagnostic(t6_id))
 
     # --- Task 7: BPF Map IP Denylist ---
-    t7_id = "xdp_antigravity_b01_t07_src_ip_denylist_map"
+    t7_id = "xdp_b01_t07_src_ip_denylist_map"
     t7_r01_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -356,7 +356,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t7_id, "c00-r01", t7_r01_c, "c00", 1, get_c00_diagnostic(t7_id))
 
     # --- Task 8: BPF Array Map Packet Counter ---
-    t8_id = "xdp_antigravity_b01_t08_count_packets_map"
+    t8_id = "xdp_b01_t08_count_packets_map"
     t8_r01_c = """#include <linux/bpf.h>
 #include <bpf/bpf_helpers.h>
 
@@ -382,7 +382,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t8_id, "c00-r01", t8_r01_c, "c00", 1, get_c00_diagnostic(t8_id))
 
     # --- Task 9: Drop UDP DNS Amplification (r01 fixes include, retains verifier bug) ---
-    t9_id = "xdp_antigravity_b01_t09_drop_udp_dns_amplification"
+    t9_id = "xdp_b01_t09_drop_udp_dns_amplification"
     t9_r01_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -431,7 +431,7 @@ char _license[] SEC("license") = "GPL";
     write_repair(t9_id, "c00-r01", t9_r01_c, "c00", 1, get_c00_diagnostic(t9_id))
 
     # --- Task 10: Allow only SSH ---
-    t10_id = "xdp_antigravity_b01_t10_allow_only_ssh"
+    t10_id = "xdp_b01_t10_allow_only_ssh"
     t10_r01_c = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/in.h>
@@ -501,8 +501,8 @@ def write_repair(
     meta_data = {
         "candidate_id": cand_id,
         "task_id": task_id,
-        "authoring_harness": "antigravity",
-        "authoring_model": "gemini-3.7-flash",
+        "authoring_harness": "agent",
+        "authoring_model": "instruction_model",
         "generation_prompt_version": "agent-repair-v1",
         "source_path": f"{cand_suffix}.c",
         "parent_candidate_id": parent_cand_id,

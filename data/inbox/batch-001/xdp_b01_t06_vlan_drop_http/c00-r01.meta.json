@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b01_t06_vlan_drop_http_c00_r01",
+  "task_id": "xdp_b01_t06_vlan_drop_http",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "xdp_b01_t06_vlan_drop_http_c00",
+  "repair_attempt": 1,
+  "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t06_vlan_drop_http/c00.c:36:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   36 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated.",
+  "claimed_status": "unvalidated",
+  "source_sha256": "7193137cd166d5eb5545bbb04eb6dfc686f2f49cf17b175f78242ce39ed3703a"
+}

@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b01_t06_vlan_drop_http_c00_r02",
+  "task_id": "xdp_b01_t06_vlan_drop_http",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v2",
+  "source_path": "c00-r02.c",
+  "parent_candidate_id": "xdp_b01_t06_vlan_drop_http_c00_r01",
+  "repair_attempt": 2,
+  "failure_diagnostic": "Behavioral tests failed:\nTest 'positive_vlan_8080_drop' failed: expected XDP_DROP (1), got XDP_PASS (2)",
+  "claimed_status": "unvalidated",
+  "source_sha256": "52907f7eb271637a2195c7b32427d506e93d85d458accc84c82e1f11d2f4a75c"
+}

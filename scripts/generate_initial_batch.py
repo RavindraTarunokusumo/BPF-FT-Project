@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generates Batch-001 for Antigravity inbox with 10 XDP tasks,
+Generates Batch-001 for inbox with 10 XDP tasks,
 initial candidates (c00.c), provenance metadata (c00.meta.json), and task specs (task.json).
 """
 
@@ -13,7 +13,7 @@ import struct
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-INBOX_DIR = PROJECT_ROOT / "data" / "inbox" / "antigravity" / "batch-001"
+INBOX_DIR = PROJECT_ROOT / "data" / "inbox" / "batch-001"
 
 
 def compute_sha256_str(text: str) -> str:
@@ -83,7 +83,7 @@ def build_tasks() -> list[dict]:
     # =========================================================================
     # Task 1: Drop IPv4 TCP Dport 23 (Telnet)
     # =========================================================================
-    t1_id = "xdp_antigravity_b01_t01_drop_tcp_port"
+    t1_id = "xdp_b01_t01_drop_tcp_port"
     t1_c00 = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/ip.h>
@@ -182,7 +182,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 2: Drop IPv4 UDP Dport 53 (DNS) - Initial candidate with verifier error
     # =========================================================================
-    t2_id = "xdp_antigravity_b01_t02_drop_udp_port"
+    t2_id = "xdp_b01_t02_drop_udp_port"
     # Faulty initial candidate: Missing bound check for UDP header after variable IPv4 header length
     t2_c00 = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
@@ -273,7 +273,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 3: Drop IPv4 ICMP (Protocol 1)
     # =========================================================================
-    t3_id = "xdp_antigravity_b01_t03_drop_icmp"
+    t3_id = "xdp_b01_t03_drop_icmp"
     t3_c00 = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/ip.h>
@@ -356,7 +356,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 4: Drop TCP SYN+FIN - Initial candidate with compiler error
     # =========================================================================
-    t4_id = "xdp_antigravity_b01_t04_drop_syn_fin"
+    t4_id = "xdp_b01_t04_drop_syn_fin"
     # Faulty initial candidate: syntax/compiler error (missing semicolon and undefined macro)
     t4_c00 = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
@@ -456,7 +456,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 5: Drop Oversized Packets (> 1400 bytes)
     # =========================================================================
-    t5_id = "xdp_antigravity_b01_t05_drop_oversized"
+    t5_id = "xdp_b01_t05_drop_oversized"
     t5_c00 = """#include <linux/bpf.h>
 #include <bpf/bpf_helpers.h>
 
@@ -521,7 +521,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 6: VLAN 802.1Q HTTP Dport 8080 Drop - Initial candidate with behavioral bug
     # =========================================================================
-    t6_id = "xdp_antigravity_b01_t06_vlan_drop_http"
+    t6_id = "xdp_b01_t06_vlan_drop_http"
     # Faulty initial candidate: Endianness bug on TCP destination port comparison (8080 instead of bpf_htons(8080))
     t6_c00 = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
@@ -632,7 +632,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 7: BPF Hash Map IP Denylist
     # =========================================================================
-    t7_id = "xdp_antigravity_b01_t07_src_ip_denylist_map"
+    t7_id = "xdp_b01_t07_src_ip_denylist_map"
     t7_c00 = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/ip.h>
@@ -714,7 +714,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 8: BPF Array Map Packet Counter
     # =========================================================================
-    t8_id = "xdp_antigravity_b01_t08_count_packets_map"
+    t8_id = "xdp_b01_t08_count_packets_map"
     t8_c00 = """#include <linux/bpf.h>
 #include <bpf/bpf_helpers.h>
 
@@ -778,7 +778,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 9: Drop UDP DNS Amplification (Port 53 & length > 512) - Initial candidate with verifier error
     # =========================================================================
-    t9_id = "xdp_antigravity_b01_t09_drop_udp_dns_amplification"
+    t9_id = "xdp_b01_t09_drop_udp_dns_amplification"
     # Faulty initial candidate: Missing bounds check on UDP header before dereferencing udp->len
     t9_c00 = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
@@ -878,7 +878,7 @@ char _license[] SEC("license") = "GPL";
     # =========================================================================
     # Task 10: Allow Only SSH on IPv4 TCP (Firewall)
     # =========================================================================
-    t10_id = "xdp_antigravity_b01_t10_allow_only_ssh"
+    t10_id = "xdp_b01_t10_allow_only_ssh"
     t10_c00 = """#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/ip.h>
@@ -1019,8 +1019,8 @@ def main() -> None:
         c00_meta = {
             "candidate_id": f"{task_id}_c00",
             "task_id": task_id,
-            "authoring_harness": "antigravity",
-            "authoring_model": "gemini-3.7-flash",
+            "authoring_harness": "agent",
+            "authoring_model": "instruction_model",
             "generation_prompt_version": "agent-generation-v1",
             "source_path": "c00.c",
             "parent_candidate_id": None,

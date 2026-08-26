@@ -1,0 +1,13 @@
+{
+  "candidate_id": "xdp_b01_t10_allow_only_ssh_c00_r01",
+  "task_id": "xdp_b01_t10_allow_only_ssh",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "xdp_b01_t10_allow_only_ssh_c00",
+  "repair_attempt": 1,
+  "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t10_allow_only_ssh/c00.c:24:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   24 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated.",
+  "claimed_status": "unvalidated",
+  "source_sha256": "e2928c2543994c1e32fbd948a0da07b64f98c91d8d6279057f798e9732b280ed"
+}
