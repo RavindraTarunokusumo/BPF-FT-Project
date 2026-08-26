@@ -1,18 +1,40 @@
 {
   "task_id": "xdp_b06_t09_drop_tcp_payload_http_post",
-  "template_family": "xdp",
-  "semantic_signature": "Drop TCP payload starting with POST",
-  "difficulty": "medium",
+  "template_family": "tcp_payload_filter",
+  "semantic_signature": "ipv4+tcp_payload_post+drop",
+  "difficulty": "advanced",
   "split": "train",
-  "instruction": "Drop TCP payload starting with POST",
+  "instruction": "Write an XDP program that parses IPv4 TCP packets and inspects the first 5 bytes of payload. If the payload starts with 'POST ' (0x50, 0x4f, 0x53, 0x54, 0x20), drop the packet; otherwise pass.",
   "requirements": [
-    "bounds_check",
-    "ethernet_parsing"
+    "Check Ethernet, IPv4, and TCP header bounds",
+    "Compute TCP data offset via tcp->doff * 4",
+    "Check payload bounds for at least 5 bytes",
+    "If payload starts with 'POST ', return XDP_DROP"
   ],
-  "gold_candidate_id": "xdp_b06_t09_drop_tcp_payload_http_post_c00",
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff00000000000008004500001c00004000401100000a0000010a000002",
+      "name": "post_drop",
+      "description": "TCP payload with POST should drop",
+      "packet_hex": "52540012345652540065432108004500003c04d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff00000000504f5354202f61706920485454502f312e310d0a",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "get_pass",
+      "description": "TCP payload with GET should pass",
+      "packet_hex": "52540012345652540065432108004500004204d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff00000000474554202f696e6465782e68746d6c20485454502f312e310d0a",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "no_payload_pass",
+      "description": "TCP without payload should pass",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
       "expected_action": "XDP_PASS"
     }
   ]

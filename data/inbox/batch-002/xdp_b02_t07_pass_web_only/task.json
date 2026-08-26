@@ -1,13 +1,47 @@
 {
   "task_id": "xdp_b02_t07_pass_web_only",
-  "difficulty": "medium",
+  "template_family": "tcp_port_allowlist",
+  "semantic_signature": "ipv4+tcp_dport_80_443+allow_only",
+  "difficulty": "intermediate",
   "split": "train",
-  "instruction": "Filter traffic targeting port [80, 443]",
+  "instruction": "Write a complete XDP/eBPF program that allows TCP traffic targeting web ports 80 or 443, drops all other TCP traffic, and passes non-TCP and non-IP traffic.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Inspect ip->protocol",
+    "If TCP, allow only ports 80 and 443; drop other TCP",
+    "Pass non-TCP and non-IP packets"
+  ],
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff00000000000008004500003c00010000401100007f0000017f0000010000000000280000",
+      "name": "http_80_pass",
+      "description": "TCP port 80 should pass",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "https_443_pass",
+      "description": "TCP port 443 should pass",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a80114303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ssh_22_drop",
+      "description": "TCP port 22 should drop",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430390016000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP traffic should pass",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801143039003500110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
       "expected_action": "XDP_PASS"
     }
-  ],
-  "gold_candidate_id": "xdp_b02_t07_pass_web_only_c00"
+  ]
 }

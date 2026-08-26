@@ -1,13 +1,41 @@
 {
   "task_id": "xdp_b02_t08_drop_ephemeral_udp",
-  "difficulty": "medium",
+  "template_family": "udp_port_range_filter",
+  "semantic_signature": "ipv4+udp_sport_ge_1024_dport_ge_1024+drop",
+  "difficulty": "intermediate",
   "split": "train",
-  "instruction": "Filter traffic targeting port None",
+  "instruction": "Write a complete XDP/eBPF program that drops UDP packets where both the source port and destination port are in the ephemeral range (>= 1024), passing other traffic.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify ip->protocol == IPPROTO_UDP",
+    "Check bpf_ntohs(udp->source) >= 1024 && bpf_ntohs(udp->dest) >= 1024",
+    "Return XDP_DROP for matching ephemeral UDP, XDP_PASS otherwise"
+  ],
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff00000000000008004500003c00010000401100007f0000017f0000010000000000280000",
+      "name": "ephemeral_udp_drop",
+      "description": "UDP 5000->6000 should drop",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801141388177000110000444e535f5155455259",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "server_udp_pass",
+      "description": "UDP 5000->53 should pass",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801141388003500110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP traffic should pass",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011413881770000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
       "expected_action": "XDP_PASS"
     }
-  ],
-  "gold_candidate_id": "xdp_b02_t08_drop_ephemeral_udp_c00"
+  ]
 }

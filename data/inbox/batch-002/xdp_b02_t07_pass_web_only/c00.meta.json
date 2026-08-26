@@ -3,10 +3,10 @@
   "task_id": "xdp_b02_t07_pass_web_only",
   "authoring_harness": "agent",
   "authoring_model": "instruction_model",
-  "generation_prompt_version": "agent-generation-v1",
+  "generation_prompt_version": "agent-generation-v2",
   "source_path": "c00.c",
   "parent_candidate_id": null,
   "repair_attempt": 0,
   "claimed_status": "unvalidated",
-  "source_sha256": "6afde287918c54dd7f53580d9d9edf6bad5f81b3d1a652087ea69a9a16bbe5d4"
+  "source_sha256": "9ba644532783d970d5ef1e895dad747884e6c25cdf64fadf2936349928119f34"
 }

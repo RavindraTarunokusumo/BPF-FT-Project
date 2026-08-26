@@ -1,13 +1,35 @@
 {
   "task_id": "xdp_b02_t10_drop_udp_mdns",
-  "difficulty": "medium",
+  "template_family": "udp_port_filter",
+  "semantic_signature": "ipv4+udp_dport_5353+drop",
+  "difficulty": "basic",
   "split": "train",
-  "instruction": "Filter traffic targeting port 5353",
+  "instruction": "Write a complete XDP/eBPF program that drops UDP packets targeting port 5353 (mDNS), passing all other traffic.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify ip->protocol == IPPROTO_UDP",
+    "Check udp->dest == bpf_htons(5353)",
+    "Return XDP_DROP for mDNS, XDP_PASS otherwise"
+  ],
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff00000000000008004500003c00010000401100007f0000017f0000010000000000280000",
+      "name": "mdns_drop",
+      "description": "UDP 5353 should drop",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a80114303914e900110000444e535f5155455259",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "dns_pass",
+      "description": "UDP 53 should pass",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801143039003500110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
       "expected_action": "XDP_PASS"
     }
-  ],
-  "gold_candidate_id": "xdp_b02_t10_drop_udp_mdns_c00"
+  ]
 }

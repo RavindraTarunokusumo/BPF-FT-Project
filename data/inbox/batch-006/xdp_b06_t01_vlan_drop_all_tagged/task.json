@@ -1,18 +1,33 @@
 {
   "task_id": "xdp_b06_t01_vlan_drop_all_tagged",
-  "template_family": "xdp",
-  "semantic_signature": "Drop all 802.1Q tagged frames",
-  "difficulty": "medium",
+  "template_family": "vlan_filter",
+  "semantic_signature": "vlan+eth_proto_0x8100+drop",
+  "difficulty": "basic",
   "split": "train",
-  "instruction": "Drop all 802.1Q tagged frames",
+  "instruction": "Write an XDP program that drops all 802.1Q VLAN tagged frames (EtherType 0x8100), passing untagged packets.",
   "requirements": [
-    "bounds_check",
-    "ethernet_parsing"
+    "Check Ethernet header bounds",
+    "If eth->h_proto == bpf_htons(ETH_P_8021Q), return XDP_DROP",
+    "Pass untagged traffic"
   ],
-  "gold_candidate_id": "xdp_b06_t01_vlan_drop_all_tagged_c00",
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff00000000000008004500001c00004000401100000a0000010a000002",
+      "name": "vlan_drop",
+      "description": "802.1Q tagged frame should drop",
+      "packet_hex": "5254001234565254006543218100006408004500001404d2000040060000c0a8010ac0a80114",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "untagged_ip_pass",
+      "description": "Untagged IPv4 frame should pass",
+      "packet_hex": "52540012345652540065432108004500001404d2000040060000c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "Untagged ARP frame should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
       "expected_action": "XDP_PASS"
     }
   ]

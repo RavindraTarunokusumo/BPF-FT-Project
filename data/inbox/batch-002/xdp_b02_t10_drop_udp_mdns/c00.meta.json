@@ -3,10 +3,10 @@
   "task_id": "xdp_b02_t10_drop_udp_mdns",
   "authoring_harness": "agent",
   "authoring_model": "instruction_model",
-  "generation_prompt_version": "agent-generation-v1",
+  "generation_prompt_version": "agent-generation-v2",
   "source_path": "c00.c",
   "parent_candidate_id": null,
   "repair_attempt": 0,
   "claimed_status": "unvalidated",
-  "source_sha256": "3fb4e957840127466e9fdd3f7b38809645883b20b30e062a31ceb396ea536d84"
+  "source_sha256": "261d919c5df753997f4a9d15bc9619f09d1d474e68319fa49cd0349f5cadc983"
 }

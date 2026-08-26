@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b06_t08_vlan_drop_icmp_c00",
-    "task_id": "xdp_b06_t08_vlan_drop_icmp",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "23f41952d32341c9f1e18a3916482d243e1c13ade23e17835eac30106dff5c5b"
+  "candidate_id": "xdp_b06_t08_vlan_drop_icmp_c00",
+  "task_id": "xdp_b06_t08_vlan_drop_icmp",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v2",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "a50bd467ec4d685c3ebae7531e7206f44073458da4b11a1568845c329813260c"
 }

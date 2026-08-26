@@ -1,16 +1,54 @@
 {
   "task_id": "xdp_b04_t10_pass_only_tcp_udp_icmp",
-  "template_family": "xdp_filter",
-  "semantic_signature": "packet_filtering",
-  "difficulty": "beginner",
+  "template_family": "ipv4_protocol_allowlist",
+  "semantic_signature": "ipv4+proto_not_tcp_udp_icmp+drop",
+  "difficulty": "basic",
   "split": "train",
-  "instruction": "Pass only TCP, UDP, ICMP",
-  "requirements": [],
-  "gold_candidate_id": "xdp_b04_t10_pass_only_tcp_udp_icmp_c00",
+  "instruction": "Write a complete XDP/eBPF program that drops IPv4 packets whose protocol is NOT TCP (6), UDP (17), or ICMP (1). Non-IPv4 traffic and allowed protocols must pass.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Check if ip->protocol matches IPPROTO_TCP, IPPROTO_UDP, or IPPROTO_ICMP",
+    "Return XDP_PASS for allowed protocols",
+    "Return XDP_DROP for other IPv4 protocols",
+    "Pass non-IPv4 traffic"
+  ],
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff0000000000000800450000140000000040ff00000a0000010a000002",
+      "name": "tcp_pass",
+      "description": "TCP (6) should pass",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP (17) should pass",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801143039003500110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP (1) should pass",
+      "packet_hex": "52540012345652540065432108004500002004d2000040010000c0a8010ac0a80114080000000000000050494e47",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gre_drop",
+      "description": "GRE (47) should drop",
+      "packet_hex": "52540012345652540065432108004500001704d20000402f0000c0a8010ac0a80114475245",
       "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "igmp_drop",
+      "description": "IGMP (2) should drop",
+      "packet_hex": "52540012345652540065432108004500001804d2000040020000c0a8010ac0a8011449474d50",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
     }
   ]
 }

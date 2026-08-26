@@ -3,10 +3,10 @@
   "task_id": "xdp_b02_t01_drop_udp_tftp",
   "authoring_harness": "agent",
   "authoring_model": "instruction_model",
-  "generation_prompt_version": "agent-generation-v1",
+  "generation_prompt_version": "agent-generation-v2",
   "source_path": "c00.c",
   "parent_candidate_id": null,
   "repair_attempt": 0,
   "claimed_status": "unvalidated",
-  "source_sha256": "7e68cbf10835f6fa64b12cfdca0c29db1887d74dd72ade499503edb1908d36c0"
+  "source_sha256": "8c7d99542b259f5321c2b5fbb69d5c73f7c33ac54d4e5ec58f5000dbd9a4bf4f"
 }

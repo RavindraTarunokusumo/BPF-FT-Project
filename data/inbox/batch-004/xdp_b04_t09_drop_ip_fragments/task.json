@@ -5,7 +5,11 @@
   "difficulty": "beginner",
   "split": "train",
   "instruction": "Write a complete XDP/eBPF C program that drops IPv4 fragmented packets (where fragment offset > 0 or MF flag is set in ip->frag_off), passing unfragmented traffic.",
-  "requirements": [],
+  "requirements": [
+    "Perform strict Ethernet header bounds checking",
+    "Verify IPv4 header bounds and protocol type",
+    "Apply accurate filtering logic and return valid XDP action"
+  ],
   "gold_candidate_id": "xdp_b04_t09_drop_ip_fragments_c00_r01",
   "tests": [
     {

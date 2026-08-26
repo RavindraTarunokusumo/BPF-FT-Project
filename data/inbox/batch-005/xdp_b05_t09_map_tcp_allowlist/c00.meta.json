@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b05_t09_map_tcp_allowlist_c00",
-    "task_id": "xdp_b05_t09_map_tcp_allowlist",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "33a77d0467258dd8895b3eda3c389aefa37ed3af4a392566a3daab844e4ef370"
+  "candidate_id": "xdp_b05_t09_map_tcp_allowlist_c00",
+  "task_id": "xdp_b05_t09_map_tcp_allowlist",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v2",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "d4c60f4c25162d4be22ae4ebc556bb653214231809acb9bbcb5ed1cacfafbe15"
 }

@@ -1,13 +1,35 @@
 {
   "task_id": "xdp_b05_t06_map_packet_byte_counter",
-  "template_family": "xdp_map_filter",
-  "difficulty": "medium",
+  "template_family": "xdp_array_map_metrics",
+  "semantic_signature": "ipv4+map_array_packet_byte_counter+pass",
+  "difficulty": "intermediate",
   "split": "train",
+  "instruction": "Write an XDP program that counts total packets (index 0) and total bytes (index 1) in a BPF array map and passes all traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY with 2 __u64 entries",
+    "Atomically increment packet count at index 0",
+    "Atomically add packet length to index 1",
+    "Pass all traffic with XDP_PASS"
+  ],
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff00000000000008004500001400010000401100007f0000017f000001",
+      "name": "tcp_pass",
+      "description": "TCP packet counted and passed",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet counted and passed",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a801143039003500110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet counted and passed",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
       "expected_action": "XDP_PASS"
     }
-  ],
-  "gold_candidate_id": "xdp_b05_t06_map_packet_byte_counter_c00"
+  ]
 }

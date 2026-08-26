@@ -5,7 +5,11 @@
   "difficulty": "beginner",
   "split": "train",
   "instruction": "Drop ICMP Echo Request",
-  "requirements": [],
+  "requirements": [
+    "Perform strict Ethernet header bounds checking",
+    "Verify IPv4 header bounds and protocol type",
+    "Apply accurate filtering logic and return valid XDP action"
+  ],
   "gold_candidate_id": "xdp_b04_t01_drop_icmp_echo_request_c00_r01",
   "tests": [
     {

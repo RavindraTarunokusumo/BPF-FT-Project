@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b05_t07_map_proto_counter_array_c00",
-    "task_id": "xdp_b05_t07_map_proto_counter_array",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "57156d6075d4492b1bdba1d1ebf64919b68399ee53b2f26c6ff508c877e4c97f"
+  "candidate_id": "xdp_b05_t07_map_proto_counter_array_c00",
+  "task_id": "xdp_b05_t07_map_proto_counter_array",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v2",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "d1e7feded56c52217546418b68e612f4b4a260de58cd21ac6458c5823e135c70"
 }

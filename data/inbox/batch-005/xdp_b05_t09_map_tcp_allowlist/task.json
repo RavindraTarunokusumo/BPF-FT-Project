@@ -1,13 +1,35 @@
 {
   "task_id": "xdp_b05_t09_map_tcp_allowlist",
-  "template_family": "xdp_map_filter",
-  "difficulty": "medium",
+  "template_family": "xdp_hash_map_filter",
+  "semantic_signature": "ipv4+tcp+map_dport_allowlist+pass",
+  "difficulty": "intermediate",
   "split": "train",
+  "instruction": "Write an XDP program that uses a BPF hash map to allowlist TCP destination ports. If a TCP packet's destination port is NOT in the map, drop it; pass non-TCP and non-IP.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_HASH with __u16 key",
+    "Inspect TCP dport",
+    "Drop TCP packet if port not found in map",
+    "Pass non-TCP traffic"
+  ],
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff00000000000008004500001400010000401100007f0000017f000001",
+      "name": "tcp_unlisted_port_drop",
+      "description": "Unlisted TCP port drops",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430391f90000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passes",
+      "packet_hex": "52540012345652540065432108004500002504d2000040110000c0a8010ac0a8011430391f9000110000444e535f5155455259",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP passes",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
       "expected_action": "XDP_PASS"
     }
-  ],
-  "gold_candidate_id": "xdp_b05_t09_map_tcp_allowlist_c00"
+  ]
 }

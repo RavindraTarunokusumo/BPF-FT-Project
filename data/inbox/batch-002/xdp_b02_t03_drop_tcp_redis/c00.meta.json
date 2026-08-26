@@ -3,10 +3,10 @@
   "task_id": "xdp_b02_t03_drop_tcp_redis",
   "authoring_harness": "agent",
   "authoring_model": "instruction_model",
-  "generation_prompt_version": "agent-generation-v1",
+  "generation_prompt_version": "agent-generation-v2",
   "source_path": "c00.c",
   "parent_candidate_id": null,
   "repair_attempt": 0,
   "claimed_status": "unvalidated",
-  "source_sha256": "af9a2c7e9c82da78e363fd3cf5793b0ab1f2ba5dde11716ef1b1493fb16248ef"
+  "source_sha256": "9c0484f85ebb0db9054ac283f348a9b3f909bff464ce37c7f08950e2c1c3e2c4"
 }

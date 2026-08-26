@@ -1,13 +1,41 @@
 {
   "task_id": "xdp_b02_t06_drop_tcp_smb",
-  "difficulty": "medium",
+  "template_family": "tcp_port_filter",
+  "semantic_signature": "ipv4+tcp_dport_139_445+drop",
+  "difficulty": "basic",
   "split": "train",
-  "instruction": "Filter traffic targeting port [445, 139]",
+  "instruction": "Write a complete XDP/eBPF program that drops TCP packets targeting ports 139 or 445 (SMB), passing other traffic.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify ip->protocol == IPPROTO_TCP",
+    "Check tcp->dest == bpf_htons(139) or bpf_htons(445)",
+    "Return XDP_DROP for SMB, XDP_PASS otherwise"
+  ],
+  "gold_candidate_id": null,
   "tests": [
     {
-      "packet_hex": "ffffffffffff00000000000008004500003c00010000401100007f0000017f0000010000000000280000",
+      "name": "smb_445_drop",
+      "description": "TCP 445 should drop",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a80114303901bd000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "smb_139_drop",
+      "description": "TCP 139 should drop",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a801143039008b000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "http_pass",
+      "description": "TCP 80 should pass",
+      "packet_hex": "52540012345652540065432108004500002804d2000040060000c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
       "expected_action": "XDP_PASS"
     }
-  ],
-  "gold_candidate_id": "xdp_b02_t06_drop_tcp_smb_c00"
+  ]
 }

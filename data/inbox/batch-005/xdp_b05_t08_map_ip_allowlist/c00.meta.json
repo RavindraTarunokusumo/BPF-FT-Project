@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b05_t08_map_ip_allowlist_c00",
-    "task_id": "xdp_b05_t08_map_ip_allowlist",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "63cb31b5e1d06fcdc16d2ee26b08bf05869cfebae263fe4b373ebadba0e5d292"
+  "candidate_id": "xdp_b05_t08_map_ip_allowlist_c00",
+  "task_id": "xdp_b05_t08_map_ip_allowlist",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v2",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "f456144ea549f22dca32479aee01c101ea8b8fdf397ba8c8413520e1f2ca2583"
 }

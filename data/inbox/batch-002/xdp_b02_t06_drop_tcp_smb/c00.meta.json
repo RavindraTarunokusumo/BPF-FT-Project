@@ -3,10 +3,10 @@
   "task_id": "xdp_b02_t06_drop_tcp_smb",
   "authoring_harness": "agent",
   "authoring_model": "instruction_model",
-  "generation_prompt_version": "agent-generation-v1",
+  "generation_prompt_version": "agent-generation-v2",
   "source_path": "c00.c",
   "parent_candidate_id": null,
   "repair_attempt": 0,
   "claimed_status": "unvalidated",
-  "source_sha256": "55c74bc410a33f32f789baea39bb2cff714efb159d0cf09dba5ff99b93b272a4"
+  "source_sha256": "6efb2990f670e3fe048f772f4d98cef439627a6d431f894fd0c349d58afb62c9"
 }

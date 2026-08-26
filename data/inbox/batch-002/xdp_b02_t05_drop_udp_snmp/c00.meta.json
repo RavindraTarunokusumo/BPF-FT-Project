@@ -3,10 +3,10 @@
   "task_id": "xdp_b02_t05_drop_udp_snmp",
   "authoring_harness": "agent",
   "authoring_model": "instruction_model",
-  "generation_prompt_version": "agent-generation-v1",
+  "generation_prompt_version": "agent-generation-v2",
   "source_path": "c00.c",
   "parent_candidate_id": null,
   "repair_attempt": 0,
   "claimed_status": "unvalidated",
-  "source_sha256": "61c8ae5b2497ad8a1e801195613882800412e6e284daac015abe641b136c41e4"
+  "source_sha256": "cf3bf83cf74fbb527ef0b64759e4f277a78d9171b86f995268e289444be339a3"
 }
