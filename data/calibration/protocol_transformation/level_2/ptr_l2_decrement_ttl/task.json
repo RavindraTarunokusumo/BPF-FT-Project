@@ -1,0 +1,77 @@
+{
+  "task_id": "ptr_l2_decrement_ttl",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_ip_rewrite",
+  "template_family": "xdp_ttl_checksum_rewrite",
+  "semantic_signature": "ipv4+decrement_ttl_update_checksum+drop_if_le_1",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF program that decrements the IPv4 TTL header field when TTL > 1, updates the IPv4 header checksum correctly, and returns XDP_PASS. If TTL <= 1 (TTL is 1 or 0), drop the packet with XDP_DROP. Pass non-IPv4 frames and malformed frames unchanged with XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify eth->h_proto == bpf_htons(ETH_P_IP)",
+    "If ip->ttl <= 1, return XDP_DROP",
+    "Decrement ip->ttl (ip->ttl -= 1)",
+    "Update IPv4 header checksum (e.g. csum = (ip->check + bpf_htons(0x0100)); if (csum < ip->check) csum += 1; ip->check = csum; or full 20-byte incremental update)",
+    "Return XDP_PASS on success",
+    "Pass non-IPv4 unchanged with XDP_PASS",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "ttl_64_dec",
+      "description": "IPv4 TTL 64 decremented to 63, checksum updated, returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ttl_64_dec.bin",
+      "expected_bytes_hex": "525400123456525400654321080045000028123400003f06e62dc0a8010ac0a8011430390050000003e8000000005002ffff00000000"
+    },
+    {
+      "name": "ttl_2_dec",
+      "description": "IPv4 TTL 2 decremented to 1, checksum updated, returns XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000271234000002112324c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ttl_2_dec.bin",
+      "expected_bytes_hex": "5254001234565254006543210800450000271234000001112424c0a8010ac0a801143039003500130000444e535f5041594c4f4144"
+    },
+    {
+      "name": "ttl_1_drop",
+      "description": "IPv4 TTL 1 must return XDP_DROP",
+      "packet_hex": "525400123456525400654321080045000028123400000106242ec0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/ttl_1_drop.bin"
+    },
+    {
+      "name": "ttl_0_drop",
+      "description": "IPv4 TTL 0 must return XDP_DROP",
+      "packet_hex": "525400123456525400654321080045000028123400000006252ec0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/ttl_0_drop.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must return XDP_PASS unchanged",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_bytes_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "name": "ttl_255_dec",
+      "description": "IPv4 TTL 255 decremented to 254",
+      "packet_hex": "52540012345652540065432108004500002412340000ff012636c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ttl_255_dec.bin",
+      "expected_bytes_hex": "52540012345652540065432108004500002412340000fe012736c0a8010ac0a801140800e2d40000123450494e4731323334"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IP header returns XDP_PASS safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    }
+  ]
+}

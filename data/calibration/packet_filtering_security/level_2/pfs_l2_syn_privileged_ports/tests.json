@@ -1,0 +1,63 @@
+{
+  "task_id": "pfs_l2_syn_privileged_ports",
+  "validator": "packet_action",
+  "test_count": 8,
+  "tests": [
+    {
+      "name": "syn_priv_80_drop",
+      "description": "TCP SYN to port 80 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_80_drop.bin"
+    },
+    {
+      "name": "syn_priv_443_drop",
+      "description": "TCP SYN to port 443 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_443_drop.bin"
+    },
+    {
+      "name": "syn_priv_1_drop",
+      "description": "TCP SYN to boundary port 1 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390001000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_1_drop.bin"
+    },
+    {
+      "name": "syn_priv_1023_drop",
+      "description": "TCP SYN to boundary port 1023 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303903ff000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_1023_drop.bin"
+    },
+    {
+      "name": "syn_high_1024_pass",
+      "description": "TCP SYN to port 1024 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390400000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_high_1024_pass.bin"
+    },
+    {
+      "name": "syn_high_8080_pass",
+      "description": "TCP SYN to port 8080 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430391f90000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_high_8080_pass.bin"
+    },
+    {
+      "name": "syn_ack_80_pass",
+      "description": "TCP SYN+ACK (0x12) to port 80 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005012ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_ack_80_pass.bin"
+    },
+    {
+      "name": "ack_80_pass",
+      "description": "TCP ACK (0x10) to port 80 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ack_80_pass.bin"
+    }
+  ]
+}

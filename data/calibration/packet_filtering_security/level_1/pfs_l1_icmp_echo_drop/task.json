@@ -1,0 +1,64 @@
+{
+  "task_id": "pfs_l1_icmp_echo_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_icmp_filter",
+  "template_family": "xdp_stateless_filter",
+  "semantic_signature": "ipv4+icmp_echo_req+drop",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write a complete XDP/eBPF program that drops IPv4 ICMP Echo Requests (Type 8). Pass other ICMP types, other protocols, non-IPv4, and malformed packets.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify Ethernet protocol is ETH_P_IP (0x0800)",
+    "Verify IP protocol is IPPROTO_ICMP",
+    "Parse variable IHL (ip->ihl * 4) safely",
+    "If ICMP type is 8 (Echo Request), return XDP_DROP; otherwise XDP_PASS",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "icmp_echo_drop",
+      "description": "ICMP Echo Request (type 8 code 0) must drop",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/icmp_echo_drop.bin"
+    },
+    {
+      "name": "icmp_reply_pass",
+      "description": "ICMP Echo Reply (type 0 code 0) must pass",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140000ead40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_reply_pass.bin"
+    },
+    {
+      "name": "icmp_unreach_pass",
+      "description": "ICMP Unreachable (type 3 code 1) must pass",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140301e7d30000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_unreach_pass.bin"
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP traffic must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "truncated_icmp_pass",
+      "description": "Truncated ICMP header must pass safely",
+      "packet_hex": "525400123456525400654321080045000014123400004001e546c0a8010ac0a80114",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_icmp_pass.bin"
+    }
+  ]
+}

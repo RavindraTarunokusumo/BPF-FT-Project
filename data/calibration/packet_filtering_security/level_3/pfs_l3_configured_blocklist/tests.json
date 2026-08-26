@@ -1,0 +1,77 @@
+{
+  "task_id": "pfs_l3_configured_blocklist",
+  "validator": "packet_action",
+  "test_count": 10,
+  "tests": [
+    {
+      "name": "ip1_pass",
+      "description": "10.0.0.1 packet defaults to pass when trie empty",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cdf0a000001c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip1_pass.bin"
+    },
+    {
+      "name": "ip2_pass",
+      "description": "192.168.1.100 packet defaults to pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e4d3c0a80164c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip2_pass.bin"
+    },
+    {
+      "name": "ip3_udp_pass",
+      "description": "172.16.0.50 UDP packet defaults to pass",
+      "packet_hex": "525400123456525400654321080045000027123400004011fa93ac100032c0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip3_udp_pass.bin"
+    },
+    {
+      "name": "ip4_icmp_pass",
+      "description": "8.8.8.8 ICMP packet defaults to pass",
+      "packet_hex": "52540012345652540065432108004500002412340000400196d908080808c0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip4_icmp_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "ip5_ihl6_pass",
+      "description": "1.1.1.1 packet with IHL=6 options must pass",
+      "packet_hex": "52540012345652540065432108004600002c123400004006a3da01010101c0a801140000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip5_ihl6_pass.bin"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IPv4 header must pass safely",
+      "packet_hex": "525400123456525400654321080045000010",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    },
+    {
+      "name": "vlan_pass",
+      "description": "VLAN frame must pass",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_pass.bin"
+    },
+    {
+      "name": "ip6_pass",
+      "description": "203.0.113.1 packet defaults to pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040066adecb007101c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip6_pass.bin"
+    },
+    {
+      "name": "ip7_pass",
+      "description": "198.51.100.1 packet defaults to pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040067cabc6336401c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip7_pass.bin"
+    }
+  ]
+}

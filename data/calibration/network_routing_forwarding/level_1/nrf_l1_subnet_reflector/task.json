@@ -1,0 +1,64 @@
+{
+  "task_id": "nrf_l1_subnet_reflector",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_l2_reflector",
+  "template_family": "xdp_packet_reflector",
+  "semantic_signature": "ipv4+dst_subnet_192_0_2_0_24+swap_mac_and_tx",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write a complete XDP/eBPF program that reflects packets whose IPv4 destination address belongs to test subnet 192.0.2.0/24 (0xC0000200/24) by swapping Ethernet source and destination addresses and returning XDP_TX. Pass non-matching destinations, malformed frames, and non-IPv4 packets unchanged with XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify eth->h_proto == bpf_htons(ETH_P_IP)",
+    "Check if (bpf_ntohl(ip->daddr) & 0xFFFFFF00) == 0xC0000200",
+    "If destination is in 192.0.2.0/24, swap eth->h_source and eth->h_dest, return XDP_TX",
+    "Pass other packets with XDP_PASS",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "subnet_dst_1_reflect_tx",
+      "description": "Packet to 192.0.2.1 must swap MACs and return XDP_TX",
+      "packet_hex": "112233445566aabbccddeeff080045000028123400004006e4e8c0a8010ac000020130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/subnet_dst_1_reflect_tx.bin"
+    },
+    {
+      "name": "subnet_dst_100_reflect_tx",
+      "description": "Packet to 192.0.2.100 must swap MACs and return XDP_TX",
+      "packet_hex": "112233445566aabbccddeeff080045000027123400004011e47bc0a8010ac00002643039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/subnet_dst_100_reflect_tx.bin"
+    },
+    {
+      "name": "other_subnet_pass",
+      "description": "Packet to 192.0.3.1 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e3e8c0a8010ac000030130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/other_subnet_pass.bin"
+    },
+    {
+      "name": "lan_dst_pass",
+      "description": "Packet to 10.0.0.1 must pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040069ce9c0a8010a0a00000130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/lan_dst_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IPv4 header must pass safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    }
+  ]
+}

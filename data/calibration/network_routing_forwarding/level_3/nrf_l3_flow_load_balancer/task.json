@@ -1,0 +1,95 @@
+{
+  "task_id": "nrf_l3_flow_load_balancer",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_flow_balancer",
+  "template_family": "xdp_devmap_balancer",
+  "semantic_signature": "ipv4_5tuple+hash_backend+dmac_rewrite_and_redirect",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF 5-tuple flow load balancer. Define: (1) 'backend_macs' array map (type BPF_MAP_TYPE_ARRAY, key __u32 [0 or 1], val unsigned char[6], max_entries 2), (2) 'backend_devmap' (type BPF_MAP_TYPE_DEVMAP, key __u32, val __u32, max_entries 2). For each IPv4 TCP/UDP packet, compute flow hash = (saddr ^ daddr ^ (sport << 16 | dport) ^ proto) % 2. Lookup backend MAC at key 'hash' in 'backend_macs' and copy into eth->h_dest. Then redirect packet via bpf_redirect_map(&backend_devmap, hash, 0). If devmap lookup fails or for non-TCP/UDP / non-IPv4 traffic, return XDP_PASS.",
+  "requirements": [
+    "Define 'backend_macs' array map (key __u32, val unsigned char[6], max_entries 2)",
+    "Define 'backend_devmap' DEVMAP (max_entries 2)",
+    "Check Ethernet and IPv4 bounds",
+    "Verify ip->protocol is IPPROTO_TCP or IPPROTO_UDP and parse L4 ports safely",
+    "Compute backend_idx = (ip->saddr ^ ip->daddr ^ (sport << 16 | dport) ^ ip->protocol) & 1",
+    "Lookup backend MAC: if present, copy to eth->h_dest",
+    "Redirect via bpf_redirect_map(&backend_devmap, backend_idx, 0)",
+    "Return XDP_PASS for non-TCP/UDP and non-IPv4",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "tcp_flow1_pass",
+      "description": "TCP flow 1 with unconfigured devmap returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006549a0a0000010a00000227100050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_flow1_pass.bin"
+    },
+    {
+      "name": "tcp_flow2_pass",
+      "description": "TCP flow 2 returns XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500002812340000400654960a0000030a0000044e2001bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_flow2_pass.bin"
+    },
+    {
+      "name": "udp_flow1_pass",
+      "description": "UDP flow returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801141388003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/udp_flow1_pass.bin"
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP traffic (non-flow) returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "ihl6_tcp_pass",
+      "description": "IPv4 TCP flow with options returns XDP_PASS",
+      "packet_hex": "52540012345652540065432108004600002c123400004006e429c0a8010ac0a801140000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ihl6_tcp_pass.bin"
+    },
+    {
+      "name": "vlan_tcp_pass",
+      "description": "VLAN frame returns XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_tcp_pass.bin"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP header returns XDP_PASS safely",
+      "packet_hex": "525400123456525400654321080045000016123400004006e53fc0a8010ac0a801140050",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IP header returns XDP_PASS safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    },
+    {
+      "name": "gre_pass",
+      "description": "GRE protocol returns XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500001e12340000402fe50ec0a8010ac0a8011400000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/gre_pass.bin"
+    }
+  ]
+}

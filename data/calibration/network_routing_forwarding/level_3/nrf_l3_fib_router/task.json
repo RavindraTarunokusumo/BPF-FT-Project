@@ -1,0 +1,94 @@
+{
+  "task_id": "nrf_l3_fib_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_fib_routing",
+  "template_family": "xdp_helper_router",
+  "semantic_signature": "ipv4+bpf_fib_lookup+route_and_redirect",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an advanced XDP/eBPF router using bpf_fib_lookup. For valid IPv4 packets, initialize struct bpf_fib_lookup with IPv4 5-tuple and ifindex=ctx->ingress_ifindex, invoke bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0). If lookup returns BPF_FIB_LKUP_RET_SUCCESS (0), decrement TTL, update IPv4 checksum incrementally (+0x0100), copy returned dmac/smac into Ethernet header, and redirect via bpf_redirect(fib_params.ifindex, 0) (or return XDP_TX if fib_params.ifindex == ctx->ingress_ifindex). If TTL <= 1 or FIB lookup returns any other code (BPF_FIB_LKUP_RET_NOT_FWDED, BPF_FIB_LKUP_RET_NO_NEIGH, etc.), pass packet to kernel network stack with XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify eth->h_proto == bpf_htons(ETH_P_IP)",
+    "If ip->ttl <= 1 return XDP_PASS",
+    "Zero-initialize struct bpf_fib_lookup fib_params and set family=AF_INET, ipv4_src=ip->saddr, ipv4_dst=ip->daddr, protocol=ip->protocol, tot_len=bpf_ntohs(ip->tot_len), ifindex=ctx->ingress_ifindex",
+    "Call bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0)",
+    "If ret == BPF_FIB_LKUP_RET_SUCCESS, decrement ip->ttl, update checksum, copy dmac/smac, return bpf_redirect(fib_params.ifindex, 0)",
+    "Return XDP_PASS on FIB fallback/failure or non-IPv4",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "ip_pkt1_fib_fallback_pass",
+      "description": "IPv4 packet without kernel FIB neighbor falls back to XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006549a0a0000010a00000230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip_pkt1_fib_fallback_pass.bin"
+    },
+    {
+      "name": "ip_pkt2_udp_fib_pass",
+      "description": "IPv4 UDP packet falls back to XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000027123400004011e53bc0a80105c0a801013039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip_pkt2_udp_fib_pass.bin"
+    },
+    {
+      "name": "ip_ttl1_pass",
+      "description": "IPv4 packet with TTL=1 must pass directly to stack",
+      "packet_hex": "525400123456525400654321080045000028123400000106242ec0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip_ttl1_pass.bin"
+    },
+    {
+      "name": "ip_ttl0_pass",
+      "description": "IPv4 packet with TTL=0 must pass to stack",
+      "packet_hex": "525400123456525400654321080045000028123400000006252ec0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ip_ttl0_pass.bin"
+    },
+    {
+      "name": "icmp_fib_pass",
+      "description": "ICMP packet falls back to XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_fib_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "ihl6_fib_pass",
+      "description": "IPv4 packet with options falls back to XDP_PASS",
+      "packet_hex": "52540012345652540065432108004600002c123400004006e429c0a8010ac0a801140000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ihl6_fib_pass.bin"
+    },
+    {
+      "name": "vlan_pass",
+      "description": "VLAN frame must return XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_pass.bin"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IP header must return XDP_PASS safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    },
+    {
+      "name": "public_fib_pass",
+      "description": "Public destination IP packet falls back to XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500002712340000401196d0c0a8010a080808083039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/public_fib_pass.bin"
+    }
+  ]
+}

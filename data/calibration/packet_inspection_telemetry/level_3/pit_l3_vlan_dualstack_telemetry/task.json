@@ -1,0 +1,94 @@
+{
+  "task_id": "pit_l3_vlan_dualstack_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_dualstack",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "vlan_dualstack_inspect+vlan_telemetry_map+pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF telemetry program that counts packets and bytes by Ethernet family in array map 'vlan_telemetry_map' (type BPF_MAP_TYPE_PERCPU_ARRAY, key __u32, val struct { __u64 packets; __u64 bytes; }, max_entries 4) without double counting. Categories: (1) Slot 0: Untagged IPv4 (EtherType 0x0800), (2) Slot 1: Single-VLAN IPv4 (802.1Q 0x8100 encapsulation with inner EtherType 0x0800), (3) Slot 2: Single-VLAN IPv6 (802.1Q 0x8100 encapsulation with inner EtherType 0x86DD), (4) Slot 3: Other traffic (untagged IPv6, ARP, QinQ, non-IP). Compute packet length, increment the corresponding slot's packets and bytes, and return XDP_PASS.",
+  "requirements": [
+    "Define 'vlan_telemetry_map' (type BPF_MAP_TYPE_PERCPU_ARRAY, key __u32, val struct { __u64 packets; __u64 bytes; }, max_entries 4)",
+    "Compute wire length pkt_len",
+    "Check Ethernet header: if eth->h_proto == bpf_htons(ETH_P_IP) -> slot 0",
+    "If eth->h_proto == bpf_htons(ETH_P_8021Q): parse VLAN header; if inner EtherType == ETH_P_IP -> slot 1; else if inner EtherType == ETH_P_IPV6 -> slot 2; else slot 3",
+    "If any other header -> slot 3",
+    "Lookup slot in 'vlan_telemetry_map', update *val.packets += 1 and *val.bytes += pkt_len",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "untagged_ipv4_slot0",
+      "description": "Untagged IPv4 frame updates slot 0 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/untagged_ipv4_slot0.bin"
+    },
+    {
+      "name": "untagged_ipv4_udp_slot0",
+      "description": "Untagged IPv4 UDP frame updates slot 0 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/untagged_ipv4_udp_slot0.bin"
+    },
+    {
+      "name": "vlan100_ipv4_slot1",
+      "description": "Single-VLAN IPv4 frame updates slot 1 and returns XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan100_ipv4_slot1.bin"
+    },
+    {
+      "name": "vlan200_ipv4_slot1",
+      "description": "Single-VLAN IPv4 frame updates slot 1 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321810000c8080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan200_ipv4_slot1.bin"
+    },
+    {
+      "name": "vlan100_ipv6_slot2",
+      "description": "Single-VLAN IPv6 frame updates slot 2 and returns XDP_PASS",
+      "packet_hex": "5254001234565254006543218100006486dd6000000000003b400000000000000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan100_ipv6_slot2.bin"
+    },
+    {
+      "name": "untagged_ipv6_slot3",
+      "description": "Untagged IPv6 frame updates slot 3 (other) and returns XDP_PASS",
+      "packet_hex": "52540012345652540065432186dd6000000000003b400000000000000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/untagged_ipv6_slot3.bin"
+    },
+    {
+      "name": "untagged_arp_slot3",
+      "description": "Untagged ARP frame updates slot 3 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/untagged_arp_slot3.bin"
+    },
+    {
+      "name": "vlan_arp_slot3",
+      "description": "VLAN ARP frame updates slot 3 and returns XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_arp_slot3.bin"
+    },
+    {
+      "name": "qinq_slot3",
+      "description": "QinQ double-tagged frame (0x88A8) updates slot 3 and returns XDP_PASS",
+      "packet_hex": "52540012345652540065432188a80064810000c8080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/qinq_slot3.bin"
+    },
+    {
+      "name": "runt_slot3",
+      "description": "Runt frame updates slot 3 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321ffff",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/runt_slot3.bin"
+    }
+  ]
+}

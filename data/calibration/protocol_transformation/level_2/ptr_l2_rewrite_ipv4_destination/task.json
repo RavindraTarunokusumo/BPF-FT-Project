@@ -1,0 +1,76 @@
+{
+  "task_id": "ptr_l2_rewrite_ipv4_destination",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_ip_rewrite",
+  "template_family": "xdp_ip_checksum_rewrite",
+  "semantic_signature": "ipv4+rewrite_dst_ip_203_0_113_9+pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF program that rewrites the IPv4 destination address to 203.0.113.9 (0xCB007109 in network byte order) and updates the IPv4 header checksum correctly. Pass non-IPv4 and malformed packets unchanged with XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify eth->h_proto == bpf_htons(ETH_P_IP)",
+    "Rewrite ip->daddr = bpf_htonl(0xCB007109) (203.0.113.9)",
+    "Recalculate or incrementally update IPv4 header checksum (ip->check)",
+    "Return XDP_PASS for all frames",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "rewrite_tcp_dst",
+      "description": "IPv4 destination rewritten to 203.0.113.9 with valid checksum",
+      "packet_hex": "5254001234565254006543210800450000281234000040069ce9c0a8010a0a00000130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/rewrite_tcp_dst.bin",
+      "expected_bytes_hex": "5254001234565254006543210800450000281234000040066ae0c0a8010acb00710930390050000003e8000000005002ffff00000000"
+    },
+    {
+      "name": "rewrite_udp_dst",
+      "description": "UDP packet destination rewritten to 203.0.113.9",
+      "packet_hex": "525400123456525400654321080045000027123400004011106cac100005ac1000013039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/rewrite_udp_dst.bin",
+      "expected_bytes_hex": "5254001234565254006543210800450000271234000040118073ac100005cb0071093039003500130000444e535f5041594c4f4144"
+    },
+    {
+      "name": "rewrite_icmp_dst",
+      "description": "ICMP packet destination rewritten to 203.0.113.9",
+      "packet_hex": "525400123456525400654321080045000024123400004001589201020304050607080800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/rewrite_icmp_dst.bin",
+      "expected_bytes_hex": "525400123456525400654321080045000024123400004001289601020304cb0071090800e2d40000123450494e4731323334"
+    },
+    {
+      "name": "already_matching_dst",
+      "description": "Packet already destined for 203.0.113.9 preserved",
+      "packet_hex": "52540012345652540065432108004500002812340000400622920a000001cb00710930390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/already_matching_dst.bin",
+      "expected_bytes_hex": "52540012345652540065432108004500002812340000400622920a000001cb00710930390050000003e8000000005002ffff00000000"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame preserved unchanged",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_bytes_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "name": "vlan_pass",
+      "description": "VLAN frame preserved unchanged",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_pass.bin"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IP header preserved safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    }
+  ]
+}

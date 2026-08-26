@@ -1,0 +1,56 @@
+{
+  "task_id": "nrf_l2_prefix_redirect",
+  "validator": "packet_action",
+  "test_count": 7,
+  "tests": [
+    {
+      "name": "prefix10_default_pass",
+      "description": "10.1.2.3 packet with unconfigured map defaults to XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000281234000040069ae6c0a8010a0a01020330390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix10_default_pass.bin"
+    },
+    {
+      "name": "prefix172_default_pass",
+      "description": "172.16.5.6 packet with unconfigured map defaults to XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006f5d3c0a8010aac10050630390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix172_default_pass.bin"
+    },
+    {
+      "name": "prefix192_pass",
+      "description": "192.168.1.1 packet (no match) must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e540c0a8010ac0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix192_pass.bin"
+    },
+    {
+      "name": "public_ip_pass",
+      "description": "8.8.8.8 packet (no match) must return XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500002712340000401196d0c0a8010a080808083039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/public_ip_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "prefix10_boundary_pass",
+      "description": "10.255.255.255 packet defaults to XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000281234000040069bebc0a8010a0affffff30390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix10_boundary_pass.bin"
+    },
+    {
+      "name": "prefix172_boundary_pass",
+      "description": "172.31.255.255 packet defaults to XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006facac0a8010aac1fffff30390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix172_boundary_pass.bin"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "task_id": "pit_l1_total_packets",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_counter",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "invocation+percpu_packet_counter+pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write a complete XDP/eBPF telemetry program that increments a 64-bit per-CPU total-packet counter once for every invocation and returns XDP_PASS. Define a per-CPU array map named 'total_packet_counter' (type BPF_MAP_TYPE_PERCPU_ARRAY, key __u32 0, val __u64 packet_count, max_entries 1). For every received packet (regardless of protocol, length, or encapsulation), lookup key 0 in 'total_packet_counter', increment the counter (*val += 1), and return XDP_PASS.",
+  "requirements": [
+    "Define 'total_packet_counter' (type BPF_MAP_TYPE_PERCPU_ARRAY, key __u32, val __u64, max_entries 1)",
+    "Lookup key __u32 0 in 'total_packet_counter'",
+    "If val != NULL, increment *val += 1",
+    "Return XDP_PASS for every packet",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "tcp_packet_pass",
+      "description": "TCP packet must increment counter and return XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_packet_pass.bin"
+    },
+    {
+      "name": "udp_packet_pass",
+      "description": "UDP packet must increment counter and return XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/udp_packet_pass.bin"
+    },
+    {
+      "name": "icmp_packet_pass",
+      "description": "ICMP packet must increment counter and return XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_packet_pass.bin"
+    },
+    {
+      "name": "arp_packet_pass",
+      "description": "ARP frame must increment counter and return XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_packet_pass.bin"
+    },
+    {
+      "name": "vlan_packet_pass",
+      "description": "VLAN frame must increment counter and return XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_packet_pass.bin"
+    },
+    {
+      "name": "runt_packet_pass",
+      "description": "Small runt packet must increment counter and return XDP_PASS",
+      "packet_hex": "5254001234565254006543210800",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/runt_packet_pass.bin"
+    }
+  ]
+}

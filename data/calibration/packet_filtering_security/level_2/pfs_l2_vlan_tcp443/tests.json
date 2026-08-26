@@ -1,0 +1,63 @@
+{
+  "task_id": "pfs_l2_vlan_tcp443",
+  "validator": "packet_action",
+  "test_count": 8,
+  "tests": [
+    {
+      "name": "untagged_tcp_443_drop",
+      "description": "Untagged IPv4 TCP 443 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/untagged_tcp_443_drop.bin"
+    },
+    {
+      "name": "vlan100_tcp_443_drop",
+      "description": "VLAN 100 IPv4 TCP 443 must drop",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a80114303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/vlan100_tcp_443_drop.bin"
+    },
+    {
+      "name": "vlan200_tcp_443_drop",
+      "description": "VLAN 200 IPv4 TCP 443 must drop",
+      "packet_hex": "525400123456525400654321810000c8080045000028123400004006e52dc0a8010ac0a80114303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/vlan200_tcp_443_drop.bin"
+    },
+    {
+      "name": "untagged_tcp_80_pass",
+      "description": "Untagged IPv4 TCP 80 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/untagged_tcp_80_pass.bin"
+    },
+    {
+      "name": "vlan100_tcp_80_pass",
+      "description": "VLAN 100 IPv4 TCP 80 must pass",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan100_tcp_80_pass.bin"
+    },
+    {
+      "name": "vlan100_udp_443_pass",
+      "description": "VLAN 100 IPv4 UDP 443 must pass",
+      "packet_hex": "52540012345652540065432181000064080045000027123400004011e523c0a8010ac0a80114303901bb00130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan100_udp_443_pass.bin"
+    },
+    {
+      "name": "untagged_arp_pass",
+      "description": "Untagged ARP frame must pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/untagged_arp_pass.bin"
+    },
+    {
+      "name": "vlan_arp_pass",
+      "description": "VLAN 100 ARP frame must pass",
+      "packet_hex": "52540012345652540065432181000064080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_arp_pass.bin"
+    }
+  ]
+}

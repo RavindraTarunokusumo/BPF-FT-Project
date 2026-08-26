@@ -1,0 +1,49 @@
+{
+  "task_id": "pfs_l1_udp53_drop",
+  "validator": "packet_action",
+  "test_count": 6,
+  "tests": [
+    {
+      "name": "udp_53_drop",
+      "description": "IPv4 UDP dest port 53 must drop",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/udp_53_drop.bin"
+    },
+    {
+      "name": "udp_123_pass",
+      "description": "IPv4 UDP dest port 123 (NTP) must pass",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039007b00130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/udp_123_pass.bin"
+    },
+    {
+      "name": "tcp_53_pass",
+      "description": "IPv4 TCP dest port 53 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390035000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_53_pass.bin"
+    },
+    {
+      "name": "icmp_pass",
+      "description": "IPv4 ICMP packet must pass",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_pass.bin"
+    },
+    {
+      "name": "non_ip_pass",
+      "description": "Non-IP frame must pass",
+      "packet_hex": "52540012345652540065432188f70000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_ip_pass.bin"
+    },
+    {
+      "name": "short_udp_pass",
+      "description": "Truncated UDP header must pass safely",
+      "packet_hex": "525400123456525400654321080045000016123400004011e534c0a8010ac0a801140035",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/short_udp_pass.bin"
+    }
+  ]
+}

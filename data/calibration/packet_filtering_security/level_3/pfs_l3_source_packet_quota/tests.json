@@ -1,0 +1,77 @@
+{
+  "task_id": "pfs_l3_source_packet_quota",
+  "validator": "packet_action",
+  "test_count": 10,
+  "tests": [
+    {
+      "name": "src1_pkt1_pass",
+      "description": "Source 10.0.0.1 first packet must pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cdf0a000001c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src1_pkt1_pass.bin"
+    },
+    {
+      "name": "src1_pkt2_pass",
+      "description": "Source 10.0.0.1 second packet must pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cdf0a000001c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src1_pkt2_pass.bin"
+    },
+    {
+      "name": "src2_pkt1_pass",
+      "description": "Source 10.0.0.2 first packet must pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cde0a000002c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src2_pkt1_pass.bin"
+    },
+    {
+      "name": "src3_udp_pass",
+      "description": "Source 10.0.0.3 UDP packet must pass",
+      "packet_hex": "5254001234565254006543210800450000271234000040119cd30a000003c0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src3_udp_pass.bin"
+    },
+    {
+      "name": "non_ip_arp_pass",
+      "description": "Non-IP ARP frame must pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_ip_arp_pass.bin"
+    },
+    {
+      "name": "src4_icmp_pass",
+      "description": "Source 10.0.0.4 ICMP packet must pass",
+      "packet_hex": "5254001234565254006543210800450000241234000040019ce50a000004c0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src4_icmp_pass.bin"
+    },
+    {
+      "name": "src5_ihl6_pass",
+      "description": "Source 10.0.0.5 IHL=6 packet must pass",
+      "packet_hex": "52540012345652540065432108004600002c1234000040069bd70a000005c0a801140000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src5_ihl6_pass.bin"
+    },
+    {
+      "name": "src6_pkt_pass",
+      "description": "Source 10.0.0.6 packet must pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cda0a000006c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src6_pkt_pass.bin"
+    },
+    {
+      "name": "truncated_frame_pass",
+      "description": "Truncated frame must pass safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_frame_pass.bin"
+    },
+    {
+      "name": "src7_pkt_pass",
+      "description": "Source 10.0.0.7 packet must pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cd90a000007c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src7_pkt_pass.bin"
+    }
+  ]
+}

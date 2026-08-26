@@ -1,0 +1,93 @@
+{
+  "task_id": "nrf_l3_policy_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_policy_routing",
+  "template_family": "xdp_devmap_router",
+  "semantic_signature": "ipv4+lpm_policy_rules+devmap_redirect",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF policy router. Define an LPM trie map 'policy_rules' (type BPF_MAP_TYPE_LPM_TRIE, key struct { __u32 prefixlen; __u32 src_ip; }, val struct { __u32 dst_prefix; __u8 proto; __u32 egress_idx; }, max_entries 256, flags BPF_F_NO_PREALLOC) and a devmap 'policy_devmap' (type BPF_MAP_TYPE_DEVMAP, key __u32, val __u32, max_entries 4). For each IPv4 packet, lookup source IP in 'policy_rules'. If a matching rule is found and (rule->proto == 0 || rule->proto == ip->protocol) and ((bpf_ntohl(ip->daddr) & rule->dst_prefix) == rule->dst_prefix), redirect via bpf_redirect_map(&policy_devmap, rule->egress_idx, 0). If no rule matches or lookup fails, return XDP_PASS. Pass non-IPv4 frames with XDP_PASS.",
+  "requirements": [
+    "Define 'policy_rules' LPM trie map (key struct { __u32 prefixlen; __u32 src_ip; }, val struct { __u32 dst_prefix; __u8 proto; __u32 egress_idx; }, max_entries 256, BPF_F_NO_PREALLOC)",
+    "Define 'policy_devmap' DEVMAP (max_entries 4)",
+    "Check Ethernet and IPv4 bounds",
+    "Lookup source IP with prefixlen=32 in 'policy_rules'",
+    "If match found and protocol/destination criteria met, return bpf_redirect_map(&policy_devmap, rule->egress_idx, 0)",
+    "Return XDP_PASS on fallback or non-IPv4",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "src1_default_pass",
+      "description": "10.0.0.1 TCP packet with unpopulated policy trie returns XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cf20a000001c0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src1_default_pass.bin"
+    },
+    {
+      "name": "src2_udp_pass",
+      "description": "172.16.0.1 UDP packet returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000027123400004011b27fac1000010a0000023039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src2_udp_pass.bin"
+    },
+    {
+      "name": "src3_icmp_pass",
+      "description": "192.168.1.50 ICMP packet returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000024123400004001e50ec0a80132c0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/src3_icmp_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "vlan_pass",
+      "description": "VLAN frame returns XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_pass.bin"
+    },
+    {
+      "name": "ihl6_pass",
+      "description": "IPv4 packet with options returns XDP_PASS",
+      "packet_hex": "52540012345652540065432108004600002c123400004006e429c0a8010ac0a801140000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ihl6_pass.bin"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IP header returns XDP_PASS safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    },
+    {
+      "name": "public_src_pass",
+      "description": "Public source IP returns XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500002812340000400696d008080808c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/public_src_pass.bin"
+    },
+    {
+      "name": "gre_pass",
+      "description": "GRE protocol returns XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500001e12340000402fe50ec0a8010ac0a8011400000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/gre_pass.bin"
+    },
+    {
+      "name": "high_port_tcp_pass",
+      "description": "High port TCP returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114c350ea60000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/high_port_tcp_pass.bin"
+    }
+  ]
+}

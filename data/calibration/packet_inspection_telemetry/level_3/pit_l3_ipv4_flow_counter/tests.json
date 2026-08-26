@@ -1,0 +1,77 @@
+{
+  "task_id": "pit_l3_ipv4_flow_counter",
+  "validator": "map_state",
+  "test_count": 10,
+  "tests": [
+    {
+      "name": "tcp_flow1_pass",
+      "description": "TCP 5-tuple flow 1 increments flow counter and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006549a0a0000010a00000230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_flow1_pass.bin"
+    },
+    {
+      "name": "tcp_flow1_pkt2_pass",
+      "description": "TCP flow 1 second packet increments counter and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006549a0a0000010a00000230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_flow1_pkt2_pass.bin"
+    },
+    {
+      "name": "tcp_flow2_pass",
+      "description": "TCP flow 2 (different dst port) returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006549a0a0000010a000002303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_flow2_pass.bin"
+    },
+    {
+      "name": "udp_flow1_pass",
+      "description": "UDP flow returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a8011414e9003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/udp_flow1_pass.bin"
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP traffic (ignored by map) returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame (ignored by map) returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "ihl6_tcp_pass",
+      "description": "IPv4 TCP flow with options (IHL=6) returns XDP_PASS",
+      "packet_hex": "52540012345652540065432108004600002c123400004006e429c0a8010ac0a801140000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ihl6_tcp_pass.bin"
+    },
+    {
+      "name": "vlan_pass",
+      "description": "VLAN frame returns XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_pass.bin"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP header returns XDP_PASS safely",
+      "packet_hex": "525400123456525400654321080045000016123400004006e53fc0a8010ac0a801140050",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IP header returns XDP_PASS safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    }
+  ]
+}

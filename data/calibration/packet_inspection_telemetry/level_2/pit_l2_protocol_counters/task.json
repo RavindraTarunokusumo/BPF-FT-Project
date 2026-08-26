@@ -1,0 +1,78 @@
+{
+  "task_id": "pit_l2_protocol_counters",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_protocol",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "proto_inspect+protocol_counters_map+pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF program that counts IPv4 TCP, IPv4 UDP, other IPv4, and non-IPv4 packets in distinct per-CPU array slots. Define a per-CPU array map named 'protocol_counters' (type BPF_MAP_TYPE_PERCPU_ARRAY, key __u32 [0=IPv4 TCP, 1=IPv4 UDP, 2=Other IPv4, 3=Non-IPv4], val __u64 count, max_entries 4). Parse Ethernet and IPv4: if non-IPv4 -> slot 3; if IPv4 TCP -> slot 0; if IPv4 UDP -> slot 1; if IPv4 other (ICMP, GRE, IGMP, etc.) -> slot 2. Increment the corresponding slot in 'protocol_counters' and return XDP_PASS.",
+  "requirements": [
+    "Define 'protocol_counters' (type BPF_MAP_TYPE_PERCPU_ARRAY, key __u32, val __u64, max_entries 4)",
+    "Check Ethernet header: if not ETH_P_IP, slot=3",
+    "Check IPv4 header: if ip->protocol == IPPROTO_TCP -> slot=0; else if ip->protocol == IPPROTO_UDP -> slot=1; else slot=2",
+    "Lookup slot in 'protocol_counters' and increment (*val += 1)",
+    "Return XDP_PASS for all packets",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "tcp_slot0",
+      "description": "IPv4 TCP frame increments slot 0 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_slot0.bin"
+    },
+    {
+      "name": "udp_slot1",
+      "description": "IPv4 UDP frame increments slot 1 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/udp_slot1.bin"
+    },
+    {
+      "name": "icmp_slot2",
+      "description": "IPv4 ICMP frame increments slot 2 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_slot2.bin"
+    },
+    {
+      "name": "gre_slot2",
+      "description": "IPv4 GRE frame increments slot 2 and returns XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500001e12340000402fe50ec0a8010ac0a8011400000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/gre_slot2.bin"
+    },
+    {
+      "name": "arp_slot3",
+      "description": "ARP frame (non-IPv4) increments slot 3 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_slot3.bin"
+    },
+    {
+      "name": "ipv6_slot3",
+      "description": "IPv6 frame increments slot 3 and returns XDP_PASS",
+      "packet_hex": "52540012345652540065432186dd6000000000003b400000000000000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ipv6_slot3.bin"
+    },
+    {
+      "name": "vlan_slot3",
+      "description": "VLAN frame increments slot 3 and returns XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_slot3.bin"
+    },
+    {
+      "name": "runt_slot3",
+      "description": "Runt frame increments slot 3 and returns XDP_PASS",
+      "packet_hex": "5254001234565254006543210800",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/runt_slot3.bin"
+    }
+  ]
+}

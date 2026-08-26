@@ -1,0 +1,71 @@
+{
+  "task_id": "nrf_l2_protocol_redirect",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_proto_redirect",
+  "template_family": "xdp_map_redirect",
+  "semantic_signature": "ipv4_tcp_udp+protocol_redirect_map+redirect_else_pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF program that redirects IPv4 TCP and UDP packets to two separately configured egress interfaces via array map 'proto_redirect_map' (type BPF_MAP_TYPE_ARRAY, key __u32 [0=TCP, 1=UDP], val __u32 ifindex, max_entries 2). For TCP, lookup key 0; for UDP, lookup key 1. If lookup succeeds and *ifindex != 0, return bpf_redirect(*ifindex, 0). If ifindex == 0 or for other protocols (ICMP, GRE, non-IPv4), return XDP_PASS.",
+  "requirements": [
+    "Define 'proto_redirect_map' array map (key __u32, val __u32, max_entries 2)",
+    "Check Ethernet and IPv4 bounds",
+    "If ip->protocol == IPPROTO_TCP, lookup key 0 in proto_redirect_map; if *val > 0 return bpf_redirect(*val, 0)",
+    "If ip->protocol == IPPROTO_UDP, lookup key 1 in proto_redirect_map; if *val > 0 return bpf_redirect(*val, 0)",
+    "Return XDP_PASS for other protocols and non-IPv4 traffic",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "tcp_default_pass",
+      "description": "TCP packet with unconfigured map (ifindex=0) must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_default_pass.bin"
+    },
+    {
+      "name": "udp_default_pass",
+      "description": "UDP packet with unconfigured map must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/udp_default_pass.bin"
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP packet must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_pass.bin"
+    },
+    {
+      "name": "gre_pass",
+      "description": "GRE packet (proto 47) must return XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500001e12340000402fe50ec0a8010ac0a8011400000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/gre_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "vlan_tcp_pass",
+      "description": "VLAN TCP frame must return XDP_PASS",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/vlan_tcp_pass.bin"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IP header must return XDP_PASS safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_ip_pass.bin"
+    }
+  ]
+}

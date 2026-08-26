@@ -1,0 +1,69 @@
+{
+  "task_id": "ptr_l1_swap_mac",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_l2_rewrite",
+  "semantic_signature": "ethernet+swap_mac_addresses+pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write a complete XDP/eBPF program that swaps Ethernet source and destination MAC addresses and passes the packet with XDP_PASS. Preserve every byte of the frame following the 12-byte MAC address area (EtherType, payload, etc.) exactly. If the packet is shorter than 14 bytes (runt Ethernet frame), return XDP_PASS unchanged.",
+  "requirements": [
+    "Check Ethernet header bounds",
+    "Swap eth->h_dest and eth->h_source using byte-wise or multi-byte temporary variables",
+    "Preserve EtherType and payload intact",
+    "Return XDP_PASS for all frames",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "swap_tcp_frame",
+      "description": "Standard TCP frame MAC addresses swapped and returned XDP_PASS",
+      "packet_hex": "112233445566aabbccddeeff080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/swap_tcp_frame.bin",
+      "expected_bytes_hex": "aabbccddeeff112233445566080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000"
+    },
+    {
+      "name": "swap_udp_frame",
+      "description": "UDP frame MAC addresses swapped",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/swap_udp_frame.bin",
+      "expected_bytes_hex": "525400654321525400123456080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144"
+    },
+    {
+      "name": "swap_arp_frame",
+      "description": "ARP frame MAC addresses swapped",
+      "packet_hex": "00112233445566778899aabb080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/swap_arp_frame.bin",
+      "expected_bytes_hex": "66778899aabb001122334455080600000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "name": "swap_vlan_frame",
+      "description": "VLAN frame outer MAC addresses swapped",
+      "packet_hex": "112233445566aabbccddeeff81000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/swap_vlan_frame.bin",
+      "expected_bytes_hex": "aabbccddeeff11223344556681000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000"
+    },
+    {
+      "name": "swap_runt_frame",
+      "description": "14-byte runt frame MAC addresses swapped",
+      "packet_hex": "112233445566aabbccddeeff0800",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/swap_runt_frame.bin",
+      "expected_bytes_hex": "aabbccddeeff1122334455660800"
+    },
+    {
+      "name": "swap_runt_frame_ffff",
+      "description": "14-byte runt frame MAC addresses swapped",
+      "packet_hex": "112233445566aabbccddeeffffff",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/swap_runt_frame_ffff.bin",
+      "expected_bytes_hex": "aabbccddeeff112233445566ffff"
+    }
+  ]
+}

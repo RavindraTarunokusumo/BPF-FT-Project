@@ -1,0 +1,80 @@
+{
+  "task_id": "pfs_l2_syn_privileged_ports",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_tcp_flags_filter",
+  "template_family": "xdp_multi_field_filter",
+  "semantic_signature": "ipv4+tcp_syn_priv_ports+drop",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write a complete XDP/eBPF program that drops initial IPv4 TCP SYN packets targeting destination ports 1-1023 (privileged ports). Initial SYN packets are defined as having the SYN flag set (0x02) and ACK flag unset (0x10). Do not drop ACK, RST, or established traffic, or higher destination ports (>= 1024). Handle variable IHL safely.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify Ethernet protocol is ETH_P_IP (0x0800)",
+    "Verify IP protocol is IPPROTO_TCP",
+    "Parse variable IHL (ip->ihl * 4) safely",
+    "Inspect TCP flags at offset 13 of TCP header: ((flags & 0x12) == 0x02)",
+    "Check destination port in range 1 <= dport <= 1023",
+    "Return XDP_DROP on match, XDP_PASS otherwise",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "syn_priv_80_drop",
+      "description": "TCP SYN to port 80 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_80_drop.bin"
+    },
+    {
+      "name": "syn_priv_443_drop",
+      "description": "TCP SYN to port 443 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_443_drop.bin"
+    },
+    {
+      "name": "syn_priv_1_drop",
+      "description": "TCP SYN to boundary port 1 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390001000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_1_drop.bin"
+    },
+    {
+      "name": "syn_priv_1023_drop",
+      "description": "TCP SYN to boundary port 1023 must drop",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303903ff000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_1023_drop.bin"
+    },
+    {
+      "name": "syn_high_1024_pass",
+      "description": "TCP SYN to port 1024 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390400000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_high_1024_pass.bin"
+    },
+    {
+      "name": "syn_high_8080_pass",
+      "description": "TCP SYN to port 8080 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430391f90000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_high_8080_pass.bin"
+    },
+    {
+      "name": "syn_ack_80_pass",
+      "description": "TCP SYN+ACK (0x12) to port 80 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005012ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_ack_80_pass.bin"
+    },
+    {
+      "name": "ack_80_pass",
+      "description": "TCP ACK (0x10) to port 80 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ack_80_pass.bin"
+    }
+  ]
+}

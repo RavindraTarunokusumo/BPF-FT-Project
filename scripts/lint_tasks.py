@@ -143,19 +143,21 @@ def lint_task_json(task_path: Path) -> list[str]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Lint all task.json files across categories/levels")
+    parser.add_argument("--root-dir", type=Path, default=INBOX_DIR, help="Root directory (data/inbox or data/calibration)")
     parser.add_argument("--category", help="Optional specific category to lint")
     parser.add_argument("--level", help="Optional specific level to lint")
     args = parser.parse_args()
 
+    root_dir = args.root_dir
     total_tasks = 0
     passed_tasks = 0
     failed_tasks = 0
 
     print("=" * 60)
-    print("XDP Task Specification Linter (Taxonomy-Based)")
+    print(f"XDP Task Specification Linter ({root_dir.name})")
     print("=" * 60)
 
-    for cat_dir in sorted(INBOX_DIR.iterdir()):
+    for cat_dir in sorted(root_dir.iterdir()):
         if not cat_dir.is_dir() or (args.category and cat_dir.name != args.category):
             continue
 

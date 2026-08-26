@@ -1,0 +1,69 @@
+{
+  "task_id": "ptr_l1_set_destination_mac",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_l2_rewrite",
+  "semantic_signature": "ethernet+set_dst_mac_020000000099+pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write a complete XDP/eBPF program that replaces the Ethernet destination address with fixed MAC 02:00:00:00:00:99. Preserve source MAC, EtherType, payload, and packet length exactly. Return XDP_PASS for all frames. If the packet is shorter than 14 bytes, pass it unchanged.",
+  "requirements": [
+    "Check Ethernet header bounds",
+    "Set eth->h_dest to {0x02, 0x00, 0x00, 0x00, 0x00, 0x99}",
+    "Preserve eth->h_source, eth->h_proto, and payload exactly",
+    "Return XDP_PASS for all frames",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "set_dst_tcp",
+      "description": "TCP frame destination MAC set to 02:00:00:00:00:99",
+      "packet_hex": "112233445566aabbccddeeff080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/set_dst_tcp.bin",
+      "expected_bytes_hex": "020000000099aabbccddeeff080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000"
+    },
+    {
+      "name": "set_dst_udp",
+      "description": "UDP frame destination MAC set to 02:00:00:00:00:99",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/set_dst_udp.bin",
+      "expected_bytes_hex": "020000000099525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144"
+    },
+    {
+      "name": "set_dst_arp",
+      "description": "ARP frame destination MAC set to 02:00:00:00:00:99",
+      "packet_hex": "ffffffffffff66778899aabb080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/set_dst_arp.bin",
+      "expected_bytes_hex": "02000000009966778899aabb080600000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "name": "set_dst_vlan",
+      "description": "VLAN frame destination MAC set to 02:00:00:00:00:99",
+      "packet_hex": "112233445566aabbccddeeff81000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/set_dst_vlan.bin",
+      "expected_bytes_hex": "020000000099aabbccddeeff81000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000"
+    },
+    {
+      "name": "set_dst_runt",
+      "description": "14-byte frame destination MAC set to 02:00:00:00:00:99",
+      "packet_hex": "112233445566aabbccddeeff0800",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/set_dst_runt.bin",
+      "expected_bytes_hex": "020000000099aabbccddeeff0800"
+    },
+    {
+      "name": "set_dst_runt_ffff",
+      "description": "14-byte frame destination MAC set to 02:00:00:00:00:99",
+      "packet_hex": "112233445566aabbccddeeffffff",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/set_dst_runt_ffff.bin",
+      "expected_bytes_hex": "020000000099aabbccddeeffffff"
+    }
+  ]
+}

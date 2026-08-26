@@ -1,0 +1,72 @@
+{
+  "task_id": "nrf_l2_prefix_redirect",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_prefix_redirect",
+  "template_family": "xdp_map_redirect",
+  "semantic_signature": "ipv4_dst_prefix+prefix_config_map+redirect_else_pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF program that selects one of two configured egress interfaces by IPv4 destination prefix: (1) Destination in 10.0.0.0/8 (0x0A000000/8) -> egress interface at key 0 in array map 'prefix_config', (2) Destination in 172.16.0.0/12 (0xAC100000/12) -> egress interface at key 1 in 'prefix_config' (type BPF_MAP_TYPE_ARRAY, key __u32, val __u32 ifindex, max_entries 2). If matched and ifindex != 0, return bpf_redirect(*ifindex, 0). If no prefix matches or ifindex == 0, return XDP_PASS. Pass non-IPv4 frames with XDP_PASS.",
+  "requirements": [
+    "Define 'prefix_config' array map (key __u32, val __u32, max_entries 2)",
+    "Check Ethernet and IPv4 bounds",
+    "Check (bpf_ntohl(ip->daddr) & 0xFF000000) == 0x0A000000 -> lookup key 0",
+    "Check (bpf_ntohl(ip->daddr) & 0xFFF00000) == 0xAC100000 -> lookup key 1",
+    "If lookup succeeds and *ifindex > 0, return bpf_redirect(*ifindex, 0)",
+    "Return XDP_PASS for no-route matches and non-IPv4",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "prefix10_default_pass",
+      "description": "10.1.2.3 packet with unconfigured map defaults to XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000281234000040069ae6c0a8010a0a01020330390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix10_default_pass.bin"
+    },
+    {
+      "name": "prefix172_default_pass",
+      "description": "172.16.5.6 packet with unconfigured map defaults to XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006f5d3c0a8010aac10050630390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix172_default_pass.bin"
+    },
+    {
+      "name": "prefix192_pass",
+      "description": "192.168.1.1 packet (no match) must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e540c0a8010ac0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix192_pass.bin"
+    },
+    {
+      "name": "public_ip_pass",
+      "description": "8.8.8.8 packet (no match) must return XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500002712340000401196d0c0a8010a080808083039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/public_ip_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must return XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "prefix10_boundary_pass",
+      "description": "10.255.255.255 packet defaults to XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000281234000040069bebc0a8010a0affffff30390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix10_boundary_pass.bin"
+    },
+    {
+      "name": "prefix172_boundary_pass",
+      "description": "172.31.255.255 packet defaults to XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006facac0a8010aac1fffff30390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/prefix172_boundary_pass.bin"
+    }
+  ]
+}

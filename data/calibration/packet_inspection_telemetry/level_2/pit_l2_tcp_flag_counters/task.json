@@ -1,0 +1,80 @@
+{
+  "task_id": "pit_l2_tcp_flag_counters",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_flags",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "tcp_flags_inspect+flag_counters_map+pass",
+  "split": "calibration",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP/eBPF program that counts valid IPv4 TCP packets by TCP control flags in array map 'tcp_flag_counters' (type BPF_MAP_TYPE_PERCPU_ARRAY, key __u32 [0=SYN, 1=FIN, 2=RST, 3=Other], val __u64 count, max_entries 4). Define flag precedence: (1) If SYN flag is set (flags & 0x02) -> slot 0, (2) Else if FIN flag is set (flags & 0x01) -> slot 1, (3) Else if RST flag is set (flags & 0x04) -> slot 2, (4) Else (ACK only, PSH+ACK, URG, etc.) -> slot 3. If the packet is not valid IPv4 TCP, do not increment any slot. Return XDP_PASS for all packets.",
+  "requirements": [
+    "Define 'tcp_flag_counters' (type BPF_MAP_TYPE_PERCPU_ARRAY, key __u32, val __u64, max_entries 4)",
+    "Check Ethernet and IPv4 bounds, verify ip->protocol == IPPROTO_TCP",
+    "Parse variable IHL (ip->ihl * 4) and verify TCP header bounds",
+    "Inspect TCP flags at offset 13 of TCP header",
+    "Apply precedence: SYN (0x02) -> 0; FIN (0x01) -> 1; RST (0x04) -> 2; other -> 3",
+    "Lookup slot in 'tcp_flag_counters' and increment (*val += 1)",
+    "Return XDP_PASS for all packets",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "syn_slot0",
+      "description": "TCP SYN (0x02) increments slot 0 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_slot0.bin"
+    },
+    {
+      "name": "syn_ack_slot0",
+      "description": "TCP SYN+ACK (0x12) increments slot 0 (SYN precedence) and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005012ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_ack_slot0.bin"
+    },
+    {
+      "name": "fin_slot1",
+      "description": "TCP FIN (0x01) increments slot 1 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005001ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/fin_slot1.bin"
+    },
+    {
+      "name": "fin_ack_slot1",
+      "description": "TCP FIN+ACK (0x11) increments slot 1 (FIN precedence) and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005011ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/fin_ack_slot1.bin"
+    },
+    {
+      "name": "rst_slot2",
+      "description": "TCP RST (0x04) increments slot 2 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005004ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/rst_slot2.bin"
+    },
+    {
+      "name": "rst_ack_slot2",
+      "description": "TCP RST+ACK (0x14) increments slot 2 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005014ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/rst_ack_slot2.bin"
+    },
+    {
+      "name": "ack_slot3",
+      "description": "TCP pure ACK (0x10) increments slot 3 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ack_slot3.bin"
+    },
+    {
+      "name": "psh_ack_slot3",
+      "description": "TCP PSH+ACK (0x18) increments slot 3 and returns XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005018ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/psh_ack_slot3.bin"
+    }
+  ]
+}

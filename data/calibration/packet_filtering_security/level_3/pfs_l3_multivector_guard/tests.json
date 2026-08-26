@@ -1,0 +1,77 @@
+{
+  "task_id": "pfs_l3_multivector_guard",
+  "validator": "packet_action",
+  "test_count": 10,
+  "tests": [
+    {
+      "name": "syn_priv_80_drop",
+      "description": "TCP SYN to privileged port 80 must drop and count reason 0",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_80_drop.bin"
+    },
+    {
+      "name": "syn_priv_443_drop",
+      "description": "TCP SYN to privileged port 443 must drop and count reason 0",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_priv_443_drop.bin"
+    },
+    {
+      "name": "syn_high_8080_pass",
+      "description": "TCP SYN to port 8080 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430391f90000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_high_8080_pass.bin"
+    },
+    {
+      "name": "ack_80_pass",
+      "description": "TCP ACK to port 80 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/ack_80_pass.bin"
+    },
+    {
+      "name": "udp_unblocked_pass",
+      "description": "UDP to unblocked port 12345 must pass",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039303900130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/udp_unblocked_pass.bin"
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP traffic must pass",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_pass.bin"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/arp_pass.bin"
+    },
+    {
+      "name": "syn_high_1024_pass",
+      "description": "TCP SYN to high port 1024 must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390400000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/syn_high_1024_pass.bin"
+    },
+    {
+      "name": "udp_dns_default_pass",
+      "description": "UDP 53 defaults to pass when blocked_udp_ports is empty",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/udp_dns_default_pass.bin"
+    },
+    {
+      "name": "tcp_established_pass",
+      "description": "Established TCP traffic (flags 0x18 PSH+ACK) must pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005018ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_established_pass.bin"
+    }
+  ]
+}
