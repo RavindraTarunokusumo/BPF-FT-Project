@@ -1,0 +1,28 @@
+{
+  "batch_id": "batch-001",
+  "task_id": "xdp_antigravity_b01_t03_drop_icmp",
+  "candidate_id": "xdp_antigravity_b01_t03_drop_icmp_c00",
+  "source_path": "/root/BPF-FT-Project/data/inbox/antigravity/batch-001/xdp_antigravity_b01_t03_drop_icmp/c00.c",
+  "source_sha256": "5ed3608d35f48d2961a88101d98f1e803282cf2d64cf12bfd2707813e632f973",
+  "timestamp": "2026-08-26T00:27:44.665553+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/inbox/antigravity/batch-001/xdp_antigravity_b01_t03_drop_icmp/c00.c:23:25: error: use of undeclared identifier 'IPPROTO_ICMP'\n   23 |     if (ip->protocol == IPPROTO_ICMP)\n      |                         ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/antigravity/batch-001/xdp_antigravity_b01_t03_drop_icmp/c00.c:23:25: error: use of undeclared identifier 'IPPROTO_ICMP'\n   23 |     if (ip->protocol == IPPROTO_ICMP)\n      |                         ^\n1 error generated."
+}
