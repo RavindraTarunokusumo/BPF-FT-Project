@@ -11,7 +11,7 @@
     "Inspect TCP flags byte (SYN=0x02, FIN=0x01)",
     "Pass all valid TCP packets and non-TCP traffic"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t04_drop_syn_fin_c00_r01",
   "tests": [
     {
       "name": "positive_syn_fin_drop",

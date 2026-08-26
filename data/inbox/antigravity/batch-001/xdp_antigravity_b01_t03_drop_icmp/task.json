@@ -10,7 +10,7 @@
     "Check bounds for Ethernet and IPv4 headers",
     "Pass non-IPv4 and non-ICMP packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t03_drop_icmp_c00_r01",
   "tests": [
     {
       "name": "positive_icmp_drop",

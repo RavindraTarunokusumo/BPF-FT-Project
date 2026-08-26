@@ -12,7 +12,7 @@
     "Extract UDP length field and compare with 512",
     "Pass non-DNS UDP and other protocols"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t09_drop_udp_dns_amplification_c00_r02",
   "tests": [
     {
       "name": "positive_dns_large_src_drop",

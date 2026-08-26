@@ -12,7 +12,7 @@
     "Check return pointer from bpf_map_lookup_elem before dereferencing",
     "Pass non-IPv4 and unblocked packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t07_src_ip_denylist_map_c00_r01",
   "tests": [
     {
       "name": "negative_ip_not_blocked_pass",

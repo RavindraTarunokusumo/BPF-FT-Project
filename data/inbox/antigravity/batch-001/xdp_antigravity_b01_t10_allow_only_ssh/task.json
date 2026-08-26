@@ -12,7 +12,7 @@
     "Drop all other IPv4 TCP packets",
     "Pass non-TCP IPv4 and non-IPv4 packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t10_allow_only_ssh_c00_r01",
   "tests": [
     {
       "name": "ssh_port_22_pass",

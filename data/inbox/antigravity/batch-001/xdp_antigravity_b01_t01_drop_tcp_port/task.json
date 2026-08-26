@@ -11,7 +11,7 @@
     "Handle variable IPv4 header length (ip->ihl * 4)",
     "Pass non-IPv4 and non-TCP packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t01_drop_tcp_port_c00_r01",
   "tests": [
     {
       "name": "positive_telnet_drop",

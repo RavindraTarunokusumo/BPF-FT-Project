@@ -11,7 +11,7 @@
     "Handle variable IPv4 header length (ip->ihl * 4)",
     "Pass non-IPv4 and non-UDP packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t02_drop_udp_port_c00_r02",
   "tests": [
     {
       "name": "positive_dns_drop",

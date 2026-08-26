@@ -11,7 +11,7 @@
     "Check null pointer on map lookup result before updating",
     "Return XDP_PASS for all packets"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t08_count_packets_map_c00_r01",
   "tests": [
     {
       "name": "count_tcp_packet_pass",

@@ -12,7 +12,7 @@
     "Apply correct byte order conversions using bpf_htons",
     "Pass untagged and non-matching traffic"
   ],
-  "gold_candidate_id": null,
+  "gold_candidate_id": "xdp_antigravity_b01_t06_vlan_drop_http_c00_r02",
   "tests": [
     {
       "name": "positive_vlan_8080_drop",
