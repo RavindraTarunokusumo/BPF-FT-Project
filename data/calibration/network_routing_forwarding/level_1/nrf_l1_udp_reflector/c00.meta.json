@@ -1,0 +1,15 @@
+{
+  "candidate_id": "nrf_l1_udp_reflector_c00",
+  "task_id": "nrf_l1_udp_reflector",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "800750bf5625952407758a7469d8e2d3bbe12bf2a752722bf6a5251fc7b5ca8b",
+  "timestamp": "2026-08-26T18:56:46.760776+00:00"
+}

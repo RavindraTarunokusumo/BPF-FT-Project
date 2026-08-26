@@ -1,0 +1,15 @@
+{
+  "candidate_id": "ptr_l2_rewrite_udp_port_c00",
+  "task_id": "ptr_l2_rewrite_udp_port",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "fda84e6a3b85e59b0de1fb09ff14d9ef89a5988de8c67055709ac26d1691877b",
+  "timestamp": "2026-08-26T20:36:55.501952+00:00"
+}

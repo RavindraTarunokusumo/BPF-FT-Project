@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "ptr_l2_rewrite_udp_port",
+  "candidate_id": "ptr_l2_rewrite_udp_port_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/protocol_transformation/level_2/ptr_l2_rewrite_udp_port/c00.c",
+  "source_sha256": "fda84e6a3b85e59b0de1fb09ff14d9ef89a5988de8c67055709ac26d1691877b",
+  "timestamp": "2026-08-26T20:43:21.615243+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/protocol_transformation/level_2/ptr_l2_rewrite_udp_port/c00.c:35:5: error: use of undeclared identifier 'uint16_t'\n   35 |     uint16_t old_dest = ntohs(udp->dest);\n      |     ^\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_2/ptr_l2_rewrite_udp_port/c00.c:37:17: error: use of undeclared identifier 'old_dest'\n   37 |     int delta = old_dest - 5353;\n      |                 ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_2/ptr_l2_rewrite_udp_port/c00.c:35:5: error: use of undeclared identifier 'uint16_t'\n   35 |     uint16_t old_dest = ntohs(udp->dest);\n      |     ^\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_2/ptr_l2_rewrite_udp_port/c00.c:37:17: error: use of undeclared identifier 'old_dest'\n   37 |     int delta = old_dest - 5353;\n      |                 ^\n2 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_fib_router",
+  "candidate_id": "nrf_l3_fib_router_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_fib_router/c00.c",
+  "source_sha256": "6a576d1bd0334d1cb788f93376cdfa5bdd3a9f65d8b20b453d9e19c10bcf0c12",
+  "timestamp": "2026-08-26T20:43:20.091692+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_fib_router/c00.c:30:25: error: use of undeclared identifier 'AF_INET'\n   30 |     fib_params.family = AF_INET;\n      |                         ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_fib_router/c00.c:33:16: error: no member named 'protocol' in 'struct bpf_fib_lookup'\n   33 |     fib_params.protocol = ip->protocol;\n      |     ~~~~~~~~~~ ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_fib_router/c00.c:30:25: error: use of undeclared identifier 'AF_INET'\n   30 |     fib_params.family = AF_INET;\n      |                         ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_fib_router/c00.c:33:16: error: no member named 'protocol' in 'struct bpf_fib_lookup'\n   33 |     fib_params.protocol = ip->protocol;\n      |     ~~~~~~~~~~ ^\n2 errors generated."
+}

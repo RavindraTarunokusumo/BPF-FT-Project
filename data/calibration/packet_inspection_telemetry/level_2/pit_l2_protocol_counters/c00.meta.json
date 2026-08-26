@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pit_l2_protocol_counters_c00",
+  "task_id": "pit_l2_protocol_counters",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "95274314e5193a3d1d1c30451c97094b71d3ed691709b69aefd52b6c10e248e4",
+  "timestamp": "2026-08-26T19:46:49.159740+00:00"
+}

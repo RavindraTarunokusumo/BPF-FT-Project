@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pit_l3_vlan_dualstack_telemetry_c00",
+  "task_id": "pit_l3_vlan_dualstack_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "629a42addd2a63b85b2341c02072cfdc203acdd72c05d135c563c49c65761f72",
+  "timestamp": "2026-08-26T19:55:47.715363+00:00"
+}

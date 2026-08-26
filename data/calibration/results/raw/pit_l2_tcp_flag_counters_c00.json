@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "pit_l2_tcp_flag_counters",
+  "candidate_id": "pit_l2_tcp_flag_counters_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c",
+  "source_sha256": "602f24b774abe62d8dc618d2645891fbc2e16e8df83367c6005bc2e22dee2cad",
+  "timestamp": "2026-08-26T20:43:21.041815+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:29:9: error: call to undeclared function 'ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   29 |     if (ntohs(eth_hdr->h_proto) != ETH_P_IP)\n      |         ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:34:36: warning: comparison of distinct pointer types ('struct iphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   34 |     if (ip_hdr + (ip_hdr->ihl * 4) > data_end)\n      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:41:36: warning: comparison of distinct pointer types ('struct tcphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   41 |     if (tcp_hdr + sizeof(*tcp_hdr) > data_end)\n      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:45:5: error: use of undeclared identifier 'u8'\n   45 |     u8 flags = tcp_hdr->th_flags;\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:47:9: error: use of undeclared identifier 'flags'\n   47 |     if (flags & 0x02) { // SYN\n      |         ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:49:16: error: use of undeclared identifier 'flags'\n   49 |     } else if (flags & 0x01) { // FIN\n      |                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:51:16: error: use of undeclared identifier 'flags'\n   51 |     } else if (flags & 0x04) { // RST\n      |                ^\n2 warnings and 5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:29:9: error: call to undeclared function 'ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   29 |     if (ntohs(eth_hdr->h_proto) != ETH_P_IP)\n      |         ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:34:36: warning: comparison of distinct pointer types ('struct iphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   34 |     if (ip_hdr + (ip_hdr->ihl * 4) > data_end)\n      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:41:36: warning: comparison of distinct pointer types ('struct tcphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   41 |     if (tcp_hdr + sizeof(*tcp_hdr) > data_end)\n      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:45:5: error: use of undeclared identifier 'u8'\n   45 |     u8 flags = tcp_hdr->th_flags;\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:47:9: error: use of undeclared identifier 'flags'\n   47 |     if (flags & 0x02) { // SYN\n      |         ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:49:16: error: use of undeclared identifier 'flags'\n   49 |     } else if (flags & 0x01) { // FIN\n      |                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_tcp_flag_counters/c00.c:51:16: error: use of undeclared identifier 'flags'\n   51 |     } else if (flags & 0x04) { // RST\n      |                ^\n2 warnings and 5 errors generated."
+}

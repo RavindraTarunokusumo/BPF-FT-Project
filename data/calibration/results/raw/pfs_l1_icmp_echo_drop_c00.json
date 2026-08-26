@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_icmp_echo_drop",
+  "candidate_id": "pfs_l1_icmp_echo_drop_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c",
+  "source_sha256": "c02911f9a27d8f81eaeca7ac3c17684aabf05015869886f50bddb1c38efbc4d1",
+  "timestamp": "2026-08-26T20:43:20.256650+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:21:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   21 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:29:5: error: use of undeclared identifier 'u_int8_t'\n   29 |     u_int8_t ihl = ip->ihl;\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:30:9: error: use of undeclared identifier 'ihl'\n   30 |     if (ihl < 5 || ihl > 15)\n      |         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:30:20: error: use of undeclared identifier 'ihl'\n   30 |     if (ihl < 5 || ihl > 15)\n      |                    ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:33:25: error: use of undeclared identifier 'ihl'\n   33 |     int ip_header_len = ihl * 4;\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:43:23: error: arithmetic on a pointer to an incomplete type 'struct icmphdr'\n   43 |     if ((void *)(icmp + 1) > data_end)\n      |                  ~~~~ ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:42:12: note: forward declaration of 'struct icmphdr'\n   42 |     struct icmphdr *icmp = data + sizeof(*eth) + ip_header_len;\n      |            ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:46:13: error: incomplete definition of type 'struct icmphdr'\n   46 |     if (icmp->type == 8)\n      |         ~~~~^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:42:12: note: forward declaration of 'struct icmphdr'\n   42 |     struct icmphdr *icmp = data + sizeof(*eth) + ip_header_len;\n      |            ^\n7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:21:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   21 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:29:5: error: use of undeclared identifier 'u_int8_t'\n   29 |     u_int8_t ihl = ip->ihl;\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:30:9: error: use of undeclared identifier 'ihl'\n   30 |     if (ihl < 5 || ihl > 15)\n      |         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:30:20: error: use of undeclared identifier 'ihl'\n   30 |     if (ihl < 5 || ihl > 15)\n      |                    ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:33:25: error: use of undeclared identifier 'ihl'\n   33 |     int ip_header_len = ihl * 4;\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:43:23: error: arithmetic on a pointer to an incomplete type 'struct icmphdr'\n   43 |     if ((void *)(icmp + 1) > data_end)\n      |                  ~~~~ ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:42:12: note: forward declaration of 'struct icmphdr'\n   42 |     struct icmphdr *icmp = data + sizeof(*eth) + ip_header_len;\n      |            ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:46:13: error: incomplete definition of type 'struct icmphdr'\n   46 |     if (icmp->type == 8)\n      |         ~~~~^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00.c:42:12: note: forward declaration of 'struct icmphdr'\n   42 |     struct icmphdr *icmp = data + sizeof(*eth) + ip_header_len;\n      |            ^\n7 errors generated."
+}

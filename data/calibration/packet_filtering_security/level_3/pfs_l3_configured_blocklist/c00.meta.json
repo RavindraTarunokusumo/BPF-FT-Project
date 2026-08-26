@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l3_configured_blocklist_c00",
+  "task_id": "pfs_l3_configured_blocklist",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "fd9e07c21d94a8eef18b3087dc8f52444ad610f199b913984908aea1e8d6d16c",
+  "timestamp": "2026-08-26T19:22:14.347121+00:00"
+}

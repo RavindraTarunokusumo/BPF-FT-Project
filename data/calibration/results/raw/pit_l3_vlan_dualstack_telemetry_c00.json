@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "pit_l3_vlan_dualstack_telemetry",
+  "candidate_id": "pit_l3_vlan_dualstack_telemetry_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00.c",
+  "source_sha256": "629a42addd2a63b85b2341c02072cfdc203acdd72c05d135c563c49c65761f72",
+  "timestamp": "2026-08-26T20:43:21.191316+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00.c:66:32: error: use of undeclared identifier 'vlan_telemetry_map'\n   66 |     val = bpf_map_lookup_elem(&vlan_telemetry_map, &key);\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00.c:76:46: error: expected identifier or '('\n   76 | struct bpf_map_def SEC(\"vlan_telemetry_map\") = {\n      |                                              ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00.c:66:32: error: use of undeclared identifier 'vlan_telemetry_map'\n   66 |     val = bpf_map_lookup_elem(&vlan_telemetry_map, &key);\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00.c:76:46: error: expected identifier or '('\n   76 | struct bpf_map_def SEC(\"vlan_telemetry_map\") = {\n      |                                              ^\n2 errors generated."
+}

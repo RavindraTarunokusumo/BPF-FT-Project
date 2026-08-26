@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pit_l1_total_bytes_c00",
+  "task_id": "pit_l1_total_bytes",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "70bdfb1c1fbd0030934726d3af5be4f716584aa1dc5cfea0b12edb359aaeb307",
+  "timestamp": "2026-08-26T19:43:43.622796+00:00"
+}

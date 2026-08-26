@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pit_l2_length_histogram_c00",
+  "task_id": "pit_l2_length_histogram",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "e159d0e52a209acbdfadce8de21964bb4c6d1f94590b2626a24332916b0e2d27",
+  "timestamp": "2026-08-26T19:45:44.137388+00:00"
+}

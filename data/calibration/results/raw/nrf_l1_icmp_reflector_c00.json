@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "nrf_l1_icmp_reflector",
+  "candidate_id": "nrf_l1_icmp_reflector_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c",
+  "source_sha256": "2b323054dda324e4cfb6813a781a2603bda8092fb8f7740830455b664f4e3d30",
+  "timestamp": "2026-08-26T20:43:19.675521+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:44:22: error: invalid application of 'sizeof' to an incomplete type 'struct icmphdr'\n   44 |     if (icmp_start + sizeof(struct icmphdr) > data_end)\n      |                      ^     ~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:44:36: note: forward declaration of 'struct icmphdr'\n   44 |     if (icmp_start + sizeof(struct icmphdr) > data_end)\n      |                                    ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:50:5: error: use of undeclared identifier 'uint8_t'\n   50 |     uint8_t temp[ETH_ALEN];\n      |     ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:52:9: error: use of undeclared identifier 'temp'\n   52 |         temp[i] = eth->h_source[i];\n      |         ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:58:26: error: use of undeclared identifier 'temp'; did you mean 'icmp'?\n   58 |         eth->h_dest[i] = temp[i];\n      |                          ^~~~\n      |                          icmp\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:47:21: note: 'icmp' declared here\n   47 |     struct icmphdr *icmp = icmp_start;\n      |                     ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:58:30: error: subscript of pointer to incomplete type 'struct icmphdr'\n   58 |         eth->h_dest[i] = temp[i];\n      |                          ~~~~^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:47:12: note: forward declaration of 'struct icmphdr'\n   47 |     struct icmphdr *icmp = icmp_start;\n      |            ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:44:22: error: invalid application of 'sizeof' to an incomplete type 'struct icmphdr'\n   44 |     if (icmp_start + sizeof(struct icmphdr) > data_end)\n      |                      ^     ~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:44:36: note: forward declaration of 'struct icmphdr'\n   44 |     if (icmp_start + sizeof(struct icmphdr) > data_end)\n      |                                    ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:50:5: error: use of undeclared identifier 'uint8_t'\n   50 |     uint8_t temp[ETH_ALEN];\n      |     ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:52:9: error: use of undeclared identifier 'temp'\n   52 |         temp[i] = eth->h_source[i];\n      |         ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:58:26: error: use of undeclared identifier 'temp'; did you mean 'icmp'?\n   58 |         eth->h_dest[i] = temp[i];\n      |                          ^~~~\n      |                          icmp\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:47:21: note: 'icmp' declared here\n   47 |     struct icmphdr *icmp = icmp_start;\n      |                     ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:58:30: error: subscript of pointer to incomplete type 'struct icmphdr'\n   58 |         eth->h_dest[i] = temp[i];\n      |                          ~~~~^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00.c:47:12: note: forward declaration of 'struct icmphdr'\n   47 |     struct icmphdr *icmp = icmp_start;\n      |            ^\n5 errors generated."
+}

@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l2_vlan_tcp443_c00",
+  "task_id": "pfs_l2_vlan_tcp443",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "415d2934a4cf73f955f99a825da0a462e23255fa2c2b97a0cc84923ffcf69694",
+  "timestamp": "2026-08-26T19:21:14.981962+00:00"
+}

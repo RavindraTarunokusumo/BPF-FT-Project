@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l1_udp53_drop_c00",
+  "task_id": "pfs_l1_udp53_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "cd75ede9f74e1e34b6e4a04ec0294352a1cac43ca05b927c144e9ae875ee7893",
+  "timestamp": "2026-08-26T19:14:34.931302+00:00"
+}

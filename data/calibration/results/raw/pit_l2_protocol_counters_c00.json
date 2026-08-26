@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "pit_l2_protocol_counters",
+  "candidate_id": "pit_l2_protocol_counters_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c",
+  "source_sha256": "95274314e5193a3d1d1c30451c97094b71d3ed691709b69aefd52b6c10e248e4",
+  "timestamp": "2026-08-26T20:43:20.983827+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:8:32: error: variable has incomplete type 'struct bpf_map_def'\n    8 | struct bpf_map_def SEC(\"maps\") protocol_counters = {\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:8:8: note: forward declaration of 'struct bpf_map_def'\n    8 | struct bpf_map_def SEC(\"maps\") protocol_counters = {\n      |        ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:17:18: warning: cast to 'void *' from smaller integer type '__u32' (aka 'unsigned int') [-Wint-to-void-pointer-cast]\n   17 |     void *data = (void *)ctx->data;\n      |                  ^~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:18:22: warning: cast to 'void *' from smaller integer type '__u32' (aka 'unsigned int') [-Wint-to-void-pointer-cast]\n   18 |     void *data_end = (void *)ctx->data_end;\n      |                      ^~~~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:25:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   25 |     if (eth->h_proto != htons(ETH_P_IP)) {\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:41:14: error: use of undeclared identifier 'IPPROTO_TCP'\n   41 |         case IPPROTO_TCP:\n      |              ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:44:14: error: use of undeclared identifier 'IPPROTO_UDP'\n   44 |         case IPPROTO_UDP:\n      |              ^\n2 warnings and 4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:8:32: error: variable has incomplete type 'struct bpf_map_def'\n    8 | struct bpf_map_def SEC(\"maps\") protocol_counters = {\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:8:8: note: forward declaration of 'struct bpf_map_def'\n    8 | struct bpf_map_def SEC(\"maps\") protocol_counters = {\n      |        ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:17:18: warning: cast to 'void *' from smaller integer type '__u32' (aka 'unsigned int') [-Wint-to-void-pointer-cast]\n   17 |     void *data = (void *)ctx->data;\n      |                  ^~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:18:22: warning: cast to 'void *' from smaller integer type '__u32' (aka 'unsigned int') [-Wint-to-void-pointer-cast]\n   18 |     void *data_end = (void *)ctx->data_end;\n      |                      ^~~~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:25:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   25 |     if (eth->h_proto != htons(ETH_P_IP)) {\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:41:14: error: use of undeclared identifier 'IPPROTO_TCP'\n   41 |         case IPPROTO_TCP:\n      |              ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00.c:44:14: error: use of undeclared identifier 'IPPROTO_UDP'\n   44 |         case IPPROTO_UDP:\n      |              ^\n2 warnings and 4 errors generated."
+}

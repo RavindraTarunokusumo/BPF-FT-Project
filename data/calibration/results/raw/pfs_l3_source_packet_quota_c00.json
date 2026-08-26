@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "pfs_l3_source_packet_quota",
+  "candidate_id": "pfs_l3_source_packet_quota_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c",
+  "source_sha256": "cd94c317cd4c12d9db789a71724f8338e384ced030303aca2b226026892a1df7",
+  "timestamp": "2026-08-26T20:43:20.666188+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:12:5: error: type name requires a specifier or qualifier\n   12 |     .name = \"source_quota_map\",\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:12:5: error: expected member name or ';' after declaration specifiers\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:11:9: error: expected ';' at end of declaration list\n   11 | struct {\n      |         ^\n      |         ;\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:29:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   29 |     if (eth->h_proto != htons(ETH_P_IP)) {\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:43:19: error: call to undeclared function 'be32_to_cpu'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   43 |     __u32 saddr = be32_to_cpu(ip->saddr);\n      |                   ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:43:19: note: did you mean '__be32_to_cpup'?\n/usr/include/linux/byteorder/little_endian.h:81:30: note: '__be32_to_cpup' declared here\n   81 | static __always_inline __u32 __be32_to_cpup(const __be32 *p)\n      |                              ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:12:5: error: type name requires a specifier or qualifier\n   12 |     .name = \"source_quota_map\",\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:12:5: error: expected member name or ';' after declaration specifiers\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:11:9: error: expected ';' at end of declaration list\n   11 | struct {\n      |         ^\n      |         ;\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:29:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   29 |     if (eth->h_proto != htons(ETH_P_IP)) {\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:43:19: error: call to undeclared function 'be32_to_cpu'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   43 |     __u32 saddr = be32_to_cpu(ip->saddr);\n      |                   ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_source_packet_quota/c00.c:43:19: note: did you mean '__be32_to_cpup'?\n/usr/include/linux/byteorder/little_endian.h:81:30: note: '__be32_to_cpup' declared here\n   81 | static __always_inline __u32 __be32_to_cpup(const __be32 *p)\n      |                              ^\n5 errors generated."
+}

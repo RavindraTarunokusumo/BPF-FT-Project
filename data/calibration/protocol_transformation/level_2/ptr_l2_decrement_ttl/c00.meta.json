@@ -1,0 +1,15 @@
+{
+  "candidate_id": "ptr_l2_decrement_ttl_c00",
+  "task_id": "ptr_l2_decrement_ttl",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "68bc0b0acaa47382df252a79e8a6dd8f98fb3468d885a577a746be2ad18536b0",
+  "timestamp": "2026-08-26T20:01:46.313910+00:00"
+}

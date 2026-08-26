@@ -1,0 +1,15 @@
+{
+  "candidate_id": "ptr_l3_vlan_pop_c00",
+  "task_id": "ptr_l3_vlan_pop",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "10acc782ca4c7f7bbc78d86e984713a1aac3fb203daf354dbd09040fa2be1590",
+  "timestamp": "2026-08-26T20:43:21.003736+00:00"
+}

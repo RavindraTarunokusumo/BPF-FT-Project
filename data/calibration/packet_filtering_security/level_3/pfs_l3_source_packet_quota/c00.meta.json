@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l3_source_packet_quota_c00",
+  "task_id": "pfs_l3_source_packet_quota",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "cd94c317cd4c12d9db789a71724f8338e384ced030303aca2b226026892a1df7",
+  "timestamp": "2026-08-26T19:41:56.361377+00:00"
+}

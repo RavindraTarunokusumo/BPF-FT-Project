@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l1_tcp23_drop_c00",
+  "task_id": "pfs_l1_tcp23_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "bcaa0f8276ef2cfc4784695927e4f569b3bf46fde8f3d705c16f096e7a8bf931",
+  "timestamp": "2026-08-26T19:12:49.720085+00:00"
+}

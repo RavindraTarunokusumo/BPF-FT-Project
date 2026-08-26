@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l1_icmp_echo_drop_c00",
+  "task_id": "pfs_l1_icmp_echo_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "c02911f9a27d8f81eaeca7ac3c17684aabf05015869886f50bddb1c38efbc4d1",
+  "timestamp": "2026-08-26T19:10:54.703401+00:00"
+}

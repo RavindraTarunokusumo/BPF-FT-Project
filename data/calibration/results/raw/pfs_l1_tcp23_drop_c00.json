@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_tcp23_drop",
+  "candidate_id": "pfs_l1_tcp23_drop_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c",
+  "source_sha256": "bcaa0f8276ef2cfc4784695927e4f569b3bf46fde8f3d705c16f096e7a8bf931",
+  "timestamp": "2026-08-26T20:43:20.304553+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:23:5: error: use of undeclared identifier 'u32'\n   23 |     u32 ip_header_len = ip->ihl * 4;\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:24:51: error: use of undeclared identifier 'ip_header_len'\n   24 |     if (data_end - data < sizeof(struct ethhdr) + ip_header_len)\n      |                                                   ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:27:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   27 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:31:57: error: use of undeclared identifier 'ip_header_len'\n   31 |     struct tcphdr *tcp = data + sizeof(struct ethhdr) + ip_header_len;\n      |                                                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:32:5: error: use of undeclared identifier 'u32'\n   32 |     u32 tcp_header_len = tcp->doff * 4;\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:33:51: error: use of undeclared identifier 'ip_header_len'\n   33 |     if (data_end - data < sizeof(struct ethhdr) + ip_header_len + tcp_header_len)\n      |                                                   ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:33:67: error: use of undeclared identifier 'tcp_header_len'\n   33 |     if (data_end - data < sizeof(struct ethhdr) + ip_header_len + tcp_header_len)\n      |                                                                   ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:14:25: warning: comparison of integers of different signs: 'long' and 'unsigned long' [-Wsign-compare]\n   14 |     if (data_end - data < sizeof(struct ethhdr))\n      |         ~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~\n1 warning and 7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:23:5: error: use of undeclared identifier 'u32'\n   23 |     u32 ip_header_len = ip->ihl * 4;\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:24:51: error: use of undeclared identifier 'ip_header_len'\n   24 |     if (data_end - data < sizeof(struct ethhdr) + ip_header_len)\n      |                                                   ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:27:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   27 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:31:57: error: use of undeclared identifier 'ip_header_len'\n   31 |     struct tcphdr *tcp = data + sizeof(struct ethhdr) + ip_header_len;\n      |                                                         ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:32:5: error: use of undeclared identifier 'u32'\n   32 |     u32 tcp_header_len = tcp->doff * 4;\n      |     ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:33:51: error: use of undeclared identifier 'ip_header_len'\n   33 |     if (data_end - data < sizeof(struct ethhdr) + ip_header_len + tcp_header_len)\n      |                                                   ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:33:67: error: use of undeclared identifier 'tcp_header_len'\n   33 |     if (data_end - data < sizeof(struct ethhdr) + ip_header_len + tcp_header_len)\n      |                                                                   ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00.c:14:25: warning: comparison of integers of different signs: 'long' and 'unsigned long' [-Wsign-compare]\n   14 |     if (data_end - data < sizeof(struct ethhdr))\n      |         ~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~\n1 warning and 7 errors generated."
+}

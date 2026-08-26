@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l3_multivector_guard_c00",
+  "task_id": "pfs_l3_multivector_guard",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "7bed0d077e7f10922725bfe8599a0010f17fb3144c469f1b785f459c5ed69df2",
+  "timestamp": "2026-08-26T19:40:40.264833+00:00"
+}

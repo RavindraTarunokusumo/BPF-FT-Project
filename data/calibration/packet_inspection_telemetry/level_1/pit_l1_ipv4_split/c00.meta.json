@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pit_l1_ipv4_split_c00",
+  "task_id": "pit_l1_ipv4_split",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "2df7cc9692a5e38f86de641aca9915d879a7483e5162c5229eb68128827d79cd",
+  "timestamp": "2026-08-26T19:42:26.168530+00:00"
+}

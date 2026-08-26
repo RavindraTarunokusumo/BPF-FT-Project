@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "ptr_l3_tcp_dnat",
+  "candidate_id": "ptr_l3_tcp_dnat_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c",
+  "source_sha256": "f18ed95e6e627547f93c23bbdf4ebcc50b7d7c1678ddf4a0de0e3023778fa375",
+  "timestamp": "2026-08-26T20:43:21.709956+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:25:16: warning: comparison of distinct pointer types ('struct iphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   25 |     if (ip + 1 > data_end)\n      |         ~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:27:32: error: 'void *' and 'struct iphdr *' are not pointers to compatible types\n   27 |     if (ip->ihl * 4 > data_end - ip)\n      |                       ~~~~~~~~ ^ ~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:29:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   29 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:33:9: warning: incompatible pointer types assigning to 'struct tcphdr *' from 'struct iphdr *' [-Wincompatible-pointer-types]\n   33 |     tcp = ip + (ip->ihl * 4);\n      |         ^ ~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:34:17: warning: comparison of distinct pointer types ('struct tcphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   34 |     if (tcp + 1 > data_end)\n      |         ~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:36:34: error: 'void *' and 'struct tcphdr *' are not pointers to compatible types\n   36 |     if (tcp->doff * 4 > data_end - tcp)\n      |                         ~~~~~~~~ ^ ~~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:46:41: error: address of bit-field requested\n   46 |     __u16 *ptr = (__u16 *)((void *)ip + offsetof(struct iphdr, ihl));\n      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_helpers.h:86:48: note: expanded from macro 'offsetof'\n   86 | #define offsetof(type, member)  ((unsigned long)&((type *)0)->member)\n      |                                                 ^~~~~~~~~~~~~~~~~~~~\n3 warnings and 4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:25:16: warning: comparison of distinct pointer types ('struct iphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   25 |     if (ip + 1 > data_end)\n      |         ~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:27:32: error: 'void *' and 'struct iphdr *' are not pointers to compatible types\n   27 |     if (ip->ihl * 4 > data_end - ip)\n      |                       ~~~~~~~~ ^ ~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:29:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   29 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:33:9: warning: incompatible pointer types assigning to 'struct tcphdr *' from 'struct iphdr *' [-Wincompatible-pointer-types]\n   33 |     tcp = ip + (ip->ihl * 4);\n      |         ^ ~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:34:17: warning: comparison of distinct pointer types ('struct tcphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   34 |     if (tcp + 1 > data_end)\n      |         ~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:36:34: error: 'void *' and 'struct tcphdr *' are not pointers to compatible types\n   36 |     if (tcp->doff * 4 > data_end - tcp)\n      |                         ~~~~~~~~ ^ ~~~\n/root/BPF-FT-Project/data/calibration/protocol_transformation/level_3/ptr_l3_tcp_dnat/c00.c:46:41: error: address of bit-field requested\n   46 |     __u16 *ptr = (__u16 *)((void *)ip + offsetof(struct iphdr, ihl));\n      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_helpers.h:86:48: note: expanded from macro 'offsetof'\n   86 | #define offsetof(type, member)  ((unsigned long)&((type *)0)->member)\n      |                                                 ^~~~~~~~~~~~~~~~~~~~\n3 warnings and 4 errors generated."
+}

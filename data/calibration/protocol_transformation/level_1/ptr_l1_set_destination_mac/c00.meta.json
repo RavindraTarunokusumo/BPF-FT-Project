@@ -1,0 +1,15 @@
+{
+  "candidate_id": "ptr_l1_set_destination_mac_c00",
+  "task_id": "ptr_l1_set_destination_mac",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "0a545abec5a2afc6bf1745af0aa0997d4bc9f0ab98c018d0dbd69d9ec1230ca5",
+  "timestamp": "2026-08-26T19:56:26.923625+00:00"
+}

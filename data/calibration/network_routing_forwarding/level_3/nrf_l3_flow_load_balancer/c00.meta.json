@@ -1,0 +1,15 @@
+{
+  "candidate_id": "nrf_l3_flow_load_balancer_c00",
+  "task_id": "nrf_l3_flow_load_balancer",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "e826e2a843bb6829764b0b4ceb41b019e2ba795e053c60357be44265bc507256",
+  "timestamp": "2026-08-26T19:05:51.981611+00:00"
+}

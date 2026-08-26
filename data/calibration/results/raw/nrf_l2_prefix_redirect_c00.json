@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "nrf_l2_prefix_redirect",
+  "candidate_id": "nrf_l2_prefix_redirect_c00",
+  "source_path": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c",
+  "source_sha256": "33f2b1618c4e25836b111d329ccf100e927177275043b929b939229b4b502fc5",
+  "timestamp": "2026-08-26T20:43:19.952837+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:21:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   21 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:37:46: error: use of undeclared identifier 'prefix_config'\n   37 |         __u32 ifindex = bpf_map_lookup_elem(&prefix_config, &key_0);\n      |                                              ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:47:46: error: use of undeclared identifier 'prefix_config'\n   47 |         __u32 ifindex = bpf_map_lookup_elem(&prefix_config, &key_1);\n      |                                              ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:56:1: warning: section does not match previous declaration [-Wsection]\n   56 | SEC(\"maps\")\n      | ^\n/usr/include/bpf/bpf_helpers.h:39:17: note: expanded from macro 'SEC'\n   39 |         __attribute__((section(name), used))                                \\\n      |                        ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:62:17: note: previous attribute is here\n   62 | } prefix_config SEC(\".maps\");\n      |                 ^\n/usr/include/bpf/bpf_helpers.h:39:17: note: expanded from macro 'SEC'\n   39 |         __attribute__((section(name), used))                                \\\n      |                        ^\n1 warning and 3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:21:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   21 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:37:46: error: use of undeclared identifier 'prefix_config'\n   37 |         __u32 ifindex = bpf_map_lookup_elem(&prefix_config, &key_0);\n      |                                              ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:47:46: error: use of undeclared identifier 'prefix_config'\n   47 |         __u32 ifindex = bpf_map_lookup_elem(&prefix_config, &key_1);\n      |                                              ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:56:1: warning: section does not match previous declaration [-Wsection]\n   56 | SEC(\"maps\")\n      | ^\n/usr/include/bpf/bpf_helpers.h:39:17: note: expanded from macro 'SEC'\n   39 |         __attribute__((section(name), used))                                \\\n      |                        ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00.c:62:17: note: previous attribute is here\n   62 | } prefix_config SEC(\".maps\");\n      |                 ^\n/usr/include/bpf/bpf_helpers.h:39:17: note: expanded from macro 'SEC'\n   39 |         __attribute__((section(name), used))                                \\\n      |                        ^\n1 warning and 3 errors generated."
+}
