@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "pit_l3_vlan_dualstack_telemetry",
+  "candidate_id": "pit_l3_vlan_dualstack_telemetry_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00-r01.c",
+  "source_sha256": "bd64c5960f1b2a86850b95a0bb980622f8fbde6dae8c684256be2bd55590500c",
+  "timestamp": "2026-08-26T21:55:24.873971+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00-r01.c:68:32: error: use of undeclared identifier 'vlan_telemetry_map'\n   68 |     val = bpf_map_lookup_elem(&vlan_telemetry_map, &key);\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00-r01.c:78:46: error: variable has incomplete type 'struct bpf_map_def'\n   78 | struct bpf_map_def SEC(\"vlan_telemetry_map\") vlan_telemetry_map = {\n      |                                              ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00-r01.c:78:8: note: forward declaration of 'struct bpf_map_def'\n   78 | struct bpf_map_def SEC(\"vlan_telemetry_map\") vlan_telemetry_map = {\n      |        ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00-r01.c:68:32: error: use of undeclared identifier 'vlan_telemetry_map'\n   68 |     val = bpf_map_lookup_elem(&vlan_telemetry_map, &key);\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00-r01.c:78:46: error: variable has incomplete type 'struct bpf_map_def'\n   78 | struct bpf_map_def SEC(\"vlan_telemetry_map\") vlan_telemetry_map = {\n      |                                              ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_vlan_dualstack_telemetry/c00-r01.c:78:8: note: forward declaration of 'struct bpf_map_def'\n   78 | struct bpf_map_def SEC(\"vlan_telemetry_map\") vlan_telemetry_map = {\n      |        ^\n2 errors generated."
+}

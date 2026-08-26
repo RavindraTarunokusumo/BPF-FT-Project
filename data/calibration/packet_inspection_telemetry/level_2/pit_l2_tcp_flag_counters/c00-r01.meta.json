@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pit_l2_tcp_flag_counters_c00_r01",
+  "task_id": "pit_l2_tcp_flag_counters",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "pit_l2_tcp_flag_counters_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "c4b17c23c76f8ce4d1fe46bea7a2899d144dc7f320001a1b7d1e18312ffbcdc7",
+  "timestamp": "2026-08-26T21:51:23.006640+00:00"
+}

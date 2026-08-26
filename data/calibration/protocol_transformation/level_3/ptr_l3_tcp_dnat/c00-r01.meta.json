@@ -1,0 +1,15 @@
+{
+  "candidate_id": "ptr_l3_tcp_dnat_c00_r01",
+  "task_id": "ptr_l3_tcp_dnat",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "ptr_l3_tcp_dnat_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "b0c38a136447ea1dad5d3c071053f230e481dad4d128aa87113860a3cce6fb8c",
+  "timestamp": "2026-08-26T22:02:30.413436+00:00"
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "nrf_l2_protocol_redirect",
+  "candidate_id": "nrf_l2_protocol_redirect_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_protocol_redirect/c00-r01.c",
+  "source_sha256": "93e13418045659509cd11414b0e305ba5b683f9571160a8ed73264f938dc976c",
+  "timestamp": "2026-08-26T21:33:13.693721+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_protocol_redirect/c00-r01.c:10:32: error: variable has incomplete type 'struct bpf_map_def'\n   10 | struct bpf_map_def SEC(\"maps\") proto_redirect_map = {\n      |                                ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_protocol_redirect/c00-r01.c:10:8: note: forward declaration of 'struct bpf_map_def'\n   10 | struct bpf_map_def SEC(\"maps\") proto_redirect_map = {\n      |        ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_protocol_redirect/c00-r01.c:10:32: error: variable has incomplete type 'struct bpf_map_def'\n   10 | struct bpf_map_def SEC(\"maps\") proto_redirect_map = {\n      |                                ^\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_protocol_redirect/c00-r01.c:10:8: note: forward declaration of 'struct bpf_map_def'\n   10 | struct bpf_map_def SEC(\"maps\") proto_redirect_map = {\n      |        ^\n1 error generated."
+}

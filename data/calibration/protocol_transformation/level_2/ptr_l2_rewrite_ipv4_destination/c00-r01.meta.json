@@ -1,0 +1,15 @@
+{
+  "candidate_id": "ptr_l2_rewrite_ipv4_destination_c00_r01",
+  "task_id": "ptr_l2_rewrite_ipv4_destination",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "ptr_l2_rewrite_ipv4_destination_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "6359d6113b2710a9b3d263f74f78ce8a24796c77e58173819fe7758607917316",
+  "timestamp": "2026-08-26T21:59:26.810411+00:00"
+}

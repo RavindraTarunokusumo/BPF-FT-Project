@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "pit_l2_length_histogram",
+  "candidate_id": "pit_l2_length_histogram_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_length_histogram/c00-r01.c",
+  "source_sha256": "88a4b5b8e5b24069cf4b33afdf0c29d7a7d2b9c9b69c9b30e18a114d76f3f6b9",
+  "timestamp": "2026-08-26T21:49:15.936782+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_length_histogram/c00-r01.c:10:58: error: expected identifier\n   10 | BPF_MAP_DEF(length_histogram, BPF_MAP_TYPE_PERCPU_ARRAY, sizeof(__u32), sizeof(__u64), 4);\n      |                                                          ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_length_histogram/c00-r01.c:10:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   10 | BPF_MAP_DEF(length_histogram, BPF_MAP_TYPE_PERCPU_ARRAY, sizeof(__u32), sizeof(__u64), 4);\n      | ^\n      | int\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_length_histogram/c00-r01.c:39:41: error: use of undeclared identifier 'length_histogram'\n   39 |     __u64 *count = bpf_map_lookup_elem(&length_histogram, &slot);\n      |                                         ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_length_histogram/c00-r01.c:10:58: error: expected identifier\n   10 | BPF_MAP_DEF(length_histogram, BPF_MAP_TYPE_PERCPU_ARRAY, sizeof(__u32), sizeof(__u64), 4);\n      |                                                          ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_length_histogram/c00-r01.c:10:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   10 | BPF_MAP_DEF(length_histogram, BPF_MAP_TYPE_PERCPU_ARRAY, sizeof(__u32), sizeof(__u64), 4);\n      | ^\n      | int\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_length_histogram/c00-r01.c:39:41: error: use of undeclared identifier 'length_histogram'\n   39 |     __u64 *count = bpf_map_lookup_elem(&length_histogram, &slot);\n      |                                         ^\n3 errors generated."
+}

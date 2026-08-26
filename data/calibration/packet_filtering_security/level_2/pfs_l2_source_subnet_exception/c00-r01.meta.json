@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l2_source_subnet_exception_c00_r01",
+  "task_id": "pfs_l2_source_subnet_exception",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "pfs_l2_source_subnet_exception_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "35d135ba146f224b54dcf8786fa5b47cd876598821a1ffaa3a3533306fc40b40",
+  "timestamp": "2026-08-26T21:40:52.297885+00:00"
+}

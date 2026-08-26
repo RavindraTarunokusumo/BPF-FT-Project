@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "pit_l3_tcp_flow_outcomes",
+  "candidate_id": "pit_l3_tcp_flow_outcomes_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c",
+  "source_sha256": "66294a962fe0a38b5c09d08ffd41d96ad969a3fc8239c9c9ebbfe976391552df",
+  "timestamp": "2026-08-26T21:53:44.470719+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:24:32: error: variable has incomplete type 'struct bpf_map_def'\n   24 | struct bpf_map_def SEC(\"maps\") tcp_flow_map = {\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:24:8: note: forward declaration of 'struct bpf_map_def'\n   24 | struct bpf_map_def SEC(\"maps\") tcp_flow_map = {\n      |        ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:38:25: error: call to undeclared function 'BPF_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   38 |     if (eth->h_proto != BPF_htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:51:21: error: no member named 'tcp_flags' in 'struct tcphdr'\n   51 |     int syn = (tcp->tcp_flags & TH_SYN) != 0;\n      |                ~~~  ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:51:33: error: use of undeclared identifier 'TH_SYN'\n   51 |     int syn = (tcp->tcp_flags & TH_SYN) != 0;\n      |                                 ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:52:21: error: no member named 'tcp_flags' in 'struct tcphdr'\n   52 |     int fin = (tcp->tcp_flags & TH_FIN) != 0;\n      |                ~~~  ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:52:33: error: use of undeclared identifier 'TH_FIN'\n   52 |     int fin = (tcp->tcp_flags & TH_FIN) != 0;\n      |                                 ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:53:21: error: no member named 'tcp_flags' in 'struct tcphdr'\n   53 |     int rst = (tcp->tcp_flags & TH_RST) != 0;\n      |                ~~~  ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:53:33: error: use of undeclared identifier 'TH_RST'\n   53 |     int rst = (tcp->tcp_flags & TH_RST) != 0;\n      |                                 ^\n8 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:24:32: error: variable has incomplete type 'struct bpf_map_def'\n   24 | struct bpf_map_def SEC(\"maps\") tcp_flow_map = {\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:24:8: note: forward declaration of 'struct bpf_map_def'\n   24 | struct bpf_map_def SEC(\"maps\") tcp_flow_map = {\n      |        ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:38:25: error: call to undeclared function 'BPF_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   38 |     if (eth->h_proto != BPF_htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:51:21: error: no member named 'tcp_flags' in 'struct tcphdr'\n   51 |     int syn = (tcp->tcp_flags & TH_SYN) != 0;\n      |                ~~~  ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:51:33: error: use of undeclared identifier 'TH_SYN'\n   51 |     int syn = (tcp->tcp_flags & TH_SYN) != 0;\n      |                                 ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:52:21: error: no member named 'tcp_flags' in 'struct tcphdr'\n   52 |     int fin = (tcp->tcp_flags & TH_FIN) != 0;\n      |                ~~~  ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:52:33: error: use of undeclared identifier 'TH_FIN'\n   52 |     int fin = (tcp->tcp_flags & TH_FIN) != 0;\n      |                                 ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:53:21: error: no member named 'tcp_flags' in 'struct tcphdr'\n   53 |     int rst = (tcp->tcp_flags & TH_RST) != 0;\n      |                ~~~  ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_tcp_flow_outcomes/c00-r01.c:53:33: error: use of undeclared identifier 'TH_RST'\n   53 |     int rst = (tcp->tcp_flags & TH_RST) != 0;\n      |                                 ^\n8 errors generated."
+}

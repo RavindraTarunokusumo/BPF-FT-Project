@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_flow_load_balancer",
+  "candidate_id": "nrf_l3_flow_load_balancer_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_flow_load_balancer/c00-r01.c",
+  "source_sha256": "eb7bc88f3454eea5209236de66b6b319a44ad706242bd2702260080946ab4cc5",
+  "timestamp": "2026-08-26T21:36:00.079698+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_flow_load_balancer/c00-r01.c:77:56: error: too many arguments to function call, expected 2, have 3\n   77 |     int ret = bpf_map_lookup_elem(&backend_macs, &idx, mac);\n      |               ~~~~~~~~~~~~~~~~~~~                      ^~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_flow_load_balancer/c00-r01.c:77:56: error: too many arguments to function call, expected 2, have 3\n   77 |     int ret = bpf_map_lookup_elem(&backend_macs, &idx, mac);\n      |               ~~~~~~~~~~~~~~~~~~~                      ^~~\n1 error generated."
+}

@@ -1,0 +1,15 @@
+{
+  "candidate_id": "ptr_l3_icmp_echo_reply_c00_r01",
+  "task_id": "ptr_l3_icmp_echo_reply",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "ptr_l3_icmp_echo_reply_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "547025550ccd5fa177308e211f617b041e921730ea1b77a536149eff9f171ef8",
+  "timestamp": "2026-08-26T22:00:38.591106+00:00"
+}

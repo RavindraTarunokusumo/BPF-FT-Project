@@ -1,0 +1,15 @@
+{
+  "candidate_id": "nrf_l2_prefix_redirect_c00_r01",
+  "task_id": "nrf_l2_prefix_redirect",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "nrf_l2_prefix_redirect_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "6f73699feebf03cc04b92d663add189781d13cdd56d41d3e7a0b34f9da1f6c58",
+  "timestamp": "2026-08-26T21:31:35.448125+00:00"
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_policy_router",
+  "candidate_id": "nrf_l3_policy_router_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_3/nrf_l3_policy_router/c00-r01.c",
+  "source_sha256": "2462feb78bbc5729f373c9f088b1683c890cb677dfe5c66c8faf18063594f42a",
+  "timestamp": "2026-08-26T21:37:07.425177+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_n3jrubmy/candidate.o\nlibbpf: elf: section(3) xdp, size 384, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_prog' at insn offset 0 (0 bytes), code size 48 insns (384 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_n3jrubmy/candidate.o is GPL\nlibbpf: elf: section(6) .maps, size 56, link 0, flags 3, type=1\nlibbpf: elf: section(16) .BTF, size 1848, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 464, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 408, link 1, flags 0, type=2\nlibbpf: looking for externs among 17 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'policy_rules': at sec_idx 6, offset 0.\nlibbpf: map 'policy_rules': unknown field 'flags'.\nError: failed to open object file\n",
+    "log": "libbpf: loading object from /tmp/bpf_val_n3jrubmy/candidate.o\nlibbpf: elf: section(3) xdp, size 384, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_prog' at insn offset 0 (0 bytes), code size 48 insns (384 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_n3jrubmy/candidate.o is GPL\nlibbpf: elf: section(6) .maps, size 56, link 0, flags 3, type=1\nlibbpf: elf: section(16) .BTF, size 1848, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 464, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 408, link 1, flags 0, type=2\nlibbpf: looking for externs among 17 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'policy_rules': at sec_idx 6, offset 0.\nlibbpf: map 'policy_rules': unknown field 'flags'.\nError: failed to open object file\n"
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Kernel verifier rejected program:\nlibbpf: loading object from /tmp/bpf_val_n3jrubmy/candidate.o\nlibbpf: elf: section(3) xdp, size 384, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_prog' at insn offset 0 (0 bytes), code size 48 insns (384 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_n3jrubmy/candidate.o is GPL\nlibbpf: elf: section(6) .maps, size 56, link 0, flags 3, type=1\nlibbpf: elf: section(16) .BTF, size 1848, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 464, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 408, link 1, flags 0, type=2\nlibbpf: looking for externs among 17 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'policy_rules': at sec_idx 6, offset 0.\nlibbpf: map 'policy_rules': unknown field 'flags'.\nError: failed to open object file"
+}

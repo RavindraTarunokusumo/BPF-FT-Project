@@ -1,0 +1,15 @@
+{
+  "candidate_id": "nrf_l1_icmp_reflector_c00_r01",
+  "task_id": "nrf_l1_icmp_reflector",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "nrf_l1_icmp_reflector_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "f82e1e9de0eb63c5be38316259147c255319d204475be45ad3332a425f10e95b",
+  "timestamp": "2026-08-26T21:26:32.526325+00:00"
+}

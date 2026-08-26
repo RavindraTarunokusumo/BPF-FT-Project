@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "pfs_l2_vlan_tcp443",
+  "candidate_id": "pfs_l2_vlan_tcp443_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_2/pfs_l2_vlan_tcp443/c00-r01.c",
+  "source_sha256": "11d1c9549bde5503a52907e8adcfb2540b7d2000eabc9e7fca27d2325a66fc76",
+  "timestamp": "2026-08-26T21:42:11.979643+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_2/pfs_l2_vlan_tcp443/c00-r01.c:6:10: fatal error: 'linux/vlan.h' file not found\n    6 | #include <linux/vlan.h>\n      |          ^~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_2/pfs_l2_vlan_tcp443/c00-r01.c:6:10: fatal error: 'linux/vlan.h' file not found\n    6 | #include <linux/vlan.h>\n      |          ^~~~~~~~~~~~~~\n1 error generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "pit_l3_ipv4_flow_counter",
+  "candidate_id": "pit_l3_ipv4_flow_counter_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_3/pit_l3_ipv4_flow_counter/c00-r01.c",
+  "source_sha256": "9133a12c59e18270d837a4086c6205f1797a26487ccb61bfe6b2847dd549d870",
+  "timestamp": "2026-08-26T21:52:38.300492+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_xqa1gdne/candidate.o\nlibbpf: elf: section(3) xdp, size 488, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_prog' at insn offset 0 (0 bytes), code size 61 insns (488 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: legacy map definitions in 'maps' section are not supported by libbpf v1.0+\nError: failed to open object file\n",
+    "log": "libbpf: loading object from /tmp/bpf_val_xqa1gdne/candidate.o\nlibbpf: elf: section(3) xdp, size 488, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_prog' at insn offset 0 (0 bytes), code size 61 insns (488 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: legacy map definitions in 'maps' section are not supported by libbpf v1.0+\nError: failed to open object file\n"
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Kernel verifier rejected program:\nlibbpf: loading object from /tmp/bpf_val_xqa1gdne/candidate.o\nlibbpf: elf: section(3) xdp, size 488, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_prog' at insn offset 0 (0 bytes), code size 61 insns (488 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: legacy map definitions in 'maps' section are not supported by libbpf v1.0+\nError: failed to open object file"
+}

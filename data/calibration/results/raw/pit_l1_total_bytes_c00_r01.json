@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "pit_l1_total_bytes",
+  "candidate_id": "pit_l1_total_bytes_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_1/pit_l1_total_bytes/c00-r01.c",
+  "source_sha256": "9c44934e3cdaad4b8f48d1002617303db8312753b61423b18d8eae7195967cb5",
+  "timestamp": "2026-08-26T21:48:42.168131+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_1/pit_l1_total_bytes/c00-r01.c:23:36: error: use of undeclared identifier 'total_byte_counter'\n   23 |     int ret = bpf_map_lookup_elem(&total_byte_counter, &key, &val);\n      |                                    ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_1/pit_l1_total_bytes/c00-r01.c:31:33: error: variable has incomplete type 'struct bpf_map_def'\n   31 | struct bpf_map_def SEC(\".maps\") total_byte_counter = {\n      |                                 ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_1/pit_l1_total_bytes/c00-r01.c:31:8: note: forward declaration of 'struct bpf_map_def'\n   31 | struct bpf_map_def SEC(\".maps\") total_byte_counter = {\n      |        ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_1/pit_l1_total_bytes/c00-r01.c:23:36: error: use of undeclared identifier 'total_byte_counter'\n   23 |     int ret = bpf_map_lookup_elem(&total_byte_counter, &key, &val);\n      |                                    ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_1/pit_l1_total_bytes/c00-r01.c:31:33: error: variable has incomplete type 'struct bpf_map_def'\n   31 | struct bpf_map_def SEC(\".maps\") total_byte_counter = {\n      |                                 ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_1/pit_l1_total_bytes/c00-r01.c:31:8: note: forward declaration of 'struct bpf_map_def'\n   31 | struct bpf_map_def SEC(\".maps\") total_byte_counter = {\n      |        ^\n2 errors generated."
+}

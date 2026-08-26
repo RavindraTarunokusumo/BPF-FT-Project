@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "ptr_l2_rewrite_ipv4_destination",
+  "candidate_id": "ptr_l2_rewrite_ipv4_destination_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/protocol_transformation/level_2/ptr_l2_rewrite_ipv4_destination/c00-r01.c",
+  "source_sha256": "6359d6113b2710a9b3d263f74f78ce8a24796c77e58173819fe7758607917316",
+  "timestamp": "2026-08-26T21:59:27.811242+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "In file included from /root/BPF-FT-Project/data/calibration/protocol_transformation/level_2/ptr_l2_rewrite_ipv4_destination/c00-r01.c:7:\nIn file included from /usr/lib/llvm-18/lib/clang/18/include/stdint.h:52:\nIn file included from /usr/include/stdint.h:26:\nIn file included from /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:33:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nIn file included from /root/BPF-FT-Project/data/calibration/protocol_transformation/level_2/ptr_l2_rewrite_ipv4_destination/c00-r01.c:7:\nIn file included from /usr/lib/llvm-18/lib/clang/18/include/stdint.h:52:\nIn file included from /usr/include/stdint.h:26:\nIn file included from /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:33:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated."
+}

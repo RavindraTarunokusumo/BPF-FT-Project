@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "pit_l2_protocol_counters",
+  "candidate_id": "pit_l2_protocol_counters_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00-r01.c",
+  "source_sha256": "5c45b9152ae12c928b8a886e1cd5329b1356145a4104ab843e1ba8ac2d8192a6",
+  "timestamp": "2026-08-26T21:50:39.074769+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00-r01.c:8:32: error: variable has incomplete type 'struct bpf_map_def'\n    8 | struct bpf_map_def SEC(\"maps\") protocol_counters = {\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00-r01.c:8:8: note: forward declaration of 'struct bpf_map_def'\n    8 | struct bpf_map_def SEC(\"maps\") protocol_counters = {\n      |        ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00-r01.c:8:32: error: variable has incomplete type 'struct bpf_map_def'\n    8 | struct bpf_map_def SEC(\"maps\") protocol_counters = {\n      |                                ^\n/root/BPF-FT-Project/data/calibration/packet_inspection_telemetry/level_2/pit_l2_protocol_counters/c00-r01.c:8:8: note: forward declaration of 'struct bpf_map_def'\n    8 | struct bpf_map_def SEC(\"maps\") protocol_counters = {\n      |        ^\n1 error generated."
+}

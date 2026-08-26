@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pit_l3_ipv4_flow_counter_c00_r01",
+  "task_id": "pit_l3_ipv4_flow_counter",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "pit_l3_ipv4_flow_counter_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "9133a12c59e18270d837a4086c6205f1797a26487ccb61bfe6b2847dd549d870",
+  "timestamp": "2026-08-26T21:52:37.299905+00:00"
+}

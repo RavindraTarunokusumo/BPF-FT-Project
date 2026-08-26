@@ -1,0 +1,15 @@
+{
+  "candidate_id": "nrf_l3_fib_router_c00_r01",
+  "task_id": "nrf_l3_fib_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "nrf_l3_fib_router_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "42f80648697fa866c03ed694f9d13d3c847684ac3b897eeb2ca1ee5533601c01",
+  "timestamp": "2026-08-26T21:33:48.287933+00:00"
+}

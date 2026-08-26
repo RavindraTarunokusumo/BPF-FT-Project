@@ -1,0 +1,15 @@
+{
+  "candidate_id": "nrf_l3_policy_router_c00_r01",
+  "task_id": "nrf_l3_policy_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "nrf_l3_policy_router_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "2462feb78bbc5729f373c9f088b1683c890cb677dfe5c66c8faf18063594f42a",
+  "timestamp": "2026-08-26T21:37:06.424566+00:00"
+}

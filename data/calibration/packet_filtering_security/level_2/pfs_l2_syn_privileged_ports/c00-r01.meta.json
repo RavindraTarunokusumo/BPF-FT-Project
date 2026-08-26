@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pfs_l2_syn_privileged_ports_c00_r01",
+  "task_id": "pfs_l2_syn_privileged_ports",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "pfs_l2_syn_privileged_ports_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "2866aa399f5d7a0318f83c6e51c1090efd0d442164c760933d9239e907f9f732",
+  "timestamp": "2026-08-26T21:41:46.259445+00:00"
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_icmp_echo_drop",
+  "candidate_id": "pfs_l1_icmp_echo_drop_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00-r01.c",
+  "source_sha256": "c420992b937c1f3cb5d8648f9c122696f0bf3fe94990300d2dd7fe5236d855ff",
+  "timestamp": "2026-08-26T21:37:51.434814+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "In file included from /root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00-r01.c:5:\nIn file included from /usr/include/linux/icmp.h:23:\nIn file included from /usr/include/linux/if.h:28:\nIn file included from /usr/include/x86_64-linux-gnu/sys/socket.h:22:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nIn file included from /root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_icmp_echo_drop/c00-r01.c:5:\nIn file included from /usr/include/linux/icmp.h:23:\nIn file included from /usr/include/linux/if.h:28:\nIn file included from /usr/include/x86_64-linux-gnu/sys/socket.h:22:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated."
+}

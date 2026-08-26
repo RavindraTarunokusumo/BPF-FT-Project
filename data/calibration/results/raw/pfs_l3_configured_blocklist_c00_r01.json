@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "pfs_l3_configured_blocklist",
+  "candidate_id": "pfs_l3_configured_blocklist_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c",
+  "source_sha256": "159fb5247429acc5c9331b25c8e17f456446da798663b715d2f859f7e946fe0b",
+  "timestamp": "2026-08-26T21:43:47.723167+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:40:22: error: call to undeclared function 'bpf_lpm_trie_lookup_elem'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   40 |     __u32 *rule_id = bpf_lpm_trie_lookup_elem(&blocklist_lpm_map, &key);\n      |                      ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:40:48: error: use of undeclared identifier 'blocklist_lpm_map'\n   40 |     __u32 *rule_id = bpf_lpm_trie_lookup_elem(&blocklist_lpm_map, &key);\n      |                                                ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:43:47: error: use of undeclared identifier 'rule_counter_map'\n   43 |         __u64 *counter = bpf_map_lookup_elem(&rule_counter_map, rule_id);\n      |                                               ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:54:50: error: expected identifier or '('\n   54 | struct bpf_map_def SEC(\"maps/blocklist_lpm_map\") = {\n      |                                                  ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:63:49: error: expected identifier or '('\n   63 | struct bpf_map_def SEC(\"maps/rule_counter_map\") = {\n      |                                                 ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:40:22: error: call to undeclared function 'bpf_lpm_trie_lookup_elem'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   40 |     __u32 *rule_id = bpf_lpm_trie_lookup_elem(&blocklist_lpm_map, &key);\n      |                      ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:40:48: error: use of undeclared identifier 'blocklist_lpm_map'\n   40 |     __u32 *rule_id = bpf_lpm_trie_lookup_elem(&blocklist_lpm_map, &key);\n      |                                                ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:43:47: error: use of undeclared identifier 'rule_counter_map'\n   43 |         __u64 *counter = bpf_map_lookup_elem(&rule_counter_map, rule_id);\n      |                                               ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:54:50: error: expected identifier or '('\n   54 | struct bpf_map_def SEC(\"maps/blocklist_lpm_map\") = {\n      |                                                  ^\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_3/pfs_l3_configured_blocklist/c00-r01.c:63:49: error: expected identifier or '('\n   63 | struct bpf_map_def SEC(\"maps/rule_counter_map\") = {\n      |                                                 ^\n5 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "nrf_l2_prefix_redirect",
+  "candidate_id": "nrf_l2_prefix_redirect_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00-r01.c",
+  "source_sha256": "6f73699feebf03cc04b92d663add189781d13cdd56d41d3e7a0b34f9da1f6c58",
+  "timestamp": "2026-08-26T21:31:36.448689+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00-r01.c:45:15: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   45 |         __u32 ifindex = bpf_map_lookup_elem(&prefix_config, &key_0);\n      |               ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00-r01.c:55:15: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   55 |         __u32 ifindex = bpf_map_lookup_elem(&prefix_config, &key_1);\n      |               ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00-r01.c:45:15: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   45 |         __u32 ifindex = bpf_map_lookup_elem(&prefix_config, &key_0);\n      |               ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_2/nrf_l2_prefix_redirect/c00-r01.c:55:15: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   55 |         __u32 ifindex = bpf_map_lookup_elem(&prefix_config, &key_1);\n      |               ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated."
+}

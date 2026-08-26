@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_tcp23_drop",
+  "candidate_id": "pfs_l1_tcp23_drop_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00-r01.c",
+  "source_sha256": "1c74ecbae2e30bdd85dfb6845b4da0106aa4113168ae9de2d90f040dec699b07",
+  "timestamp": "2026-08-26T21:38:39.516061+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00-r01.c:28:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   28 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_1/pfs_l1_tcp23_drop/c00-r01.c:28:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   28 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated."
+}

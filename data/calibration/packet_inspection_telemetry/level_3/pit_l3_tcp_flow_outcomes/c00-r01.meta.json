@@ -1,0 +1,15 @@
+{
+  "candidate_id": "pit_l3_tcp_flow_outcomes_c00_r01",
+  "task_id": "pit_l3_tcp_flow_outcomes",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "authoring_harness": "openrouter",
+  "authoring_model": "qwen/qwen3-8b",
+  "generation_prompt_version": "calibration-repair-v1",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "pit_l3_tcp_flow_outcomes_c00",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated",
+  "source_sha256": "66294a962fe0a38b5c09d08ffd41d96ad969a3fc8239c9c9ebbfe976391552df",
+  "timestamp": "2026-08-26T21:53:43.469525+00:00"
+}

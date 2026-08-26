@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "pfs_l2_syn_privileged_ports",
+  "candidate_id": "pfs_l2_syn_privileged_ports_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/packet_filtering_security/level_2/pfs_l2_syn_privileged_ports/c00-r01.c",
+  "source_sha256": "2866aa399f5d7a0318f83c6e51c1090efd0d442164c760933d9239e907f9f732",
+  "timestamp": "2026-08-26T21:41:47.259905+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "In file included from /root/BPF-FT-Project/data/calibration/packet_filtering_security/level_2/pfs_l2_syn_privileged_ports/c00-r01.c:7:\nIn file included from /usr/lib/llvm-18/lib/clang/18/include/stdint.h:52:\nIn file included from /usr/include/stdint.h:26:\nIn file included from /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:33:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nIn file included from /root/BPF-FT-Project/data/calibration/packet_filtering_security/level_2/pfs_l2_syn_privileged_ports/c00-r01.c:7:\nIn file included from /usr/lib/llvm-18/lib/clang/18/include/stdint.h:52:\nIn file included from /usr/include/stdint.h:26:\nIn file included from /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:33:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated."
+}

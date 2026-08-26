@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "nrf_l1_icmp_reflector",
+  "candidate_id": "nrf_l1_icmp_reflector_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00-r01.c",
+  "source_sha256": "f82e1e9de0eb63c5be38316259147c255319d204475be45ad3332a425f10e95b",
+  "timestamp": "2026-08-26T21:26:33.527043+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "In file included from /root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00-r01.c:5:\nIn file included from /usr/include/linux/icmp.h:23:\nIn file included from /usr/include/linux/if.h:28:\nIn file included from /usr/include/x86_64-linux-gnu/sys/socket.h:22:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nIn file included from /root/BPF-FT-Project/data/calibration/network_routing_forwarding/level_1/nrf_l1_icmp_reflector/c00-r01.c:5:\nIn file included from /usr/include/linux/icmp.h:23:\nIn file included from /usr/include/linux/if.h:28:\nIn file included from /usr/include/x86_64-linux-gnu/sys/socket.h:22:\nIn file included from /usr/include/features.h:526:\n/usr/include/x86_64-linux-gnu/gnu/stubs.h:7:11: fatal error: 'gnu/stubs-32.h' file not found\n    7 | # include <gnu/stubs-32.h>\n      |           ^~~~~~~~~~~~~~~~\n1 error generated."
+}
