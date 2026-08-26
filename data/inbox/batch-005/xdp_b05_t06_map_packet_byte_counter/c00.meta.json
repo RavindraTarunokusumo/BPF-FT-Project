@@ -1,0 +1,12 @@
+{
+    "candidate_id": "xdp_b05_t06_map_packet_byte_counter_c00",
+    "task_id": "xdp_b05_t06_map_packet_byte_counter",
+    "authoring_harness": "agent",
+    "authoring_model": "instruction_model",
+    "generation_prompt_version": "agent-generation-v1",
+    "source_path": "c00.c",
+    "parent_candidate_id": null,
+    "repair_attempt": 0,
+    "claimed_status": "unvalidated",
+    "source_sha256": "f7311ba098a97f4de1908e73bc22b9dd72c3ff66ef3cda677941034c960d2e46"
+}

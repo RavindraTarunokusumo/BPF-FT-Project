@@ -1,0 +1,24 @@
+{
+    "task_id": "xdp_b03_t01_drop_null_scan",
+    "template_family": "xdp_tcp_flags",
+    "semantic_signature": "Drop TCP packets with all flags = 0",
+    "difficulty": "medium",
+    "split": "train",
+    "instruction": "Drop TCP packets with all flags = 0",
+    "requirements": [
+        "C-code",
+        "Verifier-safe",
+        "Bounds-checks"
+    ],
+    "gold_candidate_id": null,
+    "tests": [
+        {
+            "packet_hex": "000c294f8b12000c294f8b1308004500002800010000400600007f0000017f0000020050005000000000000000005000000000000000",
+            "expected_action": "XDP_PASS"
+        },
+        {
+            "packet_hex": "000c294f8b12000c294f8b1308004500002800010000400600007f0000017f0000020050005000000000000000005000000000000000",
+            "expected_action": "XDP_DROP"
+        }
+    ]
+}

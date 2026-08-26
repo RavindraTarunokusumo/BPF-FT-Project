@@ -1,0 +1,12 @@
+{
+  "candidate_id": "xdp_b02_t02_drop_tcp_mysql_c00",
+  "task_id": "xdp_b02_t02_drop_tcp_mysql",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "f9678740bbdc63d34c517dff33363dfb416d52d62b9062cb3dee6fcd40cfc873"
+}

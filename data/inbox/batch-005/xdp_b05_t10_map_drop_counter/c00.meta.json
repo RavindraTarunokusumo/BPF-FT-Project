@@ -1,0 +1,12 @@
+{
+    "candidate_id": "xdp_b05_t10_map_drop_counter_c00",
+    "task_id": "xdp_b05_t10_map_drop_counter",
+    "authoring_harness": "agent",
+    "authoring_model": "instruction_model",
+    "generation_prompt_version": "agent-generation-v1",
+    "source_path": "c00.c",
+    "parent_candidate_id": null,
+    "repair_attempt": 0,
+    "claimed_status": "unvalidated",
+    "source_sha256": "dc1443f25e1687675dbd42293d17af9981bee44fe5b20977a9cdc98c38365ffb"
+}

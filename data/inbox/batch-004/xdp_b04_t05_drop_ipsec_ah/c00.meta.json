@@ -1,0 +1,12 @@
+{
+    "candidate_id": "xdp_b04_t05_drop_ipsec_ah_c00",
+    "task_id": "xdp_b04_t05_drop_ipsec_ah",
+    "authoring_harness": "agent",
+    "authoring_model": "instruction_model",
+    "generation_prompt_version": "agent-generation-v1",
+    "source_path": "c00.c",
+    "parent_candidate_id": null,
+    "repair_attempt": 0,
+    "claimed_status": "unvalidated",
+    "source_sha256": "ffb622efc547687bd871c09f31fa4b05daf9f127b316a7d7a9f3d8d561cfcb5d"
+}

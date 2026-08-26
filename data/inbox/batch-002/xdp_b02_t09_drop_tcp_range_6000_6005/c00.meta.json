@@ -1,0 +1,12 @@
+{
+  "candidate_id": "xdp_b02_t09_drop_tcp_range_6000_6005_c00",
+  "task_id": "xdp_b02_t09_drop_tcp_range_6000_6005",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "30398fd35ce7aedd06b42f653bb4fb89ac0ac6ba2e9d23aba754f90ff50cac0e"
+}

@@ -1,0 +1,12 @@
+{
+    "candidate_id": "xdp_b05_t02_map_dst_ip_denylist_c00",
+    "task_id": "xdp_b05_t02_map_dst_ip_denylist",
+    "authoring_harness": "agent",
+    "authoring_model": "instruction_model",
+    "generation_prompt_version": "agent-generation-v1",
+    "source_path": "c00.c",
+    "parent_candidate_id": null,
+    "repair_attempt": 0,
+    "claimed_status": "unvalidated",
+    "source_sha256": "6c159374a9120506b67cb19472ea1100908431589054021d002644e402aaa9c5"
+}

@@ -1,0 +1,46 @@
+{
+  "task_id": "xdp_b04_t07_drop_low_ttl",
+  "template_family": "ipv4_ttl_filter",
+  "semantic_signature": "ipv4+ttl_le_1+drop",
+  "difficulty": "basic",
+  "split": "train",
+  "instruction": "Write a complete XDP/eBPF C program that drops IPv4 packets with TTL <= 1, passing all packets with TTL > 1 and non-IPv4 traffic.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Inspect ip->ttl",
+    "Pass TTL > 1"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "ttl_1_drop",
+      "description": "TTL=1 should be dropped",
+      "packet_hex": "52540012345652540065432108004500001804d2000001060000c0a8010ac0a8011450494e47",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "ttl_0_drop",
+      "description": "TTL=0 should be dropped",
+      "packet_hex": "52540012345652540065432108004500001804d2000000060000c0a8010ac0a8011450494e47",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "ttl_64_pass",
+      "description": "TTL=64 should pass",
+      "packet_hex": "52540012345652540065432108004500001804d2000040060000c0a8010ac0a8011450494e47",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "short_eth_pass",
+      "description": "Boundary 14-byte Ethernet should pass",
+      "packet_hex": "5254001234565254006543210800",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

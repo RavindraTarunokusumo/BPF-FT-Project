@@ -1,0 +1,16 @@
+{
+    "task_id": "xdp_b04_t02_drop_icmp_unreachable",
+    "template_family": "xdp_filter",
+    "semantic_signature": "packet_filtering",
+    "difficulty": "beginner",
+    "split": "train",
+    "instruction": "Drop ICMP Destination Unreachable (type 3)",
+    "requirements": [],
+    "gold_candidate_id": null,
+    "tests": [
+        {
+            "packet_hex": "ffffffffffff00000000000008004500001c00000000400100000a0000010a0000020300000000000000",
+            "expected_action": "XDP_DROP"
+        }
+    ]
+}

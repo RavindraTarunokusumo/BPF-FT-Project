@@ -1,0 +1,19 @@
+{
+    "task_id": "xdp_b06_t03_vlan_drop_udp_dns",
+    "template_family": "xdp",
+    "semantic_signature": "Drop VLAN tagged UDP DNS",
+    "difficulty": "medium",
+    "split": "train",
+    "instruction": "Drop VLAN tagged UDP DNS",
+    "requirements": [
+        "bounds_check",
+        "ethernet_parsing"
+    ],
+    "gold_candidate_id": null,
+    "tests": [
+        {
+            "packet_hex": "ffffffffffff00000000000008004500001c00004000401100000a0000010a000002",
+            "expected_action": "XDP_PASS"
+        }
+    ]
+}

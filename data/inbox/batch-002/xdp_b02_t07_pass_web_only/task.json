@@ -1,0 +1,12 @@
+{
+  "task_id": "xdp_b02_t07_pass_web_only",
+  "difficulty": "medium",
+  "split": "train",
+  "instruction": "Filter traffic targeting port [80, 443]",
+  "tests": [
+    {
+      "packet_hex": "ffffffffffff00000000000008004500003c00010000401100007f0000017f0000010000000000280000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

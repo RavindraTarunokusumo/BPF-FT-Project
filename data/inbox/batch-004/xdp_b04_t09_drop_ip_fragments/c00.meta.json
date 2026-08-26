@@ -1,0 +1,12 @@
+{
+  "candidate_id": "xdp_b04_t09_drop_ip_fragments_c00",
+  "task_id": "xdp_b04_t09_drop_ip_fragments",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "c82411c5bbaa0685f983433716ed5a7dc21f05b07e011a53b0185d743bced851"
+}

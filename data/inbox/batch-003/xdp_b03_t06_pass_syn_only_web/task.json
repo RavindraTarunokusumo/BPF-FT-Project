@@ -1,0 +1,24 @@
+{
+    "task_id": "xdp_b03_t06_pass_syn_only_web",
+    "template_family": "xdp_tcp_flags",
+    "semantic_signature": "For TCP dport 80/443, allow SYN packets, drop others",
+    "difficulty": "medium",
+    "split": "train",
+    "instruction": "For TCP dport 80/443, allow SYN packets, drop others",
+    "requirements": [
+        "C-code",
+        "Verifier-safe",
+        "Bounds-checks"
+    ],
+    "gold_candidate_id": null,
+    "tests": [
+        {
+            "packet_hex": "000c294f8b12000c294f8b1308004500002800010000400600007f0000017f0000020050005000000000000000005000000000000000",
+            "expected_action": "XDP_PASS"
+        },
+        {
+            "packet_hex": "000c294f8b12000c294f8b1308004500002800010000400600007f0000017f0000020050005000000000000000005000000000000000",
+            "expected_action": "XDP_DROP"
+        }
+    ]
+}

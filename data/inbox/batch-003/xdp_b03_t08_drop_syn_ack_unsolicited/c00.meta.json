@@ -1,0 +1,12 @@
+{
+    "candidate_id": "xdp_b03_t08_drop_syn_ack_unsolicited_c00",
+    "task_id": "xdp_b03_t08_drop_syn_ack_unsolicited",
+    "authoring_harness": "agent",
+    "authoring_model": "instruction_model",
+    "generation_prompt_version": "agent-generation-v1",
+    "source_path": "c00.c",
+    "parent_candidate_id": null,
+    "repair_attempt": 0,
+    "claimed_status": "unvalidated",
+    "source_sha256": "8ec073099d9afbaa79eccf16f447605847b5faa22e8df3d88cb97118def2136d"
+}

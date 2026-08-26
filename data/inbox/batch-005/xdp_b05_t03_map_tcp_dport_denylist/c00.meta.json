@@ -1,0 +1,12 @@
+{
+    "candidate_id": "xdp_b05_t03_map_tcp_dport_denylist_c00",
+    "task_id": "xdp_b05_t03_map_tcp_dport_denylist",
+    "authoring_harness": "agent",
+    "authoring_model": "instruction_model",
+    "generation_prompt_version": "agent-generation-v1",
+    "source_path": "c00.c",
+    "parent_candidate_id": null,
+    "repair_attempt": 0,
+    "claimed_status": "unvalidated",
+    "source_sha256": "7702e72e8c2ac3d75b5b82cdcc1022821cb1f76ffe54055f3cb68156ad41ad03"
+}
