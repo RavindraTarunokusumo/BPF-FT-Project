@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t04_drop_syn_fin/c00.c:24:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   24 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t04_drop_syn_fin/c00.c:37:39: error: expected ';' at end of declaration\n   37 |     __u8 tcp_flags = ((__u8 *)tcp)[13]\n      |                                       ^\n      |                                       ;\n2 errors generated.",
   "claimed_status": "unvalidated",
-  "source_sha256": "2cbcb344f06f6a81e937fb3b99af4d997b1df20194e1adf67d4436a4defcc746"
+  "source_sha256": "818e2af870f0b9447b388d1a1f126f8b51f123cbe0ce8cb2c606abf2ef4bf7cb"
 }

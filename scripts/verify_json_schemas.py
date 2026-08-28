@@ -244,9 +244,12 @@ def verify_meta_json(data: Any, path: Path) -> List[str]:
     else:
         src_file = path.parent / data["source_path"]
         if src_file.exists():
-            actual_sha = hashlib.sha256(src_file.read_bytes()).hexdigest()
-            if actual_sha != data["source_sha256"]:
-                errors.append(f"Field 'source_sha256' ({data['source_sha256'][:8]}...) does not match actual {src_file.name} SHA ({actual_sha[:8]}...)")
+            raw_b = src_file.read_bytes()
+            norm_b = raw_b.replace(b"\r\n", b"\n")
+            actual_sha_raw = hashlib.sha256(raw_b).hexdigest()
+            actual_sha_norm = hashlib.sha256(norm_b).hexdigest()
+            if data["source_sha256"] not in (actual_sha_raw, actual_sha_norm):
+                errors.append(f"Field 'source_sha256' ({data['source_sha256'][:8]}...) does not match actual {src_file.name} SHA ({actual_sha_norm[:8]}...)")
 
     return errors
 

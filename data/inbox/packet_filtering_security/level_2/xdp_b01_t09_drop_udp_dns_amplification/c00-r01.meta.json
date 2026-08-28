@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t09_drop_udp_dns_amplification/c00.c:24:25: error: use of undeclared identifier 'IPPROTO_UDP'\n   24 |     if (ip->protocol != IPPROTO_UDP)\n      |                         ^\n1 error generated.",
   "claimed_status": "unvalidated",
-  "source_sha256": "3be02a12929129d54983648076a45274c21743804ddc801bc45ecf7d6f6bfd40"
+  "source_sha256": "9a40f8f57da684e23cf85fbb0fea534daf9d738faf0dfe7c8319988c732e3cb0"
 }

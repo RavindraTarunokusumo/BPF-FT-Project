@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:5: error: use of undeclared identifier 'uint16_t'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |     ^\n/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:48: error: use of undeclared identifier 'dport'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |                                                ^\n/root/BPF-FT-Project/data/inbox/batch-003/xdp_b03_t06_pass_syn_only_web/c00.c:26:63: error: use of undeclared identifier 'dport'\n   26 |     uint16_t dport = bpf_ntohs(tcp->dest); if (dport == 80 || dport == 443) { if (tcp->syn && !tcp->ack) return XDP_PASS; else return XDP_DROP; }\n      |                                                               ^\n3 errors generated.",
   "claimed_status": "unvalidated",
-  "source_sha256": "9c320f15082e1882765b130c7bf29e26e7c0d3abe741d9379cb3cd7da579d69d"
+  "source_sha256": "6e86d2ca7272a5412669463d447523ef5b4107935b56c47b5bc366dd11e3812b"
 }

@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t06_vlan_drop_http/c00.c:36:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   36 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated.",
   "claimed_status": "unvalidated",
-  "source_sha256": "4c9c5a39df6c708af4e82dd8ff6b310519a850accbcae0d6de8a782e882938c6"
+  "source_sha256": "7193137cd166d5eb5545bbb04eb6dfc686f2f49cf17b175f78242ce39ed3703a"
 }

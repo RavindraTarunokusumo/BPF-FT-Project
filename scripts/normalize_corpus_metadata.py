@@ -68,7 +68,8 @@ def main() -> None:
                         src_name = meta_data.get("source_path", meta_file.name.replace(".meta.json", ".c"))
                         src_file = task_dir / src_name
                         if src_file.exists():
-                            actual_sha = hashlib.sha256(src_file.read_bytes()).hexdigest()
+                            norm_b = src_file.read_bytes().replace(b"\r\n", b"\n")
+                            actual_sha = hashlib.sha256(norm_b).hexdigest()
                             if meta_data.get("source_sha256") != actual_sha:
                                 meta_data["source_sha256"] = actual_sha
                                 meta_file.write_text(json.dumps(meta_data, indent=2), encoding="utf-8")

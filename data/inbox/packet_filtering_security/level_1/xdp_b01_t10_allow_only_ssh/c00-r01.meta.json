@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t10_allow_only_ssh/c00.c:24:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   24 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated.",
   "claimed_status": "unvalidated",
-  "source_sha256": "a1636c66399920253f5dc038855dfb461069a6b9b89a48dc42285e59c172b3b1"
+  "source_sha256": "e2928c2543994c1e32fbd948a0da07b64f98c91d8d6279057f798e9732b280ed"
 }
