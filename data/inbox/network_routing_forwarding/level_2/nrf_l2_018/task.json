@@ -1,0 +1,46 @@
+{
+  "task_id": "nrf_l2_018",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "template_family": "nrf_next_hop_routing_map",
+  "semantic_signature": "next_hop_lookup_18",
+  "split": "train",
+  "instruction": "Write an XDP program that performs next-hop routing using a BPF hash map 'route_table'. Look up the IPv4 destination address. If a route exists, rewrite the Ethernet destination MAC to the next-hop MAC and return XDP_TX. Otherwise return XDP_PASS.",
+  "requirements": [
+    "Define BPF hash map 'route_table' mapping IPv4 address (__u32) to MAC address (unsigned char [6])",
+    "Look up ip->daddr in route_table",
+    "Rewrite eth->h_dest and return XDP_TX on match",
+    "Check boundaries on Ethernet and IPv4 headers"
+  ],
+  "gold_candidate_id": "nrf_l2_018_c00_r01",
+  "tests": [
+    {
+      "name": "test_route_tx",
+      "description": "IPv4 packet destined for 10.0.18.1 should be routed with XDP_TX",
+      "packet_hex": "52540012345652540065432108004500002a1234000040068ae7c0a8010a0a0012013039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/test_route_tx.bin"
+    },
+    {
+      "name": "test_unrouted_pass",
+      "description": "IPv4 packet without route should pass with XDP_PASS",
+      "packet_hex": "52540012345652540065432108004500002a1234000040061e3ec0a8010ac0a8c8013039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_unrouted_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "Non-IP ARP packet should pass with XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated Ethernet frame header should pass with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

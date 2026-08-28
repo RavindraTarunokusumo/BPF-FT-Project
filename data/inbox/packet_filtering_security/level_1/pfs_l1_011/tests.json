@@ -1,0 +1,42 @@
+{
+  "task_id": "pfs_l1_011",
+  "validator": "packet_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "test_match_drop",
+      "description": "IPv4 TCP packet with destination port 993 should be dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303903e1000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_match_drop.bin"
+    },
+    {
+      "name": "test_diff_port_pass",
+      "description": "IPv4 TCP packet with different port should pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303903e2000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_diff_port_pass.bin"
+    },
+    {
+      "name": "test_udp_pass",
+      "description": "IPv4 UDP packet to port 993 should pass",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a80114303903e100160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_udp_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "ARP packet should pass untouched",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated packet header should safely pass",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

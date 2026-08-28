@@ -1,0 +1,12 @@
+{
+  "authoring_harness": "subagent_generator",
+  "authoring_model": "gemini_3_7_flash",
+  "generation_prompt_version": "sft_repair_v1",
+  "candidate_id": "pit_l2_023_c00_r01",
+  "task_id": "pit_l2_023",
+  "source_path": "c00-r01.c",
+  "parent_candidate_id": "pit_l2_023_c00",
+  "source_sha256": "79432d6f7a24b00a4fdabd1a9c0f2f45f2700450d63c1c82646c6f2c0d673f4d",
+  "repair_attempt": 1,
+  "claimed_status": "unvalidated"
+}

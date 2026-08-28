@@ -1,0 +1,38 @@
+{
+  "task_id": "pfs_l1_051",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "template_family": "pfs_ip_ttl_or_size_filter",
+  "semantic_signature": "drop_low_ttl_or_small_51",
+  "split": "train",
+  "instruction": "Write an XDP program that drops IPv4 packets with TTL <= 1 (expired / traceroute) or fragmented packets, and passes all others.",
+  "requirements": [
+    "Drop IPv4 packets with ip->ttl <= 1",
+    "Drop IPv4 packets with fragmentation offset or MF flag set",
+    "Pass unfragmented IPv4 packets with TTL > 1 and all non-IPv4 packets"
+  ],
+  "gold_candidate_id": "pfs_l1_051_c00_r01",
+  "tests": [
+    {
+      "name": "test_low_ttl_drop",
+      "description": "IPv4 packet with TTL == 1 should be dropped",
+      "packet_hex": "52540012345652540065432108004500002a123400000106242cc0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_low_ttl_drop.bin"
+    },
+    {
+      "name": "test_normal_ttl_pass",
+      "description": "IPv4 packet with normal TTL should pass",
+      "packet_hex": "52540012345652540065432108004500002a123400004006e52bc0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_normal_ttl_pass.bin"
+    },
+    {
+      "name": "test_fragmented_drop",
+      "description": "Fragmented IPv4 packet (frag_off != 0) should be dropped",
+      "packet_hex": "525400123456525400654321080045000024123420004006c531c0a8010ac0a8011400000000000000000000000000000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_fragmented_drop.bin"
+    }
+  ]
+}

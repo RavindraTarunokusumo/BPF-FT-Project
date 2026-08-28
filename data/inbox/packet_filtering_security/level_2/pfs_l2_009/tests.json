@@ -1,0 +1,28 @@
+{
+  "task_id": "pfs_l2_009",
+  "validator": "packet_action",
+  "test_count": 3,
+  "test_cases": [
+    {
+      "name": "test_denylist_drop",
+      "description": "IPv4 packet from blocked source IP 192.168.9.50 should be dropped",
+      "packet_hex": "52540012345652540065432108004500002a123400004006dd03c0a80932c0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_denylist_drop.bin"
+    },
+    {
+      "name": "test_clean_pass",
+      "description": "IPv4 packet from unlisted source IP should pass",
+      "packet_hex": "52540012345652540065432108004500002a1234000040067ea20a141e28c0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_clean_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "Non-IP ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "task_id": "pfs_l1_007",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "template_family": "pfs_tcp_port_filter",
+  "semantic_signature": "drop_ipv4_tcp_dport_110",
+  "split": "train",
+  "instruction": "Write a complete XDP program that drops IPv4 TCP packets whose destination port is 110 (POP3) and passes all other packets. Ensure safe bounds checking on all headers.",
+  "requirements": [
+    "Drop IPv4 TCP packets with destination port == 110",
+    "Pass all other IPv4 TCP traffic, non-TCP IPv4 traffic, and non-IPv4 traffic",
+    "Handle variable IPv4 header length (ip->ihl * 4)",
+    "Validate packet boundaries before every memory dereference"
+  ],
+  "gold_candidate_id": "pfs_l1_007_c00_r01",
+  "tests": [
+    {
+      "name": "test_match_drop",
+      "description": "IPv4 TCP packet with destination port 110 should be dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039006e000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_match_drop.bin"
+    },
+    {
+      "name": "test_diff_port_pass",
+      "description": "IPv4 TCP packet with different port should pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039006f000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_diff_port_pass.bin"
+    },
+    {
+      "name": "test_udp_pass",
+      "description": "IPv4 UDP packet to port 110 should pass",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a801143039006e00160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_udp_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "ARP packet should pass untouched",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated packet header should safely pass",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

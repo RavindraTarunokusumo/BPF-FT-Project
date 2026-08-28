@@ -1,0 +1,46 @@
+{
+  "task_id": "pit_l2_059",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "template_family": "pit_protocol_histogram_map",
+  "semantic_signature": "protocol_counter_map_59",
+  "split": "train",
+  "instruction": "Write an XDP program that counts packets by protocol in a BPF array map 'proto_stats' (index 0=TCP, 1=UDP, 2=ICMP, 3=Other). Always return XDP_PASS.",
+  "requirements": [
+    "Define BPF array map 'proto_stats' with 4 __u64 counters",
+    "Classify IPv4 packet into TCP (0), UDP (1), ICMP (2), or Other (3)",
+    "Increment corresponding counter atomically or with pointer access",
+    "Always return XDP_PASS"
+  ],
+  "gold_candidate_id": "pit_l2_059_c00_r01",
+  "tests": [
+    {
+      "name": "test_tcp_count_pass",
+      "description": "TCP packet should be counted at index 0 and passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_tcp_count_pass.bin"
+    },
+    {
+      "name": "test_udp_count_pass",
+      "description": "UDP packet should be counted at index 1 and passed",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_udp_count_pass.bin"
+    },
+    {
+      "name": "test_icmp_count_pass",
+      "description": "ICMP packet should be counted at index 2 and passed",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_icmp_count_pass.bin"
+    },
+    {
+      "name": "test_arp_count_pass",
+      "description": "Non-IP ARP packet should be counted at index 3 (other) and passed",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_count_pass.bin"
+    }
+  ]
+}

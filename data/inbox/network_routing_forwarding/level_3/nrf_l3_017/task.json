@@ -1,0 +1,53 @@
+{
+  "task_id": "nrf_l3_017",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "template_family": "nrf_ecmp_5tuple_load_balancer",
+  "semantic_signature": "ecmp_load_balancer_17",
+  "split": "train",
+  "instruction": "Write an XDP program that implements ECMP 5-tuple load balancing. Hash the IPv4 5-tuple (src_ip, dst_ip, src_port, dst_port, proto), select one of 4 backend gateway MACs from an array map, rewrite destination MAC, decrement TTL, and return XDP_TX.",
+  "requirements": [
+    "Define BPF array map 'gateways' with 4 MAC addresses",
+    "Compute hash across 5-tuple and select index (hash % 4)",
+    "Rewrite destination MAC, decrement TTL, and update IP checksum",
+    "Handle variable IP header length and strict memory bounds"
+  ],
+  "gold_candidate_id": "nrf_l3_017_c00_r01",
+  "tests": [
+    {
+      "name": "test_ecmp_tx",
+      "description": "IPv4 TCP packet should be balanced to gateway and returned with XDP_TX",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011403f90050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/test_ecmp_tx.bin"
+    },
+    {
+      "name": "test_udp_tx",
+      "description": "IPv4 UDP packet should be balanced and returned with XDP_TX",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a8011407e1003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/test_udp_tx.bin"
+    },
+    {
+      "name": "test_ttl_drop",
+      "description": "IPv4 packet with TTL=1 should be dropped",
+      "packet_hex": "525400123456525400654321080045000028123400000106242ec0a8010ac0a8011403f90050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_ttl_drop.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "Non-IP ARP packet should pass with XDP_PASS",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated packet header should safely pass",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

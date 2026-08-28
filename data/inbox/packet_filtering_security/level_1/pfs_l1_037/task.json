@@ -1,0 +1,38 @@
+{
+  "task_id": "pfs_l1_037",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "template_family": "pfs_ip_protocol_filter",
+  "semantic_signature": "drop_ip_protocol_47",
+  "split": "train",
+  "instruction": "Write an XDP program that drops all IPv4 packets using protocol 47 (GRE) and passes all other packets.",
+  "requirements": [
+    "Drop IPv4 packets with ip->protocol == 47",
+    "Pass all other traffic",
+    "Verify packet boundary for Ethernet and IPv4 headers"
+  ],
+  "gold_candidate_id": "pfs_l1_037_c00_r01",
+  "tests": [
+    {
+      "name": "test_match_drop",
+      "description": "IPv4 packet with protocol 47 should be dropped",
+      "packet_hex": "52540012345652540065432108004500001c12340000402fe510c0a8010ac0a801140000000000000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_match_drop.bin"
+    },
+    {
+      "name": "test_tcp_pass",
+      "description": "TCP packet should pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_tcp_pass.bin"
+    },
+    {
+      "name": "test_udp_pass",
+      "description": "UDP packet should pass",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_udp_pass.bin"
+    }
+  ]
+}

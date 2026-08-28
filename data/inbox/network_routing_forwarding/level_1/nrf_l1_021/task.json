@@ -1,0 +1,46 @@
+{
+  "task_id": "nrf_l1_021",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "template_family": "nrf_l2_mac_swap",
+  "semantic_signature": "mac_reflection_swap_21",
+  "split": "train",
+  "instruction": "Write an XDP program that reflects incoming Ethernet frames back out the ingress interface (XDP_TX) by swapping the source and destination MAC addresses. Pass non-matching or malformed packets.",
+  "requirements": [
+    "Swap Ethernet destination MAC and source MAC addresses",
+    "Return XDP_TX for valid Ethernet frames",
+    "Pass truncated frames with XDP_PASS",
+    "Validate packet boundaries"
+  ],
+  "gold_candidate_id": "nrf_l1_021_c00_r01",
+  "tests": [
+    {
+      "name": "test_swap_tx",
+      "description": "Ethernet frame should have MACs swapped and return XDP_TX",
+      "packet_hex": "525400112233525400aabbcc080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/test_swap_tx.bin"
+    },
+    {
+      "name": "test_arp_swap_tx",
+      "description": "ARP Ethernet frame should have MACs swapped and return XDP_TX",
+      "packet_hex": "525400334455525400667788080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/test_arp_swap_tx.bin"
+    },
+    {
+      "name": "test_udp_swap_tx",
+      "description": "UDP Ethernet frame should have MACs swapped and return XDP_TX",
+      "packet_hex": "52540099aabb52540011223308004500002a123400004011e520c0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/test_udp_swap_tx.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated Ethernet frame header should pass with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

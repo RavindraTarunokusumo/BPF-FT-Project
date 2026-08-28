@@ -1,0 +1,38 @@
+{
+  "task_id": "pfs_l1_045",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "template_family": "pfs_tcp_flags_filter",
+  "semantic_signature": "drop_tcp_invalid_flags_5",
+  "split": "train",
+  "instruction": "Write an XDP program that drops IPv4 TCP packets with invalid or abnormal flag combination #5 (e.g. SYN and FIN both set) and passes all other packets.",
+  "requirements": [
+    "Drop IPv4 TCP packets having SYN (0x02) and FIN (0x01) flags set simultaneously",
+    "Pass all valid TCP packets and non-TCP packets",
+    "Handle variable IP header length and verify boundaries"
+  ],
+  "gold_candidate_id": "pfs_l1_045_c00_r01",
+  "tests": [
+    {
+      "name": "test_syn_fin_drop",
+      "description": "TCP packet with SYN+FIN flags set should be dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005003ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_syn_fin_drop.bin"
+    },
+    {
+      "name": "test_syn_pass",
+      "description": "TCP packet with SYN flag only should pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_syn_pass.bin"
+    },
+    {
+      "name": "test_ack_pass",
+      "description": "TCP packet with ACK flag should pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_ack_pass.bin"
+    }
+  ]
+}

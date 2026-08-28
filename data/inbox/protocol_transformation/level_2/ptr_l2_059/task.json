@@ -1,0 +1,53 @@
+{
+  "task_id": "ptr_l2_059",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "template_family": "ptr_stateless_snat_map",
+  "semantic_signature": "stateless_snat_rewrite_59",
+  "split": "train",
+  "instruction": "Write an XDP program that implements 1:1 Source NAT (SNAT) using a BPF hash map 'snat_table'. Lookup source IP; if a mapped IP exists, rewrite ip->saddr, update IPv4 checksum, and return XDP_PASS.",
+  "requirements": [
+    "Define BPF hash map 'snat_table' mapping internal IP (__u32) to external IP (__u32)",
+    "Rewrite ip->saddr with mapped IP and update ip->check",
+    "Pass all traffic with XDP_PASS",
+    "Strictly validate Ethernet and IPv4 header boundaries"
+  ],
+  "gold_candidate_id": "ptr_l2_059_c00_r01",
+  "tests": [
+    {
+      "name": "test_snat_rewrite_pass",
+      "description": "Internal packet from 192.168.1.59 should be SNAT rewritten and passed",
+      "packet_hex": "52540012345652540065432108004500002a123400004006e4fac0a8013bc0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_snat_rewrite_pass.bin"
+    },
+    {
+      "name": "test_tcp_snat_pass",
+      "description": "Internal TCP packet from 192.168.1.59 should be SNAT rewritten and passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e4fcc0a8013bc0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_tcp_snat_pass.bin"
+    },
+    {
+      "name": "test_clean_pass",
+      "description": "Unmapped packet should pass unaffected",
+      "packet_hex": "52540012345652540065432108004500002a1234000040066a7a0a323232c0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_clean_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "ARP packet should pass untouched",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated Ethernet frame header should pass with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

@@ -365,7 +365,7 @@ def main() -> int:
     parser.add_argument("--dir", type=Path, default=PROJECT_ROOT / "data", help="Directory to scan (default: data/)")
     args = parser.parse_args()
 
-    scan_dir = args.dir
+    scan_dir = args.dir.resolve()
     total_files = 0
     passed_files = 0
     failed_files = 0

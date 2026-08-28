@@ -1,0 +1,28 @@
+{
+  "task_id": "pfs_l1_045",
+  "validator": "packet_action",
+  "test_count": 3,
+  "test_cases": [
+    {
+      "name": "test_syn_fin_drop",
+      "description": "TCP packet with SYN+FIN flags set should be dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005003ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_syn_fin_drop.bin"
+    },
+    {
+      "name": "test_syn_pass",
+      "description": "TCP packet with SYN flag only should pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_syn_pass.bin"
+    },
+    {
+      "name": "test_ack_pass",
+      "description": "TCP packet with ACK flag should pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_ack_pass.bin"
+    }
+  ]
+}

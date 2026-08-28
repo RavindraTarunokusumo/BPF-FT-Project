@@ -1,0 +1,28 @@
+{
+  "task_id": "pfs_l3_001",
+  "validator": "packet_action",
+  "test_count": 3,
+  "test_cases": [
+    {
+      "name": "test_syn_init_pass",
+      "description": "TCP SYN packet initiating connection should pass and be recorded",
+      "packet_hex": "525400123456525400654321080045000028123400004006529a0a0001010a000102303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_syn_init_pass.bin"
+    },
+    {
+      "name": "test_udp_pass",
+      "description": "UDP packet should pass unaffected by TCP conn tracker",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_udp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated header safely passes",
+      "packet_hex": "5254001234565254006543210800",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

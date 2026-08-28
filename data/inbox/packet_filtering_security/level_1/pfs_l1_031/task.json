@@ -1,0 +1,45 @@
+{
+  "task_id": "pfs_l1_031",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "template_family": "pfs_udp_port_filter",
+  "semantic_signature": "drop_ipv4_udp_dport_5353",
+  "split": "train",
+  "instruction": "Write a complete XDP program that drops IPv4 UDP packets whose destination port is 5353 and passes all other packets.",
+  "requirements": [
+    "Drop IPv4 UDP packets with destination port == 5353",
+    "Pass non-UDP and other UDP packets",
+    "Perform proper packet boundary checks for Ethernet, IPv4, and UDP headers"
+  ],
+  "gold_candidate_id": "pfs_l1_031_c00_r01",
+  "tests": [
+    {
+      "name": "test_match_drop",
+      "description": "IPv4 UDP packet to port 5353 should be dropped",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a80114303914e900160000444e535f51554552595f44415441",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_match_drop.bin"
+    },
+    {
+      "name": "test_diff_port_pass",
+      "description": "IPv4 UDP packet to different port should pass",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a80114303914ea00160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_diff_port_pass.bin"
+    },
+    {
+      "name": "test_tcp_pass",
+      "description": "IPv4 TCP packet to port 5353 should pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303914e9000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_tcp_pass.bin"
+    },
+    {
+      "name": "test_icmp_pass",
+      "description": "ICMP packet should pass",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_icmp_pass.bin"
+    }
+  ]
+}

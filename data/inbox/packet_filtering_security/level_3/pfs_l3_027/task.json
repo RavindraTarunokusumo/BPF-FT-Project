@@ -1,0 +1,39 @@
+{
+  "task_id": "pfs_l3_027",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "template_family": "pfs_stateful_conn_tracker",
+  "semantic_signature": "tcp_stateful_syn_tracker_27",
+  "split": "train",
+  "instruction": "Write an XDP program that implements stateful TCP connection tracking using a BPF LRU hash map. Track SYN packets to register active connections; allow established TCP packets (ACK) only if a valid connection state exists in the table, dropping unsolicited non-SYN packets.",
+  "requirements": [
+    "Define BPF LRU hash map 'conn_track' mapping 5-tuple (__u32, __u32, __u16, __u16, __u8) to state",
+    "Register new connections on TCP SYN (without ACK)",
+    "Verify existing connection on TCP ACK / data packets; drop if not found",
+    "Handle variable IPv4 header length and strict memory bounds"
+  ],
+  "gold_candidate_id": "pfs_l3_027_c00_r01",
+  "tests": [
+    {
+      "name": "test_syn_init_pass",
+      "description": "TCP SYN packet initiating connection should pass and be recorded",
+      "packet_hex": "5254001234565254006543210800450000281234000040061e9a0a001b010a001b02303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_syn_init_pass.bin"
+    },
+    {
+      "name": "test_udp_pass",
+      "description": "UDP packet should pass unaffected by TCP conn tracker",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_udp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated header safely passes",
+      "packet_hex": "5254001234565254006543210800",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

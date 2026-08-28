@@ -1,0 +1,42 @@
+{
+  "task_id": "ptr_l3_031",
+  "validator": "packet_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "test_napt_tcp_pass",
+      "description": "Private TCP packet should undergo NAPT and pass",
+      "packet_hex": "5254001234565254006543210800450000281234000040067ddb0a001f05c0a80114272f0050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_napt_tcp_pass.bin"
+    },
+    {
+      "name": "test_unmapped_tcp_pass",
+      "description": "Unmapped TCP packet should pass unaffected",
+      "packet_hex": "5254001234565254006543210800450000281234000040068232c0a86405c0a80114272f0050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_unmapped_tcp_pass.bin"
+    },
+    {
+      "name": "test_udp_pass",
+      "description": "UDP packet should pass unaffected",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_udp_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "ARP packet should pass untouched",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated packet header should safely pass",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

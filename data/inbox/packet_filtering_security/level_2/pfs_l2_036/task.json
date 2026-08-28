@@ -1,0 +1,39 @@
+{
+  "task_id": "pfs_l2_036",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "template_family": "pfs_map_ip_denylist",
+  "semantic_signature": "map_denylist_src_ip_36",
+  "split": "train",
+  "instruction": "Write an XDP program using a BPF hash map 'ip_denylist' that looks up the IPv4 source address. If the source IP is found in the denylist map, drop the packet; otherwise pass it.",
+  "requirements": [
+    "Define BPF hash map 'ip_denylist' with key __u32 and value __u32 (max 1024 entries)",
+    "Parse Ethernet and IPv4 headers with strict boundary checks",
+    "Lookup ip->saddr in the map; return XDP_DROP if entry exists",
+    "Pass all non-IPv4 packets and unlisted IPv4 packets"
+  ],
+  "gold_candidate_id": "pfs_l2_036_c00",
+  "tests": [
+    {
+      "name": "test_denylist_drop",
+      "description": "IPv4 packet from blocked source IP 192.168.36.50 should be dropped",
+      "packet_hex": "52540012345652540065432108004500002a123400004006c203c0a82432c0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/test_denylist_drop.bin"
+    },
+    {
+      "name": "test_clean_pass",
+      "description": "IPv4 packet from unlisted source IP should pass",
+      "packet_hex": "52540012345652540065432108004500002a1234000040067ea20a141e28c0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_clean_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "Non-IP ARP packet should pass",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    }
+  ]
+}

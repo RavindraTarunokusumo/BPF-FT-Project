@@ -1,0 +1,11 @@
+{
+  "authoring_harness": "subagent_generator",
+  "authoring_model": "gemini_3_7_flash",
+  "generation_prompt_version": "sft_synthesis_v1",
+  "candidate_id": "ptr_l3_023_c00",
+  "task_id": "ptr_l3_023",
+  "source_path": "c00.c",
+  "source_sha256": "4fc0aa62c8ce03fbe92bd7d7f1b18354442c5feacc6be64776ad4af76a64c02d",
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated"
+}

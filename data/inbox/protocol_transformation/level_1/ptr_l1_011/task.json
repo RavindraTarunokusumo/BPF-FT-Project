@@ -1,0 +1,46 @@
+{
+  "task_id": "ptr_l1_011",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "template_family": "ptr_ip_dscp_remarking",
+  "semantic_signature": "remark_dscp_tos_11",
+  "split": "train",
+  "instruction": "Write an XDP program that rewrites the IPv4 TOS/DSCP field to value 12 (0x0c), recalculates the IPv4 checksum, and passes the packet with XDP_PASS.",
+  "requirements": [
+    "Set IPv4 ip->tos = 12",
+    "Recalculate or incrementally update the IPv4 header checksum",
+    "Return XDP_PASS for all packets",
+    "Check boundaries on Ethernet and IPv4 headers"
+  ],
+  "gold_candidate_id": "ptr_l1_011_c00_r01",
+  "tests": [
+    {
+      "name": "test_remark_pass",
+      "description": "IPv4 packet should have TOS updated to 12 and pass",
+      "packet_hex": "52540012345652540065432108004500002a123400004006e52bc0a8010ac0a801143039003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_remark_pass.bin"
+    },
+    {
+      "name": "test_tcp_remark_pass",
+      "description": "IPv4 TCP packet should have TOS updated to 12 and pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_tcp_remark_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "ARP packet should pass untouched",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated Ethernet frame header should pass with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}

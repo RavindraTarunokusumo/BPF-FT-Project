@@ -1,0 +1,42 @@
+{
+  "task_id": "pit_l3_026",
+  "validator": "packet_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "test_tcp_flow_pass",
+      "description": "TCP packet should record flow telemetry and pass",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011407ea01bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_tcp_flow_pass.bin"
+    },
+    {
+      "name": "test_udp_flow_pass",
+      "description": "UDP packet should record flow telemetry and pass",
+      "packet_hex": "52540012345652540065432108004500002a123400004011e520c0a8010ac0a801140bd2003500160000444e535f51554552595f44415441",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_udp_flow_pass.bin"
+    },
+    {
+      "name": "test_icmp_pass",
+      "description": "ICMP packet should pass unaffected without flow update",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_icmp_pass.bin"
+    },
+    {
+      "name": "test_arp_pass",
+      "description": "Non-IP ARP packet should pass unaffected",
+      "packet_hex": "525400123456525400654321080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_arp_pass.bin"
+    },
+    {
+      "name": "test_truncated_pass",
+      "description": "Truncated frame should safely pass",
+      "packet_hex": "525400123456525400654321080045",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/test_truncated_pass.bin"
+    }
+  ]
+}
