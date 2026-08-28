@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t03_drop_icmp/c00.c:23:25: error: use of undeclared identifier 'IPPROTO_ICMP'\n   23 |     if (ip->protocol == IPPROTO_ICMP)\n      |                         ^\n1 error generated.",
   "claimed_status": "unvalidated",
-  "source_sha256": "e0b2fe13d7d7342ea8bbc723e5c8b36d21a7ab7eaf868f4e86222b02e8e55dc2"
+  "source_sha256": "f3c3746b0c5435cb0b0801e8cab7731f5dcf541b7b0bb81a3623c36afb0ac88e"
 }

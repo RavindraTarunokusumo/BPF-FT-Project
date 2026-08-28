@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b04_t01_drop_icmp_echo_request_c00",
-    "task_id": "xdp_b04_t01_drop_icmp_echo_request",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "19df3def777e71363272c67d514c0d5de9f883394a879e39b43d8ca992d7947f"
+  "candidate_id": "xdp_b04_t01_drop_icmp_echo_request_c00",
+  "task_id": "xdp_b04_t01_drop_icmp_echo_request",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "627abfb6eac33e9977fd8bb877a80196ee1cf4f9852816ce7f970fef7df84876"
 }

@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Compilation failed:\n/root/BPF-FT-Project/data/inbox/batch-001/xdp_b01_t01_drop_tcp_port/c00.c:24:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   24 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated.",
   "claimed_status": "unvalidated",
-  "source_sha256": "a5a0ecfa394f46aa3e75b7f114497efec4432832dce3a5b02bfba5cfd846853f"
+  "source_sha256": "0c96a2fa40fa72062dcc9950b170f8f3a487c091e01f059b0fdcb3ad6e106aac"
 }

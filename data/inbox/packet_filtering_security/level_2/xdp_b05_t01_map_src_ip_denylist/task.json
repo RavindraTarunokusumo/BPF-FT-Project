@@ -31,5 +31,6 @@
       "expected_action": "XDP_PASS"
     }
   ],
-  "application_category": "packet_filtering_security"
+  "application_category": "packet_filtering_security",
+  "harness_type": "xdp_hash_map_telemetry"
 }

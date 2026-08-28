@@ -38,5 +38,6 @@
       "expected_action": "XDP_PASS"
     }
   ],
-  "application_category": "packet_inspection_telemetry"
+  "application_category": "packet_inspection_telemetry",
+  "harness_type": "xdp_hash_map_telemetry"
 }

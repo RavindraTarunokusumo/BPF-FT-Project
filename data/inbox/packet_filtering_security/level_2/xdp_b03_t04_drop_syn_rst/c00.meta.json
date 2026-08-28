@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b03_t04_drop_syn_rst_c00",
-    "task_id": "xdp_b03_t04_drop_syn_rst",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "9582bb98753b8dbb52f1c564ef98df0f0d3f7df6f9868acd30e95fc5a9b205a1"
+  "candidate_id": "xdp_b03_t04_drop_syn_rst_c00",
+  "task_id": "xdp_b03_t04_drop_syn_rst",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "62d2f80e6fb632f95eb7579cb24c329e6ca15adea754f7b7f78d45fba5fc208f"
 }

@@ -9,5 +9,5 @@
   "repair_attempt": 2,
   "failure_diagnostic": "Behavioral tests failed:\nTest 'positive_vlan_8080_drop' failed: expected XDP_DROP (1), got XDP_PASS (2)",
   "claimed_status": "unvalidated",
-  "source_sha256": "52907f7eb271637a2195c7b32427d506e93d85d458accc84c82e1f11d2f4a75c"
+  "source_sha256": "247e65072c26712bf80f00f444b32ad26befdef5976d977e4ea0f2ffe37b78bb"
 }

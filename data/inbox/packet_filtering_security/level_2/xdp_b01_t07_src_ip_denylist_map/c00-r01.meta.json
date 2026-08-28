@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Behavioral tests failed:\nTest 'boundary_short_pass' failed: expected XDP_PASS (2), got ERROR (None)",
   "claimed_status": "unvalidated",
-  "source_sha256": "3a1b0e137d8b6a8bd6aed3d72034b7c052515a387399b1ab32d302e8a0f36e57"
+  "source_sha256": "bb3c562510df1a7d8b0d4389ccd509ebff6220b4074feeac7b8b35c5b7495085"
 }

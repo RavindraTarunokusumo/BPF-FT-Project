@@ -9,5 +9,5 @@
   "repair_attempt": 1,
   "failure_diagnostic": "Behavioral tests failed:\nTest 'unnamed_test' failed: expected XDP_PASS (2), got XDP_DROP (1)",
   "claimed_status": "unvalidated",
-  "source_sha256": "98fa64cffc72ffb706d77b83c6c85ff0dd72fad4aa7dfef52cdac41c08de902c"
+  "source_sha256": "039cd10d65e96256aeb35237e6146cc9b50720fb19dbc525f404b5e6657683d9"
 }

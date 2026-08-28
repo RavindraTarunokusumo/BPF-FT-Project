@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b04_t02_drop_icmp_unreachable_c00",
-    "task_id": "xdp_b04_t02_drop_icmp_unreachable",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "07f101310607e61bc088b45dc5bbc84a17ca328bb6a0343b0e7c245268ace600"
+  "candidate_id": "xdp_b04_t02_drop_icmp_unreachable_c00",
+  "task_id": "xdp_b04_t02_drop_icmp_unreachable",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "0ad14592c3bc66ecd8b5e66946bf19e0cf0ca57da61ab58fee4d42e919344657"
 }

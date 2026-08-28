@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b04_t04_drop_ipsec_esp_c00",
-    "task_id": "xdp_b04_t04_drop_ipsec_esp",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "5db3b2b53692f827cba4580cd233ad598967680f11ffce2cf043fdd8c631e893"
+  "candidate_id": "xdp_b04_t04_drop_ipsec_esp_c00",
+  "task_id": "xdp_b04_t04_drop_ipsec_esp",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "db2cf33b1202f0c5ac0d108be30fde13cfa69d3f61f7b1f2934bb05601f45192"
 }

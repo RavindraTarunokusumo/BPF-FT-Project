@@ -1,12 +1,12 @@
 {
-    "candidate_id": "xdp_b04_t08_drop_dscp_cs6_c00",
-    "task_id": "xdp_b04_t08_drop_dscp_cs6",
-    "authoring_harness": "agent",
-    "authoring_model": "instruction_model",
-    "generation_prompt_version": "agent-generation-v1",
-    "source_path": "c00.c",
-    "parent_candidate_id": null,
-    "repair_attempt": 0,
-    "claimed_status": "unvalidated",
-    "source_sha256": "f10d83e63b49acec1d467f5d91a8bc6b919f8984ac0b969b91ac3aa19e691a2b"
+  "candidate_id": "xdp_b04_t08_drop_dscp_cs6_c00",
+  "task_id": "xdp_b04_t08_drop_dscp_cs6",
+  "authoring_harness": "agent",
+  "authoring_model": "instruction_model",
+  "generation_prompt_version": "agent-generation-v1",
+  "source_path": "c00.c",
+  "parent_candidate_id": null,
+  "repair_attempt": 0,
+  "claimed_status": "unvalidated",
+  "source_sha256": "848542bc91010551740e948358993b1f6aa2e6a62fc71bd64dd66b5fea9a680d"
 }
