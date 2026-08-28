@@ -14,8 +14,15 @@ int xdp_route_nrf_l1_041(struct xdp_md *ctx) {
     void *data = (void *)(long)ctx->data;
     void *data_end = (void *)(long)ctx->data_end;
 
-    // FAULT: Swapping MAC addresses without checking bounds against data_end
     struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+
+    // FAULT: Reading IP header without checking (ip + 1) bounds against data_end
+    struct iphdr *ip = (void *)(eth + 1);
+    if (ip->protocol != IPPROTO_ICMP)
+        return XDP_PASS;
+
     unsigned char tmp[ETH_ALEN];
     __builtin_memcpy(tmp, eth->h_dest, ETH_ALEN);
     __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);

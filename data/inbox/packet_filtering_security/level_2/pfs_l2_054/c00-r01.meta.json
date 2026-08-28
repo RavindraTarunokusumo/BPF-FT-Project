@@ -6,7 +6,7 @@
   "task_id": "pfs_l2_054",
   "source_path": "c00-r01.c",
   "parent_candidate_id": "pfs_l2_054_c00",
-  "source_sha256": "ba49a8dac3d879193b5886745ca709503395f42019a5c2c47c8d25320cd95220",
+  "source_sha256": "612d30db5e59846e54886b2b8d4cc1c19da6abcf08eeeb1fe6cc799ce1ceb92d",
   "repair_attempt": 1,
   "claimed_status": "unvalidated"
 }

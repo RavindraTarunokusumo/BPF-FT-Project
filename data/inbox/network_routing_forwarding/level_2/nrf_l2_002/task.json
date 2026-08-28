@@ -5,11 +5,11 @@
   "template_family": "nrf_next_hop_routing_map",
   "semantic_signature": "next_hop_lookup_2",
   "split": "train",
-  "instruction": "Write an XDP program that performs next-hop routing using a BPF hash map 'route_table'. Look up the IPv4 destination address. If a route exists, rewrite the Ethernet destination MAC to the next-hop MAC and return XDP_TX. Otherwise return XDP_PASS.",
+  "instruction": "Write an XDP program that performs next-hop routing. Look up the IPv4 destination address. If destination IP is 10.0.2.1, rewrite destination MAC to next-hop gateway and return XDP_TX. Otherwise return XDP_PASS.",
   "requirements": [
-    "Define BPF hash map 'route_table' mapping IPv4 address (__u32) to MAC address (unsigned char [6])",
-    "Look up ip->daddr in route_table",
+    "Match IPv4 packets with destination IP 10.0.2.1",
     "Rewrite eth->h_dest and return XDP_TX on match",
+    "Pass all other traffic with XDP_PASS",
     "Check boundaries on Ethernet and IPv4 headers"
   ],
   "gold_candidate_id": "nrf_l2_002_c00_r01",

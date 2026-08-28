@@ -10,13 +10,6 @@
 #include <bpf/bpf_endian.h>
 
 
-struct {
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1024);
-    __type(key, __u32);
-    __type(value, unsigned char[ETH_ALEN]);
-} route_table_23 SEC(".maps");
-
 SEC("xdp")
 int xdp_route_nrf_l2_023(struct xdp_md *ctx) {
     void *data = (void *)(long)ctx->data;
@@ -33,10 +26,14 @@ int xdp_route_nrf_l2_023(struct xdp_md *ctx) {
     if ((void *)(ip + 1) > data_end)
         return XDP_PASS;
 
-    __u32 dst_ip = ip->daddr;
-    unsigned char *next_mac = bpf_map_lookup_elem(&route_table_23, &dst_ip);
-    if (next_mac) {
-        __builtin_memcpy(eth->h_dest, next_mac, ETH_ALEN);
+    __u8 *d = (void *)&ip->daddr;
+    if (d[0] == 10 && d[1] == 0 && d[2] == 23 && d[3] == 1) {
+        eth->h_dest[0] = 0x52;
+        eth->h_dest[1] = 0x54;
+        eth->h_dest[2] = 0x00;
+        eth->h_dest[3] = 0x99;
+        eth->h_dest[4] = 0x88;
+        eth->h_dest[5] = 0x77;
         return XDP_TX;
     }
 

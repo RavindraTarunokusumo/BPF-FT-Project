@@ -676,13 +676,6 @@ def generate_pfs_l2_task(idx: int) -> Dict[str, Any]:
     
     gold_c = f"""{COMMON_HEADERS}
 
-struct {{
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1024);
-    __type(key, __u32);
-    __type(value, __u32);
-}} ip_denylist_{idx} SEC(".maps");
-
 SEC("xdp")
 int xdp_denylist_{task_id}(struct xdp_md *ctx) {{
     void *data = (void *)(long)ctx->data;
@@ -699,9 +692,8 @@ int xdp_denylist_{task_id}(struct xdp_md *ctx) {{
     if ((void *)(ip + 1) > data_end)
         return XDP_PASS;
 
-    __u32 src_ip = ip->saddr;
-    __u32 *val = bpf_map_lookup_elem(&ip_denylist_{idx}, &src_ip);
-    if (val)
+    __u8 *s = (void *)&ip->saddr;
+    if (s[0] == 192 && s[1] == 168 && s[2] == {idx} && s[3] == 50)
         return XDP_DROP;
 
     return XDP_PASS;
@@ -712,13 +704,6 @@ char _license[] SEC("license") = "GPL";
     
     faulty_c = f"""{COMMON_HEADERS}
 
-struct {{
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1024);
-    __type(key, __u32);
-    __type(value, __u32);
-}} ip_denylist_{idx} SEC(".maps");
-
 SEC("xdp")
 int xdp_denylist_{task_id}(struct xdp_md *ctx) {{
     void *data = (void *)(long)ctx->data;
@@ -728,14 +713,10 @@ int xdp_denylist_{task_id}(struct xdp_md *ctx) {{
     if ((void *)(eth + 1) > data_end)
         return XDP_PASS;
 
+    // FAULT: Reading IP address without verifying (ip + 1) bounds against data_end
     struct iphdr *ip = (void *)(eth + 1);
-    if ((void *)(ip + 1) > data_end)
-        return XDP_PASS;
-
-    // FAULT: Dereferencing map lookup pointer without checking if it is NULL
-    __u32 src_ip = ip->saddr;
-    __u32 *val = bpf_map_lookup_elem(&ip_denylist_{idx}, &src_ip);
-    if (*val == 1)
+    __u8 *s = (void *)&ip->saddr;
+    if (s[0] == 192 && s[1] == 168 && s[2] == {idx} && s[3] == 50)
         return XDP_DROP;
 
     return XDP_PASS;
@@ -958,10 +939,10 @@ def generate_nrf_l1_task(idx: int) -> Dict[str, Any]:
             "expected_action": "XDP_TX",
         },
         {
-            "name": "test_arp_swap_tx",
-            "description": "ARP Ethernet frame should have MACs swapped and return XDP_TX",
+            "name": "test_arp_pass",
+            "description": "Non-IP ARP frame should pass with XDP_PASS",
             "packet_hex": make_eth(dst_mac="52:54:00:33:44:55", src_mac="52:54:00:66:77:88", eth_type=0x0806, payload=b"\x00" * 28).hex(),
-            "expected_action": "XDP_TX",
+            "expected_action": "XDP_PASS",
         },
         {
             "name": "test_udp_swap_tx",
@@ -987,6 +968,13 @@ int xdp_route_{task_id}(struct xdp_md *ctx) {{
     if ((void *)(eth + 1) > data_end)
         return XDP_PASS;
 
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+        return XDP_PASS;
+
+    struct iphdr *ip = (void *)(eth + 1);
+    if ((void *)(ip + 1) > data_end)
+        return XDP_PASS;
+
     unsigned char tmp[ETH_ALEN];
     __builtin_memcpy(tmp, eth->h_dest, ETH_ALEN);
     __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);
@@ -1003,8 +991,15 @@ int xdp_route_{task_id}(struct xdp_md *ctx) {{
     void *data = (void *)(long)ctx->data;
     void *data_end = (void *)(long)ctx->data_end;
 
-    // FAULT: Swapping MAC addresses without checking bounds against data_end
     struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+
+    // FAULT: Reading IP header without checking (ip + 1) bounds against data_end
+    struct iphdr *ip = (void *)(eth + 1);
+    if (ip->protocol != IPPROTO_ICMP)
+        return XDP_PASS;
+
     unsigned char tmp[ETH_ALEN];
     __builtin_memcpy(tmp, eth->h_dest, ETH_ALEN);
     __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);
@@ -1035,11 +1030,11 @@ def generate_nrf_l2_task(idx: int) -> Dict[str, Any]:
     
     family = "nrf_next_hop_routing_map"
     sig = f"next_hop_lookup_{idx}"
-    inst = f"Write an XDP program that performs next-hop routing using a BPF hash map 'route_table'. Look up the IPv4 destination address. If a route exists, rewrite the Ethernet destination MAC to the next-hop MAC and return XDP_TX. Otherwise return XDP_PASS."
+    inst = f"Write an XDP program that performs next-hop routing. Look up the IPv4 destination address. If destination IP is 10.0.{idx}.1, rewrite destination MAC to next-hop gateway and return XDP_TX. Otherwise return XDP_PASS."
     reqs = [
-        "Define BPF hash map 'route_table' mapping IPv4 address (__u32) to MAC address (unsigned char [6])",
-        "Look up ip->daddr in route_table",
+        f"Match IPv4 packets with destination IP 10.0.{idx}.1",
         "Rewrite eth->h_dest and return XDP_TX on match",
+        "Pass all other traffic with XDP_PASS",
         "Check boundaries on Ethernet and IPv4 headers",
     ]
     
@@ -1073,13 +1068,6 @@ def generate_nrf_l2_task(idx: int) -> Dict[str, Any]:
     
     gold_c = f"""{COMMON_HEADERS}
 
-struct {{
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1024);
-    __type(key, __u32);
-    __type(value, unsigned char[ETH_ALEN]);
-}} route_table_{idx} SEC(".maps");
-
 SEC("xdp")
 int xdp_route_{task_id}(struct xdp_md *ctx) {{
     void *data = (void *)(long)ctx->data;
@@ -1096,10 +1084,14 @@ int xdp_route_{task_id}(struct xdp_md *ctx) {{
     if ((void *)(ip + 1) > data_end)
         return XDP_PASS;
 
-    __u32 dst_ip = ip->daddr;
-    unsigned char *next_mac = bpf_map_lookup_elem(&route_table_{idx}, &dst_ip);
-    if (next_mac) {{
-        __builtin_memcpy(eth->h_dest, next_mac, ETH_ALEN);
+    __u8 *d = (void *)&ip->daddr;
+    if (d[0] == 10 && d[1] == 0 && d[2] == {idx} && d[3] == 1) {{
+        eth->h_dest[0] = 0x52;
+        eth->h_dest[1] = 0x54;
+        eth->h_dest[2] = 0x00;
+        eth->h_dest[3] = 0x99;
+        eth->h_dest[4] = 0x88;
+        eth->h_dest[5] = 0x77;
         return XDP_TX;
     }}
 
@@ -1110,13 +1102,6 @@ char _license[] SEC("license") = "GPL";
 """
     faulty_c = f"""{COMMON_HEADERS}
 
-struct {{
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1024);
-    __type(key, __u32);
-    __type(value, unsigned char[ETH_ALEN]);
-}} route_table_{idx} SEC(".maps");
-
 SEC("xdp")
 int xdp_route_{task_id}(struct xdp_md *ctx) {{
     void *data = (void *)(long)ctx->data;
@@ -1126,15 +1111,15 @@ int xdp_route_{task_id}(struct xdp_md *ctx) {{
     if ((void *)(eth + 1) > data_end)
         return XDP_PASS;
 
+    // FAULT: Reading daddr without checking (ip + 1) bounds against data_end
     struct iphdr *ip = (void *)(eth + 1);
-    if ((void *)(ip + 1) > data_end)
-        return XDP_PASS;
+    __u8 *d = (void *)&ip->daddr;
+    if (d[0] == 10 && d[1] == 0 && d[2] == {idx} && d[3] == 1) {{
+        eth->h_dest[0] = 0x52;
+        return XDP_TX;
+    }}
 
-    // FAULT: Unchecked pointer dereference on map lookup
-    __u32 dst_ip = ip->daddr;
-    unsigned char *next_mac = bpf_map_lookup_elem(&route_table_{idx}, &dst_ip);
-    __builtin_memcpy(eth->h_dest, next_mac, ETH_ALEN);
-    return XDP_TX;
+    return XDP_PASS;
 }}
 
 char _license[] SEC("license") = "GPL";

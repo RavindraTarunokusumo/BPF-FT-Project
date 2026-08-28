@@ -10,13 +10,6 @@
 #include <bpf/bpf_endian.h>
 
 
-struct {
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1024);
-    __type(key, __u32);
-    __type(value, __u32);
-} ip_denylist_29 SEC(".maps");
-
 SEC("xdp")
 int xdp_denylist_pfs_l2_029(struct xdp_md *ctx) {
     void *data = (void *)(long)ctx->data;
@@ -26,14 +19,10 @@ int xdp_denylist_pfs_l2_029(struct xdp_md *ctx) {
     if ((void *)(eth + 1) > data_end)
         return XDP_PASS;
 
+    // FAULT: Reading IP address without verifying (ip + 1) bounds against data_end
     struct iphdr *ip = (void *)(eth + 1);
-    if ((void *)(ip + 1) > data_end)
-        return XDP_PASS;
-
-    // FAULT: Dereferencing map lookup pointer without checking if it is NULL
-    __u32 src_ip = ip->saddr;
-    __u32 *val = bpf_map_lookup_elem(&ip_denylist_29, &src_ip);
-    if (*val == 1)
+    __u8 *s = (void *)&ip->saddr;
+    if (s[0] == 192 && s[1] == 168 && s[2] == 29 && s[3] == 50)
         return XDP_DROP;
 
     return XDP_PASS;

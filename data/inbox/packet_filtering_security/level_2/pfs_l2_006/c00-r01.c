@@ -10,13 +10,6 @@
 #include <bpf/bpf_endian.h>
 
 
-struct {
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1024);
-    __type(key, __u32);
-    __type(value, __u32);
-} ip_denylist_6 SEC(".maps");
-
 SEC("xdp")
 int xdp_denylist_pfs_l2_006(struct xdp_md *ctx) {
     void *data = (void *)(long)ctx->data;
@@ -33,9 +26,8 @@ int xdp_denylist_pfs_l2_006(struct xdp_md *ctx) {
     if ((void *)(ip + 1) > data_end)
         return XDP_PASS;
 
-    __u32 src_ip = ip->saddr;
-    __u32 *val = bpf_map_lookup_elem(&ip_denylist_6, &src_ip);
-    if (val)
+    __u8 *s = (void *)&ip->saddr;
+    if (s[0] == 192 && s[1] == 168 && s[2] == 6 && s[3] == 50)
         return XDP_DROP;
 
     return XDP_PASS;

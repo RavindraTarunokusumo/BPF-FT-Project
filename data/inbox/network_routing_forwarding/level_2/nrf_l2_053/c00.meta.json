@@ -5,7 +5,7 @@
   "candidate_id": "nrf_l2_053_c00",
   "task_id": "nrf_l2_053",
   "source_path": "c00.c",
-  "source_sha256": "c35ba8d6487395845da5bae640298f9f0f4446e02b1da424eca5a356d64c9e30",
+  "source_sha256": "76652a125cee953dd3df75454437aa24395f33e4ea38ad0b8ce253af36b6f199",
   "repair_attempt": 0,
   "claimed_status": "unvalidated"
 }

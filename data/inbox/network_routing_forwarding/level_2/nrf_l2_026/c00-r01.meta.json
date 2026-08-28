@@ -6,7 +6,7 @@
   "task_id": "nrf_l2_026",
   "source_path": "c00-r01.c",
   "parent_candidate_id": "nrf_l2_026_c00",
-  "source_sha256": "bed045696138cc81d44afa087b6ac75feb39e31145c9d7a6fcd1be6eff3c79c6",
+  "source_sha256": "fccd481b4d2d3f53d01b9a8b3fd5b692e7d96835d6636cbe2fa656bd1a03cd2f",
   "repair_attempt": 1,
   "claimed_status": "unvalidated"
 }

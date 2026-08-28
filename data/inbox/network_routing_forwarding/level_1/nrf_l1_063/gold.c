@@ -18,6 +18,13 @@ int xdp_route_nrf_l1_063(struct xdp_md *ctx) {
     if ((void *)(eth + 1) > data_end)
         return XDP_PASS;
 
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+        return XDP_PASS;
+
+    struct iphdr *ip = (void *)(eth + 1);
+    if ((void *)(ip + 1) > data_end)
+        return XDP_PASS;
+
     unsigned char tmp[ETH_ALEN];
     __builtin_memcpy(tmp, eth->h_dest, ETH_ALEN);
     __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);
