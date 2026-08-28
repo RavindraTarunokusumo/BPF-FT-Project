@@ -1,0 +1,66 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "pit_l1_050",
+  "candidate_id": "pit_l1_050_c00",
+  "source_path": "/root/BPF-FT-Project/data/inbox/packet_inspection_telemetry/level_1/pit_l1_050/c00.c",
+  "source_sha256": "d475d81efd8f8b199df783425b2e034c88406138d601a77937afd8e891be409e",
+  "timestamp": "2026-08-28T14:58:12.532564+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_7xldlnov/candidate.o\nlibbpf: elf: section(3) xdp, size 80, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_pit_l1_050' at insn offset 0 (0 bytes), code size 10 insns (80 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_7xldlnov/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 685, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 128, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_telemetry_pit_l1_050': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data = (void *)(long)ctx->data;\n0: (61) r2 = *(u32 *)(r1 +0)          ; R1=ctx() R2_w=pkt(r=0)\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r1 = *(u32 *)(r1 +4)          ; R1_w=pkt_end()\n; int len = (int)(data_end - data);\n2: (1f) r1 -= r2                      ; R1_w=scalar() R2_w=pkt(r=0)\n3: (67) r1 <<= 32                     ; R1_w=scalar(smax=0x7fffffff00000000,umax=0xffffffff00000000,smin32=0,smax32=umax32=0,var_off=(0x0; 0xffffffff00000000))\n4: (c7) r1 s>>= 32                    ; R1_w=scalar(smin=0xffffffff80000000,smax=0x7fffffff)\n5: (b7) r0 = 1                        ; R0_w=1\n6: (b7) r2 = 64                       ; R2_w=64\n; }\n7: (6d) if r2 s> r1 goto pc+1         ; R1_w=scalar(smin=umin=smin32=umin32=64,smax=umax=umax32=0x7fffffff,var_off=(0x0; 0x7fffffff)) R2_w=64\n8: (b7) r0 = 2                        ; R0_w=2\n9: (95) exit\n\nfrom 7 to 9: R0=1 R1=scalar(smin=0xffffffff80000000,smax=smax32=63) R2=64 R10=fp0\n9: R0=1 R1=scalar(smin=0xffffffff80000000,smax=smax32=63) R2=64 R10=fp0\n9: (95) exit\nverification time 108 usec\nstack depth 0\nprocessed 11 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 4,
+    "total_tests": 5,
+    "details": [
+      {
+        "name": "test_normal_pass",
+        "description": "Standard 100-byte packet should pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "test_min_boundary_pass",
+        "description": "Packet exactly 64 bytes should pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "test_max_boundary_pass",
+        "description": "Packet exactly 1500 bytes should pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "test_tiny_drop",
+        "description": "Tiny packet (<64 bytes) should be dropped",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "test_oversize_drop",
+        "description": "Oversized packet (>1500 bytes) should be dropped",
+        "pass": false,
+        "expected": "XDP_DROP",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'test_oversize_drop' failed: expected XDP_DROP (1), got XDP_PASS (2)"
+}

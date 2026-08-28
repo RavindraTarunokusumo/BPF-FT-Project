@@ -1,0 +1,51 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_059",
+  "candidate_id": "pfs_l1_059_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/inbox/packet_filtering_security/level_1/pfs_l1_059/c00-r01.c",
+  "source_sha256": "f7cd191e136d2455eae26c3b6865263ae417651b05f6815d1e82b17df6b62fa7",
+  "timestamp": "2026-08-28T14:57:28.400077+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_4vzzf661/candidate.o\nlibbpf: elf: section(3) xdp, size 192, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_pfs_l1_059' at insn offset 0 (0 bytes), code size 24 insns (192 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_4vzzf661/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 841, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 272, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_pfs_l1_059': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter_pfs_l1_059(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+17         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+12      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+9         ; R2=pkt_end() R3=pkt(off=34,r=34)\n14: (b7) r0 = 1                       ; R0_w=1\n; if (ip->ttl <= 1)\n15: (71) r3 = *(u8 *)(r1 +22)         ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n16: (b7) r2 = 2                       ; R2_w=2\n; if (ip->ttl <= 1)\n17: (2d) if r2 > r3 goto pc+5         ; R2_w=2 R3_w=scalar(smin=umin=smin32=umin32=2,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->frag_off & bpf_htons(0x3FFF))\n18: (69) r1 = *(u16 *)(r1 +20)        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (ip->frag_off & bpf_htons(0x3FFF))\n19: (57) r1 &= 65343                  ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff3f,var_off=(0x0; 0xff3f))\n; \n20: (15) if r1 == 0x0 goto pc+1       ; R1_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0xff3f,var_off=(0x0; 0xff3f))\n21: (b7) r2 = 1                       ; R2=1\n22: (bf) r0 = r2                      ; R0_w=1 R2=1\n; }\n23: (95) exit\n\nfrom 20 to 22: safe\n\nfrom 17 to 23: R0_w=1 R1=pkt(r=34) R2_w=2 R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1,var_off=(0x0; 0x1)) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n23: R0_w=1 R1=pkt(r=34) R2_w=2 R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1,var_off=(0x0; 0x1)) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n23: (95) exit\n\nfrom 13 to 23: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n23: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n23: (95) exit\n\nfrom 10 to 23: R0_w=2 R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n23: R0_w=2 R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n23: (95) exit\n\nfrom 5 to 23: R0_w=2 R1_w=pkt(r=0) R2_w=pkt_end() R3_w=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n23: R0_w=2 R1_w=pkt(r=0) R2_w=pkt_end() R3_w=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n23: (95) exit\nverification time 632 usec\nstack depth 0\nprocessed 29 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "test_low_ttl_drop",
+        "description": "IPv4 packet with TTL == 1 should be dropped",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "test_normal_ttl_pass",
+        "description": "IPv4 packet with normal TTL should pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "test_fragmented_drop",
+        "description": "Fragmented IPv4 packet (frag_off != 0) should be dropped",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

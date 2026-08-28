@@ -1,0 +1,58 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "ptr_l1_049",
+  "candidate_id": "ptr_l1_049_c00_r01",
+  "source_path": "/root/BPF-FT-Project/data/inbox/protocol_transformation/level_1/ptr_l1_049/c00-r01.c",
+  "source_sha256": "bc67c17300cefb3662ae56e7938ad737f39b55d584c221dd0ae5fc67d00ba593",
+  "timestamp": "2026-08-28T14:58:54.471895+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_mct9s0a5/candidate.o\nlibbpf: elf: section(3) xdp, size 200, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform_ptr_l1_049' at insn offset 0 (0 bytes), code size 25 insns (200 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_mct9s0a5/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 910, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 304, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform_ptr_l1_049': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+18         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+13       ; R3_w=8\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n12: (2d) if r3 > r2 goto pc+10        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u8 old_tos = ip->tos;\n13: (71) r2 = *(u8 *)(r1 +15)         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n14: (b7) r3 = 4                       ; R3_w=4\n; ip->tos = 4;\n15: (73) *(u8 *)(r1 +15) = r3         ; R1=pkt(r=34) R3_w=4\n; __u32 csum = (__u32)ip->check + (__u32)old_tos - (__u32)4;\n16: (69) r3 = *(u16 *)(r1 +24)        ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; __u32 csum = (__u32)ip->check + (__u32)old_tos - (__u32)4;\n17: (0f) r2 += r3                     ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0x100fe,var_off=(0x0; 0x1ffff)) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; __u32 csum = (__u32)ip->check + (__u32)old_tos - (__u32)4;\n18: (07) r2 += -4                     ; R2_w=scalar(smin=smin32=-4,smax=smax32=0x100fa)\n; csum = (csum & 0xFFFF) + (csum >> 16);\n19: (bf) r3 = r2                      ; R2_w=scalar(id=1,smin=smin32=-4,smax=smax32=0x100fa) R3_w=scalar(id=1,smin=smin32=-4,smax=smax32=0x100fa)\n20: (77) r3 >>= 16                    ; R3_w=scalar(smin=0,smax=umax=0xffffffffffff,var_off=(0x0; 0xffffffffffff))\n; csum = (csum & 0xFFFF) + (csum >> 16);\n21: (0f) r3 += r2                     ; R2_w=scalar(id=1,smin=smin32=-4,smax=smax32=0x100fa) R3_w=scalar(smin=-4,smax=0x10000000100f9)\n; ip->check = (__u16)csum;\n22: (6b) *(u16 *)(r1 +24) = r3        ; R1=pkt(r=34) R3_w=scalar(smin=-4,smax=0x10000000100f9)\n; }\n23: (b7) r0 = 2                       ; R0_w=2\n24: (95) exit\n\nfrom 12 to 23: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n23: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n23: (b7) r0 = 2                       ; R0_w=2\n24: (95) exit\n\nfrom 9 to 23: safe\n\nfrom 4 to 23: safe\nverification time 246 usec\nstack depth 0\nprocessed 29 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 4,
+    "total_tests": 4,
+    "details": [
+      {
+        "name": "test_remark_pass",
+        "description": "IPv4 packet should have TOS updated to 4 and pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "test_tcp_remark_pass",
+        "description": "IPv4 TCP packet should have TOS updated to 4 and pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "test_arp_pass",
+        "description": "ARP packet should pass untouched",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "test_truncated_pass",
+        "description": "Truncated Ethernet frame header should pass with XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

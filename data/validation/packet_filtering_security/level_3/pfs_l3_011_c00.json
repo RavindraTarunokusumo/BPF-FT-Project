@@ -1,0 +1,53 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "pfs_l3_011",
+  "candidate_id": "pfs_l3_011_c00",
+  "source_path": "/root/BPF-FT-Project/data/inbox/packet_filtering_security/level_3/pfs_l3_011/c00.c",
+  "source_sha256": "62d704e2e0f2044428dca980d3adfc0bee7370b3b26a31f68addb1aa001191b8",
+  "timestamp": "2026-08-28T14:57:49.293313+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_n5gslltk/candidate.o\nlibbpf: elf: section(3) xdp, size 288, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_track_pfs_l3_011' at insn offset 0 (0 bytes), code size 36 insns (288 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_n5gslltk/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1536, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 448, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'conn_track_11': at sec_idx 5, offset 0.\nlibbpf: map 'conn_track_11': found type = 9.\nlibbpf: map 'conn_track_11': found key [8], sz = 16.\nlibbpf: map 'conn_track_11': found value [16], sz = 8.\nlibbpf: map 'conn_track_11': found max_entries = 10000.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #28 against 'conn_track_11'\nlibbpf: prog 'xdp_track_pfs_l3_011': found map 0 (conn_track_11, sec 5, off 0) for insn #28\nlibbpf: map 'conn_track_11': created successfully, fd=4\nlibbpf: prog 'xdp_track_pfs_l3_011': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_track_pfs_l3_011(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data = (void *)(long)ctx->data;\n1: (61) r2 = *(u32 *)(r1 +0)          ; R1=ctx() R2_w=pkt(r=0)\n; void *data_end = (void *)(long)ctx->data_end;\n2: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r2                       ; R1_w=pkt(r=0) R2_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r3 goto pc+29         ; R1_w=pkt(off=14,r=14) R3_w=pkt_end()\n6: (bf) r4 = r2                       ; R2_w=pkt(r=14) R4_w=pkt(r=14)\n7: (07) r4 += 34                      ; R4_w=pkt(off=34,r=14)\n8: (2d) if r4 > r3 goto pc+26         ; R3_w=pkt_end() R4_w=pkt(off=34,r=34)\n; struct tcphdr *tcp = (void *)ip + (ip->ihl * 4);\n9: (71) r4 = *(u8 *)(r1 +0)           ; R1_w=pkt(off=14,r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; struct tcphdr *tcp = (void *)ip + (ip->ihl * 4);\n10: (67) r4 <<= 2                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n11: (57) r4 &= 60                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; struct tcphdr *tcp = (void *)ip + (ip->ihl * 4);\n12: (0f) r1 += r4\nmark_precise: frame0: last_idx 12 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r4 stack= before 11: (57) r4 &= 60\nmark_precise: frame0: regs=r4 stack= before 10: (67) r4 <<= 2\nmark_precise: frame0: regs=r4 stack= before 9: (71) r4 = *(u8 *)(r1 +0)\n13: R1_w=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(tcp + 1) > data_end)\n13: (bf) r4 = r1                      ; R1_w=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n14: (07) r4 += 20                     ; R4=pkt(id=1,off=34,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(tcp + 1) > data_end)\n15: (2d) if r4 > r3 goto pc+19        ; R3=pkt_end() R4=pkt(id=1,off=34,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; key.src_ip = ip->saddr;\n16: (61) r3 = *(u32 *)(r2 +26)        ; R2=pkt(r=34) R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; key.src_ip = ip->saddr;\n17: (63) *(u32 *)(r10 -16) = r3       ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-16=????scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; key.dst_ip = ip->daddr;\n18: (61) r3 = *(u32 *)(r2 +30)        ; R2=pkt(r=34) R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; key.dst_ip = ip->daddr;\n19: (63) *(u32 *)(r10 -12) = r3       ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-16=mmmmmmmm\n; key.src_port = tcp->source;\n20: (69) r3 = *(u16 *)(r1 +0)         ; R1=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; key.src_port = tcp->source;\n21: (6b) *(u16 *)(r10 -8) = r3        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-8=??????scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; key.dst_port = tcp->dest;\n22: (69) r1 = *(u16 *)(r1 +2)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; key.dst_port = tcp->dest;\n23: (6b) *(u16 *)(r10 -6) = r1        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-8=????mmmm\n; key.proto = ip->protocol;\n24: (71) r1 = *(u8 *)(r2 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(r=34)\n; key.proto = ip->protocol;\n25: (73) *(u8 *)(r10 -4) = r1         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=???mmmmm\n26: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; key.src_ip = ip->saddr;\n27: (07) r2 += -16                    ; R2_w=fp-16\n; __u64 *val = bpf_map_lookup_elem(&conn_track_11, &key);\n28: (18) r1 = 0xff2125b906b35800      ; R1_w=map_ptr(map=conn_track_11,ks=16,vs=8)\n30: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=conn_track_11,ks=16,vs=8)\n31: (bf) r1 = r0                      ; R0=map_value_or_null(id=2,map=conn_track_11,ks=16,vs=8) R1_w=map_value_or_null(id=2,map=conn_track_11,ks=16,vs=8)\n32: (b7) r0 = 1                       ; R0_w=1\n; \n33: (15) if r1 == 0x0 goto pc+1       ; R1_w=map_value(map=conn_track_11,ks=16,vs=8)\n34: (b7) r0 = 2                       ; R0_w=2\n; }\n35: (95) exit\n\nfrom 33 to 35: R0_w=1 R1_w=0 R10=fp0 fp-8=mmmmmmmm fp-16=mmmmmmmm\n35: R0_w=1 R1_w=0 R10=fp0 fp-8=mmmmmmmm fp-16=mmmmmmmm\n35: (95) exit\n\nfrom 15 to 35: R0=2 R1=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(r=34) R3=pkt_end() R4=pkt(id=1,off=34,r=0xfffffffffffffffe,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R10=fp0\n35: R0=2 R1=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(r=34) R3=pkt_end() R4=pkt(id=1,off=34,r=0xfffffffffffffffe,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R10=fp0\n35: (95) exit\n\nfrom 8 to 35: R0_w=2 R1_w=pkt(off=14,r=14) R2_w=pkt(r=14) R3_w=pkt_end() R4_w=pkt(off=34,r=0xfffffffffffffffe) R10=fp0\n35: R0_w=2 R1_w=pkt(off=14,r=14) R2_w=pkt(r=14) R3_w=pkt_end() R4_w=pkt(off=34,r=0xfffffffffffffffe) R10=fp0\n35: (95) exit\n\nfrom 5 to 35: R0=2 R1=pkt(off=14,r=0xfffffffffffffffe) R2=pkt(r=0) R3=pkt_end() R10=fp0\n35: R0=2 R1=pkt(off=14,r=0xfffffffffffffffe) R2=pkt(r=0) R3=pkt_end() R10=fp0\n35: (95) exit\nverification time 725 usec\nstack depth 16\nprocessed 39 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 1,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "test_syn_init_pass",
+        "description": "TCP SYN packet initiating connection should pass and be recorded",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "XDP_DROP",
+        "stderr": ""
+      },
+      {
+        "name": "test_udp_pass",
+        "description": "UDP packet should pass unaffected by TCP conn tracker",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "XDP_DROP",
+        "stderr": ""
+      },
+      {
+        "name": "test_truncated_pass",
+        "description": "Truncated header safely passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'test_syn_init_pass' failed: expected XDP_PASS (2), got XDP_DROP (1)\nTest 'test_udp_pass' failed: expected XDP_PASS (2), got XDP_DROP (1)"
+}

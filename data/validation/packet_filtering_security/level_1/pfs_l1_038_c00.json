@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_038",
+  "candidate_id": "pfs_l1_038_c00",
+  "source_path": "/root/BPF-FT-Project/data/inbox/packet_filtering_security/level_1/pfs_l1_038/c00.c",
+  "source_sha256": "71d568265e26be7d1bc6b54d02043b7ca19947a76d5e1308d5aeca7b04546be2",
+  "timestamp": "2026-08-28T14:57:23.335249+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_6w_dmx3t/candidate.o\nlibbpf: elf: section(3) xdp, size 128, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_pfs_l1_038' at insn offset 0 (0 bytes), code size 16 insns (128 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_6w_dmx3t/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 752, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 208, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_pfs_l1_038': BPF program load failed: Permission denied\nlibbpf: prog 'xdp_filter_pfs_l1_038': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data = (void *)(long)ctx->data;\n0: (61) r2 = *(u32 *)(r1 +0)          ; R1=ctx() R2_w=pkt(r=0)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n1: (71) r3 = *(u8 *)(r2 +13)\ninvalid access to packet, off=13 size=1, R2(id=0,off=13,r=0)\nR2 offset is outside of the packet\nverification time 42 usec\nstack depth 0\nprocessed 2 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0\n-- END PROG LOAD LOG --\nlibbpf: prog 'xdp_filter_pfs_l1_038': failed to load: -13\nlibbpf: failed to load object '/tmp/bpf_val_6w_dmx3t/candidate.o'\nError: failed to load object file\n",
+    "log": "libbpf: loading object from /tmp/bpf_val_6w_dmx3t/candidate.o\nlibbpf: elf: section(3) xdp, size 128, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_pfs_l1_038' at insn offset 0 (0 bytes), code size 16 insns (128 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_6w_dmx3t/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 752, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 208, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_pfs_l1_038': BPF program load failed: Permission denied\nlibbpf: prog 'xdp_filter_pfs_l1_038': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data = (void *)(long)ctx->data;\n0: (61) r2 = *(u32 *)(r1 +0)          ; R1=ctx() R2_w=pkt(r=0)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n1: (71) r3 = *(u8 *)(r2 +13)\ninvalid access to packet, off=13 size=1, R2(id=0,off=13,r=0)\nR2 offset is outside of the packet\nverification time 42 usec\nstack depth 0\nprocessed 2 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0\n-- END PROG LOAD LOG --\nlibbpf: prog 'xdp_filter_pfs_l1_038': failed to load: -13\nlibbpf: failed to load object '/tmp/bpf_val_6w_dmx3t/candidate.o'\nError: failed to load object file\n"
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Kernel verifier rejected program:\nlibbpf: loading object from /tmp/bpf_val_6w_dmx3t/candidate.o\nlibbpf: elf: section(3) xdp, size 128, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_pfs_l1_038' at insn offset 0 (0 bytes), code size 16 insns (128 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_6w_dmx3t/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 752, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 208, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_pfs_l1_038': BPF program load failed: Permission denied\nlibbpf: prog 'xdp_filter_pfs_l1_038': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data = (void *)(long)ctx->data;\n0: (61) r2 = *(u32 *)(r1 +0)          ; R1=ctx() R2_w=pkt(r=0)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n1: (71) r3 = *(u8 *)(r2 +13)\ninvalid access to packet, off=13 size=1, R2(id=0,off=13,r=0)\nR2 offset is outside of the packet\nverification time 42 usec\nstack depth 0\nprocessed 2 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0\n-- END PROG LOAD LOG --\nlibbpf: prog 'xdp_filter_pfs_l1_038': failed to load: -13\nlibbpf: failed to load object '/tmp/bpf_val_6w_dmx3t/candidate.o'\nError: failed to load object file"
+}
