@@ -294,6 +294,8 @@ def verify_sft_jsonl(path: Path) -> List[str]:
         return [f"File {path} does not exist"]
 
     line_num = 0
+    seen_example_ids = set()
+
     with open(path, "r", encoding="utf-8") as f:
         for line in f:
             line_num += 1
@@ -307,9 +309,18 @@ def verify_sft_jsonl(path: Path) -> List[str]:
                 continue
 
             # Check schema
-            for req_f in ("task_id", "category", "difficulty", "example_type", "messages"):
+            for req_f in ("example_id", "task_id", "category", "difficulty", "template_family", "example_type", "messages"):
                 if req_f not in rec:
-                    errors.append(f"Line {line_num}: Missing field '{req_f}'")
+                    errors.append(f"Line {line_num}: Missing required field '{req_f}'")
+
+            # Check uniqueness of example_id
+            if "example_id" in rec:
+                eid = rec["example_id"]
+                if not isinstance(eid, str) or not eid.strip():
+                    errors.append(f"Line {line_num}: 'example_id' must be a non-empty string")
+                elif eid in seen_example_ids:
+                    errors.append(f"Line {line_num}: Duplicate 'example_id' '{eid}'")
+                seen_example_ids.add(eid)
 
             # Check categoricals
             if "category" in rec and rec["category"] not in VALID_CATEGORIES:
@@ -331,6 +342,16 @@ def verify_sft_jsonl(path: Path) -> List[str]:
                     for m_idx, m in enumerate(msgs):
                         if not isinstance(m.get("content"), str) or not m.get("content").strip():
                             errors.append(f"Line {line_num}: Message turn #{m_idx+1} content is empty")
+
+                    # Strict checks on assistant target
+                    if len(msgs) == 3:
+                        assistant_content = msgs[2].get("content", "")
+                        if "```" in assistant_content:
+                            errors.append(f"Line {line_num}: Assistant completion contains markdown code fences ('```'). Raw C source required.")
+                        if "// FAULT:" in assistant_content or "/* FAULT:" in assistant_content or "FAULT:" in assistant_content:
+                            errors.append(f"Line {line_num}: Assistant completion contains fault markers ('FAULT:')")
+                        if "SEC(\"xdp\")" not in assistant_content and "SEC(\"filter\")" not in assistant_content and "SEC(\"action\")" not in assistant_content:
+                            errors.append(f"Line {line_num}: Assistant completion missing SEC(\"xdp\") section definition")
 
     return errors
 
