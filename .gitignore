@@ -6,7 +6,9 @@ __pycache__/
 .DS_Store
 .venv/
 .pytest_cache/
-runs/
-artifacts/
 wandb/
+artifacts/**/*_raw/
+artifacts/**/*_tinker_raw/
+artifacts/**/*.safetensors
+
 

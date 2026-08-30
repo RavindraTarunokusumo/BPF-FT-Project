@@ -1,0 +1,17 @@
+{
+  "rollout_id": "rollout-001",
+  "model_name": "Qwen/Qwen3-8B",
+  "sampler_checkpoint": null,
+  "renderer_name": "qwen3_disable_thinking",
+  "is_mock": true,
+  "num_tasks": 36,
+  "num_samples_per_task": 1,
+  "total_samples": 36,
+  "temperature": 0.0,
+  "seed": 42,
+  "max_tokens": 2048,
+  "output_compliance_rate": 1.0,
+  "total_generated_tokens": 108,
+  "benchmark_index_path": "data\\calibration\\index.jsonl",
+  "candidates_dir": "runs/evaluation/mock-qwen3-8b/rollout-001/candidates"
+}

@@ -1,0 +1,26 @@
+{
+  "run_id": "qwen3-8b-wandb-test-01",
+  "fingerprint": "65495fc96535",
+  "model_name": "Qwen/Qwen3-8B",
+  "renderer_name": "qwen3_disable_thinking",
+  "recipe_name": "bpf_guardian_sft_v1",
+  "learning_rate": 0.0002,
+  "lr_schedule": "linear",
+  "num_epochs": 1,
+  "lora_rank": 16,
+  "batch_size": 16,
+  "max_length": 4096,
+  "save_every": 2,
+  "eval_every": 2,
+  "tinker_version": "0.26.1",
+  "tinker_cookbook_version": "0.5.5",
+  "train_sha256": "71dd50816dfa752591546b4c4f85ce2d3f5793b07b99c786dc211879841daa80",
+  "val_sha256": "2a61c686c0c862cac56ff4c447edee6f3f4906f08da528bc0f258b3a9ad3f39e",
+  "token_estimates": {
+    "train_tokens_per_epoch": 1122597,
+    "val_tokens_per_eval": 114767,
+    "total_train_tokens": 1122597,
+    "estimated_train_cost_usd": 0.49394268,
+    "estimated_val_eval_cost_usd": 0.022379565
+  }
+}

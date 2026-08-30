@@ -1,0 +1,263 @@
+root:680 [INFO] Command line invocation: training/train_tinker_sft.py --max-steps 2 --num-epochs 1 --batch-size 16 --lora-rank 16 --max-budget-usd 0.50 --confirm-paid-run
+tinker_cookbook.utils.ml_log:618 [INFO] Logging to: C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535
+root:680 [INFO] Command line invocation: training/train_tinker_sft.py --max-steps 2 --num-epochs 1 --batch-size 16 --lora-rank 16 --save-every 2 --eval-every 2 --max-budget-usd 0.50 --confirm-paid-run
+tinker_cookbook.utils.ml_log:618 [INFO] Logging to: C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535
+tinker.lib.public_interfaces.service_client:96 [INFO] ServiceClient initialized for session 164e71e6-8b76-5163-b82d-09fd8632cfbd
+tinker.lib.public_interfaces.service_client:219 [INFO] TrainingClient initialized for model 164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0
+tinker_cookbook.supervised.train:390 [INFO] Training for 63 batches x 1 epochs = 63 steps
+tinker_cookbook.supervised.train:543 [INFO] Starting epoch 0
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+You are an expert Linux kernel eBPF and XDP systems programmer.
+You are fixing an XDP program that produced diagnostic errors during evaluation.<|im_end|>
+<|im_start|>user
+Task ID: pfs_l2_031
+Category: packet_filtering_security
+Difficulty: level_2
+
+Original Instruction:
+Write an XDP program using a BPF hash map 'ip_denylist' that looks up the IPv4 source address. If the source IP is found in the denylist map, drop the packet; otherwise pass it.
+
+Technical Requirements:
+- Define BPF hash map 'ip_denylist' with key __u32 and value __u32 (max 1024 entries)
+- Parse Ethernet and IPv4 headers with strict boundary checks
+- Lookup ip->saddr in the map; return XDP_DROP if entry exists
+- Pass all non-IPv4 packets and unlisted IPv4 packets
+
+Previous Implementation:
+```c
+#include <linux/bpf.h>
+#include <linux/if_ether.h>
+#include <linux/ip.h>
+#include <linux/ipv6.h>
+#include <linux/tcp.h>
+#include <linux/udp.h>
+#include <linux/icmp.h>
+#include <linux/in.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
+
+
+SEC("xdp")
+int xdp_denylist_pfs_l2_031(struct xdp_md *ctx) {
+    void *data = (void *)(long)ctx->data;
+    void *data_end = (void *)(long)ctx->data_end;
+
+    struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+
+    // FAULT: Reading IP address without verifying (ip + 1) bounds against data_end
+    struct iphdr *ip = (void *)(eth + 1);
+    __u8 *s = (void *)&ip->saddr;
+    if (s[0] == 192 && s[1] == 168 && s[2] == 31 && s[3] == 50)
+        return XDP_DROP;
+
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";
+```
+
+Diagnostic Output:
+```text
+Kernel verifier rejected program:
+libbpf: loading object from /tmp/bpf_val_zqqagjee/candidate.o
+libbpf: elf: section(3) xdp, size 136, link 0, flags 6, type=1
+libbpf: sec 'xdp': found program 'xdp_denylist_pfs_l2_031' at insn offset 0 (0 bytes), code size 17 insns (136 bytes)
+libbpf: elf: section(4) license, size 4, link 0, flags 3, type=1
+libbpf: license of /tmp/bpf_val_zqqagjee/candidate.o is GPL
+libbpf: elf: section(14) .BTF, size 796, link 0, flags 0, type=1
+libbpf: elf: section(16) .BTF.ext, size 288, link 0, flags 0, type=1
+libbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2
+libbpf: looking for externs among 15 symbols...
+libbpf: collected 0 externs total
+libbpf: prog 'xdp_denylist_pfs_l2_031': BPF program load failed: Permission denied
+libbpf: prog 'xdp_denylist_pfs_l2_031': -- BEGIN PROG LOAD LOG --
+func#0 @0
+0: R1=ctx() R10=fp0
+; int xdp_denylist_pfs_l2_031(struct xdp_md *ctx) {
+0: (b7) r0 = 2                        ; R0_w=2
+; void *data_end = (void *)(long)ctx->data_end;
+1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()
+; void *data = (void *)(long)ctx->data;
+2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)
+; if ((void *)(eth + 1) > data_end)
+3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)
+4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)
+; if ((void *)(eth + 1) > data_end)
+5: (2d) if r3 > r2 goto pc+10         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)
+; if (s[0] == 192 && s[1] == 168 && s[2] == 31 && s[3] == 50)
+6: (71) r2 = *(u8 *)(r1 +26)
+invalid access to packet, off=26 size=1, R1(id=0,off=26,r=14)
+R1 offset is outside of the packet
+verification time 78 usec
+stack depth 0
+processed 7 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --
+libbpf: prog 'xdp_denylist_pfs_l2_031': failed to load: -13
+libbpf: failed to load object '/tmp/bpf_val_zqqagjee/candidate.o'
+Error: failed to load object file
+```
+
+Please provide the corrected, complete, and self-contained C source code for this XDP program.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+#include <linux/bpf.h>
+#include <linux/if_ether.h>
+#include <linux/ip.h>
+#include <linux/ipv6.h>
+#include <linux/tcp.h>
+#include <linux/udp.h>
+#include <linux/icmp.h>
+#include <linux/in.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
+
+
+SEC("xdp")
+int xdp_denylist_pfs_l2_031(struct xdp_md *ctx) {
+    void *data = (void *)(long)ctx->data;
+    void *data_end = (void *)(long)ctx->data_end;
+
+    struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+        return XDP_PASS;
+
+    struct iphdr *ip = (void *)(eth + 1);
+    if ((void *)(ip + 1) > data_end)
+        return XDP_PASS;
+
+    __u8 *s = (void *)&ip->saddr;
+    if (s[0] == 192 && s[1] == 168 && s[2] == 31 && s[3] == 50)
+        return XDP_DROP;
+
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";
+<|im_end|>
+tinker_cookbook.supervised.train:419 [INFO] <|im_start|>system
+You are an expert Linux kernel eBPF and XDP systems programmer.
+Write complete, self-contained, compilation-ready, and verifier-safe C source code for Linux XDP programs.<|im_end|>
+<|im_start|>user
+Task ID: pfs_l2_059
+Category: packet_filtering_security
+Difficulty: level_2
+
+Instruction:
+Write an XDP program using a BPF hash map 'ip_denylist' that looks up the IPv4 source address. If the source IP is found in the denylist map, drop the packet; otherwise pass it.
+
+Detailed Technical Requirements:
+- Define BPF hash map 'ip_denylist' with key __u32 and value __u32 (max 1024 entries)
+- Parse Ethernet and IPv4 headers with strict boundary checks
+- Lookup ip->saddr in the map; return XDP_DROP if entry exists
+- Pass all non-IPv4 packets and unlisted IPv4 packets
+
+Write the complete C source code for this XDP program.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+#include <linux/bpf.h>
+#include <linux/if_ether.h>
+#include <linux/ip.h>
+#include <linux/ipv6.h>
+#include <linux/tcp.h>
+#include <linux/udp.h>
+#include <linux/icmp.h>
+#include <linux/in.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
+
+
+SEC("xdp")
+int xdp_denylist_pfs_l2_059(struct xdp_md *ctx) {
+    void *data = (void *)(long)ctx->data;
+    void *data_end = (void *)(long)ctx->data_end;
+
+    struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+        return XDP_PASS;
+
+    struct iphdr *ip = (void *)(eth + 1);
+    if ((void *)(ip + 1) > data_end)
+        return XDP_PASS;
+
+    __u8 *s = (void *)&ip->saddr;
+    if (s[0] == 192 && s[1] == 168 && s[2] == 59 && s[3] == 50)
+        return XDP_DROP;
+
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";
+<|im_end|>
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+                Step 0                
++------------------------------------+
+| Metric               | Value       |
+|----------------------+-------------|
+| epoch                | 0           |
+| learning_rate        | 0.000200    |
+| num_loss_tokens      | 6489.000000 |
+| num_sequences        | 16          |
+| num_tokens           | 23349       |
+| progress             | 0.500000    |
+| test/bpb             | 0.190633    |
+| test/nll             | 0.441136    |
+| time/evals           | 7.830867    |
+| time/finish_batch    | 4.633695    |
+| time/get_batch       | 0.109464    |
+| time/run_evaluator   | 7.830796    |
+| time/step            | 4.618626    |
+| time/submit_batch    | 7.948347    |
+| train_mean_bpb       | 0.176771    |
+| train_mean_nll       | 0.409164    |
++------------------------------------+
+tinker_cookbook.utils.ml_log:206 [INFO] Wrote metrics to C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535/metrics.jsonl
+tinker_cookbook.utils.ml_log:279 [INFO] 
+                Step 1                
++------------------------------------+
+| Metric               | Value       |
+|----------------------+-------------|
+| epoch                | 0           |
+| learning_rate        | 0.000100    |
+| num_loss_tokens      | 6292.000000 |
+| num_sequences        | 16          |
+| num_tokens           | 14287       |
+| progress             | 1.000000    |
+| time/finish_batch    | 1.687079    |
+| time/get_batch       | 0.057202    |
+| time/step            | 1.672301    |
+| time/submit_batch    | 0.059496    |
+| train_mean_bpb       | 0.174509    |
+| train_mean_nll       | 0.385190    |
++------------------------------------+
+tinker_cookbook.checkpoint_utils:467 [INFO] Saved checkpoints: {'state_path': 'tinker://164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0/weights/final', 'sampler_path': 'tinker://164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0/sampler_weights/final'}
+tinker_cookbook.supervised.train:584 [INFO] Training completed successfully
+tinker_cookbook.checkpoint_utils:399 [INFO] Reading checkpoints from C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535\checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:421 [INFO] Found 1 valid checkpoints with key 'sampler_path' in C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535
+tinker_cookbook.checkpoint_utils:424 [INFO] Using last checkpoint: CheckpointRecord(name='final', batch=0, epoch=1, final=None, state_path='tinker://164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0/weights/final', sampler_path='tinker://164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0/sampler_weights/final', extra={'elapsed_tokens': 37636})
+root:680 [INFO] Command line invocation: training/train_tinker_sft.py --max-steps 2 --num-epochs 1 --batch-size 16 --lora-rank 16 --save-every 2 --eval-every 2 --max-budget-usd 0.50 --confirm-paid-run
+tinker_cookbook.utils.ml_log:618 [INFO] Logging to: C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535
+tinker_cookbook.checkpoint_utils:180 [INFO] Renderer metadata matches for checkpoint tinker://164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0/weights/final: qwen3_disable_thinking
+tinker.lib.public_interfaces.service_client:96 [INFO] ServiceClient initialized for session 3826c3a5-3196-5626-906c-82bcd4e1399a
+tinker.lib.public_interfaces.service_client:352 [INFO] TrainingClient initialized for model 3826c3a5-3196-5626-906c-82bcd4e1399a:train:0 via load_weights
+tinker_cookbook.supervised.train:342 [INFO] Resumed training from tinker://164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0/weights/final
+tinker_cookbook.supervised.train:390 [INFO] Training for 63 batches x 1 epochs = 63 steps
+tinker_cookbook.supervised.train:580 [INFO] Training was already complete; nothing to do
+tinker_cookbook.supervised.train:584 [INFO] Training completed successfully
+tinker_cookbook.checkpoint_utils:399 [INFO] Reading checkpoints from C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535\checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:421 [INFO] Found 1 valid checkpoints with key 'sampler_path' in C:\Users\rvind\OneDrive\Desktop\Projects\BPF-FT-Project\runs\tinker\qwen3-8b-65495fc96535
+tinker_cookbook.checkpoint_utils:424 [INFO] Using last checkpoint: CheckpointRecord(name='final', batch=0, epoch=1, final=None, state_path='tinker://164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0/weights/final', sampler_path='tinker://164e71e6-8b76-5163-b82d-09fd8632cfbd:train:0/sampler_weights/final', extra={'elapsed_tokens': 37636})
