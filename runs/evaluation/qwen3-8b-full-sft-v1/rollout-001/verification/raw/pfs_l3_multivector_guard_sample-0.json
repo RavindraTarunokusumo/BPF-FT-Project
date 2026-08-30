@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "pfs_l3_multivector_guard",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c",
+  "source_sha256": "58910110be3dcd1652a3e0c13f1cfc598d8325971acc07b7d3312e7be1359c5a",
+  "timestamp": "2026-08-30T18:37:40.947270+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c:54:63: error: cannot take the address of an rvalue of type '__u32' (aka 'unsigned int')\n   54 |             __u32 *cnt = bpf_map_lookup_elem(&drop_reasons_3, &(__u32)0);\n      |                                                               ^~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c:70:63: error: cannot take the address of an rvalue of type '__u32' (aka 'unsigned int')\n   70 |             __u32 *cnt = bpf_map_lookup_elem(&drop_reasons_3, &(__u32)1);\n      |                                                               ^~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c:79:55: error: cannot take the address of an rvalue of type '__u32' (aka 'unsigned int')\n   79 |     __u32 *cnt = bpf_map_lookup_elem(&drop_reasons_3, &(__u32)2);\n      |                                                       ^~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c:79:5: warning: label followed by a declaration is a C23 extension [-Wc23-extensions]\n   79 |     __u32 *cnt = bpf_map_lookup_elem(&drop_reasons_3, &(__u32)2);\n      |     ^\n1 warning and 3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c:54:63: error: cannot take the address of an rvalue of type '__u32' (aka 'unsigned int')\n   54 |             __u32 *cnt = bpf_map_lookup_elem(&drop_reasons_3, &(__u32)0);\n      |                                                               ^~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c:70:63: error: cannot take the address of an rvalue of type '__u32' (aka 'unsigned int')\n   70 |             __u32 *cnt = bpf_map_lookup_elem(&drop_reasons_3, &(__u32)1);\n      |                                                               ^~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c:79:55: error: cannot take the address of an rvalue of type '__u32' (aka 'unsigned int')\n   79 |     __u32 *cnt = bpf_map_lookup_elem(&drop_reasons_3, &(__u32)2);\n      |                                                       ^~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l3_multivector_guard/sample-0.c:79:5: warning: label followed by a declaration is a C23 extension [-Wc23-extensions]\n   79 |     __u32 *cnt = bpf_map_lookup_elem(&drop_reasons_3, &(__u32)2);\n      |     ^\n1 warning and 3 errors generated."
+}

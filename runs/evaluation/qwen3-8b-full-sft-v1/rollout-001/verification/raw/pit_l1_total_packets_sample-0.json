@@ -1,0 +1,72 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "pit_l1_total_packets",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l1_total_packets/sample-0.c",
+  "source_sha256": "cd7b94b2a2f634674c29476b7b347dab560c29712439841ac9722183db7044a9",
+  "timestamp": "2026-08-30T18:37:39.367419+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l1_total_packets/sample-0.c:22:11: warning: unused variable 'data' [-Wunused-variable]\n   22 |     void *data = (void *)(long)ctx->data;\n      |           ^~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l1_total_packets/sample-0.c:23:11: warning: unused variable 'data_end' [-Wunused-variable]\n   23 |     void *data_end = (void *)(long)ctx->data_end;\n      |           ^~~~~~~~\n2 warnings generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_r4silyr4/candidate.o\nlibbpf: elf: section(3) xdp, size 96, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_pit_l1_total_packets' at insn offset 0 (0 bytes), code size 12 insns (96 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_r4silyr4/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1119, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 160, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'total_packet_counter_1': at sec_idx 5, offset 0.\nlibbpf: map 'total_packet_counter_1': found type = 6.\nlibbpf: map 'total_packet_counter_1': found key [8], sz = 4.\nlibbpf: map 'total_packet_counter_1': found value [11], sz = 8.\nlibbpf: map 'total_packet_counter_1': found max_entries = 1.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #4 against 'total_packet_counter_1'\nlibbpf: prog 'xdp_telemetry_pit_l1_total_packets': found map 0 (total_packet_counter_1, sec 5, off 0) for insn #4\nlibbpf: map 'total_packet_counter_1': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_pit_l1_total_packets': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_telemetry_pit_l1_total_packets(struct xdp_md *ctx) {\n0: (b7) r1 = 0                        ; R1_w=0\n; __u32 key = 0;\n1: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 1 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 0: (b7) r1 = 0\n2: R1_w=0 R10=fp0 fp-8=0000????\n2: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0\n3: (07) r2 += -4                      ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&total_packet_counter_1, &key);\n4: (18) r1 = 0xff2125b82da83000       ; R1_w=map_ptr(map=total_packet_co,ks=4,vs=8)\n6: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=total_packet_co,ks=4,vs=8)\n; if (cnt) {\n7: (15) if r0 == 0x0 goto pc+2        ; R0_w=map_value(map=total_packet_co,ks=4,vs=8)\n8: (b7) r1 = 1                        ; R1_w=1\n; __sync_fetch_and_add(cnt, 1);\n9: (db) lock *(u64 *)(r0 +0) += r1    ; R0=map_value(map=total_packet_co,ks=4,vs=8) R1=1\n; return XDP_PASS;\n10: (b7) r0 = 2                       ; R0_w=2\n11: (95) exit\n\nfrom 7 to 10: safe\nverification time 85 usec\nstack depth 8\nprocessed 12 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 6,
+    "total_tests": 6,
+    "details": [
+      {
+        "name": "tcp_packet_pass",
+        "description": "TCP packet must increment counter and return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "udp_packet_pass",
+        "description": "UDP packet must increment counter and return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "icmp_packet_pass",
+        "description": "ICMP packet must increment counter and return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_packet_pass",
+        "description": "ARP frame must increment counter and return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vlan_packet_pass",
+        "description": "VLAN frame must increment counter and return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "runt_packet_pass",
+        "description": "Small runt packet must increment counter and return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

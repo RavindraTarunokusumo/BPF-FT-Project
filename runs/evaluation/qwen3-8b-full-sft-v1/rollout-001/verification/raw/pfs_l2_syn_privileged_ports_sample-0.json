@@ -1,0 +1,90 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "pfs_l2_syn_privileged_ports",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pfs_l2_syn_privileged_ports/sample-0.c",
+  "source_sha256": "8f6d49a1c2689571f4bba7e0cc5db9362a692863ea57b7f061adaac5445bcc60",
+  "timestamp": "2026-08-30T18:37:40.222832+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_qx2nfxjm/candidate.o\nlibbpf: elf: section(3) xdp, size 288, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_pfs_l2_syn_privileged_ports' at insn offset 0 (0 bytes), code size 36 insns (288 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_qx2nfxjm/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1093, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 368, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_pfs_l2_syn_privileged_ports': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter_pfs_l2_syn_privileged_ports(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+29         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+24      ; R4_w=8\n11: (bf) r4 = r3                      ; R3_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r2 goto pc+21        ; R2=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_TCP)\n14: (71) r3 = *(u8 *)(r3 +23)         ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_TCP)\n15: (55) if r3 != 0x6 goto pc+19      ; R3_w=6\n; unsigned int ip_hdr_len = ip->ihl * 4;\n16: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(off=14,r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; unsigned int ip_hdr_len = ip->ihl * 4;\n17: (67) r3 <<= 2                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r3 &= 60                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r4 = 20                      ; R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr))\n20: (2d) if r4 > r3 goto pc+14        ; R3_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=20\n; if ((void *)ip + ip_hdr_len > data_end)\n21: (0f) r1 += r3\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r3 stack= before 20: (2d) if r4 > r3 goto pc+14\nmark_precise: frame0: regs=r3,r4 stack= before 19: (b7) r4 = 20\nmark_precise: frame0: regs=r3 stack= before 18: (57) r3 &= 60\nmark_precise: frame0: regs=r3 stack= before 17: (67) r3 <<= 2\nmark_precise: frame0: regs=r3 stack= before 16: (71) r3 = *(u8 *)(r1 +0)\n22: R1=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)ip + ip_hdr_len > data_end)\n22: (2d) if r1 > r2 goto pc+12        ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt_end()\n23: (bf) r3 = r1                      ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (07) r3 += 20                     ; R3_w=pkt(id=1,off=34,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n25: (2d) if r3 > r2 goto pc+9         ; R2=pkt_end() R3_w=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (tcp->syn && !tcp->ack)\n26: (69) r2 = *(u16 *)(r1 +12)        ; R1=pkt(id=1,off=14,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (tcp->syn && !tcp->ack)\n27: (57) r2 &= 4608                   ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=4608,var_off=(0x0; 0x1200))\n28: (55) if r2 != 0x200 goto pc+5     ; R2_w=512\n; if (tcp->dest >= 1 && tcp->dest <= 1023) {\n29: (69) r1 = *(u16 *)(r1 +2)         ; R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (tcp->dest >= 1 && tcp->dest <= 1023) {\n30: (15) if r1 == 0x0 goto pc+3       ; R1=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n31: (b7) r0 = 1                       ; R0_w=1\n32: (b7) r2 = 1024                    ; R2_w=1024\n33: (2d) if r2 > r1 goto pc+1         ; R1=scalar(smin=umin=smin32=umin32=1024,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R2_w=1024\n34: (b7) r0 = 2                       ; R0_w=2\n; }\n35: (95) exit\n\nfrom 33 to 35: R0_w=1 R1=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=1023,var_off=(0x0; 0x3ff)) R2_w=1024 R3=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n35: R0_w=1 R1=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=1023,var_off=(0x0; 0x3ff)) R2_w=1024 R3=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n35: (95) exit\n\nfrom 30 to 34: R0=2 R1=0 R2=512 R3=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n34: R0=2 R1=0 R2=512 R3=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; if (tcp->dest >= 1 && tcp->dest <= 1023) {\n34: (b7) r0 = 2                       ; R0=2\n; }\n35: (95) exit\n\nfrom 28 to 34: R0=2 R1=pkt(id=1,off=14,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=4608,var_off=(0x0; 0x1200)) R3_w=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n34: R0=2 R1=pkt(id=1,off=14,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=4608,var_off=(0x0; 0x1200)) R3_w=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; if (tcp->dest >= 1 && tcp->dest <= 1023) {\n34: (b7) r0 = 2\n35: safe\n\nfrom 25 to 35: safe\n\nfrom 22 to 35: safe\n\nfrom 20 to 35: safe\n\nfrom 15 to 35: safe\n\nfrom 13 to 35: safe\n\nfrom 10 to 35: safe\n\nfrom 5 to 35: safe\nverification time 431 usec\nstack depth 0\nprocessed 48 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 3\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 4,
+    "total_tests": 8,
+    "details": [
+      {
+        "name": "syn_priv_80_drop",
+        "description": "TCP SYN to port 80 must drop",
+        "pass": false,
+        "expected": "XDP_DROP",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "syn_priv_443_drop",
+        "description": "TCP SYN to port 443 must drop",
+        "pass": false,
+        "expected": "XDP_DROP",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "syn_priv_1_drop",
+        "description": "TCP SYN to boundary port 1 must drop",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "syn_priv_1023_drop",
+        "description": "TCP SYN to boundary port 1023 must drop",
+        "pass": false,
+        "expected": "XDP_DROP",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "syn_high_1024_pass",
+        "description": "TCP SYN to port 1024 must pass",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "XDP_DROP",
+        "stderr": ""
+      },
+      {
+        "name": "syn_high_8080_pass",
+        "description": "TCP SYN to port 8080 must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "syn_ack_80_pass",
+        "description": "TCP SYN+ACK (0x12) to port 80 must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ack_80_pass",
+        "description": "TCP ACK (0x10) to port 80 must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'syn_priv_80_drop' failed: expected XDP_DROP (1), got XDP_PASS (2)\nTest 'syn_priv_443_drop' failed: expected XDP_DROP (1), got XDP_PASS (2)\nTest 'syn_priv_1023_drop' failed: expected XDP_DROP (1), got XDP_PASS (2)\nTest 'syn_high_1024_pass' failed: expected XDP_PASS (2), got XDP_DROP (1)"
+}

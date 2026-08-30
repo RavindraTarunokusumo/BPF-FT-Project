@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "pit_l3_vlan_dualstack_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c",
+  "source_sha256": "57c864fdf6a61039c43b449126a989d8d6710e07b3c1f742c8503b9fe59e8e08",
+  "timestamp": "2026-08-30T18:37:40.404085+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:41:27: error: arithmetic on a pointer to an incomplete type 'struct vlan_hdr'\n   41 |         if ((void *)(vlan + 1) > data_end)\n      |                      ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:40:16: note: forward declaration of 'struct vlan_hdr'\n   40 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:43:17: error: incomplete definition of type 'struct vlan_hdr'\n   43 |         if (vlan->h_proto == bpf_htons(ETH_P_IP))\n      |             ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:40:16: note: forward declaration of 'struct vlan_hdr'\n   40 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:45:22: error: incomplete definition of type 'struct vlan_hdr'\n   45 |         else if (vlan->h_proto == bpf_htons(ETH_P_IPV6))\n      |                  ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:40:16: note: forward declaration of 'struct vlan_hdr'\n   40 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:41:27: error: arithmetic on a pointer to an incomplete type 'struct vlan_hdr'\n   41 |         if ((void *)(vlan + 1) > data_end)\n      |                      ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:40:16: note: forward declaration of 'struct vlan_hdr'\n   40 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:43:17: error: incomplete definition of type 'struct vlan_hdr'\n   43 |         if (vlan->h_proto == bpf_htons(ETH_P_IP))\n      |             ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:40:16: note: forward declaration of 'struct vlan_hdr'\n   40 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:45:22: error: incomplete definition of type 'struct vlan_hdr'\n   45 |         else if (vlan->h_proto == bpf_htons(ETH_P_IPV6))\n      |                  ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/pit_l3_vlan_dualstack_telemetry/sample-0.c:40:16: note: forward declaration of 'struct vlan_hdr'\n   40 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\n3 errors generated."
+}

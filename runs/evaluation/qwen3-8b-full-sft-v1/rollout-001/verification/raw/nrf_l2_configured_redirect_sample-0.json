@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "nrf_l2_configured_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l2_configured_redirect/sample-0.c",
+  "source_sha256": "4fb0f5a912e27099615ffc332ec74d5a6a7b29ac17a50797bad698c814ef559b",
+  "timestamp": "2026-08-30T18:37:41.084796+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l2_configured_redirect/sample-0.c:25:18: error: use of undeclared identifier 'uintptr_t'\n   25 |     if ((void *)(uintptr_t)data + sizeof(struct ethhdr) > data_end)\n      |                  ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l2_configured_redirect/sample-0.c:32:64: error: cannot take the address of an rvalue of type 'int'\n   32 |     __u32 *ifindex = bpf_map_lookup_elem(&forwarding_config_2, &0);\n      |                                                                ^~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l2_configured_redirect/sample-0.c:25:18: error: use of undeclared identifier 'uintptr_t'\n   25 |     if ((void *)(uintptr_t)data + sizeof(struct ethhdr) > data_end)\n      |                  ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l2_configured_redirect/sample-0.c:32:64: error: cannot take the address of an rvalue of type 'int'\n   32 |     __u32 *ifindex = bpf_map_lookup_elem(&forwarding_config_2, &0);\n      |                                                                ^~\n2 errors generated."
+}

@@ -1,0 +1,55 @@
+{
+  "rollout_dir": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001",
+  "total_tasks": 36,
+  "total_candidates": 36,
+  "metrics": {
+    "output_compliance_rate": 0.0,
+    "compilation_pass_rate": 0.6944444444444444,
+    "kernel_verifier_pass_rate": 0.6111111111111112,
+    "behavioral_pass_rate": 0.5555555555555556,
+    "pass_at_1": {
+      "passed_tasks": 20,
+      "total_tasks": 36,
+      "rate": 0.5555555555555556
+    },
+    "pass_at_4": {
+      "passed_tasks": 20,
+      "total_tasks": 36,
+      "rate": 0.5555555555555556
+    }
+  },
+  "breakdowns": {
+    "by_category": {
+      "unknown": {
+        "total": 36,
+        "compliant": 0,
+        "compile": 25,
+        "verifier": 22,
+        "passed": 20
+      }
+    },
+    "by_difficulty": {
+      "level_1": {
+        "total": 12,
+        "compliant": 0,
+        "compile": 9,
+        "verifier": 9,
+        "passed": 9
+      },
+      "level_2": {
+        "total": 12,
+        "compliant": 0,
+        "compile": 11,
+        "verifier": 10,
+        "passed": 8
+      },
+      "level_3": {
+        "total": 12,
+        "compliant": 0,
+        "compile": 5,
+        "verifier": 3,
+        "passed": 3
+      }
+    }
+  }
+}

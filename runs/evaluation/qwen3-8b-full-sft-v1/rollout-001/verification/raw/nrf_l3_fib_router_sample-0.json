@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_fib_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c",
+  "source_sha256": "37cff7750a8c8f1019626c2e92414fe26a4b30a381016ae2e5b12706450c2ba0",
+  "timestamp": "2026-08-30T18:37:38.670839+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:34:16: error: no member named 'ipv4' in 'struct bpf_fib_lookup'\n   34 |     fib_params.ipv4.src = ip->saddr;\n      |     ~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:35:16: error: no member named 'ipv4' in 'struct bpf_fib_lookup'\n   35 |     fib_params.ipv4.dst = ip->daddr;\n      |     ~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:36:16: error: no member named 'protocol' in 'struct bpf_fib_lookup'\n   36 |     fib_params.protocol = ip->protocol;\n      |     ~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:47:29: warning: operator '>>' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n   47 |     ip->check = (__u16)csum + (__u16)csum >> 16;\n      |                 ~~~~~~~~~~~~^~~~~~~~~~~~~ ~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:47:29: note: place parentheses around the '+' expression to silence this warning\n   47 |     ip->check = (__u16)csum + (__u16)csum >> 16;\n      |                             ^\n      |                 (                        )\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:49:20: warning: address of array 'fib_params.dmac' will always evaluate to 'true' [-Wpointer-bool-conversion]\n   49 |     if (fib_params.dmac) {\n      |     ~~  ~~~~~~~~~~~^~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:51:24: warning: address of array 'fib_params.smac' will always evaluate to 'true' [-Wpointer-bool-conversion]\n   51 |         if (fib_params.smac) {\n      |         ~~  ~~~~~~~~~~~^~~~\n3 warnings and 3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:34:16: error: no member named 'ipv4' in 'struct bpf_fib_lookup'\n   34 |     fib_params.ipv4.src = ip->saddr;\n      |     ~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:35:16: error: no member named 'ipv4' in 'struct bpf_fib_lookup'\n   35 |     fib_params.ipv4.dst = ip->daddr;\n      |     ~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:36:16: error: no member named 'protocol' in 'struct bpf_fib_lookup'\n   36 |     fib_params.protocol = ip->protocol;\n      |     ~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:47:29: warning: operator '>>' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n   47 |     ip->check = (__u16)csum + (__u16)csum >> 16;\n      |                 ~~~~~~~~~~~~^~~~~~~~~~~~~ ~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:47:29: note: place parentheses around the '+' expression to silence this warning\n   47 |     ip->check = (__u16)csum + (__u16)csum >> 16;\n      |                             ^\n      |                 (                        )\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:49:20: warning: address of array 'fib_params.dmac' will always evaluate to 'true' [-Wpointer-bool-conversion]\n   49 |     if (fib_params.dmac) {\n      |     ~~  ~~~~~~~~~~~^~~~\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_fib_router/sample-0.c:51:24: warning: address of array 'fib_params.smac' will always evaluate to 'true' [-Wpointer-bool-conversion]\n   51 |         if (fib_params.smac) {\n      |         ~~  ~~~~~~~~~~~^~~~\n3 warnings and 3 errors generated."
+}

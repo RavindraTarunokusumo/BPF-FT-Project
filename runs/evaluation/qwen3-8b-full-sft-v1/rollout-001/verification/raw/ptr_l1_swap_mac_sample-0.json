@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "ptr_l1_swap_mac",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/ptr_l1_swap_mac/sample-0.c",
+  "source_sha256": "c022e0771a0c3afe047be3f1c4c390224d654bca20f9a0319a547ed94e80371e",
+  "timestamp": "2026-08-30T18:37:39.499995+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/ptr_l1_swap_mac/sample-0.c:22:14: error: no member named 'h_hdr_len' in 'struct ethhdr'\n   22 |     if (eth->h_hdr_len < sizeof(struct ethhdr))\n      |         ~~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/ptr_l1_swap_mac/sample-0.c:22:14: error: no member named 'h_hdr_len' in 'struct ethhdr'\n   22 |     if (eth->h_hdr_len < sizeof(struct ethhdr))\n      |         ~~~  ^\n1 error generated."
+}

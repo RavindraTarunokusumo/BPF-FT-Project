@@ -1,0 +1,48 @@
+{
+  "baseline_calibration": {
+    "total_tasks": 36,
+    "pass1_passed": 3,
+    "pass1_rate": 0.08333333333333333,
+    "repair1_passed": 3,
+    "repair1_total_eligible": 33,
+    "repair1_rate": 0.09090909090909091,
+    "total_passed_with_repair": 6,
+    "total_pass_rate": 0.16666666666666666
+  },
+  "sft_synthesis": {
+    "total_tasks": 36,
+    "total_candidates": 36,
+    "compliant_count": 0,
+    "compliant_rate": 0.0,
+    "compile_count": 25,
+    "compile_rate": 0.6944444444444444,
+    "verifier_count": 22,
+    "verifier_rate": 0.6111111111111112,
+    "behavioral_count": 20,
+    "behavioral_rate": 0.5555555555555556,
+    "pass1_count": 20,
+    "pass1_rate": 0.5555555555555556,
+    "by_category": {
+      "unknown": {
+        "total": 36,
+        "passed": 20
+      }
+    },
+    "by_difficulty": {
+      "level_1": {
+        "total": 12,
+        "passed": 9
+      },
+      "level_2": {
+        "total": 12,
+        "passed": 8
+      },
+      "level_3": {
+        "total": 12,
+        "passed": 3
+      }
+    }
+  },
+  "base_synthesis": null,
+  "sft_repair": null
+}

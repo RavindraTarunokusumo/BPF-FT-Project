@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "nrf_l1_udp_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l1_udp_reflector/sample-0.c",
+  "source_sha256": "a17a14aaa50c35ac7200168127a4580fe7d81009bff6238984ae8a86891ef81d",
+  "timestamp": "2026-08-30T18:37:42.197329+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l1_udp_reflector/sample-0.c:41:19: error: array type 'unsigned char[6]' is not assignable\n   41 |     eth->h_source = eth->h_dest;\n      |     ~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l1_udp_reflector/sample-0.c:42:17: error: array type 'unsigned char[6]' is not assignable\n   42 |     eth->h_dest = tmp;\n      |     ~~~~~~~~~~~ ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l1_udp_reflector/sample-0.c:41:19: error: array type 'unsigned char[6]' is not assignable\n   41 |     eth->h_source = eth->h_dest;\n      |     ~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l1_udp_reflector/sample-0.c:42:17: error: array type 'unsigned char[6]' is not assignable\n   42 |     eth->h_dest = tmp;\n      |     ~~~~~~~~~~~ ^\n2 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_flow_load_balancer",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_flow_load_balancer/sample-0.c",
+  "source_sha256": "aef267e48a2b7b0e105c6f0e8149c8656d4cc992842c6efb7d51c0674513bd4d",
+  "timestamp": "2026-08-30T18:37:41.017118+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_flow_load_balancer/sample-0.c:51:70: error: no member named 'tlc' in 'struct iphdr'\n   51 |         unsigned int tcp_hdr_len = ip->protocol == IPPROTO_TCP ? ip->tlc : 0;\n      |                                                                  ~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-001/candidates/nrf_l3_flow_load_balancer/sample-0.c:51:70: error: no member named 'tlc' in 'struct iphdr'\n   51 |         unsigned int tcp_hdr_len = ip->protocol == IPPROTO_TCP ? ip->tlc : 0;\n      |                                                                  ~~  ^\n1 error generated."
+}
