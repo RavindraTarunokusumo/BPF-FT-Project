@@ -33,4 +33,3 @@ int xdp_transform_ptr_l1_set_source_mac(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

@@ -58,16 +58,18 @@ def compute_sha256_str(content: str) -> str:
 
 def check_output_compliance(raw_text: str) -> Dict[str, Any]:
     """Checks if the raw output adheres strictly to the C source contract."""
-    has_fences = "```" in raw_text
-    has_include = "#include" in raw_text
-    has_sec = "SEC(" in raw_text
-    has_license = "char _license[]" in raw_text or "char LICENSE[]" in raw_text or "LICENSE" in raw_text
-    has_xdp = "xdp" in raw_text.lower() or "XDP_" in raw_text
+    text = re.sub(r"<think>.*?</think>", "", raw_text, flags=re.DOTALL).strip()
+    text = re.sub(r"<\|.*?\|>", "", text).strip()
 
-    fault_match = bool(re.search(r"(\bFAULT:\b|\/\/\s*FAULT:|\/\*\s*FAULT:|\bTODO:\b|\bFIXME:\b)", raw_text, re.IGNORECASE))
+    has_fences = "```" in text
+    has_include = "#include" in text
+    has_sec = "SEC(" in text
+    has_license = "char _license[]" in text or "char LICENSE[]" in text or "LICENSE" in text
+    has_xdp = "xdp" in text.lower() or "XDP_" in text
 
-    stripped = raw_text.strip()
-    starts_with_code = stripped.startswith("#include") or stripped.startswith("/*") or stripped.startswith("//")
+    fault_match = bool(re.search(r"(\bFAULT:\b|\/\/\s*FAULT:|\/\*\s*FAULT:|\bTODO:\b|\bFIXME:\b)", text, re.IGNORECASE))
+
+    starts_with_code = text.startswith("#include") or text.startswith("/*") or text.startswith("//")
 
     compliant = (
         not has_fences
@@ -92,11 +94,17 @@ def check_output_compliance(raw_text: str) -> Dict[str, Any]:
 
 
 def extract_c_source(raw_text: str) -> str:
-    """Extracts C code from response, stripping fences if present for candidate storage."""
+    """Extracts C code from response, stripping fences and ChatML tokens if present for candidate storage."""
     text = raw_text.strip()
+    # Strip thinking blocks if any
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+    # Strip ChatML special tokens
+    text = re.sub(r"<\|im_end\|>.*$", "", text, flags=re.DOTALL).strip()
+    text = re.sub(r"<\|.*?\|>", "", text).strip()
     match = re.search(r"```(?:c|C|cpp)?\s*(.*?)\s*```", text, re.DOTALL)
     if match:
         text = match.group(1).strip()
+    text = re.sub(r"<\|.*?\|>", "", text).strip()
     return text + "\n"
 
 

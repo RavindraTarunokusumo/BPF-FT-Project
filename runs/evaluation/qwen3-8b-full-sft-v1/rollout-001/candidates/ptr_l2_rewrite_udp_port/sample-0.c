@@ -50,4 +50,3 @@ int xdp_transform_ptr_l2_rewrite_udp_port(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

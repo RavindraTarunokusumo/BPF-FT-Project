@@ -47,4 +47,3 @@ int xdp_filter_pfs_l1_icmp_echo_drop(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

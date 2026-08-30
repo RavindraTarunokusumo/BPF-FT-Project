@@ -48,4 +48,3 @@ int xdp_filter_pfs_l2_vlan_tcp443(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

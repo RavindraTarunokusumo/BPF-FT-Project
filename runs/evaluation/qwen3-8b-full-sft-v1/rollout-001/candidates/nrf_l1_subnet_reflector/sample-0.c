@@ -39,4 +39,3 @@ int xdp_route_nrf_l1_subnet_reflector(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

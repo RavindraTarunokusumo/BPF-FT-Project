@@ -45,4 +45,3 @@ int xdp_reflect_nrf_l1_udp(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

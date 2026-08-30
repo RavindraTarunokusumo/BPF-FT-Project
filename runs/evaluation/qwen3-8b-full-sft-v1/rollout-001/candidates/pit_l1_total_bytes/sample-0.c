@@ -33,4 +33,3 @@ int xdp_telemetry_pit_l1_total_bytes(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

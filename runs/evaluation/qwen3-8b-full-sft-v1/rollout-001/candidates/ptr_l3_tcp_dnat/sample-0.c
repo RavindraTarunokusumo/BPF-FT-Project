@@ -65,4 +65,3 @@ int xdp_transform_ptr_l3_tcp_dnat(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

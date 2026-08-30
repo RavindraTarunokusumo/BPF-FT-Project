@@ -89,4 +89,3 @@ int xdp_policy_router_nrf_l3(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

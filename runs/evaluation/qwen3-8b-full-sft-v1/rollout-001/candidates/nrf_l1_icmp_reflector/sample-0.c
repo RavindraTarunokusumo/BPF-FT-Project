@@ -46,4 +46,3 @@ int xdp_icmp_reflector(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

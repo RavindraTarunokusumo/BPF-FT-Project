@@ -50,4 +50,3 @@ int xdp_telemetry_pit_l2_protocol_counters(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

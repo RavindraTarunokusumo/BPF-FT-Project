@@ -61,4 +61,3 @@ int xdp_transform_ptr_l3_icmp_echo_reply(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

@@ -53,4 +53,3 @@ int xdp_quota_pfs_l3_source_packet_quota(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

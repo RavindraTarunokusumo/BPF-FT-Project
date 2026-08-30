@@ -51,4 +51,3 @@ int xdp_blocklist_pfs_l3_configured(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

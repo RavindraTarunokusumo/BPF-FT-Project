@@ -49,4 +49,3 @@ int xdp_route_nrf_l2_protocol_redirect(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

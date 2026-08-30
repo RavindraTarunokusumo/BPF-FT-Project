@@ -42,4 +42,3 @@ int xdp_transform_ptr_l2_decrement_ttl(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>

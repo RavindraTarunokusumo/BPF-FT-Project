@@ -57,4 +57,3 @@ int xdp_router_nrf_l3_fib(struct xdp_md *ctx) {
 }
 
 char _license[] SEC("license") = "GPL";
-<|im_end|>
