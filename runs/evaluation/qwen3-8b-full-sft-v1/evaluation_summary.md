@@ -12,7 +12,10 @@
 ## SFT Category Breakdown (Pass@1)
 | Category | Tasks | Passed | Pass Rate |
 |---|---|---|---|
-| `unknown` | 36 | 20 | 55.6% |
+| `network_routing_forwarding` | 9 | 3 | 33.3% |
+| `packet_filtering_security` | 9 | 4 | 44.4% |
+| `packet_inspection_telemetry` | 9 | 8 | 88.9% |
+| `protocol_transformation` | 9 | 5 | 55.6% |
 
 ## SFT Difficulty Breakdown (Pass@1)
 | Difficulty | Tasks | Passed | Pass Rate |

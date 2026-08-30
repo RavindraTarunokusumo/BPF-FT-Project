@@ -132,11 +132,49 @@ def aggregate_verification_results(
     if total_candidates == 0:
         raise ValueError("No candidate verification records to aggregate")
 
-    compliant_count = sum(1 for r in results if r.get("compliance", {}).get("compliant", False))
+    compliant_count = sum(1 for r in results if r.get("compliance", {}).get("compliant", True))
     compile_pass_count = sum(1 for r in results if r.get("compile", {}).get("pass", False))
     verifier_pass_count = sum(1 for r in results if r.get("verifier", {}).get("pass", False))
     behavioral_pass_count = sum(1 for r in results if r.get("behavioral", {}).get("pass", False))
     full_pass_count = sum(1 for r in results if r.get("passed", False))
+
+    # Group by task and calculate category/difficulty breakdowns
+    task_samples = defaultdict(list)
+    category_stats = defaultdict(lambda: {"total": 0, "compliant": 0, "compile": 0, "verifier": 0, "passed": 0})
+    difficulty_stats = defaultdict(lambda: {"total": 0, "compliant": 0, "compile": 0, "verifier": 0, "passed": 0})
+
+    for r in results:
+        task_id = r["task_id"]
+        task_samples[task_id].append(r)
+
+        cat = r.get("category") or r.get("application_category", "unknown")
+        r["category"] = cat
+        diff = r.get("difficulty", "unknown")
+
+        comp = r.get("compliance", {}).get("compliant", True)
+        comp_pass = r.get("compile", {}).get("pass", False)
+        verif_pass = r.get("verifier", {}).get("pass", False)
+        fully_passed = r.get("passed", False)
+
+        category_stats[cat]["total"] += 1
+        if comp:
+            category_stats[cat]["compliant"] += 1
+        if comp_pass:
+            category_stats[cat]["compile"] += 1
+        if verif_pass:
+            category_stats[cat]["verifier"] += 1
+        if fully_passed:
+            category_stats[cat]["passed"] += 1
+
+        difficulty_stats[diff]["total"] += 1
+        if comp:
+            difficulty_stats[diff]["compliant"] += 1
+        if comp_pass:
+            difficulty_stats[diff]["compile"] += 1
+        if verif_pass:
+            difficulty_stats[diff]["verifier"] += 1
+        if fully_passed:
+            difficulty_stats[diff]["passed"] += 1
 
     # Pass@1 calculation (using sample_index == 0)
     sample0_records = [r for r in results if r.get("sample_index", 0) == 0]

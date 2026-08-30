@@ -58,7 +58,7 @@ def compute_rollout_metrics(records: List[Dict[str, Any]]) -> Dict[str, Any]:
     diff_stats: Dict[str, Dict[str, int]] = defaultdict(lambda: {"total": 0, "passed": 0})
 
     for r in sample0:
-        cat = r.get("category", "unknown")
+        cat = r.get("category") or r.get("application_category", "unknown")
         diff = r.get("difficulty", "unknown")
         cat_stats[cat]["total"] += 1
         diff_stats[diff]["total"] += 1

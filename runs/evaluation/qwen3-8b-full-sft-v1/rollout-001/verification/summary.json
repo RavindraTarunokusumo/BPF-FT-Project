@@ -1,9 +1,9 @@
 {
-  "rollout_dir": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001",
+  "rollout_dir": "runs\\evaluation\\qwen3-8b-full-sft-v1\\rollout-001",
   "total_tasks": 36,
   "total_candidates": 36,
   "metrics": {
-    "output_compliance_rate": 0.0,
+    "output_compliance_rate": 1.0,
     "compilation_pass_rate": 0.6944444444444444,
     "kernel_verifier_pass_rate": 0.6111111111111112,
     "behavioral_pass_rate": 0.5555555555555556,
@@ -20,12 +20,33 @@
   },
   "breakdowns": {
     "by_category": {
-      "unknown": {
-        "total": 36,
+      "network_routing_forwarding": {
+        "total": 9,
         "compliant": 0,
-        "compile": 25,
-        "verifier": 22,
-        "passed": 20
+        "compile": 4,
+        "verifier": 3,
+        "passed": 3
+      },
+      "packet_filtering_security": {
+        "total": 9,
+        "compliant": 0,
+        "compile": 8,
+        "verifier": 6,
+        "passed": 4
+      },
+      "packet_inspection_telemetry": {
+        "total": 9,
+        "compliant": 0,
+        "compile": 8,
+        "verifier": 8,
+        "passed": 8
+      },
+      "protocol_transformation": {
+        "total": 9,
+        "compliant": 0,
+        "compile": 5,
+        "verifier": 5,
+        "passed": 5
       }
     },
     "by_difficulty": {

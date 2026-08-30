@@ -23,9 +23,21 @@
     "pass1_count": 20,
     "pass1_rate": 0.5555555555555556,
     "by_category": {
-      "unknown": {
-        "total": 36,
-        "passed": 20
+      "network_routing_forwarding": {
+        "total": 9,
+        "passed": 3
+      },
+      "packet_filtering_security": {
+        "total": 9,
+        "passed": 4
+      },
+      "packet_inspection_telemetry": {
+        "total": 9,
+        "passed": 8
+      },
+      "protocol_transformation": {
+        "total": 9,
+        "passed": 5
       }
     },
     "by_difficulty": {
