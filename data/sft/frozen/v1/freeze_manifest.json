@@ -1,0 +1,172 @@
+{
+  "version": "v1",
+  "split_algorithm_version": "bpf_guardian_stratified_task_split_v1",
+  "configuration_fingerprint": "b3f1995712679b25",
+  "source_commit_sha": "13d12eae02bcef595d8fa1e54afc292748f57780",
+  "source_file_path": "data/sft/sft_dataset_full.jsonl",
+  "source_sha256": "18d02d59cff20aa5d4553fb3e2eebc570b14a7eb10e99f07fb7b216b7c0dc876",
+  "train_file_path": "data/sft/frozen/v1/train.jsonl",
+  "train_sha256": "71dd50816dfa752591546b4c4f85ce2d3f5793b07b99c786dc211879841daa80",
+  "validation_file_path": "data/sft/frozen/v1/validation.jsonl",
+  "validation_sha256": "2a61c686c0c862cac56ff4c447edee6f3f4906f08da528bc0f258b3a9ad3f39e",
+  "split_seed": 42,
+  "target_val_ratio": 0.1,
+  "renderer_name": "qwen3_disable_thinking",
+  "model_name": "Qwen/Qwen3-8B",
+  "max_length": 4096,
+  "excluded_benchmark_ids": [
+    "nrf_l1_icmp_reflector",
+    "nrf_l1_subnet_reflector",
+    "nrf_l1_udp_reflector",
+    "nrf_l2_configured_redirect",
+    "nrf_l2_prefix_redirect",
+    "nrf_l2_protocol_redirect",
+    "nrf_l3_fib_router",
+    "nrf_l3_flow_load_balancer",
+    "nrf_l3_policy_router",
+    "pfs_l1_icmp_echo_drop",
+    "pfs_l1_tcp23_drop",
+    "pfs_l1_udp53_drop",
+    "pfs_l2_source_subnet_exception",
+    "pfs_l2_syn_privileged_ports",
+    "pfs_l2_vlan_tcp443",
+    "pfs_l3_configured_blocklist",
+    "pfs_l3_multivector_guard",
+    "pfs_l3_source_packet_quota",
+    "pit_l1_ipv4_split",
+    "pit_l1_total_bytes",
+    "pit_l1_total_packets",
+    "pit_l2_length_histogram",
+    "pit_l2_protocol_counters",
+    "pit_l2_tcp_flag_counters",
+    "pit_l3_ipv4_flow_counter",
+    "pit_l3_tcp_flow_outcomes",
+    "pit_l3_vlan_dualstack_telemetry",
+    "ptr_l1_set_destination_mac",
+    "ptr_l1_set_source_mac",
+    "ptr_l1_swap_mac",
+    "ptr_l2_decrement_ttl",
+    "ptr_l2_rewrite_ipv4_destination",
+    "ptr_l2_rewrite_udp_port",
+    "ptr_l3_icmp_echo_reply",
+    "ptr_l3_tcp_dnat",
+    "ptr_l3_vlan_pop"
+  ],
+  "row_counts": {
+    "train": 1014,
+    "validation": 106,
+    "total": 1120
+  },
+  "unique_task_counts": {
+    "train": 578,
+    "validation": 62,
+    "total": 640
+  },
+  "category_distribution": {
+    "train": {
+      "network_routing_forwarding": 256,
+      "packet_filtering_security": 250,
+      "packet_inspection_telemetry": 254,
+      "protocol_transformation": 254
+    },
+    "validation": {
+      "network_routing_forwarding": 24,
+      "packet_filtering_security": 30,
+      "packet_inspection_telemetry": 26,
+      "protocol_transformation": 26
+    },
+    "total": {
+      "network_routing_forwarding": 280,
+      "packet_filtering_security": 280,
+      "packet_inspection_telemetry": 280,
+      "protocol_transformation": 280
+    }
+  },
+  "difficulty_distribution": {
+    "train": {
+      "level_1": 404,
+      "level_2": 406,
+      "level_3": 204
+    },
+    "validation": {
+      "level_1": 44,
+      "level_2": 42,
+      "level_3": 20
+    },
+    "total": {
+      "level_1": 448,
+      "level_2": 448,
+      "level_3": 224
+    }
+  },
+  "synthesis_repair_distribution": {
+    "train": {
+      "repair": 436,
+      "synthesis": 578
+    },
+    "validation": {
+      "repair": 44,
+      "synthesis": 62
+    },
+    "total": {
+      "repair": 480,
+      "synthesis": 640
+    }
+  },
+  "template_family_distribution": {
+    "train": {
+      "nrf_l2_mac_swap": 102,
+      "nrf_next_hop_routing_map": 102,
+      "nrf_ecmp_5tuple_load_balancer": 52,
+      "pfs_tcp_port_filter": 24,
+      "pfs_udp_port_filter": 24,
+      "pfs_ip_protocol_filter": 12,
+      "pfs_tcp_flags_filter": 13,
+      "pfs_ip_ttl_or_size_filter": 25,
+      "pfs_map_ip_denylist": 101,
+      "pfs_stateful_conn_tracker": 51,
+      "pit_packet_size_classifier": 102,
+      "pit_protocol_histogram_map": 101,
+      "pit_flow_telemetry_tracker": 51,
+      "ptr_ip_dscp_remarking": 102,
+      "ptr_stateless_snat_map": 102,
+      "ptr_stateful_napt_rewriter": 50
+    },
+    "validation": {
+      "nrf_l2_mac_swap": 10,
+      "nrf_next_hop_routing_map": 10,
+      "nrf_ecmp_5tuple_load_balancer": 4,
+      "pfs_tcp_port_filter": 4,
+      "pfs_udp_port_filter": 4,
+      "pfs_ip_protocol_filter": 2,
+      "pfs_ip_ttl_or_size_filter": 3,
+      "pfs_map_ip_denylist": 11,
+      "pfs_stateful_conn_tracker": 5,
+      "pit_packet_size_classifier": 10,
+      "pit_protocol_histogram_map": 11,
+      "pit_flow_telemetry_tracker": 5,
+      "ptr_ip_dscp_remarking": 10,
+      "ptr_stateless_snat_map": 10,
+      "ptr_stateful_napt_rewriter": 6,
+      "pfs_tcp_flags_filter": 1
+    },
+    "total": {
+      "nrf_l2_mac_swap": 112,
+      "nrf_next_hop_routing_map": 112,
+      "nrf_ecmp_5tuple_load_balancer": 56,
+      "pfs_tcp_port_filter": 28,
+      "pfs_udp_port_filter": 28,
+      "pfs_ip_protocol_filter": 14,
+      "pfs_tcp_flags_filter": 14,
+      "pfs_ip_ttl_or_size_filter": 28,
+      "pfs_map_ip_denylist": 112,
+      "pfs_stateful_conn_tracker": 56,
+      "pit_packet_size_classifier": 112,
+      "pit_protocol_histogram_map": 112,
+      "pit_flow_telemetry_tracker": 56,
+      "ptr_ip_dscp_remarking": 112,
+      "ptr_stateless_snat_map": 112,
+      "ptr_stateful_napt_rewriter": 56
+    }
+  }
+}

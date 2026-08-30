@@ -1,0 +1,18 @@
+[project]
+name = "bpf-guardian"
+version = "0.1.0"
+description = "BPF-Guardian: Fine-Tuning Qwen3-8B for Linux XDP/eBPF Synthesis and Repair"
+readme = "training/README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "tinker>=0.25.0",
+    "tinker-cookbook>=0.5.5",
+    "datasets>=3.0.0",
+    "chz>=0.2.0",
+    "pytest>=8.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
