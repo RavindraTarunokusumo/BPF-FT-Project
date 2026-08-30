@@ -26,6 +26,18 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+# Safely load .env if present without printing or logging secrets
+env_file = PROJECT_ROOT / ".env"
+if env_file.is_file():
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            k = k.strip()
+            v = v.strip().strip("\"'")
+            if k not in os.environ:
+                os.environ[k] = v
+
 import chz
 import tinker
 import tinker_cookbook

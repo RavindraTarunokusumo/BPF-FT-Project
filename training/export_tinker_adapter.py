@@ -8,16 +8,27 @@ Converts Tinker sampler checkpoint into standard Hugging Face PEFT LoRA adapter:
 4. Outputs to artifacts/qwen3-8b-bpf-guardian/.
 """
 
-from __future__ import annotations
-
 import argparse
 import json
 import os
+import shutil
 import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+# Safely load .env if present without printing or logging secrets
+env_file = PROJECT_ROOT / ".env"
+if env_file.is_file():
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            k = k.strip()
+            v = v.strip().strip("\"'")
+            if k not in os.environ:
+                os.environ[k] = v
 
 DEFAULT_BASE_MODEL = "Qwen/Qwen3-8B"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "artifacts" / "qwen3-8b-bpf-guardian"
@@ -132,23 +143,37 @@ def export_adapter(
         if not checkpoint_url.startswith("tinker://"):
             raise ValueError(f"Invalid Tinker checkpoint URL: '{checkpoint_url}' (must start with tinker://)")
 
-        from tinker_cookbook import weights
-
-        raw_download_dir = output_dir / "raw_tinker_adapter"
+        raw_download_dir = output_dir.parent / f"{output_dir.name}_tinker_raw"
         raw_download_dir.mkdir(parents=True, exist_ok=True)
 
-        print(f"[+] Downloading sampler checkpoint from Tinker: {checkpoint_url}...")
-        adapter_dir = weights.download(
-            tinker_path=checkpoint_url,
-            output_dir=str(raw_download_dir),
-        )
+        if (raw_download_dir / "adapter_model.safetensors").is_file() and (raw_download_dir / "adapter_config.json").is_file():
+            print(f"[+] Found existing downloaded weights at {raw_download_dir}.")
+            adapter_dir = str(raw_download_dir)
+        else:
+            print(f"[+] Downloading sampler checkpoint from Tinker: {checkpoint_url}...")
+            adapter_dir = weights.download(
+                tinker_path=checkpoint_url,
+                output_dir=str(raw_download_dir),
+            )
 
-        print(f"[+] Converting Tinker weights to PEFT format...")
-        weights.build_lora_adapter(
-            base_model=base_model,
-            adapter_path=adapter_dir,
-            output_path=str(output_dir),
-        )
+        output_dir.mkdir(parents=True, exist_ok=True)
+        raw_adapter_path = Path(adapter_dir)
+        raw_config_path = raw_adapter_path / "adapter_config.json"
+        raw_weights_path = raw_adapter_path / "adapter_model.safetensors"
+
+        # Load and finalize adapter_config.json
+        if raw_config_path.is_file():
+            cfg = json.loads(raw_config_path.read_text(encoding="utf-8"))
+            cfg["base_model_name_or_path"] = base_model
+            cfg["inference_mode"] = True
+            (output_dir / "adapter_config.json").write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        else:
+            raise FileNotFoundError(f"Missing adapter_config.json in downloaded checkpoint: {adapter_dir}")
+
+        if raw_weights_path.is_file():
+            shutil.copyfile(raw_weights_path, output_dir / "adapter_model.safetensors")
+        else:
+            raise FileNotFoundError(f"Missing adapter_model.safetensors in downloaded checkpoint: {adapter_dir}")
 
     print("[+] Validating exported PEFT adapter...")
     validation_info = validate_exported_peft_adapter(output_dir, base_model, lora_rank)

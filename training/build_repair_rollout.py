@@ -175,12 +175,15 @@ async def run_repair_rollout(
                 seed=seed,
                 stop=stop_seqs,
             )
-            future = await sampling_client.sample_async(prompt=prompt_model_input, params=sampling_params)
-            sample_result = await future.result_async()
+            sample_result = await sampling_client.sample_async(
+                prompt=prompt_model_input,
+                num_samples=1,
+                sampling_params=sampling_params,
+            )
             sampled_seq = sample_result.sequences[0]
-            token_ids = sampled_seq.tokens
-            raw_text = sampled_seq.text
-            termination = getattr(sampled_seq, "finish_reason", "STOP_SEQUENCE")
+            token_ids = list(sampled_seq.tokens)
+            raw_text = renderer.tokenizer.decode(token_ids)
+            termination = "STOP_SEQUENCE"
 
         compliance = check_output_compliance(raw_text)
         extracted_c = extract_c_source(raw_text)
