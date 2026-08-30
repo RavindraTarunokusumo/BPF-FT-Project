@@ -3,6 +3,8 @@
 # Executes Clang BPF compilation, bpftool kernel verifier loading, and packet tests on Linux VPS.
 set -euo pipefail
 
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:/root/.cargo/bin:/root/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}"
+
 if [[ $# -lt 1 ]]; then
     echo "Usage: $0 <rollout_directory> [extra import args...]" >&2
     echo "Example: $0 runs/evaluation/qwen3-8b-sft/rollout-001" >&2
