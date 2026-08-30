@@ -94,16 +94,32 @@ def check_output_compliance(raw_text: str) -> Dict[str, Any]:
 
 
 def extract_c_source(raw_text: str) -> str:
-    """Extracts C code from response, stripping fences and ChatML tokens if present for candidate storage."""
+    """Extracts C code from response, stripping fences, thinking preambles, and ChatML tokens."""
     text = raw_text.strip()
     # Strip thinking blocks if any
     text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
     # Strip ChatML special tokens
     text = re.sub(r"<\|im_end\|>.*$", "", text, flags=re.DOTALL).strip()
     text = re.sub(r"<\|.*?\|>", "", text).strip()
+
     match = re.search(r"```(?:c|C|cpp)?\s*(.*?)\s*```", text, re.DOTALL)
     if match:
-        text = match.group(1).strip()
+        code = match.group(1).strip()
+        code = re.sub(r"<\|.*?\|>", "", code).strip()
+        return code + "\n"
+
+    include_match = re.search(r"((?:/\*.*?\*/\s*|//.*?\n\s*)*#include\s+<.*)", text, re.DOTALL)
+    if include_match:
+        code = include_match.group(1).strip()
+        code = re.sub(r"<\|.*?\|>", "", code).strip()
+        return code + "\n"
+
+    sec_match = re.search(r"(SEC\s*\(\s*\"xdp\"\s*\).*)", text, re.DOTALL)
+    if sec_match:
+        code = sec_match.group(1).strip()
+        code = re.sub(r"<\|.*?\|>", "", code).strip()
+        return code + "\n"
+
     text = re.sub(r"<\|.*?\|>", "", text).strip()
     return text + "\n"
 

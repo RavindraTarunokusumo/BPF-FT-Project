@@ -1,0 +1,41 @@
+#include <linux/bpf.h>
+#include <linux/if_ether.h>
+#include <linux/ip.h>
+#include <linux/ipv6.h>
+#include <linux/tcp.h>
+#include <linux/udp.h>
+#include <linux/icmp.h>
+#include <linux/in.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
+
+SEC("xdp")
+int xdp_subnet_reflector(struct xdp_md *ctx) {
+    void *data = (void *)(long)ctx->data;
+    void *data_end = (void *)(long)ctx->data_end;
+
+    struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+        return XDP_PASS;
+
+    iphdr *ip = (void *)(eth + 1);
+    if ((void *)(ip + 1) > data_end)
+        return XDP_PASS;
+
+    __u32 daddr = bpf_ntohl(ip->daddr);
+    if ((daddr & 0xFFFFFF00) == 0xC0000200) {
+        __u8 tmp[ETH_ALEN];
+        __builtin_memcpy(tmp, eth->h_source, ETH_ALEN);
+        __builtin_memcpy(eth->h_source, eth->h_dest, ETH_ALEN);
+        __builtin_memcpy(eth->h_dest, tmp, ETH_ALEN);
+        return XDP_TX;
+    }
+
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";
+}
