@@ -42,7 +42,7 @@ command -v bpftool >/dev/null 2>&1 || HAS_BPF_TOOLCHAIN=false
 if [[ "$HAS_BPF_TOOLCHAIN" == "true" ]]; then
     echo "[+] Linux BPF toolchain (clang, bpftool) detected. Running live kernel validation..."
     
-    python -c "
+    uv run python -c "
 import json
 import os
 import sys
