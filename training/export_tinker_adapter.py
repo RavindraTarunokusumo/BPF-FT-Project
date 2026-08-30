@@ -140,40 +140,55 @@ def export_adapter(
         print("[+] Creating mock PEFT adapter for testing...")
         create_mock_peft_adapter(output_dir, base_model, lora_rank)
     else:
-        if not checkpoint_url.startswith("tinker://"):
-            raise ValueError(f"Invalid Tinker checkpoint URL: '{checkpoint_url}' (must start with tinker://)")
-
         raw_download_dir = output_dir.parent / f"{output_dir.name}_tinker_raw"
         raw_download_dir.mkdir(parents=True, exist_ok=True)
 
-        if (raw_download_dir / "adapter_model.safetensors").is_file() and (raw_download_dir / "adapter_config.json").is_file():
+        found_weights = list(raw_download_dir.rglob("adapter_model.safetensors"))
+        found_configs = list(raw_download_dir.rglob("adapter_config.json"))
+
+        if found_weights and found_configs:
             print(f"[+] Found existing downloaded weights at {raw_download_dir}.")
-            adapter_dir = str(raw_download_dir)
+            raw_config_path = found_configs[0]
+            raw_weights_path = found_weights[0]
         else:
-            print(f"[+] Downloading sampler checkpoint from Tinker: {checkpoint_url}...")
-            adapter_dir = weights.download(
-                tinker_path=checkpoint_url,
-                output_dir=str(raw_download_dir),
-            )
+            print(f"[+] Requesting archive URL from Tinker for: {checkpoint_url}...")
+            import tinker
+            import urllib.request
+            import tarfile
+            import io
+
+            service_client = tinker.ServiceClient()
+            rest_client = service_client.create_rest_client()
+            fut = rest_client.get_checkpoint_archive_url_from_tinker_path(checkpoint_url)
+            archive_resp = fut.result() if hasattr(fut, "result") else fut
+            archive_url = getattr(archive_resp, "url", None)
+            if not archive_url:
+                raise RuntimeError(f"Could not retrieve archive URL for {checkpoint_url}: {archive_resp}")
+
+            print(f"[+] Downloading and extracting checkpoint archive...")
+            req = urllib.request.Request(archive_url, headers={"User-Agent": "BPF-Guardian-Exporter/1.0"})
+            with urllib.request.urlopen(req) as resp:
+                data = resp.read()
+                with tarfile.open(fileobj=io.BytesIO(data), mode="r:*") as tar:
+                    tar.extractall(path=raw_download_dir)
+
+            found_weights = list(raw_download_dir.rglob("adapter_model.safetensors"))
+            found_configs = list(raw_download_dir.rglob("adapter_config.json"))
+            if not found_weights or not found_configs:
+                raise FileNotFoundError(f"Could not find adapter files in extracted archive at {raw_download_dir}")
+
+            raw_config_path = found_configs[0]
+            raw_weights_path = found_weights[0]
 
         output_dir.mkdir(parents=True, exist_ok=True)
-        raw_adapter_path = Path(adapter_dir)
-        raw_config_path = raw_adapter_path / "adapter_config.json"
-        raw_weights_path = raw_adapter_path / "adapter_model.safetensors"
 
         # Load and finalize adapter_config.json
-        if raw_config_path.is_file():
-            cfg = json.loads(raw_config_path.read_text(encoding="utf-8"))
-            cfg["base_model_name_or_path"] = base_model
-            cfg["inference_mode"] = True
-            (output_dir / "adapter_config.json").write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
-        else:
-            raise FileNotFoundError(f"Missing adapter_config.json in downloaded checkpoint: {adapter_dir}")
+        cfg = json.loads(raw_config_path.read_text(encoding="utf-8"))
+        cfg["base_model_name_or_path"] = base_model
+        cfg["inference_mode"] = True
+        (output_dir / "adapter_config.json").write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
 
-        if raw_weights_path.is_file():
-            shutil.copyfile(raw_weights_path, output_dir / "adapter_model.safetensors")
-        else:
-            raise FileNotFoundError(f"Missing adapter_model.safetensors in downloaded checkpoint: {adapter_dir}")
+        shutil.copyfile(raw_weights_path, output_dir / "adapter_model.safetensors")
 
     print("[+] Validating exported PEFT adapter...")
     validation_info = validate_exported_peft_adapter(output_dir, base_model, lora_rank)
