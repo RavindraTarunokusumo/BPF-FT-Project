@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "nrf_l1_icmp_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_icmp_reflector/sample-0.c",
+  "source_sha256": "055e1a98b3baeffe1e8f1b52aaa7e0e65aff2deed31dd66250deabfb18341690",
+  "timestamp": "2026-08-30T21:10:24.621243+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_icmp_reflector/sample-0.c:36:19: error: array type 'unsigned char[6]' is not assignable\n   36 |     eth->h_source = eth->h_dest;\n      |     ~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_icmp_reflector/sample-0.c:37:17: error: array type 'unsigned char[6]' is not assignable\n   37 |     eth->h_dest = tmp;\n      |     ~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_icmp_reflector/sample-0.c:43:1: error: extraneous closing brace ('}')\n   43 | }\n      | ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_icmp_reflector/sample-0.c:36:19: error: array type 'unsigned char[6]' is not assignable\n   36 |     eth->h_source = eth->h_dest;\n      |     ~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_icmp_reflector/sample-0.c:37:17: error: array type 'unsigned char[6]' is not assignable\n   37 |     eth->h_dest = tmp;\n      |     ~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_icmp_reflector/sample-0.c:43:1: error: extraneous closing brace ('}')\n   43 | }\n      | ^\n3 errors generated."
+}

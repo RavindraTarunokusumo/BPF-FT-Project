@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_tcp23_drop",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/pfs_l1_tcp23_drop/sample-0.c",
+  "source_sha256": "cc3c58e52e87fe9ed1cb619de7d6e896c156d4a33c310e5ac52e79078fdbbb5e",
+  "timestamp": "2026-08-30T21:10:24.494946+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/pfs_l1_tcp23_drop/sample-0.c:27:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   27 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/pfs_l1_tcp23_drop/sample-0.c:27:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   27 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n1 error generated."
+}

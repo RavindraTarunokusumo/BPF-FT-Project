@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "nrf_l2_configured_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l2_configured_redirect/sample-0.c",
+  "source_sha256": "30674442da8e6b93113238f5ed8317f8571f64a84eeb80cc1b20d219163c4ed6",
+  "timestamp": "2026-08-30T21:10:26.127583+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l2_configured_redirect/sample-0.c:27:64: error: cannot take the address of an rvalue of type 'int'\n   27 |     __u32 *ifindex = bpf_map_lookup_elem(&forwarding_config_1, &0);\n      |                                                                ^~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l2_configured_redirect/sample-0.c:27:64: error: cannot take the address of an rvalue of type 'int'\n   27 |     __u32 *ifindex = bpf_map_lookup_elem(&forwarding_config_1, &0);\n      |                                                                ^~\n1 error generated."
+}

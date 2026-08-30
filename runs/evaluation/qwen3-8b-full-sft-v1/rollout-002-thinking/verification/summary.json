@@ -1,0 +1,76 @@
+{
+  "rollout_dir": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking",
+  "total_tasks": 36,
+  "total_candidates": 36,
+  "metrics": {
+    "output_compliance_rate": 1.0,
+    "compilation_pass_rate": 0.2777777777777778,
+    "kernel_verifier_pass_rate": 0.2222222222222222,
+    "behavioral_pass_rate": 0.2222222222222222,
+    "pass_at_1": {
+      "passed_tasks": 8,
+      "total_tasks": 36,
+      "rate": 0.2222222222222222
+    },
+    "pass_at_4": {
+      "passed_tasks": 8,
+      "total_tasks": 36,
+      "rate": 0.2222222222222222
+    }
+  },
+  "breakdowns": {
+    "by_category": {
+      "network_routing_forwarding": {
+        "total": 9,
+        "compliant": 0,
+        "compile": 1,
+        "verifier": 0,
+        "passed": 0
+      },
+      "packet_filtering_security": {
+        "total": 9,
+        "compliant": 0,
+        "compile": 1,
+        "verifier": 0,
+        "passed": 0
+      },
+      "packet_inspection_telemetry": {
+        "total": 9,
+        "compliant": 0,
+        "compile": 5,
+        "verifier": 5,
+        "passed": 5
+      },
+      "protocol_transformation": {
+        "total": 9,
+        "compliant": 0,
+        "compile": 3,
+        "verifier": 3,
+        "passed": 3
+      }
+    },
+    "by_difficulty": {
+      "level_1": {
+        "total": 12,
+        "compliant": 0,
+        "compile": 5,
+        "verifier": 4,
+        "passed": 4
+      },
+      "level_2": {
+        "total": 12,
+        "compliant": 0,
+        "compile": 2,
+        "verifier": 2,
+        "passed": 2
+      },
+      "level_3": {
+        "total": 12,
+        "compliant": 0,
+        "compile": 3,
+        "verifier": 2,
+        "passed": 2
+      }
+    }
+  }
+}

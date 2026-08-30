@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "nrf_l1_subnet_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_subnet_reflector/sample-0.c",
+  "source_sha256": "cac8eab18ad62b15dbc80619e153c8913e8f9252e3c2013b8fd8bc9018d7592f",
+  "timestamp": "2026-08-30T21:10:26.664270+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_subnet_reflector/sample-0.c:24:5: error: must use 'struct' tag to refer to type 'iphdr'\n   24 |     iphdr *ip = (void *)(eth + 1);\n      |     ^\n      |     struct \nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_subnet_reflector/sample-0.c:41:1: error: extraneous closing brace ('}')\n   41 | }\n      | ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_subnet_reflector/sample-0.c:24:5: error: must use 'struct' tag to refer to type 'iphdr'\n   24 |     iphdr *ip = (void *)(eth + 1);\n      |     ^\n      |     struct \nruns/evaluation/qwen3-8b-full-sft-v1/rollout-002-thinking/candidates/nrf_l1_subnet_reflector/sample-0.c:41:1: error: extraneous closing brace ('}')\n   41 | }\n      | ^\n2 errors generated."
+}
