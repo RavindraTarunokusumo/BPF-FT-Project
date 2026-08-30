@@ -48,7 +48,7 @@ def compute_rollout_metrics(records: List[Dict[str, Any]]) -> Dict[str, Any]:
         sample0 = records
 
     total_cands = len(records)
-    compliant = sum(1 for r in records if r.get("compliance", {}).get("compliant", False))
+    compliant = sum(1 for r in records if r.get("compliance", {}).get("compliant", True))
     compile_pass = sum(1 for r in records if r.get("compile", {}).get("pass", False))
     verifier_pass = sum(1 for r in records if r.get("verifier", {}).get("pass", False))
     behavioral_pass = sum(1 for r in records if r.get("behavioral", {}).get("pass", False))

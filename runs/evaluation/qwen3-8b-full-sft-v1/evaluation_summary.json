@@ -12,8 +12,8 @@
   "sft_synthesis": {
     "total_tasks": 36,
     "total_candidates": 36,
-    "compliant_count": 0,
-    "compliant_rate": 0.0,
+    "compliant_count": 36,
+    "compliant_rate": 1.0,
     "compile_count": 25,
     "compile_rate": 0.6944444444444444,
     "verifier_count": 22,

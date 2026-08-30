@@ -179,42 +179,40 @@ def aggregate_verification_results(
     # Pass@1 calculation (using sample_index == 0)
     sample0_records = [r for r in results if r.get("sample_index", 0) == 0]
     total_tasks = len(sample0_records)
+    if total_tasks == 0:
+        total_tasks = total_candidates
+        sample0_records = results
+
     pass1_success_count = sum(1 for r in sample0_records if r.get("passed", False))
     pass1_rate = (pass1_success_count / total_tasks) if total_tasks > 0 else 0.0
 
-    # Pass@4 calculation (at least one sample passing per task)
+    # Group by task for Pass@N calculation
     task_samples: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     for r in results:
         task_samples[r["task_id"]].append(r)
 
-    pass4_success_count = sum(
-        1 for t_id, s_list in task_samples.items() if any(s.get("passed", False) for s in s_list)
-    )
-    pass4_rate = (pass4_success_count / len(task_samples)) if task_samples else 0.0
+    max_samples_per_task = max(len(s_list) for s_list in task_samples.values()) if task_samples else 0
+    has_pass4 = max_samples_per_task >= 4
 
-    # Breakdowns
-    category_stats: Dict[str, Dict[str, int]] = defaultdict(lambda: {"total": 0, "compliant": 0, "compile": 0, "verifier": 0, "passed": 0})
-    difficulty_stats: Dict[str, Dict[str, int]] = defaultdict(lambda: {"total": 0, "compliant": 0, "compile": 0, "verifier": 0, "passed": 0})
+    pass4_rate = None
+    pass4_success_count = None
+    if has_pass4:
+        pass4_success_count = sum(
+            1 for t_id, s_list in task_samples.items() if any(s.get("passed", False) for s in s_list[:4])
+        )
+        pass4_rate = (pass4_success_count / len(task_samples)) if task_samples else 0.0
 
-    for r in sample0_records:
-        cat = r.get("category", "unknown")
-        diff = r.get("difficulty", "unknown")
-
-        for d_dict, key in [(category_stats, cat), (difficulty_stats, diff)]:
-            d_dict[key]["total"] += 1
-            if r.get("compliance", {}).get("compliant", False):
-                d_dict[key]["compliant"] += 1
-            if r.get("compile", {}).get("pass", False):
-                d_dict[key]["compile"] += 1
-            if r.get("verifier", {}).get("pass", False):
-                d_dict[key]["verifier"] += 1
-            if r.get("passed", False):
-                d_dict[key]["passed"] += 1
+    # Assertions for consistency
+    cat_total = sum(s["total"] for s in category_stats.values())
+    cat_compliant = sum(s["compliant"] for s in category_stats.values())
+    assert cat_total == total_tasks, f"Category task count {cat_total} != total {total_tasks}"
+    assert cat_compliant == compliant_count, f"Category compliant sum {cat_compliant} != total {compliant_count}"
 
     summary = {
         "rollout_dir": str(rollout_dir),
         "total_tasks": total_tasks,
         "total_candidates": total_candidates,
+        "num_samples_per_task": max_samples_per_task,
         "metrics": {
             "output_compliance_rate": compliant_count / total_candidates,
             "compilation_pass_rate": compile_pass_count / total_candidates,
@@ -227,9 +225,9 @@ def aggregate_verification_results(
             },
             "pass_at_4": {
                 "passed_tasks": pass4_success_count,
-                "total_tasks": len(task_samples),
+                "total_tasks": len(task_samples) if has_pass4 else None,
                 "rate": pass4_rate,
-            },
+            } if has_pass4 else "N/A",
         },
         "breakdowns": {
             "by_category": {k: dict(v) for k, v in category_stats.items()},
@@ -240,6 +238,8 @@ def aggregate_verification_results(
     summary_json_file.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
 
     # Generate Markdown summary
+    pass4_row = f"| **Functional Pass@4** | **{pass4_success_count} / {len(task_samples)}** | **{pass4_rate:.1%}** |" if has_pass4 else "| **Functional Pass@4** | N/A (1 sample/task) | N/A |"
+
     md_lines = [
         "# BPF-Guardian Benchmark Verification Summary",
         "",
@@ -251,7 +251,7 @@ def aggregate_verification_results(
         f"| Kernel Verifier Load | {verifier_pass_count} / {total_candidates} | {verifier_pass_count / total_candidates:.1%} |",
         f"| Behavioral Packet Test | {behavioral_pass_count} / {total_candidates} | {behavioral_pass_count / total_candidates:.1%} |",
         f"| **Functional Pass@1** | **{pass1_success_count} / {total_tasks}** | **{pass1_rate:.1%}** |",
-        f"| **Functional Pass@4** | **{pass4_success_count} / {len(task_samples)}** | **{pass4_rate:.1%}** |",
+        pass4_row,
         "",
         "## Category Breakdown (Pass@1)",
         "| Category | Tasks | Compliant | Compile | Verifier | Fully Passed | Pass@1 Rate |",
@@ -322,8 +322,9 @@ def main() -> None:
     print(f"  Compilation Pass:       {summary['metrics']['compilation_pass_rate']:.1%}")
     print(f"  Kernel Verifier Pass:   {summary['metrics']['kernel_verifier_pass_rate']:.1%}")
     print(f"  Behavioral Pass:        {summary['metrics']['behavioral_pass_rate']:.1%}")
-    print(f"  Functional Pass@1:      {summary['metrics']['pass_at_1']['rate']:.1%} ({summary['metrics']['pass_at_1']['passed_tasks']}/{summary['total_tasks']})")
-    print(f"  Functional Pass@4:      {summary['metrics']['pass_at_4']['rate']:.1%} ({summary['metrics']['pass_at_4']['passed_tasks']}/{summary['total_tasks']})")
+    p4 = summary["metrics"]["pass_at_4"]
+    p4_str = f"{p4['rate']:.1%} ({p4['passed_tasks']}/{summary['total_tasks']})" if isinstance(p4, dict) else "N/A (1 sample/task)"
+    print(f"  Functional Pass@4:      {p4_str}")
     print(f"  Summary JSON:           {verification_output_dir / 'summary.json'}")
     print(f"  Summary Markdown:       {verification_output_dir / 'summary.md'}")
 

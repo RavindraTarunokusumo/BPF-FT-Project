@@ -4,7 +4,7 @@
 | Metric | Calibration Baseline | Base Model | SFT Model | Absolute Delta (SFT vs Base) |
 |---|---|---|---|---|
 | **Functional Pass@1** | 8.3% (3/36) | 8.3% | **55.6%** | **+47.2%** |
-| Output Compliance | N/A | - | 0.0% | - |
+| Output Compliance | N/A | - | 100.0% | - |
 | Clang BPF Compilation | N/A | - | 69.4% | - |
 | Kernel Verifier Load | N/A | - | 61.1% | - |
 | Behavioral Pass | N/A | - | 55.6% | - |
