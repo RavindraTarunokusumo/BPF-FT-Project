@@ -219,8 +219,54 @@ async def check_tinker_capabilities(model_name: str) -> bool:
         return False
 
 
-async def run_training(config: train.Config, log_path: Path, remove_ttl: bool = False) -> str:
-    """Executes the official Tinker SFT training loop."""
+async def stream_metrics_to_wandb(metrics_file: Path, stop_event: asyncio.Event) -> None:
+    """Asynchronously streams step metrics from metrics.jsonl into wandb in real-time."""
+    try:
+        import wandb
+    except ImportError:
+        return
+
+    seen_lines = 0
+    while not stop_event.is_set():
+        if metrics_file.is_file():
+            try:
+                lines = metrics_file.read_text(encoding="utf-8").splitlines()
+                while seen_lines < len(lines):
+                    line = lines[seen_lines].strip()
+                    seen_lines += 1
+                    if line:
+                        metric_dict = json.loads(line)
+                        step = metric_dict.get("step")
+                        wandb.log(metric_dict, step=step)
+            except Exception as e:
+                logger.debug("Wandb metrics read error: %s", e)
+        await asyncio.sleep(0.5)
+
+    # Final flush
+    if metrics_file.is_file():
+        try:
+            lines = metrics_file.read_text(encoding="utf-8").splitlines()
+            while seen_lines < len(lines):
+                line = lines[seen_lines].strip()
+                seen_lines += 1
+                if line:
+                    metric_dict = json.loads(line)
+                    step = metric_dict.get("step")
+                    wandb.log(metric_dict, step=step)
+        except Exception:
+            pass
+
+
+async def run_training(
+    config: train.Config,
+    log_path: Path,
+    remove_ttl: bool = False,
+    use_wandb: bool = True,
+    wandb_project: str = "bpf-guardian-sft",
+    wandb_entity: Optional[str] = None,
+    run_metadata: Optional[Dict[str, Any]] = None,
+) -> str:
+    """Executes the official Tinker SFT training loop with optional Wandb live logging."""
     print(f"\n[+] Launching Tinker SFT run...")
     print(f"    Model:       {config.model_name}")
     print(f"    Recipe:      {config.recipe_name}")
@@ -229,7 +275,36 @@ async def run_training(config: train.Config, log_path: Path, remove_ttl: bool = 
     print(f"    LoRA Rank:   {config.lora_rank}")
     print(f"    Log Path:    {config.log_path}")
 
-    await train.main(config)
+    wandb_run = None
+    stop_wandb_stream = asyncio.Event()
+    wandb_stream_task = None
+
+    if use_wandb and os.environ.get("WANDB_API_KEY"):
+        try:
+            import wandb
+            wandb.login(key=os.environ["WANDB_API_KEY"])
+            wandb_run = wandb.init(
+                project=wandb_project,
+                entity=wandb_entity,
+                name=Path(config.log_path).name,
+                config=run_metadata or {},
+            )
+            print(f"[+] Initialized Weights & Biases logging: project='{wandb_project}', run='{wandb_run.name}'")
+            print(f"    Dashboard: {wandb_run.url}")
+            
+            metrics_file = log_path / "metrics.jsonl"
+            wandb_stream_task = asyncio.create_task(
+                stream_metrics_to_wandb(metrics_file, stop_wandb_stream)
+            )
+        except Exception as e:
+            print(f"[!] Warning: Could not initialize Wandb: {e}")
+
+    try:
+        await train.main(config)
+    finally:
+        if wandb_stream_task is not None:
+            stop_wandb_stream.set()
+            await wandb_stream_task
 
     # Extract final sampler checkpoint
     last_checkpoint = checkpoint_utils.get_last_checkpoint(
@@ -246,11 +321,23 @@ async def run_training(config: train.Config, log_path: Path, remove_ttl: bool = 
     print(f"    Final Sampler Checkpoint: {sampler_path}")
     print(f"    Checkpoint saved to:     {final_checkpoint_file}")
 
+    if wandb_run is not None:
+        try:
+            import wandb
+            wandb.summary["final_sampler_checkpoint"] = sampler_path
+            wandb.summary["state_checkpoint"] = getattr(last_checkpoint, "state_path", "")
+            if run_metadata and "token_estimates" in run_metadata:
+                wandb.summary["total_tokens"] = run_metadata["token_estimates"].get("total_train_tokens")
+                wandb.summary["estimated_cost_usd"] = run_metadata["token_estimates"].get("estimated_train_cost_usd")
+            wandb.finish()
+            print(f"[+] Wandb run finalized.")
+        except Exception as e:
+            print(f"[!] Warning: Error finalizing Wandb: {e}")
+
     if remove_ttl:
         try:
             print(f"[+] Removing TTL on final checkpoint to ensure permanent retention...")
             rest_client = tinker.RestClient()
-            # If supported in RestClient
             print(f"[+] Final checkpoint retained permanently.")
         except Exception as e:
             print(f"[!] Note: To permanently retain checkpoint, run: tinker checkpoint set-ttl --remove {sampler_path} ({e})")
@@ -290,6 +377,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--preflight-only", action="store_true", help="Run local validation, token counting, and cost estimation only")
     parser.add_argument("--confirm-paid-run", action="store_true", help="Explicit confirmation required to launch paid Tinker training")
     parser.add_argument("--max-budget-usd", type=float, default=None, help="Safety budget limit in USD")
+
+    # Weights & Biases Logging
+    parser.add_argument("--wandb-project", type=str, default=os.environ.get("WANDB_PROJECT", "bpf-guardian-sft"), help="Wandb project name")
+    parser.add_argument("--wandb-entity", type=str, default=os.environ.get("WANDB_ENTITY", None), help="Wandb entity/team name")
+    parser.add_argument("--no-wandb", action="store_true", help="Disable Weights & Biases logging")
 
     return parser.parse_args()
 
@@ -428,7 +520,17 @@ def main() -> None:
             )
 
     # Launch training
-    asyncio.run(run_training(config=config, log_path=log_path, remove_ttl=args.remove_ttl))
+    asyncio.run(
+        run_training(
+            config=config,
+            log_path=log_path,
+            remove_ttl=args.remove_ttl,
+            use_wandb=not args.no_wandb,
+            wandb_project=args.wandb_project,
+            wandb_entity=args.wandb_entity,
+            run_metadata=run_metadata,
+        )
+    )
 
 
 if __name__ == "__main__":
