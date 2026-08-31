@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c",
   "source_sha256": "cb42d01bf80ef3190ef1a30410c39c5c7cdeb21aa90b11ea18d69aac7ec2495d",
-  "timestamp": "2026-08-31T18:30:29.664397+00:00",
+  "timestamp": "2026-08-31T20:25:12.224267+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_010_ipv6_hop_by_hop_drop/sample-0.c",
   "source_sha256": "29596207d54fe49eef5f0c4b106974c3fa358f989bbb5fef7ab556c905734c12",
-  "timestamp": "2026-08-31T18:30:27.314147+00:00",
+  "timestamp": "2026-08-31T20:25:08.355115+00:00",
   "compile": {
     "pass": true,
     "stdout": "",
@@ -15,15 +15,51 @@
   "verifier": {
     "pass": true,
     "stdout": "",
-    "stderr": "libbpf: loading object from /tmp/bpf_val_3hgbezi9/candidate.o\nlibbpf: elf: section(3) xdp, size 152, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_syn_pfs_l1_010_ipv6_hop_by_hop_drop' at insn offset 0 (0 bytes), code size 19 insns (152 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_3hgbezi9/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 948, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 224, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_syn_pfs_l1_010_ipv6_hop_by_hop_drop': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx(off=0,imm=0) R10=fp0\n; int xdp_filter_syn_pfs_l1_010_ipv6_hop_by_hop_drop(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx(off=0,imm=0) R2_w=pkt_end(off=0,imm=0)\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(off=0,r=0,imm=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(off=0,r=0,imm=0) R3_w=pkt(off=0,r=0,imm=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0,imm=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+12         ; R2_w=pkt_end(off=0,imm=0) R3_w=pkt(off=14,r=14,imm=0)\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(off=0,r=14,imm=0) R3_w=scalar(umax=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(umax=65280,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(off=0,r=14,imm=0) R4_w=scalar(umax=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(umax=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n10: (55) if r3 != 0xdd86 goto pc+7    ; R3_w=56710\n11: (bf) r3 = r1                      ; R1_w=pkt(off=0,r=14,imm=0) R3_w=pkt(off=0,r=14,imm=0)\n12: (07) r3 += 54                     ; R3=pkt(off=54,r=14,imm=0)\n13: (2d) if r3 > r2 goto pc+4         ; R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=54,imm=0)\n; if (ip6->nexthdr == 0)\n14: (71) r1 = *(u8 *)(r1 +20)         ; R1_w=scalar(umax=255,var_off=(0x0; 0xff))\n15: (b7) r0 = 1                       ; R0_w=1\n; \n16: (15) if r1 == 0x0 goto pc+1       ; R1_w=scalar(umax=255,var_off=(0x0; 0xff))\n17: (b7) r0 = 2                       ; R0_w=2\n; }\n18: (95) exit\n\nfrom 16 to 18: R0_w=1 R1_w=0 R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=54,imm=0) R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: R0_w=1 R1_w=0 R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=54,imm=0) R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: (95) exit\n\nfrom 13 to 18: R0=2 R1=pkt(off=0,r=14,imm=0) R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=-2,imm=0) R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: R0=2 R1=pkt(off=0,r=14,imm=0) R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=-2,imm=0) R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: (95) exit\n\nfrom 10 to 18: R0=2 R1=pkt(off=0,r=14,imm=0) R2=pkt_end(off=0,imm=0) R3=scalar() R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: R0=2 R1=pkt(off=0,r=14,imm=0) R2=pkt_end(off=0,imm=0) R3=scalar() R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: (95) exit\n\nfrom 5 to 18: safe\nverification time 4768 usec\nstack depth 0\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_dp3qc5j2/candidate.o\nlibbpf: elf: section(3) xdp, size 152, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_syn_pfs_l1_010_ipv6_hop_by_hop_drop' at insn offset 0 (0 bytes), code size 19 insns (152 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_dp3qc5j2/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 948, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 224, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_syn_pfs_l1_010_ipv6_hop_by_hop_drop': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx(off=0,imm=0) R10=fp0\n; int xdp_filter_syn_pfs_l1_010_ipv6_hop_by_hop_drop(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx(off=0,imm=0) R2_w=pkt_end(off=0,imm=0)\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(off=0,r=0,imm=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(off=0,r=0,imm=0) R3_w=pkt(off=0,r=0,imm=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0,imm=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+12         ; R2_w=pkt_end(off=0,imm=0) R3_w=pkt(off=14,r=14,imm=0)\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(off=0,r=14,imm=0) R3_w=scalar(umax=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(umax=65280,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(off=0,r=14,imm=0) R4_w=scalar(umax=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(umax=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n10: (55) if r3 != 0xdd86 goto pc+7    ; R3_w=56710\n11: (bf) r3 = r1                      ; R1_w=pkt(off=0,r=14,imm=0) R3_w=pkt(off=0,r=14,imm=0)\n12: (07) r3 += 54                     ; R3=pkt(off=54,r=14,imm=0)\n13: (2d) if r3 > r2 goto pc+4         ; R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=54,imm=0)\n; if (ip6->nexthdr == 0)\n14: (71) r1 = *(u8 *)(r1 +20)         ; R1_w=scalar(umax=255,var_off=(0x0; 0xff))\n15: (b7) r0 = 1                       ; R0_w=1\n; \n16: (15) if r1 == 0x0 goto pc+1       ; R1_w=scalar(umax=255,var_off=(0x0; 0xff))\n17: (b7) r0 = 2                       ; R0_w=2\n; }\n18: (95) exit\n\nfrom 16 to 18: R0_w=1 R1_w=0 R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=54,imm=0) R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: R0_w=1 R1_w=0 R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=54,imm=0) R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: (95) exit\n\nfrom 13 to 18: R0=2 R1=pkt(off=0,r=14,imm=0) R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=-2,imm=0) R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: R0=2 R1=pkt(off=0,r=14,imm=0) R2=pkt_end(off=0,imm=0) R3=pkt(off=54,r=-2,imm=0) R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: (95) exit\n\nfrom 10 to 18: R0=2 R1=pkt(off=0,r=14,imm=0) R2=pkt_end(off=0,imm=0) R3=scalar() R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: R0=2 R1=pkt(off=0,r=14,imm=0) R2=pkt_end(off=0,imm=0) R3=scalar() R4=scalar(umax=255,var_off=(0x0; 0xff)) R10=fp0\n18: (95) exit\n\nfrom 5 to 18: safe\nverification time 445 usec\nstack depth 0\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
     "log": ""
   },
   "behavioral": {
-    "pass": false,
-    "passed_tests": 0,
-    "total_tests": 0,
-    "details": []
+    "pass": true,
+    "passed_tests": 5,
+    "total_tests": 5,
+    "details": [
+      {
+        "name": "ipv6_hbh_drop",
+        "description": "IPv6 packet with Next Header 0 (Hop-by-Hop) must be dropped",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "ipv6_tcp_pass",
+        "description": "IPv6 packet with Next Header 6 (TCP) must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_udp_pass",
+        "description": "IPv6 packet with Next Header 17 (UDP) must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv4_pass",
+        "description": "IPv4 traffic must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ipv6_pass",
+        "description": "Truncated IPv6 header must pass safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
   },
-  "passed": false,
-  "diagnostic": "Behavioral tests failed:\n"
+  "passed": true,
+  "diagnostic": null
 }

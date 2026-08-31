@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c",
   "source_sha256": "5fe18ea4ed93b3dbe40f4061504d499729b57c48263a0da5dbda9b0a83d11193",
-  "timestamp": "2026-08-31T18:30:51.093109+00:00",
+  "timestamp": "2026-08-31T20:24:52.759275+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

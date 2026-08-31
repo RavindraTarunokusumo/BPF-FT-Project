@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l2_006_geneve_opt_class_router/sample-0.c",
   "source_sha256": "837210e892107211a86d472f3ae9cd9f254fde4ad0db3f30d34ce0e622c8f85d",
-  "timestamp": "2026-08-31T18:29:56.479648+00:00",
+  "timestamp": "2026-08-31T20:24:39.814623+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

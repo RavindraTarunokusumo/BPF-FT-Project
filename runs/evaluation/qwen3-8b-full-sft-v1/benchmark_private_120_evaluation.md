@@ -25,7 +25,7 @@ This report documents the rigorous evaluation of the fine-tuned **Qwen3-8B SFT m
 | **Calibration Set (SFT Synthesis)** | 36 | **100.0%** (36/36) | 69.4% (25/36) | 61.1% (22/36) | 55.6% (20/36) | **55.6%** (20/36) |
 | **Calibration Set (SFT Repair@1)** | 16 | **100.0%** (16/16) | 100.0% (16/16) | 100.0% (16/16) | 100.0% (16/16) | **100.0%** (16/16) |
 | **Calibration Set (Post-Repair Total)** | 36 | **100.0%** (36/36) | 100.0% (36/36) | 100.0% (36/36) | 100.0% (36/36) | **100.0%** (36/36) |
-| **Private Synthesis Benchmark (Held-Out)** | 120 | **100.0%** (120/120) | 40.8% (49/120) | 25.8% (31/120) | 0.0% (0/120) | **0.0%** (0/120) |
+| **Private Synthesis Benchmark (Held-Out)** | 120 | **100.0%** (120/120) | 40.8% (49/120) | 25.8% (31/120) | 15.8% (19/120) | **15.8%** (19/120) |
 | **Private Repair Benchmark (Held-Out)** | 120 | **100.0%** (120/120) | **84.2%** (101/120) | **80.0%** (96/120) | **62.5%** (75/120) | **62.5%** (75/120) |
 
 ---
@@ -62,20 +62,28 @@ The 120-Task Private Repair Benchmark presents the model with faulty C programs 
 
 The 120-Task Private Synthesis Benchmark measures zero-shot generation across completely novel protocol headers (GTP-U, GENEVE, VXLAN, SRv6) and complex algorithmic logic (token bucket rate limiters, flow hashing, FIB lookups).
 
-### 4.1 By Application Category
-| Application Category | Total Tasks | Output Compliant | Compile Pass | Verifier Pass | Behavioral Pass | Pass@1 Rate |
+### 4.1 By Application Category (Pass@1)
+| Application Category | Total Tasks | Output Compliant | Compile Pass | Verifier Pass | Fully Passed | Pass@1 Rate |
 |---|---|---|---|---|---|---|
-| `packet_filtering_security` | 30 | 30 (100.0%) | 15 (50.0%) | 10 (33.3%) | 0 | **0.0%** |
-| `network_routing_forwarding` | 30 | 30 (100.0%) | 13 (43.3%) | 12 (40.0%) | 0 | **0.0%** |
-| `packet_inspection_telemetry` | 30 | 30 (100.0%) | 13 (43.3%) | 8 (26.7%) | 0 | **0.0%** |
-| `protocol_transformation` | 30 | 30 (100.0%) | 8 (26.7%) | 1 (3.3%) | 0 | **0.0%** |
+| `packet_inspection_telemetry` | 30 | 30 (100.0%) | 13 (43.3%) | 8 (26.7%) | 8 | **26.7%** (8/30) |
+| `network_routing_forwarding` | 30 | 30 (100.0%) | 13 (43.3%) | 12 (40.0%) | 6 | **20.0%** (6/30) |
+| `packet_filtering_security` | 30 | 30 (100.0%) | 15 (50.0%) | 10 (33.3%) | 4 | **13.3%** (4/30) |
+| `protocol_transformation` | 30 | 30 (100.0%) | 8 (26.7%) | 1 (3.3%) | 1 | **3.3%** (1/30) |
 
-### 4.2 By Difficulty Tier
-| Difficulty Tier | Total Tasks | Output Compliant | Compile Pass | Verifier Pass | Behavioral Pass | Pass@1 Rate |
+### 4.2 By Difficulty Tier (Pass@1)
+| Difficulty Tier | Total Tasks | Output Compliant | Compile Pass | Verifier Pass | Fully Passed | Pass@1 Rate |
 |---|---|---|---|---|---|---|
-| `level_1` (Basic) | 40 | 40 (100.0%) | 18 (45.0%) | 13 (32.5%) | 0 | **0.0%** |
-| `level_2` (Intermediate) | 40 | 40 (100.0%) | 15 (37.5%) | 9 (22.5%) | 0 | **0.0%** |
-| `level_3` (Advanced) | 40 | 40 (100.0%) | 16 (40.0%) | 9 (22.5%) | 0 | **0.0%** |
+| `level_1` (Basic) | 40 | 40 (100.0%) | 18 (45.0%) | 13 (32.5%) | 10 | **25.0%** (10/40) |
+| `level_2` (Intermediate) | 40 | 40 (100.0%) | 15 (37.5%) | 9 (22.5%) | 5 | **12.5%** (5/40) |
+| `level_3` (Advanced) | 40 | 40 (100.0%) | 16 (40.0%) | 9 (22.5%) | 4 | **10.0%** (4/40) |
+
+### 4.3 Behavioral Fixture Distribution on 31 Verifier-Valid Programs
+- **Total Fixtures Executed**: 210 fixtures (averaging 6.8 fixtures/task)
+- **Total Fixtures Passed**: 191 / 210 (**91.0% fixture-level accuracy**)
+- **0% Fixtures Passed**: 0 / 31 (0.0%)
+- **1–49% Fixtures Passed**: 0 / 31 (0.0%)
+- **50–99% Fixtures Passed**: 12 / 31 (38.7%)
+- **100% Fixtures Passed**: 19 / 31 (**61.3%** of verifier-valid programs)
 
 ---
 

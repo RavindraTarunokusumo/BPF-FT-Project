@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_005_qinq_to_single_vlan/sample-0.c",
   "source_sha256": "e97db7c799b2140e52c053564e25b05022a17b5717d48a68be68eb2f59039b1f",
-  "timestamp": "2026-08-31T18:31:46.866082+00:00",
+  "timestamp": "2026-08-31T20:25:30.454899+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l2_003_gtpu_teid_devmap_router/sample-0.c",
   "source_sha256": "2f302422938908c007b6a026ed97e27ca899296e8a71b7e67d4beafa313dfd64",
-  "timestamp": "2026-08-31T18:29:52.618376+00:00",
+  "timestamp": "2026-08-31T20:24:37.697253+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

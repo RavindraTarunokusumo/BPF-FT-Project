@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c",
   "source_sha256": "04a35fa34fcf98e6ea664186f9067f818cea8878442c2355a529b28e22ac5ac7",
-  "timestamp": "2026-08-31T18:31:44.635075+00:00",
+  "timestamp": "2026-08-31T20:25:29.431765+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

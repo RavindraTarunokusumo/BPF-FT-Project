@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c",
   "source_sha256": "08584a62b3647575b0532cff91a8047eb1aa7838858f1e29dfb8b78111cb88cb",
-  "timestamp": "2026-08-31T18:30:47.390010+00:00",
+  "timestamp": "2026-08-31T20:24:50.886348+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

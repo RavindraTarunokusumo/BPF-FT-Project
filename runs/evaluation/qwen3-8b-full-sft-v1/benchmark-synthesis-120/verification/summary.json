@@ -1,5 +1,5 @@
 {
-  "rollout_dir": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120",
+  "rollout_dir": "runs\\evaluation\\qwen3-8b-full-sft-v1\\benchmark-synthesis-120",
   "total_tasks": 120,
   "total_candidates": 120,
   "num_samples_per_task": 1,
@@ -7,11 +7,11 @@
     "output_compliance_rate": 1.0,
     "compilation_pass_rate": 0.4083333333333333,
     "kernel_verifier_pass_rate": 0.25833333333333336,
-    "behavioral_pass_rate": 0.0,
+    "behavioral_pass_rate": 0.15833333333333333,
     "pass_at_1": {
-      "passed_tasks": 0,
+      "passed_tasks": 19,
       "total_tasks": 120,
-      "rate": 0.0
+      "rate": 0.15833333333333333
     },
     "pass_at_4": "N/A"
   },
@@ -22,28 +22,28 @@
         "compliant": 30,
         "compile": 13,
         "verifier": 12,
-        "passed": 0
+        "passed": 6
       },
       "packet_filtering_security": {
         "total": 30,
         "compliant": 30,
         "compile": 15,
         "verifier": 10,
-        "passed": 0
+        "passed": 4
       },
       "packet_inspection_telemetry": {
         "total": 30,
         "compliant": 30,
         "compile": 13,
         "verifier": 8,
-        "passed": 0
+        "passed": 8
       },
       "protocol_transformation": {
         "total": 30,
         "compliant": 30,
         "compile": 8,
         "verifier": 1,
-        "passed": 0
+        "passed": 1
       }
     },
     "by_difficulty": {
@@ -52,21 +52,21 @@
         "compliant": 40,
         "compile": 18,
         "verifier": 13,
-        "passed": 0
+        "passed": 10
       },
       "level_2": {
         "total": 40,
         "compliant": 40,
         "compile": 15,
         "verifier": 9,
-        "passed": 0
+        "passed": 4
       },
       "level_3": {
         "total": 40,
         "compliant": 40,
         "compile": 16,
         "verifier": 9,
-        "passed": 0
+        "passed": 5
       }
     }
   }

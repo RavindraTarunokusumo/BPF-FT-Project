@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_002_geneve_opt_class_histogram/sample-0.c",
   "source_sha256": "1a90d8689c22332844b03c79a87ab8861a2ae69d4d2f1ce66323c16eeb7a06c2",
-  "timestamp": "2026-08-31T18:31:14.488243+00:00",
+  "timestamp": "2026-08-31T20:25:05.237612+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

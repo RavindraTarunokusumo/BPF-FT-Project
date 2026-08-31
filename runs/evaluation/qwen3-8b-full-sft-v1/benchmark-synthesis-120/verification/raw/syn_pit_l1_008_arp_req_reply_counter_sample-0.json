@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c",
   "source_sha256": "34f1825bf87f5179608a4cccca43a0aec7e4e6da4670d4ec16dfe1c9bfd22d99",
-  "timestamp": "2026-08-31T18:31:09.146563+00:00",
+  "timestamp": "2026-08-31T20:25:00.000935+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

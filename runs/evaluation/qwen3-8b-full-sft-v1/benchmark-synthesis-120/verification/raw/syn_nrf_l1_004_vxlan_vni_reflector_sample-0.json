@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_004_vxlan_vni_reflector/sample-0.c",
   "source_sha256": "eaa2be29b5d55d07854413d9bf3fbeac00e14459372d831f83b4b1370391378a",
-  "timestamp": "2026-08-31T18:29:44.440150+00:00",
+  "timestamp": "2026-08-31T20:25:39.491934+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

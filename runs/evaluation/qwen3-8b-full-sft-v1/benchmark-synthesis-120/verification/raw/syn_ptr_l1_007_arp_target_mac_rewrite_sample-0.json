@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c",
   "source_sha256": "64946bcf5c932d67078217ab2f47024d6e2f439d81aef9bf425f49b6ff2dc66e",
-  "timestamp": "2026-08-31T18:31:38.033854+00:00",
+  "timestamp": "2026-08-31T20:25:25.598178+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

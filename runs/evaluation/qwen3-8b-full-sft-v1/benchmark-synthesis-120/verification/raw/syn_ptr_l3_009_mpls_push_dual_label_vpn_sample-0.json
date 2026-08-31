@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c",
   "source_sha256": "1b02ebe9d7ac0736c7634d47a5630ce915cc762e0822235b1781469b4881c696",
-  "timestamp": "2026-08-31T18:32:10.807304+00:00",
+  "timestamp": "2026-08-31T20:25:38.186349+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c",
   "source_sha256": "73a1abccf665ecfc54cf57bc729c309299d143e41994b2c85779765cf823026d",
-  "timestamp": "2026-08-31T18:30:11.139674+00:00",
+  "timestamp": "2026-08-31T20:24:53.397446+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

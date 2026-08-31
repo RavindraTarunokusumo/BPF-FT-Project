@@ -45,7 +45,8 @@ def main():
         task_spec = dict(t)
         if test_json.is_file():
             try:
-                task_spec["tests"] = json.loads(test_json.read_text(encoding="utf-8")).get("tests", [])
+                test_data = json.loads(test_json.read_text(encoding="utf-8"))
+                task_spec["tests"] = test_data.get("tests") or test_data.get("test_cases", [])
             except Exception:
                 task_spec["tests"] = []
 

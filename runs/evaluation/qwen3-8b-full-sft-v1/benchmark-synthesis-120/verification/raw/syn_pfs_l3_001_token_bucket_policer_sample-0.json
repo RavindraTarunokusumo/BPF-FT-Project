@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c",
   "source_sha256": "37f2b43ae92880745462b05d3962c798f656d153d9e76c50e71805ac09bfef3b",
-  "timestamp": "2026-08-31T18:30:39.201802+00:00",
+  "timestamp": "2026-08-31T20:24:40.011071+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l2_007_vlan_prio_pcp_traffic_split/sample-0.c",
   "source_sha256": "dca8aba554b140c0f61fb04c831023c6dda0a414fa4c921a99cce0f9b9084c5c",
-  "timestamp": "2026-08-31T18:29:57.832978+00:00",
+  "timestamp": "2026-08-31T20:24:40.554746+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

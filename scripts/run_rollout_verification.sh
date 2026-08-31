@@ -87,17 +87,20 @@ for idx, c_file in enumerate(c_files, start=1):
     
     cat = task_spec.get('application_category', '')
     diff = task_spec.get('difficulty', '')
+    rel = task_spec.get('relative_path', f'{cat}/{diff}/{task_id}')
     
     # Load detailed test specs if available across possible benchmark locations
     for test_candidate in [
         Path(f'data/calibration/{cat}/{diff}/{task_id}/tests.json'),
+        Path(f'data/benchmark/synthesis/{rel}/tests.json'),
+        Path(f'data/benchmark/repair/{rel}/tests.json'),
         Path(f'data/benchmark/synthesis/{cat}/{diff}/{task_id}/tests.json'),
         Path(f'data/benchmark/repair/{cat}/{diff}/{task_id}/tests.json'),
-        Path(f'data/inbox/{cat}/{diff}/{task_id}/tests.json'),
     ]:
         if test_candidate.is_file():
             try:
-                task_spec['tests'] = json.loads(test_candidate.read_text(encoding='utf-8')).get('tests', [])
+                test_data = json.loads(test_candidate.read_text(encoding='utf-8'))
+                task_spec['tests'] = test_data.get('tests') or test_data.get('test_cases', [])
                 break
             except Exception:
                 pass
@@ -109,8 +112,17 @@ for idx, c_file in enumerate(c_files, start=1):
         task_spec=task_spec,
     )
     
+    def sanitize_obj(obj):
+        if isinstance(obj, str):
+            return obj.replace('\x00', '\\x00')
+        elif isinstance(obj, dict):
+            return {k: sanitize_obj(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [sanitize_obj(v) for v in obj]
+        return obj
+
     out_json = raw_dir / f'{task_id}_{cand_id}.json'
-    out_json.write_text(json.dumps(res, indent=2), encoding='utf-8')
+    out_json.write_text(json.dumps(sanitize_obj(res), indent=2), encoding='utf-8')
     if idx % 10 == 0 or idx == len(c_files):
         print(f'  Verified {idx}/{len(c_files)} candidates...')
 "

@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c",
   "source_sha256": "daaab8085065ef70c0b0670fe3338b1129aade5e8d17ac6df63c3a02581fe7f1",
-  "timestamp": "2026-08-31T18:30:29.046364+00:00",
+  "timestamp": "2026-08-31T20:25:11.121420+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

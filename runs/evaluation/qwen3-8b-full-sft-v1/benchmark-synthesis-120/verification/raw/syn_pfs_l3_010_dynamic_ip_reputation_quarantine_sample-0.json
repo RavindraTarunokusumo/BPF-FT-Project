@@ -5,7 +5,7 @@
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_010_dynamic_ip_reputation_quarantine/sample-0.c",
   "source_sha256": "d3fdf54bd6088138b1122a973758493d3322b91c1b28f1141e53541b40e7fd17",
-  "timestamp": "2026-08-31T18:30:52.421497+00:00",
+  "timestamp": "2026-08-31T20:24:53.403759+00:00",
   "compile": {
     "pass": false,
     "stdout": "",
