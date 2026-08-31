@@ -1,0 +1,45 @@
+{
+  "task_id": "syn_nrf_l1_007_proxy_arp_responder",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_proxy_arp",
+  "template_family": "xdp_proxy_arp_responder",
+  "semantic_signature": "arp_req_for_192_168_100_1+reply_with_router_mac_and_tx",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that acts as a Proxy ARP responder. Inspect ARP Requests (EtherType 0x0806, opcode 1). If the target IP (ar_tip) is 192.168.100.1, synthesize an ARP Reply: swap Ethernet MACs and set source MAC to 02:00:00:00:00:01, set opcode to 2, set sender MAC to 02:00:00:00:00:01, swap sender and target IP addresses, and return XDP_TX. Pass other ARP requests and protocols with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct arphdr_eth_ipv4 bounds",
+    "Verify opcode == 1 (ARPOP_REQUEST) and ar_tip == 192.168.100.1",
+    "Synthesize ARP Reply (opcode 2, MAC 02:00:00:00:00:01, swap endpoints)",
+    "Return XDP_TX for target IP, XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "proxy_arp_target_match_tx",
+      "fixture_file": "fixtures/proxy_arp_target_match_tx.bin",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "proxy_arp_other_target_pass",
+      "fixture_file": "fixtures/proxy_arp_other_target_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_arp_pass",
+      "fixture_file": "fixtures/truncated_arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

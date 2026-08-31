@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pit_l1_005_dns_query_response_split",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_dns",
+  "template_family": "xdp_dns_qr_counter",
+  "semantic_signature": "dns_udp53+qr_flag_split_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects DNS traffic (UDP port 53 on source or destination). Parse the DNS header flags and inspect the QR bit (bit 15 / 0x8000). Count DNS Queries (QR == 0) in slot 0, and DNS Responses (QR == 1) in slot 1 of a per-CPU array map named 'dns_qr_map' (max_entries 2). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'dns_qr_map' with max_entries 2",
+    "Validate Ethernet, IPv4, and UDP header bounds",
+    "Check UDP port 53 on source or destination",
+    "Inspect DNS flags word: bit 15 (0x8000) distinguishes query (0) from response (1)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dns_query_pass",
+      "fixture_file": "fixtures/dns_query_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_response_pass",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_dns_udp_pass",
+      "fixture_file": "fixtures/non_dns_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_dns_pass",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pit_l2_006_ntp_stratum_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_ntp",
+  "template_family": "xdp_ntp_stratum_counter",
+  "semantic_signature": "ntp_udp123+stratum_histogram+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects NTP traffic (UDP port 123) and classifies packet stratum into a per-CPU array map named 'ntp_stratum_map' (max_entries 4): slot 0 for Stratum 1 (Primary Reference), slot 1 for Stratum 2 (Secondary Reference), slot 2 for Stratum 3-15 (Downstream servers), and slot 3 for Unsynchronized / reserved (Stratum 0 or >= 16). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'ntp_stratum_map' with max_entries 4",
+    "Validate Ethernet, IPv4, UDP, and NTP header bounds",
+    "Inspect Stratum field at byte offset 1 of NTP payload",
+    "Increment corresponding histogram slot",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ntp_stratum1_pass",
+      "fixture_file": "fixtures/ntp_stratum1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ntp_stratum2_pass",
+      "fixture_file": "fixtures/ntp_stratum2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ntp_stratum3_pass",
+      "fixture_file": "fixtures/ntp_stratum3_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ntp_unsynced_pass",
+      "fixture_file": "fixtures/ntp_unsynced_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_pass",
+      "fixture_file": "fixtures/udp_other_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ntp_pass",
+      "fixture_file": "fixtures/truncated_ntp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

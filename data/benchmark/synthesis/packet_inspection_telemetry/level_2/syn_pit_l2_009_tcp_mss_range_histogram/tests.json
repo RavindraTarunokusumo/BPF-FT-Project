@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pit_l2_009_tcp_mss_range_histogram",
+  "main_validator": "map_state",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "mss_bucket0_pass",
+      "description": "TCP SYN with MSS 1000 (<1200) increments slot 0 and returns XDP_PASS",
+      "fixture_file": "fixtures/mss_bucket0_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006002ffffe2120000020403e8",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "mss_bucket1_pass",
+      "description": "TCP SYN with MSS 1300 (1200-1400) increments slot 1 and returns XDP_PASS",
+      "fixture_file": "fixtures/mss_bucket1_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006002ffffe0e6000002040514",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "mss_bucket2_pass",
+      "description": "TCP SYN with MSS 1460 (1401-1460) increments slot 2 and returns XDP_PASS",
+      "fixture_file": "fixtures/mss_bucket2_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006002ffffe0460000020405b4",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "mss_bucket3_pass",
+      "description": "TCP SYN with MSS 1500 (>1460) increments slot 3 and returns XDP_PASS",
+      "fixture_file": "fixtures/mss_bucket3_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006002ffffe01e0000020405dc",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "syn_no_mss_pass",
+      "description": "TCP SYN without MSS option passes without counting",
+      "fixture_file": "fixtures/syn_no_mss_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ack_pass",
+      "description": "TCP ACK passes",
+      "fixture_file": "fixtures/ack_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010fffff7f40000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP packet passes safely",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000016123400004006e53fc0a8010ac0a801140050",
+      "packet_len": 36,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

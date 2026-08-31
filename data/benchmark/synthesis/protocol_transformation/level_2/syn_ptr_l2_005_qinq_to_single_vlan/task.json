@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_ptr_l2_005_qinq_to_single_vlan",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_qinq_pop",
+  "semantic_signature": "qinq_8021ad+pop_outer_tag_to_single_8021q+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that transforms 802.1ad QinQ dual-tagged frames (outer EtherType 0x88A8 or 0x8100, followed by inner EtherType 0x8100) into single 802.1Q VLAN frames. Use bpf_xdp_adjust_head(ctx, 4) to pop the outer 4-byte VLAN tag, restore Ethernet MAC addresses, and set new_eth->h_proto to bpf_htons(ETH_P_8021Q). Pass single-tagged VLANs, untagged traffic, and malformed frames unchanged with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and dual struct vlanhdr bounds",
+    "Verify outer proto 0x88A8/0x8100 and inner proto 0x8100",
+    "Pop 4 bytes using bpf_xdp_adjust_head(ctx, 4)",
+    "Restore Ethernet MACs and set EtherType to 0x8100",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "qinq_pop_outer_tag_pass",
+      "fixture_file": "fixtures/qinq_pop_outer_tag_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "qinq_pop_outer_tag_2_pass",
+      "fixture_file": "fixtures/qinq_pop_outer_tag_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "single_vlan_pass",
+      "fixture_file": "fixtures/single_vlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "untagged_pass",
+      "fixture_file": "fixtures/untagged_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_qinq_pass",
+      "fixture_file": "fixtures/truncated_qinq_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

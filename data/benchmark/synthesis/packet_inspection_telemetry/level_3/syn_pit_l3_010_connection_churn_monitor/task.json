@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_010_connection_churn_monitor",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_churn",
+  "template_family": "xdp_flow_churn_monitor",
+  "semantic_signature": "tcp_syn_fin_rst+connection_churn_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that monitors TCP connection churn rate. Count newly initiated connections (TCP SYN with ACK=0) in slot 0, and terminated connections (TCP FIN or RST) in slot 1 of a per-CPU array map named 'churn_monitor_map' (max_entries 2). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'churn_monitor_map' with max_entries 2",
+    "Validate Ethernet, IPv4, and TCP header bounds",
+    "Increment slot 0 for SYN && !ACK",
+    "Increment slot 1 for FIN || RST",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "syn_churn_pass",
+      "fixture_file": "fixtures/syn_churn_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "fin_churn_pass",
+      "fixture_file": "fixtures/fin_churn_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "rst_churn_pass",
+      "fixture_file": "fixtures/rst_churn_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ack_pass",
+      "fixture_file": "fixtures/ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "task_id": "syn_ptr_l1_003_gre_strip_key_flag",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_gre_flags_transform",
+  "semantic_signature": "gre_proto47+clear_key_flag_bit+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GRE packets (IPv4 protocol 47) and clears the Key Present flag (bit 13 / 0x2000 in host byte order) in the 16-bit flags field of struct grehdr. Preserve all other fields and payload bytes. Return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and struct grehdr bounds",
+    "Clear Key flag bit 0x2000 from gre->flags",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gre_clear_key_flag_pass",
+      "fixture_file": "fixtures/gre_clear_key_flag_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gre_no_key_pass",
+      "fixture_file": "fixtures/gre_no_key_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gre_pass",
+      "fixture_file": "fixtures/truncated_gre_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

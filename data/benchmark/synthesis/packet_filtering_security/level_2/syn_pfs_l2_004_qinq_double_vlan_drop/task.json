@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_004_qinq_double_vlan_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_qinq_filter",
+  "template_family": "xdp_qinq_vid_filter",
+  "semantic_signature": "qinq_8021ad+outer_vid_100_inner_vid_200+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects 802.1ad QinQ dual-VLAN tagged frames (outer EtherType 0x88A8 or 0x8100, followed by inner EtherType 0x8100). Parse both outer and inner VLAN headers and extract the 12-bit VLAN IDs (TCI & 0x0FFF). If outer VID is 100 AND inner VID is 200, drop the frame with XDP_DROP. Pass other QinQ combinations, single-tagged VLANs, untagged traffic, and truncated frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet header and check for outer tag 0x88A8 or 0x8100",
+    "Validate outer struct vlanhdr and verify inner proto is 0x8100",
+    "Validate inner struct vlanhdr bounds",
+    "Extract outer VID and inner VID from h_vlan_TCI & 0x0FFF",
+    "Drop packet if outer_vid == 100 && inner_vid == 200",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "qinq_100_200_drop",
+      "fixture_file": "fixtures/qinq_100_200_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "qinq_100_300_pass",
+      "fixture_file": "fixtures/qinq_100_300_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "qinq_200_100_pass",
+      "fixture_file": "fixtures/qinq_200_100_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "single_vlan_100_pass",
+      "fixture_file": "fixtures/single_vlan_100_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "untagged_pass",
+      "fixture_file": "fixtures/untagged_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_qinq_pass",
+      "fixture_file": "fixtures/truncated_qinq_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_ptr_l1_004_gtpu_teid_rewrite",
+  "main_validator": "packet_bytes",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "gtpu_teid_rewrite_pass",
+      "description": "GTP-U packet has TEID rewritten to 0x11223344",
+      "fixture_file": "fixtures/gtpu_teid_rewrite_pass.bin",
+      "packet_hex": "525400123456525400654321080045000048123400004011e502c0a8010ac0a80114303908680034000030ff00249988776645000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 86,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "gtpu_teid_rewrite_2_pass",
+      "description": "Second GTP-U packet rewritten to 0x11223344",
+      "fixture_file": "fixtures/gtpu_teid_rewrite_2_pass.bin",
+      "packet_hex": "52540012345652540065432108004500004c123400004011e4fec0a8010ac0a80114303908680038000030ff00280000000145000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 90,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "description": "UDP to port 2153 passed unchanged",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039086900080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passed unchanged",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "description": "Truncated GTP-U packet passed safely",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001e123400004011e52cc0a8010ac0a8011430390868000a000030ff",
+      "packet_len": 44,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

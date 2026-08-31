@@ -1,0 +1,44 @@
+{
+  "task_id": "syn_ptr_l1_006_ipv6_traffic_class_remark",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_ipv6_tc_remark",
+  "semantic_signature": "ipv6_0x86dd+remark_traffic_class_0xb8+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv6 packets (EtherType 0x86DD) and remarks the 8-bit Traffic Class (DSCP/ECN) field to Expedited Forwarding (0xB8 / 184). Preserve version and flow label. Return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct ipv6hdr bounds",
+    "Rewrite Traffic Class bits (bits 20-27) to 0xB8",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ipv6_remark_tc_pass",
+      "fixture_file": "fixtures/ipv6_remark_tc_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_remark_tc_udp_pass",
+      "fixture_file": "fixtures/ipv6_remark_tc_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

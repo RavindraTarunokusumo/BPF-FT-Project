@@ -1,0 +1,45 @@
+{
+  "task_id": "syn_ptr_l1_007_arp_target_mac_rewrite",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_arp_tha_rewrite",
+  "semantic_signature": "arp_reply_op2+rewrite_target_mac_02aabbccddee+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects ARP Reply packets (EtherType 0x0806, ar_op == 2). Rewrite the Target Hardware Address (ar_tha) field to 02:AA:BB:CC:DD:EE. Return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct arphdr_eth_ipv4 bounds",
+    "Check arp->ar_op == bpf_htons(2)",
+    "Rewrite arp->ar_tha to 02:AA:BB:CC:DD:EE",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "arp_reply_target_mac_rewrite_pass",
+      "fixture_file": "fixtures/arp_reply_target_mac_rewrite_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_req_pass",
+      "fixture_file": "fixtures/arp_req_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_arp_pass",
+      "fixture_file": "fixtures/truncated_arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

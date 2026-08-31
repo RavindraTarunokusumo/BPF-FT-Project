@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pfs_l3_005_tcp_handshake_state_tracker",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_stateful_conntrack",
+  "template_family": "xdp_tcp_handshake_tracker",
+  "semantic_signature": "tcp_conntrack+state_machine_syn_est_fin+drop_unsolicited",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write a stateful TCP connection tracker in XDP. Maintain bidirectional flow states in a BPF hash map named 'ct_map' (key struct flow_key { __be32 src_ip, dst_ip; __be16 src_port, dst_port; }, value __u32 state, max_entries 2048). Implement a 3-way handshake state machine: SYN initializes forward state to SYN_SENT (1); SYN-ACK promotes both directions to ESTABLISHED (2); FIN or RST transitions to CLOSED (3). If non-SYN TCP traffic arrives for a flow with no established state, drop the packet with XDP_DROP. Pass valid stateful TCP flows, UDP/other protocols, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Define struct flow_key with 4-tuple endpoints",
+    "Define hash map 'ct_map' with key struct flow_key, value __u32, max_entries 2048",
+    "Track SYN -> SYN-ACK -> ESTABLISHED state progression",
+    "Drop unsolicited TCP ACK/data packets not tracked in ct_map",
+    "Handle RST and FIN teardown",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "syn_initiates_state_pass",
+      "fixture_file": "fixtures/syn_initiates_state_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_ack_establishes_pass",
+      "fixture_file": "fixtures/syn_ack_establishes_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "established_ack_pass",
+      "fixture_file": "fixtures/established_ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "unsolicited_ack_drop",
+      "fixture_file": "fixtures/unsolicited_ack_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "fin_teardown_pass",
+      "fixture_file": "fixtures/fin_teardown_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "rst_pass",
+      "fixture_file": "fixtures/rst_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

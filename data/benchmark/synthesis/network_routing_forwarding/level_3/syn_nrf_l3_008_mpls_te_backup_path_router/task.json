@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_nrf_l3_008_mpls_te_backup_path_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_router_mpls_frr",
+  "template_family": "xdp_mpls_frr_router",
+  "semantic_signature": "mpls_frr_primary_if90_backup_if91+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements MPLS Traffic Engineering Fast Reroute (FRR). Inspect MPLS packets (EtherType 0x8847). Extract the 20-bit label: for TE tunnel label 1000, check tunnel health in a BPF array map 'te_health_map' (key 0, value __u32). If primary tunnel is UP (status == 1), redirect to primary TE interface ifindex 90. If DOWN (status == 0), fail over to backup TE interface ifindex 91. Pass other labels and traffic with XDP_PASS.",
+  "requirements": [
+    "Define array map 'te_health_map' with max_entries 1",
+    "Validate Ethernet and struct mpls_label bounds",
+    "Check label == 1000 and inspect te_health_map",
+    "Redirect to ifindex 90 if UP, or ifindex 91 if DOWN",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "te_label_1000_redirect_if90",
+      "fixture_file": "fixtures/te_label_1000_redirect_if90.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "te_label_2000_pass",
+      "fixture_file": "fixtures/te_label_2000_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_eth_pass",
+      "fixture_file": "fixtures/truncated_eth_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

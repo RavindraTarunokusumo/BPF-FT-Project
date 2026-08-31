@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pfs_l3_007_vxlan_tenant_acl_matrix",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_vxlan_acl",
+  "template_family": "xdp_vxlan_tenant_firewall",
+  "semantic_signature": "vxlan_vni_tenant_map+inner_ip_lpm_acl+drop_unauthorized",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements a multi-tenant VXLAN security firewall. Parse VXLAN encapsulated frames on UDP port 4789. Extract the 24-bit VNI and lookup the Tenant ID in a BPF hash map named 'vni_tenant_map' (key __u32 vni, value __u32 tenant_id, max_entries 256). If the VNI is unregistered (not found and != 100), drop with XDP_DROP. For registered tenants, parse the inner Ethernet and inner IPv4 header and evaluate source IP permissions against an LPM trie map named 'acl_lpm_map' (key struct bpf_lpm_trie_key, value __u32 policy where 1=allow, 0=drop, max_entries 512). If policy == 0 or matching blocked subnet 10.0.2.0/24, drop the packet with XDP_DROP. Pass allowed frames, non-VXLAN traffic, and malformed packets with XDP_PASS.",
+  "requirements": [
+    "Define hash map 'vni_tenant_map' with key __u32 and max_entries 256",
+    "Define LPM trie map 'acl_lpm_map' with struct bpf_lpm_trie_key and max_entries 512",
+    "Parse outer Ethernet, IPv4, UDP, and VXLAN headers",
+    "Validate and parse inner Ethernet and inner IPv4 headers",
+    "Evaluate tenant VNI registration and inner IP ACL policy",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "vxlan_tenant_allowed_pass",
+      "fixture_file": "fixtures/vxlan_tenant_allowed_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vxlan_tenant_blocked_drop",
+      "fixture_file": "fixtures/vxlan_tenant_blocked_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "vxlan_unknown_vni_drop",
+      "fixture_file": "fixtures/vxlan_unknown_vni_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "vxlan_inner_udp_pass",
+      "fixture_file": "fixtures/vxlan_inner_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vxlan_inner_arp_pass",
+      "fixture_file": "fixtures/vxlan_inner_arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_vxlan_udp_pass",
+      "fixture_file": "fixtures/non_vxlan_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_tcp_pass",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_vxlan_pass",
+      "fixture_file": "fixtures/truncated_vxlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

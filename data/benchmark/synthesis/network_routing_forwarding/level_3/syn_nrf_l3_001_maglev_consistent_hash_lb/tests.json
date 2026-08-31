@@ -1,0 +1,88 @@
+{
+  "task_id": "syn_nrf_l3_001_maglev_consistent_hash_lb",
+  "main_validator": "xdp_action",
+  "test_count": 9,
+  "test_cases": [
+    {
+      "name": "flow1_lb_redirect",
+      "description": "Flow 1 deterministically balanced to backend ifindex",
+      "fixture_file": "fixtures/flow1_lb_redirect.bin",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cf20a000001c0a8010127110050000003e8000000005002ffff012b0000",
+      "packet_len": 54,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "flow2_lb_redirect",
+      "description": "Flow 2 balanced to backend",
+      "fixture_file": "fixtures/flow2_lb_redirect.bin",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cf10a000002c0a8010127120050000003e8000000005002ffff012a0000",
+      "packet_len": 54,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_flow_lb_redirect",
+      "description": "UDP flow balanced to backend",
+      "fixture_file": "fixtures/udp_flow_lb_redirect.bin",
+      "packet_hex": "52540012345652540065432108004500001c1234000040119cf10a000003c0a801014e21003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP traffic passed unchanged",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_pass",
+      "description": "IPv6 frame passed unchanged",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "vlan_pass",
+      "description": "VLAN frame passed unchanged",
+      "fixture_file": "fixtures/vlan_pass.bin",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP packet passed safely",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000016123400004006e53fc0a8010ac0a801140050",
+      "packet_len": 36,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IPv4 packet passed safely",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "packet_hex": "52540012345652540065432108004500",
+      "packet_len": 16,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_ptr_l2_007_ipv4_options_strip",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_ipv4_options_stripper",
+  "semantic_signature": "ipv4_ihl_gt_5+strip_options_reset_ihl_5+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that strips IPv4 options from IPv4 packets where ihl == 6 (24-byte header containing 4 bytes of options). Use bpf_xdp_adjust_head(ctx, 4) to pop 4 bytes, restore Ethernet MACs, set ip->ihl = 5, update ip->tot_len, recompute the IPv4 header checksum, and return XDP_PASS. Pass packets with ihl == 5 unchanged.",
+  "requirements": [
+    "Validate Ethernet and struct iphdr bounds",
+    "Verify ip->ihl == 6",
+    "Pop 4 option bytes using bpf_xdp_adjust_head(ctx, 4)",
+    "Restore MACs, set ip->ihl = 5, and update IPv4 checksum",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ihl_6_options_stripped_pass",
+      "fixture_file": "fixtures/ihl_6_options_stripped_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ihl_5_no_options_pass",
+      "fixture_file": "fixtures/ihl_5_no_options_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

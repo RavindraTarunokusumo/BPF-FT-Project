@@ -1,0 +1,51 @@
+{
+  "task_id": "syn_pit_l1_006_dhcp_message_type_counter",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_dhcp",
+  "template_family": "xdp_dhcp_type_counter",
+  "semantic_signature": "dhcp_ports_67_68+option_53_split_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects DHCP packets (UDP ports 67/68). Verify the 4-byte Magic Cookie 0x63825363 at offset 236. Parse DHCP Option 53 (Message Type) and count occurrences into a per-CPU array map named 'dhcp_type_map' (max_entries 4): slot 0 for Discover (1), slot 1 for Offer (2), slot 2 for Request (3), and slot 3 for Ack (5). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'dhcp_type_map' with max_entries 4",
+    "Validate Ethernet, IPv4, UDP, and DHCP 243-byte offset bounds",
+    "Verify Magic Cookie 0x63825363",
+    "Extract Option 53 value and increment corresponding map slot",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dhcp_discover_pass",
+      "fixture_file": "fixtures/dhcp_discover_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dhcp_offer_pass",
+      "fixture_file": "fixtures/dhcp_offer_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dhcp_request_pass",
+      "fixture_file": "fixtures/dhcp_request_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dhcp_ack_pass",
+      "fixture_file": "fixtures/dhcp_ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_dhcp_udp_pass",
+      "fixture_file": "fixtures/non_dhcp_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_dhcp_pass",
+      "fixture_file": "fixtures/truncated_dhcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

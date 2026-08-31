@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_006_tcp_out_of_order_detector",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_tcp_ooo",
+  "template_family": "xdp_tcp_seq_tracker",
+  "semantic_signature": "tcp_seq_tracking+out_of_order_detector+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that tracks TCP sequence continuity and detects out-of-order packets. Maintain per-flow state in a BPF hash map named 'seq_tracker_map' (key struct flow_key, value struct seq_tracker { __u32 expected_seq; __u32 in_order_pkts; __u32 out_of_order_pkts; }, max_entries 1024). For IPv4 TCP segments carrying payload, check if tcp->seq matches expected_seq. If it matches, advance expected_seq by payload length and increment in_order_pkts. If it deviates, increment out_of_order_pkts. Always return XDP_PASS.",
+  "requirements": [
+    "Define struct flow_key and struct seq_tracker",
+    "Define hash map 'seq_tracker_map' with max_entries 1024",
+    "Calculate TCP payload length and check sequence numbers",
+    "Accumulate in_order vs out_of_order packet counts",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "tcp_seq1_pass",
+      "fixture_file": "fixtures/tcp_seq1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_seq2_in_order_pass",
+      "fixture_file": "fixtures/tcp_seq2_in_order_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_seq_out_of_order_pass",
+      "fixture_file": "fixtures/tcp_seq_out_of_order_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "other_flow_pass",
+      "fixture_file": "fixtures/other_flow_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

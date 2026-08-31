@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_003_dhcp_rogue_server_filter",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_dhcp_filter",
+  "template_family": "xdp_dhcp_rogue_filter",
+  "semantic_signature": "dhcp_resp_src67_dst68+unauthorized_server_ip+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that blocks rogue DHCP servers. Inspect UDP traffic from source port 67 to destination port 68. Verify the BOOTREPLY op code (op == 2) and the 4-byte DHCP Magic Cookie (0x63825363 at offset 236). Look up the authorized DHCP server IPv4 address in an array map named 'auth_dhcp_server' (key 0, type BPF_MAP_TYPE_ARRAY, max_entries 1, default fallback 192.168.1.1 / 0xC0A80101). If the packet source IP (ip->saddr) does not match the authorized server IP, drop the packet with XDP_DROP. Pass authorized DHCP responses, client requests, non-DHCP traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Define array map 'auth_dhcp_server' with key __u32, value __be32, max_entries 1",
+    "Validate Ethernet, IPv4, UDP, and DHCP 240-byte header bounds",
+    "Verify UDP src == 67, dst == 68, op == 2, and magic cookie == 0x63825363",
+    "Lookup authorized server IP in map (fallback to 192.168.1.1 if unconfigured)",
+    "Drop packet if ip->saddr != authorized_ip",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dhcp_rogue_offer_drop",
+      "fixture_file": "fixtures/dhcp_rogue_offer_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "dhcp_auth_offer_pass",
+      "fixture_file": "fixtures/dhcp_auth_offer_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dhcp_auth_ack_pass",
+      "fixture_file": "fixtures/dhcp_auth_ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dhcp_client_discover_pass",
+      "fixture_file": "fixtures/dhcp_client_discover_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dhcp_bad_cookie_pass",
+      "fixture_file": "fixtures/dhcp_bad_cookie_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_dhcp_pass",
+      "fixture_file": "fixtures/truncated_dhcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_nrf_l2_002_ipv6_lpm_trie_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_ipv6_lpm",
+  "template_family": "xdp_ipv6_lpm_router",
+  "semantic_signature": "ipv6_lpm_trie+longest_prefix_match_redirect+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that routes IPv6 packets (EtherType 0x86DD) using Longest Prefix Match (LPM). If the destination address matches prefix 2001:db8:1::/48, redirect to interface ifindex 10. If the destination address matches prefix 2001:db8:2::/48, redirect to interface ifindex 11. Pass unrouted destinations and non-IPv6 traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct ipv6hdr bounds",
+    "Verify eth->h_proto == bpf_htons(ETH_P_IPV6)",
+    "Match destination IPv6 prefix 2001:db8:1::/48 -> bpf_redirect(10, 0)",
+    "Match destination IPv6 prefix 2001:db8:2::/48 -> bpf_redirect(11, 0)",
+    "Always return XDP_PASS for non-matching traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "prefix_1_redirect_if10",
+      "fixture_file": "fixtures/prefix_1_redirect_if10.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "prefix_2_redirect_if11",
+      "fixture_file": "fixtures/prefix_2_redirect_if11.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "unrouted_prefix_pass",
+      "fixture_file": "fixtures/unrouted_prefix_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

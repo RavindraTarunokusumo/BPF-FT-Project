@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pfs_l2_007_ipv6_nd_spoof_guard",
+  "main_validator": "packet_action",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "unsolicited_router_na_drop",
+      "description": "Unsolicited ICMPv6 NA (S=0, R=1) claiming router status must be dropped",
+      "fixture_file": "fixtures/unsolicited_router_na_drop.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000243a4020010db800000000000000000000000120010db80000000000000000000000028800d37e123400018000000020010db80000000000000000000000010201525400123456",
+      "packet_len": 90,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "solicited_router_na_pass",
+      "description": "Solicited ICMPv6 NA (S=1, R=1) must pass",
+      "fixture_file": "fixtures/solicited_router_na_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000243a4020010db800000000000000000000000120010db80000000000000000000000028800937e12340001c000000020010db80000000000000000000000010201525400123456",
+      "packet_len": 90,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "unsolicited_host_na_pass",
+      "description": "Unsolicited ICMPv6 NA for normal host (S=0, R=0) must pass",
+      "fixture_file": "fixtures/unsolicited_host_na_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000243a4020010db800000000000000000000000120010db800000000000000000000000288005330123400010000000020010db80000000000000000000000500201525400123456",
+      "packet_len": 90,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ns_pass",
+      "description": "Neighbor Solicitation (Type 135) must pass",
+      "fixture_file": "fixtures/ns_pass.bin",
+      "packet_hex": "52540012345652540065432186dd60000000001c3a4020010db800000000000000000000000120010db80000000000000000000000028700dd44123400010000000020010db8000000000000000000000001",
+      "packet_len": 82,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_tcp_pass",
+      "description": "IPv6 TCP packet must pass",
+      "fixture_file": "fixtures/ipv6_tcp_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002ffff1ffd0000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv4_pass",
+      "description": "IPv4 traffic must pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_na_pass",
+      "description": "Truncated ICMPv6 NA must pass safely",
+      "fixture_file": "fixtures/truncated_na_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000043a4020010db800000000000000000000000120010db800000000000000000000000288000000",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

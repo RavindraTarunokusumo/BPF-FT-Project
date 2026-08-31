@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_nrf_l1_001_mpls_label_forward",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_router_mpls",
+  "template_family": "xdp_mpls_label_forwarder",
+  "semantic_signature": "mpls_label_100_to_if2_label_200_to_if3+pass_other",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects MPLS unicast frames (EtherType 0x8847). Extract the 20-bit label from the outer label stack entry. If label == 100, redirect to interface ifindex 2 using bpf_redirect(2, 0). If label == 200, redirect to interface ifindex 3 using bpf_redirect(3, 0). Pass all other MPLS labels, non-MPLS frames, and malformed packets with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct mpls_label bounds",
+    "Extract 20-bit label (bpf_ntohl(mpls->entry) >> 12)",
+    "Return bpf_redirect(2, 0) for label 100",
+    "Return bpf_redirect(3, 0) for label 200",
+    "Return XDP_PASS for other labels and non-MPLS traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "label_100_redirect_if2",
+      "fixture_file": "fixtures/label_100_redirect_if2.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "label_200_redirect_if3",
+      "fixture_file": "fixtures/label_200_redirect_if3.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "label_300_pass",
+      "fixture_file": "fixtures/label_300_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

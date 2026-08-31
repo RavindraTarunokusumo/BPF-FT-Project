@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pfs_l3_003_tcp_syn_flood_guard",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_syn_flood_guard",
+  "template_family": "xdp_syn_rate_limit",
+  "semantic_signature": "ipv4_tcp_syn+per_src_100ms_window_max_10_syns+drop_excess",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that protects against TCP SYN flood attacks. Maintain per-source IPv4 state in a BPF hash map named 'syn_flood_map' (key __be32 src_ip, value struct syn_rate_state { __u64 window_start_ns; __u32 syn_count; __u32 drop_count; }, max_entries 1024). For every initial TCP SYN packet (tcp->syn == 1 && tcp->ack == 0), calculate a 100ms sliding window using bpf_ktime_get_ns(). Allow up to 10 SYNs per window. If a source exceeds 10 SYNs within the current 100ms window, increment drop_count and drop the packet with XDP_DROP. Pass non-SYN TCP traffic, other protocols, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Define struct syn_rate_state with window_start_ns (__u64), syn_count (__u32), drop_count (__u32)",
+    "Define hash map 'syn_flood_map' with key __be32 and max_entries 1024",
+    "Filter only TCP SYN packets (tcp->syn && !tcp->ack)",
+    "Enforce limit of 10 SYNs per 100ms window (100,000,000 ns)",
+    "Increment drop_count and drop excess SYNs with XDP_DROP",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "syn_1_pass",
+      "fixture_file": "fixtures/syn_1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_2_pass",
+      "fixture_file": "fixtures/syn_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_3_pass",
+      "fixture_file": "fixtures/syn_3_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_4_pass",
+      "fixture_file": "fixtures/syn_4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_other_src_pass",
+      "fixture_file": "fixtures/syn_other_src_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_syn_tcp_pass",
+      "fixture_file": "fixtures/non_syn_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

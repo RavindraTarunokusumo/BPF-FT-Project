@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_pfs_l1_010_ipv6_hop_by_hop_drop",
+  "main_validator": "packet_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "ipv6_hbh_drop",
+      "description": "IPv6 packet with Next Header 0 (Hop-by-Hop) must be dropped",
+      "fixture_file": "fixtures/ipv6_hbh_drop.bin",
+      "packet_hex": "52540012345652540065432186dd60000000001c004020010db800000000000000000000000120010db8000000000000000000000002060000000000000030390050000003e8000000005002fffff8020000",
+      "packet_len": 82,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_tcp_pass",
+      "description": "IPv6 packet with Next Header 6 (TCP) must pass",
+      "fixture_file": "fixtures/ipv6_tcp_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002ffff1ffd0000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_udp_pass",
+      "description": "IPv6 packet with Next Header 17 (UDP) must pass",
+      "fixture_file": "fixtures/ipv6_udp_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000008114020010db800000000000000000000000120010db80000000000000000000000023039003500080000",
+      "packet_len": 62,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv4_pass",
+      "description": "IPv4 traffic must pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "description": "Truncated IPv6 header must pass safely",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000",
+      "packet_len": 17,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

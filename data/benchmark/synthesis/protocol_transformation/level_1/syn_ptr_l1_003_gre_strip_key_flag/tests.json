@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_ptr_l1_003_gre_strip_key_flag",
+  "main_validator": "packet_bytes",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "gre_clear_key_flag_pass",
+      "description": "GRE Key bit cleared",
+      "fixture_file": "fixtures/gre_clear_key_flag_pass.bin",
+      "packet_hex": "52540012345652540065432108004500004012340000402fe4ecc0a8010ac0a80114200008001234567845000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 78,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "gre_no_key_pass",
+      "description": "GRE without Key flag passed unchanged",
+      "fixture_file": "fixtures/gre_no_key_pass.bin",
+      "packet_hex": "52540012345652540065432108004500003c12340000402fe4f0c0a8010ac0a801140000080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passed unchanged",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passed unchanged",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_gre_pass",
+      "description": "Truncated GRE packet passed safely",
+      "fixture_file": "fixtures/truncated_gre_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001512340000402fe517c0a8010ac0a8011400",
+      "packet_len": 35,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

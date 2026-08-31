@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_nrf_l3_001_maglev_consistent_hash_lb",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_load_balancer_maglev",
+  "template_family": "xdp_maglev_lb",
+  "semantic_signature": "ipv4_5tuple+maglev_lookup_table+redirect_backend",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP load balancer using Google Maglev consistent hashing. Compute a 5-tuple flow hash over IPv4 TCP/UDP packets, index into a fixed lookup table of size 257 (maglev_table[hash % 257]), and redirect to the selected backend interface ifindex (base index 100 + backend_id). Pass non-TCP/UDP traffic with XDP_PASS.",
+  "requirements": [
+    "Extract 5-tuple for TCP and UDP packets",
+    "Compute 32-bit Murmur/FNV flow hash",
+    "Index into Maglev table modulo 257",
+    "Return bpf_redirect(100 + (hash % 4), 0)",
+    "Always return XDP_PASS for non-TCP/UDP traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "flow1_lb_redirect",
+      "fixture_file": "fixtures/flow1_lb_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "flow2_lb_redirect",
+      "fixture_file": "fixtures/flow2_lb_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "udp_flow_lb_redirect",
+      "fixture_file": "fixtures/udp_flow_lb_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vlan_pass",
+      "fixture_file": "fixtures/vlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

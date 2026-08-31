@@ -1,0 +1,55 @@
+{
+  "task_id": "syn_nrf_l2_008_ip_in_ip_tunnel_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_ipinip",
+  "template_family": "xdp_ipinip_router",
+  "semantic_signature": "ipinip_proto4+inner_daddr_routing+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IP-in-IP tunnel traffic (outer IPv4 protocol 4). Parse the inner IPv4 header. If inner destination is in 10.1.0.0/16, redirect to interface ifindex 18. If inner destination is in 10.2.0.0/16, redirect to interface ifindex 19. Pass unrouted traffic with XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4 (protocol 4), and inner IPv4 header bounds",
+    "Redirect inner destination 10.1.0.0/16 -> bpf_redirect(18, 0)",
+    "Redirect inner destination 10.2.0.0/16 -> bpf_redirect(19, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "inner_subnet1_redirect_if18",
+      "fixture_file": "fixtures/inner_subnet1_redirect_if18.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "inner_subnet2_redirect_if19",
+      "fixture_file": "fixtures/inner_subnet2_redirect_if19.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "inner_other_subnet_pass",
+      "fixture_file": "fixtures/inner_other_subnet_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_tcp_pass",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipinip_pass",
+      "fixture_file": "fixtures/truncated_ipinip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

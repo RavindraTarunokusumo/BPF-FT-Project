@@ -1,0 +1,47 @@
+{
+  "task_id": "syn_pfs_l1_001_geneve_vni_filter",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_tunnel_filter",
+  "template_family": "xdp_geneve_vni_filter",
+  "semantic_signature": "geneve_udp6081+vni_001234+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects UDP packets on destination port 6081 (GENEVE encapsulation). Parse the GENEVE tunnel header and drop packets where the 24-bit Virtual Network Identifier (VNI) is exactly 0x001234. Pass all other GENEVE VNIs, non-GENEVE UDP packets, TCP/ICMP/other protocols, non-IPv4 frames, and malformed/truncated packets with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet header bounds and check eth->h_proto == bpf_htons(ETH_P_IP)",
+    "Validate IPv4 header bounds (supporting variable IHL) and check ip->protocol == IPPROTO_UDP",
+    "Validate UDP header bounds and check udp->dest == bpf_htons(6081)",
+    "Validate GENEVE header bounds (struct genevehdr)",
+    "Extract 24-bit VNI from gen->vni[0..2] and drop if equal to 0x001234",
+    "Return XDP_PASS for non-matching or malformed packets",
+    "Include SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "geneve_match_drop",
+      "fixture_file": "fixtures/geneve_match_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "geneve_other_vni_pass",
+      "fixture_file": "fixtures/geneve_other_vni_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "geneve_wrong_port_pass",
+      "fixture_file": "fixtures/geneve_wrong_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_geneve_pass",
+      "fixture_file": "fixtures/truncated_geneve_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

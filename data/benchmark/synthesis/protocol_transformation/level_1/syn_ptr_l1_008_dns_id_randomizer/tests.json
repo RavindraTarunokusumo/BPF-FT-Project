@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_ptr_l1_008_dns_id_randomizer",
+  "main_validator": "packet_bytes",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "dns_id_xor_pass",
+      "description": "DNS query ID XORed with 0xA55A with checksum update",
+      "fixture_file": "fixtures/dns_id_xor_pass.bin",
+      "packet_hex": "525400123456525400654321080045000039123400004011e511c0a8010ac0a801143039003500250000123400000001000000000000076578616d706c6503636f6d0000010001",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_response_pass",
+      "description": "DNS response passed unchanged",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "packet_hex": "525400123456525400654321080045000039123400004011e511c0a8010ac0a801140035303900250000567880000001000000000000076578616d706c6503636f6d0000010001",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_dns_udp_pass",
+      "description": "UDP to port 5353 passed unchanged",
+      "fixture_file": "fixtures/non_dns_udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a80114303914e900080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passed unchanged",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_dns_pass",
+      "description": "Truncated DNS packet passed safely",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001d123400004011e52dc0a8010ac0a80114303900350009000012",
+      "packet_len": 43,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

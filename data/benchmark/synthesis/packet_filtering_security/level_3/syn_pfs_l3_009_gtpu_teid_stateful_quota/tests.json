@@ -1,0 +1,88 @@
+{
+  "task_id": "syn_pfs_l3_009_gtpu_teid_stateful_quota",
+  "main_validator": "packet_action",
+  "test_count": 9,
+  "test_cases": [
+    {
+      "name": "teid_first_pkt_pass",
+      "description": "First packet for TEID 0x1000 passes and initializes quota",
+      "fixture_file": "fixtures/teid_first_pkt_pass.bin",
+      "packet_hex": "5254001234565254006543210800450000a4123400004011e4a6c0a8010ac0a80114303908680090000030ff00800000100045000080123400004001e4dac0a8010ac0a801140800270c1234000141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+      "packet_len": 178,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "teid_second_pkt_pass",
+      "description": "Second packet for TEID 0x1000 within quota passes",
+      "fixture_file": "fixtures/teid_second_pkt_pass.bin",
+      "packet_hex": "5254001234565254006543210800450000a4123400004011e4a6c0a8010ac0a80114303908680090000030ff00800000100045000080123400004001e4dac0a8010ac0a801140800f4d91234000142424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242",
+      "packet_len": 178,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "teid_other_tunnel_pass",
+      "description": "Packet for different TEID 0x2000 has independent quota and passes",
+      "fixture_file": "fixtures/teid_other_tunnel_pass.bin",
+      "packet_hex": "525400123456525400654321080045000048123400004011e502c0a8010ac0a80114303908680034000030ff00240000200045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 86,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "teid_echo_req_pass",
+      "description": "GTP-U Echo Request bypasses user quota and passes",
+      "fixture_file": "fixtures/teid_echo_req_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004011e526c0a8010ac0a8011430390868001000003001000000001000",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "description": "UDP to port 2153 passes",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039086900080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "direct_tcp_pass",
+      "description": "Direct TCP traffic passes",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "direct_icmp_pass",
+      "description": "Direct ICMP passes",
+      "fixture_file": "fixtures/direct_icmp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passes",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "description": "Truncated GTP-U packet passes safely",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001e123400004011e52cc0a8010ac0a8011430390868000a000030ff",
+      "packet_len": 44,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

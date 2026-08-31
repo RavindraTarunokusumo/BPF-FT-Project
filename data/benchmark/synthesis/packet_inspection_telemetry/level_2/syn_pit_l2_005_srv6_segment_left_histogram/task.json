@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pit_l2_005_srv6_segment_left_histogram",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_srv6",
+  "template_family": "xdp_srv6_sl_counter",
+  "semantic_signature": "srv6_routing_type_4+segments_left_histogram+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects SRv6 traffic (IPv6 Next Header 43 / Routing Header with Routing Type 4). Parse the 8-byte SRH header and inspect the 8-bit Segments Left field. Record counts in a per-CPU array map named 'srv6_sl_map' (max_entries 4): slot 0 for Segments Left 0, slot 1 for 1, slot 2 for 2, and slot 3 for 3 or more. Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'srv6_sl_map' with max_entries 4",
+    "Validate Ethernet and IPv6 header bounds (eth->h_proto == 0x86DD)",
+    "Verify ip6->nexthdr == 43 and srh->routing_type == 4",
+    "Classify srh->segments_left into slots 0..3 (capping at slot 3)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "srv6_sl_0_pass",
+      "fixture_file": "fixtures/srv6_sl_0_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "srv6_sl_1_pass",
+      "fixture_file": "fixtures/srv6_sl_1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "srv6_sl_2_pass",
+      "fixture_file": "fixtures/srv6_sl_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "srv6_sl_3_pass",
+      "fixture_file": "fixtures/srv6_sl_3_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "standard_ipv6_pass",
+      "fixture_file": "fixtures/standard_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_srv6_pass",
+      "fixture_file": "fixtures/truncated_srv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

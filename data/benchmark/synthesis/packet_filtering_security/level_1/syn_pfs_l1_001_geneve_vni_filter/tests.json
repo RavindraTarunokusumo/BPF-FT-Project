@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_pfs_l1_001_geneve_vni_filter",
+  "main_validator": "packet_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "geneve_match_drop",
+      "description": "GENEVE packet with VNI 0x001234 must be dropped",
+      "fixture_file": "fixtures/geneve_match_drop.bin",
+      "packet_hex": "525400123456525400654321080045000056123400004011e4f4c0a8010ac0a80114303917c1004200000000080000123400525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 100,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "geneve_other_vni_pass",
+      "description": "GENEVE packet with VNI 0x005678 must pass",
+      "fixture_file": "fixtures/geneve_other_vni_pass.bin",
+      "packet_hex": "525400123456525400654321080045000056123400004011e4f4c0a8010ac0a80114303917c1004200000000080000567800525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 100,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "geneve_wrong_port_pass",
+      "description": "UDP packet to port 6080 must pass",
+      "fixture_file": "fixtures/geneve_wrong_port_pass.bin",
+      "packet_hex": "525400123456525400654321080045000026123400004011e524c0a8010ac0a80114303917c0001200004e4f545f47454e455645",
+      "packet_len": 52,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet must pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_geneve_pass",
+      "description": "Truncated GENEVE packet must pass safely",
+      "fixture_file": "fixtures/truncated_geneve_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001e123400004011e52cc0a8010ac0a80114303917c1000a00000000",
+      "packet_len": 44,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

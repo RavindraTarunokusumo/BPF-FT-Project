@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pfs_l1_006_coap_non_confirmable_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_coap_filter",
+  "template_family": "xdp_coap_type_filter",
+  "semantic_signature": "coap_udp5683+type_1_non_confirmable+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects CoAP traffic (RFC 7252) on UDP destination port 5683. Parse the 4-byte CoAP fixed header and extract the 2-bit Type field from bits 4-5 of the first byte ((byte >> 4) & 0x03). If the message type is 1 (Non-confirmable / NON), drop the packet with XDP_DROP. Pass Confirmable (0), ACK (2), Reset (3), non-CoAP UDP packets, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4 (variable IHL), and UDP headers",
+    "Verify UDP destination port is 5683",
+    "Validate 4-byte CoAP header bounds",
+    "Extract 2-bit Type field and drop if type == 1",
+    "Pass all other traffic safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "coap_non_drop",
+      "fixture_file": "fixtures/coap_non_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "coap_con_pass",
+      "fixture_file": "fixtures/coap_con_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "coap_ack_pass",
+      "fixture_file": "fixtures/coap_ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_port_pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_coap_pass",
+      "fixture_file": "fixtures/truncated_coap_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

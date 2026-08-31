@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pit_l1_001_vxlan_vni_counter",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_tunnel",
+  "template_family": "xdp_vxlan_counter",
+  "semantic_signature": "vxlan_udp4789+percpu_packet_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects VXLAN traffic (UDP port 4789) and counts valid VXLAN encapsulated frames in a per-CPU array map named 'vxlan_counter_map' (key 0, type BPF_MAP_TYPE_PERCPU_ARRAY, value __u64, max_entries 1). Increment the counter by 1 for every valid VXLAN frame. Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'vxlan_counter_map' with key __u32, value __u64, max_entries 1",
+    "Validate Ethernet, IPv4 (variable IHL), UDP, and VXLAN header bounds",
+    "Verify UDP destination port is 4789",
+    "Increment counter at key 0 for valid VXLAN frames",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "vxlan_packet_pass",
+      "fixture_file": "fixtures/vxlan_packet_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vxlan_packet_2_pass",
+      "fixture_file": "fixtures/vxlan_packet_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_vxlan_udp_pass",
+      "fixture_file": "fixtures/non_vxlan_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_vxlan_pass",
+      "fixture_file": "fixtures/truncated_vxlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

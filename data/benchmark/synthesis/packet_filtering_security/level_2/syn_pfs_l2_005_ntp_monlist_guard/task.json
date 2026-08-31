@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_005_ntp_monlist_guard",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_ntp_filter",
+  "template_family": "xdp_ntp_mode_guard",
+  "semantic_signature": "ntp_udp123+mode_6_or_7+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects NTP traffic (UDP port 123). Parse the 48-byte NTP fixed header (struct ntphdr) and extract the 3-bit Mode field (li_vn_mode & 0x07). To prevent NTP amplification attacks, drop packets where mode is 6 (Control Message) or 7 (Private / monlist command) with XDP_DROP. Pass standard NTP Client (3), Server (4), Broadcast (5), non-NTP traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and UDP headers",
+    "Verify UDP port 123 on source or destination",
+    "Validate 48-byte struct ntphdr bounds",
+    "Extract 3-bit mode field and drop if mode == 6 || mode == 7",
+    "Pass all other NTP modes and protocols safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ntp_mode7_monlist_drop",
+      "fixture_file": "fixtures/ntp_mode7_monlist_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "ntp_mode6_control_drop",
+      "fixture_file": "fixtures/ntp_mode6_control_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "ntp_mode3_client_pass",
+      "fixture_file": "fixtures/ntp_mode3_client_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ntp_mode4_server_pass",
+      "fixture_file": "fixtures/ntp_mode4_server_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_port_pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ntp_pass",
+      "fixture_file": "fixtures/truncated_ntp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

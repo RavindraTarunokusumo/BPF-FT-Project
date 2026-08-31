@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pfs_l1_002_vxlan_flags_filter",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_tunnel_filter",
+  "template_family": "xdp_vxlan_flags_filter",
+  "semantic_signature": "vxlan_udp4789+reserved_flags_nonzero+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects VXLAN traffic on UDP destination port 4789. Parse the 8-byte VXLAN header and check the 32-bit flags field. The only valid flag in RFC 7348 is the I-bit (0x08000000 in network order / bit 27). If any reserved flag bits are non-zero (i.e. flags & ~0x08000000 != 0), drop the packet with XDP_DROP. Pass all valid VXLAN frames, non-VXLAN traffic, and malformed packets with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 header bounds (accounting for variable IHL)",
+    "Verify UDP destination port is 4789",
+    "Validate VXLAN header bounds (8 bytes)",
+    "Check flags field: drop if reserved bits are set",
+    "Pass all other and truncated packets safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "vxlan_bad_flags_drop",
+      "fixture_file": "fixtures/vxlan_bad_flags_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "vxlan_valid_pass",
+      "fixture_file": "fixtures/vxlan_valid_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vxlan_other_port_pass",
+      "fixture_file": "fixtures/vxlan_other_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_vxlan_pass",
+      "fixture_file": "fixtures/truncated_vxlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pit_l2_007_icmpv6_nd_telemetry",
+  "main_validator": "map_state",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "icmp6_rs_pass",
+      "description": "Router Solicitation (Type 133) increments slot 0 and returns XDP_PASS",
+      "fixture_file": "fixtures/icmp6_rs_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000113a4020010db800000000000000000000000120010db8000000000000000000000002850090df123400015445535450494e4736",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp6_ra_pass",
+      "description": "Router Advertisement (Type 134) increments slot 1 and returns XDP_PASS",
+      "fixture_file": "fixtures/icmp6_ra_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000113a4020010db800000000000000000000000120010db800000000000000000000000286008fdf123400015445535450494e4736",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp6_ns_pass",
+      "description": "Neighbor Solicitation (Type 135) increments slot 2 and returns XDP_PASS",
+      "fixture_file": "fixtures/icmp6_ns_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000113a4020010db800000000000000000000000120010db800000000000000000000000287008edf123400015445535450494e4736",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp6_na_pass",
+      "description": "Neighbor Advertisement (Type 136) increments slot 3 and returns XDP_PASS",
+      "fixture_file": "fixtures/icmp6_na_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000113a4020010db800000000000000000000000120010db800000000000000000000000288008ddf123400015445535450494e4736",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp6_echo_pass",
+      "description": "ICMPv6 Echo Request (Type 128) passes without incrementing ND map",
+      "fixture_file": "fixtures/icmp6_echo_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000113a4020010db800000000000000000000000120010db8000000000000000000000002800095df123400015445535450494e4736",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv4_pass",
+      "description": "IPv4 traffic passes",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_icmp6_pass",
+      "description": "Truncated ICMPv6 packet passes safely",
+      "fixture_file": "fixtures/truncated_icmp6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000013a4020010db800000000000000000000000120010db800000000000000000000000285",
+      "packet_len": 55,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

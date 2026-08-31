@@ -1,0 +1,55 @@
+{
+  "task_id": "syn_ptr_l2_004_gre_decap_to_inner_ipv4",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_gre_decap",
+  "semantic_signature": "gre_proto47+strip_24_outer_bytes_expose_inner_ip+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that decapsulates GRE tunnel packets (IPv4 protocol 47 carrying inner IPv4 EtherType 0x0800). Strip the outer 24 bytes (20-byte outer IPv4 + 4-byte GRE header) using bpf_xdp_adjust_head(ctx, 24), attach the original Ethernet MAC header to the inner IPv4 packet, set eth->h_proto to 0x0800, and return XDP_PASS. Pass non-GRE traffic and malformed packets unchanged.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4 (IHL=5), struct grehdr (flags==0), and inner IPv4 bounds",
+    "Call bpf_xdp_adjust_head(ctx, 24) to strip outer encapsulation",
+    "Restore Ethernet MACs and set eth->h_proto = bpf_htons(ETH_P_IP)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gre_decap_pass",
+      "fixture_file": "fixtures/gre_decap_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gre_decap_tcp_pass",
+      "fixture_file": "fixtures/gre_decap_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gre_udp_pass",
+      "fixture_file": "fixtures/non_gre_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_tcp_pass",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gre_pass",
+      "fixture_file": "fixtures/truncated_gre_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

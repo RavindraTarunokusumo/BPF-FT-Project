@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_nrf_l1_006_ipv6_multicast_forward",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_router_ipv6",
+  "template_family": "xdp_ipv6_mcast_forwarder",
+  "semantic_signature": "ipv6_mcast_ff02_prefix+redirect_ifindex_4+pass_unicast",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv6 packets (EtherType 0x86DD). If the destination address starts with link-local multicast prefix ff02::/16 (first 16 bits equal 0xFF02), redirect the packet to interface ifindex 4 using bpf_redirect(4, 0). Pass unicast IPv6 traffic and other protocols with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct ipv6hdr bounds",
+    "Verify eth->h_proto == bpf_htons(ETH_P_IPV6)",
+    "Check if ip6->daddr.s6_addr16[0] == bpf_htons(0xFF02)",
+    "Return bpf_redirect(4, 0) for matching multicast",
+    "Return XDP_PASS for unicast and non-IPv6 traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ipv6_mcast_ff02_redirect_if4",
+      "fixture_file": "fixtures/ipv6_mcast_ff02_redirect_if4.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "ipv6_unicast_pass",
+      "fixture_file": "fixtures/ipv6_unicast_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

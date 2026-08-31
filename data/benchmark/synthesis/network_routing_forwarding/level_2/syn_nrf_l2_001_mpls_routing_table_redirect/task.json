@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_nrf_l2_001_mpls_routing_table_redirect",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_mpls_table",
+  "template_family": "xdp_mpls_route_table",
+  "semantic_signature": "mpls_label_table_lookup+redirect_egress_ifindex+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that routes MPLS frames (EtherType 0x8847) using a BPF hash routing table named 'mpls_route_map' (key __u32 label, value __u32 egress_ifindex, max_entries 1024). Extract the 20-bit label from the outer label stack entry. If a route exists, redirect to egress_ifindex using bpf_redirect(egress_ifindex, 0). If label == 500, redirect to ifindex 20. If label == 600, redirect to ifindex 21. Pass unrouted labels and non-MPLS frames with XDP_PASS.",
+  "requirements": [
+    "Define hash map 'mpls_route_map' with key __u32 and max_entries 1024",
+    "Validate Ethernet and struct mpls_label bounds",
+    "Extract 20-bit label and lookup in table",
+    "Return bpf_redirect(egress_ifindex, 0) on match",
+    "Return XDP_PASS if no route found",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "label_500_redirect_if20",
+      "fixture_file": "fixtures/label_500_redirect_if20.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "label_600_redirect_if21",
+      "fixture_file": "fixtures/label_600_redirect_if21.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "label_999_unrouted_pass",
+      "fixture_file": "fixtures/label_999_unrouted_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

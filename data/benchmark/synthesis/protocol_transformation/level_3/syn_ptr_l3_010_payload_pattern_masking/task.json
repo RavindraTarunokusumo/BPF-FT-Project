@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_ptr_l3_010_payload_pattern_masking",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_dpi_scrubber",
+  "template_family": "xdp_payload_sanitizer",
+  "semantic_signature": "tcp_payload_dpi+mask_token_secret99_with_X+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that performs deep packet inspection (DPI) payload sanitization on IPv4 TCP traffic. Search the TCP payload for the 8-byte sensitive string 'SECRET99'. When found, overwrite the 8 bytes with 'XXXXXXXX' (0x58), reset the TCP checksum, and return XDP_PASS. Pass non-matching traffic unchanged.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and TCP header bounds",
+    "Calculate TCP payload offset from tcp->doff * 4",
+    "Safely search payload for 8-byte pattern 'SECRET99'",
+    "Mask matching pattern with 'XXXXXXXX'",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "mask_secret_token_pass",
+      "fixture_file": "fixtures/mask_secret_token_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mask_secret_token_2_pass",
+      "fixture_file": "fixtures/mask_secret_token_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "clean_payload_pass",
+      "fixture_file": "fixtures/clean_payload_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "no_payload_tcp_pass",
+      "fixture_file": "fixtures/no_payload_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

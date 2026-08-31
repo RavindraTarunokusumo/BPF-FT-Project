@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_ptr_l2_010_tcp_timestamp_strip",
+  "main_validator": "packet_bytes",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "ts_stripped_pass",
+      "description": "TCP packet with Timestamp option replaced by 10 NOPs",
+      "fixture_file": "fixtures/ts_stripped_pass.bin",
+      "packet_hex": "525400123456525400654321080045000034123400004006e521c0a8010ac0a8011430390050000003e8000000008002ffffafd80000080a01020304050607080000",
+      "packet_len": 66,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ts_with_mss_pass",
+      "description": "TCP packet with MSS + Timestamp has Timestamp replaced",
+      "fixture_file": "fixtures/ts_with_mss_pass.bin",
+      "packet_hex": "525400123456525400654321080045000038123400004006e51dc0a8010ac0a8011430390050000003e8000000009002ffff981c0000020405b4080a01020304050607080000",
+      "packet_len": 70,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "no_ts_pass",
+      "description": "TCP packet without Timestamp option passed unchanged",
+      "fixture_file": "fixtures/no_ts_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006002ffffe0460000020405b4",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passed unchanged",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP packet passed unchanged",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP packet passed safely",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000016123400004006e53fc0a8010ac0a801140050",
+      "packet_len": 36,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

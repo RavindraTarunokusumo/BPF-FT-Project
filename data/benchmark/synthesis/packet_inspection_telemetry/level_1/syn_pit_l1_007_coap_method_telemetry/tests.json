@@ -1,0 +1,61 @@
+{
+  "task_id": "syn_pit_l1_007_coap_method_telemetry",
+  "main_validator": "map_state",
+  "test_count": 6,
+  "test_cases": [
+    {
+      "name": "coap_get_pass",
+      "description": "CoAP GET (code 1) increments slot 0 and returns XDP_PASS",
+      "fixture_file": "fixtures/coap_get_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430391633000c000040011234",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "coap_post_pass",
+      "description": "CoAP POST (code 2) increments slot 1 and returns XDP_PASS",
+      "fixture_file": "fixtures/coap_post_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430391633000c000040021234",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "coap_put_pass",
+      "description": "CoAP PUT (code 3) increments slot 2 and returns XDP_PASS",
+      "fixture_file": "fixtures/coap_put_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430391633000c000040031234",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "coap_delete_pass",
+      "description": "CoAP DELETE (code 4) increments slot 3 and returns XDP_PASS",
+      "fixture_file": "fixtures/coap_delete_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430391633000c000040041234",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_coap_udp_pass",
+      "description": "UDP to port 5684 passes without counting",
+      "fixture_file": "fixtures/non_coap_udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039163400080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_coap_pass",
+      "description": "Truncated CoAP packet passes safely",
+      "fixture_file": "fixtures/truncated_coap_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001d123400004011e52dc0a8010ac0a80114303916330009000040",
+      "packet_len": 43,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

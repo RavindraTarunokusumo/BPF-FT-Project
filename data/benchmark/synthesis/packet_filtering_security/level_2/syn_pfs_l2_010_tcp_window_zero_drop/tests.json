@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pfs_l2_010_tcp_window_zero_drop",
+  "main_validator": "packet_action",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "tcp_zero_window_drop",
+      "description": "Established TCP packet (ACK set, no SYN/RST) with Window == 0 must be dropped",
+      "fixture_file": "fixtures/tcp_zero_window_drop.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e80000000050100000f7f40000",
+      "packet_len": 54,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_valid_window_pass",
+      "description": "Established TCP packet with Window 65535 must pass",
+      "fixture_file": "fixtures/tcp_valid_window_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010fffff7f40000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_syn_zero_window_pass",
+      "description": "TCP SYN packet with Window == 0 must pass (only established ACK packets filtered)",
+      "fixture_file": "fixtures/tcp_syn_zero_window_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e80000000050020000f8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_rst_zero_window_pass",
+      "description": "TCP RST packet with Window == 0 must pass",
+      "fixture_file": "fixtures/tcp_rst_zero_window_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e80000000050140000f7f00000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet must pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP packet must pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP packet must pass safely",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000018123400004006e53dc0a8010ac0a8011400503039",
+      "packet_len": 38,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

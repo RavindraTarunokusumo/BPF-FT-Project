@@ -1,0 +1,45 @@
+#include <linux/bpf.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
+#include <linux/if_ether.h>
+#include <linux/ip.h>
+
+struct grehdr {
+    __be16 flags;
+    __be16 proto;
+};
+
+SEC("xdp")
+int xdp_gre_csum_filter(struct xdp_md *ctx) {
+    void *data_end = (void *)(long)ctx->data_end;
+    void *data = (void *)(long)ctx->data;
+
+    struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+        return XDP_PASS;
+
+    struct iphdr *ip = (void *)(eth + 1);
+    if ((void *)(ip + 1) > data_end)
+        return XDP_PASS;
+    if (ip->protocol != 47) // IPPROTO_GRE
+        return XDP_PASS;
+
+    int ip_len = ip->ihl * 4;
+    if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)
+        return XDP_PASS;
+
+    struct grehdr *gre = (void *)ip + ip_len;
+    if ((void *)(gre + 1) > data_end)
+        return XDP_PASS;
+
+    __u16 flags = bpf_ntohs(gre->flags);
+    // Bit 15 (0x8000) indicates Checksum Present
+    if (flags & 0x8000)
+        return XDP_DROP;
+
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";

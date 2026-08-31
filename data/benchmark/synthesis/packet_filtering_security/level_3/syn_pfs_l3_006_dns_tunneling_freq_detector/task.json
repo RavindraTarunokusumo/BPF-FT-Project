@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pfs_l3_006_dns_tunneling_freq_detector",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_dns_tunnel_detector",
+  "template_family": "xdp_dns_rate_limiter",
+  "semantic_signature": "dns_query_udp53+per_client_bytes_gt_500_per_sec+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that detects DNS tunneling data exfiltration. Maintain per-client statistics in a BPF hash map named 'dns_tunnel_map' (key __be32 client_ip, value struct dns_client_stat { __u64 window_start_ns; __u64 total_bytes; }, max_entries 1024). For DNS queries targeting UDP port 53 (QR == 0), calculate cumulative DNS query payload bytes within a 1-second rolling epoch (1,000,000,000 ns). If a client's cumulative query volume exceeds 500 bytes within the 1-second window, drop subsequent queries with XDP_DROP. Pass compliant queries, DNS responses, other protocols, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Define struct dns_client_stat with window_start_ns and total_bytes (__u64)",
+    "Define hash map 'dns_tunnel_map' with max_entries 1024",
+    "Filter only DNS Queries (UDP dst 53 and QR == 0)",
+    "Track cumulative query bytes per 1-second window",
+    "Drop query with XDP_DROP if cumulative bytes > 500",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dns_normal_query_pass",
+      "fixture_file": "fixtures/dns_normal_query_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_second_query_pass",
+      "fixture_file": "fixtures/dns_second_query_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_tunnel_exfil_drop",
+      "fixture_file": "fixtures/dns_tunnel_exfil_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "dns_other_src_pass",
+      "fixture_file": "fixtures/dns_other_src_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_response_pass",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_port_pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_dns_pass",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

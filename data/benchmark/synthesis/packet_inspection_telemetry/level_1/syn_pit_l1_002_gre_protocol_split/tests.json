@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_pit_l1_002_gre_protocol_split",
+  "main_validator": "map_state",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "gre_ipv4_pass",
+      "description": "GRE carrying IPv4 increments slot 0 and returns XDP_PASS",
+      "fixture_file": "fixtures/gre_ipv4_pass.bin",
+      "packet_hex": "52540012345652540065432108004500003c12340000402fe4f0c0a8010ac0a801140000080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "gre_ipv6_pass",
+      "description": "GRE carrying IPv6 increments slot 1 and returns XDP_PASS",
+      "fixture_file": "fixtures/gre_ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432108004500005112340000402fe4dbc0a8010ac0a80114000086dd6000000000113a4020010db800000000000000000000000120010db8000000000000000000000002800095df123400015445535450494e4736",
+      "packet_len": 95,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "gre_other_pass",
+      "description": "GRE carrying other protocol increments slot 2 and returns XDP_PASS",
+      "fixture_file": "fixtures/gre_other_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002212340000402fe50ac0a8010ac0a801140000884700000000000000000000",
+      "packet_len": 48,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_gre_udp_pass",
+      "description": "Non-GRE UDP packet passes without incrementing GRE map",
+      "fixture_file": "fixtures/non_gre_udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_gre_pass",
+      "description": "Truncated GRE packet passes safely",
+      "fixture_file": "fixtures/truncated_gre_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001512340000402fe517c0a8010ac0a8011400",
+      "packet_len": 35,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

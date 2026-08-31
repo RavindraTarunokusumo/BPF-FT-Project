@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_001_count_min_sketch_heavy_hitters",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_sketch",
+  "template_family": "xdp_count_min_sketch",
+  "semantic_signature": "ipv4_5tuple+count_min_sketch_4x256+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements a 4-row by 256-column Count-Min Sketch (1024 cells total) in a per-CPU array map named 'cms_sketch_map' (max_entries 1024). For every IPv4 TCP or UDP packet, extract the 5-tuple and compute a flow hash. Using 4 distinct row hash functions, increment the corresponding cell in each row (row * 256 + hash_r % 256). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'cms_sketch_map' with max_entries 1024 (4 rows * 256 columns)",
+    "Extract 5-tuple for TCP and UDP packets",
+    "Compute 4 independent hash positions across sketch rows",
+    "Increment sketch counter in each row",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "flow1_pkt1_pass",
+      "fixture_file": "fixtures/flow1_pkt1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "flow1_pkt2_pass",
+      "fixture_file": "fixtures/flow1_pkt2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "flow2_pkt1_pass",
+      "fixture_file": "fixtures/flow2_pkt1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "flow3_udp_pass",
+      "fixture_file": "fixtures/flow3_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

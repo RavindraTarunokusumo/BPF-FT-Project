@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_nrf_l1_002_vlan_trunk_reflector",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_reflector_vlan",
+  "template_family": "xdp_vlan_reflector",
+  "semantic_signature": "vlan_vid_100+swap_macs_and_tx+pass_other",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that acts as a VLAN trunk reflector. Inspect 802.1Q tagged frames (eth->h_proto == 0x8100). If the 12-bit VLAN ID (VID) is equal to 100, swap the Ethernet source and destination MAC addresses and reflect the frame out the incoming interface with XDP_TX. Pass all other VLAN IDs, untagged traffic, and truncated frames unchanged with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct vlanhdr bounds",
+    "Check eth->h_proto == bpf_htons(ETH_P_8021Q)",
+    "Extract 12-bit VID (bpf_ntohs(vlan->h_vlan_TCI) & 0x0FFF)",
+    "If VID == 100, swap MAC addresses and return XDP_TX",
+    "Return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "vlan100_reflected_tx",
+      "fixture_file": "fixtures/vlan100_reflected_tx.bin",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "vlan200_pass",
+      "fixture_file": "fixtures/vlan200_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "untagged_pass",
+      "fixture_file": "fixtures/untagged_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_vlan_pass",
+      "fixture_file": "fixtures/truncated_vlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

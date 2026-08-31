@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_ptr_l1_001_mpls_pop_single_label",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_mpls_pop",
+  "semantic_signature": "mpls_0x8847+pop_4byte_label_restore_eth_p_ip+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that pops a single MPLS label (4 bytes) from incoming MPLS unicast frames (EtherType 0x8847) when the Bottom-of-Stack (BOS) bit is 1. Use bpf_xdp_adjust_head(ctx, 4) to shrink the packet head, restore original MAC addresses, and set eth->h_proto to bpf_htons(ETH_P_IP / 0x0800). Pass multi-label MPLS frames (BOS == 0) and non-MPLS traffic unchanged with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct mpls_label bounds",
+    "Verify eth->h_proto == bpf_htons(0x8847) and BOS bit != 0",
+    "Call bpf_xdp_adjust_head(ctx, 4) to pop 4 bytes",
+    "Restore MACs and set eth->h_proto = bpf_htons(ETH_P_IP)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "mpls_single_pop_pass",
+      "fixture_file": "fixtures/mpls_single_pop_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mpls_multi_label_pass",
+      "fixture_file": "fixtures/mpls_multi_label_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

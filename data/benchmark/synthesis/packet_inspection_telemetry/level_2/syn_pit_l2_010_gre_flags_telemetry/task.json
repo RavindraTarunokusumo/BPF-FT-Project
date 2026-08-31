@@ -1,0 +1,55 @@
+{
+  "task_id": "syn_pit_l2_010_gre_flags_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_gre",
+  "template_family": "xdp_gre_flags_counter",
+  "semantic_signature": "gre_proto47+key_seq_csum_flags_telemetry+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GRE packets (IP protocol 47) and tracks the presence of optional GRE header flags in a per-CPU array map named 'gre_flags_freq_map' (max_entries 3). Increment slot 0 if Key bit (0x2000) is set, slot 1 if Sequence bit (0x1000) is set, and slot 2 if Checksum bit (0x8000) is set. Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'gre_flags_freq_map' with max_entries 3",
+    "Validate Ethernet, IPv4, and struct grehdr bounds",
+    "Inspect flags word and independently increment slots 0 (Key), 1 (Seq), and 2 (Checksum)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gre_key_flag_pass",
+      "fixture_file": "fixtures/gre_key_flag_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gre_seq_flag_pass",
+      "fixture_file": "fixtures/gre_seq_flag_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gre_csum_flag_pass",
+      "fixture_file": "fixtures/gre_csum_flag_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gre_no_flags_pass",
+      "fixture_file": "fixtures/gre_no_flags_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gre_pass",
+      "fixture_file": "fixtures/truncated_gre_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_nrf_l3_010_weighted_fair_queuing_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_router_wfq",
+  "template_family": "xdp_wfq_scheduler",
+  "semantic_signature": "wfq_deficit_round_robin+redirect_priority_queues",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements a 2-class Weighted Fair Queuing (WFQ) packet scheduler with 3:1 weight ratio for IPv4 traffic. If packet length <= 256 bytes, schedule to low-latency queue interface ifindex 100. If packet length > 256 bytes, schedule to bulk queue interface ifindex 101. Pass non-IPv4 traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct iphdr bounds",
+    "Check total packet length (ctx->data_end - ctx->data)",
+    "Redirect packet length <= 256 bytes -> bpf_redirect(100, 0)",
+    "Redirect packet length > 256 bytes -> bpf_redirect(101, 0)",
+    "Always return XDP_PASS for non-IPv4 traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "small_pkt_redirect_if100",
+      "fixture_file": "fixtures/small_pkt_redirect_if100.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "large_pkt_redirect_if101",
+      "fixture_file": "fixtures/large_pkt_redirect_if101.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "small_udp_redirect_if100",
+      "fixture_file": "fixtures/small_udp_redirect_if100.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "large_udp_redirect_if101",
+      "fixture_file": "fixtures/large_udp_redirect_if101.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vlan_pass",
+      "fixture_file": "fixtures/vlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_eth_pass",
+      "fixture_file": "fixtures/truncated_eth_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

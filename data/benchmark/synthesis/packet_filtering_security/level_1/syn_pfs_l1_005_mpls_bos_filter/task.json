@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pfs_l1_005_mpls_bos_filter",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_mpls_filter",
+  "template_family": "xdp_mpls_bos_filter",
+  "semantic_signature": "mpls_0x8847+top_label_bos_zero+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects MPLS unicast frames (EtherType 0x8847). Parse the first 4-byte MPLS shim header and check the Bottom-of-Stack (BOS / S-bit, bit 8 in 32-bit big-endian representation). If the BOS bit is 0 (meaning more labels follow in the stack), drop the packet with XDP_DROP. Pass MPLS packets with BOS=1, non-MPLS traffic, and truncated frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet header bounds and check eth->h_proto == bpf_htons(0x8847)",
+    "Validate 4-byte MPLS label header bounds",
+    "Extract 32-bit label entry and check bit 8 (0x00000100)",
+    "Drop packet if BOS bit is 0",
+    "Pass single-label MPLS and non-MPLS packets safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "mpls_nobos_drop",
+      "fixture_file": "fixtures/mpls_nobos_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "mpls_bos_pass",
+      "fixture_file": "fixtures/mpls_bos_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

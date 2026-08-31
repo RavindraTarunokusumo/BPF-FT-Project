@@ -1,0 +1,55 @@
+{
+  "task_id": "syn_nrf_l2_010_tcp_syn_steering_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_syn_steer",
+  "template_family": "xdp_syn_steering_router",
+  "semantic_signature": "tcp_syn_to_if15_established_to_if16+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that steers TCP traffic: redirect TCP SYN packets (tcp->syn == 1, ack == 0) to connection distributor ifindex 15. Redirect established TCP packets (ack == 1) to fast-path worker ifindex 16. Pass non-TCP traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and TCP header bounds",
+    "Redirect TCP SYN (syn=1, ack=0) -> bpf_redirect(15, 0)",
+    "Redirect TCP ACK (ack=1) -> bpf_redirect(16, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "tcp_syn_redirect_if15",
+      "fixture_file": "fixtures/tcp_syn_redirect_if15.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "tcp_ack_redirect_if16",
+      "fixture_file": "fixtures/tcp_ack_redirect_if16.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "tcp_rst_pass",
+      "fixture_file": "fixtures/tcp_rst_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

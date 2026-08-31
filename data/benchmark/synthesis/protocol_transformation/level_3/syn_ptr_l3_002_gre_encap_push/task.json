@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_ptr_l3_002_gre_encap_push",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_gre_encap",
+  "semantic_signature": "ipv4_raw+push_24byte_gre_header+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that encapsulates incoming raw IPv4 packets into a GRE tunnel (outer IPv4 protocol 47, outer src 192.168.1.1, dst 192.168.1.254, GRE proto 0x0800). Use bpf_xdp_adjust_head(ctx, -24) to expand the packet head by 24 bytes. Populate the outer IPv4 and 4-byte GRE header, recompute the outer IPv4 checksum, and return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 header bounds",
+    "Call bpf_xdp_adjust_head(ctx, -24) to expand head by 24 bytes",
+    "Populate outer IPv4 (protocol 47) and struct grehdr (proto 0x0800)",
+    "Compute outer IPv4 checksum",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "encap_gre_tcp_pass",
+      "fixture_file": "fixtures/encap_gre_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "encap_gre_udp_pass",
+      "fixture_file": "fixtures/encap_gre_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "encap_gre_icmp_pass",
+      "fixture_file": "fixtures/encap_gre_icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vlan_pass",
+      "fixture_file": "fixtures/vlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mpls_pass",
+      "fixture_file": "fixtures/mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_eth_pass",
+      "fixture_file": "fixtures/truncated_eth_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "task_id": "syn_pfs_l3_008_sliding_window_ddos_limiter",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_sliding_window",
+  "template_family": "xdp_subnet_rate_limiter",
+  "semantic_signature": "ipv4_subnet_24+4_slot_sliding_window_100_pkts+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements a 4-slot sliding window DDoS packet rate limiter per /24 IPv4 subnet. Maintain state in a BPF hash map named 'subnet_limiter_map' (key __be32 subnet, value struct sliding_window { __u64 last_epoch_ns; __u32 slot_counts[4]; __u32 current_slot; }, max_entries 1024). Divide each 1-second observation window into 4 slots of 250ms (250,000,000 ns). Advance slots according to elapsed time from bpf_ktime_get_ns(). Sum the counts across all 4 slots. If the total packet rate across the 4-slot window exceeds 100 packets/second, drop the packet with XDP_DROP. Pass compliant packets and non-IPv4 traffic with XDP_PASS.",
+  "requirements": [
+    "Define struct sliding_window with last_epoch_ns, slot_counts[4], and current_slot",
+    "Define hash map 'subnet_limiter_map' with key __be32 (/24 subnet) and max_entries 1024",
+    "Maintain 4 rotating 250ms slots spanning 1 second",
+    "Sum packet counts across slots and drop with XDP_DROP if total >= 100",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "subnet_pkt1_pass",
+      "fixture_file": "fixtures/subnet_pkt1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "subnet_pkt2_pass",
+      "fixture_file": "fixtures/subnet_pkt2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "subnet_pkt3_pass",
+      "fixture_file": "fixtures/subnet_pkt3_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "subnet_pkt4_pass",
+      "fixture_file": "fixtures/subnet_pkt4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "other_subnet_pass",
+      "fixture_file": "fixtures/other_subnet_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "subnet_flood_drop",
+      "fixture_file": "fixtures/subnet_flood_drop.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

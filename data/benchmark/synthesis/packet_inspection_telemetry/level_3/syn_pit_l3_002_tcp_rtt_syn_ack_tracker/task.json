@@ -1,0 +1,67 @@
+{
+  "task_id": "syn_pit_l3_002_tcp_rtt_syn_ack_tracker",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_rtt",
+  "template_family": "xdp_tcp_rtt_histogram",
+  "semantic_signature": "tcp_syn_ack_rtt+histogram_buckets+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that measures TCP round-trip handshake latency (SYN to SYN-ACK RTT). On seeing a SYN packet, record the timestamp from bpf_ktime_get_ns() in a BPF hash map named 'syn_ts_map' (key struct flow_key, value __u64 timestamp, max_entries 1024). On seeing the corresponding SYN-ACK response, compute the RTT delta (now - syn_time) and record into a per-CPU array map named 'rtt_histogram_map' (max_entries 4): slot 0 for RTT < 1ms, slot 1 for 1-10ms, slot 2 for 10-100ms, and slot 3 for > 100ms. Delete the flow entry and return XDP_PASS.",
+  "requirements": [
+    "Define struct flow_key with 4-tuple endpoints",
+    "Define hash map 'syn_ts_map' with max_entries 1024",
+    "Define per-CPU array map 'rtt_histogram_map' with max_entries 4",
+    "Record SYN timestamp and match against reverse SYN-ACK",
+    "Bucket latency delta into microsecond/millisecond ranges",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "syn_recorded_pass",
+      "fixture_file": "fixtures/syn_recorded_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_ack_rtt_pass",
+      "fixture_file": "fixtures/syn_ack_rtt_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ack_pass",
+      "fixture_file": "fixtures/ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "unmatched_syn_ack_pass",
+      "fixture_file": "fixtures/unmatched_syn_ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

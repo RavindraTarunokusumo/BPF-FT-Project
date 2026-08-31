@@ -1,0 +1,45 @@
+{
+  "task_id": "syn_nrf_l1_009_dns_cache_redirect",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_router_l4",
+  "template_family": "xdp_dns_redirector",
+  "semantic_signature": "dns_query_udp53+redirect_ifindex_6+pass_other",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv4 UDP traffic. If destination port is 53 (DNS), redirect the packet to local DNS caching accelerator ifindex 6 using bpf_redirect(6, 0). Pass all other traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and UDP header bounds",
+    "Verify UDP destination port is 53",
+    "Return bpf_redirect(6, 0) for DNS",
+    "Return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dns_port_53_redirect_if6",
+      "fixture_file": "fixtures/dns_port_53_redirect_if6.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "udp_port_5353_pass",
+      "fixture_file": "fixtures/udp_port_5353_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_udp_pass",
+      "fixture_file": "fixtures/truncated_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_nrf_l2_009_wireguard_peer_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_wireguard",
+  "template_family": "xdp_wg_peer_router",
+  "semantic_signature": "wireguard_data_receiver_idx_table+redirect+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that routes WireGuard data packets (UDP port 51820, Type 4). Extract the 32-bit Receiver Index. If Receiver Index is 0x11111111, redirect to peer interface ifindex 25. If Receiver Index is 0x22222222, redirect to peer interface ifindex 26. Pass other Receiver Indexes and non-WireGuard traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and WireGuard Type 4 header bounds",
+    "Verify UDP port 51820 and WireGuard message type 4",
+    "Redirect Receiver Index 0x11111111 -> bpf_redirect(25, 0)",
+    "Redirect Receiver Index 0x22222222 -> bpf_redirect(26, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "wg_peer1_redirect_if25",
+      "fixture_file": "fixtures/wg_peer1_redirect_if25.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "wg_peer2_redirect_if26",
+      "fixture_file": "fixtures/wg_peer2_redirect_if26.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "wg_peer_other_pass",
+      "fixture_file": "fixtures/wg_peer_other_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "wg_handshake_pass",
+      "fixture_file": "fixtures/wg_handshake_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_wg_udp_pass",
+      "fixture_file": "fixtures/non_wg_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_wg_pass",
+      "fixture_file": "fixtures/truncated_wg_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

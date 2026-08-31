@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pit_l2_001_tcp_options_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_tcp_options",
+  "template_family": "xdp_tcp_options_parser",
+  "semantic_signature": "tcp_options_parse+mss_ws_sack_ts_histogram+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that parses variable-length TCP options and records option frequencies in a per-CPU array map named 'tcp_options_freq_map' (max_entries 4). Tally: slot 0 for MSS (Kind 2), slot 1 for Window Scale (Kind 3), slot 2 for SACK Permitted (Kind 4), and slot 3 for Timestamp (Kind 8). Safely iterate through options with explicit bounds checking on every dereference. Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'tcp_options_freq_map' with max_entries 4",
+    "Validate Ethernet, IPv4, TCP headers, and TCP options boundaries",
+    "Safely walk TLV TCP options (Kind 0 EOL, Kind 1 NOP, Kind 2 MSS, Kind 3 WS, Kind 4 SACK, Kind 8 TS)",
+    "Increment corresponding frequency counter slots without double-counting per option instance",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "tcp_opt_mss_ws_pass",
+      "fixture_file": "fixtures/tcp_opt_mss_ws_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_opt_sack_ts_pass",
+      "fixture_file": "fixtures/tcp_opt_sack_ts_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_no_options_pass",
+      "fixture_file": "fixtures/tcp_no_options_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_ack_pass",
+      "fixture_file": "fixtures/tcp_ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_opt_pass",
+      "fixture_file": "fixtures/truncated_tcp_opt_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

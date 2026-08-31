@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_nrf_l2_006_geneve_opt_class_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_geneve_table",
+  "template_family": "xdp_geneve_class_router",
+  "semantic_signature": "geneve_opt_class_0x0100_to_if20_0x0102_to_if21",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that routes GENEVE packets (UDP destination port 6081) by Option Class. If the first option has Option Class 0x0100 (Linux), redirect to ifindex 20. If Option Class is 0x0102 (AWS), redirect to ifindex 21. Pass other classes, optionless GENEVE, and non-GENEVE traffic with XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4, UDP, GENEVE, and option header bounds",
+    "Verify UDP destination port is 6081",
+    "Redirect Option Class 0x0100 -> bpf_redirect(20, 0)",
+    "Redirect Option Class 0x0102 -> bpf_redirect(21, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "geneve_linux_class_redirect_if20",
+      "fixture_file": "fixtures/geneve_linux_class_redirect_if20.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "geneve_aws_class_redirect_if21",
+      "fixture_file": "fixtures/geneve_aws_class_redirect_if21.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "geneve_ovs_class_pass",
+      "fixture_file": "fixtures/geneve_ovs_class_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_geneve_udp_pass",
+      "fixture_file": "fixtures/non_geneve_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_geneve_pass",
+      "fixture_file": "fixtures/truncated_geneve_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

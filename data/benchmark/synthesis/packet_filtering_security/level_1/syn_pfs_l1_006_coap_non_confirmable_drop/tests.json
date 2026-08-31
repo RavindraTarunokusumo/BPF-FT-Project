@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_pfs_l1_006_coap_non_confirmable_drop",
+  "main_validator": "packet_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "coap_non_drop",
+      "description": "CoAP packet with Type 1 (Non-confirmable) must be dropped",
+      "fixture_file": "fixtures/coap_non_drop.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430391633000c000050011234",
+      "packet_len": 46,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "coap_con_pass",
+      "description": "CoAP packet with Type 0 (Confirmable) must pass",
+      "fixture_file": "fixtures/coap_con_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430391633000c000040011234",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "coap_ack_pass",
+      "description": "CoAP packet with Type 2 (Acknowledgement) must pass",
+      "fixture_file": "fixtures/coap_ack_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430391633000c000060451234",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_other_port_pass",
+      "description": "UDP packet on port 5684 must pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430391634000c000050011234",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_coap_pass",
+      "description": "Truncated CoAP packet must pass safely",
+      "fixture_file": "fixtures/truncated_coap_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001d123400004011e52dc0a8010ac0a80114303916330009000050",
+      "packet_len": 43,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "task_id": "syn_ptr_l3_004_stateful_napt44",
+  "main_validator": "packet_bytes",
+  "test_count": 9,
+  "test_cases": [
+    {
+      "name": "outbound_snat_pass",
+      "description": "Outbound TCP packet from 10.0.0.10 SNATed to 198.51.100.1:30000",
+      "fixture_file": "fixtures/outbound_snat_pass.bin",
+      "packet_hex": "5254001234565254006543210800450000281234000040069c910a00000ac000020127110050000003e8000000005002ffff012b0000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "outbound_snat_2_pass",
+      "description": "Second outbound packet from 10.0.0.20 SNATed",
+      "fixture_file": "fixtures/outbound_snat_2_pass.bin",
+      "packet_hex": "5254001234565254006543210800450000281234000040069c860a000014c0000202271201bb000003e8000000005002ffffffbe0000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_private_ip_pass",
+      "description": "Packet from non-private IP passed unchanged",
+      "fixture_file": "fixtures/non_private_ip_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e4e8c0a8010ac000020130390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passed unchanged",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP packet passed unchanged",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_pass",
+      "description": "IPv6 frame passed unchanged",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP packet passed safely",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000016123400004006e53fc0a8010ac0a801140050",
+      "packet_len": 36,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IPv4 packet passed safely",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "packet_hex": "52540012345652540065432108004500",
+      "packet_len": 16,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_006_geneve_opt_critical_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_geneve_filter",
+  "template_family": "xdp_geneve_opt_filter",
+  "semantic_signature": "geneve_udp6081+critical_opt_bit+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GENEVE tunnel traffic (UDP port 6081). Parse the 8-byte GENEVE header and any variable-length TLV options (length specified by gen->opt_len * 4). If either the global Critical flag in the base header (gen->critical) is set OR any TLV option has the Critical bit set (bit 7 / 0x80 of option type field), drop the packet with XDP_DROP. Pass GENEVE packets with non-critical options or no options, non-GENEVE traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and GENEVE header bounds",
+    "Verify UDP destination port is 6081",
+    "Check base header gen->critical flag",
+    "Iterate through GENEVE TLV options with strict bounds checking",
+    "Check option type bit 0x80 and drop if critical",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "geneve_crit_opt_drop",
+      "fixture_file": "fixtures/geneve_crit_opt_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "geneve_normal_opt_pass",
+      "fixture_file": "fixtures/geneve_normal_opt_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "geneve_no_opt_pass",
+      "fixture_file": "fixtures/geneve_no_opt_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_pass",
+      "fixture_file": "fixtures/udp_other_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_geneve_pass",
+      "fixture_file": "fixtures/truncated_geneve_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

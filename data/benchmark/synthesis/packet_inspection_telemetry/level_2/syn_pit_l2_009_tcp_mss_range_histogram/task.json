@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pit_l2_009_tcp_mss_range_histogram",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_tcp",
+  "template_family": "xdp_tcp_mss_histogram",
+  "semantic_signature": "tcp_syn+mss_value_histogram_4_buckets+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects TCP SYN packets, parses the TCP options to locate the MSS option (Kind 2, Length 4), and places the MSS value into one of four deterministic histogram buckets in a per-CPU array map named 'mss_histogram_map' (max_entries 4): slot 0 for MSS < 1200, slot 1 for 1200 <= MSS <= 1400, slot 2 for 1401 <= MSS <= 1460, and slot 3 for MSS > 1460. Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'mss_histogram_map' with max_entries 4",
+    "Validate Ethernet, IPv4, TCP headers, and TCP options bounds",
+    "Filter only TCP SYN packets (tcp->syn == 1)",
+    "Parse MSS option and record count in range bucket",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "mss_bucket0_pass",
+      "fixture_file": "fixtures/mss_bucket0_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mss_bucket1_pass",
+      "fixture_file": "fixtures/mss_bucket1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mss_bucket2_pass",
+      "fixture_file": "fixtures/mss_bucket2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mss_bucket3_pass",
+      "fixture_file": "fixtures/mss_bucket3_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_no_mss_pass",
+      "fixture_file": "fixtures/syn_no_mss_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ack_pass",
+      "fixture_file": "fixtures/ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

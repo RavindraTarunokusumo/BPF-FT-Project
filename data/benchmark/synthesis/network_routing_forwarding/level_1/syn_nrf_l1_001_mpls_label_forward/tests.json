@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_nrf_l1_001_mpls_label_forward",
+  "main_validator": "xdp_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "label_100_redirect_if2",
+      "description": "MPLS label 100 redirected to ifindex 2",
+      "fixture_file": "fixtures/label_100_redirect_if2.bin",
+      "packet_hex": "52540012345652540065432188470006414045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 54,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "label_200_redirect_if3",
+      "description": "MPLS label 200 redirected to ifindex 3",
+      "fixture_file": "fixtures/label_200_redirect_if3.bin",
+      "packet_hex": "5254001234565254006543218847000c814045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 58,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "label_300_pass",
+      "description": "MPLS label 300 passed unchanged",
+      "fixture_file": "fixtures/label_300_pass.bin",
+      "packet_hex": "52540012345652540065432188470012c1404500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv4_pass",
+      "description": "IPv4 passed unchanged",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "description": "Truncated MPLS passed safely",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "packet_hex": "52540012345652540065432188470001",
+      "packet_len": 16,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

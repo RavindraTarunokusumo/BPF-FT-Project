@@ -1,0 +1,45 @@
+{
+  "task_id": "syn_pfs_l1_010_ipv6_hop_by_hop_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_ipv6_filter",
+  "template_family": "xdp_ipv6_nexthdr_filter",
+  "semantic_signature": "ipv6_0x86dd+nexthdr_0_hop_by_hop+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv6 packets (EtherType 0x86DD). Parse the 40-byte IPv6 header and check the nexthdr field. If the next header is 0 (IPPROTO_HOPOPTS / Hop-by-Hop Options), drop the packet with XDP_DROP. Pass standard IPv6 traffic (TCP, UDP, ICMPv6), IPv4 traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet header bounds and check eth->h_proto == bpf_htons(ETH_P_IPV6)",
+    "Validate 40-byte struct ipv6hdr bounds",
+    "Check ip6->nexthdr == 0 and drop if true",
+    "Pass all other traffic safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ipv6_hbh_drop",
+      "fixture_file": "fixtures/ipv6_hbh_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "ipv6_tcp_pass",
+      "fixture_file": "fixtures/ipv6_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_udp_pass",
+      "fixture_file": "fixtures/ipv6_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

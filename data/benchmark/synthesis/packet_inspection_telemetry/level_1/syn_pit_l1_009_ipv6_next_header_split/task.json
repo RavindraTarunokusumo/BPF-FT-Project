@@ -1,0 +1,51 @@
+{
+  "task_id": "syn_pit_l1_009_ipv6_next_header_split",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_ipv6",
+  "template_family": "xdp_ipv6_proto_counter",
+  "semantic_signature": "ipv6_0x86dd+nexthdr_split_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv6 traffic (EtherType 0x86DD). Parse the 40-byte IPv6 header and inspect the nexthdr field. Count packets into a per-CPU array map named 'ipv6_proto_map' (max_entries 4): slot 0 for TCP (6), slot 1 for UDP (17), slot 2 for ICMPv6 (58), and slot 3 for all other Next Header types. Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'ipv6_proto_map' with max_entries 4",
+    "Validate Ethernet and struct ipv6hdr bounds",
+    "Check eth->h_proto == bpf_htons(ETH_P_IPV6)",
+    "Increment slot 0 for TCP, slot 1 for UDP, slot 2 for ICMPv6, slot 3 for other",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ipv6_tcp_pass",
+      "fixture_file": "fixtures/ipv6_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_udp_pass",
+      "fixture_file": "fixtures/ipv6_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_icmp6_pass",
+      "fixture_file": "fixtures/ipv6_icmp6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_other_pass",
+      "fixture_file": "fixtures/ipv6_other_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

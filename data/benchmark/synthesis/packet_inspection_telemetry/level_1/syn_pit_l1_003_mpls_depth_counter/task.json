@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pit_l1_003_mpls_depth_counter",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_mpls",
+  "template_family": "xdp_mpls_depth_counter",
+  "semantic_signature": "mpls_0x8847+bos_bit_split_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects MPLS unicast frames (EtherType 0x8847). Parse the first 4-byte MPLS label and inspect the Bottom-of-Stack (BOS / S-bit, bit 8). Count single-label frames (BOS == 1) in slot 0, and stacked multi-label frames (BOS == 0) in slot 1 of a per-CPU array map named 'mpls_depth_map' (max_entries 2). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'mpls_depth_map' with max_entries 2",
+    "Validate Ethernet header bounds and check eth->h_proto == bpf_htons(0x8847)",
+    "Validate 4-byte MPLS label header bounds",
+    "Check BOS bit (entry & 0x00000100) and increment slot 0 (BOS=1) or slot 1 (BOS=0)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "mpls_single_label_pass",
+      "fixture_file": "fixtures/mpls_single_label_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mpls_multi_label_pass",
+      "fixture_file": "fixtures/mpls_multi_label_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_mpls_ipv4_pass",
+      "fixture_file": "fixtures/non_mpls_ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

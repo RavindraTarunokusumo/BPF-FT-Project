@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_ptr_l2_002_nat64_stateless_translator",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_nat64",
+  "template_family": "xdp_stateless_nat64",
+  "semantic_signature": "ipv6_nat64_prefix_64_ff9b+translate_to_ipv4+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that performs stateless NAT64 translation (RFC 7915). Inspect IPv6 packets (EtherType 0x86DD) targeting the well-known NAT64 prefix 64:ff9b::/96 (first 96 bits equal to 0x0064FF9B0000000000000000). Extract the lower 32 bits of the IPv6 destination address as the IPv4 destination address. Use bpf_xdp_adjust_head(ctx, 20) to shrink the header by 20 bytes (40-byte IPv6 -> 20-byte IPv4), construct a valid IPv4 header (IHL 5, TTL 64, translated endpoints), compute the IPv4 header checksum, set eth->h_proto to 0x0800, and return XDP_PASS. Pass other traffic unchanged.",
+  "requirements": [
+    "Validate Ethernet and struct ipv6hdr bounds",
+    "Check for NAT64 prefix 64:ff9b::/96 in destination IPv6",
+    "Shrink packet head by 20 bytes using bpf_xdp_adjust_head(ctx, 20)",
+    "Populate new IPv4 header with calculated checksum and set EtherType 0x0800",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "nat64_translate_pass",
+      "fixture_file": "fixtures/nat64_translate_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "nat64_translate_udp_pass",
+      "fixture_file": "fixtures/nat64_translate_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_other_prefix_pass",
+      "fixture_file": "fixtures/ipv6_other_prefix_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

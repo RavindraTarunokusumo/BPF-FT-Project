@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_ptr_l2_010_tcp_timestamp_strip",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_tcp_options_rewrite",
+  "template_family": "xdp_ts_stripper",
+  "semantic_signature": "tcp_options+replace_timestamp_with_nops+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects TCP packets with options. Parse the TCP options to locate the Timestamp option (Kind 8, Length 10). Overwrite the 10 option bytes with 10 NOP bytes (0x01), recalculate the TCP checksum, and return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, TCP headers, and TCP options bounds",
+    "Locate TCP Timestamp option (Kind 8, Length 10)",
+    "Overwrite 10 bytes with NOPs (0x01)",
+    "Update TCP checksum",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ts_stripped_pass",
+      "fixture_file": "fixtures/ts_stripped_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ts_with_mss_pass",
+      "fixture_file": "fixtures/ts_with_mss_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "no_ts_pass",
+      "fixture_file": "fixtures/no_ts_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

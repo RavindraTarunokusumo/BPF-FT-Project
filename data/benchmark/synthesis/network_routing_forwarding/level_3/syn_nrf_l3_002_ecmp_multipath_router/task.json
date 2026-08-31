@@ -1,0 +1,65 @@
+{
+  "task_id": "syn_nrf_l3_002_ecmp_multipath_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_router_ecmp",
+  "template_family": "xdp_ecmp_router",
+  "semantic_signature": "ipv4_5tuple_hash+ecmp_4way_redirect+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements 4-way Equal-Cost Multi-Path (ECMP) routing for IPv4 traffic. Compute a 5-tuple hash and redirect to next-hop interfaces ifindex 10, 11, 12, or 13 (10 + (hash % 4)). Pass non-IP traffic with XDP_PASS.",
+  "requirements": [
+    "Extract 5-tuple for IPv4 TCP/UDP",
+    "Calculate 32-bit hash value",
+    "Redirect to ifindex (10 + (hash % 4))",
+    "Always return XDP_PASS for non-IPv4 traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "flow1_ecmp_redirect",
+      "fixture_file": "fixtures/flow1_ecmp_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "flow2_ecmp_redirect",
+      "fixture_file": "fixtures/flow2_ecmp_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "udp_ecmp_redirect",
+      "fixture_file": "fixtures/udp_ecmp_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "icmp_ecmp_redirect",
+      "fixture_file": "fixtures/icmp_ecmp_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vlan_pass",
+      "fixture_file": "fixtures/vlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_eth_pass",
+      "fixture_file": "fixtures/truncated_eth_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

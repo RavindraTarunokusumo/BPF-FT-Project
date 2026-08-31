@@ -1,0 +1,67 @@
+{
+  "task_id": "syn_ptr_l3_004_stateful_napt44",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_napt44",
+  "template_family": "xdp_stateful_nat",
+  "semantic_signature": "ipv4_tcp_napt44+stateful_session_translation+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements stateful NAPT44 for IPv4 TCP traffic. Maintain outbound mappings in a BPF hash map 'napt_fwd_map' and inbound reverse mappings in 'napt_rev_map' (max_entries 1024). Translate private IP source 10.0.0.x to public IP 198.51.100.1 and remap source port to 30000. For inbound return traffic to 198.51.100.1:30000, restore original private IP/port. Recalculate IP checksums and return XDP_PASS.",
+  "requirements": [
+    "Define struct napt_tuple with 4-tuple endpoints",
+    "Define hash maps 'napt_fwd_map' and 'napt_rev_map' with max_entries 1024",
+    "Perform outbound SNAT translation (src IP -> 198.51.100.1, src port -> 30000)",
+    "Perform inbound DNAT translation for return traffic",
+    "Recalculate IPv4 checksum",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "outbound_snat_pass",
+      "fixture_file": "fixtures/outbound_snat_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "outbound_snat_2_pass",
+      "fixture_file": "fixtures/outbound_snat_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_private_ip_pass",
+      "fixture_file": "fixtures/non_private_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

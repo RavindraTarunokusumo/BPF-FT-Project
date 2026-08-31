@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pfs_l2_001_tcp_mss_clamp_filter",
+  "main_validator": "packet_action",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "syn_large_mss_drop",
+      "description": "TCP SYN with MSS 1504 (>1460) must be dropped",
+      "fixture_file": "fixtures/syn_large_mss_drop.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006002ffffe01a0000020405e0",
+      "packet_len": 58,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "syn_valid_mss_pass",
+      "description": "TCP SYN with MSS 1460 must pass",
+      "fixture_file": "fixtures/syn_valid_mss_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006002ffffe0460000020405b4",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "syn_small_mss_pass",
+      "description": "TCP SYN with MSS 1200 must pass",
+      "fixture_file": "fixtures/syn_small_mss_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006002ffffe14a0000020404b0",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "syn_no_options_pass",
+      "description": "TCP SYN without options must pass",
+      "fixture_file": "fixtures/syn_no_options_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ack_large_mss_pass",
+      "description": "Non-SYN TCP packet with large MSS option must pass (only SYNs checked)",
+      "fixture_file": "fixtures/ack_large_mss_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002c123400004006e529c0a8010ac0a8011430390050000003e8000000006010ffffe00c0000020405e0",
+      "packet_len": 58,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet must pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_opt_pass",
+      "description": "Truncated TCP options must pass safely",
+      "fixture_file": "fixtures/truncated_tcp_opt_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

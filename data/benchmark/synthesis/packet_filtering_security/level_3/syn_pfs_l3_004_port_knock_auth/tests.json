@@ -1,0 +1,88 @@
+{
+  "task_id": "syn_pfs_l3_004_port_knock_auth",
+  "main_validator": "packet_action",
+  "test_count": 9,
+  "test_cases": [
+    {
+      "name": "knock_stage1_pass",
+      "description": "UDP packet to Knock Port 7000 sets stage 1 and passes",
+      "fixture_file": "fixtures/knock_stage1_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e506c0a80132c0a8011430391b5800080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "knock_stage2_pass",
+      "description": "UDP packet to Knock Port 8000 advances to stage 2 and passes",
+      "fixture_file": "fixtures/knock_stage2_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e506c0a80132c0a8011430391f4000080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "knock_stage3_pass",
+      "description": "UDP packet to Knock Port 9000 completes authentication and passes",
+      "fixture_file": "fixtures/knock_stage3_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e506c0a80132c0a801143039232800080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "unauthenticated_ssh_drop",
+      "description": "TCP SSH access from unauthenticated IP 192.168.1.99 must be dropped",
+      "fixture_file": "fixtures/unauthenticated_ssh_drop.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e4d4c0a80163c0a8011430390016000003e8000000005002fffff83c0000",
+      "packet_len": 54,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "authenticated_ssh_pass",
+      "description": "TCP SSH access from completed knock IP 192.168.1.50 must pass",
+      "fixture_file": "fixtures/authenticated_ssh_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e505c0a80132c0a8011430390016000003e8000000005002fffff83c0000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "web_port80_pass",
+      "description": "TCP port 80 traffic must pass unconditionally",
+      "fixture_file": "fixtures/web_port80_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e4d4c0a80163c0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_other_pass",
+      "description": "UDP port 53 traffic must pass unconditionally",
+      "fixture_file": "fixtures/udp_other_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame must pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP packet must pass safely",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000016123400004006e53fc0a8010ac0a801140016",
+      "packet_len": 36,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "task_id": "syn_ptr_l3_007_geneve_metadata_insertion",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_geneve_metadata",
+  "template_family": "xdp_geneve_meta_injector",
+  "semantic_signature": "geneve_udp6081+insert_custom_8byte_tlv_metadata+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GENEVE tunnel packets without options (gen->opt_len == 0). Use bpf_xdp_adjust_head(ctx, -8) to insert an 8-byte custom TLV option (Class 0x0100, Type 1, Length 1 word = 4 bytes of data 0xDEADBEEF). Update gen->opt_len to 2 (8 bytes), adjust UDP length by 8, and return XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4, UDP, and struct genevehdr bounds",
+    "Verify UDP destination port is 6081 and gen->opt_len == 0",
+    "Expand packet head by 8 bytes using bpf_xdp_adjust_head(ctx, -8)",
+    "Insert 8-byte GENEVE TLV option with Class 0x0100, Type 1, Data 0xDEADBEEF",
+    "Update gen->opt_len = 2",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "geneve_meta_inserted_pass",
+      "fixture_file": "fixtures/geneve_meta_inserted_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "geneve_already_has_opts_pass",
+      "fixture_file": "fixtures/geneve_already_has_opts_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_geneve_udp_pass",
+      "fixture_file": "fixtures/non_geneve_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_geneve_pass",
+      "fixture_file": "fixtures/truncated_geneve_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

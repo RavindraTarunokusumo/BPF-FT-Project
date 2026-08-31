@@ -1,0 +1,88 @@
+{
+  "task_id": "syn_pit_l3_006_tcp_out_of_order_detector",
+  "main_validator": "map_state",
+  "test_count": 9,
+  "test_cases": [
+    {
+      "name": "tcp_seq1_pass",
+      "description": "First packet with SEQ 1000 and len 100 updates expected SEQ to 1100",
+      "fixture_file": "fixtures/tcp_seq1_pass.bin",
+      "packet_hex": "52540012345652540065432108004500008c123400004006e4c9c0a8010ac0a8011427110050000003e8000000005002ffff4208000041414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+      "packet_len": 154,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_seq2_in_order_pass",
+      "description": "In-order packet with SEQ 1100 updates expected SEQ to 1200",
+      "fixture_file": "fixtures/tcp_seq2_in_order_pass.bin",
+      "packet_hex": "52540012345652540065432108004500008c123400004006e4c9c0a8010ac0a80114271100500000044c000000005002ffff0f72000042424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242",
+      "packet_len": 154,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_seq_out_of_order_pass",
+      "description": "Out-of-order packet (SEQ 1500 != 1200) increments out_of_order_count",
+      "fixture_file": "fixtures/tcp_seq_out_of_order_pass.bin",
+      "packet_hex": "52540012345652540065432108004500008c123400004006e4c9c0a8010ac0a8011427110050000005dc000000005002ffffdbaf000043434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343434343",
+      "packet_len": 154,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "other_flow_pass",
+      "description": "Different flow is tracked in independent entry",
+      "fixture_file": "fixtures/other_flow_pass.bin",
+      "packet_hex": "52540012345652540065432108004500005a123400004006e4d3c0a8011ec0a801284e2201bb00001388000000005002ffff1e3200004444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444",
+      "packet_len": 104,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passes",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP packet passes",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passes",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_pass",
+      "description": "IPv6 frame passes",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "description": "Truncated TCP packet passes safely",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000016123400004006e53fc0a8010ac0a801140050",
+      "packet_len": 36,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

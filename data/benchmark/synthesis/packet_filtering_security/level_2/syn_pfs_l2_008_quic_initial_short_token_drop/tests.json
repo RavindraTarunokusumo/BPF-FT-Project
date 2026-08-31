@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pfs_l2_008_quic_initial_short_token_drop",
+  "main_validator": "packet_action",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "quic_empty_token_drop",
+      "description": "QUIC Initial packet with Token Length == 0 must be dropped",
+      "fixture_file": "fixtures/quic_empty_token_drop.bin",
+      "packet_hex": "525400123456525400654321080045000049123400004011e501c0a8010ac0a80114303901bb00350000c00000000108010203040506070808111213141516171800001300000001515549435f4652414d455f44415441",
+      "packet_len": 87,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "quic_valid_token_pass",
+      "description": "QUIC Initial packet with non-empty token must pass",
+      "fixture_file": "fixtures/quic_valid_token_pass.bin",
+      "packet_hex": "52540012345652540065432108004500004d123400004011e4fdc0a8010ac0a80114303901bb00390000c0000000010801020304050607080811121314151617180401020304001300000001515549435f4652414d455f44415441",
+      "packet_len": 91,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "quic_short_hdr_pass",
+      "description": "QUIC Short Header (1-RTT) packet must pass",
+      "fixture_file": "fixtures/quic_short_hdr_pass.bin",
+      "packet_hex": "525400123456525400654321080045000038123400004011e512c0a8010ac0a80114303901bb0024000040010203040506070800000001515549435f4652414d455f44415441",
+      "packet_len": 70,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "quic_handshake_pass",
+      "description": "QUIC Long Header Handshake packet (pkt_type 2) must pass",
+      "fixture_file": "fixtures/quic_handshake_pass.bin",
+      "packet_hex": "525400123456525400654321080045000048123400004011e502c0a8010ac0a80114303901bb00340000e000000001080102030405060708081112131415161718001300000001515549435f4652414d455f44415441",
+      "packet_len": 86,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_other_port_pass",
+      "description": "UDP packet to port 444 must pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "packet_hex": "525400123456525400654321080045000049123400004011e501c0a8010ac0a80114303901bc00350000c00000000108010203040506070808111213141516171800001300000001515549435f4652414d455f44415441",
+      "packet_len": 87,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet must pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_quic_pass",
+      "description": "Truncated QUIC header must pass safely",
+      "fixture_file": "fixtures/truncated_quic_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a80114303901bb000c0000c0000001",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

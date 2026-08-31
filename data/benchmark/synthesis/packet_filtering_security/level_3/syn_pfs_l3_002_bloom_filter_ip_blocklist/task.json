@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pfs_l3_002_bloom_filter_ip_blocklist",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_bloom_filter",
+  "template_family": "xdp_bloom_ip_filter",
+  "semantic_signature": "ipv4_src+bloom_filter_4096_bits_3_hashes+drop_if_set",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements a 3-hash 4096-bit Bloom Filter IP blocklist. Use a BPF array map named 'bloom_filter' (key __u32 word_index, value __u64 bitmap_word, max_entries 64 for 4096 total bits). For each IPv4 packet, compute 3 distinct integer hash values on ntohl(ip->saddr) modulo 4096. Test if the corresponding bits are set in the bitmap words. If all 3 bits are set (indicating positive bloom filter membership), drop the packet with XDP_DROP. Otherwise, return XDP_PASS. Pass non-IPv4 frames safely.",
+  "requirements": [
+    "Define array map 'bloom_filter' with max_entries 64 (64 * 64 = 4096 bits)",
+    "Compute 3 independent hash functions mapping IPv4 address to [0, 4095]",
+    "Lookup bitmap words from bloom_filter map with bounds checking",
+    "Drop packet if and only if all 3 hashed bits are 1 in the bitmap",
+    "Pass non-matching and non-IPv4 packets safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "blocked_ip_drop",
+      "fixture_file": "fixtures/blocked_ip_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "clean_ip_pass",
+      "fixture_file": "fixtures/clean_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "clean_ip_2_pass",
+      "fixture_file": "fixtures/clean_ip_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "clean_ip_3_pass",
+      "fixture_file": "fixtures/clean_ip_3_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_blocked_drop",
+      "fixture_file": "fixtures/udp_blocked_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "icmp_clean_pass",
+      "fixture_file": "fixtures/icmp_clean_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

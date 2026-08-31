@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pfs_l1_007_wireguard_init_filter",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_wireguard_filter",
+  "template_family": "xdp_wireguard_msgtype_filter",
+  "semantic_signature": "wireguard_udp51820+msgtype_1_init+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects WireGuard VPN traffic on UDP destination port 51820. Parse the first 4 bytes of the WireGuard header and check the Message Type (first byte). If the message type is 1 (Handshake Initiation), drop the packet with XDP_DROP. Pass other WireGuard messages (Type 2 Response, Type 4 Data), non-WireGuard traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and UDP header bounds",
+    "Verify UDP destination port is 51820",
+    "Validate 4-byte WireGuard header bounds",
+    "Drop packet if msg_type == 1",
+    "Pass all other traffic safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "wg_init_drop",
+      "fixture_file": "fixtures/wg_init_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "wg_data_pass",
+      "fixture_file": "fixtures/wg_data_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "wg_resp_pass",
+      "fixture_file": "fixtures/wg_resp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_pass",
+      "fixture_file": "fixtures/udp_other_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_wg_pass",
+      "fixture_file": "fixtures/truncated_wg_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_nrf_l3_009_gtpu_anchor_mobility_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_router_gtpu_mobility",
+  "template_family": "xdp_gtpu_mobility_router",
+  "semantic_signature": "gtpu_teid_mobility_table+redirect_gnodeb+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program for cellular mobility handoff. Inspect GTP-U packets (UDP destination port 2152). If TEID == 0x0000A001, redirect to target gNodeB interface ifindex 95. If TEID == 0x0000A002, redirect to source gNodeB interface ifindex 96. Pass other TEIDs and non-GTP-U traffic with XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4, UDP, and struct gtpuhdr bounds",
+    "Verify UDP destination port is 2152",
+    "Redirect TEID 0xA001 -> bpf_redirect(95, 0)",
+    "Redirect TEID 0xA002 -> bpf_redirect(96, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "teid_a001_redirect_if95",
+      "fixture_file": "fixtures/teid_a001_redirect_if95.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "teid_a002_redirect_if96",
+      "fixture_file": "fixtures/teid_a002_redirect_if96.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "teid_other_pass",
+      "fixture_file": "fixtures/teid_other_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

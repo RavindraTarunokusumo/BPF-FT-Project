@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_ptr_l2_008_ip_in_ip_decap",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_ipinip_decap",
+  "semantic_signature": "ipinip_proto4+strip_20_outer_bytes_expose_inner_ip+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that decapsulates IPv4-in-IPv4 tunnel packets (outer IP protocol 4 / IPPROTO_IPIP). Strip the 20-byte outer IPv4 header using bpf_xdp_adjust_head(ctx, 20), preserve Ethernet MAC addresses, set eth->h_proto to bpf_htons(ETH_P_IP), and return XDP_PASS. Pass non-tunneled traffic and truncated frames unchanged.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4 (IHL=5), and inner IPv4 header bounds",
+    "Verify outer_ip->protocol == 4",
+    "Call bpf_xdp_adjust_head(ctx, 20) to strip outer IPv4 header",
+    "Restore Ethernet MACs and set eth->h_proto = bpf_htons(ETH_P_IP)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ipinip_decap_pass",
+      "fixture_file": "fixtures/ipinip_decap_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipinip_decap_udp_pass",
+      "fixture_file": "fixtures/ipinip_decap_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_tcp_pass",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipinip_pass",
+      "fixture_file": "fixtures/truncated_ipinip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

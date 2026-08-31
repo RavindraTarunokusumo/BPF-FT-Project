@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_009_ip_in_ip_nested_loopback_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_ipinip_filter",
+  "template_family": "xdp_ipinip_inner_filter",
+  "semantic_signature": "ipinip_proto4+inner_daddr_127_net+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv4-in-IPv4 tunnel packets (outer IP protocol 4 / IPPROTO_IPIP). Parse the inner IPv4 header (supporting variable outer IHL) and check the inner destination IP address (inner_ip->daddr). If the inner destination address belongs to the loopback network 127.0.0.0/8 (i.e. (ntohl(inner_ip->daddr) & 0xFF000000) == 0x7F000000), drop the packet with XDP_DROP to prevent tunnel-based loopback attacks. Pass valid IP-in-IP packets, non-tunneled traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and outer IPv4 header bounds (accounting for variable outer IHL)",
+    "Verify outer_ip->protocol == 4",
+    "Validate inner struct iphdr bounds",
+    "Check inner_ip->daddr in 127.0.0.0/8 and drop if match",
+    "Pass all other traffic safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ipinip_loopback_dest_drop",
+      "fixture_file": "fixtures/ipinip_loopback_dest_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "ipinip_valid_dest_pass",
+      "fixture_file": "fixtures/ipinip_valid_dest_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipinip_inner_icmp_pass",
+      "fixture_file": "fixtures/ipinip_inner_icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_tcp_pass",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipinip_pass",
+      "fixture_file": "fixtures/truncated_ipinip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

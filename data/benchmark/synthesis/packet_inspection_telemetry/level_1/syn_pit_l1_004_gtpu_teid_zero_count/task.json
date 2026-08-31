@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pit_l1_004_gtpu_teid_zero_count",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_gtpu",
+  "template_family": "xdp_gtpu_teid_counter",
+  "semantic_signature": "gtpu_udp2152+teid_zero_vs_nonzero_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GTP-U traffic (UDP port 2152). Parse the 8-byte GTP-U header and inspect the 32-bit TEID field. Count control packets (teid == 0) in slot 0, and user data packets (teid != 0) in slot 1 of a per-CPU array map named 'gtpu_teid_split_map' (max_entries 2). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'gtpu_teid_split_map' with max_entries 2",
+    "Validate Ethernet, IPv4 (variable IHL), UDP, and GTP-U header bounds",
+    "Verify UDP destination port 2152",
+    "Check gtp->teid == 0 (slot 0) vs gtp->teid != 0 (slot 1)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gtpu_control_teid0_pass",
+      "fixture_file": "fixtures/gtpu_control_teid0_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gtpu_data_teid_nonzero_pass",
+      "fixture_file": "fixtures/gtpu_data_teid_nonzero_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

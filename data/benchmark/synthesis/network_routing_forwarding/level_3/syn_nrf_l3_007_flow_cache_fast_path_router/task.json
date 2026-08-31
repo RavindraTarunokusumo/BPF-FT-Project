@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_nrf_l3_007_flow_cache_fast_path_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_router_flow_cache",
+  "template_family": "xdp_flow_cache_router",
+  "semantic_signature": "flow_cache_hit_redirect+slow_path_pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that accelerates packet routing using an exact-match 5-tuple flow cache in a BPF hash map 'flow_cache_map' (key struct flow_key, value __u32 egress_ifindex, max_entries 2048). On cache hit, redirect packet to cached egress interface using bpf_redirect(egress_ifindex, 0). On cache miss or non-IP traffic, pass to kernel slow-path with XDP_PASS.",
+  "requirements": [
+    "Define struct flow_key and hash map 'flow_cache_map' with max_entries 2048",
+    "Extract 5-tuple for IPv4 TCP/UDP traffic",
+    "Perform exact-match lookup in flow cache",
+    "Redirect to cached egress ifindex on hit",
+    "Return XDP_PASS on cache miss or non-IP traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "flow_cache_miss_pass",
+      "fixture_file": "fixtures/flow_cache_miss_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "flow_cache_udp_miss_pass",
+      "fixture_file": "fixtures/flow_cache_udp_miss_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vlan_pass",
+      "fixture_file": "fixtures/vlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mpls_pass",
+      "fixture_file": "fixtures/mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

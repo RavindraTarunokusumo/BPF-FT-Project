@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pit_l2_003_dns_qtype_distribution",
+  "main_validator": "map_state",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "dns_a_query_pass",
+      "description": "DNS A query (QTYPE 1) increments slot 0 and returns XDP_PASS",
+      "fixture_file": "fixtures/dns_a_query_pass.bin",
+      "packet_hex": "525400123456525400654321080045000033123400004011e517c0a8010ac0a8011430390035001f0000123400000001000000000000016103636f6d0000010001",
+      "packet_len": 65,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_aaaa_query_pass",
+      "description": "DNS AAAA query (QTYPE 28) increments slot 1 and returns XDP_PASS",
+      "fixture_file": "fixtures/dns_aaaa_query_pass.bin",
+      "packet_hex": "525400123456525400654321080045000036123400004011e514c0a8010ac0a801143039003500220000123400000001000000000000046161616103636f6d00001c0001",
+      "packet_len": 68,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_cname_query_pass",
+      "description": "DNS CNAME query (QTYPE 5) increments slot 2 and returns XDP_PASS",
+      "fixture_file": "fixtures/dns_cname_query_pass.bin",
+      "packet_hex": "525400123456525400654321080045000037123400004011e513c0a8010ac0a80114303900350023000012340000000100000000000005636e616d6503636f6d0000050001",
+      "packet_len": 69,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_mx_query_pass",
+      "description": "DNS MX query (QTYPE 15) increments slot 3 and returns XDP_PASS",
+      "fixture_file": "fixtures/dns_mx_query_pass.bin",
+      "packet_hex": "525400123456525400654321080045000034123400004011e516c0a8010ac0a801143039003500200000123400000001000000000000026d7803636f6d00000f0001",
+      "packet_len": 66,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_txt_query_pass",
+      "description": "DNS TXT query (QTYPE 16) increments slot 4 and returns XDP_PASS",
+      "fixture_file": "fixtures/dns_txt_query_pass.bin",
+      "packet_hex": "525400123456525400654321080045000035123400004011e515c0a8010ac0a8011430390035002100001234000000010000000000000374787403636f6d0000100001",
+      "packet_len": 67,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_response_pass",
+      "description": "DNS response passes without incrementing query distribution",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "packet_hex": "525400123456525400654321080045000039123400004011e511c0a8010ac0a801140035303900250000123480000001000000000000076578616d706c6503636f6d0000010001",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_dns_pass",
+      "description": "Truncated DNS packet passes safely",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001f123400004011e52bc0a8010ac0a8011430390035000b0000123400",
+      "packet_len": 45,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

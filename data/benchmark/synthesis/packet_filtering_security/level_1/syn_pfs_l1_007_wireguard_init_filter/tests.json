@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_pfs_l1_007_wireguard_init_filter",
+  "main_validator": "packet_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "wg_init_drop",
+      "description": "WireGuard Handshake Initiation packet (Type 1) must be dropped",
+      "fixture_file": "fixtures/wg_init_drop.bin",
+      "packet_hex": "5254001234565254006543210800450000b3123400004011e497c0a8010ac0a801143039ca6c009f00000000000100000044332211aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "packet_len": 193,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "wg_data_pass",
+      "description": "WireGuard Data packet (Type 4) must pass",
+      "fixture_file": "fixtures/wg_data_pass.bin",
+      "packet_hex": "52540012345652540065432108004500002f123400004011e51bc0a8010ac0a801143039ca6c001b000000000004000000887766550100000000000000",
+      "packet_len": 61,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "wg_resp_pass",
+      "description": "WireGuard Handshake Response (Type 2) must pass",
+      "fixture_file": "fixtures/wg_resp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500007b123400004011e4cfc0a8010ac0a801143039ca6c00670000000000020000004433221188776655bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "packet_len": 137,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_other_pass",
+      "description": "UDP packet on other port must pass",
+      "fixture_file": "fixtures/udp_other_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a801143039ca6d000c000001000000",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_wg_pass",
+      "description": "Truncated WireGuard packet must pass safely",
+      "fixture_file": "fixtures/truncated_wg_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001d123400004011e52dc0a8010ac0a801143039ca6c0009000001",
+      "packet_len": 43,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

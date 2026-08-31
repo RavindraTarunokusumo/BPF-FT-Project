@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_pfs_l1_004_gtpu_echo_req_drop",
+  "main_validator": "packet_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "gtpu_echo_req_drop",
+      "description": "GTP-U packet with Message Type 1 (Echo Request) must be dropped",
+      "fixture_file": "fixtures/gtpu_echo_req_drop.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004011e526c0a8010ac0a8011430390868001000003001000012345678",
+      "packet_len": 50,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "gtpu_gpdu_pass",
+      "description": "GTP-U packet with Message Type 255 (G-PDU user data) must pass",
+      "fixture_file": "fixtures/gtpu_gpdu_pass.bin",
+      "packet_hex": "525400123456525400654321080045000048123400004011e502c0a8010ac0a80114303908680034000030ff00241234567845000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 86,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "gtpu_echo_reply_pass",
+      "description": "GTP-U packet with Message Type 2 (Echo Reply) must pass",
+      "fixture_file": "fixtures/gtpu_echo_reply_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004011e526c0a8010ac0a8011430390868001000003002000012345678",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_other_port_pass",
+      "description": "UDP packet on port 2153 must pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430390869000c000030010000",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "description": "Truncated GTP-U packet must pass safely",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001e123400004011e52cc0a8010ac0a8011430390868000a00003001",
+      "packet_len": 44,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

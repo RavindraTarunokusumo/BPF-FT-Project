@@ -1,0 +1,55 @@
+{
+  "task_id": "syn_pit_l2_007_icmpv6_nd_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_icmpv6",
+  "template_family": "xdp_nd_message_counter",
+  "semantic_signature": "icmpv6_nd_types_133_to_136+histogram+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv6 ICMPv6 Neighbor Discovery traffic (Next Header 58). Parse struct icmp6hdr and record counts in a per-CPU array map named 'nd_telemetry_map' (max_entries 4): slot 0 for Router Solicitation (133), slot 1 for Router Advertisement (134), slot 2 for Neighbor Solicitation (135), and slot 3 for Neighbor Advertisement (136). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'nd_telemetry_map' with max_entries 4",
+    "Validate Ethernet, IPv6, and struct icmp6hdr bounds",
+    "Check icmp6_type in range 133..136 and increment slot (type - 133)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "icmp6_rs_pass",
+      "fixture_file": "fixtures/icmp6_rs_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp6_ra_pass",
+      "fixture_file": "fixtures/icmp6_ra_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp6_ns_pass",
+      "fixture_file": "fixtures/icmp6_ns_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp6_na_pass",
+      "fixture_file": "fixtures/icmp6_na_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp6_echo_pass",
+      "fixture_file": "fixtures/icmp6_echo_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_icmp6_pass",
+      "fixture_file": "fixtures/truncated_icmp6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

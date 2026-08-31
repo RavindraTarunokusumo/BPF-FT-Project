@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_010_tcp_window_zero_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_tcp_filter",
+  "template_family": "xdp_tcp_window_filter",
+  "semantic_signature": "ipv4_tcp_ack_only+window_zero+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv4 TCP traffic to mitigate zero-window denial of service attacks. For established TCP packets where ACK flag is set (tcp->ack == 1) and neither SYN nor RST flags are set (tcp->syn == 0 && tcp->rst == 0), inspect the 16-bit advertised receive window (tcp->window). If tcp->window == 0, drop the packet with XDP_DROP. Pass SYN, RST, non-zero window TCP packets, UDP/ICMP/other traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 header bounds (variable IHL)",
+    "Validate struct tcphdr bounds",
+    "Check tcp->ack && !tcp->syn && !tcp->rst",
+    "Drop packet if tcp->window == 0",
+    "Pass all other traffic safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "tcp_zero_window_drop",
+      "fixture_file": "fixtures/tcp_zero_window_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "tcp_valid_window_pass",
+      "fixture_file": "fixtures/tcp_valid_window_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_syn_zero_window_pass",
+      "fixture_file": "fixtures/tcp_syn_zero_window_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_rst_zero_window_pass",
+      "fixture_file": "fixtures/tcp_rst_zero_window_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

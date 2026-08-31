@@ -1,0 +1,55 @@
+{
+  "task_id": "syn_ptr_l2_003_vxlan_decap_to_inner_ethernet",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_vxlan_decap",
+  "semantic_signature": "vxlan_udp4789+strip_50_outer_bytes_expose_inner_eth+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that decapsulates VXLAN tunnel packets (UDP destination port 4789). Validate the outer Ethernet (14 bytes), IPv4 (20 bytes), UDP (8 bytes), and VXLAN (8 bytes) headers, as well as the inner Ethernet header. Use bpf_xdp_adjust_head(ctx, 50) to strip the 50 outer encapsulation bytes and deliver the raw inner Ethernet frame. Pass all non-VXLAN traffic and truncated frames unchanged with XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4 (IHL=5), UDP, VXLAN, and inner Ethernet header bounds",
+    "Verify UDP destination port is 4789",
+    "Call bpf_xdp_adjust_head(ctx, 50) to remove 50 outer bytes",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "vxlan_decap_pass",
+      "fixture_file": "fixtures/vxlan_decap_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vxlan_decap_tcp_pass",
+      "fixture_file": "fixtures/vxlan_decap_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_vxlan_udp_pass",
+      "fixture_file": "fixtures/non_vxlan_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_vxlan_pass",
+      "fixture_file": "fixtures/truncated_vxlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pfs_l3_001_token_bucket_policer",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_stateful_policer",
+  "template_family": "xdp_token_bucket",
+  "semantic_signature": "ipv4_src_hash+token_bucket_10k_rate_5k_burst+policer",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write a stateful XDP token bucket rate limiter in C. Maintain a BPF hash map named 'policer_map' (key __be32 src_ip, value struct bucket_state { __u64 last_time_ns; __u64 tokens; }, max_entries 1024). Configure a rate of 10,000 bytes/second (RATE_BYTES_PER_SEC) and a burst capacity of 5,000 bytes (BURST_CAPACITY). On every IPv4 packet, calculate elapsed time using bpf_ktime_get_ns(), replenish tokens up to BURST_CAPACITY, and deduce packet length. If available tokens are insufficient or packet length exceeds BURST_CAPACITY, drop the packet with XDP_DROP. Otherwise, deduct packet length and return XDP_PASS. Pass non-IPv4 frames unchanged.",
+  "requirements": [
+    "Define struct bucket_state with last_time_ns (__u64) and tokens (__u64)",
+    "Define hash map 'policer_map' with key __be32, value struct bucket_state, max_entries 1024",
+    "Calculate packet wire length: (void *)data_end - (void *)data",
+    "Replenish tokens based on elapsed nanoseconds from bpf_ktime_get_ns()",
+    "Enforce token deduction and drop with XDP_DROP on deficit",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "initial_packet_pass",
+      "fixture_file": "fixtures/initial_packet_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "second_burst_packet_pass",
+      "fixture_file": "fixtures/second_burst_packet_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "third_packet_pass",
+      "fixture_file": "fixtures/third_packet_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "other_source_pass",
+      "fixture_file": "fixtures/other_source_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "oversized_burst_packet_drop",
+      "fixture_file": "fixtures/oversized_burst_packet_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "udp_rate_limit_pass",
+      "fixture_file": "fixtures/udp_rate_limit_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_ip_arp_pass",
+      "fixture_file": "fixtures/non_ip_arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_002_dns_null_txt_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_dns_filter",
+  "template_family": "xdp_dns_qtype_filter",
+  "semantic_signature": "dns_udp53+query_qtype_null_or_txt+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects DNS query traffic on UDP destination port 53. Parse the DNS 12-byte header, verify it is a DNS Query (QR flag bit == 0) with qdcount >= 1. Walk the variable-length DNS QNAME wire format until the terminating null byte, and inspect the 16-bit QTYPE. If the query type is NULL (10) or TXT (16), drop the packet with XDP_DROP to prevent DNS tunneling exfiltration. Pass standard query types (A 1, AAAA 28, MX 15), DNS responses, non-DNS traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and DNS header bounds",
+    "Verify UDP destination port is 53 and DNS QR bit == 0",
+    "Safely iterate through DNS label lengths with bounds checks",
+    "Extract 16-bit QTYPE and drop if qtype == 10 or qtype == 16",
+    "Pass all other queries and responses safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dns_null_drop",
+      "fixture_file": "fixtures/dns_null_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "dns_txt_drop",
+      "fixture_file": "fixtures/dns_txt_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "dns_a_pass",
+      "fixture_file": "fixtures/dns_a_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_aaaa_pass",
+      "fixture_file": "fixtures/dns_aaaa_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_response_pass",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_port_pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_dns_pass",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

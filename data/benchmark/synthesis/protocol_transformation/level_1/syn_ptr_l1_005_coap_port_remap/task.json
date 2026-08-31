@@ -1,0 +1,45 @@
+{
+  "task_id": "syn_ptr_l1_005_coap_port_remap",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_l4_port_remap",
+  "semantic_signature": "coap_udp5683+remap_to_5684_update_csum+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv4 UDP traffic targeting CoAP destination port 5683. Rewrite destination port to 5684. If UDP checksum is non-zero, incrementally update it for the 16-bit port difference. Return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and UDP header bounds",
+    "Rewrite udp->dest to bpf_htons(5684)",
+    "Update UDP checksum correctly if non-zero",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "coap_port_remap_pass",
+      "fixture_file": "fixtures/coap_port_remap_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "coap_other_port_pass",
+      "fixture_file": "fixtures/coap_other_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_udp_pass",
+      "fixture_file": "fixtures/truncated_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

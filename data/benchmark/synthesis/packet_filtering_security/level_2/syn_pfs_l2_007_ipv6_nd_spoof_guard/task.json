@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_007_ipv6_nd_spoof_guard",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_icmpv6_filter",
+  "template_family": "xdp_nd_spoof_filter",
+  "semantic_signature": "icmpv6_na_136+router_flag_and_unsolicited+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that protects against rogue IPv6 router advertisement attacks via ICMPv6 Neighbor Advertisement (Type 136). Parse the IPv6 header and ICMPv6 NA structure. Extract the Router flag (R-bit, bit 31) and Solicited flag (S-bit, bit 30). If a packet is an unsolicited NA claiming router status (R == 1 and S == 0), drop the packet with XDP_DROP. Pass solicited router NAs, host NAs, other ICMPv6 messages, non-IPv6 traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv6 header bounds",
+    "Verify ip6->nexthdr == IPPROTO_ICMPV6",
+    "Validate struct icmp6_na_hdr bounds (24 bytes)",
+    "Verify icmp6_type == 136",
+    "Extract R and S flags: drop if (flags & 0x80000000) != 0 && (flags & 0x40000000) == 0",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "unsolicited_router_na_drop",
+      "fixture_file": "fixtures/unsolicited_router_na_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "solicited_router_na_pass",
+      "fixture_file": "fixtures/solicited_router_na_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "unsolicited_host_na_pass",
+      "fixture_file": "fixtures/unsolicited_host_na_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ns_pass",
+      "fixture_file": "fixtures/ns_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_tcp_pass",
+      "fixture_file": "fixtures/ipv6_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_na_pass",
+      "fixture_file": "fixtures/truncated_na_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

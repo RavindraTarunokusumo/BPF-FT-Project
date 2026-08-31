@@ -1,0 +1,47 @@
+{
+  "task_id": "syn_pfs_l1_009_sctp_abort_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_sctp_filter",
+  "template_family": "xdp_sctp_chunk_filter",
+  "semantic_signature": "sctp_proto132+chunk_type_6_abort+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects SCTP traffic (IP protocol 132). Parse the 12-byte SCTP common header and the first SCTP chunk header (struct sctp_chunkhdr). If the chunk type is 6 (ABORT chunk), drop the packet with XDP_DROP. Pass other SCTP chunks (DATA 0, INIT 1, SACK 3), non-SCTP traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 header bounds (accounting for variable IHL)",
+    "Verify ip->protocol == 132 (SCTP)",
+    "Validate 12-byte struct sctphdr bounds",
+    "Validate 4-byte struct sctp_chunkhdr bounds",
+    "Drop packet if chunk->chunk_type == 6",
+    "Pass all other traffic safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "sctp_abort_drop",
+      "fixture_file": "fixtures/sctp_abort_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "sctp_data_pass",
+      "fixture_file": "fixtures/sctp_data_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "sctp_init_pass",
+      "fixture_file": "fixtures/sctp_init_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_sctp_pass",
+      "fixture_file": "fixtures/truncated_sctp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

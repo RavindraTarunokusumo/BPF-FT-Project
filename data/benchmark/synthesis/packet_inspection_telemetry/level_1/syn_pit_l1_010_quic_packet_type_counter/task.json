@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pit_l1_010_quic_packet_type_counter",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_quic",
+  "template_family": "xdp_quic_type_counter",
+  "semantic_signature": "quic_udp443+long_vs_short_header_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects QUIC traffic (UDP port 443). Check the first byte of the QUIC payload: bit 7 (0x80) indicates a Long Header packet (Initial, Handshake, 0-RTT), while bit 7 == 0 indicates a Short Header (1-RTT). Count Long Header packets in slot 0, and Short Header packets in slot 1 of a per-CPU array map named 'quic_hdr_type_map' (max_entries 2). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'quic_hdr_type_map' with max_entries 2",
+    "Validate Ethernet, IPv4, UDP, and QUIC first-byte bounds",
+    "Check UDP port 443 on source or destination",
+    "Inspect first byte bit 7 and increment slot 0 (Long Header) or slot 1 (Short Header)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "quic_long_hdr_pass",
+      "fixture_file": "fixtures/quic_long_hdr_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "quic_short_hdr_pass",
+      "fixture_file": "fixtures/quic_short_hdr_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_quic_udp_pass",
+      "fixture_file": "fixtures/non_quic_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_quic_pass",
+      "fixture_file": "fixtures/truncated_quic_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

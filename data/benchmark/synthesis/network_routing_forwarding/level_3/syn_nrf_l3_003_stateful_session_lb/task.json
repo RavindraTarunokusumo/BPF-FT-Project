@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_nrf_l3_003_stateful_session_lb",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_load_balancer_stateful",
+  "template_family": "xdp_stateful_lb",
+  "semantic_signature": "tcp_5tuple+sticky_session_affinity_map+redirect",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP load balancer that maintains sticky session affinity for TCP connections in a BPF hash map 'session_map' (key struct flow_key, value __u32 ifindex, max_entries 1024). On SYN, assign backend (50 + (hash % 2)) and store in map. For established packets, lookup affinity and redirect to assigned backend. Pass non-TCP traffic with XDP_PASS.",
+  "requirements": [
+    "Define struct flow_key and hash map 'session_map' with max_entries 1024",
+    "Assign backend on SYN and record in session_map",
+    "Lookup assigned backend for existing flow packets",
+    "Return bpf_redirect(assigned_ifindex, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "flow1_syn_assigned_redirect",
+      "fixture_file": "fixtures/flow1_syn_assigned_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "flow1_ack_affinity_redirect",
+      "fixture_file": "fixtures/flow1_ack_affinity_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "flow2_syn_redirect",
+      "fixture_file": "fixtures/flow2_syn_redirect.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

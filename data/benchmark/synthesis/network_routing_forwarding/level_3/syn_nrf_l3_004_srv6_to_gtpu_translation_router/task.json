@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_nrf_l3_004_srv6_to_gtpu_translation_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_router_srv6_gtpu",
+  "template_family": "xdp_srv6_gtpu_interworking",
+  "semantic_signature": "srv6_sid_to_gtpu_translation+redirect_upf_if60",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects SRv6 packets (IPv6 Next Header 43, Routing Type 4). If the active Segment ID matches prefix 2001:db8:ffff::/48, redirect to 5G UPF gateway interface ifindex 60 using bpf_redirect(60, 0). Pass non-matching SRv6 packets and other traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv6, and struct srv6_hdr bounds",
+    "Verify ip6->nexthdr == 43 and srh->routing_type == 4",
+    "Check active SID against prefix 2001:db8:ffff::/48",
+    "Return bpf_redirect(60, 0) on match",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "srv6_5g_sid_redirect_if60",
+      "fixture_file": "fixtures/srv6_5g_sid_redirect_if60.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "srv6_other_sid_pass",
+      "fixture_file": "fixtures/srv6_other_sid_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "standard_ipv6_pass",
+      "fixture_file": "fixtures/standard_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_srv6_pass",
+      "fixture_file": "fixtures/truncated_srv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "task_id": "syn_ptr_l1_009_ntp_stratum_clamp",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_ntp_clamp",
+  "semantic_signature": "ntp_udp123+clamp_stratum_gt_4_to_4+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects NTP traffic (UDP port 123) and clamps the 8-bit Stratum field (byte offset 1 of NTP payload) to maximum 4 if current stratum is between 5 and 15. Return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and NTP header bounds",
+    "Clamp *(ntp + 1) to 4 if stratum > 4 && stratum <= 15",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ntp_stratum_clamp_pass",
+      "fixture_file": "fixtures/ntp_stratum_clamp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ntp_stratum_valid_pass",
+      "fixture_file": "fixtures/ntp_stratum_valid_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_ntp_udp_pass",
+      "fixture_file": "fixtures/non_ntp_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ntp_pass",
+      "fixture_file": "fixtures/truncated_ntp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

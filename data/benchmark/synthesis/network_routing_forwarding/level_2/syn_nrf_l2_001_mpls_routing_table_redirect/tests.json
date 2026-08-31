@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_nrf_l2_001_mpls_routing_table_redirect",
+  "main_validator": "xdp_action",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "label_500_redirect_if20",
+      "description": "MPLS label 500 routed to ifindex 20",
+      "fixture_file": "fixtures/label_500_redirect_if20.bin",
+      "packet_hex": "5254001234565254006543218847001f414045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 54,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "label_600_redirect_if21",
+      "description": "MPLS label 600 routed to ifindex 21",
+      "fixture_file": "fixtures/label_600_redirect_if21.bin",
+      "packet_hex": "52540012345652540065432188470025814045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 58,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "label_999_unrouted_pass",
+      "description": "Unrouted MPLS label 999 passed unchanged",
+      "fixture_file": "fixtures/label_999_unrouted_pass.bin",
+      "packet_hex": "5254001234565254006543218847003e71404500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv4_pass",
+      "description": "IPv4 traffic passed unchanged",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passed unchanged",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "description": "Truncated MPLS frame passed safely",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "packet_hex": "52540012345652540065432188470001",
+      "packet_len": 16,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

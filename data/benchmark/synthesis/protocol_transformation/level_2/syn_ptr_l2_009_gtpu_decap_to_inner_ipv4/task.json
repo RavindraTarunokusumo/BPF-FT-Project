@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_ptr_l2_009_gtpu_decap_to_inner_ipv4",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_gtpu_decap",
+  "semantic_signature": "gtpu_udp2152+strip_36_outer_bytes_expose_inner_ip+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that decapsulates GTP-U cellular tunnel packets (UDP destination port 2152). Strip the outer 36 bytes (20-byte outer IPv4 + 8-byte UDP + 8-byte GTP-U) using bpf_xdp_adjust_head(ctx, 36), attach original Ethernet MAC addresses, set eth->h_proto to 0x0800, and return XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4, UDP, and GTP-U header bounds",
+    "Verify UDP destination port is 2152",
+    "Call bpf_xdp_adjust_head(ctx, 36) to strip outer encapsulation",
+    "Restore Ethernet MACs and set eth->h_proto = bpf_htons(ETH_P_IP)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gtpu_decap_pass",
+      "fixture_file": "fixtures/gtpu_decap_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gtpu_decap_tcp_pass",
+      "fixture_file": "fixtures/gtpu_decap_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_tcp_pass",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

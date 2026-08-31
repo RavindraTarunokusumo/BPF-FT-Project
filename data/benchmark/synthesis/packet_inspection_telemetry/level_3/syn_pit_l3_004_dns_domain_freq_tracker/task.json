@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_004_dns_domain_freq_tracker",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_dns_domains",
+  "template_family": "xdp_dns_domain_tracker",
+  "semantic_signature": "dns_query+domain_hash_freq_and_bytes_map+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects DNS queries (UDP destination port 53, QR == 0). Parse the question QNAME labels, compute a 32-bit FNV-1a hash across the domain name bytes, and maintain query frequency and total wire byte volume in a BPF hash map named 'domain_freq_map' (key __u32 domain_hash, value struct domain_stat { __u64 query_count; __u64 total_bytes; }, max_entries 1024). Always return XDP_PASS.",
+  "requirements": [
+    "Define struct domain_stat with query_count and total_bytes",
+    "Define hash map 'domain_freq_map' with key __u32 and max_entries 1024",
+    "Walk DNS QNAME labels safely and compute 32-bit hash",
+    "Accumulate query_count and total_bytes per domain hash",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "domain_a_pass",
+      "fixture_file": "fixtures/domain_a_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "domain_a_pkt2_pass",
+      "fixture_file": "fixtures/domain_a_pkt2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "domain_b_pass",
+      "fixture_file": "fixtures/domain_b_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_response_pass",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_dns_udp_pass",
+      "fixture_file": "fixtures/non_dns_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_dns_pass",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

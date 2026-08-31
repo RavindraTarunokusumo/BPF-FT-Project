@@ -1,0 +1,55 @@
+{
+  "task_id": "syn_ptr_l2_006_geneve_opt_strip",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_geneve_opt_strip",
+  "semantic_signature": "geneve_udp6081+clear_opt_len_to_zero+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GENEVE tunnel packets (UDP destination port 6081). If gen->opt_len > 0, set gen->opt_len = 0 to strip options from the active header definition. Return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and struct genevehdr bounds",
+    "Check UDP destination port 6081",
+    "Set gen->opt_len = 0",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "geneve_strip_opt_pass",
+      "fixture_file": "fixtures/geneve_strip_opt_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "geneve_no_opt_pass",
+      "fixture_file": "fixtures/geneve_no_opt_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_geneve_udp_pass",
+      "fixture_file": "fixtures/non_geneve_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_geneve_pass",
+      "fixture_file": "fixtures/truncated_geneve_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

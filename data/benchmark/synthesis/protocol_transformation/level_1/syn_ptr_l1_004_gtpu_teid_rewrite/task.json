@@ -1,0 +1,45 @@
+{
+  "task_id": "syn_ptr_l1_004_gtpu_teid_rewrite",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_gtpu_teid_remap",
+  "semantic_signature": "gtpu_udp2152+rewrite_teid_11223344+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GTP-U packets (UDP destination port 2152) and rewrites the 32-bit Tunnel Endpoint Identifier (TEID) field to fixed value 0x11223344 (in network byte order). Preserve all other fields and payload. Return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and struct gtpuhdr bounds",
+    "Verify UDP destination port is 2152",
+    "Rewrite gtp->teid to bpf_htonl(0x11223344)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gtpu_teid_rewrite_pass",
+      "fixture_file": "fixtures/gtpu_teid_rewrite_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gtpu_teid_rewrite_2_pass",
+      "fixture_file": "fixtures/gtpu_teid_rewrite_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

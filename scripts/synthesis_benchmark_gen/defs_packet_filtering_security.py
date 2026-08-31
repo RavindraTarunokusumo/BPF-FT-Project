@@ -33,6 +33,9 @@ from .packet_utils import (
     make_udp,
     make_vxlan,
     make_wireguard,
+    parse_ipv4,
+    parse_ipv6,
+    parse_mac,
 )
 
 
@@ -2803,7 +2806,7 @@ char _license[] SEC("license") = "GPL";
     t29_tests = [
         {"name": "teid_first_pkt_pass", "description": "First packet for TEID 0x1000 passes and initializes quota", "packet_hex": make_eth(payload=make_ipv4(proto=17, payload=make_udp(dst_port=2152, payload=make_gtpu(teid=0x1000, inner_pkt=make_ipv4(proto=1, payload=make_icmp(payload=b"A"*100)))))).hex(), "expected_action": "XDP_PASS"},
         {"name": "teid_second_pkt_pass", "description": "Second packet for TEID 0x1000 within quota passes", "packet_hex": make_eth(payload=make_ipv4(proto=17, payload=make_udp(dst_port=2152, payload=make_gtpu(teid=0x1000, inner_pkt=make_ipv4(proto=1, payload=make_icmp(payload=b"B"*100)))))).hex(), "expected_action": "XDP_PASS"},
-        {"name": "teid_other_tunnel_pass", "description": "Packet for different TEID 0x2000 has independent quota and passes", "packet_hex": make_eth(payload=make_ipv4(proto=17, payload=make_udp(dst_port=2152, payload=make_gtpu(teid=0x2000, inner_pkt=make_ipv4(proto=1, payload=make_icmp())))))).hex(), "expected_action": "XDP_PASS"},
+        {"name": "teid_other_tunnel_pass", "description": "Packet for different TEID 0x2000 has independent quota and passes", "packet_hex": make_eth(payload=make_ipv4(proto=17, payload=make_udp(dst_port=2152, payload=make_gtpu(teid=0x2000, inner_pkt=make_ipv4(proto=1, payload=make_icmp()))))).hex(), "expected_action": "XDP_PASS"},
         {"name": "teid_echo_req_pass", "description": "GTP-U Echo Request bypasses user quota and passes", "packet_hex": make_eth(payload=make_ipv4(proto=17, payload=make_udp(dst_port=2152, payload=make_gtpu(msg_type=1, teid=0x1000)))).hex(), "expected_action": "XDP_PASS"},
         {"name": "non_gtpu_udp_pass", "description": "UDP to port 2153 passes", "packet_hex": make_eth(payload=make_ipv4(proto=17, payload=make_udp(dst_port=2153))).hex(), "expected_action": "XDP_PASS"},
         {"name": "direct_tcp_pass", "description": "Direct TCP traffic passes", "packet_hex": make_eth(payload=make_ipv4(proto=6, payload=make_tcp())).hex(), "expected_action": "XDP_PASS"},

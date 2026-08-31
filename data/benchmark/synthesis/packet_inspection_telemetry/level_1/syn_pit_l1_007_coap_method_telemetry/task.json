@@ -1,0 +1,51 @@
+{
+  "task_id": "syn_pit_l1_007_coap_method_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_coap",
+  "template_family": "xdp_coap_method_counter",
+  "semantic_signature": "coap_udp5683+method_code_split_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects CoAP traffic (UDP port 5683). Parse the 4-byte CoAP header and inspect the 8-bit Code field (byte offset 1). Count request methods into a per-CPU array map named 'coap_method_map' (max_entries 4): slot 0 for GET (code 1), slot 1 for POST (code 2), slot 2 for PUT (code 3), and slot 3 for DELETE (code 4). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'coap_method_map' with max_entries 4",
+    "Validate Ethernet, IPv4, UDP, and CoAP header bounds",
+    "Verify UDP destination port is 5683",
+    "Extract Code byte and increment slot (code - 1) for codes 1..4",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "coap_get_pass",
+      "fixture_file": "fixtures/coap_get_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "coap_post_pass",
+      "fixture_file": "fixtures/coap_post_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "coap_put_pass",
+      "fixture_file": "fixtures/coap_put_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "coap_delete_pass",
+      "fixture_file": "fixtures/coap_delete_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_coap_udp_pass",
+      "fixture_file": "fixtures/non_coap_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_coap_pass",
+      "fixture_file": "fixtures/truncated_coap_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_001_tcp_mss_clamp_filter",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_tcp_options_filter",
+  "template_family": "xdp_mss_option_filter",
+  "semantic_signature": "ipv4_tcp_syn+parse_mss_opt_gt_1460+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv4 TCP SYN packets. Parse the variable-length TCP options list to locate the Maximum Segment Size (MSS) option (Kind 2, Length 4). If the requested MSS is strictly greater than 1460 bytes, drop the packet with XDP_DROP. Pass TCP SYN packets with valid MSS <= 1460 or without MSS option, non-SYN TCP packets, other protocols, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 headers (supporting variable IHL)",
+    "Validate TCP header and check tcp->syn is set",
+    "Calculate TCP header length from tcp->doff * 4 and bounds-check options region",
+    "Iterate through TCP options with safe bounds checking on every step",
+    "Parse MSS option (Kind 2, Length 4) and drop if MSS > 1460",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "syn_large_mss_drop",
+      "fixture_file": "fixtures/syn_large_mss_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "syn_valid_mss_pass",
+      "fixture_file": "fixtures/syn_valid_mss_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_small_mss_pass",
+      "fixture_file": "fixtures/syn_small_mss_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_no_options_pass",
+      "fixture_file": "fixtures/syn_no_options_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ack_large_mss_pass",
+      "fixture_file": "fixtures/ack_large_mss_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_opt_pass",
+      "fixture_file": "fixtures/truncated_tcp_opt_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

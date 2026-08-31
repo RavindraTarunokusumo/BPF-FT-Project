@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_ptr_l3_006_icmp_port_unreachable_generator",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_icmp_error_generator",
+  "template_family": "xdp_port_unreachable_synthesizer",
+  "semantic_signature": "udp_port_9999_closed+synthesize_icmp_type_3_code_3_and_tx",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that synthesizes an ICMP Destination Unreachable / Port Unreachable response (Type 3, Code 3) when incoming IPv4 UDP traffic targets closed port 9999. Swap Ethernet MAC addresses, swap IPv4 source and destination addresses, set IPv4 protocol to IPPROTO_ICMP, construct struct icmphdr with type 3 code 3, compute checksums, and return XDP_TX. Pass other UDP ports and protocols unchanged with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and UDP header bounds",
+    "Check udp->dest == bpf_htons(9999)",
+    "Swap MACs and IP endpoints",
+    "Set IP protocol to ICMP and construct ICMP Type 3 Code 3 header",
+    "Return XDP_TX for closed port, XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "udp_port_9999_icmp_unreachable_tx",
+      "fixture_file": "fixtures/udp_port_9999_icmp_unreachable_tx.bin",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "udp_port_80_pass",
+      "fixture_file": "fixtures/udp_port_80_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_port_9999_pass",
+      "fixture_file": "fixtures/tcp_port_9999_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_udp_pass",
+      "fixture_file": "fixtures/truncated_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_eth_pass",
+      "fixture_file": "fixtures/truncated_eth_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

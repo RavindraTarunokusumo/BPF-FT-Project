@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_007_wireguard_session_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_wireguard",
+  "template_family": "xdp_wg_session_tracker",
+  "semantic_signature": "wireguard_udp51820+receiver_idx_session_matrix+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that maintains active WireGuard session telemetry (UDP port 51820). Parse WireGuard Type 4 data packets, extract the 32-bit Receiver Index, and update session statistics in a BPF hash map named 'wg_session_map' (key __u32 receiver_idx, value struct wg_session_stat { __u64 last_seen_ns; __u64 total_packets; __u64 total_bytes; }, max_entries 1024). Update timestamps with bpf_ktime_get_ns(). Always return XDP_PASS.",
+  "requirements": [
+    "Define struct wg_session_stat with last_seen_ns, total_packets, and total_bytes",
+    "Define hash map 'wg_session_map' with key __u32 and max_entries 1024",
+    "Filter WireGuard Type 4 data packets",
+    "Accumulate packet count, wire byte volume, and last seen timestamp",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "wg_data1_pass",
+      "fixture_file": "fixtures/wg_data1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "wg_data1_pkt2_pass",
+      "fixture_file": "fixtures/wg_data1_pkt2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "wg_other_session_pass",
+      "fixture_file": "fixtures/wg_other_session_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "wg_handshake_pass",
+      "fixture_file": "fixtures/wg_handshake_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_wg_udp_pass",
+      "fixture_file": "fixtures/non_wg_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_wg_pass",
+      "fixture_file": "fixtures/truncated_wg_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

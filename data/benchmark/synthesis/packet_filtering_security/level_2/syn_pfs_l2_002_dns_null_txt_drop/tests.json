@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pfs_l2_002_dns_null_txt_drop",
+  "main_validator": "packet_action",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "dns_null_drop",
+      "description": "DNS query with QTYPE=NULL (10) must be dropped",
+      "fixture_file": "fixtures/dns_null_drop.bin",
+      "packet_hex": "52540012345652540065432108004500003d123400004011e50dc0a8010ac0a80114303900350029000012340000000100000000000004746573740674756e6e656c03636f6d00000a0001",
+      "packet_len": 75,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_txt_drop",
+      "description": "DNS query with QTYPE=TXT (16) must be dropped",
+      "fixture_file": "fixtures/dns_txt_drop.bin",
+      "packet_hex": "52540012345652540065432108004500003e123400004011e50cc0a8010ac0a8011430390035002a000012340000000100000000000005657866696c0674756e6e656c03636f6d0000100001",
+      "packet_len": 76,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_a_pass",
+      "description": "DNS query with QTYPE=A (1) must pass",
+      "fixture_file": "fixtures/dns_a_pass.bin",
+      "packet_hex": "525400123456525400654321080045000039123400004011e511c0a8010ac0a801143039003500250000123400000001000000000000076578616d706c6503636f6d0000010001",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_aaaa_pass",
+      "description": "DNS query with QTYPE=AAAA (28) must pass",
+      "fixture_file": "fixtures/dns_aaaa_pass.bin",
+      "packet_hex": "525400123456525400654321080045000039123400004011e511c0a8010ac0a801143039003500250000123400000001000000000000076578616d706c6503636f6d00001c0001",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_response_pass",
+      "description": "DNS response packet (QR=1) must pass",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "packet_hex": "525400123456525400654321080045000039123400004011e511c0a8010ac0a801140035303900250000123480000001000000000000076578616d706c6503636f6d0000100001",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_other_port_pass",
+      "description": "UDP packet on other port must pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "packet_hex": "525400123456525400654321080045000039123400004011e511c0a8010ac0a80114303914e900250000123400000001000000000000076578616d706c6503636f6d00000a0001",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_dns_pass",
+      "description": "Truncated DNS packet must pass safely",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "packet_hex": "525400123456525400654321080045000020123400004011e52ac0a8010ac0a8011430390035000c000012340100",
+      "packet_len": 46,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_008_mpls_vpn_flow_stats",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_mpls_vpn",
+  "template_family": "xdp_mpls_vpn_tracker",
+  "semantic_signature": "mpls_vpn_bos_label+traffic_stats_map+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects MPLS L3VPN traffic (EtherType 0x8847). Walk the MPLS label stack to locate the Bottom-of-Stack (BOS) VPN service label. Track cumulative packets and byte volume per VPN label in a BPF hash map named 'vpn_stats_map' (key __u32 vpn_label, value struct mpls_stats { __u64 pkts; __u64 bytes; }, max_entries 1024). Always return XDP_PASS.",
+  "requirements": [
+    "Define struct mpls_stats with pkts and bytes",
+    "Define hash map 'vpn_stats_map' with key __u32 and max_entries 1024",
+    "Walk MPLS label stack safely to extract the BOS service label",
+    "Accumulate packets and wire bytes per VPN label",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "vpn_label_100_pass",
+      "fixture_file": "fixtures/vpn_label_100_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vpn_label_100_pkt2_pass",
+      "fixture_file": "fixtures/vpn_label_100_pkt2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vpn_label_200_pass",
+      "fixture_file": "fixtures/vpn_label_200_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vpn_multi_label_pass",
+      "fixture_file": "fixtures/vpn_multi_label_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_mpls_ipv4_pass",
+      "fixture_file": "fixtures/non_mpls_ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_mpls_pass",
+      "fixture_file": "fixtures/truncated_mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "task_id": "syn_pit_l1_009_ipv6_next_header_split",
+  "main_validator": "map_state",
+  "test_count": 6,
+  "test_cases": [
+    {
+      "name": "ipv6_tcp_pass",
+      "description": "IPv6 TCP packet increments slot 0 and returns XDP_PASS",
+      "fixture_file": "fixtures/ipv6_tcp_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_udp_pass",
+      "description": "IPv6 UDP packet increments slot 1 and returns XDP_PASS",
+      "fixture_file": "fixtures/ipv6_udp_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000008114020010db800000000000000000000000120010db80000000000000000000000023039003500080000",
+      "packet_len": 62,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_icmp6_pass",
+      "description": "IPv6 ICMPv6 packet increments slot 2 and returns XDP_PASS",
+      "fixture_file": "fixtures/ipv6_icmp6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000113a4020010db800000000000000000000000120010db8000000000000000000000002800095df123400015445535450494e4736",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_other_pass",
+      "description": "IPv6 other next header (e.g. GRE 47) increments slot 3 and returns XDP_PASS",
+      "fixture_file": "fixtures/ipv6_other_pass.bin",
+      "packet_hex": "52540012345652540065432186dd60000000000a2f4020010db800000000000000000000000120010db800000000000000000000000200000000000000000000",
+      "packet_len": 64,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv4_pass",
+      "description": "IPv4 packet passes without incrementing IPv6 map",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "description": "Truncated IPv6 header passes safely",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000",
+      "packet_len": 16,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

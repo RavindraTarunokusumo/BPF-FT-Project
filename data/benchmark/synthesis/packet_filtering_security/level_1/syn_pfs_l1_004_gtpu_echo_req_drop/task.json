@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pfs_l1_004_gtpu_echo_req_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_gtpu_filter",
+  "template_family": "xdp_gtpu_msgtype_filter",
+  "semantic_signature": "gtpu_udp2152+msgtype_1_echo_req+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GTP-U tunnel traffic on UDP destination port 2152. Parse the 8-byte GTP-U header and check the Message Type field. If the Message Type is 1 (Echo Request), drop the packet with XDP_DROP. Pass other GTP-U message types (e.g. 255 G-PDU, 2 Echo Reply), non-GTP-U UDP packets, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, and UDP header bounds",
+    "Check UDP destination port is 2152",
+    "Validate GTP-U header bounds (struct gtpuhdr)",
+    "Drop packet if gtp->msg_type == 1",
+    "Pass all non-matching and truncated packets",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gtpu_echo_req_drop",
+      "fixture_file": "fixtures/gtpu_echo_req_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "gtpu_gpdu_pass",
+      "fixture_file": "fixtures/gtpu_gpdu_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "gtpu_echo_reply_pass",
+      "fixture_file": "fixtures/gtpu_echo_reply_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_port_pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

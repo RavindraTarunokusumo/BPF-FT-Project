@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pfs_l1_008_arp_gratuitous_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_arp_filter",
+  "template_family": "xdp_garp_filter",
+  "semantic_signature": "arp_0x0806+sender_ip_eq_target_ip+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects ARP frames (EtherType 0x0806). Parse the 28-byte Ethernet/IPv4 ARP structure and check if the Sender IP (ar_sip) is identical to the Target IP (ar_tip), which identifies Gratuitous ARP / ARP announcements. If ar_sip == ar_tip, drop the packet with XDP_DROP. Pass standard ARP requests and replies, non-ARP traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet header bounds and check eth->h_proto == bpf_htons(ETH_P_ARP)",
+    "Validate 28-byte struct arphdr_eth_ipv4 bounds",
+    "Verify hardware format (1), protocol (0x0800), hlen (6), and plen (4)",
+    "Drop packet if arp->ar_sip == arp->ar_tip",
+    "Pass non-matching and truncated packets safely",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gratuitous_arp_drop",
+      "fixture_file": "fixtures/gratuitous_arp_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "standard_arp_req_pass",
+      "fixture_file": "fixtures/standard_arp_req_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "standard_arp_reply_pass",
+      "fixture_file": "fixtures/standard_arp_reply_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_arp_pass",
+      "fixture_file": "fixtures/truncated_arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

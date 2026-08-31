@@ -1,0 +1,67 @@
+{
+  "task_id": "syn_ptr_l3_009_mpls_push_dual_label_vpn",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_head_adjust",
+  "template_family": "xdp_mpls_push_dual",
+  "semantic_signature": "ipv4_raw+push_dual_mpls_labels_1000_and_200+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that encapsulates incoming raw IPv4 packets into a dual MPLS label stack (outer Transport Label 1000 with BOS=0, inner VPN Service Label 200 with BOS=1, TTL 64). Use bpf_xdp_adjust_head(ctx, -8) to expand the packet head by 8 bytes. Set eth->h_proto to bpf_htons(0x8847) and return XDP_PASS. Pass non-IPv4 traffic unchanged.",
+  "requirements": [
+    "Validate Ethernet and struct iphdr bounds",
+    "Verify eth->h_proto == bpf_htons(ETH_P_IP)",
+    "Expand packet head by 8 bytes using bpf_xdp_adjust_head(ctx, -8)",
+    "Push outer label 1000 (BOS=0, TTL 64) and inner label 200 (BOS=1, TTL 64)",
+    "Set eth->h_proto = bpf_htons(0x8847)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "push_dual_mpls_tcp_pass",
+      "fixture_file": "fixtures/push_dual_mpls_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "push_dual_mpls_udp_pass",
+      "fixture_file": "fixtures/push_dual_mpls_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "push_dual_mpls_icmp_pass",
+      "fixture_file": "fixtures/push_dual_mpls_icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vlan_pass",
+      "fixture_file": "fixtures/vlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "existing_mpls_pass",
+      "fixture_file": "fixtures/existing_mpls_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_eth_pass",
+      "fixture_file": "fixtures/truncated_eth_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

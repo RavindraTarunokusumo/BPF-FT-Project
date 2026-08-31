@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_005_gtpu_bearer_traffic_matrix",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_gtpu_bearer",
+  "template_family": "xdp_gtpu_traffic_matrix",
+  "semantic_signature": "gtpu_teid+uplink_downlink_traffic_matrix+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that maintains a bearer traffic matrix for GTP-U cellular tunnels. Inspect GTP-U packets (UDP port 2152 on dest for uplink or source for downlink). Extract the 32-bit TEID and update per-TEID telemetry in a BPF hash map named 'bearer_matrix_map' (key __u32 teid, value struct bearer_stats { __u64 uplink_bytes; __u64 downlink_bytes; __u64 total_pkts; }, max_entries 1024). Accumulate uplink vs downlink bytes and total packets. Always return XDP_PASS.",
+  "requirements": [
+    "Define struct bearer_stats with uplink_bytes, downlink_bytes, and total_pkts",
+    "Define hash map 'bearer_matrix_map' with key __u32 and max_entries 1024",
+    "Distinguish uplink (dest port 2152) from downlink (source port 2152)",
+    "Accumulate per-TEID direction bytes and packet counts",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "teid1_uplink_pass",
+      "fixture_file": "fixtures/teid1_uplink_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "teid1_downlink_pass",
+      "fixture_file": "fixtures/teid1_downlink_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "teid2_pass",
+      "fixture_file": "fixtures/teid2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "echo_req_pass",
+      "fixture_file": "fixtures/echo_req_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

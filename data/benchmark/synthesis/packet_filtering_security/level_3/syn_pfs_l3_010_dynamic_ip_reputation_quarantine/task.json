@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pfs_l3_010_dynamic_ip_reputation_quarantine",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_ip_quarantine",
+  "template_family": "xdp_reputation_firewall",
+  "semantic_signature": "ipv4_src_reputation+3_bad_events_60s_quarantine+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements a dynamic IP reputation quarantine system. Maintain per-source state in a BPF hash map named 'quarantine_map' (key __be32 src_ip, value struct ip_reputation { __u32 bad_event_count; __u64 quarantine_until_ns; }, max_entries 1024). Inspect incoming traffic: if a source IP is currently in active quarantine (now < quarantine_until_ns), drop all its traffic with XDP_DROP. Detect abnormal TCP scans (SYN+FIN simultaneously or NULL flags). Increment bad_event_count on each abnormal packet. Once bad_event_count reaches 3, quarantine the IP for 60 seconds (now + 60,000,000,000 ns) and drop with XDP_DROP. Pass compliant packets and non-IPv4 traffic with XDP_PASS.",
+  "requirements": [
+    "Define struct ip_reputation with bad_event_count (__u32) and quarantine_until_ns (__u64)",
+    "Define hash map 'quarantine_map' with key __be32 and max_entries 1024",
+    "Drop all traffic from sources with active quarantine timestamp",
+    "Detect abnormal TCP flags (SYN+FIN or NULL) and increment count",
+    "Enforce 60-second quarantine upon reaching 3 abnormal events",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "bad_flags_1_pass",
+      "fixture_file": "fixtures/bad_flags_1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "bad_flags_2_pass",
+      "fixture_file": "fixtures/bad_flags_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "bad_flags_3_triggers_quarantine_drop",
+      "fixture_file": "fixtures/bad_flags_3_triggers_quarantine_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "quarantined_valid_pkt_drop",
+      "fixture_file": "fixtures/quarantined_valid_pkt_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "clean_ip_pass",
+      "fixture_file": "fixtures/clean_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_clean_pass",
+      "fixture_file": "fixtures/udp_clean_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_clean_pass",
+      "fixture_file": "fixtures/icmp_clean_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_ptr_l3_003_srv6_end_dx4_decapsulation",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_srv6_dx4",
+  "template_family": "xdp_srv6_end_dx4_decap",
+  "semantic_signature": "srv6_end_dx4+decap_outer_ipv6_srh_to_ipv4+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program implementing SRv6 End.DX4 behavior (decapsulating outer IPv6 and Segment Routing Header to expose the inner IPv4 payload). When Segments Left == 0, strip the 48-byte outer IPv6 + 8-byte SRH header using bpf_xdp_adjust_head(ctx, 48), attach the original Ethernet MAC addresses, set eth->h_proto to bpf_htons(ETH_P_IP / 0x0800), and return XDP_PASS. Pass non-matching traffic unchanged.",
+  "requirements": [
+    "Validate Ethernet, IPv6, and struct srv6_hdr bounds",
+    "Verify ip6->nexthdr == 43, srh->routing_type == 4, and srh->segments_left == 0",
+    "Strip 48 outer bytes using bpf_xdp_adjust_head(ctx, 48)",
+    "Restore Ethernet MACs and set EtherType to 0x0800",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "srv6_dx4_decap_pass",
+      "fixture_file": "fixtures/srv6_dx4_decap_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "srv6_dx4_decap_tcp_pass",
+      "fixture_file": "fixtures/srv6_dx4_decap_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "srv6_sl_nonzero_pass",
+      "fixture_file": "fixtures/srv6_sl_nonzero_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "standard_ipv6_pass",
+      "fixture_file": "fixtures/standard_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_srv6_pass",
+      "fixture_file": "fixtures/truncated_srv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

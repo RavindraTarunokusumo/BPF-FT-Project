@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_ptr_l2_001_tcp_mss_clamp_rewrite",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_tcp_options_rewrite",
+  "template_family": "xdp_mss_clamper",
+  "semantic_signature": "tcp_syn+clamp_mss_to_1300_update_csum+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv4 TCP SYN packets. Parse the variable-length TCP options list to locate the MSS option (Kind 2, Length 4). If the requested MSS is greater than 1300 bytes, clamp it to 1300 bytes (0x0514) and incrementally update the TCP header checksum (tcp->check) to maintain mathematical checksum validity. Pass TCP SYNs with MSS <= 1300, non-SYN TCP packets, other protocols, and malformed frames unchanged with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, TCP headers, and TCP options bounds",
+    "Filter only TCP SYN packets",
+    "Parse MSS option (Kind 2, Length 4)",
+    "Clamp MSS to 1300 if > 1300 and update tcp->check",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "clamp_mss_1460_to_1300_pass",
+      "fixture_file": "fixtures/clamp_mss_1460_to_1300_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "clamp_mss_1500_to_1300_pass",
+      "fixture_file": "fixtures/clamp_mss_1500_to_1300_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "mss_1200_unchanged_pass",
+      "fixture_file": "fixtures/mss_1200_unchanged_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "syn_no_mss_pass",
+      "fixture_file": "fixtures/syn_no_mss_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ack_pass",
+      "fixture_file": "fixtures/ack_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

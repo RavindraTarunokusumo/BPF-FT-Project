@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_003_vxlan_flow_matrix",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_vxlan_matrix",
+  "template_family": "xdp_vxlan_flow_tracker",
+  "semantic_signature": "vxlan_vni+inner_5tuple_flow_matrix+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that maintains a multi-tenant flow statistics matrix for VXLAN traffic. Parse VXLAN encapsulated packets (UDP port 4789), extract the 24-bit VNI, and parse the inner IPv4 TCP/UDP 5-tuple. Maintain total packet and wire byte counts in a BPF hash map named 'vxlan_matrix_map' (key struct vxlan_flow_key { __u32 vni; __be32 src_ip, dst_ip; __be16 src_port, dst_port; __u8 proto; }, value struct flow_stats { __u64 pkts; __u64 bytes; }, max_entries 2048). Always return XDP_PASS.",
+  "requirements": [
+    "Define struct vxlan_flow_key and struct flow_stats",
+    "Define hash map 'vxlan_matrix_map' with max_entries 2048",
+    "Parse outer headers, VXLAN VNI, and inner Ethernet/IPv4/L4 headers",
+    "Accumulate packets and byte volume per inner flow key",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "vxlan_flow1_pass",
+      "fixture_file": "fixtures/vxlan_flow1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vxlan_flow1_pkt2_pass",
+      "fixture_file": "fixtures/vxlan_flow1_pkt2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vxlan_flow2_vni200_pass",
+      "fixture_file": "fixtures/vxlan_flow2_vni200_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "vxlan_inner_udp_pass",
+      "fixture_file": "fixtures/vxlan_inner_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_vxlan_udp_pass",
+      "fixture_file": "fixtures/non_vxlan_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_tcp_pass",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_vxlan_pass",
+      "fixture_file": "fixtures/truncated_vxlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

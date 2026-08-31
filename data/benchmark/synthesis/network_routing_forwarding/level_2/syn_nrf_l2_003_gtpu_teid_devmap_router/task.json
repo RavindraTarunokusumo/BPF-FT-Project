@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_nrf_l2_003_gtpu_teid_devmap_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_gtpu_table",
+  "template_family": "xdp_gtpu_devmap_router",
+  "semantic_signature": "gtpu_teid_lookup+redirect_egress_ifindex+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that dispatches GTP-U cellular tunnel packets (UDP destination port 2152). If gtp->teid == 0x00000100, redirect to slice 1 interface ifindex 30. If gtp->teid == 0x00000200, redirect to slice 2 interface ifindex 31. Pass other TEIDs and non-GTP-U traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and struct gtpuhdr bounds",
+    "Verify UDP destination port is 2152",
+    "Redirect TEID 0x100 -> bpf_redirect(30, 0)",
+    "Redirect TEID 0x200 -> bpf_redirect(31, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "teid_100_redirect_if30",
+      "fixture_file": "fixtures/teid_100_redirect_if30.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "teid_200_redirect_if31",
+      "fixture_file": "fixtures/teid_200_redirect_if31.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "teid_999_pass",
+      "fixture_file": "fixtures/teid_999_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

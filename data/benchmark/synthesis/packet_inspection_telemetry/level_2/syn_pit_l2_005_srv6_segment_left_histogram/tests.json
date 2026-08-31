@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pit_l2_005_srv6_segment_left_histogram",
+  "main_validator": "map_state",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "srv6_sl_0_pass",
+      "description": "SRv6 packet with Segments Left 0 increments slot 0 and returns XDP_PASS",
+      "fixture_file": "fixtures/srv6_sl_0_pass.bin",
+      "packet_hex": "52540012345652540065432186dd60000000004c2b4020010db800000000000000000000000120010db8000000000000000000000002040404000100000020010db800000000000000000000001020010db800000000000000000000002045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 130,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "srv6_sl_1_pass",
+      "description": "SRv6 packet with Segments Left 1 increments slot 1 and returns XDP_PASS",
+      "fixture_file": "fixtures/srv6_sl_1_pass.bin",
+      "packet_hex": "52540012345652540065432186dd60000000004c2b4020010db800000000000000000000000120010db8000000000000000000000002040404010100000020010db800000000000000000000001020010db800000000000000000000002045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 130,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "srv6_sl_2_pass",
+      "description": "SRv6 packet with Segments Left 2 increments slot 2 and returns XDP_PASS",
+      "fixture_file": "fixtures/srv6_sl_2_pass.bin",
+      "packet_hex": "52540012345652540065432186dd60000000004c2b4020010db800000000000000000000000120010db8000000000000000000000002040404020100000020010db800000000000000000000001020010db800000000000000000000002045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 130,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "srv6_sl_3_pass",
+      "description": "SRv6 packet with Segments Left >= 3 increments slot 3 and returns XDP_PASS",
+      "fixture_file": "fixtures/srv6_sl_3_pass.bin",
+      "packet_hex": "52540012345652540065432186dd60000000004c2b4020010db800000000000000000000000120010db8000000000000000000000002040404030100000020010db800000000000000000000001020010db800000000000000000000002045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 130,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "standard_ipv6_pass",
+      "description": "Standard IPv6 TCP packet passes without SRv6 counting",
+      "fixture_file": "fixtures/standard_ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv4_pass",
+      "description": "IPv4 packet passes",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_srv6_pass",
+      "description": "Truncated SRv6 packet passes safely",
+      "fixture_file": "fixtures/truncated_srv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000022b4020010db800000000000000000000000120010db80000000000000000000000020400",
+      "packet_len": 56,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

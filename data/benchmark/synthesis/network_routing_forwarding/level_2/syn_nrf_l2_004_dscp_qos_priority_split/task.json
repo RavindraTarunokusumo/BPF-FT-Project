@@ -1,0 +1,57 @@
+{
+  "task_id": "syn_nrf_l2_004_dscp_qos_priority_split",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_qos",
+  "template_family": "xdp_dscp_qos_splitter",
+  "semantic_signature": "ipv4_dscp_ef_to_if10_af_to_if11_be_to_if12",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that routes IPv4 packets by DSCP QoS class (ip->tos >> 2). If DSCP == 46 (Expedited Forwarding / 0xB8), redirect to priority interface ifindex 10. If DSCP == 34 (Assured Forwarding AF41 / 0x88), redirect to medium interface ifindex 11. For Best Effort and other DSCP values, redirect to default interface ifindex 12. Pass non-IPv4 traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and struct iphdr bounds",
+    "Extract 6-bit DSCP (ip->tos >> 2)",
+    "Redirect DSCP 46 -> bpf_redirect(10, 0)",
+    "Redirect DSCP 34 -> bpf_redirect(11, 0)",
+    "Redirect other IPv4 -> bpf_redirect(12, 0)",
+    "Always return XDP_PASS for non-IPv4 traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dscp_ef_redirect_if10",
+      "fixture_file": "fixtures/dscp_ef_redirect_if10.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "dscp_af41_redirect_if11",
+      "fixture_file": "fixtures/dscp_af41_redirect_if11.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "dscp_be_redirect_if12",
+      "fixture_file": "fixtures/dscp_be_redirect_if12.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_eth_pass",
+      "fixture_file": "fixtures/truncated_eth_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

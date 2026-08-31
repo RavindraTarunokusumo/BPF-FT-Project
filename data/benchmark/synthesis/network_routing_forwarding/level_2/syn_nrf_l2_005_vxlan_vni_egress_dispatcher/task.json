@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_nrf_l2_005_vxlan_vni_egress_dispatcher",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_router_vxlan_table",
+  "template_family": "xdp_vxlan_dispatcher",
+  "semantic_signature": "vxlan_vni_100_to_if40_vni_200_to_if41+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that dispatches VXLAN packets (UDP destination port 4789). If VNI == 100, redirect to tenant 1 interface ifindex 40. If VNI == 200, redirect to tenant 2 interface ifindex 41. Pass all other VNIs and non-VXLAN traffic with XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4, UDP, and struct vxlanhdr bounds",
+    "Verify UDP destination port is 4789",
+    "Redirect VNI 100 -> bpf_redirect(40, 0)",
+    "Redirect VNI 200 -> bpf_redirect(41, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "vxlan_vni100_redirect_if40",
+      "fixture_file": "fixtures/vxlan_vni100_redirect_if40.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "vxlan_vni200_redirect_if41",
+      "fixture_file": "fixtures/vxlan_vni200_redirect_if41.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "vxlan_vni300_pass",
+      "fixture_file": "fixtures/vxlan_vni300_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_vxlan_udp_pass",
+      "fixture_file": "fixtures/non_vxlan_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_vxlan_pass",
+      "fixture_file": "fixtures/truncated_vxlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

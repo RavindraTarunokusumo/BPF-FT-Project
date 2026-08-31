@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pfs_l1_003_gre_checksum_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_gre_filter",
+  "template_family": "xdp_gre_csum_filter",
+  "semantic_signature": "gre_proto47+csum_present_bit+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GRE packets (IPv4 protocol 47). Parse the GRE fixed header and check the Checksum Present flag (bit 15 / 0x8000 in host byte order). If the Checksum Present bit is set, drop the packet with XDP_DROP. Pass GRE packets without the checksum bit, non-GRE traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 header bounds",
+    "Verify ip->protocol == 47 (GRE)",
+    "Validate GRE header bounds (struct grehdr)",
+    "Extract 16-bit flags and drop if bit 0x8000 is set",
+    "Pass all other traffic and truncated packets",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gre_csum_present_drop",
+      "fixture_file": "fixtures/gre_csum_present_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "gre_no_csum_pass",
+      "fixture_file": "fixtures/gre_no_csum_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gre_pass",
+      "fixture_file": "fixtures/truncated_gre_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pfs_l2_008_quic_initial_short_token_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_quic_filter",
+  "template_family": "xdp_quic_token_filter",
+  "semantic_signature": "quic_udp443+initial_token_len_zero+drop",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects QUIC traffic (RFC 9000) on UDP destination port 443. Check for Long Header (bit 7 set) and Initial Packet Type (bits 4-5 == 0). Parse past Version (4 bytes), Destination Connection ID (variable length), and Source Connection ID (variable length) to reach the Token Length field. If Token Length is 0, drop the packet with XDP_DROP to prevent unauthenticated client amplification. Pass QUIC packets with non-zero tokens, other packet types (Handshake, 1-RTT), other UDP ports, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and QUIC initial byte bounds",
+    "Verify UDP destination port 443",
+    "Verify Long Header (first_byte & 0x80) and Initial Type ((first_byte >> 4) & 0x03 == 0)",
+    "Parse variable DCID and SCID lengths safely",
+    "Drop packet if Token Length byte == 0",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "quic_empty_token_drop",
+      "fixture_file": "fixtures/quic_empty_token_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "quic_valid_token_pass",
+      "fixture_file": "fixtures/quic_valid_token_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "quic_short_hdr_pass",
+      "fixture_file": "fixtures/quic_short_hdr_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "quic_handshake_pass",
+      "fixture_file": "fixtures/quic_handshake_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_port_pass",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_quic_pass",
+      "fixture_file": "fixtures/truncated_quic_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

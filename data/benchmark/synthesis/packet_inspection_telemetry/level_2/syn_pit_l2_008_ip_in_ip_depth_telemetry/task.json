@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pit_l2_008_ip_in_ip_depth_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_ipinip",
+  "template_family": "xdp_ipinip_depth_counter",
+  "semantic_signature": "ipinip_proto4+nesting_depth_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IP-in-IP tunnel traffic (outer protocol 4). Parse the inner IPv4 header. If the inner IPv4 packet encapsulates another protocol (inner protocol != 4), increment slot 0 (Single encapsulation). If the inner IPv4 packet is itself another IP-in-IP tunnel (inner protocol == 4), increment slot 1 (Double nested encapsulation) in a per-CPU array map named 'ipinip_depth_map' (max_entries 2). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'ipinip_depth_map' with max_entries 2",
+    "Validate Ethernet and outer IPv4 header bounds",
+    "Validate inner IPv4 header bounds (accounting for variable outer IHL)",
+    "Check inner protocol: slot 0 for single encap, slot 1 for double encap",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "single_ipinip_pass",
+      "fixture_file": "fixtures/single_ipinip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "double_ipinip_pass",
+      "fixture_file": "fixtures/double_ipinip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_ip_pass",
+      "fixture_file": "fixtures/direct_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ipinip_pass",
+      "fixture_file": "fixtures/truncated_ipinip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

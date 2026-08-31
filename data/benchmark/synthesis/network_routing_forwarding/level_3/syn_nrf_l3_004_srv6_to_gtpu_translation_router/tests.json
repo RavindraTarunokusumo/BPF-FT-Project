@@ -1,0 +1,88 @@
+{
+  "task_id": "syn_nrf_l3_004_srv6_to_gtpu_translation_router",
+  "main_validator": "xdp_action",
+  "test_count": 9,
+  "test_cases": [
+    {
+      "name": "srv6_5g_sid_redirect_if60",
+      "description": "SRv6 packet with 5G SID redirected to ifindex 60",
+      "fixture_file": "fixtures/srv6_5g_sid_redirect_if60.bin",
+      "packet_hex": "52540012345652540065432186dd60000000003c2b4020010db800000000000000000000000120010db8000000000000000000000002040204010000000020010db8ffff0000000000000000000145000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 114,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "srv6_other_sid_pass",
+      "description": "SRv6 packet with other SID passed unchanged",
+      "fixture_file": "fixtures/srv6_other_sid_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000402b4020010db800000000000000000000000120010db8000000000000000000000002040204010000000020010db800010000000000000000000145000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 118,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "standard_ipv6_pass",
+      "description": "Standard IPv6 passed unchanged",
+      "fixture_file": "fixtures/standard_ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv4_pass",
+      "description": "IPv4 traffic passed unchanged",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passed unchanged",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP packet passed unchanged",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_srv6_pass",
+      "description": "Truncated SRv6 packet passed safely",
+      "fixture_file": "fixtures/truncated_srv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000000000022b4020010db800000000000000000000000120010db80000000000000000000000020400",
+      "packet_len": 56,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_ipv6_pass",
+      "description": "Truncated IPv6 header passed safely",
+      "fixture_file": "fixtures/truncated_ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd6000",
+      "packet_len": 16,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

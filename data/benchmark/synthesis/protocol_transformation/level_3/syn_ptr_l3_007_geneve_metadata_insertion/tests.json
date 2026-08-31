@@ -1,0 +1,88 @@
+{
+  "task_id": "syn_ptr_l3_007_geneve_metadata_insertion",
+  "main_validator": "packet_bytes",
+  "test_count": 9,
+  "test_cases": [
+    {
+      "name": "geneve_meta_inserted_pass",
+      "description": "GENEVE packet without options has 8-byte metadata inserted",
+      "fixture_file": "fixtures/geneve_meta_inserted_pass.bin",
+      "packet_hex": "525400123456525400654321080045000056123400004011e4f4c0a8010ac0a80114303917c1004200000000080000006400525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 100,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "geneve_already_has_opts_pass",
+      "description": "GENEVE packet already with options passed unchanged",
+      "fixture_file": "fixtures/geneve_already_has_opts_pass.bin",
+      "packet_hex": "525400123456525400654321080045000062123400004011e4e8c0a8010ac0a80114303917c1004e000002000800000064000100010100000000525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 112,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_geneve_udp_pass",
+      "description": "UDP to port 6082 passed unchanged",
+      "fixture_file": "fixtures/non_geneve_udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a80114303917c200080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passed unchanged",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP packet passed unchanged",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "ipv6_pass",
+      "description": "IPv6 frame passed unchanged",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_geneve_pass",
+      "description": "Truncated GENEVE packet passed safely",
+      "fixture_file": "fixtures/truncated_geneve_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001e123400004011e52cc0a8010ac0a80114303917c1000a00000000",
+      "packet_len": 44,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_ip_pass",
+      "description": "Truncated IPv4 packet passed safely",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "packet_hex": "52540012345652540065432108004500",
+      "packet_len": 16,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

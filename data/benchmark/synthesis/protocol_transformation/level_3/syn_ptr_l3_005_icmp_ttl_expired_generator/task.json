@@ -1,0 +1,67 @@
+{
+  "task_id": "syn_ptr_l3_005_icmp_ttl_expired_generator",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_icmp_error_generator",
+  "template_family": "xdp_time_exceeded_synthesizer",
+  "semantic_signature": "ipv4_ttl_le_1+synthesize_icmp_type_11_and_tx",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that acts as a router TTL expired responder. When an incoming IPv4 packet has TTL <= 1, synthesize an ICMP Time Exceeded response (Type 11, Code 0): swap Ethernet MAC addresses, swap IPv4 source and destination addresses, reset IPv4 TTL to 64, set ip->protocol to IPPROTO_ICMP, construct struct icmphdr with type 11 and code 0, recompute IPv4 and ICMP checksums, and return XDP_TX. Pass packets with TTL > 1 and non-IPv4 traffic unchanged with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 header bounds",
+    "Check ip->ttl <= 1",
+    "Swap Ethernet MAC addresses and IPv4 endpoints",
+    "Set IP TTL=64 and protocol=IPPROTO_ICMP",
+    "Synthesize ICMP Type 11 Code 0 header and recalculate checksums",
+    "Return XDP_TX for TTL <= 1, XDP_PASS for TTL > 1",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "ttl_1_icmp_time_exceeded_tx",
+      "fixture_file": "fixtures/ttl_1_icmp_time_exceeded_tx.bin",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "ttl_0_icmp_time_exceeded_tx",
+      "fixture_file": "fixtures/ttl_0_icmp_time_exceeded_tx.bin",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "ttl_64_pass",
+      "fixture_file": "fixtures/ttl_64_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ttl_2_pass",
+      "fixture_file": "fixtures/ttl_2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_ttl1_tx",
+      "fixture_file": "fixtures/icmp_ttl1_tx.bin",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_eth_pass",
+      "fixture_file": "fixtures/truncated_eth_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

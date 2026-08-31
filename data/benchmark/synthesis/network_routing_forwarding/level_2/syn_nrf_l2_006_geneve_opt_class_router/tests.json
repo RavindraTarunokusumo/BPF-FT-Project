@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_nrf_l2_006_geneve_opt_class_router",
+  "main_validator": "xdp_action",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "geneve_linux_class_redirect_if20",
+      "description": "GENEVE packet with Linux class (0x0100) redirected to ifindex 20",
+      "fixture_file": "fixtures/geneve_linux_class_redirect_if20.bin",
+      "packet_hex": "52540012345652540065432108004500005e123400004011e4ecc0a8010ac0a80114303917c1004a000002000800000064000100010100000000525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 108,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "geneve_aws_class_redirect_if21",
+      "description": "GENEVE packet with AWS class (0x0102) redirected to ifindex 21",
+      "fixture_file": "fixtures/geneve_aws_class_redirect_if21.bin",
+      "packet_hex": "525400123456525400654321080045000062123400004011e4e8c0a8010ac0a80114303917c1004e000002000800000064000102010100000000525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 112,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "geneve_ovs_class_pass",
+      "description": "GENEVE packet with OVS class (0x0101) passed unchanged",
+      "fixture_file": "fixtures/geneve_ovs_class_pass.bin",
+      "packet_hex": "52540012345652540065432108004500005e123400004011e4ecc0a8010ac0a80114303917c1004a000002000800000064000101010100000000525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 108,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_geneve_udp_pass",
+      "description": "UDP to port 6082 passed unchanged",
+      "fixture_file": "fixtures/non_geneve_udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a80114303917c200080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passed unchanged",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_geneve_pass",
+      "description": "Truncated GENEVE packet passed safely",
+      "fixture_file": "fixtures/truncated_geneve_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001e123400004011e52cc0a8010ac0a80114303917c1000a00000000",
+      "packet_len": 44,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "task_id": "syn_pfs_l3_009_gtpu_teid_stateful_quota",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_gtpu_quota",
+  "template_family": "xdp_teid_quota_enforcer",
+  "semantic_signature": "gtpu_teid_hash+quota_100kb_per_teid+drop_excess",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that enforces a stateful cumulative byte quota per GTP-U tunnel. Maintain per-TEID quota in a BPF hash map named 'teid_quota_map' (key __u32 teid, value struct teid_quota_stat { __u64 bytes_consumed; __u64 pkts_consumed; }, max_entries 1024). For GTP-U G-PDU user plane packets on UDP port 2152 (msg_type == 0xFF), accumulate packet wire bytes. Enforce a maximum quota of 100 KB (102,400 bytes). If a packet causes cumulative bytes for that TEID to exceed 100 KB, drop the packet with XDP_DROP. Pass GTP-U control messages, non-GTP-U traffic, and malformed frames with XDP_PASS.",
+  "requirements": [
+    "Define struct teid_quota_stat with bytes_consumed and pkts_consumed (__u64)",
+    "Define hash map 'teid_quota_map' with key __u32 (TEID) and max_entries 1024",
+    "Parse GTP-U G-PDU packets and accumulate wire byte length",
+    "Drop packet with XDP_DROP if cumulative bytes exceed 102,400 bytes",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "teid_first_pkt_pass",
+      "fixture_file": "fixtures/teid_first_pkt_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "teid_second_pkt_pass",
+      "fixture_file": "fixtures/teid_second_pkt_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "teid_other_tunnel_pass",
+      "fixture_file": "fixtures/teid_other_tunnel_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "teid_echo_req_pass",
+      "fixture_file": "fixtures/teid_echo_req_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_tcp_pass",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "direct_icmp_pass",
+      "fixture_file": "fixtures/direct_icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

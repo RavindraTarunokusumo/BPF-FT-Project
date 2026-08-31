@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_pit_l1_010_quic_packet_type_counter",
+  "main_validator": "map_state",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "quic_long_hdr_pass",
+      "description": "QUIC Long Header packet increments slot 0 and returns XDP_PASS",
+      "fixture_file": "fixtures/quic_long_hdr_pass.bin",
+      "packet_hex": "525400123456525400654321080045000049123400004011e501c0a8010ac0a80114303901bb00350000c00000000108010203040506070808111213141516171800001300000001515549435f4652414d455f44415441",
+      "packet_len": 87,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "quic_short_hdr_pass",
+      "description": "QUIC Short Header packet increments slot 1 and returns XDP_PASS",
+      "fixture_file": "fixtures/quic_short_hdr_pass.bin",
+      "packet_hex": "525400123456525400654321080045000038123400004011e512c0a8010ac0a80114303901bb0024000040010203040506070800000001515549435f4652414d455f44415441",
+      "packet_len": 70,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "non_quic_udp_pass",
+      "description": "UDP to port 444 passes without counting",
+      "fixture_file": "fixtures/non_quic_udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a80114303901bc00080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passes",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_quic_pass",
+      "description": "Truncated QUIC packet passes safely",
+      "fixture_file": "fixtures/truncated_quic_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a80114303901bb00080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

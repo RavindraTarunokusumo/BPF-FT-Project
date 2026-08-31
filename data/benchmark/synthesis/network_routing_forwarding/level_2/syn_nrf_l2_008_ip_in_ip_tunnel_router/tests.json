@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_nrf_l2_008_ip_in_ip_tunnel_router",
+  "main_validator": "xdp_action",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "inner_subnet1_redirect_if18",
+      "description": "IP-in-IP with inner dest 10.1.1.10 redirected to ifindex 18",
+      "fixture_file": "fixtures/inner_subnet1_redirect_if18.bin",
+      "packet_hex": "52540012345652540065432108004500003c1234000040040254cb007101c63364014500002812340000400653910a0000010a01010a30390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "inner_subnet2_redirect_if19",
+      "description": "IP-in-IP with inner dest 10.2.1.20 redirected to ifindex 19",
+      "fixture_file": "fixtures/inner_subnet2_redirect_if19.bin",
+      "packet_hex": "5254001234565254006543210800450000301234000040040260cb007101c63364014500001c12340000401153870a0000010a0201143039003500080000",
+      "packet_len": 62,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "inner_other_subnet_pass",
+      "description": "IP-in-IP with inner dest 10.3.1.30 passed unchanged",
+      "fixture_file": "fixtures/inner_other_subnet_pass.bin",
+      "packet_hex": "52540012345652540065432108004500003c1234000040040254cb007101c633640145000028123400004006537b0a0000010a03011e30390050000003e8000000005002fffff8020000",
+      "packet_len": 74,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "direct_tcp_pass",
+      "description": "Direct TCP passed unchanged",
+      "fixture_file": "fixtures/direct_tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passed unchanged",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_ipinip_pass",
+      "description": "Truncated IP-in-IP packet passed safely",
+      "fixture_file": "fixtures/truncated_ipinip_pass.bin",
+      "packet_hex": "525400123456525400654321080045000016123400004004e541c0a8010ac0a801144500",
+      "packet_len": 36,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

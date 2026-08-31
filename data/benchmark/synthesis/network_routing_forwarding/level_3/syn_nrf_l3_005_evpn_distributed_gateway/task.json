@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_nrf_l3_005_evpn_distributed_gateway",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_router_evpn",
+  "template_family": "xdp_evpn_gateway",
+  "semantic_signature": "vxlan_inner_l3_anycast_gw+redirect_egress+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program implementing an EVPN distributed anycast gateway. Inspect VXLAN encapsulated traffic (UDP port 4789). If the inner Ethernet destination MAC matches anycast gateway MAC 00:00:5e:00:01:01, route the inner packet: if inner IPv4 destination is in 10.0.1.0/24, redirect to ifindex 70. If inner IPv4 destination is in 10.0.2.0/24, redirect to ifindex 71. Pass other traffic with XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4, UDP, VXLAN, and inner Ethernet/IPv4 bounds",
+    "Verify inner destination MAC matches 00:00:5e:00:01:01",
+    "Redirect inner 10.0.1.0/24 -> bpf_redirect(70, 0)",
+    "Redirect inner 10.0.2.0/24 -> bpf_redirect(71, 0)",
+    "Always return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "evpn_subnet1_redirect_if70",
+      "fixture_file": "fixtures/evpn_subnet1_redirect_if70.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "evpn_subnet2_redirect_if71",
+      "fixture_file": "fixtures/evpn_subnet2_redirect_if71.bin",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "evpn_other_mac_pass",
+      "fixture_file": "fixtures/evpn_other_mac_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_vxlan_udp_pass",
+      "fixture_file": "fixtures/non_vxlan_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_vxlan_pass",
+      "fixture_file": "fixtures/truncated_vxlan_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_ip_pass",
+      "fixture_file": "fixtures/truncated_ip_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

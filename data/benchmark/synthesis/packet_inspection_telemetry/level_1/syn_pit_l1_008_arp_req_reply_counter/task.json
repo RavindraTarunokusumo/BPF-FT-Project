@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_pit_l1_008_arp_req_reply_counter",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_arp",
+  "template_family": "xdp_arp_opcode_counter",
+  "semantic_signature": "arp_0x0806+opcode_split_counter+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects ARP frames (EtherType 0x0806). Parse the standard struct arphdr and check the opcode (ar_op). Count ARP Requests (opcode 1) in slot 0, and ARP Replies (opcode 2) in slot 1 of a per-CPU array map named 'arp_opcode_map' (max_entries 2). Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'arp_opcode_map' with max_entries 2",
+    "Validate Ethernet and struct arphdr bounds",
+    "Check eth->h_proto == bpf_htons(ETH_P_ARP)",
+    "Increment slot 0 for ARPOP_REQUEST (1) and slot 1 for ARPOP_REPLY (2)",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "arp_req_pass",
+      "fixture_file": "fixtures/arp_req_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_reply_pass",
+      "fixture_file": "fixtures/arp_reply_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv6_pass",
+      "fixture_file": "fixtures/ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_arp_pass",
+      "fixture_file": "fixtures/truncated_arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

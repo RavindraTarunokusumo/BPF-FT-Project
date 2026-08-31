@@ -1,0 +1,52 @@
+{
+  "task_id": "syn_nrf_l1_009_dns_cache_redirect",
+  "main_validator": "xdp_action",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "dns_port_53_redirect_if6",
+      "description": "DNS query on port 53 redirected to ifindex 6",
+      "fixture_file": "fixtures/dns_port_53_redirect_if6.bin",
+      "packet_hex": "525400123456525400654321080045000039123400004011e511c0a8010ac0a801143039003500250000123400000001000000000000076578616d706c6503636f6d0000010001",
+      "packet_len": 71,
+      "expected_action": "XDP_REDIRECT",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_port_5353_pass",
+      "description": "mDNS on port 5353 passed unchanged",
+      "fixture_file": "fixtures/udp_port_5353_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a80114303914e900080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passed unchanged",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passed unchanged",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_udp_pass",
+      "description": "Truncated UDP packet passed safely",
+      "fixture_file": "fixtures/truncated_udp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000016123400004011e534c0a8010ac0a801140035",
+      "packet_len": 36,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

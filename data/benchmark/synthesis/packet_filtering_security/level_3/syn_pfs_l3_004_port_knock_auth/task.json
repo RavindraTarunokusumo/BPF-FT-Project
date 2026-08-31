@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pfs_l3_004_port_knock_auth",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_port_knock",
+  "template_family": "xdp_port_knock_state_machine",
+  "semantic_signature": "stateful_port_knock_udp_7000_8000_9000+guard_tcp_22",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write a stateful XDP port knocking firewall. Maintain client authentication state in a BPF hash map named 'knock_map' (key __be32 src_ip, value struct knock_state { __u32 stage; __u64 last_knock_ns; }, max_entries 1024). Implement a 3-step sequence: UDP port 7000 sets stage 1, UDP port 8000 advances stage 1 -> 2, and UDP port 9000 advances stage 2 -> 3 (authenticated). Each step must occur within 10 seconds of the previous step. For TCP packets targeting destination port 22 (SSH), drop packets with XDP_DROP unless the client is in stage 3 within 10 seconds. Pass all other traffic with XDP_PASS.",
+  "requirements": [
+    "Define struct knock_state with stage (__u32) and last_knock_ns (__u64)",
+    "Define hash map 'knock_map' with key __be32, value struct knock_state, max_entries 1024",
+    "Transition knock state machine: UDP 7000 (stage 1) -> 8000 (stage 2) -> 9000 (stage 3)",
+    "Enforce 10-second timeout window (10,000,000,000 ns) between knocks and for SSH access",
+    "Drop TCP port 22 if unauthenticated (stage != 3 or expired)",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "knock_stage1_pass",
+      "fixture_file": "fixtures/knock_stage1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "knock_stage2_pass",
+      "fixture_file": "fixtures/knock_stage2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "knock_stage3_pass",
+      "fixture_file": "fixtures/knock_stage3_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "unauthenticated_ssh_drop",
+      "fixture_file": "fixtures/unauthenticated_ssh_drop.bin",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "authenticated_ssh_pass",
+      "fixture_file": "fixtures/authenticated_ssh_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "web_port80_pass",
+      "fixture_file": "fixtures/web_port80_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_other_pass",
+      "fixture_file": "fixtures/udp_other_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_tcp_pass",
+      "fixture_file": "fixtures/truncated_tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

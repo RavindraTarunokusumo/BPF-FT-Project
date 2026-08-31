@@ -1,0 +1,70 @@
+{
+  "task_id": "syn_pit_l2_001_tcp_options_telemetry",
+  "main_validator": "map_state",
+  "test_count": 7,
+  "test_cases": [
+    {
+      "name": "tcp_opt_mss_ws_pass",
+      "description": "TCP packet with MSS and WS options updates bitfield telemetry and passes",
+      "fixture_file": "fixtures/tcp_opt_mss_ws_pass.bin",
+      "packet_hex": "525400123456525400654321080045000030123400004006e525c0a8010ac0a8011430390050000003e8000000007002ffffc63f0000020405b403030700",
+      "packet_len": 62,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_opt_sack_ts_pass",
+      "description": "TCP packet with SACK and TS options updates bitfield and passes",
+      "fixture_file": "fixtures/tcp_opt_sack_ts_pass.bin",
+      "packet_hex": "525400123456525400654321080045000034123400004006e521c0a8010ac0a8011430390050000003e8000000008002ffffabd600000402080a0102030405060708",
+      "packet_len": 66,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_no_options_pass",
+      "description": "TCP packet without options passes",
+      "fixture_file": "fixtures/tcp_no_options_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_ack_pass",
+      "description": "TCP ACK passes",
+      "fixture_file": "fixtures/tcp_ack_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010fffff7f40000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_pass",
+      "description": "UDP packet passes without telemetry",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passes",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_tcp_opt_pass",
+      "description": "Truncated TCP options pass safely",
+      "fixture_file": "fixtures/truncated_tcp_opt_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

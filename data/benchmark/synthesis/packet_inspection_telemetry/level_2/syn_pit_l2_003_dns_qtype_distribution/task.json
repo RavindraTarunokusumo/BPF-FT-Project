@@ -1,0 +1,56 @@
+{
+  "task_id": "syn_pit_l2_003_dns_qtype_distribution",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_telemetry_dns",
+  "template_family": "xdp_dns_qtype_dist",
+  "semantic_signature": "dns_queries_udp53+qtype_histogram+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects DNS query traffic (UDP port 53, QR == 0). Parse the DNS question section to extract the 16-bit QTYPE and record counts into a per-CPU array map named 'dns_qtype_dist_map' (max_entries 6): slot 0 for A (1), slot 1 for AAAA (28), slot 2 for CNAME (5), slot 3 for MX (15), slot 4 for TXT (16), and slot 5 for OTHER query types. Safely walk labels and bounds check. Always return XDP_PASS.",
+  "requirements": [
+    "Define per-CPU array map 'dns_qtype_dist_map' with max_entries 6",
+    "Validate Ethernet, IPv4, UDP, and DNS header bounds",
+    "Walk DNS QNAME labels safely and extract 16-bit QTYPE",
+    "Increment corresponding slot in dns_qtype_dist_map",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dns_a_query_pass",
+      "fixture_file": "fixtures/dns_a_query_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_aaaa_query_pass",
+      "fixture_file": "fixtures/dns_aaaa_query_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_cname_query_pass",
+      "fixture_file": "fixtures/dns_cname_query_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_mx_query_pass",
+      "fixture_file": "fixtures/dns_mx_query_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_txt_query_pass",
+      "fixture_file": "fixtures/dns_txt_query_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_response_pass",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_dns_pass",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

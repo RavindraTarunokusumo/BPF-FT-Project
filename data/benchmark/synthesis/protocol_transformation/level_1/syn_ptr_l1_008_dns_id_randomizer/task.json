@@ -1,0 +1,45 @@
+{
+  "task_id": "syn_ptr_l1_008_dns_id_randomizer",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_packet_rewrite",
+  "template_family": "xdp_dns_id_mask",
+  "semantic_signature": "dns_query_udp53+xor_txid_0xa55a_update_csum+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects DNS query traffic (UDP destination port 53). XOR the 16-bit Transaction ID (dns_id) with 0xA55A and incrementally update the UDP checksum if non-zero. Return XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IPv4, UDP, and DNS ID 2-byte bounds",
+    "XOR *dns_id with bpf_htons(0xA55A)",
+    "Incrementally update UDP checksum if non-zero",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "dns_id_xor_pass",
+      "fixture_file": "fixtures/dns_id_xor_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "dns_response_pass",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_dns_udp_pass",
+      "fixture_file": "fixtures/non_dns_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_dns_pass",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

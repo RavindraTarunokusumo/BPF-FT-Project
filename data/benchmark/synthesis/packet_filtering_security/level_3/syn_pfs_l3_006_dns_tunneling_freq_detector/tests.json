@@ -1,0 +1,88 @@
+{
+  "task_id": "syn_pfs_l3_006_dns_tunneling_freq_detector",
+  "main_validator": "packet_action",
+  "test_count": 9,
+  "test_cases": [
+    {
+      "name": "dns_normal_query_pass",
+      "description": "Short normal DNS query passes and accumulates bytes",
+      "fixture_file": "fixtures/dns_normal_query_pass.bin",
+      "packet_hex": "525400123456525400654321080045000033123400004011e517c0a8010ac0a8011430390035001f0000123400000001000000000000016103636f6d0000010001",
+      "packet_len": 65,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_second_query_pass",
+      "description": "Second normal DNS query passes",
+      "fixture_file": "fixtures/dns_second_query_pass.bin",
+      "packet_hex": "525400123456525400654321080045000033123400004011e517c0a8010ac0a8011430390035001f0000123400000001000000000000016203636f6d0000010001",
+      "packet_len": 65,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_tunnel_exfil_drop",
+      "description": "Excessively long tunneling DNS query (> 200 bytes) exceeding rate quota drops",
+      "fixture_file": "fixtures/dns_tunnel_exfil_drop.bin",
+      "packet_hex": "5254001234565254006543210800450000ef123400004011e45bc0a8010ac0a801143039003500db00001234000000010000000000003c7878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878783c7979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979793c7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a0674756e6e656c03636f6d0000010001",
+      "packet_len": 253,
+      "expected_action": "XDP_DROP",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_other_src_pass",
+      "description": "Query from clean client passes",
+      "fixture_file": "fixtures/dns_other_src_pass.bin",
+      "packet_hex": "525400123456525400654321080045000036123400004011e50ac0a80114c0a8011430390035002200001234000000010000000000000474657374036f72670000010001",
+      "packet_len": 68,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "dns_response_pass",
+      "description": "DNS response passes",
+      "fixture_file": "fixtures/dns_response_pass.bin",
+      "packet_hex": "52540012345652540065432108004500003912340000401196be08080808c0a8010a0035303900250000123480000001000000000000076578616d706c6503636f6d0000010001",
+      "packet_len": 71,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "udp_other_port_pass",
+      "description": "UDP to port 5353 passes",
+      "fixture_file": "fixtures/udp_other_port_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a80114303914e900080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "tcp_pass",
+      "description": "TCP packet passes",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "arp_pass",
+      "description": "ARP frame passes",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    },
+    {
+      "name": "truncated_dns_pass",
+      "description": "Truncated DNS query passes safely",
+      "fixture_file": "fixtures/truncated_dns_pass.bin",
+      "packet_hex": "52540012345652540065432108004500001f123400004011e52bc0a8010ac0a8011430390035000b0000000100",
+      "packet_len": 45,
+      "expected_action": "XDP_PASS",
+      "expected_output_hex": null
+    }
+  ]
+}

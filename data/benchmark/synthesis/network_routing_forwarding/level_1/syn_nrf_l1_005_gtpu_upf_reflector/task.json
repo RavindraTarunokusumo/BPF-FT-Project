@@ -1,0 +1,46 @@
+{
+  "task_id": "syn_nrf_l1_005_gtpu_upf_reflector",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_reflector_gtpu",
+  "template_family": "xdp_gtpu_reflector",
+  "semantic_signature": "gtpu_teid_echo_and_reflect_tx+pass_other",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects GTP-U traffic (UDP destination port 2152). If gtp->teid == 0x12345678, swap outer Ethernet MAC addresses, outer IPv4 source and destination addresses, swap UDP source and destination ports, and reflect the frame with XDP_TX. Pass other TEIDs and non-GTP-U traffic with XDP_PASS.",
+  "requirements": [
+    "Validate outer Ethernet, IPv4, UDP, and struct gtpuhdr bounds",
+    "Verify UDP destination port is 2152 and gtp->teid == bpf_htonl(0x12345678)",
+    "Swap MACs, IP endpoints, and UDP ports",
+    "Recalculate IPv4 checksum",
+    "Return XDP_TX for matching TEID, XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "gtpu_teid_match_reflected_tx",
+      "fixture_file": "fixtures/gtpu_teid_match_reflected_tx.bin",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "gtpu_other_teid_pass",
+      "fixture_file": "fixtures/gtpu_other_teid_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "non_gtpu_udp_pass",
+      "fixture_file": "fixtures/non_gtpu_udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "tcp_pass",
+      "fixture_file": "fixtures/tcp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_gtpu_pass",
+      "fixture_file": "fixtures/truncated_gtpu_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

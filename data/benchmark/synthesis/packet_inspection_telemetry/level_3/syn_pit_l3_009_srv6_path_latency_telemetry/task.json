@@ -1,0 +1,66 @@
+{
+  "task_id": "syn_pit_l3_009_srv6_path_latency_telemetry",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_telemetry_srv6_path",
+  "template_family": "xdp_srv6_path_tracker",
+  "semantic_signature": "srv6_srh_path_hash+telemetry_metrics_map+pass",
+  "split": "benchmark",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects SRv6 Segment Routing traffic (IPv6 Next Header 43, Routing Type 4). Compute a path hash across the active Segment List (128-bit IPv6 SIDs). Maintain telemetry metrics in a BPF hash map named 'srv6_path_map' (key __u32 path_hash, value struct path_metrics { __u64 pkts; __u64 bytes; __u32 hops; __u32 pad; }, max_entries 1024). Record total packet count, byte volume, and hops count (srh->last_entry + 1). Always return XDP_PASS.",
+  "requirements": [
+    "Define struct path_metrics with pkts, bytes, and hops",
+    "Define hash map 'srv6_path_map' with key __u32 and max_entries 1024",
+    "Parse SRv6 header and hash the Segment List SIDs",
+    "Accumulate packets and byte volume per unique SRv6 path",
+    "Always return XDP_PASS",
+    "SEC(\"xdp\") and GPL license declaration"
+  ],
+  "test_fixtures": [
+    {
+      "name": "srv6_path1_pass",
+      "fixture_file": "fixtures/srv6_path1_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "srv6_path1_pkt2_pass",
+      "fixture_file": "fixtures/srv6_path1_pkt2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "srv6_path2_pass",
+      "fixture_file": "fixtures/srv6_path2_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "standard_ipv6_pass",
+      "fixture_file": "fixtures/standard_ipv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "ipv4_pass",
+      "fixture_file": "fixtures/ipv4_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "udp_pass",
+      "fixture_file": "fixtures/udp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "icmp_pass",
+      "fixture_file": "fixtures/icmp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "arp_pass",
+      "fixture_file": "fixtures/arp_pass.bin",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "truncated_srv6_pass",
+      "fixture_file": "fixtures/truncated_srv6_pass.bin",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}
