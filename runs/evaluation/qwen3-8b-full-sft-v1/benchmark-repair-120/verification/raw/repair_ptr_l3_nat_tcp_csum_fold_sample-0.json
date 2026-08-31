@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
   "task_id": "repair_ptr_l3_nat_tcp_csum_fold",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_nat_tcp_csum_fold/sample-0.c",
   "source_sha256": "cce33905c58182047c4f11ba832d6ab64198b9226862387ef4c1ca59fcc3bdeb",
-  "timestamp": "2026-08-31T18:18:32.621801+00:00",
+  "timestamp": "2026-08-31T18:20:14.480410+00:00",
   "compile": {
     "pass": true,
     "stdout": "",

@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
   "task_id": "repair_nrf_l2_vlan_interface_switch",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l2_vlan_interface_switch/sample-0.c",
   "source_sha256": "c96e72fc5b4e8bebd5b8c3ac5979c12c905b6f797cfc76b022f0ca4a6971de69",
-  "timestamp": "2026-08-31T18:19:06.928192+00:00",
+  "timestamp": "2026-08-31T18:20:48.759310+00:00",
   "compile": {
     "pass": true,
     "stdout": "",
@@ -15,15 +15,37 @@
   "verifier": {
     "pass": true,
     "stdout": "",
-    "stderr": "libbpf: loading object from /tmp/bpf_val_fau8mqya/candidate.o\nlibbpf: elf: section(3) xdp, size 184, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 23 insns (184 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_fau8mqya/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 891, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 256, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+16         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto == bpf_htons(ETH_P_8021Q)) {\n6: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto == bpf_htons(ETH_P_8021Q)) {\n10: (55) if r4 != 0x81 goto pc+11     ; R4_w=129\n11: (07) r3 += 18                     ; R3=pkt(off=18,r=14)\n12: (2d) if r3 > r2 goto pc+9         ; R2=pkt_end() R3=pkt(off=18,r=18)\n; __u16 vid = bpf_ntohs(vlh->h_vlan_TCI) & 0x0FFF;\n13: (69) r1 = *(u16 *)(r1 +0)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; __u16 vid = bpf_ntohs(vlh->h_vlan_TCI) & 0x0FFF;\n14: (57) r1 &= 65295                  ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n15: (dc) r1 = be16 r1                 ; R1_w=scalar()\n; if (vid == 10)\n16: (15) if r1 == 0xa goto pc+2       ; R1_w=scalar()\n17: (55) if r1 != 0x14 goto pc+4      ; R1_w=20\n18: (b7) r0 = 3                       ; R0_w=3\n; \n19: (bf) r1 = r0                      ; R0_w=3 R1_w=3\n20: (b7) r2 = 0                       ; R2_w=0\n21: (85) call bpf_redirect#23         ; R0=scalar()\n; }\n22: (95) exit\n\nfrom 17 to 22: safe\n\nfrom 16 to 19: R0=2 R1_w=10 R2=pkt_end() R3=pkt(off=18,r=18) R4=129 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n19: R0=2 R1_w=10 R2=pkt_end() R3=pkt(off=18,r=18) R4=129 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; \n19: (bf) r1 = r0                      ; R0=2 R1_w=2\n20: (b7) r2 = 0                       ; R2_w=0\n21: (85) call bpf_redirect#23\n22: safe\n\nfrom 12 to 22: safe\n\nfrom 10 to 22: safe\n\nfrom 5 to 22: safe\nverification time 151 usec\nstack depth 0\nprocessed 31 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_93bminky/candidate.o\nlibbpf: elf: section(3) xdp, size 184, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 23 insns (184 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_93bminky/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 891, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 256, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+16         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto == bpf_htons(ETH_P_8021Q)) {\n6: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto == bpf_htons(ETH_P_8021Q)) {\n10: (55) if r4 != 0x81 goto pc+11     ; R4_w=129\n11: (07) r3 += 18                     ; R3=pkt(off=18,r=14)\n12: (2d) if r3 > r2 goto pc+9         ; R2=pkt_end() R3=pkt(off=18,r=18)\n; __u16 vid = bpf_ntohs(vlh->h_vlan_TCI) & 0x0FFF;\n13: (69) r1 = *(u16 *)(r1 +0)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; __u16 vid = bpf_ntohs(vlh->h_vlan_TCI) & 0x0FFF;\n14: (57) r1 &= 65295                  ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n15: (dc) r1 = be16 r1                 ; R1_w=scalar()\n; if (vid == 10)\n16: (15) if r1 == 0xa goto pc+2       ; R1_w=scalar()\n17: (55) if r1 != 0x14 goto pc+4      ; R1_w=20\n18: (b7) r0 = 3                       ; R0_w=3\n; \n19: (bf) r1 = r0                      ; R0_w=3 R1_w=3\n20: (b7) r2 = 0                       ; R2_w=0\n21: (85) call bpf_redirect#23         ; R0=scalar()\n; }\n22: (95) exit\n\nfrom 17 to 22: safe\n\nfrom 16 to 19: R0=2 R1_w=10 R2=pkt_end() R3=pkt(off=18,r=18) R4=129 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n19: R0=2 R1_w=10 R2=pkt_end() R3=pkt(off=18,r=18) R4=129 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; \n19: (bf) r1 = r0                      ; R0=2 R1_w=2\n20: (b7) r2 = 0                       ; R2_w=0\n21: (85) call bpf_redirect#23\n22: safe\n\nfrom 12 to 22: safe\n\nfrom 10 to 22: safe\n\nfrom 5 to 22: safe\nverification time 202 usec\nstack depth 0\nprocessed 31 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 2\n-- END PROG LOAD LOG --\n",
     "log": ""
   },
   "behavioral": {
-    "pass": false,
-    "passed_tests": 0,
-    "total_tests": 0,
-    "details": []
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_redirect_vlan10",
+        "description": "Redirect VLAN 10 to ifindex 2",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "pass_redirect_vlan20",
+        "description": "Redirect VLAN 20 to ifindex 3",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "pass_untagged",
+        "description": "Pass untagged frame with XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
   },
-  "passed": false,
-  "diagnostic": "Behavioral tests failed:\n"
+  "passed": true,
+  "diagnostic": null
 }

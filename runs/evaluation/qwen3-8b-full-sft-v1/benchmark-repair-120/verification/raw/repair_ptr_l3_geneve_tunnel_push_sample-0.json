@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
   "task_id": "repair_ptr_l3_geneve_tunnel_push",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c",
   "source_sha256": "ae4a698c93d1c428494c3fbb8526ca8fe9e2dc83f48e706d22b8678a0fe663ff",
-  "timestamp": "2026-08-31T18:18:30.299085+00:00",
+  "timestamp": "2026-08-31T18:20:08.615933+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

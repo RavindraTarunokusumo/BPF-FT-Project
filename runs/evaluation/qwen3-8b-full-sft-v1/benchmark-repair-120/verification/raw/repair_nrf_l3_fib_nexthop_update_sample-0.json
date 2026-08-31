@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
   "task_id": "repair_nrf_l3_fib_nexthop_update",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c",
   "source_sha256": "32190ce73f9d0b6936fc99dfda92207a8fe37195d7f6c7228420f6dbc6b75a73",
-  "timestamp": "2026-08-31T18:18:30.587257+00:00",
+  "timestamp": "2026-08-31T18:20:09.311493+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

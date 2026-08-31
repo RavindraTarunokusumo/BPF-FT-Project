@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
   "task_id": "repair_ptr_l1_zero_ip_id",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_zero_ip_id/sample-0.c",
   "source_sha256": "6d4a6d17ef41b487e08604b6c79afe975e912cdaf7d9923fd7249db0805e63bb",
-  "timestamp": "2026-08-31T18:19:09.185803+00:00",
+  "timestamp": "2026-08-31T18:20:53.097581+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

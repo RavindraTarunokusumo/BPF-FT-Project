@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
   "task_id": "repair_nrf_l1_subnet_reflector_tx",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l1_subnet_reflector_tx/sample-0.c",
   "source_sha256": "6822418e192a98c4774bf8ff4bcef344fb3d815977ada9e232b464dc0f5692c9",
-  "timestamp": "2026-08-31T18:19:07.196285+00:00",
+  "timestamp": "2026-08-31T18:20:49.241915+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

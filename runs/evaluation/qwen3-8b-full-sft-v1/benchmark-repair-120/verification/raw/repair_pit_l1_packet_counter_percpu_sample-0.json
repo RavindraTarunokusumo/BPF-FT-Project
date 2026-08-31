@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
   "task_id": "repair_pit_l1_packet_counter_percpu",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_pit_l1_packet_counter_percpu/sample-0.c",
   "source_sha256": "f2a08e628c5d9e7c2c9b0570776257949c9f52c931b7818fe38943f239666f31",
-  "timestamp": "2026-08-31T18:19:07.494897+00:00",
+  "timestamp": "2026-08-31T18:20:49.718232+00:00",
   "compile": {
     "pass": true,
     "stdout": "",
@@ -15,15 +15,45 @@
   "verifier": {
     "pass": true,
     "stdout": "",
-    "stderr": "libbpf: loading object from /tmp/bpf_val_75t1i17d/candidate.o\nlibbpf: elf: section(3) xdp, size 96, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 12 insns (96 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_75t1i17d/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1078, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 160, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'packet_count': at sec_idx 5, offset 0.\nlibbpf: map 'packet_count': found type = 6.\nlibbpf: map 'packet_count': found key [6], sz = 4.\nlibbpf: map 'packet_count': found value [9], sz = 8.\nlibbpf: map 'packet_count': found max_entries = 1.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #4 against 'packet_count'\nlibbpf: prog 'xdp_telemetry': found map 0 (packet_count, sec 5, off 0) for insn #4\nlibbpf: map 'packet_count': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_telemetry(struct xdp_md *ctx) {\n0: (b7) r1 = 0                        ; R1_w=0\n; __u32 key = 0;\n1: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 1 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 0: (b7) r1 = 0\n2: R1_w=0 R10=fp0 fp-8=0000????\n2: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0\n3: (07) r2 += -4                      ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&packet_count, &key);\n4: (18) r1 = 0xff2125b881435600       ; R1_w=map_ptr(map=packet_count,ks=4,vs=8)\n6: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=packet_count,ks=4,vs=8)\n; if (cnt)\n7: (15) if r0 == 0x0 goto pc+2        ; R0_w=map_value(map=packet_count,ks=4,vs=8)\n8: (b7) r1 = 1                        ; R1_w=1\n; __sync_fetch_and_add(cnt, 1);\n9: (db) lock *(u64 *)(r0 +0) += r1    ; R0=map_value(map=packet_count,ks=4,vs=8) R1=1\n; return XDP_PASS;\n10: (b7) r0 = 2                       ; R0_w=2\n11: (95) exit\n\nfrom 7 to 10: safe\nverification time 96 usec\nstack depth 8\nprocessed 12 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_g26z1d0s/candidate.o\nlibbpf: elf: section(3) xdp, size 96, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 12 insns (96 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_g26z1d0s/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1078, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 160, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'packet_count': at sec_idx 5, offset 0.\nlibbpf: map 'packet_count': found type = 6.\nlibbpf: map 'packet_count': found key [6], sz = 4.\nlibbpf: map 'packet_count': found value [9], sz = 8.\nlibbpf: map 'packet_count': found max_entries = 1.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #4 against 'packet_count'\nlibbpf: prog 'xdp_telemetry': found map 0 (packet_count, sec 5, off 0) for insn #4\nlibbpf: map 'packet_count': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_telemetry(struct xdp_md *ctx) {\n0: (b7) r1 = 0                        ; R1_w=0\n; __u32 key = 0;\n1: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 1 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 0: (b7) r1 = 0\n2: R1_w=0 R10=fp0 fp-8=0000????\n2: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0\n3: (07) r2 += -4                      ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&packet_count, &key);\n4: (18) r1 = 0xff2125b881435200       ; R1_w=map_ptr(map=packet_count,ks=4,vs=8)\n6: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=packet_count,ks=4,vs=8)\n; if (cnt)\n7: (15) if r0 == 0x0 goto pc+2        ; R0_w=map_value(map=packet_count,ks=4,vs=8)\n8: (b7) r1 = 1                        ; R1_w=1\n; __sync_fetch_and_add(cnt, 1);\n9: (db) lock *(u64 *)(r0 +0) += r1    ; R0=map_value(map=packet_count,ks=4,vs=8) R1=1\n; return XDP_PASS;\n10: (b7) r0 = 2                       ; R0_w=2\n11: (95) exit\n\nfrom 7 to 10: safe\nverification time 70 usec\nstack depth 8\nprocessed 12 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
     "log": ""
   },
   "behavioral": {
     "pass": false,
-    "passed_tests": 0,
-    "total_tests": 0,
-    "details": []
+    "passed_tests": 3,
+    "total_tests": 4,
+    "details": [
+      {
+        "name": "pass_tcp",
+        "description": "Count TCP packet and pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_udp",
+        "description": "Count UDP packet and pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Count ARP frame and pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Count truncated packet and pass",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "ERROR",
+        "stderr": "Error: failed to run program: Invalid argument\n"
+      }
+    ]
   },
   "passed": false,
-  "diagnostic": "Behavioral tests failed:\n"
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_trunc' failed: expected XDP_PASS (2), got ERROR (None)"
 }

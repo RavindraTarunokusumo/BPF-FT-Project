@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
   "task_id": "repair_pit_l2_tos_diffserv_metrics",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_pit_l2_tos_diffserv_metrics/sample-0.c",
   "source_sha256": "fdd769041e484834d5c07627c647d0dfa1f541b89f8b33a0f47c1af1b45aeba7",
-  "timestamp": "2026-08-31T18:18:32.423309+00:00",
+  "timestamp": "2026-08-31T18:20:14.021671+00:00",
   "compile": {
     "pass": true,
     "stdout": "",
@@ -15,15 +15,37 @@
   "verifier": {
     "pass": true,
     "stdout": "",
-    "stderr": "libbpf: loading object from /tmp/bpf_val_0adggkiu/candidate.o\nlibbpf: elf: section(3) xdp, size 208, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 26 insns (208 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_0adggkiu/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1209, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 272, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'dscp_stats': at sec_idx 5, offset 0.\nlibbpf: map 'dscp_stats': found type = 6.\nlibbpf: map 'dscp_stats': found key [6], sz = 4.\nlibbpf: map 'dscp_stats': found value [9], sz = 8.\nlibbpf: map 'dscp_stats': found max_entries = 64.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #18 against 'dscp_stats'\nlibbpf: prog 'xdp_telemetry': found map 0 (dscp_stats, sec 5, off 0) for insn #18\nlibbpf: map 'dscp_stats': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+19         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+14       ; R3_w=8\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n12: (2d) if r3 > r2 goto pc+11        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 dscp = (ip->tos >> 2) & 63;\n13: (71) r1 = *(u8 *)(r1 +15)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n14: (77) r1 >>= 2                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=63,var_off=(0x0; 0x3f))\n; __u32 dscp = (ip->tos >> 2) & 63;\n15: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=63,var_off=(0x0; 0x3f)) R10=fp0 fp-8=mmmm????\n16: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 dscp = (ip->tos >> 2) & 63;\n17: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&dscp_stats, &dscp);\n18: (18) r1 = 0xff2125b8936bd400      ; R1_w=map_ptr(map=dscp_stats,ks=4,vs=8)\n20: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=dscp_stats,ks=4,vs=8)\n; if (cnt)\n21: (15) if r0 == 0x0 goto pc+2       ; R0=map_value(map=dscp_stats,ks=4,vs=8)\n22: (b7) r1 = 1                       ; R1_w=1\n; __sync_fetch_and_add(cnt, 1);\n23: (db) lock *(u64 *)(r0 +0) += r1   ; R0=map_value(map=dscp_stats,ks=4,vs=8) R1_w=1\n; }\n24: (b7) r0 = 2                       ; R0_w=2\n25: (95) exit\n\nfrom 21 to 24: R0=0 R10=fp0 fp-8=mmmm????\n24: R0=0 R10=fp0 fp-8=mmmm????\n24: (b7) r0 = 2                       ; R0_w=2\n25: (95) exit\n\nfrom 12 to 24: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: (b7) r0 = 2                       ; R0_w=2\n25: (95) exit\n\nfrom 9 to 24: R1=pkt(r=14) R2=pkt_end() R3=scalar() R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: R1=pkt(r=14) R2=pkt_end() R3=scalar() R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: (b7) r0 = 2                       ; R0_w=2\n25: (95) exit\n\nfrom 4 to 24: safe\nverification time 185 usec\nstack depth 8\nprocessed 32 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_uguxx6vz/candidate.o\nlibbpf: elf: section(3) xdp, size 208, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 26 insns (208 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_uguxx6vz/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1209, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 272, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'dscp_stats': at sec_idx 5, offset 0.\nlibbpf: map 'dscp_stats': found type = 6.\nlibbpf: map 'dscp_stats': found key [6], sz = 4.\nlibbpf: map 'dscp_stats': found value [9], sz = 8.\nlibbpf: map 'dscp_stats': found max_entries = 64.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #18 against 'dscp_stats'\nlibbpf: prog 'xdp_telemetry': found map 0 (dscp_stats, sec 5, off 0) for insn #18\nlibbpf: map 'dscp_stats': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+19         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+14       ; R3_w=8\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n12: (2d) if r3 > r2 goto pc+11        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 dscp = (ip->tos >> 2) & 63;\n13: (71) r1 = *(u8 *)(r1 +15)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n14: (77) r1 >>= 2                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=63,var_off=(0x0; 0x3f))\n; __u32 dscp = (ip->tos >> 2) & 63;\n15: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=63,var_off=(0x0; 0x3f)) R10=fp0 fp-8=mmmm????\n16: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 dscp = (ip->tos >> 2) & 63;\n17: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&dscp_stats, &dscp);\n18: (18) r1 = 0xff2125b882f89800      ; R1_w=map_ptr(map=dscp_stats,ks=4,vs=8)\n20: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=dscp_stats,ks=4,vs=8)\n; if (cnt)\n21: (15) if r0 == 0x0 goto pc+2       ; R0=map_value(map=dscp_stats,ks=4,vs=8)\n22: (b7) r1 = 1                       ; R1_w=1\n; __sync_fetch_and_add(cnt, 1);\n23: (db) lock *(u64 *)(r0 +0) += r1   ; R0=map_value(map=dscp_stats,ks=4,vs=8) R1_w=1\n; }\n24: (b7) r0 = 2                       ; R0_w=2\n25: (95) exit\n\nfrom 21 to 24: R0=0 R10=fp0 fp-8=mmmm????\n24: R0=0 R10=fp0 fp-8=mmmm????\n24: (b7) r0 = 2                       ; R0_w=2\n25: (95) exit\n\nfrom 12 to 24: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: (b7) r0 = 2                       ; R0_w=2\n25: (95) exit\n\nfrom 9 to 24: R1=pkt(r=14) R2=pkt_end() R3=scalar() R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: R1=pkt(r=14) R2=pkt_end() R3=scalar() R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: (b7) r0 = 2                       ; R0_w=2\n25: (95) exit\n\nfrom 4 to 24: safe\nverification time 248 usec\nstack depth 8\nprocessed 32 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
     "log": ""
   },
   "behavioral": {
-    "pass": false,
-    "passed_tests": 0,
-    "total_tests": 0,
-    "details": []
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_dscp_ef",
+        "description": "Count DSCP EF (46) in slot 46",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_dscp_be",
+        "description": "Count DSCP BE (0) in slot 0",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
   },
-  "passed": false,
-  "diagnostic": "Behavioral tests failed:\n"
+  "passed": true,
+  "diagnostic": null
 }

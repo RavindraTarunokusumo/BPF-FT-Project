@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
   "task_id": "repair_ptr_l3_nptv6_prefix_rewrite",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c",
   "source_sha256": "ba0228e8bfe33104261204351ca0f1ed1a07cabd1825a9ef8421670e15bfc7d5",
-  "timestamp": "2026-08-31T18:18:31.519622+00:00",
+  "timestamp": "2026-08-31T18:20:11.795422+00:00",
   "compile": {
     "pass": true,
     "stdout": "",
@@ -15,15 +15,30 @@
   "verifier": {
     "pass": true,
     "stdout": "",
-    "stderr": "libbpf: loading object from /tmp/bpf_val_f5c2ae61/candidate.o\nlibbpf: elf: section(3) xdp, size 144, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 18 insns (144 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_f5c2ae61/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 797, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 192, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+11         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n9: (55) if r3 != 0xdd86 goto pc+6     ; R3_w=0xdd86\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 54                     ; R3=pkt(off=54,r=14)\n12: (2d) if r3 > r2 goto pc+3         ; R2=pkt_end() R3=pkt(off=54,r=54)\n13: (18) r2 = 0x990000fd              ; R2_w=0x990000fd\n; ip6->saddr[0] = 0xFD;\n15: (63) *(u32 *)(r1 +22) = r2        ; R1=pkt(r=54) R2_w=0x990000fd\n; }\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\n\nfrom 12 to 16: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=54,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n16: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=54,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\n\nfrom 9 to 16: R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n16: R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\n\nfrom 4 to 16: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n16: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\nverification time 154 usec\nstack depth 0\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_35zxnzis/candidate.o\nlibbpf: elf: section(3) xdp, size 144, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 18 insns (144 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_35zxnzis/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 797, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 192, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+11         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n9: (55) if r3 != 0xdd86 goto pc+6     ; R3_w=0xdd86\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 54                     ; R3=pkt(off=54,r=14)\n12: (2d) if r3 > r2 goto pc+3         ; R2=pkt_end() R3=pkt(off=54,r=54)\n13: (18) r2 = 0x990000fd              ; R2_w=0x990000fd\n; ip6->saddr[0] = 0xFD;\n15: (63) *(u32 *)(r1 +22) = r2        ; R1=pkt(r=54) R2_w=0x990000fd\n; }\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\n\nfrom 12 to 16: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=54,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n16: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=54,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\n\nfrom 9 to 16: R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n16: R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\n\nfrom 4 to 16: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n16: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\nverification time 222 usec\nstack depth 0\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
     "log": ""
   },
   "behavioral": {
-    "pass": false,
-    "passed_tests": 0,
-    "total_tests": 0,
-    "details": []
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_nptv6_translate",
+        "description": "Translate IPv6 /64 prefix to fd00:0099::",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_ipv4",
+        "description": "Pass IPv4 traffic unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
   },
-  "passed": false,
-  "diagnostic": "Behavioral tests failed:\n"
+  "passed": true,
+  "diagnostic": null
 }

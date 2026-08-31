@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
   "task_id": "repair_ptr_l1_strip_outer_vlan",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c",
   "source_sha256": "1c1d2773516abef8305f32b73998308c1ed43c087605d940b24bd5b311ff0ee1",
-  "timestamp": "2026-08-31T18:18:31.410282+00:00",
+  "timestamp": "2026-08-31T18:20:11.493207+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
   "task_id": "repair_ptr_l3_vlan_push_and_retag",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c",
   "source_sha256": "a7dcd0c9a9f65ca8a54ea9ef3ad48fa176e127d2075a553648c483b14c9871fb",
-  "timestamp": "2026-08-31T18:18:28.483866+00:00",
+  "timestamp": "2026-08-31T18:20:04.379725+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

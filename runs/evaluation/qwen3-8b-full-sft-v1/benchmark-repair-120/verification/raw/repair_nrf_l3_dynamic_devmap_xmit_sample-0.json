@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
   "task_id": "repair_nrf_l3_dynamic_devmap_xmit",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_dynamic_devmap_xmit/sample-0.c",
   "source_sha256": "ea0acb13418479b3faa237ce8e637acc91eb67049a1451c574c99fd0c2ae35e2",
-  "timestamp": "2026-08-31T18:19:04.978693+00:00",
+  "timestamp": "2026-08-31T18:20:45.726461+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

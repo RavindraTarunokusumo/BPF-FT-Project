@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
   "task_id": "repair_nrf_l2_session_stickiness",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l2_session_stickiness/sample-0.c",
   "source_sha256": "e5b9d201be9c7a8fc9d7d214e70d03d49a223d19e35af6f307ea3fd8196b6c78",
-  "timestamp": "2026-08-31T18:19:06.135829+00:00",
+  "timestamp": "2026-08-31T18:20:47.274885+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

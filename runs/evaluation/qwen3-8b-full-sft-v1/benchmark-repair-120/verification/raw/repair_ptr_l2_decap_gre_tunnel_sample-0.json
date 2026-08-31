@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
   "task_id": "repair_ptr_l2_decap_gre_tunnel",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l2_decap_gre_tunnel/sample-0.c",
   "source_sha256": "0916cbe1d1dcaa3dc77425ce76008a5e6d18103e2ebe6ca16810664d3de1bbe4",
-  "timestamp": "2026-08-31T18:19:06.196291+00:00",
+  "timestamp": "2026-08-31T18:20:47.408456+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

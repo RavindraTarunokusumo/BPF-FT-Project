@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
   "task_id": "repair_ptr_l2_vxlan_header_strip",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l2_vxlan_header_strip/sample-0.c",
   "source_sha256": "04bbac84af1602f36c970c9c6ecc77b683795e7e053429812d614dfe84133b58",
-  "timestamp": "2026-08-31T18:19:06.719249+00:00",
+  "timestamp": "2026-08-31T18:20:48.287696+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
   "task_id": "repair_pit_l1_proto_counter_split",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_pit_l1_proto_counter_split/sample-0.c",
   "source_sha256": "a184d9ddd6e73d7b6ca80321b3fae5a6f0454fffa44edb17db013bb10b2b6276",
-  "timestamp": "2026-08-31T18:18:31.844448+00:00",
+  "timestamp": "2026-08-31T18:20:12.704000+00:00",
   "compile": {
     "pass": true,
     "stdout": "",
@@ -15,15 +15,45 @@
   "verifier": {
     "pass": true,
     "stdout": "",
-    "stderr": "libbpf: loading object from /tmp/bpf_val_zw1cpaoe/candidate.o\nlibbpf: elf: section(3) xdp, size 224, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 28 insns (224 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_zw1cpaoe/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1230, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 256, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 432, link 1, flags 0, type=2\nlibbpf: looking for externs among 18 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'proto_stats': at sec_idx 5, offset 0.\nlibbpf: map 'proto_stats': found type = 6.\nlibbpf: map 'proto_stats': found key [6], sz = 4.\nlibbpf: map 'proto_stats': found value [9], sz = 8.\nlibbpf: map 'proto_stats': found max_entries = 3.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #20 against 'proto_stats'\nlibbpf: prog 'xdp_telemetry': found map 0 (proto_stats, sec 5, off 0) for insn #20\nlibbpf: map 'proto_stats': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+21         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n5: (b7) r2 = 2                        ; R2_w=2\n; __u32 slot = 2; // other\n6: (63) *(u32 *)(r10 -4) = r2         ; R2_w=2 R10=fp0 fp-8=mmmm????\n; __u16 h_proto = bpf_ntohs(eth->h_proto);\n7: (71) r2 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (71) r1 = *(u8 *)(r1 +13)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (67) r1 <<= 8                      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n10: (4f) r1 |= r2                     ; R1_w=scalar() R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n11: (dc) r1 = be16 r1                 ; R1_w=scalar()\n; if (h_proto == ETH_P_IP)\n12: (15) if r1 == 0x86dd goto pc+3    ; R1_w=scalar()\n13: (55) if r1 != 0x800 goto pc+4     ; R1=2048\n14: (b7) r1 = 0                       ; R1_w=0\n15: (05) goto pc+1\n; \n17: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 17 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 15: (05) goto pc+1\nmark_precise: frame0: regs=r1 stack= before 14: (b7) r1 = 0\n18: R1_w=0 R10=fp0 fp-8=0000????\n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&proto_stats, &slot);\n19: (07) r2 += -4                     ; R2_w=fp-4\n20: (18) r1 = 0xff2125b8cd8cd800      ; R1_w=map_ptr(map=proto_stats,ks=4,vs=8)\n22: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=proto_stats,ks=4,vs=8)\n; if (cnt)\n23: (15) if r0 == 0x0 goto pc+2       ; R0=map_value(map=proto_stats,ks=4,vs=8)\n24: (b7) r1 = 1                       ; R1_w=1\n; __sync_fetch_and_add(cnt, 1);\n25: (db) lock *(u64 *)(r0 +0) += r1   ; R0=map_value(map=proto_stats,ks=4,vs=8) R1_w=1\n; }\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\n\nfrom 23 to 26: R0=0 R10=fp0 fp-8=mmmm????\n26: R0=0 R10=fp0 fp-8=mmmm????\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\n\nfrom 13 to 18: R1=scalar() R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=14,r=14) R10=fp0 fp-8=mmmm????\n18: R1=scalar() R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=14,r=14) R10=fp0 fp-8=mmmm????\n; \n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&proto_stats, &slot);\n19: (07) r2 += -4                     ; R2_w=fp-4\n20: (18) r1 = 0xff2125b8cd8cd800      ; R1_w=map_ptr(map=proto_stats,ks=4,vs=8)\n22: (85) call bpf_map_lookup_elem#1\n23: safe\n\nfrom 12 to 16: R1=0x86dd R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=14,r=14) R10=fp0 fp-8=mmmm????\n16: R1=0x86dd R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=14,r=14) R10=fp0 fp-8=mmmm????\n; if (h_proto == ETH_P_IP)\n16: (b7) r1 = 1                       ; R1_w=1\n; \n17: (63) *(u32 *)(r10 -4) = r1        ; R1_w=1 R10=fp0 fp-8=mmmm????\n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&proto_stats, &slot);\n19: (07) r2 += -4                     ; R2_w=fp-4\n20: (18) r1 = 0xff2125b8cd8cd800      ; R1_w=map_ptr(map=proto_stats,ks=4,vs=8)\n22: (85) call bpf_map_lookup_elem#1\n23: safe\n\nfrom 4 to 26: R1_w=pkt(r=0) R2_w=pkt_end() R3_w=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n26: R1_w=pkt(r=0) R2_w=pkt_end() R3_w=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n; }\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\nverification time 217 usec\nstack depth 8\nprocessed 42 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_tq_kbuyc/candidate.o\nlibbpf: elf: section(3) xdp, size 224, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 28 insns (224 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_tq_kbuyc/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1230, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 256, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 432, link 1, flags 0, type=2\nlibbpf: looking for externs among 18 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'proto_stats': at sec_idx 5, offset 0.\nlibbpf: map 'proto_stats': found type = 6.\nlibbpf: map 'proto_stats': found key [6], sz = 4.\nlibbpf: map 'proto_stats': found value [9], sz = 8.\nlibbpf: map 'proto_stats': found max_entries = 3.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #20 against 'proto_stats'\nlibbpf: prog 'xdp_telemetry': found map 0 (proto_stats, sec 5, off 0) for insn #20\nlibbpf: map 'proto_stats': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+21         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n5: (b7) r2 = 2                        ; R2_w=2\n; __u32 slot = 2; // other\n6: (63) *(u32 *)(r10 -4) = r2         ; R2_w=2 R10=fp0 fp-8=mmmm????\n; __u16 h_proto = bpf_ntohs(eth->h_proto);\n7: (71) r2 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (71) r1 = *(u8 *)(r1 +13)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (67) r1 <<= 8                      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n10: (4f) r1 |= r2                     ; R1_w=scalar() R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n11: (dc) r1 = be16 r1                 ; R1_w=scalar()\n; if (h_proto == ETH_P_IP)\n12: (15) if r1 == 0x86dd goto pc+3    ; R1_w=scalar()\n13: (55) if r1 != 0x800 goto pc+4     ; R1=2048\n14: (b7) r1 = 0                       ; R1_w=0\n15: (05) goto pc+1\n; \n17: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 17 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 15: (05) goto pc+1\nmark_precise: frame0: regs=r1 stack= before 14: (b7) r1 = 0\n18: R1_w=0 R10=fp0 fp-8=0000????\n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&proto_stats, &slot);\n19: (07) r2 += -4                     ; R2_w=fp-4\n20: (18) r1 = 0xff2125b89938a200      ; R1_w=map_ptr(map=proto_stats,ks=4,vs=8)\n22: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=proto_stats,ks=4,vs=8)\n; if (cnt)\n23: (15) if r0 == 0x0 goto pc+2       ; R0=map_value(map=proto_stats,ks=4,vs=8)\n24: (b7) r1 = 1                       ; R1_w=1\n; __sync_fetch_and_add(cnt, 1);\n25: (db) lock *(u64 *)(r0 +0) += r1   ; R0=map_value(map=proto_stats,ks=4,vs=8) R1_w=1\n; }\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\n\nfrom 23 to 26: R0=0 R10=fp0 fp-8=mmmm????\n26: R0=0 R10=fp0 fp-8=mmmm????\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\n\nfrom 13 to 18: R1=scalar() R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=14,r=14) R10=fp0 fp-8=mmmm????\n18: R1=scalar() R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=14,r=14) R10=fp0 fp-8=mmmm????\n; \n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&proto_stats, &slot);\n19: (07) r2 += -4                     ; R2_w=fp-4\n20: (18) r1 = 0xff2125b89938a200      ; R1_w=map_ptr(map=proto_stats,ks=4,vs=8)\n22: (85) call bpf_map_lookup_elem#1\n23: safe\n\nfrom 12 to 16: R1=0x86dd R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=14,r=14) R10=fp0 fp-8=mmmm????\n16: R1=0x86dd R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=14,r=14) R10=fp0 fp-8=mmmm????\n; if (h_proto == ETH_P_IP)\n16: (b7) r1 = 1                       ; R1_w=1\n; \n17: (63) *(u32 *)(r10 -4) = r1        ; R1_w=1 R10=fp0 fp-8=mmmm????\n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&proto_stats, &slot);\n19: (07) r2 += -4                     ; R2_w=fp-4\n20: (18) r1 = 0xff2125b89938a200      ; R1_w=map_ptr(map=proto_stats,ks=4,vs=8)\n22: (85) call bpf_map_lookup_elem#1\n23: safe\n\nfrom 4 to 26: R1_w=pkt(r=0) R2_w=pkt_end() R3_w=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n26: R1_w=pkt(r=0) R2_w=pkt_end() R3_w=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n; }\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\nverification time 294 usec\nstack depth 8\nprocessed 42 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
     "log": ""
   },
   "behavioral": {
     "pass": false,
-    "passed_tests": 0,
-    "total_tests": 0,
-    "details": []
+    "passed_tests": 3,
+    "total_tests": 4,
+    "details": [
+      {
+        "name": "pass_ipv4",
+        "description": "Count IPv4 packet in slot 0",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_ipv6",
+        "description": "Count IPv6 packet in slot 1",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Count ARP frame in slot 2",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Count truncated frame in slot 2",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "ERROR",
+        "stderr": "Error: failed to run program: Invalid argument\n"
+      }
+    ]
   },
   "passed": false,
-  "diagnostic": "Behavioral tests failed:\n"
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_trunc' failed: expected XDP_PASS (2), got ERROR (None)"
 }

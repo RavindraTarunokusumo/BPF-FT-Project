@@ -1,11 +1,11 @@
 {
-  "application_category": "unknown",
-  "difficulty": "unknown",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
   "task_id": "repair_pfs_l2_vlan_tagged_filter",
   "candidate_id": "sample-0",
   "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_pfs_l2_vlan_tagged_filter/sample-0.c",
   "source_sha256": "05afc69c28ca9818a248bd896061b767b390b4b3fefe592fce8f4fc0f3d22852",
-  "timestamp": "2026-08-31T18:18:32.496992+00:00",
+  "timestamp": "2026-08-31T18:20:14.178397+00:00",
   "compile": {
     "pass": false,
     "stdout": "",

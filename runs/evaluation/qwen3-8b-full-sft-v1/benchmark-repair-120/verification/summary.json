@@ -7,31 +7,66 @@
     "output_compliance_rate": 1.0,
     "compilation_pass_rate": 0.8416666666666667,
     "kernel_verifier_pass_rate": 0.8,
-    "behavioral_pass_rate": 0.0,
+    "behavioral_pass_rate": 0.625,
     "pass_at_1": {
-      "passed_tasks": 0,
+      "passed_tasks": 75,
       "total_tasks": 120,
-      "rate": 0.0
+      "rate": 0.625
     },
     "pass_at_4": "N/A"
   },
   "breakdowns": {
     "by_category": {
-      "unknown": {
-        "total": 120,
-        "compliant": 120,
-        "compile": 101,
-        "verifier": 96,
-        "passed": 0
+      "network_routing_forwarding": {
+        "total": 30,
+        "compliant": 30,
+        "compile": 20,
+        "verifier": 20,
+        "passed": 14
+      },
+      "packet_filtering_security": {
+        "total": 30,
+        "compliant": 30,
+        "compile": 29,
+        "verifier": 28,
+        "passed": 21
+      },
+      "packet_inspection_telemetry": {
+        "total": 30,
+        "compliant": 30,
+        "compile": 30,
+        "verifier": 29,
+        "passed": 24
+      },
+      "protocol_transformation": {
+        "total": 30,
+        "compliant": 30,
+        "compile": 22,
+        "verifier": 19,
+        "passed": 16
       }
     },
     "by_difficulty": {
-      "unknown": {
-        "total": 120,
-        "compliant": 120,
-        "compile": 101,
-        "verifier": 96,
-        "passed": 0
+      "level_1": {
+        "total": 40,
+        "compliant": 40,
+        "compile": 36,
+        "verifier": 34,
+        "passed": 23
+      },
+      "level_2": {
+        "total": 40,
+        "compliant": 40,
+        "compile": 33,
+        "verifier": 32,
+        "passed": 29
+      },
+      "level_3": {
+        "total": 40,
+        "compliant": 40,
+        "compile": 32,
+        "verifier": 30,
+        "passed": 23
       }
     }
   }
