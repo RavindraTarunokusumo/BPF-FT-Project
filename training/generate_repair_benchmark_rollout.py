@@ -254,7 +254,7 @@ async def run_repair_benchmark_rollout(
 
     compliant_count = sum(1 for r in generation_records if r["compliance"]["compliant"])
     manifest = {
-        "benchmark_index": str(benchmark_index),
+        "benchmark_index": benchmark_index.relative_to(PROJECT_ROOT).as_posix() if benchmark_index.is_relative_to(PROJECT_ROOT) else str(benchmark_index),
         "benchmark_type": "repair_benchmark_120",
         "total_tasks": len(tasks),
         "total_samples": len(generation_records),

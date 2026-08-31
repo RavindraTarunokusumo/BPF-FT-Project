@@ -1,5 +1,5 @@
 {
-  "benchmark_index": "C:\\Users\\rvind\\OneDrive\\Desktop\\Projects\\BPF-FT-Project\\data\\benchmark\\repair\\index.jsonl",
+  "benchmark_index": "data/benchmark/repair/index.jsonl",
   "benchmark_type": "repair_benchmark_120",
   "total_tasks": 120,
   "total_samples": 120,

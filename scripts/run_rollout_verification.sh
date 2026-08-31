@@ -29,9 +29,15 @@ BENCHMARK_INDEX="data/calibration/index.jsonl"
 
 # Read benchmark index from manifest if present
 if [[ -f "$ROLLOUT_DIR/manifest.json" ]]; then
-    MANIFEST_INDEX=$(grep -o '"benchmark_index": "[^"]*' "$ROLLOUT_DIR/manifest.json" | cut -d'"' -f4 || true)
-    if [[ -n "$MANIFEST_INDEX" && -f "$MANIFEST_INDEX" ]]; then
-        BENCHMARK_INDEX="$MANIFEST_INDEX"
+    RAW_MANIFEST_INDEX=$(grep -o '"benchmark_index": "[^"]*' "$ROLLOUT_DIR/manifest.json" | cut -d'"' -f4 | sed 's/\\\\/\//g' || true)
+    if [[ -n "$RAW_MANIFEST_INDEX" && -f "$RAW_MANIFEST_INDEX" ]]; then
+        BENCHMARK_INDEX="$RAW_MANIFEST_INDEX"
+    elif [[ -f "data/benchmark/repair/index.jsonl" && "$ROLLOUT_DIR" =~ "repair" ]]; then
+        BENCHMARK_INDEX="data/benchmark/repair/index.jsonl"
+    elif [[ -f "data/benchmark/synthesis/index.jsonl" && "$ROLLOUT_DIR" =~ "synthesis" ]]; then
+        BENCHMARK_INDEX="data/benchmark/synthesis/index.jsonl"
+    elif [[ "$RAW_MANIFEST_INDEX" =~ (data/.*) && -f "${BASH_REMATCH[1]}" ]]; then
+        BENCHMARK_INDEX="${BASH_REMATCH[1]}"
     fi
 fi
 
@@ -87,6 +93,7 @@ for idx, c_file in enumerate(c_files, start=1):
         Path(f'data/calibration/{cat}/{diff}/{task_id}/tests.json'),
         Path(f'data/benchmark/synthesis/{cat}/{diff}/{task_id}/tests.json'),
         Path(f'data/benchmark/repair/{cat}/{diff}/{task_id}/tests.json'),
+        *Path('data').glob(f'**/{task_id}/tests.json'),
     ]:
         if test_candidate.is_file():
             try:
