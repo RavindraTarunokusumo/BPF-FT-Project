@@ -27,11 +27,20 @@ VERIFICATION_DIR="$ROLLOUT_DIR/verification"
 RAW_DIR="$VERIFICATION_DIR/raw"
 BENCHMARK_INDEX="data/calibration/index.jsonl"
 
+# Read benchmark index from manifest if present
+if [[ -f "$ROLLOUT_DIR/manifest.json" ]]; then
+    MANIFEST_INDEX=$(grep -o '"benchmark_index": "[^"]*' "$ROLLOUT_DIR/manifest.json" | cut -d'"' -f4 || true)
+    if [[ -n "$MANIFEST_INDEX" && -f "$MANIFEST_INDEX" ]]; then
+        BENCHMARK_INDEX="$MANIFEST_INDEX"
+    fi
+fi
+
 mkdir -p "$RAW_DIR"
 
 echo "======================================================================"
 echo "BPF-Guardian VPS Rollout Verification"
 echo "Rollout Directory: $ROLLOUT_DIR"
+echo "Benchmark Index:   $BENCHMARK_INDEX"
 echo "Candidates Dir:    $CANDIDATES_DIR"
 echo "Raw Results Dir:   $RAW_DIR"
 echo "======================================================================"
@@ -70,13 +79,21 @@ for idx, c_file in enumerate(c_files, start=1):
     cand_id = c_file.stem
     task_spec = task_specs.get(task_id, {'task_id': task_id, 'tests': []})
     
-    # Load detailed test specs if available
-    test_json = Path(f'data/calibration/{task_spec.get(\"application_category\", \"\")}/{task_spec.get(\"difficulty\", \"\")}/{task_id}/tests.json')
-    if test_json.is_file():
-        try:
-            task_spec['tests'] = json.loads(test_json.read_text(encoding='utf-8')).get('tests', [])
-        except Exception:
-            pass
+    cat = task_spec.get('application_category', '')
+    diff = task_spec.get('difficulty', '')
+    
+    # Load detailed test specs if available across possible benchmark locations
+    for test_candidate in [
+        Path(f'data/calibration/{cat}/{diff}/{task_id}/tests.json'),
+        Path(f'data/benchmark/synthesis/{cat}/{diff}/{task_id}/tests.json'),
+        Path(f'data/benchmark/repair/{cat}/{diff}/{task_id}/tests.json'),
+    ]:
+        if test_candidate.is_file():
+            try:
+                task_spec['tests'] = json.loads(test_candidate.read_text(encoding='utf-8')).get('tests', [])
+                break
+            except Exception:
+                pass
 
     res = validator.validate_candidate(
         task_id=task_id,

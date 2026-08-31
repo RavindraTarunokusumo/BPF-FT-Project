@@ -149,6 +149,7 @@ def build_task_prompt(task_meta: Dict[str, Any]) -> List[Dict[str, str]]:
     task_json_path = None
     for candidate_dir in [
         PROJECT_ROOT / "data" / "calibration" / category / difficulty / task_id / "task.json",
+        PROJECT_ROOT / "data" / "benchmark" / "synthesis" / category / difficulty / task_id / "task.json",
         PROJECT_ROOT / "data" / "inbox" / category / difficulty / task_id / "task.json",
     ]:
         if candidate_dir.is_file():
