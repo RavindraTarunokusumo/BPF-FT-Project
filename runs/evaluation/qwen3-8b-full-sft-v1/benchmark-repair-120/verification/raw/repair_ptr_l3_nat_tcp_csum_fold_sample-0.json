@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_ptr_l3_nat_tcp_csum_fold",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_nat_tcp_csum_fold/sample-0.c",
+  "source_sha256": "cce33905c58182047c4f11ba832d6ab64198b9226862387ef4c1ca59fcc3bdeb",
+  "timestamp": "2026-08-31T18:18:32.621801+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "Verifier loading timed out after 30s",
+    "log": "Timeout"
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Kernel verifier rejected program:\nVerifier loading timed out after 30s"
+}

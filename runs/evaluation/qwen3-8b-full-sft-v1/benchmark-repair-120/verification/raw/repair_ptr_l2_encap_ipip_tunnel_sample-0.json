@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_ptr_l2_encap_ipip_tunnel",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l2_encap_ipip_tunnel/sample-0.c",
+  "source_sha256": "a3cbbf5b085b675009457dec39d921b4c9ffbca8a74566aeaa0b105c9078f7e9",
+  "timestamp": "2026-08-31T18:19:10.129219+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l2_encap_ipip_tunnel/sample-0.c:43:19: error: use of unknown builtin '__builtin_checksum_fast' [-Wimplicit-function-declaration]\n   43 |     ip->check = ~(__builtin_checksum_fast(ip, sizeof(struct iphdr)));\n      |                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l2_encap_ipip_tunnel/sample-0.c:23:19: warning: unused variable 'eth_saved' [-Wunused-variable]\n   23 |     struct ethhdr eth_saved = *eth;\n      |                   ^~~~~~~~~\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l2_encap_ipip_tunnel/sample-0.c:43:19: error: use of unknown builtin '__builtin_checksum_fast' [-Wimplicit-function-declaration]\n   43 |     ip->check = ~(__builtin_checksum_fast(ip, sizeof(struct iphdr)));\n      |                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l2_encap_ipip_tunnel/sample-0.c:23:19: warning: unused variable 'eth_saved' [-Wunused-variable]\n   23 |     struct ethhdr eth_saved = *eth;\n      |                   ^~~~~~~~~\n1 warning and 1 error generated."
+}

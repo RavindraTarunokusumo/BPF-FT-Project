@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_pit_l3_jitter_ringbuf_logger",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_pit_l3_jitter_ringbuf_logger/sample-0.c",
+  "source_sha256": "041ea55f6f3e428f9b223832cb03b5ea8347401eda5ac7ba9cc08109abe0e21e",
+  "timestamp": "2026-08-31T18:19:05.069817+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_im307pza/candidate.o\nlibbpf: elf: section(3) xdp, size 168, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 21 insns (168 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 16, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_im307pza/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1083, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 272, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'events_rb': at sec_idx 5, offset 0.\nlibbpf: map 'events_rb': found type = 27.\nlibbpf: map 'events_rb': found max_entries = 262144.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #1 against 'events_rb'\nlibbpf: prog 'xdp_telemetry': found map 0 (events_rb, sec 5, off 0) for insn #1\nlibbpf: map 'events_rb': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_telemetry(struct xdp_md *ctx) {\n0: (bf) r6 = r1                       ; R1=ctx() R6_w=ctx()\n; struct packet_event *evt = bpf_ringbuf_reserve(&events_rb, sizeof(*evt), 0);\n1: (18) r1 = 0xff2125b881492800       ; R1_w=map_ptr(map=events_rb,ks=0,vs=0)\n3: (b7) r2 = 16                       ; R2_w=16\n4: (b7) r3 = 0                        ; R3_w=0\n5: (85) call bpf_ringbuf_reserve#131\nmark_precise: frame0: last_idx 5 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r2 stack= before 4: (b7) r3 = 0\nmark_precise: frame0: regs=r2 stack= before 3: (b7) r2 = 16\n6: R0_w=ringbuf_mem_or_null(id=2,ref_obj_id=2,sz=16) refs=2\n6: (bf) r7 = r0                       ; R0_w=ringbuf_mem_or_null(id=2,ref_obj_id=2,sz=16) R7_w=ringbuf_mem_or_null(id=2,ref_obj_id=2,sz=16) refs=2\n; if (!evt) {\n7: (15) if r7 == 0x0 goto pc+11       ; R7_w=ringbuf_mem(ref_obj_id=2,sz=16) refs=2\n; evt->ts = bpf_ktime_get_ns();\n8: (85) call bpf_ktime_get_ns#5       ; R0=scalar() refs=2\n; evt->ts = bpf_ktime_get_ns();\n9: (7b) *(u64 *)(r7 +0) = r0          ; R0=scalar() R7=ringbuf_mem(ref_obj_id=2,sz=16) refs=2\n; evt->len = (__u32)((long)ctx->data_end - (long)ctx->data);\n10: (61) r1 = *(u32 *)(r6 +0)         ; R1_w=pkt(r=0) R6=ctx() refs=2\n; evt->len = (__u32)((long)ctx->data_end - (long)ctx->data);\n11: (61) r2 = *(u32 *)(r6 +4)         ; R2_w=pkt_end() R6=ctx() refs=2\n; evt->len = (__u32)((long)ctx->data_end - (long)ctx->data);\n12: (1f) r2 -= r1                     ; R1_w=pkt(r=0) R2_w=scalar() refs=2\n; evt->len = (__u32)((long)ctx->data_end - (long)ctx->data);\n13: (63) *(u32 *)(r7 +8) = r2         ; R2_w=scalar() R7=ringbuf_mem(ref_obj_id=2,sz=16) refs=2\n; evt->ifindex = ctx->ingress_ifindex;\n14: (61) r1 = *(u32 *)(r6 +12)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R6=ctx() refs=2\n; evt->ifindex = ctx->ingress_ifindex;\n15: (63) *(u32 *)(r7 +12) = r1        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=ringbuf_mem(ref_obj_id=2,sz=16) refs=2\n; bpf_ringbuf_submit(evt, 0);\n16: (bf) r1 = r7                      ; R1_w=ringbuf_mem(ref_obj_id=2,sz=16) R7=ringbuf_mem(ref_obj_id=2,sz=16) refs=2\n17: (b7) r2 = 0                       ; R2_w=0 refs=2\n18: (85) call bpf_ringbuf_submit#132          ;\n; }\n19: (b7) r0 = 2                       ; R0_w=2\n20: (95) exit\n\nfrom 7 to 19: R0=0 R6=ctx() R7=0 R10=fp0\n19: R0=0 R6=ctx() R7=0 R10=fp0\n19: (b7) r0 = 2                       ; R0_w=2\n20: (95) exit\nverification time 202 usec\nstack depth 0\nprocessed 22 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\n"
+}

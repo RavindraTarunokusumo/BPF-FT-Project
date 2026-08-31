@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_ptr_l1_rewrite_dst_mac",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_rewrite_dst_mac/sample-0.c",
+  "source_sha256": "e8c915c58b3b604ddfafbc8ddb810228fc7e261f3a29e894d07edb9456cb627d",
+  "timestamp": "2026-08-31T18:19:06.071897+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_t7snc2e_/candidate.o\nlibbpf: elf: section(3) xdp, size 128, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 16 insns (128 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_t7snc2e_/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 770, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 192, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+9          ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n5: (b7) r2 = 0                        ; R2_w=0\n; d[2] = 0x00;\n6: (73) *(u8 *)(r1 +4) = r2           ; R1_w=pkt(r=14) R2_w=0\n7: (73) *(u8 *)(r1 +3) = r2           ; R1_w=pkt(r=14) R2_w=0\n8: (73) *(u8 *)(r1 +2) = r2           ; R1_w=pkt(r=14) R2_w=0\n9: (73) *(u8 *)(r1 +1) = r2           ; R1_w=pkt(r=14) R2_w=0\n10: (b7) r2 = 153                     ; R2_w=153\n; d[5] = 0x99;\n11: (73) *(u8 *)(r1 +5) = r2          ; R1_w=pkt(r=14) R2_w=153\n12: (b7) r2 = 2                       ; R2_w=2\n; d[0] = 0x02;\n13: (73) *(u8 *)(r1 +0) = r2          ; R1_w=pkt(r=14) R2_w=2\n; }\n14: (b7) r0 = 2                       ; R0_w=2\n15: (95) exit\n\nfrom 4 to 14: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n14: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n14: (b7) r0 = 2                       ; R0_w=2\n15: (95) exit\nverification time 114 usec\nstack depth 0\nprocessed 18 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\n"
+}

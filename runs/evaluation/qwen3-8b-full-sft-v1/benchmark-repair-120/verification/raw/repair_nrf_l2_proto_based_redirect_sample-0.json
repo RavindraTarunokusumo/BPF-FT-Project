@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_nrf_l2_proto_based_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l2_proto_based_redirect/sample-0.c",
+  "source_sha256": "a29ba756179e1bd1b8cafb7cccf07afeb86ced7c91e5d8678b8dc22d57727a0d",
+  "timestamp": "2026-08-31T18:19:08.139264+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l2_proto_based_redirect/sample-0.c:35:48: error: incompatible pointer to integer conversion passing '__u32 *' (aka 'unsigned int *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   35 |         return bpf_redirect_map(&proto_devmap, &key, 0);\n      |                                                ^~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l2_proto_based_redirect/sample-0.c:38:48: error: incompatible pointer to integer conversion passing '__u32 *' (aka 'unsigned int *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   38 |         return bpf_redirect_map(&proto_devmap, &key, 0);\n      |                                                ^~~~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l2_proto_based_redirect/sample-0.c:35:48: error: incompatible pointer to integer conversion passing '__u32 *' (aka 'unsigned int *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   35 |         return bpf_redirect_map(&proto_devmap, &key, 0);\n      |                                                ^~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l2_proto_based_redirect/sample-0.c:38:48: error: incompatible pointer to integer conversion passing '__u32 *' (aka 'unsigned int *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   38 |         return bpf_redirect_map(&proto_devmap, &key, 0);\n      |                                                ^~~~\n2 errors generated."
+}

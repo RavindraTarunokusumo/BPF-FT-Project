@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_ptr_l1_rewrite_src_mac",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_rewrite_src_mac/sample-0.c",
+  "source_sha256": "11b78d45857c9e1d764cc75be4e5f76160737087050ae9b8926acd9ec349e382",
+  "timestamp": "2026-08-31T18:19:08.042186+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_n502i11q/candidate.o\nlibbpf: elf: section(3) xdp, size 168, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 21 insns (168 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_n502i11q/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 803, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 192, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+14         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r2 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (4f) r3 |= r2                      ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3_w=scalar()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+9        ; R3_w=8\n10: (b7) r2 = 0                       ; R2_w=0\n; eth->h_source[i] = new_src[i];\n11: (73) *(u8 *)(r1 +10) = r2         ; R1_w=pkt(r=14) R2_w=0\n12: (73) *(u8 *)(r1 +9) = r2          ; R1_w=pkt(r=14) R2_w=0\n13: (73) *(u8 *)(r1 +8) = r2          ; R1_w=pkt(r=14) R2_w=0\n14: (73) *(u8 *)(r1 +7) = r2          ; R1_w=pkt(r=14) R2_w=0\n15: (b7) r2 = 66                      ; R2_w=66\n16: (73) *(u8 *)(r1 +11) = r2         ; R1_w=pkt(r=14) R2_w=66\n17: (b7) r2 = 2                       ; R2_w=2\n18: (73) *(u8 *)(r1 +6) = r2          ; R1=pkt(r=14) R2=2\n; }\n19: (b7) r0 = 2                       ; R0_w=2\n20: (95) exit\n\nfrom 9 to 19: safe\n\nfrom 4 to 19: safe\nverification time 127 usec\nstack depth 0\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\n"
+}

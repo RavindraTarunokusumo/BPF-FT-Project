@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_nrf_l3_flow_affinity_table",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c",
+  "source_sha256": "0cf5ac2191f953ad0a3110d4a4eea483755156039f72f9a99e7440c780e302d0",
+  "timestamp": "2026-08-31T18:19:07.885370+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:56:19: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   56 |             __u32 dev = bpf_map_lookup_elem(&affinity_devmap, &i);\n      |                   ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:35:11: warning: unused variable 'src' [-Wunused-variable]\n   35 |     __u32 src = ip->saddr;\n      |           ^~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:36:11: warning: unused variable 'dst' [-Wunused-variable]\n   36 |     __u32 dst = ip->daddr;\n      |           ^~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:37:11: warning: unused variable 'proto' [-Wunused-variable]\n   37 |     __u16 proto = ip->protocol;\n      |           ^~~~~\n3 warnings and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:56:19: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   56 |             __u32 dev = bpf_map_lookup_elem(&affinity_devmap, &i);\n      |                   ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:35:11: warning: unused variable 'src' [-Wunused-variable]\n   35 |     __u32 src = ip->saddr;\n      |           ^~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:36:11: warning: unused variable 'dst' [-Wunused-variable]\n   36 |     __u32 dst = ip->daddr;\n      |           ^~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:37:11: warning: unused variable 'proto' [-Wunused-variable]\n   37 |     __u16 proto = ip->protocol;\n      |           ^~~~~\n3 warnings and 1 error generated."
+}

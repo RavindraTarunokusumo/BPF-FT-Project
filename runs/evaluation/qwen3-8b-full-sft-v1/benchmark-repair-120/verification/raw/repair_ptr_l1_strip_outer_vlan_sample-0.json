@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_ptr_l1_strip_outer_vlan",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c",
+  "source_sha256": "1c1d2773516abef8305f32b73998308c1ed43c087605d940b24bd5b311ff0ee1",
+  "timestamp": "2026-08-31T18:18:31.410282+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c:18:22: error: arithmetic on a pointer to an incomplete type 'struct vlan_hdr'\n   18 |     if ((void *)(vlh + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c:17:12: note: forward declaration of 'struct vlan_hdr'\n   17 |     struct vlan_hdr *vlh = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c:21:29: error: incomplete definition of type 'struct vlan_hdr'\n   21 |     __be16 inner_proto = vlh->h_vlan_encapsulated_proto;\n      |                          ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c:17:12: note: forward declaration of 'struct vlan_hdr'\n   17 |     struct vlan_hdr *vlh = (void *)(eth + 1);\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c:18:22: error: arithmetic on a pointer to an incomplete type 'struct vlan_hdr'\n   18 |     if ((void *)(vlh + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c:17:12: note: forward declaration of 'struct vlan_hdr'\n   17 |     struct vlan_hdr *vlh = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c:21:29: error: incomplete definition of type 'struct vlan_hdr'\n   21 |     __be16 inner_proto = vlh->h_vlan_encapsulated_proto;\n      |                          ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_strip_outer_vlan/sample-0.c:17:12: note: forward declaration of 'struct vlan_hdr'\n   17 |     struct vlan_hdr *vlh = (void *)(eth + 1);\n      |            ^\n2 errors generated."
+}

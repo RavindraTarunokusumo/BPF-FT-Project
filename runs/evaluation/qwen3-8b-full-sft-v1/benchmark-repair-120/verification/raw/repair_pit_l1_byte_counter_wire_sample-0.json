@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_pit_l1_byte_counter_wire",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_pit_l1_byte_counter_wire/sample-0.c",
+  "source_sha256": "1333a7a18b844afdea726b6d6420a107bb82bcdae3ccf1b17b48fcc6c98a5dbb",
+  "timestamp": "2026-08-31T18:19:09.079514+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_ks8x5bci/candidate.o\nlibbpf: elf: section(3) xdp, size 112, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 14 insns (112 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_ks8x5bci/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1171, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 208, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'byte_count': at sec_idx 5, offset 0.\nlibbpf: map 'byte_count': found type = 6.\nlibbpf: map 'byte_count': found key [6], sz = 4.\nlibbpf: map 'byte_count': found value [9], sz = 8.\nlibbpf: map 'byte_count': found max_entries = 1.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #6 against 'byte_count'\nlibbpf: prog 'xdp_telemetry': found map 0 (byte_count, sec 5, off 0) for insn #6\nlibbpf: map 'byte_count': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r6 = *(u32 *)(r1 +4)          ; R1=ctx() R6_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r7 = *(u32 *)(r1 +0)          ; R1=ctx() R7_w=pkt(r=0)\n2: (b7) r1 = 0                        ; R1_w=0\n; __u32 key = 0;\n3: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 3 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 2: (b7) r1 = 0\n4: R1_w=0 R10=fp0 fp-8=0000????\n4: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0\n; \n5: (07) r2 += -4                      ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&byte_count, &key);\n6: (18) r1 = 0xff2125b881493400       ; R1_w=map_ptr(map=byte_count,ks=4,vs=8)\n8: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=byte_count,ks=4,vs=8)\n; if (cnt)\n9: (15) if r0 == 0x0 goto pc+2        ; R0_w=map_value(map=byte_count,ks=4,vs=8)\n; __u64 len = (__u64)data_end - (__u64)data;\n10: (1f) r6 -= r7                     ; R6_w=scalar() R7_w=pkt(r=0)\n; __sync_fetch_and_add(cnt, len);\n11: (db) lock *(u64 *)(r0 +0) += r6   ; R0=map_value(map=byte_count,ks=4,vs=8) R6=scalar()\n; return XDP_PASS;\n12: (b7) r0 = 2                       ; R0_w=2\n13: (95) exit\n\nfrom 9 to 12: safe\nverification time 104 usec\nstack depth 8\nprocessed 14 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\n"
+}

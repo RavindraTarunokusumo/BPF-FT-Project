@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_nrf_l3_fib_ttl_decrement",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c",
+  "source_sha256": "a14ba698c49e717f50f770ca2d8ccf528f61ef102e214f3e879534427c48e52a",
+  "timestamp": "2026-08-31T18:18:28.263638+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:13:8: error: redefinition of 'bpf_fib_lookup'\n   13 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:65:28: error: no member named 'sport' in 'struct iphdr'\n   65 |     fib_params.sport = ip->sport;\n      |                        ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:66:28: error: no member named 'dport' in 'struct iphdr'\n   66 |     fib_params.dport = ip->dport;\n      |                        ~~  ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:13:8: error: redefinition of 'bpf_fib_lookup'\n   13 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:65:28: error: no member named 'sport' in 'struct iphdr'\n   65 |     fib_params.sport = ip->sport;\n      |                        ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:66:28: error: no member named 'dport' in 'struct iphdr'\n   66 |     fib_params.dport = ip->dport;\n      |                        ~~  ^\n3 errors generated."
+}

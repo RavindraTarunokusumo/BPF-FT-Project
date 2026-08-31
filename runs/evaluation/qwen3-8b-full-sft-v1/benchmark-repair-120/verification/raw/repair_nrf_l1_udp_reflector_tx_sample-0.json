@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_nrf_l1_udp_reflector_tx",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c",
+  "source_sha256": "b69c4d33ef867bc3c4e34ed1dcf3c658df6879aedaf87f23ca8845ac071ca383",
+  "timestamp": "2026-08-31T18:18:30.642798+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c:15:25: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   15 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |                         ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c:15:25: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   15 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |                         ^\n1 error generated."
+}

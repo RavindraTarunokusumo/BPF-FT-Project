@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_ptr_l1_zero_ip_id",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_zero_ip_id/sample-0.c",
+  "source_sha256": "6d4a6d17ef41b487e08604b6c79afe975e912cdaf7d9923fd7249db0805e63bb",
+  "timestamp": "2026-08-31T18:19:09.185803+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_zero_ip_id/sample-0.c:30:47: error: no member named 'ip_hdr_csum' in 'struct iphdr'\n   30 |         csum += (__u32)ip->check + (__u32)ip->ip_hdr_csum;\n      |                                           ~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l1_zero_ip_id/sample-0.c:30:47: error: no member named 'ip_hdr_csum' in 'struct iphdr'\n   30 |         csum += (__u32)ip->check + (__u32)ip->ip_hdr_csum;\n      |                                           ~~  ^\n1 error generated."
+}

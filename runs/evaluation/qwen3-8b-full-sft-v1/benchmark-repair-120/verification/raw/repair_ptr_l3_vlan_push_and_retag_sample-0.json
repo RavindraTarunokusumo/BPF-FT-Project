@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_ptr_l3_vlan_push_and_retag",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c",
+  "source_sha256": "a7dcd0c9a9f65ca8a54ea9ef3ad48fa176e127d2075a553648c483b14c9871fb",
+  "timestamp": "2026-08-31T18:18:28.483866+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:25:35: error: use of undeclared identifier 'ETH_P_VLAN'\n   25 |     if (eth->h_proto != bpf_htons(ETH_P_VLAN))\n      |                                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:25:35: error: use of undeclared identifier 'ETH_P_VLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:25:35: error: use of undeclared identifier 'ETH_P_VLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:25:35: error: use of undeclared identifier 'ETH_P_VLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:38:34: error: use of undeclared identifier 'ETH_P_88A8'\n   38 |     new_eth->h_proto = bpf_htons(ETH_P_88A8);\n      |                                  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:38:34: error: use of undeclared identifier 'ETH_P_88A8'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:38:34: error: use of undeclared identifier 'ETH_P_88A8'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:38:34: error: use of undeclared identifier 'ETH_P_88A8'\n8 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:25:35: error: use of undeclared identifier 'ETH_P_VLAN'\n   25 |     if (eth->h_proto != bpf_htons(ETH_P_VLAN))\n      |                                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:25:35: error: use of undeclared identifier 'ETH_P_VLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:25:35: error: use of undeclared identifier 'ETH_P_VLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:25:35: error: use of undeclared identifier 'ETH_P_VLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:38:34: error: use of undeclared identifier 'ETH_P_88A8'\n   38 |     new_eth->h_proto = bpf_htons(ETH_P_88A8);\n      |                                  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:38:34: error: use of undeclared identifier 'ETH_P_88A8'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:38:34: error: use of undeclared identifier 'ETH_P_88A8'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_ptr_l3_vlan_push_and_retag/sample-0.c:38:34: error: use of undeclared identifier 'ETH_P_88A8'\n8 errors generated."
+}

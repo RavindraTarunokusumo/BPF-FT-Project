@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_nrf_l3_ecmp_hash_load_balancer",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c",
+  "source_sha256": "1c6e7f6b08c39c3f0569b3a3f6c05bcce414ce1e356a7fc646d10da69ab9a154",
+  "timestamp": "2026-08-31T18:19:07.563208+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:53:43: error: incompatible pointer to integer conversion passing '__u32 *' (aka 'unsigned int *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   53 |     return bpf_redirect_map(&ecmp_devmap, &slot, 0);\n      |                                           ^~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:53:43: error: incompatible pointer to integer conversion passing '__u32 *' (aka 'unsigned int *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   53 |     return bpf_redirect_map(&ecmp_devmap, &slot, 0);\n      |                                           ^~~~~\n1 error generated."
+}

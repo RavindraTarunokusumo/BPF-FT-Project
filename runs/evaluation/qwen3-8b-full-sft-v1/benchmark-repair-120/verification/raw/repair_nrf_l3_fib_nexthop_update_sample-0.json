@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "repair_nrf_l3_fib_nexthop_update",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c",
+  "source_sha256": "32190ce73f9d0b6936fc99dfda92207a8fe37195d7f6c7228420f6dbc6b75a73",
+  "timestamp": "2026-08-31T18:18:30.587257+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:15:8: error: redefinition of 'bpf_fib_lookup'\n   15 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:48:25: warning: implicit conversion from '__u16' (aka 'unsigned short') to '__u8' (aka 'unsigned char') changes value from 512 to 0 [-Wconstant-conversion]\n   48 |     fib_params.family = bpf_htons(AF_INET);\n      |                       ~ ^~~~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:82:3: note: expanded from macro 'bpf_htons'\n   82 |          __bpf_constant_htons(x) : __bpf_htons(x))\n      |          ^~~~~~~~~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:54:34: note: expanded from macro '__bpf_constant_htons'\n   54 | # define __bpf_constant_htons(x)        ___bpf_swab16(x)\n      |                                         ^~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:15:27: note: expanded from macro '___bpf_swab16'\n   15 | #define ___bpf_swab16(x) ((__u16)(                      \\\n      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n   16 |                           ___bpf_mvb(x, 16, 0, 1) |     \\\n      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n   17 |                           ___bpf_mvb(x, 16, 1, 0)))\n      |                           ~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:48:25: warning: implicit conversion from 'unsigned short' to '__u8' (aka 'unsigned char') changes value from 512 to 0 [-Wconstant-conversion]\n   48 |     fib_params.family = bpf_htons(AF_INET);\n      |                       ~ ^~~~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:82:29: note: expanded from macro 'bpf_htons'\n   82 |          __bpf_constant_htons(x) : __bpf_htons(x))\n      |                                    ^~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:52:27: note: expanded from macro '__bpf_htons'\n   52 | # define __bpf_htons(x)                 __builtin_bswap16(x)\n      |                                         ^~~~~~~~~~~~~~~~~~~~\n2 warnings and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:15:8: error: redefinition of 'bpf_fib_lookup'\n   15 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:48:25: warning: implicit conversion from '__u16' (aka 'unsigned short') to '__u8' (aka 'unsigned char') changes value from 512 to 0 [-Wconstant-conversion]\n   48 |     fib_params.family = bpf_htons(AF_INET);\n      |                       ~ ^~~~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:82:3: note: expanded from macro 'bpf_htons'\n   82 |          __bpf_constant_htons(x) : __bpf_htons(x))\n      |          ^~~~~~~~~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:54:34: note: expanded from macro '__bpf_constant_htons'\n   54 | # define __bpf_constant_htons(x)        ___bpf_swab16(x)\n      |                                         ^~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:15:27: note: expanded from macro '___bpf_swab16'\n   15 | #define ___bpf_swab16(x) ((__u16)(                      \\\n      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n   16 |                           ___bpf_mvb(x, 16, 0, 1) |     \\\n      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n   17 |                           ___bpf_mvb(x, 16, 1, 0)))\n      |                           ~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:48:25: warning: implicit conversion from 'unsigned short' to '__u8' (aka 'unsigned char') changes value from 512 to 0 [-Wconstant-conversion]\n   48 |     fib_params.family = bpf_htons(AF_INET);\n      |                       ~ ^~~~~~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:82:29: note: expanded from macro 'bpf_htons'\n   82 |          __bpf_constant_htons(x) : __bpf_htons(x))\n      |                                    ^~~~~~~~~~~~~~\n/usr/include/bpf/bpf_endian.h:52:27: note: expanded from macro '__bpf_htons'\n   52 | # define __bpf_htons(x)                 __builtin_bswap16(x)\n      |                                         ^~~~~~~~~~~~~~~~~~~~\n2 warnings and 1 error generated."
+}
