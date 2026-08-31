@@ -1,0 +1,12 @@
+faulty.c:48:9: error: no member named 's_addr' in 'struct flow_key'; did you mean 'saddr'?
+    key.s_addr = ip->saddr;
+        ^~~~~~
+        saddr
+faulty.c:13:11: note: 'saddr' declared here
+    __u32 saddr;
+          ^
+faulty.c:49:9: error: no member named 'd_addr' in 'struct flow_key'; did you mean 'daddr'?
+    key.d_addr = ip->daddr;
+        ^~~~~~
+        daddr
+2 errors generated.

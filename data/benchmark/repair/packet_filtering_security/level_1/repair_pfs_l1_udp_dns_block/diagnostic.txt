@@ -1,0 +1,8 @@
+faulty.c:28:14: error: no member named 'dest_port' in 'struct udphdr'; did you mean 'dest'?
+    if (udp->dest_port == bpf_htons(53))
+             ^~~~~~~~~
+             dest
+/usr/include/linux/udp.h:23:9: note: 'dest' declared here
+        __be16  dest;
+                ^
+1 error generated.

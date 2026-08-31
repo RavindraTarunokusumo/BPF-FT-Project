@@ -1,0 +1,4 @@
+FAIL: test_case 'set_broadcast_dmac' failed:
+  Expected Ethernet dst MAC: ff:ff:ff:ff:ff:ff, src MAC: 52:54:00:12:34:56
+  Observed Ethernet dst MAC: 00:11:22:33:44:55, src MAC: ff:ff:ff:ff:ff:ff (overwrote source MAC instead of dest MAC)
+1 of 2 test cases failed.

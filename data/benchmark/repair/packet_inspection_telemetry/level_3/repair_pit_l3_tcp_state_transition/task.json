@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l3_tcp_state_transition",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_tcp_fsm_stats",
+  "template_family": "xdp_hash_map_filter",
+  "semantic_signature": "tcp_state_fsm+state_counter_map+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the TCP FSM state transition precedence so receiving a FIN flag transitions the connection to STATE_CLOSED (2) instead of remaining in STATE_ESTABLISHED (1). Return XDP_PASS.",
+  "requirements": [
+    "Check Ethernet, IPv4, and TCP bounds",
+    "On SYN: transition to STATE_SYN_SENT (0)",
+    "On ACK: transition to STATE_ESTABLISHED (1)",
+    "On FIN: transition to STATE_CLOSED (2)",
+    "Update tcp_fsm_map and return XDP_PASS",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: TCP state transition to CLOSED when FIN received was overwritten to ESTABLISHED by subsequent check",
+  "tests": [
+    {
+      "name": "pass_syn",
+      "description": "Transition to SYN_SENT on SYN",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_fin",
+      "description": "Transition to CLOSED on FIN",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011430390050000003e9000000005001ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+FAIL: test_case 'drop_more_fragments' failed:
+  Expected action: XDP_DROP
+  Observed action: XDP_PASS (MF flag in network order 0x0020 did not match raw mask 0x3FFF)
+1 of 6 test cases failed.

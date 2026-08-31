@@ -1,0 +1,7 @@
+faulty.c:54:20: error: call to undeclared function 'bpf_ktime_get_ns'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+        __u64 ts = bpf_ktime_get_ns();
+                   ^
+faulty.c:55:9: error: call to undeclared function 'bpf_map_update_elem'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+        bpf_map_update_elem(&ct_map, &key, &ts, BPF_ANY);
+        ^
+2 errors generated.

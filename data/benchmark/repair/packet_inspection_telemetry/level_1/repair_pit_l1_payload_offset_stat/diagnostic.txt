@@ -1,0 +1,8 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+22: (2d) if r3 >= r1 goto pc+10
+; __u64 plen = (__u64)(long)data_end - (__u64)(long)payload;
+23: (bf) r4 = r1
+24: (1f) r4 -= r3
+processed 25 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

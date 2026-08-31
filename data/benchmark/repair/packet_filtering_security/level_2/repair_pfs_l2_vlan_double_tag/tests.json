@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l2_vlan_double_tag",
+  "test_count": 7,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "drop_qinq_tcp_23",
+      "description": "Drop QinQ double VLAN TCP 23",
+      "packet_hex": "52540012345652540065432188a80064810000c8080045000014123400004006e541c0a8010ac0a8011430390017000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "drop_single_vlan_tcp_23",
+      "description": "Drop single VLAN TCP 23",
+      "packet_hex": "52540012345652540065432181000064080045000014123400004006e541c0a8010ac0a8011430390017000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "drop_untagged_tcp_23",
+      "description": "Drop untagged TCP 23",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390017000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_qinq_tcp_80",
+      "description": "Pass QinQ TCP 80",
+      "packet_hex": "52540012345652540065432188a80064810000c8080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_untagged_tcp_80",
+      "description": "Pass untagged TCP 80",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated frame safely",
+      "packet_hex": "52540012345652540065432188a800648100",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l3_policy_multihop_router",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_policy_routing",
+  "template_family": "xdp_devmap_router",
+  "semantic_signature": "policy_routing_matrix+devmap_redirect",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the missing endian conversion include in the policy routing filter. Route matching source/dest policy flows through devmap interfaces, passing non-matching traffic with XDP_PASS.",
+  "requirements": [
+    "Include <bpf/bpf_endian.h>",
+    "Define policy_devmap DEVMAP with 4 entries",
+    "Match 3-tuple policy (saddr prefix, daddr prefix, protocol)",
+    "Redirect matching policy traffic to devmap slot; return XDP_PASS otherwise",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: undefined identifier 'bpf_htons' due to missing <bpf/bpf_endian.h>",
+  "tests": [
+    {
+      "name": "pass_policy_tcp",
+      "description": "Redirect policy TCP traffic to devmap slot 0",
+      "packet_hex": "52540012345652540065432108004500001412340000400654ae0a0000010a01000130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "pass_policy_udp",
+      "description": "Redirect policy UDP traffic to devmap slot 1",
+      "packet_hex": "52540012345652540065432108004500001412340000401154a30a0000010a0100013039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_REDIRECT"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+FAIL: test_case 'pass_whitelisted_admin_ssh' failed:
+  Expected action: XDP_PASS
+  Observed action: XDP_DROP (allowlisted admin IP 10.0.0.1 was dropped by port 22 rule)
+1 of 6 test cases failed.

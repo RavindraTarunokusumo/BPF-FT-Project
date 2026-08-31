@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l3_vlan_hierarchy_metrics",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_vlan_hierarchy",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "untag_single_double_vlan+packet_byte_stats+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the variable scoping and declaration in the hierarchical VLAN telemetry program. Count packets and bytes across untagged (0), single-tagged (1), double-tagged (2), and other (3) frames.",
+  "requirements": [
+    "Track untagged, single-tagged, and double-tagged VLAN frames",
+    "Update both packet and byte counters in a per-CPU array map",
+    "Ensure bounds are checked across VLAN parsing layers",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: undefined identifier 'eth_proto' caused by variable scoping bug in loop",
+  "tests": [
+    {
+      "name": "pass_untagged",
+      "description": "Count untagged frame in slot 0",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_single_vlan",
+      "description": "Count single VLAN frame in slot 1",
+      "packet_hex": "52540012345652540065432181000064080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_qinq_vlan",
+      "description": "Count QinQ double VLAN in slot 2",
+      "packet_hex": "52540012345652540065432188a80064810000c8080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Count untagged ARP in slot 0",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

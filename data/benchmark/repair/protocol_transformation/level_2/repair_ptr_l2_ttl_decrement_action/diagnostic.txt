@@ -1,0 +1,4 @@
+FAIL: test_case 'drop_ttl_zero' failed:
+  Expected action: XDP_DROP
+  Observed action: XDP_PASS (TTL 0 was decremented to 255 and passed)
+1 of 3 test cases failed.

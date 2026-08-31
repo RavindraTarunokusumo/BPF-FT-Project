@@ -1,0 +1,8 @@
+faulty.c:28:12: error: variable has incomplete type 'struct udphdr'
+    struct udphdr *udp = (void *)ip + ip_len;
+           ^
+faulty.c:28:12: note: forward declaration of 'struct udphdr'
+faulty.c:29:18: error: invalid application of 'sizeof' to an incomplete type 'struct udphdr'
+    if ((void *)(udp + 1) > data_end)
+                 ^~~~~~~
+2 errors generated.

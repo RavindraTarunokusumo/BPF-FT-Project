@@ -1,0 +1,4 @@
+faulty.c:18:25: error: use of undeclared identifier 'IPPROTO_UDP'
+    if (ip->protocol != IPPROTO_UDP)
+                        ^
+1 error generated.

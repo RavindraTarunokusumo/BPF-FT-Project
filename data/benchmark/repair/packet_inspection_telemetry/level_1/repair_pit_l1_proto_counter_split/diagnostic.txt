@@ -1,0 +1,4 @@
+faulty.c:26:18: error: expression is not an integer constant expression
+            case ip_const:
+                 ^~~~~~~~
+1 error generated.

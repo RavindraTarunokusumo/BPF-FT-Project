@@ -1,0 +1,7 @@
+faulty.c:48:49: error: excess elements in scalar initializer
+        struct knock_state new_st = { .stage = {1} };
+                                                ^
+faulty.c:53:53: error: excess elements in scalar initializer
+            struct knock_state new_st = { .stage = {2} };
+                                                    ^
+2 errors generated.

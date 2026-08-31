@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l2_syn_fin_ratio",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_tcp_ratio",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "syn_slot_0_fin_slot_1+ratio_stats+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the slot assignment bug in the TCP SYN/FIN ratio telemetry program. Store SYN packets in slot 0 and FIN packets in slot 1 of syn_fin_stats array map, returning XDP_PASS.",
+  "requirements": [
+    "Check bounds for Ethernet, IP, and TCP headers",
+    "Store TCP SYN in slot 0; store TCP FIN in slot 1",
+    "Do not count other flags (ACK only, RST only, UDP)",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: swapped map slot indices (SYN was stored in slot 1 and FIN in slot 0)",
+  "tests": [
+    {
+      "name": "pass_syn",
+      "description": "Count SYN in slot 0",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_fin",
+      "description": "Count FIN in slot 1",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005001ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ack",
+      "description": "Pass ACK without updating ratio stats",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

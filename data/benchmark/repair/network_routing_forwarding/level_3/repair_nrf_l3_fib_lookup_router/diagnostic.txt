@@ -1,0 +1,5 @@
+faulty.c:23:28: error: variable has incomplete type 'struct bpf_fib_lookup'
+    struct bpf_fib_lookup fib_params = {0};
+                          ^
+faulty.c:23:12: note: forward declaration of 'struct bpf_fib_lookup'
+1 error generated.

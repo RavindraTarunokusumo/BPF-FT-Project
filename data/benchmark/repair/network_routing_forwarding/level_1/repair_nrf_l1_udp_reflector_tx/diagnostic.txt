@@ -1,0 +1,4 @@
+faulty.c:41:12: error: use of undeclared identifier 'XDP_TX'
+    return XDP_TX;
+           ^
+1 error generated.

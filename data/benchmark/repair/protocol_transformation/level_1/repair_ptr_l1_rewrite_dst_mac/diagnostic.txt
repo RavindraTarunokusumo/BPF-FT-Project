@@ -1,0 +1,4 @@
+faulty.c:15:17: error: array type 'unsigned char[6]' is not assignable
+    eth->h_dest = (__u8[6]){0x02, 0x00, 0x00, 0x00, 0x00, 0x99};
+    ~~~~~~~~~~~ ^
+1 error generated.

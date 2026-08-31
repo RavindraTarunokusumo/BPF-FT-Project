@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l1_udp_reflector_tx",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_l2_reflector",
+  "template_family": "xdp_packet_reflector",
+  "semantic_signature": "ipv4+udp+swap_mac_and_tx",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the missing include header in the UDP reflector program. Swap Ethernet source and destination MAC addresses on valid IPv4 UDP packets and transmit them back out on the same interface using XDP_TX; pass other traffic with XDP_PASS.",
+  "requirements": [
+    "Include <linux/bpf.h>",
+    "Check Ethernet, IPv4, and UDP bounds",
+    "Swap Ethernet source and destination MACs for IPv4 UDP packets",
+    "Return XDP_TX for UDP traffic; return XDP_PASS for other traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: undeclared identifier 'XDP_TX' due to missing include <linux/bpf.h>",
+  "tests": [
+    {
+      "name": "tx_udp_reflector",
+      "description": "Reflect UDP packet back out interface",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "pass_tcp",
+      "description": "Pass TCP packet unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

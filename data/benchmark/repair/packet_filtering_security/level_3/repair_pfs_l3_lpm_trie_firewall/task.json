@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l3_lpm_trie_firewall",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_lpm_trie_filter",
+  "template_family": "xdp_lpm_trie_map",
+  "semantic_signature": "ipv4+lpm_trie_lookup+drop_match",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the LPM Trie key struct definition and lookup so the XDP filter queries an LPM Trie blocklist and drops matched source IP addresses while passing unmatched and non-IP traffic.",
+  "requirements": [
+    "Define LPM trie map lpm_blocklist with BPF_F_NO_PREALLOC flag",
+    "Define LPM key struct with prefixlen (__u32) and data (__u32 saddr)",
+    "Set prefixlen = 32 for exact source IP lookup",
+    "Drop if lookup succeeds; return XDP_PASS otherwise",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: missing prefixlen field in struct bpf_lpm_trie_key definition",
+  "tests": [
+    {
+      "name": "pass_unmatched_lpm",
+      "description": "Pass IP not in blocklist",
+      "packet_hex": "525400123456525400654321080045000014123400004006e4f2c0000201c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ip_udp",
+      "description": "Pass UDP traffic",
+      "packet_hex": "5254001234565254006543210800450000141234000040117c8bc633642ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated safely",
+      "packet_hex": "525400123456525400654321080045000014123400004006",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

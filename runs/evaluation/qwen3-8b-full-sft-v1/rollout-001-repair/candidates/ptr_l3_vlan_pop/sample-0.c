@@ -24,15 +24,18 @@ int xdp_transform_ptr_l3_vlan_pop(struct xdp_md *ctx) {
     if ((void *)(eth + 1) > data_end)
         return XDP_PASS;
 
-    __u64 new_data = (void *)eth + 4;
-    if (new_data + sizeof(struct ethhdr) - 1 > (void *)data_end)
+    __u64 new_data = (void *)eth + sizeof(struct ethhdr) - 4;
+    if (new_data < (void *)eth)
         return XDP_PASS;
 
     struct ethhdr *new_eth = (void *)new_data;
     __builtin_memcpy(new_eth, eth, sizeof(struct ethhdr));
     __builtin_memcpy(&new_eth->h_proto, &eth->h_proto, sizeof(eth->h_proto));
-
-    __builtin_memcpy(data, new_data, data_end - new_data);
+    
+    __u64 len = (__u64)data_end - (__u64)eth;
+    if (len >= 4)
+        __builtin_memcpy(new_data, eth + 4, len - 4);
+    
     return XDP_PASS;
 }
 

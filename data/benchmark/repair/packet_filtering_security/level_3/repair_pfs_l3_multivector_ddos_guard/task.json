@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l3_multivector_ddos_guard",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_multi_guard",
+  "template_family": "xdp_stateful_multi_counter",
+  "semantic_signature": "ipv4+multi_vector_guard_drop+stats_map",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the compilation errors in the multi-vector DDoS guard. The filter drops TCP SYN packets to privileged ports (1-1023) and UDP NTP packets (port 123), maintaining separate drop counters in an array map.",
+  "requirements": [
+    "Define enum drop_reason with DROP_SYN_PRIV=0, DROP_UDP_NTP=1, DROP_MALFORMED=2",
+    "Define drop_stats array map with 4 entries",
+    "Increment drop counter corresponding to the match reason",
+    "Return XDP_DROP on match, XDP_PASS on normal traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: enum constant redeclaration and missing array bounds check in stats map update",
+  "tests": [
+    {
+      "name": "drop_syn_port_22",
+      "description": "Drop TCP SYN on privileged port 22",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390016000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "drop_udp_ntp_123",
+      "description": "Drop UDP NTP port 123",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039007b00130000444e535f5041594c4f4144",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_tcp_ack_80",
+      "description": "Pass TCP ACK on port 80",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp_dns_53",
+      "description": "Pass UDP DNS port 53",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "drop_trunc",
+      "description": "Drop malformed truncated packet",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541",
+      "expected_action": "XDP_DROP"
+    }
+  ]
+}

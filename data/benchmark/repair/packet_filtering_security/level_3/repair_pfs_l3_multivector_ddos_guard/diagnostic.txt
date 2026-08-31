@@ -1,0 +1,7 @@
+faulty.c:15:5: error: redeclaration of enumerator 'DROP_SYN_PRIV'
+    DROP_SYN_PRIV = 3,
+    ^
+faulty.c:12:5: note: previous definition is here
+    DROP_SYN_PRIV = 0,
+    ^
+1 error generated.

@@ -1,0 +1,4 @@
+FAIL: test_case 'unmapped_destination_aborted' failed:
+  Expected action: XDP_ABORTED
+  Observed action: XDP_PASS (strict router leaked unrouted frame to local stack)
+1 of 2 test cases failed.

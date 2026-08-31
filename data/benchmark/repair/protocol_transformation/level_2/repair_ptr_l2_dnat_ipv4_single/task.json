@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l2_dnat_ipv4_single",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_dnat",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "dnat_to_203_0_113_9+csum_update+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the missing include header and rewrite IPv4 destination address to 203.0.113.9 (0xCB007109) with accurate checksum recalculation, returning XDP_PASS.",
+  "requirements": [
+    "Include <linux/in.h>",
+    "Check Ethernet and IPv4 bounds",
+    "Rewrite ip->daddr to 203.0.113.9 (bpf_htonl(0xCB007109))",
+    "Update IPv4 header checksum correctly",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: undeclared identifier 'IPPROTO_IP' due to missing include <linux/in.h>",
+  "tests": [
+    {
+      "name": "pass_dnat_tcp",
+      "description": "DNAT destination IP to 203.0.113.9",
+      "packet_hex": "5254001234565254006543210800450000141234000040067cc9c0a8010ac633640130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l3_flow_session_lifecycle",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_flow_lifecycle",
+  "template_family": "xdp_hash_map_filter",
+  "semantic_signature": "flow_lifecycle_record+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the kernel verifier stack limit error by reducing local structure sizes on the stack. Track flow session lifecycle state in a BPF hash map, returning XDP_PASS.",
+  "requirements": [
+    "Keep stack frame allocation under 512 bytes",
+    "Track 5-tuple flow in flow_lifecycle hash map",
+    "Record start timestamp, end timestamp, packet count, and byte count",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: stack frame limit of 512 bytes exceeded by large local struct on stack",
+  "tests": [
+    {
+      "name": "pass_tcp",
+      "description": "Track TCP flow lifecycle",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011404d20050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp",
+      "description": "Track UDP flow lifecycle",
+      "packet_hex": "5254001234565254006543210800450000141234000040119ce70a000002c0a8011404d2003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

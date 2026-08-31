@@ -1,0 +1,4 @@
+faulty.c:17:16: error: arithmetic on a pointer to void is a GNU extension [-Werror,-Wpointer-arith]
+    if (ip_raw + sizeof(struct iphdr) > data_end)
+        ~~~~~~ ^
+1 error generated.

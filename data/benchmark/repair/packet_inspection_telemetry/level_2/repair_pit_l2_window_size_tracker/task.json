@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l2_window_size_tracker",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_tcp_window_stats",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "tcp_window_scale+stats_map+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection by masking or clamping the TCP window histogram bucket index (0..7). Track TCP advertised window size in an 8-bucket array map and return XDP_PASS.",
+  "requirements": [
+    "Check bounds for Ethernet, IP, and TCP headers",
+    "Extract TCP window size: bpf_ntohs(tcp->window)",
+    "Calculate bucket index: (window >> 13) & 7",
+    "Record observation in 8-entry per-CPU array map",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: array index for TCP window bucket not statically bounded",
+  "tests": [
+    {
+      "name": "pass_tcp_max_win",
+      "description": "Count TCP max window in bucket 7",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp",
+      "description": "Pass UDP traffic",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

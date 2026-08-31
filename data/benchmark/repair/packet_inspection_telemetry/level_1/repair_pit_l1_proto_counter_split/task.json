@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l1_proto_counter_split",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_proto_stats",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "eth_proto+percpu_split_counter+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the switch statement compilation error in the protocol telemetry program. Count IPv4 frames in slot 0, IPv6 frames in slot 1, and other frames in slot 2 of a per-CPU array map, then return XDP_PASS.",
+  "requirements": [
+    "Check Ethernet header bounds",
+    "Count ETH_P_IP (0x0800) in slot 0",
+    "Count ETH_P_IPV6 (0x86DD) in slot 1",
+    "Count non-IP / malformed frames in slot 2",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: variable used in switch case expression instead of integer constant",
+  "tests": [
+    {
+      "name": "pass_ipv4",
+      "description": "Count IPv4 packet in slot 0",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ipv6",
+      "description": "Count IPv6 packet in slot 1",
+      "packet_hex": "52540012345652540065432186dd60000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Count ARP frame in slot 2",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Count truncated frame in slot 2",
+      "packet_hex": "52540012345652540065",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+16: (85) call bpf_xdp_adjust_head#44
+R2 variable offset adjust_head prohibited
+processed 17 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

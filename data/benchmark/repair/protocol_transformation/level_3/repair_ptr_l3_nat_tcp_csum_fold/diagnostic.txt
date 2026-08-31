@@ -1,0 +1,4 @@
+FAIL: test_case 'verify_tcp_csum' failed:
+  Expected TCP checksum: 0x34C8
+  Observed TCP checksum: 0x9B37 (inverted delta sign applied to pseudo-header sum)
+1 of 2 test cases failed.

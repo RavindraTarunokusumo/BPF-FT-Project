@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l2_ttl_distribution",
+  "test_count": 4,
+  "validator": {
+    "type": "map_state"
+  },
+  "tests": [
+    {
+      "name": "pass_ttl_32",
+      "description": "Count TTL 32 in slot 32",
+      "packet_hex": "5254001234565254006543210800450000141234000020060542c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ttl_64",
+      "description": "Count TTL 64 in slot 64",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ttl_128",
+      "description": "Count TTL 128 in slot 128",
+      "packet_hex": "525400123456525400654321080045000014123400008006a541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

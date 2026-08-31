@@ -1,0 +1,4 @@
+FAIL: test_case 'pass_172_17_1_1' failed:
+  Expected action: XDP_PASS
+  Observed action: XDP_DROP (172.17.1.1 was incorrectly dropped by /8 subnet mask)
+1 of 6 test cases failed.

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l3_ecmp_weight_distribution",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_ecmp_balancer",
+  "template_family": "xdp_devmap_balancer",
+  "semantic_signature": "ecmp_2backend_balanced_redirect+redirect",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the modulo backend selection in the 2-way ECMP load balancer so flows are uniformly distributed between backends 0 and 1 (hash & 1). Redirect via ecmp_devmap.",
+  "requirements": [
+    "Define ecmp_devmap DEVMAP with 2 entries",
+    "Compute 5-tuple hash and select backend using (hash & 1)",
+    "Redirect via bpf_redirect_map(&ecmp_devmap, slot, 0)",
+    "Return XDP_PASS for non-TCP traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: modulo calculation (hash % 3) produced out-of-range backend slot 2 when only 2 backends (slots 0 and 1) were configured",
+  "tests": [
+    {
+      "name": "pass_ecmp_flow1",
+      "description": "Redirect flow 1 through 2-entry ECMP devmap",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011413880050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "pass_ecmp_flow2",
+      "description": "Redirect flow 2 through 2-entry ECMP devmap",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf20a000002c0a8011413890050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT"
+    }
+  ]
+}

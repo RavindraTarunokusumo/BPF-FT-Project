@@ -1,0 +1,5 @@
+faulty.c:26:12: error: variable has incomplete type 'struct udphdr'
+    struct udphdr *udp = (void *)ip + ip_len;
+           ^
+faulty.c:26:12: note: forward declaration of 'struct udphdr'
+1 error generated.

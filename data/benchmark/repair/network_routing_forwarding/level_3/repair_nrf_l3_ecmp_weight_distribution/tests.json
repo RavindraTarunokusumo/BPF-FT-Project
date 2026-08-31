@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l3_ecmp_weight_distribution",
+  "test_count": 2,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "pass_ecmp_flow1",
+      "description": "Redirect flow 1 through 2-entry ECMP devmap",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011413880050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "pass_ecmp_flow2",
+      "description": "Redirect flow 2 through 2-entry ECMP devmap",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf20a000002c0a8011413890050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT"
+    }
+  ]
+}

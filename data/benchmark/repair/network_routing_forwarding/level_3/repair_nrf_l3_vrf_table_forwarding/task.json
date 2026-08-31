@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l3_vrf_table_forwarding",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_vrf_routing",
+  "template_family": "xdp_map_redirect",
+  "semantic_signature": "vrf_id_and_dst_ip_routing+redirect",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the VRF routing key struct definition. Match the compound key (VRF ID from ingress interface + destination IP) in vrf_routes and redirect to the returned interface, returning XDP_PASS on miss.",
+  "requirements": [
+    "Define struct vrf_key with vrf_id (__u32) and dst_ip (__u32)",
+    "Define vrf_routes hash map",
+    "Lookup (ingress_ifindex, ip->daddr) in vrf_routes",
+    "Redirect if route found; return XDP_PASS otherwise",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: struct vrf_key definition missing vrf_id field causing member access failure",
+  "tests": [
+    {
+      "name": "pass_unmatched_vrf1",
+      "description": "Pass unmapped VRF 1 destination with XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000141234000040069c050a010101c0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_unmatched_vrf2",
+      "description": "Pass unmapped VRF 2 destination with XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000141234000040069b030a020202c0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

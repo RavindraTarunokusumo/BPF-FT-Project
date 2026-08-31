@@ -1,0 +1,4 @@
+FAIL: test_case 'verify_folded_checksum' failed:
+  Expected IPv4 checksum: 0xE4DE
+  Observed IPv4 checksum: 0xE4DC (carry bits were truncated instead of folded)
+1 of 2 test cases failed.

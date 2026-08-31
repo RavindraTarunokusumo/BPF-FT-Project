@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l3_dynamic_port_knocking",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_port_knocking",
+  "template_family": "xdp_hash_map_filter",
+  "semantic_signature": "ipv4+port_knock_sequence+dynamic_allow",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the struct definition and state machine logic for port knocking. Target port 22 is dropped unless the client IP has completed knock sequence port 1111 followed by 2222.",
+  "requirements": [
+    "Define knock_map hash map keyed by __u32 src IP storing __u32 knock_stage",
+    "Stage 0 -> if dst port 1111, advance to stage 1",
+    "Stage 1 -> if dst port 2222, advance to stage 2",
+    "If dst port 22 and stage == 2, return XDP_PASS; if dst port 22 and stage != 2, return XDP_DROP",
+    "Pass all non-port-22 packets",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: struct knock_state initialization exceeds declared field width",
+  "tests": [
+    {
+      "name": "pass_knock_stage1",
+      "description": "Pass initial knock port 1111",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cef0a000005c0a8011430390457000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_knock_stage2",
+      "description": "Pass second knock port 2222",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cef0a000005c0a80114303908ae000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "drop_unknocked_port_22",
+      "description": "Drop SSH port 22 for unknocked host",
+      "packet_hex": "5254001234565254006543210800450000141234000040069ceb0a000009c0a8011430390016000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_web_traffic",
+      "description": "Pass standard port 80 web traffic",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cef0a000005c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated header safely",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

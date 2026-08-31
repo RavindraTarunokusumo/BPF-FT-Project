@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l1_broadcast_forward",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_broadcast_forward",
+  "template_family": "xdp_direct_redirect",
+  "semantic_signature": "bcast_redirect_ifindex_5+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the broadcast MAC check in the forwarding program. Check that all 6 bytes of eth->h_dest are 0xFF, redirect broadcast frames to interface index 5, and pass unicast frames with XDP_PASS.",
+  "requirements": [
+    "Check Ethernet header bounds",
+    "Verify if destination MAC is broadcast (FF:FF:FF:FF:FF:FF)",
+    "Redirect broadcast frames with bpf_redirect(5, 0)",
+    "Pass unicast frames with XDP_PASS",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: prohibited comparison between pointer eth->h_dest and scalar integer 0",
+  "tests": [
+    {
+      "name": "pass_redirect_bcast",
+      "description": "Redirect broadcast frame to ifindex 5",
+      "packet_hex": "ffffffffffff52540065432108000001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "pass_unicast",
+      "description": "Pass unicast frame with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

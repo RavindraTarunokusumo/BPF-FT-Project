@@ -1,0 +1,10 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+4: (85) call bpf_ringbuf_reserve#131
+5: R0=mem_or_null(id=1,ref_obj_id=1,off=0,r=0,size=16)
+; evt->ts = bpf_ktime_get_ns();
+6: (85) call bpf_ktime_get_ns#5
+7: (7b) *(u64 *)(r0 +0) = r0
+R0 invalid mem access 'mem_or_null'
+processed 8 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

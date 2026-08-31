@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l3_vrf_table_forwarding",
+  "test_count": 2,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "pass_unmatched_vrf1",
+      "description": "Pass unmapped VRF 1 destination with XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000141234000040069c050a010101c0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_unmatched_vrf2",
+      "description": "Pass unmapped VRF 2 destination with XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000141234000040069b030a020202c0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

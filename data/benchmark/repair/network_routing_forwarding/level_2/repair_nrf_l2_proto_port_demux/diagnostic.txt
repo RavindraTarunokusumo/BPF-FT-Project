@@ -1,0 +1,4 @@
+FAIL: test_case 'demux_tcp_to_if2' failed:
+  Expected redirect to ifindex 2
+  Observed redirect to ifindex 3 (protocol demux interface mismatch)
+1 of 3 test cases failed.

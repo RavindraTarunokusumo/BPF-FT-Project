@@ -1,0 +1,4 @@
+faulty.c:20:39: error: use of undeclared identifier 'ETH_P_IP'
+        if (eth->h_proto == bpf_htons(ETH_P_IP))
+                                      ^
+1 error generated.

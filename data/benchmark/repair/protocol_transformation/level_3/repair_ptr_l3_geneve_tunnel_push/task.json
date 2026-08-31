@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l3_geneve_tunnel_push",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_geneve_encap",
+  "template_family": "xdp_head_adjust",
+  "semantic_signature": "geneve_encap_push+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the stack memory limit error in the GENEVE tunnel encapsulation program. Push 50 bytes of outer headers (Ethernet + IPv4 + UDP 6081 + GENEVE) using bpf_xdp_adjust_head(ctx, -50), and return XDP_PASS.",
+  "requirements": [
+    "Keep stack frame under 512 bytes",
+    "Expand header by 50 bytes using bpf_xdp_adjust_head",
+    "Write outer Ethernet, IPv4, UDP (dst port 6081), and GENEVE header",
+    "Return XDP_PASS",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: stack frame limit exceeded by declaring large local buffer for tunnel encapsulation",
+  "tests": [
+    {
+      "name": "pass_geneve_encap",
+      "description": "Push GENEVE tunnel encapsulation",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

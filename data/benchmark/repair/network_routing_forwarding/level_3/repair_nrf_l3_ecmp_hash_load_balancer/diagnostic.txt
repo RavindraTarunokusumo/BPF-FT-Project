@@ -1,0 +1,4 @@
+faulty.c:40:18: error: call to undeclared function 'bpf_jhash'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    __u32 slot = bpf_jhash(ip->saddr, ip->daddr, tcp->source);
+                 ^
+1 error generated.

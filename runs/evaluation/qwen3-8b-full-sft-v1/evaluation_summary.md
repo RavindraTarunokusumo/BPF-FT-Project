@@ -8,6 +8,8 @@
 | Clang BPF Compilation | N/A | - | 69.4% | - |
 | Kernel Verifier Load | N/A | - | 61.1% | - |
 | Behavioral Pass | N/A | - | 55.6% | - |
+| Repair@1 Recovery | 9.1% (3/33) | - | 100.0% (16/16) | - |
+| Post-Repair Total Pass | 16.7% (6/36) | - | **100.0%** (36/36) | **+83.3%** |
 
 ## SFT Category Breakdown (Pass@1)
 | Category | Tasks | Passed | Pass Rate |

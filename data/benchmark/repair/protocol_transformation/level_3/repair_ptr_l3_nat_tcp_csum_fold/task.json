@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l3_nat_tcp_csum_fold",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_tcp_csum_fold",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "tcp_pseudo_header_csum_repair+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the pseudo-header checksum differential calculation when rewriting the destination IP to 10.10.10.10 so that the TCP checksum is correctly updated.",
+  "requirements": [
+    "Check Ethernet, IPv4, and TCP bounds",
+    "Rewrite ip->daddr to 10.10.10.10",
+    "Apply accurate 1's complement delta to both ip->check and tcp->check",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: TCP checksum delta used addition instead of subtraction for old IP addresses, corrupting TCP pseudo-header checksum",
+  "tests": [
+    {
+      "name": "pass_tcp_dnat",
+      "description": "DNAT destination IP and update TCP pseudo-checksum",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

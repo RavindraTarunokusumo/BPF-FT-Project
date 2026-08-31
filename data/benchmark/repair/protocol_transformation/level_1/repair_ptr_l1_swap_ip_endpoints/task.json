@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l1_swap_ip_endpoints",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_ip_swap",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "swap_ip_src_dst+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection by checking that the IPv4 header is completely within packet bounds before swapping source and destination IP addresses. Return XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Swap ip->saddr and ip->daddr",
+    "IPv4 header checksum is invariant under endpoint swap (sum of addresses is identical)",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: packet write past data boundary due to missing ip bounds check",
+  "tests": [
+    {
+      "name": "pass_swap_tcp",
+      "description": "Swap IP endpoints on TCP packet",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_swap_udp",
+      "description": "Swap IP endpoints on UDP packet",
+      "packet_hex": "52540012345652540065432108004500001412340000400654ae0a0000010a0000023039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

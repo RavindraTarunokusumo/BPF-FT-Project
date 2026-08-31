@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l3_tcp_mss_clamping",
+  "test_count": 3,
+  "validator": {
+    "type": "packet_bytes"
+  },
+  "tests": [
+    {
+      "name": "pass_clamp_mss",
+      "description": "Clamp MSS 1460 down to 1220 and update checksum",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000006002ffff0000000000000000020405b4",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_keep_mss",
+      "description": "Keep smaller MSS 1024 unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000006002ffff000000000000000002040400",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ack",
+      "description": "Pass ACK traffic unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

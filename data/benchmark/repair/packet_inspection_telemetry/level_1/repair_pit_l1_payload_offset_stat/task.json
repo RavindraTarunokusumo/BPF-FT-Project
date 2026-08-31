@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l1_payload_offset_stat",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_payload_stats",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "udp_payload_len+telemetry+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection when inspecting UDP payload length. Safely parse Ethernet, IPv4, and UDP headers, and update UDP payload telemetry counter in a per-CPU map.",
+  "requirements": [
+    "Verify Ethernet, IPv4, and UDP header bounds",
+    "Ensure UDP payload offset is checked against data_end",
+    "Accumulate UDP payload bytes in per-CPU map",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: accessing UDP payload without checking (payload + payload_len <= data_end)",
+  "tests": [
+    {
+      "name": "pass_udp_payload",
+      "description": "Track UDP payload bytes",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a8011430390035000d000048454c4c4f",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_tcp",
+      "description": "Pass TCP packet without updating UDP stats",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

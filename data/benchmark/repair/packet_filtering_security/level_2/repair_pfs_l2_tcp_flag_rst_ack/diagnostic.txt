@@ -1,0 +1,4 @@
+faulty.c:29:19: error: cannot assign to bit-field in struct tcphdr
+    if ((tcp->rst = 1) && tcp->ack)
+         ~~~~~~~~ ^ ~
+1 error generated.

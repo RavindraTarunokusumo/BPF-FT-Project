@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l2_packet_rate_decay",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_rate_telemetry",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "time_delta_shift+exponential_decay_stats+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the unsupported variable division in the exponential moving rate telemetry filter by replacing the 64-bit division with a bit-shift approximation (e.g. delta >> 30). Return XDP_PASS.",
+  "requirements": [
+    "Retrieve time from bpf_ktime_get_ns()",
+    "Replace variable division with right bit-shift for decay calculation",
+    "Update rate decay accumulator in per-CPU map",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: unsupported 64-bit integer division by non-constant variable in BPF instruction stream",
+  "tests": [
+    {
+      "name": "pass_tcp",
+      "description": "Update rate stats for TCP",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp",
+      "description": "Update rate stats for UDP",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Update rate stats for ARP",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

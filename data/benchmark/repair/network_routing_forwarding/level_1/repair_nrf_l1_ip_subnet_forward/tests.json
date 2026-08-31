@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l1_ip_subnet_forward",
+  "test_count": 3,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "pass_redirect_10_net",
+      "description": "Redirect 10.0.0.0/8 traffic to ifindex 3",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf9c0a8010a0a00000530390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "pass_outside_subnet",
+      "description": "Pass 192.168.1.1 traffic with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000014123400004006e554c0a8010ac0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

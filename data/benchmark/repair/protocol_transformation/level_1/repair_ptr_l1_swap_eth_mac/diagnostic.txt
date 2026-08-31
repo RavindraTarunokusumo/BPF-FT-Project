@@ -1,0 +1,10 @@
+faulty.c:16:9: error: array type '__u8[6]' is not assignable
+    tmp = eth->h_dest;
+    ~~~ ^
+faulty.c:17:17: error: array type 'unsigned char[6]' is not assignable
+    eth->h_dest = eth->h_source;
+    ~~~~~~~~~~~ ^
+faulty.c:18:19: error: array type 'unsigned char[6]' is not assignable
+    eth->h_source = tmp;
+    ~~~~~~~~~~~~~ ^
+3 errors generated.

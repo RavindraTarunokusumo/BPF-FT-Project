@@ -1,0 +1,8 @@
+faulty.c:8:12: error: variable has incomplete type 'struct ethhdr'
+    struct ethhdr *eth = data;
+           ^
+faulty.c:8:12: note: forward declaration of 'struct ethhdr'
+faulty.c:12:18: error: use of undeclared identifier 'ETH_ALEN'
+    __u8 new_src[ETH_ALEN] = {0x02, 0x00, 0x00, 0x00, 0x00, 0x42};
+                 ^
+2 errors generated.

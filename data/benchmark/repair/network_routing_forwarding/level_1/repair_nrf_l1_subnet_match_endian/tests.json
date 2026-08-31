@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l1_subnet_match_endian",
+  "test_count": 2,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "tx_172_16_match",
+      "description": "Reflect 172.16.0.0/16 traffic with XDP_TX",
+      "packet_hex": "525400123456525400654321080045000014123400004006f0e8c0a8010aac100a0530390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "pass_other_ip",
+      "description": "Pass other IP traffic with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000014123400004006e554c0a8010ac0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

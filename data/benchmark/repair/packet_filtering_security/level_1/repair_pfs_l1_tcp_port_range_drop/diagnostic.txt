@@ -1,0 +1,9 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+; struct tcphdr *tcp = (void *)ip + ip_len;
+...
+18: (2d) if r3 >= r1 goto pc+8
+; __u16 dport = bpf_ntohs(tcp->dest);
+19: (69) r4 = *(u16 *)(r3 +2)
+invalid access to packet, id=0, off=36, size=2, R3_w=pkt(off=34,r=34,imm=0)
+processed 20 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0
+-- END PROG LOAD LOG --

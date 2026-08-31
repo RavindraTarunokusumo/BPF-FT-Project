@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l3_icmp_echo_to_reply",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_icmp_reply_gen",
+  "template_family": "xdp_packet_reflector",
+  "semantic_signature": "icmp_echo_req_to_reply_and_tx+tx",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the missing ICMP header include. Convert an IPv4 ICMP Echo Request (type 8) into an ICMP Echo Reply (type 0) by swapping Ethernet and IP endpoints, updating the ICMP type and checksum, and transmitting with XDP_TX.",
+  "requirements": [
+    "Include <linux/icmp.h>",
+    "Check Ethernet, IPv4, and ICMP bounds",
+    "Verify icmp->type == 8 (Echo Request)",
+    "Swap Ethernet source/destination MAC addresses",
+    "Swap IPv4 source/destination IP addresses",
+    "Set icmp->type = 0 (Echo Reply) and update ICMP checksum (csum += 0x0800)",
+    "Return XDP_TX for ICMP Echo, XDP_PASS for other traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: variable has incomplete type 'struct icmphdr' due to missing <linux/icmp.h>",
+  "tests": [
+    {
+      "name": "tx_icmp_reply",
+      "description": "Convert ICMP echo request to reply and reflect TX",
+      "packet_hex": "525400123456525400654321080045000014123400004001e546c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "pass_tcp",
+      "description": "Pass TCP packet unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

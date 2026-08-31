@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l1_set_vlan_prio",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_vlan_rewrite",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "vlan_prio_set_highest_7+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the VLAN priority update in the XDP transformation program to set 802.1p priority to 7 (highest priority) in the VLAN tag TCI (top 3 bits of h_vlan_TCI) while preserving VID and CFI.",
+  "requirements": [
+    "Check Ethernet and VLAN header bounds",
+    "Verify eth->h_proto is ETH_P_8021Q",
+    "Set top 3 bits of h_vlan_TCI to 7: (tci & 0x1FFF) | (7 << 13)",
+    "Preserve payload and return XDP_PASS",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: member access into struct vlan_hdr with non-existent field 'prio'",
+  "tests": [
+    {
+      "name": "pass_set_prio_vlan",
+      "description": "Set 802.1p priority to 7 on VLAN tag",
+      "packet_hex": "52540012345652540065432181000064080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Pass untagged frame unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated VLAN header safely",
+      "packet_hex": "5254001234565254006543218100",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

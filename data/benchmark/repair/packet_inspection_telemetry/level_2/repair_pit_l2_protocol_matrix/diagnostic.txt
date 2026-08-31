@@ -1,0 +1,4 @@
+faulty.c:10:11: error: field 'counters' has incomplete type '__u64[]' (aka 'unsigned long long[]')
+    __u64 counters[];
+          ^
+1 error generated.

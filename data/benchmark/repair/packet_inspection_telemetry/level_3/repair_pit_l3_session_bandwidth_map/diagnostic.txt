@@ -1,0 +1,7 @@
+faulty.c:75:49: error: passing 'struct session_val' to parameter of type 'const void *' [-Werror,-Wint-conversion]
+        bpf_map_update_elem(&session_map, &key, init, BPF_ANY);
+                                                ^~~~
+/usr/include/bpf/bpf_helper_defs.h:42:61: note: passing argument to parameter 'value' here
+long (*bpf_map_update_elem)(void *map, const void *key, const void *value, __u64 flags) = (void *) 2;
+                                                            ^
+1 error generated.

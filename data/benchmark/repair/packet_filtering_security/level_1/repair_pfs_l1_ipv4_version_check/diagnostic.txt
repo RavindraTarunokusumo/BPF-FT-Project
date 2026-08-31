@@ -1,0 +1,14 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+; void *data = (void *)(long)ctx->data;
+1: (61) r2 = *(u32 *)(r1 +0)
+; void *data_end = (void *)(long)ctx->data_end;
+2: (61) r1 = *(u32 *)(r1 +4)
+; if ((void *)(eth + 1) > data_end)
+3: r3 = r2
+4: (07) r3 += 14
+5: (2d) if r3 > r1 goto pc+9
+; if (ip->saddr == bpf_htonl(0x0A000063))
+6: (61) r4 = *(u32 *)(r2 +26)
+invalid access to packet, id=0, off=26, size=4, R2_w=pkt(off=0,r=14,imm=0)
+processed 7 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

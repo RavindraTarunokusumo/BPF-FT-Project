@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l1_ipv4_version_check",
+  "test_count": 5,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "drop_10_0_0_99",
+      "description": "Drop IPv4 source 10.0.0.99",
+      "packet_hex": "5254001234565254006543210800450000141234000040069c910a000063c0a80114",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_192_168_1_10",
+      "description": "Pass IPv4 source 192.168.1.10",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_10_0_0_1",
+      "description": "Pass IPv4 source 10.0.0.1",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated IPv4 header safely",
+      "packet_hex": "52540012345652540065432108004500",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

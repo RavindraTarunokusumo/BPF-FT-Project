@@ -1,0 +1,5 @@
+faulty.c:10:17: error: variable has incomplete type 'struct lpm_key'
+    __type(key, struct lpm_key);
+                ^
+faulty.c:10:17: note: forward declaration of 'struct lpm_key'
+1 error generated.

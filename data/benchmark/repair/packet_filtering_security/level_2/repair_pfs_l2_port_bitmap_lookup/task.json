@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l2_port_bitmap_lookup",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_bitmap_filter",
+  "template_family": "xdp_array_map_filter",
+  "semantic_signature": "ipv4+port_bitmap_check+drop_if_set",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection by masking/bounding the port index when querying the port bitmap array map. Drop TCP ports whose bit in the bitmap is set.",
+  "requirements": [
+    "Define port_bitmap array map with 2048 __u32 entries (65536 bits total)",
+    "Safely compute word index (port / 32) and bit offset (port % 32)",
+    "Ensure word index < 2048 before map lookup / access",
+    "If bit is set (1), return XDP_DROP; otherwise XDP_PASS",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: array index arithmetic on map value buffer not bounded within value size",
+  "tests": [
+    {
+      "name": "pass_default_bitmap",
+      "description": "Pass when port not set in bitmap",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_port_22",
+      "description": "Pass port 22",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390016000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp",
+      "description": "Pass UDP port 22",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039001600130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_high_port",
+      "description": "Pass high TCP port 65000",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a801143039fde8000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_icmp",
+      "description": "Pass ICMP",
+      "packet_hex": "525400123456525400654321080045000014123400004001e546c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated header safely",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

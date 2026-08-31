@@ -1,0 +1,7 @@
+FAIL: test_case 'drop_tcp_syn_80' failed:
+  Expected action: XDP_DROP
+  Observed action: XDP_PASS
+FAIL: test_case 'pass_tcp_ack_80' failed:
+  Expected action: XDP_PASS
+  Observed action: XDP_DROP
+2 of 5 test cases failed.

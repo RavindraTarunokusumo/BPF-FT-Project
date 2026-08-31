@@ -1,0 +1,9 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+; struct icmphdr *icmp = (void *)(ip + 1);
+...
+10: (2d) if r2 == 0x0 goto pc+4
+; if (icmp->type == 13)
+11: (71) r1 = *(u8 *)(r3 +34)
+invalid access to packet, id=0, off=34, size=1, R3_w=pkt(off=0,r=34,imm=0)
+processed 12 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

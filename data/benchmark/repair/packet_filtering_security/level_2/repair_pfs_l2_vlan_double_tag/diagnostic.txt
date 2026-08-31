@@ -1,0 +1,11 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+12: (2d) if r4 > r1 goto pc+20
+13: (69) r3 = *(u16 *)(r2 +2)
+14: (dc) r3 = be16 r3
+15: (07) r2 += 4
+; while (eth_proto == ETH_P_8021Q || eth_proto == 0x88A8)
+16: (55) if r3 == 0x8100 goto pc-8
+back-edge from insn 16 to 8
+processed 17 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

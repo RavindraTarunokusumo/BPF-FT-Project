@@ -1,0 +1,4 @@
+faulty.c:29:33: error: passing 'struct <anonymous at faulty.c:8:1>' to parameter of type 'void *' [-Werror]
+        return bpf_redirect_map(proto_devmap, 0, 0);
+                                ^~~~~~~~~~~~
+1 error generated.

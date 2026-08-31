@@ -1,0 +1,14 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+24: (69) r1 = *(u16 *)(r3 +14)
+25: (dc) r1 = be16 r1
+26: (74) r1 >>= 12
+27: (63) *(u32 *)(r10 -4) = r1
+; __u64 *cnt = bpf_map_lookup_elem(&win_stats, &bucket);
+28: (bf) r2 = r10
+29: (07) r2 += -4
+30: (18) r1 = 0xffff8880042a4000
+32: (85) call bpf_map_lookup_elem#1
+R2 invalid map access into array map, key out of range
+processed 33 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

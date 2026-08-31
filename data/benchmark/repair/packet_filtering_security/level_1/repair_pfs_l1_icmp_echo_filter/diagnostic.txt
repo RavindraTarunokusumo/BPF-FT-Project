@@ -1,0 +1,4 @@
+faulty.c:28:20: error: comparison between pointer and integer ('__u8' (aka 'unsigned char') and 'char *')
+    if (icmp->type == "8")
+        ~~~~~~~~~~ ^  ~~~
+1 error generated.

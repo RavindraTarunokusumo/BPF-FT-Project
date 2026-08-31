@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l2_rate_limit_map",
+  "test_count": 7,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "pass_untracked_src",
+      "description": "Pass untracked source IP",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_other_src",
+      "description": "Pass second source IP",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf20a000002c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ack",
+      "description": "Pass TCP ACK",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp",
+      "description": "Pass UDP traffic",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_icmp",
+      "description": "Pass ICMP traffic",
+      "packet_hex": "525400123456525400654321080045000014123400004001e546c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated header safely",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

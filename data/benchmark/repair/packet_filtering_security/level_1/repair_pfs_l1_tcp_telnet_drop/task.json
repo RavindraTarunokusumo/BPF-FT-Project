@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l1_tcp_telnet_drop",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_port_filter",
+  "template_family": "xdp_stateless_filter",
+  "semantic_signature": "ipv4+tcp_dport_23+drop",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the XDP program to compile and drop IPv4 TCP packets destined to Telnet port 23, while passing all other traffic (other TCP ports, UDP, ICMP, non-IPv4, and malformed packets).",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify Ethernet protocol is ETH_P_IP (0x0800)",
+    "Verify IP protocol is IPPROTO_TCP",
+    "Parse variable IHL (ip->ihl * 4) safely",
+    "Include required headers <linux/tcp.h>",
+    "Drop packets with TCP dport 23; return XDP_PASS for other packets",
+    "GPL license and SEC(\"xdp\") entry point"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Missing include header <linux/tcp.h>, resulting in unknown type name 'struct tcphdr'",
+  "tests": [
+    {
+      "name": "drop_tcp_23",
+      "description": "Drop IPv4 TCP dport 23",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390017000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_tcp_80",
+      "description": "Pass IPv4 TCP dport 80",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp_23",
+      "description": "Pass IPv4 UDP dport 23",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039001700130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP non-IP packet",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_truncated",
+      "description": "Pass truncated IPv4 safely",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

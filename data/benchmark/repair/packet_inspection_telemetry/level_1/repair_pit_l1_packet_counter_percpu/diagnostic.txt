@@ -1,0 +1,7 @@
+faulty.c:9:16: error: expected ';' after struct
+} packet_count SEC(".maps");
+               ^
+faulty.c:11:1: error: expected identifier or '('
+SEC("xdp")
+^
+2 errors generated.

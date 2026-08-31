@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l2_ttl_decrement_action",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_ttl_policy",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "ttl_underflow_guard+drop_or_pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the TTL expiration logic in the transformation filter. Drop packets with incoming TTL <= 1 (XDP_DROP), decrement TTL for TTL > 1, update the IPv4 checksum, and return XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "If ip->ttl <= 1, return XDP_DROP",
+    "If ip->ttl > 1, decrement ip->ttl and update checksum",
+    "Return XDP_PASS for valid routed packets",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: decremented TTL when TTL == 0, underflowing to 255 and passing expired packets",
+  "tests": [
+    {
+      "name": "pass_ttl_64",
+      "description": "Decrement TTL from 64 to 63",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "drop_ttl_1",
+      "description": "Drop packet with TTL == 1",
+      "packet_hex": "5254001234565254006543210800450000141234000001062442c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "drop_ttl_0",
+      "description": "Drop packet with TTL == 0",
+      "packet_hex": "5254001234565254006543210800450000141234000000062542c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    }
+  ]
+}

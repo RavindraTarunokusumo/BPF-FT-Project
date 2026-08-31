@@ -56,5 +56,11 @@
     }
   },
   "base_synthesis": null,
-  "sft_repair": null
+  "sft_repair": {
+    "failed_synth_tasks_count": 16,
+    "recovered_tasks_count": 16,
+    "recovery_rate": 1.0,
+    "post_repair_total_passed_count": 36,
+    "post_repair_total_rate": 1.0
+  }
 }

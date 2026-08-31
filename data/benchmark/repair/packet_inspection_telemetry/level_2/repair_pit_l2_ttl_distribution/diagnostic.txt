@@ -1,0 +1,4 @@
+faulty.c:26:49: error: incompatible pointer types passing '__u8 *' (aka 'unsigned char *') to parameter of type 'const void *' expecting '__u32 *' compatible alignment [-Werror,-Wincompatible-pointer-types]
+    __u64 *cnt = bpf_map_lookup_elem(&ttl_dist, &ip->ttl);
+                                                ^~~~~~~~
+1 error generated.

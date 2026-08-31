@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l1_packet_size_quantiles",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_counter",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "packet_first_byte+telemetry+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection by validating that data + 1 <= data_end before reading packet content. Record the first payload byte modulo 16 in a per-CPU histogram and return XDP_PASS.",
+  "requirements": [
+    "Check data + 1 <= data_end before accessing *data",
+    "Ensure bucket index < 16",
+    "Record observation in per-CPU array map",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: reading packet data byte without checking if ctx->data + 1 <= ctx->data_end",
+  "tests": [
+    {
+      "name": "pass_ipv4",
+      "description": "Count IPv4 first byte in histogram",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Count ARP first byte in histogram",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Safely pass truncated packet",
+      "packet_hex": "52540012345652540065",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

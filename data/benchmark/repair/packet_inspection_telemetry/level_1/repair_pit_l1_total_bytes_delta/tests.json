@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l1_total_bytes_delta",
+  "test_count": 3,
+  "validator": {
+    "type": "map_state"
+  },
+  "tests": [
+    {
+      "name": "pass_pkt1",
+      "description": "Add first packet bytes to accumulator",
+      "packet_hex": "525400123456525400654321080045000046123400004006e50fc0a8010ac0a801144141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_pkt2",
+      "description": "Add second packet bytes to accumulator",
+      "packet_hex": "525400123456525400654321080045000078123400004006e4ddc0a8010ac0a8011442424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242424242",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Add ARP frame bytes to accumulator",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

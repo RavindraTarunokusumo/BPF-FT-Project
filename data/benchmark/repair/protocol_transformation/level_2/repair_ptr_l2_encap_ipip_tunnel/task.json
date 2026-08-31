@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l2_encap_ipip_tunnel",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_ipip_encap",
+  "template_family": "xdp_head_adjust",
+  "semantic_signature": "ipip_tunnel_encap+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection in the IPIP encapsulation filter. Push a 20-byte outer IPv4 header (protocol IPPROTO_IPIP = 4) using bpf_xdp_adjust_head(ctx, -20), re-validate packet bounds, and return XDP_PASS.",
+  "requirements": [
+    "Preserve original Ethernet header before head adjustment",
+    "Call bpf_xdp_adjust_head(ctx, -20)",
+    "Re-validate that (eth + 1) + 1 <= data_end for outer Ethernet and IP headers",
+    "Construct outer IPv4 header with proto=IPPROTO_IPIP",
+    "Return XDP_PASS",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: unverified access to packet pointer after head expansion",
+  "tests": [
+    {
+      "name": "pass_encap_tcp",
+      "description": "Encap IPv4 TCP in outer IPIP header",
+      "packet_hex": "52540012345652540065432108004500001412340000400654ae0a0000010a00000230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass non-IP ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

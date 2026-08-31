@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l2_frag_header_tracker",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_frag_stats",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "frag_stats_counter+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection by validating the IPv4 header bounds before reading ip->frag_off. Record fragmented packets in slot 0 and unfragmented packets in slot 1 of a per-CPU map, returning XDP_PASS.",
+  "requirements": [
+    "Check Ethernet bounds",
+    "Check IPv4 bounds (ip + 1 <= data_end)",
+    "Check for fragmentation (ip->frag_off & htons(0x3FFF))",
+    "Record in per-CPU array map with 2 entries",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: accessing ip->frag_off without proving ip + 1 <= data_end",
+  "tests": [
+    {
+      "name": "pass_frag",
+      "description": "Count fragmented packet in slot 0",
+      "packet_hex": "525400123456525400654321080045000014123420004006c541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_unfrag",
+      "description": "Count unfragmented in slot 1",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

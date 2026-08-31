@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l2_tcp_flags_hist",
+  "test_count": 4,
+  "validator": {
+    "type": "map_state"
+  },
+  "tests": [
+    {
+      "name": "pass_syn",
+      "description": "Count SYN in slot 0",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_fin",
+      "description": "Count FIN in slot 1",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005001ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_rst",
+      "description": "Count RST in slot 2",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005004ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ack",
+      "description": "Count other/ACK in slot 3",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

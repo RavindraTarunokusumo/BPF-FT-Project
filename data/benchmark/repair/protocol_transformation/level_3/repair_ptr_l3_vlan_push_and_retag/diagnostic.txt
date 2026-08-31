@@ -1,0 +1,7 @@
+faulty.c:11:8: error: redefinition of 'struct vlan_hdr'
+struct vlan_hdr {
+       ^
+faulty.c:6:8: note: previous definition is here
+struct vlan_hdr {
+       ^
+1 error generated.

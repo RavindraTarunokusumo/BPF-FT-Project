@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l1_icmp_reflector_tx",
+  "test_count": 3,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "tx_icmp_reflector",
+      "description": "Reflect ICMP packet back out interface",
+      "packet_hex": "525400123456525400654321080045000014123400004001e546c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "pass_tcp",
+      "description": "Pass TCP packet unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

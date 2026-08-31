@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l2_ttl_distribution",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_ttl_stats",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "ipv4_ttl+256_bucket_stats+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the key type passed to bpf_map_lookup_elem in the TTL telemetry filter. Record observed IPv4 TTL values (0..255) into a 256-entry array map and return XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Promote ip->ttl (__u8) to __u32 key for map lookup",
+    "Record TTL count in ttl_dist array map with 256 entries",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: passing uint8 address instead of uint32 key to bpf_map_lookup_elem",
+  "tests": [
+    {
+      "name": "pass_ttl_32",
+      "description": "Count TTL 32 in slot 32",
+      "packet_hex": "5254001234565254006543210800450000141234000020060542c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ttl_64",
+      "description": "Count TTL 64 in slot 64",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ttl_128",
+      "description": "Count TTL 128 in slot 128",
+      "packet_hex": "525400123456525400654321080045000014123400008006a541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

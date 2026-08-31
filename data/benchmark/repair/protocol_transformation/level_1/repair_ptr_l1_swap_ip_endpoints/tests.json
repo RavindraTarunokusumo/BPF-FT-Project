@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l1_swap_ip_endpoints",
+  "test_count": 3,
+  "validator": {
+    "type": "packet_bytes"
+  },
+  "tests": [
+    {
+      "name": "pass_swap_tcp",
+      "description": "Swap IP endpoints on TCP packet",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_swap_udp",
+      "description": "Swap IP endpoints on UDP packet",
+      "packet_hex": "52540012345652540065432108004500001412340000400654ae0a0000010a0000023039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

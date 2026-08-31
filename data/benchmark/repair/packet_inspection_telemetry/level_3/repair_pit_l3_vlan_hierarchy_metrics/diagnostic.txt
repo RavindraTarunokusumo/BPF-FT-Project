@@ -1,0 +1,4 @@
+faulty.c:48:19: error: use of undeclared identifier 'eth_proto'
+    if (eth_proto == ETH_P_IP)
+        ^
+1 error generated.

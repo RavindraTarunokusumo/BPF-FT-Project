@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l2_map_redirect_fallback",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_redirect_config",
+  "template_family": "xdp_map_redirect",
+  "semantic_signature": "config_map_redirect_or_aborted+redirect",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection by checking the return value of bpf_map_lookup_elem for NULL. Redirect frames to the interface stored at key 0 of forwarding_config; if missing or 0, return XDP_ABORTED.",
+  "requirements": [
+    "Define forwarding_config array map with 1 entry of __u32",
+    "Lookup key 0; if result is NULL or *val == 0, return XDP_ABORTED",
+    "Otherwise redirect to *val with bpf_redirect(*val, 0)",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: dereferencing config map lookup result without NULL check",
+  "tests": [
+    {
+      "name": "pass_unconfigured_aborted",
+      "description": "Return XDP_ABORTED when config map entry is 0",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_ABORTED"
+    },
+    {
+      "name": "pass_arp_aborted",
+      "description": "Return XDP_ABORTED on unconfigured ARP",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_ABORTED"
+    }
+  ]
+}

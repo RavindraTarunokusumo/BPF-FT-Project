@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l2_prefix_based_routing",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_prefix_routing",
+  "template_family": "xdp_map_redirect",
+  "semantic_signature": "prefix_lookup_redirect+redirect_or_pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the missing struct declaration in the prefix routing filter. Lookup destination IP in lpm_routes (LPM trie) and redirect to the returned interface index, passing non-matching traffic with XDP_PASS.",
+  "requirements": [
+    "Define struct lpm_key with prefixlen and addr",
+    "Define lpm_routes LPM trie map",
+    "Lookup ip->daddr in lpm_routes",
+    "If route found, redirect to *ifindex using bpf_redirect(*ifindex, 0)",
+    "Return XDP_PASS if route not found",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: undefined struct 'lpm_key' in routing lookup",
+  "tests": [
+    {
+      "name": "pass_unmatched_route",
+      "description": "Pass route lookup miss with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000014123400004006dc54c0a8010ac0a80a0130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass non-IP ARP frame with XDP_PASS",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

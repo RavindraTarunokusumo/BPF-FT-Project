@@ -1,0 +1,7 @@
+faulty.c:33:47: error: passing '__u64' (aka 'unsigned long long') to parameter of type 'const void *' [-Wint-conversion]
+        bpf_map_update_elem(&quota_map, &src, init_val, BPF_ANY);
+                                              ^~~~~~~~
+/usr/include/bpf/bpf_helper_defs.h:42:61: note: passing argument to parameter 'value' here
+long (*bpf_map_update_elem)(void *map, const void *key, const void *value, __u64 flags) = (void *) 2;
+                                                            ^
+1 error generated.

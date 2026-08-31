@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l2_snat_ipv4_single",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_snat",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "snat_to_198_51_100_1+csum_update+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the compilation error in the SNAT filter to rewrite the IPv4 source address to 198.51.100.1 (0xC6336401) with correct IP header checksum, returning XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Rewrite ip->saddr to 198.51.100.1 (bpf_htonl(0xC6336401))",
+    "Update IPv4 checksum accurately",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: invalid operands to binary expression in checksum update",
+  "tests": [
+    {
+      "name": "pass_snat_tcp",
+      "description": "SNAT source IP to 198.51.100.1",
+      "packet_hex": "525400123456525400654321080045000014123400004006e519c0a80132c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

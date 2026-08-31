@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l2_default_route_action",
+  "test_count": 2,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "aborted_unmapped_dst",
+      "description": "Abort unmapped destination with XDP_ABORTED",
+      "packet_hex": "525400123456525400654321080045000014123400004006e554c0a8010ac0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_ABORTED"
+    },
+    {
+      "name": "pass_known_route",
+      "description": "Pass known route miss check",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cfdc0a8010a0a00000130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_ABORTED"
+    }
+  ]
+}

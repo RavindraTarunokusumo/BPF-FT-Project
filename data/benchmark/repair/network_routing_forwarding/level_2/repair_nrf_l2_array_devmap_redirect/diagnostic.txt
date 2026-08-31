@@ -1,0 +1,4 @@
+faulty.c:6:18: error: use of undeclared identifier 'BPF_MAP_TYPE_DEVMAP'
+    __uint(type, BPF_MAP_TYPE_DEVMAP);
+                 ^
+1 error generated.

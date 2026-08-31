@@ -1,0 +1,11 @@
+faulty.c:20:16: error: variable has incomplete type 'struct vlan_hdr'
+        struct vlan_hdr *vlh = nh;
+               ^
+faulty.c:20:16: note: forward declaration of 'struct vlan_hdr'
+faulty.c:21:26: error: invalid application of 'sizeof' to an incomplete type 'struct vlan_hdr'
+        if ((void *)(vlh + 1) > data_end)
+                     ^~~~~~~
+faulty.c:23:36: error: member access into incomplete type 'struct vlan_hdr'
+        eth_proto = bpf_ntohs(vlh->h_vlan_encapsulated_proto);
+                                  ^
+3 errors generated.

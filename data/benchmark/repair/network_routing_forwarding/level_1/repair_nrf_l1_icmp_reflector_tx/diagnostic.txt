@@ -1,0 +1,4 @@
+faulty.c:16:22: error: comparison between pointer and integer ('__be16' (aka 'unsigned short') and 'char *')
+    if (eth->h_proto != "0x0800")
+        ~~~~~~~~~~~~ ^  ~~~~~~~~
+1 error generated.

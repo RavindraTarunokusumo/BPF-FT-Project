@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l1_arp_request_reflector",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_arp_reflector",
+  "template_family": "xdp_packet_reflector",
+  "semantic_signature": "arp_request_reflect+tx",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the return action in the ARP reflector filter so that reflected ARP request frames are transmitted back out the interface with XDP_TX rather than being passed to the network stack.",
+  "requirements": [
+    "Check Ethernet and ARP header bounds",
+    "Verify EtherType is ETH_P_ARP (0x0806)",
+    "Swap Ethernet source and destination MACs",
+    "Return XDP_TX for ARP frames; return XDP_PASS for other traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: swapped MAC addresses on ARP request but returned XDP_PASS instead of XDP_TX",
+  "tests": [
+    {
+      "name": "tx_arp_reflect",
+      "description": "Reflect ARP request frame with XDP_TX",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "pass_ip_traffic",
+      "description": "Pass IP traffic with XDP_PASS",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

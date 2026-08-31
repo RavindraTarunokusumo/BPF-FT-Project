@@ -1,0 +1,11 @@
+faulty.c:26:12: error: variable has incomplete type 'struct tcphdr'
+    struct tcphdr *tcp = (void *)ip + ip_len;
+           ^
+faulty.c:26:12: note: forward declaration of 'struct tcphdr'
+faulty.c:27:18: error: invalid application of 'sizeof' to an incomplete type 'struct tcphdr'
+    if ((void *)(tcp + 1) > data_end)
+                 ^~~~~~~
+faulty.c:30:12: error: member access into incomplete type 'struct tcphdr'
+    if (tcp->dest == bpf_htons(23))
+           ^
+3 errors generated.

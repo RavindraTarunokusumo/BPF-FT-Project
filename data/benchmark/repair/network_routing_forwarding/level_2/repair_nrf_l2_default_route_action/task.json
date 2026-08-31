@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l2_default_route_action",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_strict_routing",
+  "template_family": "xdp_map_redirect",
+  "semantic_signature": "strict_routing_table+aborted_on_miss",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the default routing failure action in the strict forwarder. If the destination IP exists in routing_table, redirect to the mapped egress; otherwise return XDP_ABORTED.",
+  "requirements": [
+    "Define routing_table hash map keyed by __u32 dst IP storing __u32 egress ifindex",
+    "Lookup ip->daddr in routing_table",
+    "If route exists, return bpf_redirect(*egress, 0)",
+    "If route is absent, return XDP_ABORTED",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: returned XDP_PASS instead of required XDP_ABORTED when route lookup failed in strict forwarding table",
+  "tests": [
+    {
+      "name": "aborted_unmapped_dst",
+      "description": "Abort unmapped destination with XDP_ABORTED",
+      "packet_hex": "525400123456525400654321080045000014123400004006e554c0a8010ac0a8010130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_ABORTED"
+    },
+    {
+      "name": "pass_known_route",
+      "description": "Pass known route miss check",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cfdc0a8010a0a00000130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_ABORTED"
+    }
+  ]
+}

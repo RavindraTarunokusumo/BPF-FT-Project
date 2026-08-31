@@ -1,0 +1,4 @@
+faulty.c:42:9: error: use of undeclared identifier 'TH_SYN'
+    if (TH_SYN & tcp->syn)
+        ^
+1 error generated.

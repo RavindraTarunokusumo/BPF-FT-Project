@@ -1,0 +1,4 @@
+FAIL: test_case 'verify_ttl_decrement_on_forward' failed:
+  Expected IPv4 TTL: 63, IPv4 checksum updated
+  Observed IPv4 TTL: 64 (forwarded without standard layer-3 TTL decrement)
+1 of 2 test cases failed.

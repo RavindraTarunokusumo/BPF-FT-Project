@@ -1,0 +1,4 @@
+FAIL: test_case 'pass_first_syn' failed:
+  Expected action: XDP_PASS
+  Observed action: XDP_DROP (first SYN packet from new client was dropped)
+1 of 6 test cases failed.

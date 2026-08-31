@@ -1,0 +1,9 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+26: (85) call bpf_xdp_adjust_head#44
+27: (61) r2 = *(u32 *)(r6 +0)
+; __u16 proto = inner_eth->h_proto;
+28: (69) r1 = *(u16 *)(r2 +12)
+invalid access to packet, id=0, off=12, size=2, R2_w=pkt(off=0,r=0,imm=0)
+processed 29 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

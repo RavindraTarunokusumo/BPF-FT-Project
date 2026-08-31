@@ -1,0 +1,4 @@
+FAIL: test_case 'match_172_16_subnet' failed:
+  Expected action: XDP_TX
+  Observed action: XDP_PASS (endian mismatch: ip->daddr in network order did not match host constant 0xAC100000)
+1 of 2 test cases failed.

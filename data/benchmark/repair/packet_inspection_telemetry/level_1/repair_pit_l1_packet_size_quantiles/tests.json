@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l1_packet_size_quantiles",
+  "test_count": 3,
+  "validator": {
+    "type": "map_state"
+  },
+  "tests": [
+    {
+      "name": "pass_ipv4",
+      "description": "Count IPv4 first byte in histogram",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Count ARP first byte in histogram",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Safely pass truncated packet",
+      "packet_hex": "52540012345652540065",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l3_ecmp_hash_load_balancer",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_ecmp_balancer",
+  "template_family": "xdp_devmap_balancer",
+  "semantic_signature": "ecmp_5tuple_hash_balance+redirect",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the hashing function in the ECMP load balancer. Compute an inline 5-tuple hash ((saddr ^ daddr ^ sport ^ dport ^ proto) & 3) and redirect through ecmp_devmap with 4 egress interfaces.",
+  "requirements": [
+    "Define ecmp_devmap DEVMAP with 4 entries",
+    "Extract 5-tuple fields safely",
+    "Calculate backend slot: (saddr ^ daddr ^ sport ^ dport ^ proto) & 3",
+    "Redirect through ecmp_devmap with bpf_redirect_map(&ecmp_devmap, slot, 0)",
+    "Return XDP_PASS for non-IP traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: call to undeclared function 'bpf_jhash' (using non-existent helper instead of inline hash or lookup)",
+  "tests": [
+    {
+      "name": "pass_ecmp_flow1",
+      "description": "Redirect flow 1 through ECMP devmap",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011413880050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT"
+    },
+    {
+      "name": "pass_ecmp_flow2",
+      "description": "Redirect flow 2 through ECMP devmap",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf20a000002c0a8011413890050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT"
+    }
+  ]
+}

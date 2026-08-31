@@ -1,0 +1,4 @@
+faulty.c:26:10: error: cannot initialize a variable of type '__u32' (aka 'unsigned int') with an rvalue of type '__be32 *' (aka 'unsigned int *')
+    csum += (&old_src);
+         ^  ~~~~~~~~~~
+1 error generated.

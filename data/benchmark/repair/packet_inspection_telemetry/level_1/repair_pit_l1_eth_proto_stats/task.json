@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l1_eth_proto_stats",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_proto_stats",
+  "template_family": "xdp_percpu_counter",
+  "semantic_signature": "eth_proto+ipv4_vs_non_ipv4+split_counter",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the missing include header in the telemetry program. Record IPv4 frames in slot 0 and non-IPv4 frames in slot 1 of a per-CPU array map, returning XDP_PASS for all traffic.",
+  "requirements": [
+    "Include <linux/if_ether.h>",
+    "Define eth_stats per-CPU array map with 2 entries of __u64",
+    "Check Ethernet bounds; increment slot 0 for IPv4, slot 1 for non-IPv4",
+    "Return XDP_PASS for all packets",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: undeclared identifier 'ETH_P_IP' due to missing include <linux/if_ether.h>",
+  "tests": [
+    {
+      "name": "pass_ipv4",
+      "description": "Count IPv4 in slot 0",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_non_ip",
+      "description": "Count non-IPv4 in slot 1",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Count truncated in slot 1",
+      "packet_hex": "52540012345652540065",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

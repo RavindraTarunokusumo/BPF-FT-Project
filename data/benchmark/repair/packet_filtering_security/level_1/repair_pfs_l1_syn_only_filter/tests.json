@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l1_syn_only_filter",
+  "test_count": 5,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "drop_tcp_syn_80",
+      "description": "Drop TCP SYN on port 80",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_tcp_ack_80",
+      "description": "Pass TCP ACK on port 80",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp_80",
+      "description": "Pass UDP on port 80",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039005000130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP packet",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated packet safely",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

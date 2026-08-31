@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l1_push_dummy_tag",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_vlan_push",
+  "template_family": "xdp_head_adjust",
+  "semantic_signature": "vlan_push_tag_100+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier rejection in the VLAN push transformation. Call bpf_xdp_adjust_head(ctx, -4) to expand the packet header, then write an 802.1Q VLAN tag (VID 100) and return XDP_PASS.",
+  "requirements": [
+    "Copy Ethernet header to temporary stack variable",
+    "Call bpf_xdp_adjust_head(ctx, -4)",
+    "Reload ctx->data and ctx->data_end and check boundary",
+    "Write Ethernet header with 0x8100, VLAN tag 100, and encapsulated EtherType",
+    "Return XDP_PASS",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: accessing packet data after negative adjust_head without checking eth + 1 <= data_end",
+  "tests": [
+    {
+      "name": "pass_push_vlan_tcp",
+      "description": "Push VLAN tag 100 on TCP frame",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_push_vlan_arp",
+      "description": "Push VLAN tag 100 on ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

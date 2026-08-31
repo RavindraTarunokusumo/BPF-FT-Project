@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l2_rewrite_udp_port_csum",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_udp_port_rewrite",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "udp_dport_rewrite_5353+csum_update+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the missing include header in the UDP port rewriting filter. Rewrite the destination port of IPv4 UDP packets from 53 to 5353 (mDNS) and update non-zero UDP checksums, preserving zero checksums as zero.",
+  "requirements": [
+    "Include <linux/udp.h>",
+    "Check Ethernet, IPv4, and UDP bounds",
+    "Rewrite udp->dest to bpf_htons(5353)",
+    "If udp->check != 0, update UDP checksum with incremental delta",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: variable has incomplete type 'struct udphdr' due to missing include <linux/udp.h>",
+  "tests": [
+    {
+      "name": "pass_rewrite_udp_port",
+      "description": "Rewrite UDP port from 53 to 5353 and update checksum",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a80114303900350013776e444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_tcp",
+      "description": "Pass TCP unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

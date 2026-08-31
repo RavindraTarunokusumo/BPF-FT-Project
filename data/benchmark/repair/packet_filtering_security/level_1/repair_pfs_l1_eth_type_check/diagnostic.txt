@@ -1,0 +1,7 @@
+faulty.c:14:25: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+                        ^
+faulty.c:30:22: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    if (udp->dest == bpf_htons(69))
+                     ^
+2 errors generated.

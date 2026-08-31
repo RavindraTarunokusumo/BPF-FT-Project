@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l1_eth_hairpin_tx",
+  "test_count": 2,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "tx_hairpin_valid",
+      "description": "Hairpin reflect valid Ethernet frame with XDP_TX",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated Ethernet frame with XDP_PASS",
+      "packet_hex": "52540012345652540065",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

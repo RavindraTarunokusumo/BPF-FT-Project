@@ -1,0 +1,9 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+16: (bf) r2 = r10
+17: (07) r2 += -64
+; int rc = bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0);
+18: (85) call bpf_fib_lookup#88
+invalid indirect read from stack R2 off -64+2 size 2 (uninitialized field sport/dport)
+processed 19 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

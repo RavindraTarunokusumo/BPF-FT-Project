@@ -1,0 +1,4 @@
+faulty.c:29:21: error: invalid operands to binary expression ('__be32 *' (aka 'unsigned int *') and '__u32' (aka 'unsigned int'))
+    if ((&ip->saddr & mask) == subnet) {
+         ~~~~~~~~~~ ^ ~~~~
+1 error generated.

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l3_dual_vlan_rewriting",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_qinq_rewrite",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "qinq_retag_outer300_inner400+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the QinQ retagging program to write outer VLAN VID = 300 and inner VLAN VID = 400 when processing QinQ double-tagged frames (0x88A8 followed by 0x8100), returning XDP_PASS.",
+  "requirements": [
+    "Parse outer and inner 802.1Q/802.1ad VLAN tags safely",
+    "Rewrite outer VLAN VID to 300 (preserving PCP/CFI)",
+    "Rewrite inner VLAN VID to 400 (preserving PCP/CFI)",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: swapped outer and inner VLAN IDs during QinQ retagging (wrote 400 to outer and 300 to inner)",
+  "tests": [
+    {
+      "name": "pass_retag_qinq",
+      "description": "Retag QinQ outer VID to 300 and inner VID to 400",
+      "packet_hex": "52540012345652540065432188a80064810000c8080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Pass untagged frame unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

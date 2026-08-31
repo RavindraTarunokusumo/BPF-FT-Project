@@ -1,0 +1,7 @@
+faulty.c:26:13: error: expected ')'
+            return bpf_redirect(2, 0);
+            ^
+faulty.c:25:12: note: to match this '('
+        if ((vid == 10)
+           ^
+1 error generated.

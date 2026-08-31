@@ -1,0 +1,8 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+12: (85) call bpf_xdp_adjust_head#44
+; eth->h_proto = bpf_htons(ETH_P_IP);
+13: (6b) *(u16 *)(r6 +12) = r7
+R6 invalid mem access 'inv' (stale register after adjust_head)
+processed 14 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

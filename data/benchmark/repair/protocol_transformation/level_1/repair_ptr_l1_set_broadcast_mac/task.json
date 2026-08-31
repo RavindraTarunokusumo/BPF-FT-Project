@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l1_set_broadcast_mac",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_mac_rewrite",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "set_dst_mac_broadcast_ff+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the field assignment bug in the transformation program to set the Ethernet destination MAC (eth->h_dest) to FF:FF:FF:FF:FF:FF while keeping the original source MAC, returning XDP_PASS.",
+  "requirements": [
+    "Check Ethernet header bounds",
+    "Set eth->h_dest to FF:FF:FF:FF:FF:FF",
+    "Preserve original eth->h_source and payload",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: modified eth->h_source instead of eth->h_dest to broadcast ff:ff:ff:ff:ff:ff",
+  "tests": [
+    {
+      "name": "pass_broadcast_tcp",
+      "description": "Set destination MAC to broadcast on TCP packet",
+      "packet_hex": "001122334455525400123456080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_broadcast_arp",
+      "description": "Set destination MAC to broadcast on ARP frame",
+      "packet_hex": "00112233445552540012345608060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+6: (69) r3 = *(u16 *)(r2 +20)
+invalid access to packet, id=0, off=20, size=2, R2_w=pkt(off=0,r=14,imm=0)
+processed 7 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

@@ -1,0 +1,4 @@
+FAIL: test_case 'track_dscp_ef' failed:
+  Expected map dscp_stats[46] = 1 (DSCP EF 46 / 0x2E)
+  Observed map dscp_stats[46] = 0, dscp_stats[56] = 1 (wrong bit alignment without >> 2)
+1 of 3 test cases failed.

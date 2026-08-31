@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l3_gtp_u_decap",
+  "test_count": 2,
+  "validator": {
+    "type": "packet_bytes"
+  },
+  "tests": [
+    {
+      "name": "pass_decap_gtpu",
+      "description": "Decap GTP-U encapsulation and pass inner IP",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039086800130000444e535f5041594c4f414430ff00140000000145000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_tcp",
+      "description": "Pass unencapsulated TCP frame unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

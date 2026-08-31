@@ -1,0 +1,4 @@
+faulty.c:4:10: fatal error: 'linux/in.h' file not found (simulated missing dependency on specific header)
+#include <linux/in.h>
+         ^~~~~~~~~~~~
+1 error generated.

@@ -1,0 +1,8 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+16: (85) call bpf_xdp_adjust_head#44
+; eth->h_proto = inner_proto;
+17: (6b) *(u16 *)(r6 +12) = r7
+R6 invalid mem access 'inv' (registers pointing to packet invalidated after adjust_head)
+processed 18 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

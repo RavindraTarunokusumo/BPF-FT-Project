@@ -1,0 +1,4 @@
+FAIL: test_case 'verify_valid_ip_checksum' failed:
+  Expected IPv4 checksum: 0xF761 (calculated over zeroed ID)
+  Observed IPv4 checksum: 0xE52D (stale checksum from original non-zero ID 0x1234)
+1 of 2 test cases failed.

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l3_inter_arrival_time",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_inter_arrival",
+  "template_family": "xdp_hash_map_filter",
+  "semantic_signature": "per_src_inter_arrival_hist+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the histogram index computation by clamping the inter-arrival delta bucket index (0..31) before querying the array map. Return XDP_PASS.",
+  "requirements": [
+    "Compute inter-arrival delta = now - last_ts",
+    "Calculate logarithmic bucket index safely: (delta >> 20) & 31",
+    "Update iat_hist map and src_ts_map",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: bitwise shift on variable latency value causing verifier scalar range overflow",
+  "tests": [
+    {
+      "name": "pass_tcp1",
+      "description": "Track inter-arrival for source 1",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_tcp2",
+      "description": "Track inter-arrival for source 2",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf20a000002c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

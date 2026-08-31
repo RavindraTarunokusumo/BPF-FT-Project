@@ -1,0 +1,4 @@
+FAIL: test_case 'verify_qinq_retag' failed:
+  Expected outer VID: 300, inner VID: 400
+  Observed outer VID: 400, inner VID: 300 (swapped VLAN identifiers)
+1 of 2 test cases failed.

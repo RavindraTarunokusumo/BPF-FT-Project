@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l3_tcp_mss_clamping",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_mss_clamp",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "tcp_mss_clamp_1220+csum_update+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier boundary check when clamping TCP MSS. If an IPv4 TCP SYN packet carries an MSS option greater than 1220 bytes (0x04C4), clamp it to 1220 and recalculate the TCP checksum, returning XDP_PASS.",
+  "requirements": [
+    "Check Ethernet, IPv4, and TCP headers with options bounds",
+    "Ensure (void *)(tcp_opt + 4) <= data_end",
+    "If TCP SYN contains MSS option (kind=2, len=4) and value > 1220, clamp to 1220",
+    "Update TCP checksum accurately",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: TCP option bytes inspected and modified without verifying (opt + 4 <= data_end)",
+  "tests": [
+    {
+      "name": "pass_clamp_mss",
+      "description": "Clamp MSS 1460 down to 1220 and update checksum",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000006002ffff0000000000000000020405b4",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_keep_mss",
+      "description": "Keep smaller MSS 1024 unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000006002ffff000000000000000002040400",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ack",
+      "description": "Pass ACK traffic unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005010ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

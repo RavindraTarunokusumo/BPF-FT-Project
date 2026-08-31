@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l3_nptv6_prefix_rewrite",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_nptv6",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "nptv6_prefix_translation+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the verifier bounds check when translating IPv6 source prefix (NPTv6). Rewrite the /64 prefix to fd00:0099::/64 and return XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv6 header bounds (40 bytes for IPv6)",
+    "Ensure (void *)(ip6 + 1) <= data_end",
+    "Rewrite upper 8 bytes of source address to fd00:0099::",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: IPv6 address buffer dereferenced without bounds check against data_end",
+  "tests": [
+    {
+      "name": "pass_nptv6_translate",
+      "description": "Translate IPv6 /64 prefix to fd00:0099::",
+      "packet_hex": "52540012345652540065432186dd6000000000140640fd000001000000000000000000000001fd00000200000000000000000000000230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_ipv4",
+      "description": "Pass IPv4 traffic unchanged",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

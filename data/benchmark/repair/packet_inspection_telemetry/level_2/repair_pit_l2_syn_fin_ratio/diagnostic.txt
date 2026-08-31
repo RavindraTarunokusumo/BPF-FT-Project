@@ -1,0 +1,4 @@
+FAIL: test_case 'track_syn' failed:
+  Expected map syn_fin_stats[0] = 1, syn_fin_stats[1] = 0
+  Observed map syn_fin_stats[0] = 0, syn_fin_stats[1] = 1 (SYN was incremented in FIN slot 1)
+1 of 3 test cases failed.

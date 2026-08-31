@@ -1,0 +1,4 @@
+FAIL: test_case 'generate_time_exceeded' failed:
+  Expected ICMP source IP: 192.168.1.1 (router gateway address)
+  Observed ICMP source IP: 10.0.0.1 (reflection bug: router set source IP to sender IP)
+1 of 2 test cases failed.

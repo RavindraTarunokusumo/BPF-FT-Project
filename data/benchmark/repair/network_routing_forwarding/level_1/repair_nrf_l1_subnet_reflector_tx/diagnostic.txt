@@ -1,0 +1,4 @@
+faulty.c:7:1: error: expected identifier or '('
+SEC("xdp")
+^
+1 error generated.

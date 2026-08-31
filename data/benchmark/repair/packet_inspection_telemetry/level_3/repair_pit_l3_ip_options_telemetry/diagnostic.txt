@@ -1,0 +1,11 @@
+0: R1=ctx(off=0,imm=0) R10=fp0
+...
+16: (2d) if r3 > r1 goto pc+15
+; while (i < opt_len ...
+17: (2d) if r4 >= r5 goto pc+12
+18: (0f) r2 += r4
+19: (2d) if r2 > r1 goto pc+10
+20: (71) r6 = *(u8 *)(r2 +0)
+back-edge from insn 25 to 17
+processed 26 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --

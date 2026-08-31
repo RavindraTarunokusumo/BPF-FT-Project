@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l2_multicast_drop",
+  "test_count": 6,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "drop_ethernet_multicast",
+      "description": "Drop Ethernet Multicast 01:00:5E",
+      "packet_hex": "01005e000001525400654321080045000014123400004002c700c0a8010ae0000001",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "drop_ip_multicast_ssdp",
+      "description": "Drop IPv4 multicast 239.255.255.250",
+      "packet_hex": "525400123456525400654321080045000014123400004011b6f8c0a8010aeffffffa3039076c00130000444e535f5041594c4f4144",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_broadcast",
+      "description": "Pass broadcast traffic",
+      "packet_hex": "ffffffffffff525400654321080045000014123400004011a6f3c0a8010affffffff3039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_unicast",
+      "description": "Pass standard unicast TCP",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated safely",
+      "packet_hex": "52540012345652540065",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

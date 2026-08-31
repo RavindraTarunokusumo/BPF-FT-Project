@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_nrf_l1_subnet_reflector_tx",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_l2_reflector",
+  "template_family": "xdp_packet_reflector",
+  "semantic_signature": "ipv4+dst_subnet_192_0_2_0_24+swap_mac_and_tx",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the missing include in the subnet reflector filter. For packets whose IPv4 destination is in 192.0.2.0/24, swap Ethernet addresses and return XDP_TX; pass other traffic with XDP_PASS.",
+  "requirements": [
+    "Include <bpf/bpf_helpers.h>",
+    "Check Ethernet and IPv4 bounds",
+    "Match IPv4 destination in 192.0.2.0/24 (daddr & 0xFFFFFF00 == 192.0.2.0)",
+    "Swap MACs and return XDP_TX; return XDP_PASS otherwise",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: undefined macro 'SEC' due to missing include <bpf/bpf_helpers.h>",
+  "tests": [
+    {
+      "name": "tx_subnet_match",
+      "description": "Reflect destination in 192.0.2.0/24 with XDP_TX",
+      "packet_hex": "525400123456525400654321080045000014123400004006e4d0c0a8010ac000022d30390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_TX"
+    },
+    {
+      "name": "pass_other_subnet",
+      "description": "Pass destination in 198.51.100.0/24 with XDP_PASS",
+      "packet_hex": "5254001234565254006543210800450000141234000040067cc9c0a8010ac633640130390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

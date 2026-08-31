@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l1_icmp_type_mask",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_icmp_filter",
+  "template_family": "xdp_stateless_filter",
+  "semantic_signature": "ipv4+icmp_type_13_timestamp+drop",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the kernel verifier rejection in the ICMP filter to drop ICMP Timestamp Request packets (type 13) while passing all other traffic.",
+  "requirements": [
+    "Check Ethernet, IPv4, and ICMP bounds accurately",
+    "Ensure (void *)(icmp + 1) <= data_end",
+    "Drop ICMP packets with type == 13; pass all other traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: ICMP header pointer arithmetic checked using '>' instead of '> data_end' offset",
+  "tests": [
+    {
+      "name": "drop_icmp_timestamp",
+      "description": "Drop ICMP Timestamp Request type 13",
+      "packet_hex": "525400123456525400654321080045000014123400004001e546c0a8010ac0a801140d00ddd40000123450494e4731323334",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_icmp_reply",
+      "description": "Pass ICMP Echo Reply type 0",
+      "packet_hex": "525400123456525400654321080045000014123400004001e546c0a8010ac0a801140000ead40000123450494e4731323334",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_tcp",
+      "description": "Pass TCP packet",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated ICMP safely",
+      "packet_hex": "52540012345652540065432108004500001412340000",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

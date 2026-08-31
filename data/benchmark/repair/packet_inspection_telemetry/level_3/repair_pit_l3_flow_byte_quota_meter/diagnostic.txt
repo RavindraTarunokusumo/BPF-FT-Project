@@ -1,0 +1,4 @@
+FAIL: test_case 'track_ip_tot_len' failed:
+  Expected map src_meter[10.1.1.1].ip_bytes = 56 bytes
+  Observed map src_meter[10.1.1.1].ip_bytes = 14336 bytes (network byte order 0x3800 instead of 56 / 0x0038)
+1 of 3 test cases failed.

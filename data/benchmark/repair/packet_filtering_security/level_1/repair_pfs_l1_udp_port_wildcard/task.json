@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l1_udp_port_wildcard",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_port_filter",
+  "template_family": "xdp_stateless_filter",
+  "semantic_signature": "ipv4+udp_dport_1900_ssdp+drop",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the kernel verifier failure by validating the variable IP header length and ensuring the UDP header pointer is within data_end before dereferencing. Drop SSDP UDP port 1900.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Verify ip->ihl >= 5 and (void *)ip + ip->ihl * 4 <= data_end",
+    "Verify (void *)(udp + 1) <= data_end",
+    "Drop UDP packets with dport 1900 (SSDP); pass all others",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "verifier_rejection",
+  "failure_reason": "Kernel verifier rejection: pointer arithmetic with unchecked variable ihl offset leads to invalid packet access",
+  "tests": [
+    {
+      "name": "drop_udp_1900",
+      "description": "Drop UDP SSDP port 1900",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039076c00130000444e535f5041594c4f4144",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_udp_80",
+      "description": "Pass UDP port 80",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039005000130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_tcp_1900",
+      "description": "Pass TCP port 1900",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a801143039076c000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP packet",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated packet safely",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a801",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

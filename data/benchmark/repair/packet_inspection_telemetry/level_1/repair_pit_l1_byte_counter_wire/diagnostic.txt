@@ -1,0 +1,4 @@
+faulty.c:16:26: error: arithmetic on pointers to void is a GNU extension [-Werror,-Wpointer-arith]
+    __u64 len = data_end - data;
+                ~~~~~~~~ ^
+1 error generated.

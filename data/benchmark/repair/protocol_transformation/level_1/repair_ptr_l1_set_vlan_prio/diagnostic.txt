@@ -1,0 +1,4 @@
+faulty.c:23:14: error: no member named 'prio' in 'struct vlan_hdr'
+        vlh->prio = 7;
+        ~~~  ^
+1 error generated.

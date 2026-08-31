@@ -1,0 +1,4 @@
+faulty.c:26:17: error: too few arguments to function call, expected 5, have 2
+    ip->check = bpf_csum_diff(&ip->ttl, 1);
+                ~~~~~~~~~~~~~            ^
+1 error generated.

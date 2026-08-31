@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l2_subnet_blacklist",
+  "test_count": 7,
+  "validator": {
+    "type": "packet_action"
+  },
+  "tests": [
+    {
+      "name": "drop_subnet_tcp",
+      "description": "Drop TCP from 198.51.100.15",
+      "packet_hex": "5254001234565254006543210800450000141234000040067cb1c633640fc0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_outside_ip",
+      "description": "Pass IP from 192.0.2.1",
+      "packet_hex": "525400123456525400654321080045000014123400004006e4f2c0000201c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_subnet_dns",
+      "description": "Pass UDP DNS from 198.51.100.15",
+      "packet_hex": "5254001234565254006543210800450000141234000040117ca6c633640fc0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "drop_subnet_udp_other",
+      "description": "Drop non-DNS UDP from 198.51.100.15",
+      "packet_hex": "5254001234565254006543210800450000141234000040117ca6c633640fc0a801143039007b00130000444e535f5041594c4f4144",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "drop_subnet_ihl6",
+      "description": "Drop IHL=6 TCP from 198.51.100.15",
+      "packet_hex": "5254001234565254006543210800460000181234000040067badc633640fc0a801140000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated safely",
+      "packet_hex": "525400123456525400654321080045000014123400004006",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

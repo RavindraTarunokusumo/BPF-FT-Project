@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l2_csum_incremental_delta",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_checksum_repair",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "rfc1624_csum_update+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the RFC 1624 incremental checksum calculation when modifying the destination IP address to 10.0.0.99 so the carry bits are correctly folded back into the 16-bit word.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Rewrite ip->daddr to 10.0.0.99 (bpf_htonl(0x0A000063))",
+    "Perform RFC 1624 1's complement carry fold: while(csum >> 16) csum = (csum & 0xFFFF) + (csum >> 16)",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: RFC 1624 equation missing carry folding when updating 16-bit checksum",
+  "tests": [
+    {
+      "name": "pass_csum_rewrite",
+      "description": "Rewrite IP and verify folded checksum",
+      "packet_hex": "52540012345652540065432108004500001412340000400654ae0a0000010a00000230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

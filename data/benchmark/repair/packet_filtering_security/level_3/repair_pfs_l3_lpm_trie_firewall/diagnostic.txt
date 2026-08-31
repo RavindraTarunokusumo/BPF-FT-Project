@@ -1,0 +1,4 @@
+faulty.c:29:20: error: struct lpm_key must start with __u32 prefixlen for BPF_MAP_TYPE_LPM_TRIE
+    struct lpm_key key;
+                   ^
+1 error generated.

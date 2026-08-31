@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l2_ip_options_parse",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_ip_options_filter",
+  "template_family": "xdp_multi_field_filter",
+  "semantic_signature": "ipv4+options_present_ihl_gt_5+drop",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the pointer arithmetic in the XDP filter to detect and drop IPv4 packets carrying IP options (IHL > 5) while passing standard IPv4 (IHL == 5) and other non-IP traffic.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Check ip->ihl > 5 and drop packets with options",
+    "Ensure variable length bounds checks before parsing payload",
+    "Pass packets without IP options (IHL == 5)",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "compilation_error",
+  "failure_reason": "Compilation error: invalid void pointer arithmetic in strict C compilation mode",
+  "tests": [
+    {
+      "name": "drop_ihl6_options",
+      "description": "Drop IPv4 with IHL=6 options",
+      "packet_hex": "525400123456525400654321080046000030123400004006e425c0a8010ac0a80114000000000000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "drop_ihl7_options",
+      "description": "Drop IPv4 with IHL=7 options",
+      "packet_hex": "525400123456525400654321080047000038123400004006e31dc0a8010ac0a801140000000000000000000000000000000030390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_standard_ipv4",
+      "description": "Pass standard IPv4 without options",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp_standard",
+      "description": "Pass UDP without options",
+      "packet_hex": "525400123456525400654321080045000027123400004011e523c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_icmp_standard",
+      "description": "Pass ICMP without options",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a801140800e2d40000123450494e4731323334",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated packet safely",
+      "packet_hex": "525400123456525400654321080046000018123400004006e43dc0a801",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

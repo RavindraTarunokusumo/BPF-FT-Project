@@ -1,0 +1,4 @@
+FAIL: test_case 'accumulate_two_packets' failed:
+  Expected map byte_accumulator[0] = 238 bytes
+  Observed map byte_accumulator[0] = 154 bytes (only recorded last packet length)
+1 of 3 test cases failed.

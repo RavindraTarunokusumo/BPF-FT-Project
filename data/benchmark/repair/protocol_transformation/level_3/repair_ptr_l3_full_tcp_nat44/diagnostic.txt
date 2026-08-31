@@ -1,0 +1,7 @@
+faulty.c:16:25: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+                        ^
+faulty.c:35:22: error: call to undeclared function 'bpf_htonl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    __be32 new_src = bpf_htonl(0xC6336401);
+                     ^
+2 errors generated.

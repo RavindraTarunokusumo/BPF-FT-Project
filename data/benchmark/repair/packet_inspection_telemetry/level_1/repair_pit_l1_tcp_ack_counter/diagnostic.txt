@@ -1,0 +1,4 @@
+FAIL: test_case 'count_ack_only' failed:
+  Expected map ack_stats[0] = 1 after pure SYN packet
+  Observed map ack_stats[0] = 2 (SYN packet erroneously incremented ACK counter)
+1 of 4 test cases failed.

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l3_flow_byte_quota_meter",
+  "test_count": 3,
+  "validator": {
+    "type": "map_state"
+  },
+  "tests": [
+    {
+      "name": "pass_tcp1",
+      "description": "Meter IPv4 total bytes for source 1",
+      "packet_hex": "5254001234565254006543210800450000241234000040069be20a010101c0a8011448454c4c4f5f574f524c445f31323334",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_tcp2",
+      "description": "Meter IPv4 total bytes for source 2",
+      "packet_hex": "5254001234565254006543210800450000221234000040069be30a010102c0a80114414e4f544845525f5041434b4554",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

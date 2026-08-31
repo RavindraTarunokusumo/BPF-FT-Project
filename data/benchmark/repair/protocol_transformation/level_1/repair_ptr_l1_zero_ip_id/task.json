@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_ptr_l1_zero_ip_id",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_ip_id_zero",
+  "template_family": "xdp_stateless_rewrite",
+  "semantic_signature": "zero_ip_id_with_csum_update+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the IPv4 header checksum calculation when zeroing the 16-bit IPv4 ID field (ip->id = 0) so the resulting packet carries a valid checksum. Return XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Set ip->id = 0",
+    "Update IPv4 header checksum (ip->check) accurately",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: modified ip->id to 0 without updating the IPv4 header checksum, producing invalid checksums on wire",
+  "tests": [
+    {
+      "name": "pass_zero_id",
+      "description": "Zero IPv4 ID and update checksum",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541c0a8010ac0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

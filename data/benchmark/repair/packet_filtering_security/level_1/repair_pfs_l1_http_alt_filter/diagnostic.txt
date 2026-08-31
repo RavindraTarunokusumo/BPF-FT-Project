@@ -1,0 +1,4 @@
+FAIL: test_case 'drop_tcp_8080' failed:
+  Expected action: XDP_DROP
+  Observed action: XDP_PASS (tcp->dest in network byte order was 0x901F instead of host 8080 / 0x1F90)
+1 of 5 test cases failed.

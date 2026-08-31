@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pfs_l3_tiered_acl_precedence",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_tiered_acl",
+  "template_family": "xdp_multi_map_filter",
+  "semantic_signature": "ipv4+allowlist_overrides_denylist+acl",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix rule precedence in the tiered ACL filter so that allowlisted source IPs (in allowlist_map) are permitted to access port 22 before applying the general port 22 block rule.",
+  "requirements": [
+    "Check allowlist_map hash map for source IP first",
+    "If source IP is in allowlist, return XDP_PASS immediately",
+    "If not allowlisted and TCP dport is 22, return XDP_DROP",
+    "Pass all other traffic (web port 80, UDP, ARP, etc.)",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Rule precedence bug: global port 22 block evaluated before admin IP allowlist lookup, causing admin SSH traffic to be dropped",
+  "tests": [
+    {
+      "name": "pass_whitelisted_admin_ssh",
+      "description": "Pass allowlisted admin on port 22",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cf30a000001c0a8011430390016000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "drop_non_whitelisted_ssh",
+      "description": "Drop non-allowlisted client on port 22",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cef0a000005c0a8011430390016000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP"
+    },
+    {
+      "name": "pass_web_traffic",
+      "description": "Pass port 80 traffic",
+      "packet_hex": "5254001234565254006543210800450000141234000040069cef0a000005c0a8011430390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_udp",
+      "description": "Pass UDP traffic",
+      "packet_hex": "525400123456525400654321080045000014123400004011e536c0a8010ac0a801143039003500130000444e535f5041594c4f4144",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_trunc",
+      "description": "Pass truncated packet safely",
+      "packet_hex": "525400123456525400654321080045000014123400004006e541",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+faulty.c:35:10: error: no member named 'vrf_id' in 'struct vrf_key'
+        .vrf_id = ctx->ingress_ifindex,
+        ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

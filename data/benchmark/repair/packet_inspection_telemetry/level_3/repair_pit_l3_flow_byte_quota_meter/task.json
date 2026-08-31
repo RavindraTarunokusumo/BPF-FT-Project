@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "repair_pit_l3_flow_byte_quota_meter",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_flow_meter",
+  "template_family": "xdp_hash_map_filter",
+  "semantic_signature": "per_src_ip_tot_len_accumulator+pass",
+  "learning_mode": "repair",
+  "program_contract": {
+    "program_type": "xdp",
+    "section": "xdp",
+    "max_source_bytes": 262144
+  },
+  "instruction": "Fix the byte-order extraction of ip->tot_len when accumulating source IP bandwidth quota in the meter map. Return XDP_PASS.",
+  "requirements": [
+    "Check Ethernet and IPv4 bounds",
+    "Convert ip->tot_len with bpf_ntohs before accumulating bytes",
+    "Update src_meter hash map with packet count and total IP bytes",
+    "Return XDP_PASS for all traffic",
+    "GPL license and SEC(\"xdp\")"
+  ],
+  "diagnostic_category": "behavioral_logic_bug",
+  "failure_reason": "Behavioral bug: accumulated host-endian constant without bpf_ntohs on ip->tot_len",
+  "tests": [
+    {
+      "name": "pass_tcp1",
+      "description": "Meter IPv4 total bytes for source 1",
+      "packet_hex": "5254001234565254006543210800450000241234000040069be20a010101c0a8011448454c4c4f5f574f524c445f31323334",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_tcp2",
+      "description": "Meter IPv4 total bytes for source 2",
+      "packet_hex": "5254001234565254006543210800450000221234000040069be30a010102c0a80114414e4f544845525f5041434b4554",
+      "expected_action": "XDP_PASS"
+    },
+    {
+      "name": "pass_arp",
+      "description": "Pass ARP frame unchanged",
+      "packet_hex": "52540012345652540065432108060001080006040001525400654321c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS"
+    }
+  ]
+}

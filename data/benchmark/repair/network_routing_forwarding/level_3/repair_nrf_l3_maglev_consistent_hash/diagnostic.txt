@@ -1,0 +1,5 @@
+faulty.c:12:19: error: variable has incomplete type 'struct maglev_entry'
+    __type(value, struct maglev_entry);
+                  ^
+faulty.c:12:19: note: forward declaration of 'struct maglev_entry'
+1 error generated.

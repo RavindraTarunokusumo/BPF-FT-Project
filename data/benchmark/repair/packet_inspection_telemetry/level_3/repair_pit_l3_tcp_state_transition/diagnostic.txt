@@ -1,0 +1,4 @@
+FAIL: test_case 'track_fin_ack' failed:
+  Expected tcp_fsm_map state = 2 (CLOSED on FIN+ACK)
+  Observed tcp_fsm_map state = 1 (ESTABLISHED erroneously retained due to ACK branch precedence)
+1 of 3 test cases failed.
