@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_010_connection_churn_monitor",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c",
+  "source_sha256": "2bd255a250490951bfdfd196adf53ab28d4bd229a42e4606359475a2f3140051",
+  "timestamp": "2026-08-31T18:31:30.512372+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c:49:52: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c:13:1)'\n   49 |         __sync_fetch_and_add(&churn_monitor_map_10.entries[key], 1);\n      |                               ~~~~~~~~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c:51:52: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c:13:1)'\n   51 |         __sync_fetch_and_add(&churn_monitor_map_10.entries[1], 1);\n      |                               ~~~~~~~~~~~~~~~~~~~~ ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c:49:52: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c:13:1)'\n   49 |         __sync_fetch_and_add(&churn_monitor_map_10.entries[key], 1);\n      |                               ~~~~~~~~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c:51:52: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_010_connection_churn_monitor/sample-0.c:13:1)'\n   51 |         __sync_fetch_and_add(&churn_monitor_map_10.entries[1], 1);\n      |                               ~~~~~~~~~~~~~~~~~~~~ ^\n2 errors generated."
+}

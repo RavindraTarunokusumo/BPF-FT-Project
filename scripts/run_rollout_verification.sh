@@ -59,7 +59,7 @@ command -v bpftool >/dev/null 2>&1 || HAS_BPF_TOOLCHAIN=false
 if [[ "$HAS_BPF_TOOLCHAIN" == "true" ]]; then
     echo "[+] Linux BPF toolchain (clang, bpftool) detected. Running live kernel validation..."
     
-    uv run python -c "
+    python3 -c "
 import json
 import os
 import sys
@@ -93,7 +93,7 @@ for idx, c_file in enumerate(c_files, start=1):
         Path(f'data/calibration/{cat}/{diff}/{task_id}/tests.json'),
         Path(f'data/benchmark/synthesis/{cat}/{diff}/{task_id}/tests.json'),
         Path(f'data/benchmark/repair/{cat}/{diff}/{task_id}/tests.json'),
-        *Path('data').glob(f'**/{task_id}/tests.json'),
+        Path(f'data/inbox/{cat}/{diff}/{task_id}/tests.json'),
     ]:
         if test_candidate.is_file():
             try:
@@ -119,7 +119,7 @@ else
 fi
 
 # Aggregate results
-uv run python training/import_verifier_results.py \
+python3 training/import_verifier_results.py \
     --rollout-dir "$ROLLOUT_DIR" \
     --output-dir "$VERIFICATION_DIR" \
     --raw-dir "$RAW_DIR" \

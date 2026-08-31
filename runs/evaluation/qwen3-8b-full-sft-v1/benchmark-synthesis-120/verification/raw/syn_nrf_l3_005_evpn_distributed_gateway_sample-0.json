@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_005_evpn_distributed_gateway",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c",
+  "source_sha256": "73a1abccf665ecfc54cf57bc729c309299d143e41994b2c85779765cf823026d",
+  "timestamp": "2026-08-31T18:30:11.139674+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:22:35: error: use of undeclared identifier 'ETH_P_VXLAN'\n   22 |     if (eth->h_proto != bpf_htons(ETH_P_VXLAN))\n      |                                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:22:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:22:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:22:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:30:24: error: arithmetic on a pointer to an incomplete type 'struct vxlan_hdr'\n   30 |     if ((void *)(vxlan + 1) > data_end)\n      |                  ~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:29:12: note: forward declaration of 'struct vxlan_hdr'\n   29 |     struct vxlan_hdr *vxlan = (void *)eth + eth_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:33:14: error: incomplete definition of type 'struct vxlan_hdr'\n   33 |     if (vxlan->vni != 0x5e0001)\n      |         ~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:29:12: note: forward declaration of 'struct vxlan_hdr'\n   29 |     struct vxlan_hdr *vxlan = (void *)eth + eth_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:36:34: error: invalid application of 'sizeof' to an incomplete type 'struct vxlan_hdr'\n   36 |     unsigned int vxlan_hdr_len = sizeof(struct vxlan_hdr);\n      |                                  ^     ~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:29:12: note: forward declaration of 'struct vxlan_hdr'\n   29 |     struct vxlan_hdr *vxlan = (void *)eth + eth_hdr_len;\n      |            ^\n7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:22:35: error: use of undeclared identifier 'ETH_P_VXLAN'\n   22 |     if (eth->h_proto != bpf_htons(ETH_P_VXLAN))\n      |                                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:22:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:22:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:22:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:30:24: error: arithmetic on a pointer to an incomplete type 'struct vxlan_hdr'\n   30 |     if ((void *)(vxlan + 1) > data_end)\n      |                  ~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:29:12: note: forward declaration of 'struct vxlan_hdr'\n   29 |     struct vxlan_hdr *vxlan = (void *)eth + eth_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:33:14: error: incomplete definition of type 'struct vxlan_hdr'\n   33 |     if (vxlan->vni != 0x5e0001)\n      |         ~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:29:12: note: forward declaration of 'struct vxlan_hdr'\n   29 |     struct vxlan_hdr *vxlan = (void *)eth + eth_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:36:34: error: invalid application of 'sizeof' to an incomplete type 'struct vxlan_hdr'\n   36 |     unsigned int vxlan_hdr_len = sizeof(struct vxlan_hdr);\n      |                                  ^     ~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:29:12: note: forward declaration of 'struct vxlan_hdr'\n   29 |     struct vxlan_hdr *vxlan = (void *)eth + eth_hdr_len;\n      |            ^\n7 errors generated."
+}

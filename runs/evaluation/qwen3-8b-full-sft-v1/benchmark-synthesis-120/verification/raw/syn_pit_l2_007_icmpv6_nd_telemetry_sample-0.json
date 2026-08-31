@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_007_icmpv6_nd_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c",
+  "source_sha256": "65ed2e3f565c007594a7a5ddf724b8110fbbc57f4ff28dc233526013ce24bc51",
+  "timestamp": "2026-08-31T18:31:18.797466+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:36:14: error: no member named 'protocol' in 'struct ipv6hdr'\n   36 |     if (ip6->protocol != IPPROTO_ICMPV6)\n      |         ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:40:24: error: arithmetic on a pointer to an incomplete type 'struct icmp6hdr'\n   40 |     if ((void *)(icmp6 + 1) > data_end)\n      |                  ~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:39:12: note: forward declaration of 'struct icmp6hdr'\n   39 |     struct icmp6hdr *icmp6 = (void *)(ip6 + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:43:23: error: incomplete definition of type 'struct icmp6hdr'\n   43 |     __u32 type = icmp6->icmp6_type;\n      |                  ~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:39:12: note: forward declaration of 'struct icmp6hdr'\n   39 |     struct icmp6hdr *icmp6 = (void *)(ip6 + 1);\n      |            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:36:14: error: no member named 'protocol' in 'struct ipv6hdr'\n   36 |     if (ip6->protocol != IPPROTO_ICMPV6)\n      |         ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:40:24: error: arithmetic on a pointer to an incomplete type 'struct icmp6hdr'\n   40 |     if ((void *)(icmp6 + 1) > data_end)\n      |                  ~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:39:12: note: forward declaration of 'struct icmp6hdr'\n   39 |     struct icmp6hdr *icmp6 = (void *)(ip6 + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:43:23: error: incomplete definition of type 'struct icmp6hdr'\n   43 |     __u32 type = icmp6->icmp6_type;\n      |                  ~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:39:12: note: forward declaration of 'struct icmp6hdr'\n   39 |     struct icmp6hdr *icmp6 = (void *)(ip6 + 1);\n      |            ^\n3 errors generated."
+}

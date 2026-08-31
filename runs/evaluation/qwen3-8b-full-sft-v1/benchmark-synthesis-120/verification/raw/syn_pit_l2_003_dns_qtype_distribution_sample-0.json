@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_003_dns_qtype_distribution",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c",
+  "source_sha256": "9b3fc051bc19165ec0e68e0a523bde485e96b74adbc38001cb92bd9449084df7",
+  "timestamp": "2026-08-31T18:31:15.270977+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:58:23: error: invalid application of 'sizeof' to an incomplete type 'struct dns_hdr'\n   58 |     if (payload_len < sizeof(struct dns_hdr))\n      |                       ^     ~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:58:37: note: forward declaration of 'struct dns_hdr'\n   58 |     if (payload_len < sizeof(struct dns_hdr))\n      |                                     ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:62:22: error: arithmetic on a pointer to an incomplete type 'struct dns_hdr'\n   62 |     if ((void *)(dns + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:61:12: note: forward declaration of 'struct dns_hdr'\n   61 |     struct dns_hdr *dns = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:65:12: error: incomplete definition of type 'struct dns_hdr'\n   65 |     if (dns->qr != 0)\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:61:12: note: forward declaration of 'struct dns_hdr'\n   61 |     struct dns_hdr *dns = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:68:22: error: incomplete definition of type 'struct dns_hdr'\n   68 |     __u32 qtype = dns->qtype;\n      |                   ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:61:12: note: forward declaration of 'struct dns_hdr'\n   61 |     struct dns_hdr *dns = (void *)udp + udp_hdr_len;\n      |            ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:58:23: error: invalid application of 'sizeof' to an incomplete type 'struct dns_hdr'\n   58 |     if (payload_len < sizeof(struct dns_hdr))\n      |                       ^     ~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:58:37: note: forward declaration of 'struct dns_hdr'\n   58 |     if (payload_len < sizeof(struct dns_hdr))\n      |                                     ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:62:22: error: arithmetic on a pointer to an incomplete type 'struct dns_hdr'\n   62 |     if ((void *)(dns + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:61:12: note: forward declaration of 'struct dns_hdr'\n   61 |     struct dns_hdr *dns = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:65:12: error: incomplete definition of type 'struct dns_hdr'\n   65 |     if (dns->qr != 0)\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:61:12: note: forward declaration of 'struct dns_hdr'\n   61 |     struct dns_hdr *dns = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:68:22: error: incomplete definition of type 'struct dns_hdr'\n   68 |     __u32 qtype = dns->qtype;\n      |                   ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:61:12: note: forward declaration of 'struct dns_hdr'\n   61 |     struct dns_hdr *dns = (void *)udp + udp_hdr_len;\n      |            ^\n4 errors generated."
+}

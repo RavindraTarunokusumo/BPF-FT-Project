@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "syn_pfs_l1_005_mpls_bos_filter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_005_mpls_bos_filter/sample-0.c",
+  "source_sha256": "a609fbcd922a3418babd2420b84d59a5a2544d673a6c8681580808abdec44c02",
+  "timestamp": "2026-08-31T18:30:22.557914+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_005_mpls_bos_filter/sample-0.c:25:24: warning: cast to smaller integer type 'unsigned int' from 'void *' [-Wvoid-pointer-to-int-cast]\n   25 |     unsigned int len = (unsigned int)data + sizeof(struct ethhdr) - (unsigned int)data;\n      |                        ^~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_005_mpls_bos_filter/sample-0.c:25:69: warning: cast to smaller integer type 'unsigned int' from 'void *' [-Wvoid-pointer-to-int-cast]\n   25 |     unsigned int len = (unsigned int)data + sizeof(struct ethhdr) - (unsigned int)data;\n      |                                                                     ^~~~~~~~~~~~~~~~~~\n2 warnings generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_1n1lqxx6/candidate.o\nlibbpf: elf: section(3) xdp, size 16, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_syn_pfs_l1_005_mpls_bos' at insn offset 0 (0 bytes), code size 2 insns (16 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_1n1lqxx6/candidate.o is GPL\nlibbpf: elf: section(13) .BTF, size 654, link 0, flags 0, type=1\nlibbpf: elf: section(15) .BTF.ext, size 80, link 0, flags 0, type=1\nlibbpf: elf: section(23) .symtab, size 288, link 1, flags 0, type=2\nlibbpf: looking for externs among 12 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_syn_pfs_l1_005_mpls_bos': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx(off=0,imm=0) R10=fp0\n; }\n0: (b7) r0 = 2                        ; R0_w=2\n1: (95) exit\nverification time 76 usec\nstack depth 0\nprocessed 2 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\n"
+}

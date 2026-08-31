@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_006_ipv6_traffic_class_remark",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_006_ipv6_traffic_class_remark/sample-0.c",
+  "source_sha256": "bac16b1d4f5b211b8de454790e7c16a7f7229f64b22c61d1d70c52674195d0de",
+  "timestamp": "2026-08-31T18:31:36.575722+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_006_ipv6_traffic_class_remark/sample-0.c:28:28: error: no member named 'traffic_class' in 'struct ipv6hdr'\n   28 |     __u8 old_tclass = ip6->traffic_class;\n      |                       ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_006_ipv6_traffic_class_remark/sample-0.c:29:10: error: no member named 'traffic_class' in 'struct ipv6hdr'\n   29 |     ip6->traffic_class = 0xB8;\n      |     ~~~  ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_006_ipv6_traffic_class_remark/sample-0.c:28:28: error: no member named 'traffic_class' in 'struct ipv6hdr'\n   28 |     __u8 old_tclass = ip6->traffic_class;\n      |                       ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_006_ipv6_traffic_class_remark/sample-0.c:29:10: error: no member named 'traffic_class' in 'struct ipv6hdr'\n   29 |     ip6->traffic_class = 0xB8;\n      |     ~~~  ^\n2 errors generated."
+}

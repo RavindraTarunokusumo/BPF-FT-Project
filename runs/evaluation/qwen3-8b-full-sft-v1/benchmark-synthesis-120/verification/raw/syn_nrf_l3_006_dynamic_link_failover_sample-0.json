@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_006_dynamic_link_failover",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_006_dynamic_link_failover/sample-0.c",
+  "source_sha256": "a5f005e79c53dfff1ce086cd2bb6e73856ed8bf07aaae0458673cf9356f0a922",
+  "timestamp": "2026-08-31T18:30:11.998375+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_006_dynamic_link_failover/sample-0.c:36:61: error: cannot take the address of an rvalue of type 'int'\n   36 |     __u32 *status = bpf_map_lookup_elem(&link_status_map_6, &0);\n      |                                                             ^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_006_dynamic_link_failover/sample-0.c:42:16: error: call to undeclared function 'bpf_xdp_redirect_ifindex'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   42 |         return bpf_xdp_redirect_ifindex(80, ctx);\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_006_dynamic_link_failover/sample-0.c:45:16: error: call to undeclared function 'bpf_xdp_redirect_ifindex'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   45 |         return bpf_xdp_redirect_ifindex(81, ctx);\n      |                ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_006_dynamic_link_failover/sample-0.c:36:61: error: cannot take the address of an rvalue of type 'int'\n   36 |     __u32 *status = bpf_map_lookup_elem(&link_status_map_6, &0);\n      |                                                             ^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_006_dynamic_link_failover/sample-0.c:42:16: error: call to undeclared function 'bpf_xdp_redirect_ifindex'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   42 |         return bpf_xdp_redirect_ifindex(80, ctx);\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_006_dynamic_link_failover/sample-0.c:45:16: error: call to undeclared function 'bpf_xdp_redirect_ifindex'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   45 |         return bpf_xdp_redirect_ifindex(81, ctx);\n      |                ^\n3 errors generated."
+}

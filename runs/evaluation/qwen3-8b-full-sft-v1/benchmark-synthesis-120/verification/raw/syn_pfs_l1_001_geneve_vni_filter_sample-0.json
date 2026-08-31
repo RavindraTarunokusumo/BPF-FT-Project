@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "syn_pfs_l1_001_geneve_vni_filter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c",
+  "source_sha256": "d877c2807de3f792dbd9af4e9c96368268814d1f52873f237fdd2a060268ef3f",
+  "timestamp": "2026-08-31T18:30:17.724388+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:48:44: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   48 |     if ((unsigned char *)udp + udp_hdr_len > data_end)\n      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:56:22: error: arithmetic on a pointer to an incomplete type 'struct genevehdr'\n   56 |     if ((void *)(gen + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:55:12: note: forward declaration of 'struct genevehdr'\n   55 |     struct genevehdr *gen = (void *)ptr;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:59:20: error: incomplete definition of type 'struct genevehdr'\n   59 |     __u8 *vni = gen->vni;\n      |                 ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:55:12: note: forward declaration of 'struct genevehdr'\n   55 |     struct genevehdr *gen = (void *)ptr;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:60:38: error: invalid application of 'sizeof' to an incomplete type 'struct genevehdr'\n   60 |     if (vni < (unsigned char *)gen + sizeof(struct genevehdr))\n      |                                      ^     ~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:55:12: note: forward declaration of 'struct genevehdr'\n   55 |     struct genevehdr *gen = (void *)ptr;\n      |            ^\n1 warning and 3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:48:44: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   48 |     if ((unsigned char *)udp + udp_hdr_len > data_end)\n      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:56:22: error: arithmetic on a pointer to an incomplete type 'struct genevehdr'\n   56 |     if ((void *)(gen + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:55:12: note: forward declaration of 'struct genevehdr'\n   55 |     struct genevehdr *gen = (void *)ptr;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:59:20: error: incomplete definition of type 'struct genevehdr'\n   59 |     __u8 *vni = gen->vni;\n      |                 ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:55:12: note: forward declaration of 'struct genevehdr'\n   55 |     struct genevehdr *gen = (void *)ptr;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:60:38: error: invalid application of 'sizeof' to an incomplete type 'struct genevehdr'\n   60 |     if (vni < (unsigned char *)gen + sizeof(struct genevehdr))\n      |                                      ^     ~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l1_001_geneve_vni_filter/sample-0.c:55:12: note: forward declaration of 'struct genevehdr'\n   55 |     struct genevehdr *gen = (void *)ptr;\n      |            ^\n1 warning and 3 errors generated."
+}

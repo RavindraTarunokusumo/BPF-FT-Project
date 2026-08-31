@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_001_vxlan_vni_counter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c",
+  "source_sha256": "9102f5004fffdb40e1760d3bbae0748cd84cc3ad69d0e9c6d4b59831f8fc54ec",
+  "timestamp": "2026-08-31T18:30:54.476467+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_VXLAN'\n   29 |     if (eth->h_proto != bpf_htons(ETH_P_VXLAN))\n      |                                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:33:24: error: arithmetic on a pointer to an incomplete type 'struct vxlanhdr'\n   33 |     if ((void *)(vxlan + 1) > data_end)\n      |                  ~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:32:12: note: forward declaration of 'struct vxlanhdr'\n   32 |     struct vxlanhdr *vxlan = (void *)(eth + 1);\n      |            ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_VXLAN'\n   29 |     if (eth->h_proto != bpf_htons(ETH_P_VXLAN))\n      |                                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_VXLAN'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:33:24: error: arithmetic on a pointer to an incomplete type 'struct vxlanhdr'\n   33 |     if ((void *)(vxlan + 1) > data_end)\n      |                  ~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_001_vxlan_vni_counter/sample-0.c:32:12: note: forward declaration of 'struct vxlanhdr'\n   32 |     struct vxlanhdr *vxlan = (void *)(eth + 1);\n      |            ^\n5 errors generated."
+}

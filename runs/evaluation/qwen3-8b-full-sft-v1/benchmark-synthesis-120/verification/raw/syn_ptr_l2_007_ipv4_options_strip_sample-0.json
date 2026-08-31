@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_007_ipv4_options_strip",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c",
+  "source_sha256": "b45cb18f32d77541ffec3dea9caff6cc5d76d950b090886b6f7252e8ab7055c1",
+  "timestamp": "2026-08-31T18:31:48.503229+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:33:18: warning: comparison of distinct pointer types ('__u8 *' (aka 'unsigned char *') and 'void *') [-Wcompare-distinct-pointer-types]\n   33 |     if (new_data > (void *)(ip + 1))\n      |         ~~~~~~~~ ^ ~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:41:8: warning: incompatible pointer types assigning to 'struct iphdr *' from '__u8 *' (aka 'unsigned char *') [-Wincompatible-pointer-types]\n   41 |     ip = new_data;\n      |        ^ ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:40:5: error: A call to built-in function 'memcpy' is not supported.\n   40 |     __builtin_memcpy(new_data, eth, (void *)(ip) - (void *)eth);\n      |     ^\n2 warnings and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:33:18: warning: comparison of distinct pointer types ('__u8 *' (aka 'unsigned char *') and 'void *') [-Wcompare-distinct-pointer-types]\n   33 |     if (new_data > (void *)(ip + 1))\n      |         ~~~~~~~~ ^ ~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:41:8: warning: incompatible pointer types assigning to 'struct iphdr *' from '__u8 *' (aka 'unsigned char *') [-Wincompatible-pointer-types]\n   41 |     ip = new_data;\n      |        ^ ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:40:5: error: A call to built-in function 'memcpy' is not supported.\n   40 |     __builtin_memcpy(new_data, eth, (void *)(ip) - (void *)eth);\n      |     ^\n2 warnings and 1 error generated."
+}

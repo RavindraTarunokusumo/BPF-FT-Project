@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "syn_nrf_l1_003_gre_tunnel_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_003_gre_tunnel_reflector/sample-0.c",
+  "source_sha256": "09ae02f8ee7234c2da7294df226eab1f804701c00f599734ac816f2d08319345",
+  "timestamp": "2026-08-31T18:29:43.365948+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_003_gre_tunnel_reflector/sample-0.c:43:68: error: expected ';' after expression\n   43 |     __builtin_memcpy(&new_ip->daddr, &ip->saddr, sizeof(ip->saddr))\n      |                                                                    ^\n      |                                                                    ;\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_003_gre_tunnel_reflector/sample-0.c:43:68: error: expected ';' after expression\n   43 |     __builtin_memcpy(&new_ip->daddr, &ip->saddr, sizeof(ip->saddr))\n      |                                                                    ^\n      |                                                                    ;\n1 error generated."
+}

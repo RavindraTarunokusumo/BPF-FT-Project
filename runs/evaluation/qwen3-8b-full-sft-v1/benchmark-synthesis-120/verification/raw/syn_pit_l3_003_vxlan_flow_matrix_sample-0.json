@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_003_vxlan_flow_matrix",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c",
+  "source_sha256": "516a9ec220a1daac7ed2b6215260c9b18251461a34df737da78d688086277630",
+  "timestamp": "2026-08-31T18:31:23.246936+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c:70:24: error: arithmetic on a pointer to an incomplete type 'struct vxlanhdr'\n   70 |     if ((void *)(vxlan + 1) > data_end)\n      |                  ~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c:69:12: note: forward declaration of 'struct vxlanhdr'\n   69 |     struct vxlanhdr *vxlan = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c:74:20: error: incomplete definition of type 'struct vxlanhdr'\n   74 |     key.vni = vxlan->vni;\n      |               ~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c:69:12: note: forward declaration of 'struct vxlanhdr'\n   69 |     struct vxlanhdr *vxlan = (void *)udp + udp_hdr_len;\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c:70:24: error: arithmetic on a pointer to an incomplete type 'struct vxlanhdr'\n   70 |     if ((void *)(vxlan + 1) > data_end)\n      |                  ~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c:69:12: note: forward declaration of 'struct vxlanhdr'\n   69 |     struct vxlanhdr *vxlan = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c:74:20: error: incomplete definition of type 'struct vxlanhdr'\n   74 |     key.vni = vxlan->vni;\n      |               ~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c:69:12: note: forward declaration of 'struct vxlanhdr'\n   69 |     struct vxlanhdr *vxlan = (void *)udp + udp_hdr_len;\n      |            ^\n2 errors generated."
+}

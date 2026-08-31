@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_008_gtpu_teid_remapping_and_csum",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c",
+  "source_sha256": "1fdac8e60e3da859fca5d4ffadff3adad62a63557d8aac88843c8dd92feaffb9",
+  "timestamp": "2026-08-31T18:32:09.113676+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:44:46: error: invalid application of 'sizeof' to an incomplete type 'struct gtpuhdr'\n   44 |     unsigned int gtp_hdr_len = udp_hdr_len + sizeof(struct gtpuhdr);\n      |                                              ^     ~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:44:60: note: forward declaration of 'struct gtpuhdr'\n   44 |     unsigned int gtp_hdr_len = udp_hdr_len + sizeof(struct gtpuhdr);\n      |                                                            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:49:21: error: incomplete definition of type 'struct gtpuhdr'\n   49 |     __u32 teid = gtp->teid;\n      |                  ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:44:60: note: forward declaration of 'struct gtpuhdr'\n   44 |     unsigned int gtp_hdr_len = udp_hdr_len + sizeof(struct gtpuhdr);\n      |                                                            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:53:8: error: incomplete definition of type 'struct gtpuhdr'\n   53 |     gtp->teid = bpf_htonl(0x2000);\n      |     ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:44:60: note: forward declaration of 'struct gtpuhdr'\n   44 |     unsigned int gtp_hdr_len = udp_hdr_len + sizeof(struct gtpuhdr);\n      |                                                            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:44:46: error: invalid application of 'sizeof' to an incomplete type 'struct gtpuhdr'\n   44 |     unsigned int gtp_hdr_len = udp_hdr_len + sizeof(struct gtpuhdr);\n      |                                              ^     ~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:44:60: note: forward declaration of 'struct gtpuhdr'\n   44 |     unsigned int gtp_hdr_len = udp_hdr_len + sizeof(struct gtpuhdr);\n      |                                                            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:49:21: error: incomplete definition of type 'struct gtpuhdr'\n   49 |     __u32 teid = gtp->teid;\n      |                  ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:44:60: note: forward declaration of 'struct gtpuhdr'\n   44 |     unsigned int gtp_hdr_len = udp_hdr_len + sizeof(struct gtpuhdr);\n      |                                                            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:53:8: error: incomplete definition of type 'struct gtpuhdr'\n   53 |     gtp->teid = bpf_htonl(0x2000);\n      |     ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_008_gtpu_teid_remapping_and_csum/sample-0.c:44:60: note: forward declaration of 'struct gtpuhdr'\n   44 |     unsigned int gtp_hdr_len = udp_hdr_len + sizeof(struct gtpuhdr);\n      |                                                            ^\n3 errors generated."
+}

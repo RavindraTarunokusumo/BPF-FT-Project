@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_003_srv6_end_dx4_decapsulation",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c",
+  "source_sha256": "4949de6e919270248855475197e5b09726ee7ada3ce7752e1b1fa3b3497ffd93",
+  "timestamp": "2026-08-31T18:31:58.780666+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:33:23: error: arithmetic on a pointer to an incomplete type 'struct sctphdr'\n   33 |     if ((void *)(sctp + 1) > data_end)\n      |                  ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:32:12: note: forward declaration of 'struct sctphdr'\n   32 |     struct sctphdr *sctp = (void *)(ip6 + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:36:13: error: incomplete definition of type 'struct sctphdr'\n   36 |     if (sctp->check != 0x12345678)\n      |         ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:32:12: note: forward declaration of 'struct sctphdr'\n   32 |     struct sctphdr *sctp = (void *)(ip6 + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:40:17: warning: ordered comparison between pointer and integer ('__u64' (aka 'unsigned long long') and 'void *')\n   40 |     if (pkt_len < (void *)ip6 + sizeof(struct ipv6hdr))\n      |         ~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:44:59: error: invalid application of 'sizeof' to an incomplete type 'struct srh_hdr'\n   44 |     __u64 new_hdr = (__u64)ip6 + sizeof(struct ipv6hdr) + sizeof(struct srh_hdr);\n      |                                                           ^     ~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:44:73: note: forward declaration of 'struct srh_hdr'\n   44 |     __u64 new_hdr = (__u64)ip6 + sizeof(struct ipv6hdr) + sizeof(struct srh_hdr);\n      |                                                                         ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:56:10: error: no member named 'protocol' in 'struct ipv6hdr'\n   56 |     ip6->protocol = IPPROTO_TCP;\n      |     ~~~  ^\n1 warning and 4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:33:23: error: arithmetic on a pointer to an incomplete type 'struct sctphdr'\n   33 |     if ((void *)(sctp + 1) > data_end)\n      |                  ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:32:12: note: forward declaration of 'struct sctphdr'\n   32 |     struct sctphdr *sctp = (void *)(ip6 + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:36:13: error: incomplete definition of type 'struct sctphdr'\n   36 |     if (sctp->check != 0x12345678)\n      |         ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:32:12: note: forward declaration of 'struct sctphdr'\n   32 |     struct sctphdr *sctp = (void *)(ip6 + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:40:17: warning: ordered comparison between pointer and integer ('__u64' (aka 'unsigned long long') and 'void *')\n   40 |     if (pkt_len < (void *)ip6 + sizeof(struct ipv6hdr))\n      |         ~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:44:59: error: invalid application of 'sizeof' to an incomplete type 'struct srh_hdr'\n   44 |     __u64 new_hdr = (__u64)ip6 + sizeof(struct ipv6hdr) + sizeof(struct srh_hdr);\n      |                                                           ^     ~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:44:73: note: forward declaration of 'struct srh_hdr'\n   44 |     __u64 new_hdr = (__u64)ip6 + sizeof(struct ipv6hdr) + sizeof(struct srh_hdr);\n      |                                                                         ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c:56:10: error: no member named 'protocol' in 'struct ipv6hdr'\n   56 |     ip6->protocol = IPPROTO_TCP;\n      |     ~~~  ^\n1 warning and 4 errors generated."
+}

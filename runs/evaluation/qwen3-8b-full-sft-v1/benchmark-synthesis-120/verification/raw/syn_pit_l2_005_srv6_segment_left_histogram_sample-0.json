@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_005_srv6_segment_left_histogram",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c",
+  "source_sha256": "9274f38191309f58e68cd24cd85790c1577784cb0f225d8199df1de1a9e1d311",
+  "timestamp": "2026-08-31T18:31:17.206750+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_IP6'\n   29 |     if (eth->h_proto != bpf_htons(ETH_P_IP6))\n      |                                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_IP6'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_IP6'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_IP6'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:40:22: error: arithmetic on a pointer to an incomplete type 'struct ipv6_routing_hdr'\n   40 |     if ((void *)(srh + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:39:12: note: forward declaration of 'struct ipv6_routing_hdr'\n   39 |     struct ipv6_routing_hdr *srh = (void *)(ip6 + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:43:19: error: incomplete definition of type 'struct ipv6_routing_hdr'\n   43 |     __u32 sl = srh->segments_left;\n      |                ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:39:12: note: forward declaration of 'struct ipv6_routing_hdr'\n   39 |     struct ipv6_routing_hdr *srh = (void *)(ip6 + 1);\n      |            ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_IP6'\n   29 |     if (eth->h_proto != bpf_htons(ETH_P_IP6))\n      |                                   ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_IP6'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_IP6'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:29:35: error: use of undeclared identifier 'ETH_P_IP6'\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:40:22: error: arithmetic on a pointer to an incomplete type 'struct ipv6_routing_hdr'\n   40 |     if ((void *)(srh + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:39:12: note: forward declaration of 'struct ipv6_routing_hdr'\n   39 |     struct ipv6_routing_hdr *srh = (void *)(ip6 + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:43:19: error: incomplete definition of type 'struct ipv6_routing_hdr'\n   43 |     __u32 sl = srh->segments_left;\n      |                ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:39:12: note: forward declaration of 'struct ipv6_routing_hdr'\n   39 |     struct ipv6_routing_hdr *srh = (void *)(ip6 + 1);\n      |            ^\n6 errors generated."
+}

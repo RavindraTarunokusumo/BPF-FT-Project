@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_006_icmp_port_unreachable_generator",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c",
+  "source_sha256": "a2a248df46cd65990b90d55d9c34c03c8d19f132df3e733d29c94b27dc5eb237",
+  "timestamp": "2026-08-31T18:32:03.683023+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:52:33: error: no member named 'src' in 'struct iphdr'\n   52 |     struct in_addr tmp_ip = ip->src;\n      |                             ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:53:9: error: no member named 'src' in 'struct iphdr'\n   53 |     ip->src = ip->dst;\n      |     ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:53:19: error: no member named 'dst' in 'struct iphdr'\n   53 |     ip->src = ip->dst;\n      |               ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:54:9: error: no member named 'dst' in 'struct iphdr'\n   54 |     ip->dst = tmp_ip;\n      |     ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:66:19: error: no member named 'icmp_id' in 'struct icmphdr::(unnamed at /usr/include/linux/icmp.h:94:2)'\n   66 |     icmp->un.echo.icmp_id = 0x1234;\n      |     ~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:67:19: error: no member named 'icmp_seq' in 'struct icmphdr::(unnamed at /usr/include/linux/icmp.h:94:2)'\n   67 |     icmp->un.echo.icmp_seq = 0x5678;\n      |     ~~~~~~~~~~~~~ ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:52:33: error: no member named 'src' in 'struct iphdr'\n   52 |     struct in_addr tmp_ip = ip->src;\n      |                             ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:53:9: error: no member named 'src' in 'struct iphdr'\n   53 |     ip->src = ip->dst;\n      |     ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:53:19: error: no member named 'dst' in 'struct iphdr'\n   53 |     ip->src = ip->dst;\n      |               ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:54:9: error: no member named 'dst' in 'struct iphdr'\n   54 |     ip->dst = tmp_ip;\n      |     ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:66:19: error: no member named 'icmp_id' in 'struct icmphdr::(unnamed at /usr/include/linux/icmp.h:94:2)'\n   66 |     icmp->un.echo.icmp_id = 0x1234;\n      |     ~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_006_icmp_port_unreachable_generator/sample-0.c:67:19: error: no member named 'icmp_seq' in 'struct icmphdr::(unnamed at /usr/include/linux/icmp.h:94:2)'\n   67 |     icmp->un.echo.icmp_seq = 0x5678;\n      |     ~~~~~~~~~~~~~ ^\n6 errors generated."
+}

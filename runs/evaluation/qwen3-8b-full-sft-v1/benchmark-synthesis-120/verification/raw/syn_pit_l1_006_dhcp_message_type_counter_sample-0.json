@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_006_dhcp_message_type_counter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c",
+  "source_sha256": "adc76bde295551963a0c61a3588082656ea4acf9f06dd2ff058b592ad4eb879e",
+  "timestamp": "2026-08-31T18:31:02.926483+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:50:44: error: no member named 'src' in 'struct udphdr'\n   50 |     if (udp->dest != bpf_htons(67) && udp->src != bpf_htons(68))\n      |                                       ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:58:23: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   58 |     if (payload + 243 > data_end)\n      |         ~~~~~~~~~~~~~ ^ ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:68:20: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   68 |     while (payload < data_end) {\n      |            ~~~~~~~ ^ ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:73:35: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   73 |         if (payload + 2 + opt_len > data_end)\n      |             ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\n3 warnings and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:50:44: error: no member named 'src' in 'struct udphdr'\n   50 |     if (udp->dest != bpf_htons(67) && udp->src != bpf_htons(68))\n      |                                       ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:58:23: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   58 |     if (payload + 243 > data_end)\n      |         ~~~~~~~~~~~~~ ^ ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:68:20: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   68 |     while (payload < data_end) {\n      |            ~~~~~~~ ^ ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:73:35: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   73 |         if (payload + 2 + opt_len > data_end)\n      |             ~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\n3 warnings and 1 error generated."
+}

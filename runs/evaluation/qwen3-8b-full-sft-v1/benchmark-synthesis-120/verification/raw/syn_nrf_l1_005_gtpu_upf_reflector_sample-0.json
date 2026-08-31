@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "syn_nrf_l1_005_gtpu_upf_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c",
+  "source_sha256": "d30560c84e0f7f54e4d7bcf11f448c2c2694bdec7e668a5f05db61b6cca7fc37",
+  "timestamp": "2026-08-31T18:29:45.263426+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:48:22: error: arithmetic on a pointer to an incomplete type 'struct gtpuhdr'\n   48 |     if ((void *)(gtp + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:47:12: note: forward declaration of 'struct gtpuhdr'\n   47 |     struct gtpuhdr *gtp = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:51:12: error: incomplete definition of type 'struct gtpuhdr'\n   51 |     if (gtp->teid != bpf_htonl(0x12345678))\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:47:12: note: forward declaration of 'struct gtpuhdr'\n   47 |     struct gtpuhdr *gtp = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:63:33: error: no member named 'src' in 'struct iphdr'\n   63 |     struct in_addr tmp_ip = ip->src;\n      |                             ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:64:9: error: no member named 'src' in 'struct iphdr'\n   64 |     ip->src = ip->dst;\n      |     ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:64:19: error: no member named 'dst' in 'struct iphdr'\n   64 |     ip->src = ip->dst;\n      |               ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:65:9: error: no member named 'dst' in 'struct iphdr'\n   65 |     ip->dst = tmp_ip;\n      |     ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:68:27: error: no member named 'src' in 'struct udphdr'\n   68 |     __u16 tmp_port = udp->src;\n      |                      ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:69:10: error: no member named 'src' in 'struct udphdr'\n   69 |     udp->src = udp->dest;\n      |     ~~~  ^\n8 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:48:22: error: arithmetic on a pointer to an incomplete type 'struct gtpuhdr'\n   48 |     if ((void *)(gtp + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:47:12: note: forward declaration of 'struct gtpuhdr'\n   47 |     struct gtpuhdr *gtp = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:51:12: error: incomplete definition of type 'struct gtpuhdr'\n   51 |     if (gtp->teid != bpf_htonl(0x12345678))\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:47:12: note: forward declaration of 'struct gtpuhdr'\n   47 |     struct gtpuhdr *gtp = (void *)udp + udp_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:63:33: error: no member named 'src' in 'struct iphdr'\n   63 |     struct in_addr tmp_ip = ip->src;\n      |                             ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:64:9: error: no member named 'src' in 'struct iphdr'\n   64 |     ip->src = ip->dst;\n      |     ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:64:19: error: no member named 'dst' in 'struct iphdr'\n   64 |     ip->src = ip->dst;\n      |               ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:65:9: error: no member named 'dst' in 'struct iphdr'\n   65 |     ip->dst = tmp_ip;\n      |     ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:68:27: error: no member named 'src' in 'struct udphdr'\n   68 |     __u16 tmp_port = udp->src;\n      |                      ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l1_005_gtpu_upf_reflector/sample-0.c:69:10: error: no member named 'src' in 'struct udphdr'\n   69 |     udp->src = udp->dest;\n      |     ~~~  ^\n8 errors generated."
+}

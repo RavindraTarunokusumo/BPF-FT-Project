@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_004_srv6_to_gtpu_translation_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c",
+  "source_sha256": "841f7b299a83997edb33f3f78f6537690f6ff513dc5ec5efa7ac262639735682",
+  "timestamp": "2026-08-31T18:30:09.732938+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:37:23: error: arithmetic on a pointer to an incomplete type 'struct sctp_hdr'\n   37 |     if ((void *)(sctp + 1) > data_end)\n      |                  ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:36:12: note: forward declaration of 'struct sctp_hdr'\n   36 |     struct sctp_hdr *sctp = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:40:26: error: incomplete definition of type 'struct sctp_hdr'\n   40 |     __u32 src_port = sctp->source;\n      |                      ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:36:12: note: forward declaration of 'struct sctp_hdr'\n   36 |     struct sctp_hdr *sctp = (void *)ip + ip_hdr_len;\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:37:23: error: arithmetic on a pointer to an incomplete type 'struct sctp_hdr'\n   37 |     if ((void *)(sctp + 1) > data_end)\n      |                  ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:36:12: note: forward declaration of 'struct sctp_hdr'\n   36 |     struct sctp_hdr *sctp = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:40:26: error: incomplete definition of type 'struct sctp_hdr'\n   40 |     __u32 src_port = sctp->source;\n      |                      ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:36:12: note: forward declaration of 'struct sctp_hdr'\n   36 |     struct sctp_hdr *sctp = (void *)ip + ip_hdr_len;\n      |            ^\n2 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_001_token_bucket_policer",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c",
+  "source_sha256": "37f2b43ae92880745462b05d3962c798f656d153d9e76c50e71805ac09bfef3b",
+  "timestamp": "2026-08-31T18:30:39.201802+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:48:23: error: use of undeclared identifier 'BURST_CAPACITY'\n   48 |             .tokens = BURST_CAPACITY,\n      |                       ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:51:12: error: incompatible integer to pointer conversion assigning to 'struct bucket_state *' from 'long' [-Wint-conversion]\n   51 |         bs = bpf_map_update_elem(&policer_map_1, &src_ip, &initial, BPF_ANY);\n      |            ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:58:37: error: use of undeclared identifier 'RATE_BYTES_PER_SEC'\n   58 |     __u64 rate_ns = 1000000000ULL / RATE_BYTES_PER_SEC;\n      |                                     ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:61:64: error: use of undeclared identifier 'RATE_BYTES_PER_SEC'\n   61 |         __u64 tokens = BURST_CAPACITY - (elapsed / rate_ns) * (RATE_BYTES_PER_SEC);\n      |                                                                ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:61:24: error: use of undeclared identifier 'BURST_CAPACITY'\n   61 |         __u64 tokens = BURST_CAPACITY - (elapsed / rate_ns) * (RATE_BYTES_PER_SEC);\n      |                        ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:62:22: error: use of undeclared identifier 'BURST_CAPACITY'\n   62 |         if (tokens < BURST_CAPACITY)\n      |                      ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:67:19: error: use of undeclared identifier 'BURST_CAPACITY'\n   67 |     if (pkt_len > BURST_CAPACITY || bs->tokens < pkt_len)\n      |                   ^\n7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:48:23: error: use of undeclared identifier 'BURST_CAPACITY'\n   48 |             .tokens = BURST_CAPACITY,\n      |                       ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:51:12: error: incompatible integer to pointer conversion assigning to 'struct bucket_state *' from 'long' [-Wint-conversion]\n   51 |         bs = bpf_map_update_elem(&policer_map_1, &src_ip, &initial, BPF_ANY);\n      |            ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:58:37: error: use of undeclared identifier 'RATE_BYTES_PER_SEC'\n   58 |     __u64 rate_ns = 1000000000ULL / RATE_BYTES_PER_SEC;\n      |                                     ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:61:64: error: use of undeclared identifier 'RATE_BYTES_PER_SEC'\n   61 |         __u64 tokens = BURST_CAPACITY - (elapsed / rate_ns) * (RATE_BYTES_PER_SEC);\n      |                                                                ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:61:24: error: use of undeclared identifier 'BURST_CAPACITY'\n   61 |         __u64 tokens = BURST_CAPACITY - (elapsed / rate_ns) * (RATE_BYTES_PER_SEC);\n      |                        ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:62:22: error: use of undeclared identifier 'BURST_CAPACITY'\n   62 |         if (tokens < BURST_CAPACITY)\n      |                      ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:67:19: error: use of undeclared identifier 'BURST_CAPACITY'\n   67 |     if (pkt_len > BURST_CAPACITY || bs->tokens < pkt_len)\n      |                   ^\n7 errors generated."
+}

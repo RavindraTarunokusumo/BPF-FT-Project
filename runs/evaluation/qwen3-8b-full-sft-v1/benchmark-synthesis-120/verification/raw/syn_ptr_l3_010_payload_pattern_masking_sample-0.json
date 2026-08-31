@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_010_payload_pattern_masking",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_010_payload_pattern_masking/sample-0.c",
+  "source_sha256": "a540c0c0252134b18567f0fcdf11c401216acbb05d6980fd6ce535a2c7af0a9e",
+  "timestamp": "2026-08-31T18:32:13.890483+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_010_payload_pattern_masking/sample-0.c:39:11: error: incompatible pointer to integer conversion initializing '__u64' (aka 'unsigned long long') with an expression of type 'void *' [-Wint-conversion]\n   39 |     __u64 payload_start = (void *)tcp + sizeof(struct tcphdr);\n      |           ^               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_010_payload_pattern_masking/sample-0.c:40:23: warning: ordered comparison between pointer and integer ('__u64' (aka 'unsigned long long') and 'void *')\n   40 |     if (payload_start >= data_end)\n      |         ~~~~~~~~~~~~~ ^  ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_010_payload_pattern_masking/sample-0.c:45:35: error: 'void *' and '__u8 *' (aka 'unsigned char *') are not pointers to compatible types\n   45 |     for (int i = 0; i <= data_end - p; i++) {\n      |                          ~~~~~~~~ ^ ~\n1 warning and 2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_010_payload_pattern_masking/sample-0.c:39:11: error: incompatible pointer to integer conversion initializing '__u64' (aka 'unsigned long long') with an expression of type 'void *' [-Wint-conversion]\n   39 |     __u64 payload_start = (void *)tcp + sizeof(struct tcphdr);\n      |           ^               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_010_payload_pattern_masking/sample-0.c:40:23: warning: ordered comparison between pointer and integer ('__u64' (aka 'unsigned long long') and 'void *')\n   40 |     if (payload_start >= data_end)\n      |         ~~~~~~~~~~~~~ ^  ~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_010_payload_pattern_masking/sample-0.c:45:35: error: 'void *' and '__u8 *' (aka 'unsigned char *') are not pointers to compatible types\n   45 |     for (int i = 0; i <= data_end - p; i++) {\n      |                          ~~~~~~~~ ^ ~\n1 warning and 2 errors generated."
+}

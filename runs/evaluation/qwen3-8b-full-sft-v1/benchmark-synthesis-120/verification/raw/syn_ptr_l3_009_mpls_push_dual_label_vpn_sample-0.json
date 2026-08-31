@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_009_mpls_push_dual_label_vpn",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c",
+  "source_sha256": "1b02ebe9d7ac0736c7634d47a5630ce915cc762e0822235b1781469b4881c696",
+  "timestamp": "2026-08-31T18:32:10.807304+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:42:9: error: subscript of pointer to incomplete type 'struct mpls_label'\n   42 |     mpls[0].label = 1000;\n      |     ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:41:12: note: forward declaration of 'struct mpls_label'\n   41 |     struct mpls_label *mpls = (void *)(new_eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:43:9: error: subscript of pointer to incomplete type 'struct mpls_label'\n   43 |     mpls[0].bos = 0;\n      |     ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:41:12: note: forward declaration of 'struct mpls_label'\n   41 |     struct mpls_label *mpls = (void *)(new_eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:44:9: error: subscript of pointer to incomplete type 'struct mpls_label'\n   44 |     mpls[0].ttl = 64;\n      |     ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:41:12: note: forward declaration of 'struct mpls_label'\n   41 |     struct mpls_label *mpls = (void *)(new_eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:46:24: error: arithmetic on a pointer to an incomplete type 'struct mpls_label'\n   46 |     ip = (void *)(mpls + 1);\n      |                   ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:41:12: note: forward declaration of 'struct mpls_label'\n   41 |     struct mpls_label *mpls = (void *)(new_eth + 1);\n      |            ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:42:9: error: subscript of pointer to incomplete type 'struct mpls_label'\n   42 |     mpls[0].label = 1000;\n      |     ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:41:12: note: forward declaration of 'struct mpls_label'\n   41 |     struct mpls_label *mpls = (void *)(new_eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:43:9: error: subscript of pointer to incomplete type 'struct mpls_label'\n   43 |     mpls[0].bos = 0;\n      |     ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:41:12: note: forward declaration of 'struct mpls_label'\n   41 |     struct mpls_label *mpls = (void *)(new_eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:44:9: error: subscript of pointer to incomplete type 'struct mpls_label'\n   44 |     mpls[0].ttl = 64;\n      |     ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:41:12: note: forward declaration of 'struct mpls_label'\n   41 |     struct mpls_label *mpls = (void *)(new_eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:46:24: error: arithmetic on a pointer to an incomplete type 'struct mpls_label'\n   46 |     ip = (void *)(mpls + 1);\n      |                   ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:41:12: note: forward declaration of 'struct mpls_label'\n   41 |     struct mpls_label *mpls = (void *)(new_eth + 1);\n      |            ^\n4 errors generated."
+}

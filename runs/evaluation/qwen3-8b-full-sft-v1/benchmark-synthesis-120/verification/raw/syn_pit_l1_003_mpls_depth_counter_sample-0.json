@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_003_mpls_depth_counter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c",
+  "source_sha256": "638978b28fba478a0ac814cd861d20d9886706913e14c87589018494b5d527d4",
+  "timestamp": "2026-08-31T18:30:57.131991+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:37:23: error: arithmetic on a pointer to an incomplete type 'struct mpls_hdr'\n   37 |     if ((void *)(mpls + 1) > data_end)\n      |                  ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:36:12: note: forward declaration of 'struct mpls_hdr'\n   36 |     struct mpls_hdr *mpls = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:41:13: error: incomplete definition of type 'struct mpls_hdr'\n   41 |     if (mpls->bos & 0x00000100)\n      |         ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:36:12: note: forward declaration of 'struct mpls_hdr'\n   36 |     struct mpls_hdr *mpls = (void *)(eth + 1);\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:37:23: error: arithmetic on a pointer to an incomplete type 'struct mpls_hdr'\n   37 |     if ((void *)(mpls + 1) > data_end)\n      |                  ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:36:12: note: forward declaration of 'struct mpls_hdr'\n   36 |     struct mpls_hdr *mpls = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:41:13: error: incomplete definition of type 'struct mpls_hdr'\n   41 |     if (mpls->bos & 0x00000100)\n      |         ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:36:12: note: forward declaration of 'struct mpls_hdr'\n   36 |     struct mpls_hdr *mpls = (void *)(eth + 1);\n      |            ^\n2 errors generated."
+}

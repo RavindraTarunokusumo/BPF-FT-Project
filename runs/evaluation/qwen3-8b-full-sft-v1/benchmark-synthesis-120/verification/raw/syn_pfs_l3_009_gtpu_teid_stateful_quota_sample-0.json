@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_009_gtpu_teid_stateful_quota",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c",
+  "source_sha256": "5fe18ea4ed93b3dbe40f4061504d499729b57c48263a0da5dbda9b0a83d11193",
+  "timestamp": "2026-08-31T18:30:51.093109+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:66:14: error: no member named 'daddr' in 'struct udphdr'\n   66 |     if (udp->daddr == bpf_htons(12345) && udp->sport == bpf_htons(5000)) {\n      |         ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:66:48: error: no member named 'sport' in 'struct udphdr'\n   66 |     if (udp->daddr == bpf_htons(12345) && udp->sport == bpf_htons(5000)) {\n      |                                           ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:68:21: error: no member named 'daddr' in 'struct udphdr'\n   68 |     } else if (udp->daddr == bpf_htons(12346) && udp->sport == bpf_htons(5001)) {\n      |                ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:68:55: error: no member named 'sport' in 'struct udphdr'\n   68 |     } else if (udp->daddr == bpf_htons(12346) && udp->sport == bpf_htons(5001)) {\n      |                                                  ~~~  ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:66:14: error: no member named 'daddr' in 'struct udphdr'\n   66 |     if (udp->daddr == bpf_htons(12345) && udp->sport == bpf_htons(5000)) {\n      |         ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:66:48: error: no member named 'sport' in 'struct udphdr'\n   66 |     if (udp->daddr == bpf_htons(12345) && udp->sport == bpf_htons(5000)) {\n      |                                           ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:68:21: error: no member named 'daddr' in 'struct udphdr'\n   68 |     } else if (udp->daddr == bpf_htons(12346) && udp->sport == bpf_htons(5001)) {\n      |                ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:68:55: error: no member named 'sport' in 'struct udphdr'\n   68 |     } else if (udp->daddr == bpf_htons(12346) && udp->sport == bpf_htons(5001)) {\n      |                                                  ~~~  ^\n4 errors generated."
+}

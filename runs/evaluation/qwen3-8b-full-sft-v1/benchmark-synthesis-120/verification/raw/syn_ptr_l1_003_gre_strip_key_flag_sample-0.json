@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_003_gre_strip_key_flag",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c",
+  "source_sha256": "3f0557918c0f4294a79d22a5ac78d587c7fd94631e877ff6210482382c671551",
+  "timestamp": "2026-08-31T18:31:33.190989+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:32:22: error: arithmetic on a pointer to an incomplete type 'struct grehdr'\n   32 |     if ((void *)(gre + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:31:12: note: forward declaration of 'struct grehdr'\n   31 |     struct grehdr *gre = (void *)(ip + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:35:22: error: incomplete definition of type 'struct grehdr'\n   35 |     __u16 flags = gre->flags & ~0x2000;\n      |                   ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:31:12: note: forward declaration of 'struct grehdr'\n   31 |     struct grehdr *gre = (void *)(ip + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:36:8: error: incomplete definition of type 'struct grehdr'\n   36 |     gre->flags = flags;\n      |     ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:31:12: note: forward declaration of 'struct grehdr'\n   31 |     struct grehdr *gre = (void *)(ip + 1);\n      |            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:32:22: error: arithmetic on a pointer to an incomplete type 'struct grehdr'\n   32 |     if ((void *)(gre + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:31:12: note: forward declaration of 'struct grehdr'\n   31 |     struct grehdr *gre = (void *)(ip + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:35:22: error: incomplete definition of type 'struct grehdr'\n   35 |     __u16 flags = gre->flags & ~0x2000;\n      |                   ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:31:12: note: forward declaration of 'struct grehdr'\n   31 |     struct grehdr *gre = (void *)(ip + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:36:8: error: incomplete definition of type 'struct grehdr'\n   36 |     gre->flags = flags;\n      |     ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:31:12: note: forward declaration of 'struct grehdr'\n   31 |     struct grehdr *gre = (void *)(ip + 1);\n      |            ^\n3 errors generated."
+}

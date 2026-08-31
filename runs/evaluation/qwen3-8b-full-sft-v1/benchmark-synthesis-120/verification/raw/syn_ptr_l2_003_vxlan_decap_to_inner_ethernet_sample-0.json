@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_003_vxlan_decap_to_inner_ethernet",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c",
+  "source_sha256": "04a35fa34fcf98e6ea664186f9067f818cea8878442c2355a529b28e22ac5ac7",
+  "timestamp": "2026-08-31T18:31:44.635075+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:50:14: error: no member named 'dgram_len' in 'struct udphdr'\n   50 |     if (udp->dgram_len < (unsigned int)sizeof(struct ethhdr))\n      |         ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:57:34: error: invalid application of 'sizeof' to an incomplete type 'struct vxlan_hdr'\n   57 |     unsigned int vxlan_hdr_len = sizeof(struct vxlan_hdr);\n      |                                  ^     ~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:57:48: note: forward declaration of 'struct vxlan_hdr'\n   57 |     unsigned int vxlan_hdr_len = sizeof(struct vxlan_hdr);\n      |                                                ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:62:14: error: incomplete definition of type 'struct vxlan_hdr'\n   62 |     if (vxlan->vni != 0x3)\n      |         ~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:57:48: note: forward declaration of 'struct vxlan_hdr'\n   57 |     unsigned int vxlan_hdr_len = sizeof(struct vxlan_hdr);\n      |                                                ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:69:18: error: 'void *' and '__u8 *' (aka 'unsigned char *') are not pointers to compatible types\n   69 |     if (data_end - p < sizeof(struct ethhdr))\n      |         ~~~~~~~~ ^ ~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:72:39: error: '__u8 *' (aka 'unsigned char *') and 'void *' are not pointers to compatible types\n   72 |     __u64 new_head = (__u64)data + (p - (void *)data);\n      |                                     ~ ^ ~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:76:48: error: 'void *' and '__u8 *' (aka 'unsigned char *') are not pointers to compatible types\n   76 |     __builtin_memcpy((void *)data, p, data_end - p);\n      |                                       ~~~~~~~~ ^ ~\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:50:14: error: no member named 'dgram_len' in 'struct udphdr'\n   50 |     if (udp->dgram_len < (unsigned int)sizeof(struct ethhdr))\n      |         ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:57:34: error: invalid application of 'sizeof' to an incomplete type 'struct vxlan_hdr'\n   57 |     unsigned int vxlan_hdr_len = sizeof(struct vxlan_hdr);\n      |                                  ^     ~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:57:48: note: forward declaration of 'struct vxlan_hdr'\n   57 |     unsigned int vxlan_hdr_len = sizeof(struct vxlan_hdr);\n      |                                                ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:62:14: error: incomplete definition of type 'struct vxlan_hdr'\n   62 |     if (vxlan->vni != 0x3)\n      |         ~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:57:48: note: forward declaration of 'struct vxlan_hdr'\n   57 |     unsigned int vxlan_hdr_len = sizeof(struct vxlan_hdr);\n      |                                                ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:69:18: error: 'void *' and '__u8 *' (aka 'unsigned char *') are not pointers to compatible types\n   69 |     if (data_end - p < sizeof(struct ethhdr))\n      |         ~~~~~~~~ ^ ~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:72:39: error: '__u8 *' (aka 'unsigned char *') and 'void *' are not pointers to compatible types\n   72 |     __u64 new_head = (__u64)data + (p - (void *)data);\n      |                                     ~ ^ ~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l2_003_vxlan_decap_to_inner_ethernet/sample-0.c:76:48: error: 'void *' and '__u8 *' (aka 'unsigned char *') are not pointers to compatible types\n   76 |     __builtin_memcpy((void *)data, p, data_end - p);\n      |                                       ~~~~~~~~ ^ ~\n6 errors generated."
+}

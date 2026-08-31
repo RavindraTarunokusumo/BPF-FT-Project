@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_002_ipv6_lpm_trie_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c",
+  "source_sha256": "a8a8ee43d29e2bfe97b7f8041c83fb865edab05050161507d376722f809997aa",
+  "timestamp": "2026-08-31T18:29:51.225277+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c:30:11: warning: comparison of distinct pointer types ('__u8 *' (aka 'unsigned char *') and 'void *') [-Wcompare-distinct-pointer-types]\n   30 |     if (d < (void *)ip6 + sizeof(struct ipv6hdr))\n      |         ~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 warning generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_cr5ri65j/candidate.o\nlibbpf: elf: section(3) xdp, size 16, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_syn_nrf_l2_002' at insn offset 0 (0 bytes), code size 2 insns (16 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_cr5ri65j/candidate.o is GPL\nlibbpf: elf: section(13) .BTF, size 649, link 0, flags 0, type=1\nlibbpf: elf: section(15) .BTF.ext, size 80, link 0, flags 0, type=1\nlibbpf: elf: section(23) .symtab, size 288, link 1, flags 0, type=2\nlibbpf: looking for externs among 12 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_route_syn_nrf_l2_002': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx(off=0,imm=0) R10=fp0\n; }\n0: (b7) r0 = 2                        ; R0_w=2\n1: (95) exit\nverification time 58 usec\nstack depth 0\nprocessed 2 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\n"
+}

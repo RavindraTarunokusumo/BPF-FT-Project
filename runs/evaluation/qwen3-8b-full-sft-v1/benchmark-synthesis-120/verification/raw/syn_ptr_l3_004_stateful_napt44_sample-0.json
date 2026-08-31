@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_004_stateful_napt44",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c",
+  "source_sha256": "1dd94a957348573244088f133f7f56e91e56d07927a9a617ce51bdc3ad165501",
+  "timestamp": "2026-08-31T18:32:00.458902+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:64:25: error: subscripted value is not an array, pointer, or vector\n   64 |         d[i] = ip->saddr[i];\n      |                ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:70:28: warning: incompatible pointer types initializing 'struct napt_tuple *' with an expression of type '__u64 *' (aka 'unsigned long long *') [-Wincompatible-pointer-types]\n   70 |         struct napt_tuple *rev_key = (__u64 *)val;\n      |                            ^         ~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:73:22: error: subscripted value is not an array, pointer, or vector\n   73 |             ip->saddr[i] = rev_key->priv_src_ip;\n      |             ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:83:18: error: subscripted value is not an array, pointer, or vector\n   83 |         ip->saddr[i] = (ip->saddr[i] == 10 && i == 0) ? 198 : \n      |         ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:83:34: error: subscripted value is not an array, pointer, or vector\n   83 |         ip->saddr[i] = (ip->saddr[i] == 10 && i == 0) ? 198 : \n      |                         ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:84:34: error: subscripted value is not an array, pointer, or vector\n   84 |                        (ip->saddr[i] == 0 && i == 1) ? 51 : \n      |                         ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:85:34: error: subscripted value is not an array, pointer, or vector\n   85 |                        (ip->saddr[i] == 0 && i == 2) ? 100 : ip->saddr[i];\n      |                         ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:85:71: error: subscripted value is not an array, pointer, or vector\n   85 |                        (ip->saddr[i] == 0 && i == 2) ? 100 : ip->saddr[i];\n      |                                                              ~~~~~~~~~^~\n1 warning and 7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:64:25: error: subscripted value is not an array, pointer, or vector\n   64 |         d[i] = ip->saddr[i];\n      |                ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:70:28: warning: incompatible pointer types initializing 'struct napt_tuple *' with an expression of type '__u64 *' (aka 'unsigned long long *') [-Wincompatible-pointer-types]\n   70 |         struct napt_tuple *rev_key = (__u64 *)val;\n      |                            ^         ~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:73:22: error: subscripted value is not an array, pointer, or vector\n   73 |             ip->saddr[i] = rev_key->priv_src_ip;\n      |             ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:83:18: error: subscripted value is not an array, pointer, or vector\n   83 |         ip->saddr[i] = (ip->saddr[i] == 10 && i == 0) ? 198 : \n      |         ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:83:34: error: subscripted value is not an array, pointer, or vector\n   83 |         ip->saddr[i] = (ip->saddr[i] == 10 && i == 0) ? 198 : \n      |                         ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:84:34: error: subscripted value is not an array, pointer, or vector\n   84 |                        (ip->saddr[i] == 0 && i == 1) ? 51 : \n      |                         ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:85:34: error: subscripted value is not an array, pointer, or vector\n   85 |                        (ip->saddr[i] == 0 && i == 2) ? 100 : ip->saddr[i];\n      |                         ~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_ptr_l3_004_stateful_napt44/sample-0.c:85:71: error: subscripted value is not an array, pointer, or vector\n   85 |                        (ip->saddr[i] == 0 && i == 2) ? 100 : ip->saddr[i];\n      |                                                              ~~~~~~~~~^~\n1 warning and 7 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_004_vxlan_inner_l3_distribution",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c",
+  "source_sha256": "7234762e7bc88896edec62e21c8d7df320ffaa74b5ce1263b926d0715c0e0b7e",
+  "timestamp": "2026-08-31T18:31:16.258465+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:61:52: error: invalid application of 'sizeof' to an incomplete type 'struct vxlanhdr'\n   61 |     struct ethhdr *inner_eth = (void *)vxlan_hdr + sizeof(struct vxlanhdr);\n      |                                                    ^     ~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:61:66: note: forward declaration of 'struct vxlanhdr'\n   61 |     struct ethhdr *inner_eth = (void *)vxlan_hdr + sizeof(struct vxlanhdr);\n      |                                                                  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:61:52: error: invalid application of 'sizeof' to an incomplete type 'struct vxlanhdr'\n   61 |     struct ethhdr *inner_eth = (void *)vxlan_hdr + sizeof(struct vxlanhdr);\n      |                                                    ^     ~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:61:66: note: forward declaration of 'struct vxlanhdr'\n   61 |     struct ethhdr *inner_eth = (void *)vxlan_hdr + sizeof(struct vxlanhdr);\n      |                                                                  ^\n1 error generated."
+}

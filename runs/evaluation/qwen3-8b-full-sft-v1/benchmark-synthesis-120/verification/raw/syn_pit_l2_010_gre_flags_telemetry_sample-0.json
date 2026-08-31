@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_010_gre_flags_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c",
+  "source_sha256": "c6fe43e96e7b81b7d2023857fd42e92efa352021b237f290a24209e359f79963",
+  "timestamp": "2026-08-31T18:31:20.754554+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:44:22: error: arithmetic on a pointer to an incomplete type 'struct gre_hdr'\n   44 |     if ((void *)(gre + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:43:12: note: forward declaration of 'struct gre_hdr'\n   43 |     struct gre_hdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:48:12: error: incomplete definition of type 'struct gre_hdr'\n   48 |     if (gre->flags & 0x2000)\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:43:12: note: forward declaration of 'struct gre_hdr'\n   43 |     struct gre_hdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:50:17: error: incomplete definition of type 'struct gre_hdr'\n   50 |     else if (gre->flags & 0x1000)\n      |              ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:43:12: note: forward declaration of 'struct gre_hdr'\n   43 |     struct gre_hdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:52:17: error: incomplete definition of type 'struct gre_hdr'\n   52 |     else if (gre->flags & 0x8000)\n      |              ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:43:12: note: forward declaration of 'struct gre_hdr'\n   43 |     struct gre_hdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:44:22: error: arithmetic on a pointer to an incomplete type 'struct gre_hdr'\n   44 |     if ((void *)(gre + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:43:12: note: forward declaration of 'struct gre_hdr'\n   43 |     struct gre_hdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:48:12: error: incomplete definition of type 'struct gre_hdr'\n   48 |     if (gre->flags & 0x2000)\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:43:12: note: forward declaration of 'struct gre_hdr'\n   43 |     struct gre_hdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:50:17: error: incomplete definition of type 'struct gre_hdr'\n   50 |     else if (gre->flags & 0x1000)\n      |              ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:43:12: note: forward declaration of 'struct gre_hdr'\n   43 |     struct gre_hdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:52:17: error: incomplete definition of type 'struct gre_hdr'\n   52 |     else if (gre->flags & 0x8000)\n      |              ~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:43:12: note: forward declaration of 'struct gre_hdr'\n   43 |     struct gre_hdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\n4 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_003_stateful_session_lb",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_003_stateful_session_lb/sample-0.c",
+  "source_sha256": "bc9bb188ae8360a07fb668bb45be5297236127504682cb33dc1505f5c4dc5281",
+  "timestamp": "2026-08-31T18:30:08.756438+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_003_stateful_session_lb/sample-0.c:75:32: error: called object type 'int' is not a function or function pointer\n   75 |             return XDP_REDIRECT(old_ifindex);\n      |                    ~~~~~~~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_003_stateful_session_lb/sample-0.c:78:32: error: called object type 'int' is not a function or function pointer\n   78 |             return XDP_REDIRECT(ifindex);\n      |                    ~~~~~~~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_003_stateful_session_lb/sample-0.c:84:28: error: called object type 'int' is not a function or function pointer\n   84 |         return XDP_REDIRECT(*val);\n      |                ~~~~~~~~~~~~^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_003_stateful_session_lb/sample-0.c:75:32: error: called object type 'int' is not a function or function pointer\n   75 |             return XDP_REDIRECT(old_ifindex);\n      |                    ~~~~~~~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_003_stateful_session_lb/sample-0.c:78:32: error: called object type 'int' is not a function or function pointer\n   78 |             return XDP_REDIRECT(ifindex);\n      |                    ~~~~~~~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/candidates/syn_nrf_l3_003_stateful_session_lb/sample-0.c:84:28: error: called object type 'int' is not a function or function pointer\n   84 |         return XDP_REDIRECT(*val);\n      |                ~~~~~~~~~~~~^\n3 errors generated."
+}
