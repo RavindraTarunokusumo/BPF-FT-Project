@@ -24,6 +24,18 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+# Safely load .env if present
+env_file = PROJECT_ROOT / ".env"
+if env_file.is_file():
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            k = k.strip()
+            v = v.strip().strip("\"'")
+            if k not in os.environ:
+                os.environ[k] = v
+
 import tinker
 from tinker_cookbook.renderers import get_renderer
 from tinker_cookbook.tokenizer_utils import get_tokenizer
@@ -134,6 +146,7 @@ async def run_repair_rollout(
     for idx, failed_cand in enumerate(failed_candidates, start=1):
         task_id = failed_cand["task_id"]
         sample_id = failed_cand.get("sample_id", "sample-0")
+        print(f"[{idx}/{len(failed_candidates)}] Repairing candidate for {task_id}...", flush=True)
         meta = task_meta.get(task_id, {})
         category = meta.get("application_category", failed_cand.get("category", "packet_filtering_security"))
         difficulty = meta.get("difficulty", failed_cand.get("difficulty", "level_1"))
@@ -259,7 +272,7 @@ async def run_repair_rollout(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="BPF-Guardian Diagnostic Repair@1 Rollout Generator")
-    parser.add_argument("--synthesis-rollout", type=Path, required=True, help="Path to synthesis rollout directory")
+    parser.add_argument("--synthesis-rollout", "--synthesis-rollout-dir", dest="synthesis_rollout", type=Path, required=True, help="Path to synthesis rollout directory")
     parser.add_argument("--output-dir", type=Path, required=True, help="Destination directory for repair rollout")
     parser.add_argument("--benchmark-index", type=Path, default=PROJECT_ROOT / "data" / "calibration" / "index.jsonl")
     parser.add_argument("--model-name", type=str, default=DEFAULT_MODEL_NAME)
