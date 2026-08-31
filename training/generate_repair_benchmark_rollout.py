@@ -104,6 +104,9 @@ async def run_repair_benchmark_rollout(
     max_tokens: int = 2048,
     mock: bool = False,
 ) -> Dict[str, Any]:
+    benchmark_index = benchmark_index.resolve()
+    output_dir = output_dir.resolve()
+
     if not benchmark_index.is_file():
         raise FileNotFoundError(f"Repair benchmark index not found: {benchmark_index}")
 
@@ -176,7 +179,16 @@ async def run_repair_benchmark_rollout(
         prompt_model_input = renderer.build_generation_prompt(messages)
         prompt_hash = compute_sha256_str(json.dumps(messages, sort_keys=True))
 
-        if mock:
+        task_cand_dir = candidates_dir / task_id
+        task_cand_dir.mkdir(parents=True, exist_ok=True)
+        cand_file = task_cand_dir / "sample-0.c"
+
+        if cand_file.is_file() and cand_file.stat().st_size > 0:
+            extracted_c = cand_file.read_text(encoding="utf-8")
+            raw_text = extracted_c
+            token_ids = [0]
+            finish_reason = "STOP_SEQUENCE"
+        elif mock:
             raw_text = generate_mock_c_program(task_id, 0)
             token_ids = [100, 200, 300]
             finish_reason = "STOP_SEQUENCE"
@@ -201,10 +213,8 @@ async def run_repair_benchmark_rollout(
         extracted_c = extract_c_source(raw_text)
         source_hash = compute_sha256_str(extracted_c)
 
-        task_cand_dir = candidates_dir / task_id
-        task_cand_dir.mkdir(parents=True, exist_ok=True)
-        cand_file = task_cand_dir / "sample-0.c"
-        cand_file.write_text(extracted_c, encoding="utf-8", newline="\n")
+        if not cand_file.is_file() or cand_file.stat().st_size == 0:
+            cand_file.write_text(extracted_c, encoding="utf-8", newline="\n")
 
         record = {
             "task_id": task_id,
@@ -214,7 +224,7 @@ async def run_repair_benchmark_rollout(
             "difficulty": difficulty,
             "diagnostic_category": task_data.get("diagnostic_category", "compilation_error"),
             "prompt_hash": prompt_hash,
-            "candidate_path": str(cand_file.relative_to(PROJECT_ROOT)),
+            "candidate_path": cand_file.relative_to(PROJECT_ROOT).as_posix(),
             "source_hash": source_hash,
             "raw_response": raw_text,
             "num_generated_tokens": len(token_ids),
@@ -227,7 +237,6 @@ async def run_repair_benchmark_rollout(
             "task_id": task_id,
             "prompt_hash": prompt_hash,
             "messages": messages,
-            "rendered_prompt": prompt_model_input,
         })
 
         if idx % 10 == 0 or idx == len(tasks):

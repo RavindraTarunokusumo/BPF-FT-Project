@@ -1,0 +1,15 @@
+{
+  "benchmark_index": "C:\\Users\\rvind\\OneDrive\\Desktop\\Projects\\BPF-FT-Project\\data\\benchmark\\repair\\index.jsonl",
+  "benchmark_type": "repair_benchmark_120",
+  "total_tasks": 120,
+  "total_samples": 120,
+  "model_name": "Qwen/Qwen3-8B",
+  "sampler_checkpoint": "tinker://c72c22e1-f9a3-5275-a244-ce3befb919af:train:0/sampler_weights/final",
+  "renderer_name": "qwen3_disable_thinking",
+  "temperature": 0.0,
+  "seed": 42,
+  "max_tokens": 2048,
+  "compliant_count": 120,
+  "compliance_rate": 1.0,
+  "total_generated_tokens": 120
+}
