@@ -29,15 +29,15 @@ BENCHMARK_INDEX="data/calibration/index.jsonl"
 
 # Read benchmark index from manifest if present
 if [[ -f "$ROLLOUT_DIR/manifest.json" ]]; then
-    RAW_MANIFEST_INDEX=$(grep -o '"benchmark_index": "[^"]*' "$ROLLOUT_DIR/manifest.json" | cut -d'"' -f4 | sed 's/\\\\/\//g' || true)
+    RAW_MANIFEST_INDEX=$(grep -oE '"benchmark_index(_path)?": "[^"]*' "$ROLLOUT_DIR/manifest.json" | cut -d'"' -f4 | sed 's/\\\\/\//g' || true)
     if [[ -n "$RAW_MANIFEST_INDEX" && -f "$RAW_MANIFEST_INDEX" ]]; then
         BENCHMARK_INDEX="$RAW_MANIFEST_INDEX"
-    elif [[ -f "data/benchmark/repair/index.jsonl" && "$ROLLOUT_DIR" =~ "repair" ]]; then
+    elif [[ "$ROLLOUT_DIR" =~ "calibration" && -f "data/calibration/index.jsonl" ]]; then
+        BENCHMARK_INDEX="data/calibration/index.jsonl"
+    elif [[ "$ROLLOUT_DIR" =~ "repair" && -f "data/benchmark/repair/index.jsonl" ]]; then
         BENCHMARK_INDEX="data/benchmark/repair/index.jsonl"
-    elif [[ -f "data/benchmark/synthesis/index.jsonl" && "$ROLLOUT_DIR" =~ "synthesis" ]]; then
+    elif [[ "$ROLLOUT_DIR" =~ "synthesis" && -f "data/benchmark/synthesis/index.jsonl" ]]; then
         BENCHMARK_INDEX="data/benchmark/synthesis/index.jsonl"
-    elif [[ "$RAW_MANIFEST_INDEX" =~ (data/.*) && -f "${BASH_REMATCH[1]}" ]]; then
-        BENCHMARK_INDEX="${BASH_REMATCH[1]}"
     fi
 fi
 
