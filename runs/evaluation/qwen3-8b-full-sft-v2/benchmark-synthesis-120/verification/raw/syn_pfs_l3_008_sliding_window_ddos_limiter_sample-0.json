@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_008_sliding_window_ddos_limiter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_008_sliding_window_ddos_limiter/sample-0.c",
+  "source_sha256": "0be7c629e7953673c9d1539ff88a3eda022aee1d3632010835e73e030e68640e",
+  "timestamp": "2026-09-01T22:46:51.098961+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "Verifier loading timed out after 30s",
+    "log": "Timeout"
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Kernel verifier rejected program:\nVerifier loading timed out after 30s"
+}

@@ -1,0 +1,100 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "pfs_l3_source_packet_quota",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/pfs_l3_source_packet_quota/sample-0.c",
+  "source_sha256": "b75943343d90f396a3b7958ffe19b694c5af116dbff6883ee1b8521047b16e26",
+  "timestamp": "2026-09-01T22:46:40.669191+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_d4sd2pa1/candidate.o\nlibbpf: elf: section(3) xdp, size 320, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_pfs_l3_source_packet_quota' at insn offset 0 (0 bytes), code size 40 insns (320 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_d4sd2pa1/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1385, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 352, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 408, link 1, flags 0, type=2\nlibbpf: looking for externs among 17 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'source_quota_map': at sec_idx 5, offset 0.\nlibbpf: map 'source_quota_map': found type = 1.\nlibbpf: map 'source_quota_map': found key [8], sz = 4.\nlibbpf: map 'source_quota_map': found value [11], sz = 8.\nlibbpf: map 'source_quota_map': found max_entries = 10240.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #18 against 'source_quota_map'\nlibbpf: prog 'xdp_filter_pfs_l3_source_packet_quota': found map 0 (source_quota_map, sec 5, off 0) for insn #18\nlibbpf: sec '.relxdp': relo #1: insn #34 against 'source_quota_map'\nlibbpf: prog 'xdp_filter_pfs_l3_source_packet_quota': found map 0 (source_quota_map, sec 5, off 0) for insn #34\nlibbpf: map 'source_quota_map': created successfully, fd=4\nlibbpf: prog 'xdp_filter_pfs_l3_source_packet_quota': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter_pfs_l3_source_packet_quota(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+33         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+28      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+25        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 saddr = ip->saddr;\n14: (61) r1 = *(u32 *)(r1 +26)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 saddr = ip->saddr;\n15: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n16: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 saddr = ip->saddr;\n17: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *count = bpf_map_lookup_elem(&source_quota_map, &saddr);\n18: (18) r1 = 0xff2125b887db6800      ; R1_w=map_ptr(map=source_quota_ma,ks=4,vs=8)\n20: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=1,map=source_quota_ma,ks=4,vs=8)\n; if (count) {\n21: (15) if r0 == 0x0 goto pc+6       ; R0_w=map_value(map=source_quota_ma,ks=4,vs=8)\n; __u64 new_count = *count + 1;\n22: (79) r1 = *(u64 *)(r0 +0)         ; R0_w=map_value(map=source_quota_ma,ks=4,vs=8) R1_w=scalar()\n; __u64 new_count = *count + 1;\n23: (07) r1 += 1                      ; R1_w=scalar()\n; \n24: (7b) *(u64 *)(r0 +0) = r1         ; R0_w=map_value(map=source_quota_ma,ks=4,vs=8) R1_w=scalar()\n25: (b7) r0 = 1                       ; R0=1\n26: (25) if r1 > 0x5 goto pc+12       ; R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=5,var_off=(0x0; 0x7))\n27: (05) goto pc+10\n; int ret = bpf_map_update_elem(&source_quota_map, &saddr, &(__u64){1}, BPF_ANY);\n38: (b7) r0 = 2                       ; R0_w=2\n; }\n39: (95) exit\n\nfrom 26 to 39: R0=1 R1=scalar(umin=6) R10=fp0 fp-8=mmmm????\n39: R0=1 R1=scalar(umin=6) R10=fp0 fp-8=mmmm????\n39: (95) exit\n\nfrom 21 to 28: R0_w=0 R10=fp0 fp-8=mmmm????\n28: R0_w=0 R10=fp0 fp-8=mmmm????\n; \n28: (b7) r1 = 1                       ; R1_w=1\n; int ret = bpf_map_update_elem(&source_quota_map, &saddr, &(__u64){1}, BPF_ANY);\n29: (7b) *(u64 *)(r10 -16) = r1       ; R1_w=1 R10=fp0 fp-16_w=1\n30: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n31: (07) r2 += -4                     ; R2_w=fp-4\n32: (bf) r3 = r10                     ; R3_w=fp0 R10=fp0\n33: (07) r3 += -16                    ; R3_w=fp-16\n; int ret = bpf_map_update_elem(&source_quota_map, &saddr, &(__u64){1}, BPF_ANY);\n34: (18) r1 = 0xff2125b887db6800      ; R1_w=map_ptr(map=source_quota_ma,ks=4,vs=8)\n36: (b7) r4 = 0                       ; R4_w=0\n37: (85) call bpf_map_update_elem#2   ; R0=scalar()\n38: (b7) r0 = 2                       ; R0_w=2\n; }\n39: (95) exit\n\nfrom 13 to 39: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: (95) exit\n\nfrom 10 to 39: R0_w=2 R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: R0_w=2 R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: (95) exit\n\nfrom 5 to 39: R0_w=2 R1_w=pkt(r=0) R2_w=pkt_end() R3_w=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n39: R0_w=2 R1_w=pkt(r=0) R2_w=pkt_end() R3_w=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n39: (95) exit\nverification time 353 usec\nstack depth 16\nprocessed 44 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 10,
+    "total_tests": 10,
+    "details": [
+      {
+        "name": "src1_pkt1_pass",
+        "description": "Source 10.0.0.1 first packet must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "src1_pkt2_pass",
+        "description": "Source 10.0.0.1 second packet must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "src2_pkt1_pass",
+        "description": "Source 10.0.0.2 first packet must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "src3_udp_pass",
+        "description": "Source 10.0.0.3 UDP packet must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "non_ip_arp_pass",
+        "description": "Non-IP ARP frame must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "src4_icmp_pass",
+        "description": "Source 10.0.0.4 ICMP packet must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "src5_ihl6_pass",
+        "description": "Source 10.0.0.5 IHL=6 packet must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "src6_pkt_pass",
+        "description": "Source 10.0.0.6 packet must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_frame_pass",
+        "description": "Truncated frame must pass safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "src7_pkt_pass",
+        "description": "Source 10.0.0.7 packet must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

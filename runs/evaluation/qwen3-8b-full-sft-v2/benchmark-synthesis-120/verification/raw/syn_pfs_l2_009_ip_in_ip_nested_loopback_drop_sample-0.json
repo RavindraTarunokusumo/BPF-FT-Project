@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_009_ip_in_ip_nested_loopback_drop",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_009_ip_in_ip_nested_loopback_drop/sample-0.c",
+  "source_sha256": "8bc9b07dfca316c00b06a6d956289306190f41833c8f8ec9185e8c153cdca950",
+  "timestamp": "2026-09-01T22:46:49.677620+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_009_ip_in_ip_nested_loopback_drop/sample-0.c:39:25: error: call to undeclared function 'ntohl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   39 |     __u32 inner_daddr = ntohl(inner_ip->daddr);\n      |                         ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_009_ip_in_ip_nested_loopback_drop/sample-0.c:39:25: error: call to undeclared function 'ntohl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   39 |     __u32 inner_daddr = ntohl(inner_ip->daddr);\n      |                         ^\n1 error generated."
+}

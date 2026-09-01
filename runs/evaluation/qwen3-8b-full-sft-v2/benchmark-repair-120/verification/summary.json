@@ -1,72 +1,72 @@
 {
-  "rollout_dir": "runs\\evaluation\\qwen3-8b-full-sft-v2\\benchmark-repair-120",
+  "rollout_dir": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120",
   "total_tasks": 120,
   "total_candidates": 120,
   "num_samples_per_task": 1,
   "metrics": {
     "output_compliance_rate": 1.0,
-    "compilation_pass_rate": 1.0,
-    "kernel_verifier_pass_rate": 1.0,
-    "behavioral_pass_rate": 1.0,
+    "compilation_pass_rate": 0.9166666666666666,
+    "kernel_verifier_pass_rate": 0.8833333333333333,
+    "behavioral_pass_rate": 0.7083333333333334,
     "pass_at_1": {
-      "passed_tasks": 120,
+      "passed_tasks": 85,
       "total_tasks": 120,
-      "rate": 1.0
+      "rate": 0.7083333333333334
     },
     "pass_at_4": "N/A"
   },
   "breakdowns": {
     "by_category": {
+      "network_routing_forwarding": {
+        "total": 30,
+        "compliant": 30,
+        "compile": 24,
+        "verifier": 24,
+        "passed": 16
+      },
       "packet_filtering_security": {
         "total": 30,
         "compliant": 30,
-        "compile": 30,
-        "verifier": 30,
-        "passed": 30
+        "compile": 28,
+        "verifier": 28,
+        "passed": 23
       },
       "packet_inspection_telemetry": {
         "total": 30,
         "compliant": 30,
         "compile": 30,
-        "verifier": 30,
-        "passed": 30
+        "verifier": 29,
+        "passed": 24
       },
       "protocol_transformation": {
         "total": 30,
         "compliant": 30,
-        "compile": 30,
-        "verifier": 30,
-        "passed": 30
-      },
-      "network_routing_forwarding": {
-        "total": 30,
-        "compliant": 30,
-        "compile": 30,
-        "verifier": 30,
-        "passed": 30
+        "compile": 28,
+        "verifier": 25,
+        "passed": 22
       }
     },
     "by_difficulty": {
       "level_1": {
         "total": 40,
         "compliant": 40,
-        "compile": 40,
-        "verifier": 40,
-        "passed": 40
+        "compile": 39,
+        "verifier": 37,
+        "passed": 26
       },
       "level_2": {
         "total": 40,
         "compliant": 40,
-        "compile": 40,
-        "verifier": 40,
-        "passed": 40
+        "compile": 35,
+        "verifier": 33,
+        "passed": 32
       },
       "level_3": {
         "total": 40,
         "compliant": 40,
-        "compile": 40,
-        "verifier": 40,
-        "passed": 40
+        "compile": 36,
+        "verifier": 36,
+        "passed": 27
       }
     }
   }

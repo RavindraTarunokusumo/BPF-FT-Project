@@ -1,0 +1,93 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_003_srv6_end_dx4_decapsulation",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l3_003_srv6_end_dx4_decapsulation/sample-0.c",
+  "source_sha256": "c96c5782c331f8ba4d6bcd22112ff9dee8dff0f74c794d49ae90f5448081b857",
+  "timestamp": "2026-09-01T22:47:21.273849+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_r77npyvt/candidate.o\nlibbpf: elf: section(3) xdp, size 600, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform_syn_ptr_l3_003_srv6_end_dx4_decapsulation' at insn offset 0 (0 bytes), code size 75 insns (600 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_r77npyvt/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1224, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 400, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform_syn_ptr_l3_003_srv6_end_dx4_decapsulation': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r2 = r1                       ; R1_w=pkt(r=0) R2_w=pkt(r=0)\n3: (07) r2 += 14                      ; R2_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r2 > r3 goto pc+68         ; R2_w=pkt(off=14,r=14) R3_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r5 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r4 != 0x8 goto pc+63       ; R4_w=8\n10: (bf) r4 = r1                      ; R1_w=pkt(r=14) R4_w=pkt(r=14)\n11: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n12: (2d) if r4 > r3 goto pc+60        ; R3=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_UDP)\n13: (71) r4 = *(u8 *)(r1 +23)         ; R1=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_UDP)\n14: (55) if r4 != 0x11 goto pc+58     ; R4_w=17\n; __u32 ip_hdr_len = ip->ihl * 4;\n15: (71) r4 = *(u8 *)(r2 +0)          ; R2=pkt(off=14,r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ip_hdr_len = ip->ihl * 4;\n16: (67) r4 <<= 2                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n17: (57) r4 &= 60                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n18: (b7) r5 = 20                      ; R5_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n19: (2d) if r5 > r4 goto pc+53        ; R4_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n20: (0f) r2 += r4\nmark_precise: frame0: last_idx 20 first_idx 12 subseq_idx -1 \nmark_precise: frame0: regs=r4 stack= before 19: (2d) if r5 > r4 goto pc+53\nmark_precise: frame0: regs=r4,r5 stack= before 18: (b7) r5 = 20\nmark_precise: frame0: regs=r4 stack= before 17: (57) r4 &= 60\nmark_precise: frame0: regs=r4 stack= before 16: (67) r4 <<= 2\nmark_precise: frame0: regs=r4 stack= before 15: (71) r4 = *(u8 *)(r2 +0)\n21: R2=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n21: (2d) if r2 > r3 goto pc+51        ; R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n22: (bf) r4 = r2                      ; R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n23: (07) r4 += 8                      ; R4_w=pkt(id=1,off=22,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (2d) if r4 > r3 goto pc+48        ; R3=pkt_end() R4_w=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (udp->dest != bpf_htons(5003))\n25: (69) r2 = *(u16 *)(r2 +2)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (udp->dest != bpf_htons(5003))\n26: (55) if r2 != 0x8b13 goto pc+46   ; R2_w=0x8b13\n; __builtin_memcpy(tmp_mac, eth->h_dest, ETH_ALEN);\n27: (71) r2 = *(u8 *)(r1 +5)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n28: (67) r2 <<= 8                     ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n29: (71) r3 = *(u8 *)(r1 +4)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n30: (4f) r2 |= r3                     ; R2_w=scalar() R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n31: (6b) *(u16 *)(r10 -4) = r2        ; R2_w=scalar() R10=fp0 fp-8=??mm????\n32: (71) r2 = *(u8 *)(r1 +1)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n33: (67) r2 <<= 8                     ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n34: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n35: (4f) r2 |= r3                     ; R2_w=scalar() R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n36: (71) r3 = *(u8 *)(r1 +2)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n37: (67) r3 <<= 16                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000))\n38: (71) r4 = *(u8 *)(r1 +3)          ; R1=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n39: (67) r4 <<= 24                    ; R4_w=scalar(smin=0,smax=umax=umax32=0xff000000,smax32=0x7f000000,var_off=(0x0; 0xff000000))\n40: (4f) r4 |= r3                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000)) R4_w=scalar()\n41: (4f) r4 |= r2                     ; R2_w=scalar() R4_w=scalar()\n42: (63) *(u32 *)(r10 -8) = r4        ; R4_w=scalar() R10=fp0 fp-8=??mmmmmm\n; __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);\n43: (71) r2 = *(u8 *)(r1 +8)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n44: (73) *(u8 *)(r1 +2) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n45: (71) r2 = *(u8 *)(r1 +9)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n46: (73) *(u8 *)(r1 +3) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n47: (71) r2 = *(u8 *)(r1 +6)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n48: (73) *(u8 *)(r1 +0) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n49: (71) r2 = *(u8 *)(r1 +7)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n50: (73) *(u8 *)(r1 +1) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n51: (71) r2 = *(u8 *)(r1 +10)         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n52: (73) *(u8 *)(r1 +4) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n53: (71) r2 = *(u8 *)(r1 +11)         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n54: (73) *(u8 *)(r1 +5) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n55: (b7) r2 = 0                       ; R2_w=0\n; __builtin_memcpy(eth->h_source, tmp_mac, ETH_ALEN);\n56: (69) r3 = *(u16 *)(r10 -4)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-8=??mmmmmm\n57: (61) r4 = *(u32 *)(r10 -8)        ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=??mmmmmm\n; eth->h_proto = bpf_htons(ETH_P_IP);\n58: (73) *(u8 *)(r1 +13) = r2         ; R1=pkt(r=34) R2_w=0\n59: (b7) r2 = 8                       ; R2_w=8\n60: (73) *(u8 *)(r1 +12) = r2         ; R1=pkt(r=34) R2_w=8\n; __builtin_memcpy(eth->h_source, tmp_mac, ETH_ALEN);\n61: (bf) r2 = r4                      ; R2_w=scalar(id=2,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R4_w=scalar(id=2,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n62: (77) r2 >>= 16                    ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n63: (73) *(u8 *)(r1 +8) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n64: (bf) r2 = r4                      ; R2_w=scalar(id=2,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R4_w=scalar(id=2,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n65: (77) r2 >>= 24                    ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n66: (73) *(u8 *)(r1 +9) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n67: (73) *(u8 *)(r1 +6) = r4          ; R1=pkt(r=34) R4_w=scalar(id=2,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n68: (77) r4 >>= 8                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffffff,var_off=(0x0; 0xffffff))\n69: (73) *(u8 *)(r1 +7) = r4          ; R1=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffffff,var_off=(0x0; 0xffffff))\n70: (73) *(u8 *)(r1 +10) = r3         ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n71: (77) r3 >>= 8                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n72: (73) *(u8 *)(r1 +11) = r3         ; R1=pkt(r=34) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; }\n73: (b7) r0 = 2                       ; R0_w=2\n74: (95) exit\n\nfrom 26 to 73: safe\n\nfrom 24 to 73: safe\n\nfrom 21 to 73: safe\n\nfrom 19 to 73: safe\n\nfrom 14 to 73: safe\n\nfrom 12 to 73: safe\n\nfrom 9 to 73: safe\n\nfrom 4 to 73: safe\nverification time 643 usec\nstack depth 8\nprocessed 83 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 9,
+    "total_tests": 9,
+    "details": [
+      {
+        "name": "srv6_dx4_decap_pass",
+        "description": "SRv6 packet with SL 0 stripped to inner IPv4",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "srv6_dx4_decap_tcp_pass",
+        "description": "SRv6 packet carrying TCP stripped to inner IPv4 TCP",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "srv6_sl_nonzero_pass",
+        "description": "SRv6 packet with SL > 0 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "standard_ipv6_pass",
+        "description": "Standard IPv6 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv4_pass",
+        "description": "IPv4 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "udp_pass",
+        "description": "UDP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "icmp_pass",
+        "description": "ICMP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_srv6_pass",
+        "description": "Truncated SRv6 frame passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

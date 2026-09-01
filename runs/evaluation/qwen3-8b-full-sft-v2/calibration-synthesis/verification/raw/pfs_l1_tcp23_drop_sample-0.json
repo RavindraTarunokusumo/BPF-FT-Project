@@ -1,0 +1,73 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_tcp23_drop",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/pfs_l1_tcp23_drop/sample-0.c",
+  "source_sha256": "6880432279bf46d2b8ffeb0b2c45faf8bd1d031c375f5af67c4a771265a0452c",
+  "timestamp": "2026-09-01T22:46:41.134968+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_cnthgcu1/candidate.o\nlibbpf: elf: section(3) xdp, size 232, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_pfs_l1_tcp23_drop' at insn offset 0 (0 bytes), code size 29 insns (232 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_cnthgcu1/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1260, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 288, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'stats': at sec_idx 5, offset 0.\nlibbpf: map 'stats': found type = 6.\nlibbpf: map 'stats': found key [8], sz = 4.\nlibbpf: map 'stats': found value [11], sz = 8.\nlibbpf: map 'stats': found max_entries = 64.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #20 against 'stats'\nlibbpf: prog 'xdp_filter_pfs_l1_tcp23_drop': found map 0 (stats, sec 5, off 0) for insn #20\nlibbpf: map 'stats': created successfully, fd=4\nlibbpf: prog 'xdp_filter_pfs_l1_tcp23_drop': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter_pfs_l1_tcp23_drop(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+22         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+17      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+14        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_TCP)\n14: (71) r1 = *(u8 *)(r1 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_TCP)\n15: (55) if r1 != 0x6 goto pc+12      ; R1_w=6\n16: (b7) r1 = 23                      ; R1_w=23\n; __u32 key = (23 % 64);\n17: (63) *(u32 *)(r10 -4) = r1        ; R1_w=23 R10=fp0 fp-8=mmmm????\n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n19: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&stats, &key);\n20: (18) r1 = 0xff2125b9191bac00      ; R1_w=map_ptr(map=stats,ks=4,vs=8)\n22: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=stats,ks=4,vs=8)\n; if (cnt)\n23: (15) if r0 == 0x0 goto pc+3       ; R0=map_value(map=stats,ks=4,vs=8)\n; *cnt += 1;\n24: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=stats,ks=4,vs=8) R1_w=scalar()\n25: (07) r1 += 1                      ; R1_w=scalar()\n26: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=stats,ks=4,vs=8) R1_w=scalar()\n27: (b7) r0 = 1                       ; R0_w=1\n; }\n28: (95) exit\n\nfrom 23 to 27: R0=0 R10=fp0 fp-8=mmmm????\n27: R0=0 R10=fp0 fp-8=mmmm????\n; *cnt += 1;\n27: (b7) r0 = 1                       ; R0_w=1\n; }\n28: (95) exit\n\nfrom 15 to 28: R0=2 R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt_end() R3=pkt(off=34,r=34) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n28: R0=2 R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt_end() R3=pkt(off=34,r=34) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n28: (95) exit\n\nfrom 13 to 28: safe\n\nfrom 10 to 28: safe\n\nfrom 5 to 28: safe\nverification time 239 usec\nstack depth 8\nprocessed 34 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 5,
+    "total_tests": 6,
+    "details": [
+      {
+        "name": "tcp_23_drop",
+        "description": "IPv4 TCP dest port 23 must drop",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "tcp_23_ihl6_drop",
+        "description": "IPv4 TCP dest port 23 with IHL=6 options must drop",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "tcp_80_pass",
+        "description": "IPv4 TCP dest port 80 must pass",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "XDP_DROP",
+        "stderr": ""
+      },
+      {
+        "name": "udp_23_pass",
+        "description": "IPv4 UDP dest port 23 must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ip_pass",
+        "description": "Truncated IPv4 header must pass safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'tcp_80_pass' failed: expected XDP_PASS (2), got XDP_DROP (1)"
+}

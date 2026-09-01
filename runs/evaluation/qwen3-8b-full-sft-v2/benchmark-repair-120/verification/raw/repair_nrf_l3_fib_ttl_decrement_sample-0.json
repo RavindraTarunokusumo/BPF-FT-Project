@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "repair_nrf_l3_fib_ttl_decrement",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c",
+  "source_sha256": "48d2dcbc0c00410766fd35f7eb18465d9a7a5e58426998a5eb524e9edd7dfc94",
+  "timestamp": "2026-09-01T22:47:36.248969+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:17:8: error: redefinition of 'bpf_fib_lookup'\n   17 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:17:8: error: redefinition of 'bpf_fib_lookup'\n   17 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\n1 error generated."
+}

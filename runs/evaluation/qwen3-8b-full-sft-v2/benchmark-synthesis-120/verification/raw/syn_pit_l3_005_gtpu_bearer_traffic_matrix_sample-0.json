@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_005_gtpu_bearer_traffic_matrix",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c",
+  "source_sha256": "adaa425399773f1fc1fb517337c56e716963b914b225cd032a9d8497a5766c0e",
+  "timestamp": "2026-09-01T22:46:49.187390+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:56:41: error: no member named 'dlen' in 'struct udphdr'; did you mean 'len'?\n   56 |             stats->uplink_bytes += udp->dlen;\n      |                                         ^~~~\n      |                                         len\n/usr/include/linux/udp.h:26:9: note: 'len' declared here\n   26 |         __be16  len;\n      |                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:60:38: error: no member named 'dlen' in 'struct udphdr'; did you mean 'len'?\n   60 |                 .uplink_bytes = udp->dlen,\n      |                                      ^~~~\n      |                                      len\n/usr/include/linux/udp.h:26:9: note: 'len' declared here\n   26 |         __be16  len;\n      |                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:69:43: error: no member named 'dlen' in 'struct udphdr'; did you mean 'len'?\n   69 |             stats->downlink_bytes += udp->dlen;\n      |                                           ^~~~\n      |                                           len\n/usr/include/linux/udp.h:26:9: note: 'len' declared here\n   26 |         __be16  len;\n      |                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:74:40: error: no member named 'dlen' in 'struct udphdr'; did you mean 'len'?\n   74 |                 .downlink_bytes = udp->dlen,\n      |                                        ^~~~\n      |                                        len\n/usr/include/linux/udp.h:26:9: note: 'len' declared here\n   26 |         __be16  len;\n      |                 ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:56:41: error: no member named 'dlen' in 'struct udphdr'; did you mean 'len'?\n   56 |             stats->uplink_bytes += udp->dlen;\n      |                                         ^~~~\n      |                                         len\n/usr/include/linux/udp.h:26:9: note: 'len' declared here\n   26 |         __be16  len;\n      |                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:60:38: error: no member named 'dlen' in 'struct udphdr'; did you mean 'len'?\n   60 |                 .uplink_bytes = udp->dlen,\n      |                                      ^~~~\n      |                                      len\n/usr/include/linux/udp.h:26:9: note: 'len' declared here\n   26 |         __be16  len;\n      |                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:69:43: error: no member named 'dlen' in 'struct udphdr'; did you mean 'len'?\n   69 |             stats->downlink_bytes += udp->dlen;\n      |                                           ^~~~\n      |                                           len\n/usr/include/linux/udp.h:26:9: note: 'len' declared here\n   26 |         __be16  len;\n      |                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:74:40: error: no member named 'dlen' in 'struct udphdr'; did you mean 'len'?\n   74 |                 .downlink_bytes = udp->dlen,\n      |                                        ^~~~\n      |                                        len\n/usr/include/linux/udp.h:26:9: note: 'len' declared here\n   26 |         __be16  len;\n      |                 ^\n4 errors generated."
+}

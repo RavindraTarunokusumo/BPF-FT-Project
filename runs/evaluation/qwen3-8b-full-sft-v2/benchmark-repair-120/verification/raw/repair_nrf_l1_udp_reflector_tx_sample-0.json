@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "repair_nrf_l1_udp_reflector_tx",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c",
+  "source_sha256": "de89536243fbec27a4c40757d85f4f0025afafc61166df178367352094097e18",
+  "timestamp": "2026-09-01T22:47:38.786394+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c:51:9: error: call to undeclared function 'xdp_push'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   51 |     if (xdp_push(ctx, (void *)eth, pkt_len) < 0)\n      |         ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c:46:20: warning: unused variable 'new_data' [-Wunused-variable]\n   46 |     unsigned char *new_data = (void *)(eth + 1);\n      |                    ^~~~~~~~\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c:51:9: error: call to undeclared function 'xdp_push'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   51 |     if (xdp_push(ctx, (void *)eth, pkt_len) < 0)\n      |         ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c:46:20: warning: unused variable 'new_data' [-Wunused-variable]\n   46 |     unsigned char *new_data = (void *)(eth + 1);\n      |                    ^~~~~~~~\n1 warning and 1 error generated."
+}

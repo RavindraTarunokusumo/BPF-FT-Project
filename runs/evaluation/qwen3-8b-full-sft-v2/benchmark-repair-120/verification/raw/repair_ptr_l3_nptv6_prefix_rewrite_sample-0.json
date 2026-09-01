@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "repair_ptr_l3_nptv6_prefix_rewrite",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c",
+  "source_sha256": "7d4d6e8300b8cd51d5d94d34a09abcefbdec2782c9dc9e5648b39ad00a4fce03",
+  "timestamp": "2026-09-01T22:47:39.917839+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c:28:15: error: subscripted value is not an array, pointer, or vector\n   28 |     ip6->saddr[0] = 0xFD;\n      |     ~~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c:29:15: error: subscripted value is not an array, pointer, or vector\n   29 |     ip6->saddr[1] = 0x00;\n      |     ~~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c:30:15: error: subscripted value is not an array, pointer, or vector\n   30 |     ip6->saddr[2] = 0x00;\n      |     ~~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c:31:15: error: subscripted value is not an array, pointer, or vector\n   31 |     ip6->saddr[3] = 0x99;\n      |     ~~~~~~~~~~^~\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c:28:15: error: subscripted value is not an array, pointer, or vector\n   28 |     ip6->saddr[0] = 0xFD;\n      |     ~~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c:29:15: error: subscripted value is not an array, pointer, or vector\n   29 |     ip6->saddr[1] = 0x00;\n      |     ~~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c:30:15: error: subscripted value is not an array, pointer, or vector\n   30 |     ip6->saddr[2] = 0x00;\n      |     ~~~~~~~~~~^~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_nptv6_prefix_rewrite/sample-0.c:31:15: error: subscripted value is not an array, pointer, or vector\n   31 |     ip6->saddr[3] = 0x99;\n      |     ~~~~~~~~~~^~\n4 errors generated."
+}

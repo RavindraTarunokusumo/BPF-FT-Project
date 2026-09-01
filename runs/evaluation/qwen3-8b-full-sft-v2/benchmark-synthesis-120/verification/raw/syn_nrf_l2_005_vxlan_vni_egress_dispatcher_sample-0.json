@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_005_vxlan_vni_egress_dispatcher",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c",
+  "source_sha256": "6dade47964e62b0fce45c4b3669c94577e9d2325cba2d080d7f7e6a157fda920",
+  "timestamp": "2026-09-01T22:47:26.486993+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:43:21: error: arithmetic on a pointer to an incomplete type 'struct vxlanhdr'\n   43 |     if ((void *)(vx + 1) > data_end)\n      |                  ~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:42:12: note: forward declaration of 'struct vxlanhdr'\n   42 |     struct vxlanhdr *vx = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:46:19: error: incomplete definition of type 'struct vxlanhdr'\n   46 |     __u32 vni = vx->vni;\n      |                 ~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:42:12: note: forward declaration of 'struct vxlanhdr'\n   42 |     struct vxlanhdr *vx = (void *)(udp + 1);\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:43:21: error: arithmetic on a pointer to an incomplete type 'struct vxlanhdr'\n   43 |     if ((void *)(vx + 1) > data_end)\n      |                  ~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:42:12: note: forward declaration of 'struct vxlanhdr'\n   42 |     struct vxlanhdr *vx = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:46:19: error: incomplete definition of type 'struct vxlanhdr'\n   46 |     __u32 vni = vx->vni;\n      |                 ~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:42:12: note: forward declaration of 'struct vxlanhdr'\n   42 |     struct vxlanhdr *vx = (void *)(udp + 1);\n      |            ^\n2 errors generated."
+}

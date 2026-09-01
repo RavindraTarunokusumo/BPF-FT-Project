@@ -1,0 +1,72 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_009_ipv6_next_header_split",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_009_ipv6_next_header_split/sample-0.c",
+  "source_sha256": "4bf2d2c7c1b48bbe393dd2d08c9a4e1fb75e5a01b32122b06c81195a2cf59760",
+  "timestamp": "2026-09-01T22:47:26.944436+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_qrveqroo/candidate.o\nlibbpf: elf: section(3) xdp, size 296, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_syn_pit_l1_009_ipv6_next_header_split' at insn offset 0 (0 bytes), code size 37 insns (296 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_qrveqroo/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1265, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 288, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 456, link 1, flags 0, type=2\nlibbpf: looking for externs among 19 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'ipv6_proto_map': at sec_idx 5, offset 0.\nlibbpf: map 'ipv6_proto_map': found type = 6.\nlibbpf: map 'ipv6_proto_map': found key [8], sz = 4.\nlibbpf: map 'ipv6_proto_map': found value [11], sz = 8.\nlibbpf: map 'ipv6_proto_map': found max_entries = 4.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #28 against 'ipv6_proto_map'\nlibbpf: prog 'xdp_telemetry_syn_pit_l1_009_ipv6_next_header_split': found map 0 (ipv6_proto_map, sec 5, off 0) for insn #28\nlibbpf: map 'ipv6_proto_map': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_syn_pit_l1_009_ipv6_next_header_split': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+30         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n9: (55) if r3 != 0xdd86 goto pc+25    ; R3_w=0xdd86\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 54                     ; R3=pkt(off=54,r=14)\n12: (2d) if r3 > r2 goto pc+22        ; R2=pkt_end() R3=pkt(off=54,r=54)\n; __u32 key = ip->nexthdr % 4;\n13: (71) r1 = *(u8 *)(r1 +20)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n14: (bf) r2 = r1                      ; R1_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n15: (57) r2 &= 3                      ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3))\n; __u32 key = ip->nexthdr % 4;\n16: (63) *(u32 *)(r10 -4) = r2        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3)) R10=fp0 fp-8=mmmm????\n; if (ip->nexthdr == 6)\n17: (15) if r1 == 0x3a goto pc+6      ; R1_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n18: (15) if r1 == 0x11 goto pc+3      ; R1_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n19: (55) if r1 != 0x6 goto pc+6       ; R1_w=6\n20: (b7) r1 = 0                       ; R1_w=0\n21: (05) goto pc+3\n; \n25: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 25 first_idx 25 subseq_idx -1 \nmark_precise: frame0: parent state regs=r1 stack=:  R1_rw=P0 R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3)) R3=pkt(off=54,r=54) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=mmmm????\nmark_precise: frame0: last_idx 21 first_idx 12 subseq_idx 25 \nmark_precise: frame0: regs=r1 stack= before 21: (05) goto pc+3\nmark_precise: frame0: regs=r1 stack= before 20: (b7) r1 = 0\n26: R1=0 R10=fp0 fp-8=0000????\n26: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&ipv6_proto_map, &key);\n27: (07) r2 += -4                     ; R2_w=fp-4\n28: (18) r1 = 0xff2125b89938b800      ; R1_w=map_ptr(map=ipv6_proto_map,ks=4,vs=8)\n30: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=2,map=ipv6_proto_map,ks=4,vs=8)\n; if (cnt)\n31: (15) if r0 == 0x0 goto pc+3       ; R0_w=map_value(map=ipv6_proto_map,ks=4,vs=8)\n; *cnt += 1;\n32: (79) r1 = *(u64 *)(r0 +0)         ; R0_w=map_value(map=ipv6_proto_map,ks=4,vs=8) R1_w=scalar()\n33: (07) r1 += 1                      ; R1_w=scalar()\n34: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=ipv6_proto_map,ks=4,vs=8) R1=scalar()\n; }\n35: (b7) r0 = 2                       ; R0_w=2\n36: (95) exit\n\nfrom 31 to 35: safe\n\nfrom 19 to 26: R1_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3)) R3=pkt(off=54,r=54) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=mmmm????\n26: R1_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3)) R3=pkt(off=54,r=54) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=mmmm????\n; \n26: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&ipv6_proto_map, &key);\n27: (07) r2 += -4                     ; R2_w=fp-4\n28: (18) r1 = 0xff2125b89938b800      ; R1_w=map_ptr(map=ipv6_proto_map,ks=4,vs=8)\n30: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=3,map=ipv6_proto_map,ks=4,vs=8)\n; if (cnt)\n31: (15) if r0 == 0x0 goto pc+3       ; R0_w=map_value(map=ipv6_proto_map,ks=4,vs=8)\n; *cnt += 1;\n32: (79) r1 = *(u64 *)(r0 +0)         ; R0_w=map_value(map=ipv6_proto_map,ks=4,vs=8) R1_w=scalar()\n33: (07) r1 += 1                      ; R1_w=scalar()\n34: (7b) *(u64 *)(r0 +0) = r1\n35: safe\n\nfrom 31 to 35: safe\n\nfrom 18 to 22: R1=17 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3)) R3=pkt(off=54,r=54) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=mmmm????\n22: R1=17 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3)) R3=pkt(off=54,r=54) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=mmmm????\n; if (ip->nexthdr == 6)\n22: (b7) r1 = 1                       ; R1_w=1\n23: (05) goto pc+1\n; \n25: (63) *(u32 *)(r10 -4) = r1        ; R1_w=1 R10=fp0 fp-8=mmmm????\n26: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&ipv6_proto_map, &key);\n27: (07) r2 += -4                     ; R2_w=fp-4\n28: (18) r1 = 0xff2125b89938b800      ; R1_w=map_ptr(map=ipv6_proto_map,ks=4,vs=8)\n30: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=4,map=ipv6_proto_map,ks=4,vs=8)\n; if (cnt)\n31: (15) if r0 == 0x0 goto pc+3       ; R0_w=map_value(map=ipv6_proto_map,ks=4,vs=8)\n; *cnt += 1;\n32: (79) r1 = *(u64 *)(r0 +0)         ; R0_w=map_value(map=ipv6_proto_map,ks=4,vs=8) R1_w=scalar()\n33: (07) r1 += 1                      ; R1_w=scalar()\n34: (7b) *(u64 *)(r0 +0) = r1\n35: safe\n\nfrom 31 to 35: safe\n\nfrom 17 to 24: R1=58 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3)) R3=pkt(off=54,r=54) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=mmmm????\n24: R1=58 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3)) R3=pkt(off=54,r=54) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=mmmm????\n; if (ip->nexthdr == 6)\n24: (b7) r1 = 2                       ; R1_w=2\n; \n25: (63) *(u32 *)(r10 -4) = r1        ; R1_w=2 R10=fp0 fp-8=mmmm????\n26: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&ipv6_proto_map, &key);\n27: (07) r2 += -4                     ; R2_w=fp-4\n28: (18) r1 = 0xff2125b89938b800      ; R1_w=map_ptr(map=ipv6_proto_map,ks=4,vs=8)\n30: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=5,map=ipv6_proto_map,ks=4,vs=8)\n; if (cnt)\n31: (15) if r0 == 0x0 goto pc+3       ; R0_w=map_value(map=ipv6_proto_map,ks=4,vs=8)\n; *cnt += 1;\n32: (79) r1 = *(u64 *)(r0 +0)         ; R0_w=map_value(map=ipv6_proto_map,ks=4,vs=8) R1_w=scalar()\n33: (07) r1 += 1                      ; R1_w=scalar()\n34: (7b) *(u64 *)(r0 +0) = r1\n35: safe\n\nfrom 31 to 35: safe\n\nfrom 12 to 35: safe\n\nfrom 9 to 35: safe\n\nfrom 4 to 35: safe\nverification time 515 usec\nstack depth 8\nprocessed 72 insns (limit 1000000) max_states_per_insn 1 total_states 5 peak_states 5 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 6,
+    "total_tests": 6,
+    "details": [
+      {
+        "name": "ipv6_tcp_pass",
+        "description": "IPv6 TCP packet increments slot 0 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_udp_pass",
+        "description": "IPv6 UDP packet increments slot 1 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_icmp6_pass",
+        "description": "IPv6 ICMPv6 packet increments slot 2 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_other_pass",
+        "description": "IPv6 other next header (e.g. GRE 47) increments slot 3 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv4_pass",
+        "description": "IPv4 packet passes without incrementing IPv6 map",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ipv6_pass",
+        "description": "Truncated IPv6 header passes safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

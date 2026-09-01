@@ -1,0 +1,58 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "repair_pfs_l3_lpm_counter_sync",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_pfs_l3_lpm_counter_sync/sample-0.c",
+  "source_sha256": "9fc3d198ed018665299b2312f6ae28e6a97134a952f101ecb2cf407b332a3974",
+  "timestamp": "2026-09-01T22:47:37.529755+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_p2w41b7t/candidate.o\nlibbpf: elf: section(3) xdp, size 304, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter' at insn offset 0 (0 bytes), code size 38 insns (304 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 72, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_p2w41b7t/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1682, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 368, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 408, link 1, flags 0, type=2\nlibbpf: looking for externs among 17 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'lpm_blocklist': at sec_idx 5, offset 0.\nlibbpf: map 'lpm_blocklist': found type = 11.\nlibbpf: map 'lpm_blocklist': found key [6], sz = 8.\nlibbpf: map 'lpm_blocklist': found value [7], sz = 4.\nlibbpf: map 'lpm_blocklist': found max_entries = 1024.\nlibbpf: map 'lpm_blocklist': found map_flags = 0x1.\nlibbpf: map 'rule_stats': at sec_idx 5, offset 40.\nlibbpf: map 'rule_stats': found type = 2.\nlibbpf: map 'rule_stats': found key [7], sz = 4.\nlibbpf: map 'rule_stats': found value [19], sz = 8.\nlibbpf: map 'rule_stats': found max_entries = 256.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #20 against 'lpm_blocklist'\nlibbpf: prog 'xdp_filter': found map 0 (lpm_blocklist, sec 5, off 0) for insn #20\nlibbpf: sec '.relxdp': relo #1: insn #30 against 'rule_stats'\nlibbpf: prog 'xdp_filter': found map 1 (rule_stats, sec 5, off 40) for insn #30\nlibbpf: map 'lpm_blocklist': created successfully, fd=4\nlibbpf: map 'rule_stats': created successfully, fd=5\nlibbpf: prog 'xdp_filter': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+31         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+26      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+23        ; R2=pkt_end() R3=pkt(off=34,r=34)\n14: (b7) r2 = 32                      ; R2_w=32\n; struct lpm_key key = {\n15: (63) *(u32 *)(r10 -8) = r2        ; R2_w=32 R10=fp0 fp-8=????32\n; .addr = ip->saddr,\n16: (61) r1 = *(u32 *)(r1 +26)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; struct lpm_key key = {\n17: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmmmmmm\n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n19: (07) r2 += -8                     ; R2_w=fp-8\n; __u32 *rule_id = bpf_map_lookup_elem(&lpm_blocklist, &key);\n20: (18) r1 = 0xff2125b89938aa00      ; R1_w=map_ptr(map=lpm_blocklist,ks=8,vs=4)\n22: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=lpm_blocklist,ks=8,vs=4)\n23: (bf) r1 = r0                      ; R0=map_value_or_null(id=1,map=lpm_blocklist,ks=8,vs=4) R1_w=map_value_or_null(id=1,map=lpm_blocklist,ks=8,vs=4)\n24: (b7) r0 = 2                       ; R0_w=2\n; if (rule_id) {\n25: (15) if r1 == 0x0 goto pc+11      ; R1_w=map_value(map=lpm_blocklist,ks=8,vs=4)\n; __u32 rid = *rule_id;\n26: (61) r1 = *(u32 *)(r1 +0)         ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 rid = *rule_id;\n27: (63) *(u32 *)(r10 -12) = r1       ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-16=mmmm????\n28: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 rid = *rule_id;\n29: (07) r2 += -12                    ; R2_w=fp-12\n; __u64 *cnt = bpf_map_lookup_elem(&rule_stats, &rid);\n30: (18) r1 = 0xff2125b7a9a60000      ; R1_w=map_ptr(map=rule_stats,ks=4,vs=8)\n32: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=rule_stats,ks=4,vs=8)\n; if (cnt)\n33: (15) if r0 == 0x0 goto pc+2       ; R0=map_value(map=rule_stats,ks=4,vs=8)\n34: (b7) r1 = 1                       ; R1_w=1\n; __sync_fetch_and_add(cnt, 1);\n35: (db) lock *(u64 *)(r0 +0) += r1   ; R0=map_value(map=rule_stats,ks=4,vs=8) R1_w=1\n36: (b7) r0 = 1                       ; R0_w=1\n; }\n37: (95) exit\n\nfrom 33 to 36: R0=0 R10=fp0 fp-8=mmmmmmmm fp-16=mmmm????\n36: R0=0 R10=fp0 fp-8=mmmmmmmm fp-16=mmmm????\n; __sync_fetch_and_add(cnt, 1);\n36: (b7) r0 = 1                       ; R0_w=1\n; }\n37: (95) exit\n\nfrom 25 to 37: R0_w=2 R1_w=0 R10=fp0 fp-8=mmmmmmmm\n37: R0_w=2 R1_w=0 R10=fp0 fp-8=mmmmmmmm\n37: (95) exit\n\nfrom 13 to 37: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: (95) exit\n\nfrom 10 to 37: safe\n\nfrom 5 to 37: safe\nverification time 256 usec\nstack depth 16\nprocessed 42 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 4,
+    "total_tests": 4,
+    "details": [
+      {
+        "name": "pass_unmatched",
+        "description": "Pass unmatched IP address",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_udp_unmatched",
+        "description": "Pass UDP traffic",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Pass truncated packet safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

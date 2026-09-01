@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_006_ntp_stratum_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_006_ntp_stratum_telemetry/sample-0.c",
+  "source_sha256": "9c9d9bc4b751a2deb7a883a6416a8bd9eacc5627b812c472d354154b4b3ffffa",
+  "timestamp": "2026-09-01T22:47:26.232178+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_006_ntp_stratum_telemetry/sample-0.c:50:14: error: no member named 'dgram_len' in 'struct udphdr'\n   50 |     if (udp->dgram_len >= (unsigned int)sizeof(struct udphdr) + 48) {\n      |         ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_006_ntp_stratum_telemetry/sample-0.c:52:25: warning: comparison of distinct pointer types ('char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   52 |         if (payload + 1 <= data_end) {\n      |             ~~~~~~~~~~~ ^  ~~~~~~~~\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_006_ntp_stratum_telemetry/sample-0.c:50:14: error: no member named 'dgram_len' in 'struct udphdr'\n   50 |     if (udp->dgram_len >= (unsigned int)sizeof(struct udphdr) + 48) {\n      |         ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_006_ntp_stratum_telemetry/sample-0.c:52:25: warning: comparison of distinct pointer types ('char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   52 |         if (payload + 1 <= data_end) {\n      |             ~~~~~~~~~~~ ^  ~~~~~~~~\n1 warning and 1 error generated."
+}

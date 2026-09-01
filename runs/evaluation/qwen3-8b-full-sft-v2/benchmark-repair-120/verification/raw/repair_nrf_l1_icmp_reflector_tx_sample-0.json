@@ -1,0 +1,51 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "repair_nrf_l1_icmp_reflector_tx",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_icmp_reflector_tx/sample-0.c",
+  "source_sha256": "91de821c2b4cead9f5a8775b7802ea30be54a7a50fe18660fbaf1226fc1e791e",
+  "timestamp": "2026-09-01T22:47:44.133283+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_ngpel6jv/candidate.o\nlibbpf: elf: section(3) xdp, size 336, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 42 insns (336 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_ngpel6jv/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 951, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 608, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+35         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+30      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+27        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_ICMP)\n14: (71) r2 = *(u8 *)(r1 +23)         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_ICMP)\n15: (55) if r2 != 0x1 goto pc+25      ; R2_w=1\n; eth->h_dest[i] = eth->h_source[i];\n16: (71) r2 = *(u8 *)(r1 +6)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n17: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n18: (73) *(u8 *)(r1 +6) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n19: (73) *(u8 *)(r1 +0) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n20: (71) r2 = *(u8 *)(r1 +1)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n21: (71) r3 = *(u8 *)(r1 +7)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n22: (73) *(u8 *)(r1 +1) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n23: (73) *(u8 *)(r1 +7) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n24: (71) r2 = *(u8 *)(r1 +2)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n25: (71) r3 = *(u8 *)(r1 +8)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n26: (73) *(u8 *)(r1 +2) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n27: (73) *(u8 *)(r1 +8) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n28: (71) r2 = *(u8 *)(r1 +3)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n29: (71) r3 = *(u8 *)(r1 +9)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n30: (73) *(u8 *)(r1 +3) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n31: (73) *(u8 *)(r1 +9) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n32: (71) r2 = *(u8 *)(r1 +4)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n33: (71) r3 = *(u8 *)(r1 +10)         ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n34: (73) *(u8 *)(r1 +4) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n35: (73) *(u8 *)(r1 +10) = r2         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n36: (71) r2 = *(u8 *)(r1 +11)         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n37: (71) r3 = *(u8 *)(r1 +5)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n38: (73) *(u8 *)(r1 +11) = r3         ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n39: (73) *(u8 *)(r1 +5) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n40: (b7) r0 = 3                       ; R0=3\n; }\n41: (95) exit\n\nfrom 15 to 41: safe\n\nfrom 13 to 41: safe\n\nfrom 10 to 41: safe\n\nfrom 5 to 41: safe\nverification time 266 usec\nstack depth 0\nprocessed 46 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "tx_icmp_reflector",
+        "description": "Reflect ICMP packet back out interface",
+        "pass": true,
+        "expected": "XDP_TX",
+        "actual": "XDP_TX"
+      },
+      {
+        "name": "pass_tcp",
+        "description": "Pass TCP packet unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

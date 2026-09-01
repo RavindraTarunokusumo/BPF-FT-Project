@@ -1,0 +1,86 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "pit_l2_length_histogram",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/pit_l2_length_histogram/sample-0.c",
+  "source_sha256": "5baad4bf76be6819f514e836c5119f4b7041b2ff1b36df497d7d26c914670cc5",
+  "timestamp": "2026-09-01T22:46:43.237684+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_eavvonzy/candidate.o\nlibbpf: elf: section(3) xdp, size 264, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_pit_l2_length_histogram' at insn offset 0 (0 bytes), code size 33 insns (264 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_eavvonzy/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1268, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 256, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 456, link 1, flags 0, type=2\nlibbpf: looking for externs among 19 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'length_histogram': at sec_idx 5, offset 0.\nlibbpf: map 'length_histogram': found type = 6.\nlibbpf: map 'length_histogram': found key [8], sz = 4.\nlibbpf: map 'length_histogram': found value [11], sz = 8.\nlibbpf: map 'length_histogram': found max_entries = 4.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #24 against 'length_histogram'\nlibbpf: prog 'xdp_telemetry_pit_l2_length_histogram': found map 0 (length_histogram, sec 5, off 0) for insn #24\nlibbpf: map 'length_histogram': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_pit_l2_length_histogram': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n2: (b7) r3 = 0                        ; R3_w=0\n; __u32 slot = 0;\n3: (63) *(u32 *)(r10 -4) = r3\nmark_precise: frame0: last_idx 3 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r3 stack= before 2: (b7) r3 = 0\n4: R3_w=0 R10=fp0 fp-8=0000????\n; __u32 pkt_len = (__u32)(data_end - data);\n4: (1f) r2 -= r1                      ; R1_w=pkt(r=0) R2_w=scalar()\n5: (bf) r1 = r2                       ; R1_w=scalar(id=1) R2_w=scalar(id=1)\n6: (67) r1 <<= 32                     ; R1_w=scalar(smax=0x7fffffff00000000,umax=0xffffffff00000000,smin32=0,smax32=umax32=0,var_off=(0x0; 0xffffffff00000000))\n7: (77) r1 >>= 32                     ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n8: (b7) r3 = 512                      ; R3_w=512\n; if (pkt_len >= 512)\n9: (2d) if r3 > r1 goto pc+2          ; R1_w=scalar(smin=umin=umin32=512,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R3_w=512\n10: (b7) r1 = 3                       ; R1_w=3\n11: (05) goto pc+9\n; \n21: (63) *(u32 *)(r10 -4) = r1        ; R1=3 R10=fp0 fp-8=mmmm????\n22: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *count = bpf_map_lookup_elem(&length_histogram, &slot);\n23: (07) r2 += -4                     ; R2_w=fp-4\n24: (18) r1 = 0xff2125b887cf2e00      ; R1_w=map_ptr(map=length_histogra,ks=4,vs=8)\n26: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=2,map=length_histogra,ks=4,vs=8)\n; if (count)\n27: (15) if r0 == 0x0 goto pc+3       ; R0_w=map_value(map=length_histogra,ks=4,vs=8)\n; *count += 1;\n28: (79) r1 = *(u64 *)(r0 +0)         ; R0_w=map_value(map=length_histogra,ks=4,vs=8) R1_w=scalar()\n29: (07) r1 += 1                      ; R1_w=scalar()\n30: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=length_histogra,ks=4,vs=8) R1=scalar()\n; return XDP_PASS;\n31: (b7) r0 = 2                       ; R0_w=2\n32: (95) exit\n\nfrom 27 to 31: safe\n\nfrom 9 to 12: R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=511,var_off=(0x0; 0x1ff)) R2_w=scalar(id=1) R3_w=512 R10=fp0 fp-8=0000????\n12: R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=511,var_off=(0x0; 0x1ff)) R2_w=scalar(id=1) R3_w=512 R10=fp0 fp-8=0000????\n; if (pkt_len >= 512)\n12: (b7) r3 = 128                     ; R3_w=128\n; else if (pkt_len >= 128)\n13: (2d) if r3 > r1 goto pc+2         ; R1_w=scalar(smin=umin=smin32=umin32=128,smax=umax=smax32=umax32=511,var_off=(0x0; 0x1ff)) R3_w=128\n14: (b7) r1 = 2                       ; R1_w=2\n15: (05) goto pc+5\n21: safe\n\nfrom 13 to 16: R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=127,var_off=(0x0; 0x7f)) R2=scalar(id=1) R3=128 R10=fp0 fp-8=0000????\n16: R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=127,var_off=(0x0; 0x7f)) R2=scalar(id=1) R3=128 R10=fp0 fp-8=0000????\n16: (67) r2 <<= 32                    ; R2_w=scalar(smax=0x7fffffff00000000,umax=0xffffffff00000000,smin32=0,smax32=umax32=0,var_off=(0x0; 0xffffffff00000000))\n17: (77) r2 >>= 32                    ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n18: (b7) r1 = 64                      ; R1_w=64\n; else if (pkt_len >= 64)\n19: (2d) if r1 > r2 goto pc+2         ; R1_w=64 R2_w=scalar(smin=umin=umin32=64,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n20: (b7) r1 = 1\n21: safe\n\nfrom 19 to 22: R1_w=64 R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=63,var_off=(0x0; 0x3f)) R3=128 R10=fp0 fp-8=0000????\n22: R1_w=64 R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=63,var_off=(0x0; 0x3f)) R3=128 R10=fp0 fp-8=0000????\n; \n22: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *count = bpf_map_lookup_elem(&length_histogram, &slot);\n23: (07) r2 += -4                     ; R2_w=fp-4\n24: (18) r1 = 0xff2125b887cf2e00      ; R1_w=map_ptr(map=length_histogra,ks=4,vs=8)\n26: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=3,map=length_histogra,ks=4,vs=8)\n; if (count)\n27: (15) if r0 == 0x0 goto pc+3       ; R0=map_value(map=length_histogra,ks=4,vs=8)\n; *count += 1;\n28: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=length_histogra,ks=4,vs=8) R1_w=scalar()\n29: (07) r1 += 1                      ; R1_w=scalar()\n30: (7b) *(u64 *)(r0 +0) = r1\n31: safe\n\nfrom 27 to 31: safe\nverification time 237 usec\nstack depth 8\nprocessed 45 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 8,
+    "total_tests": 8,
+    "details": [
+      {
+        "name": "bucket0_runt",
+        "description": "34-byte packet falls in bucket 0 (0-63) and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "bucket0_54",
+        "description": "54-byte TCP packet falls in bucket 0 (0-63) and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "bucket1_64",
+        "description": "64-byte boundary packet falls in bucket 1 (64-127) and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "bucket1_100",
+        "description": "100-byte packet falls in bucket 1 (64-127) and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "bucket2_128",
+        "description": "128-byte boundary packet falls in bucket 2 (128-511) and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "bucket2_256",
+        "description": "256-byte packet falls in bucket 2 (128-511) and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "bucket3_512",
+        "description": "512-byte boundary packet falls in bucket 3 (512+) and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "bucket3_1024",
+        "description": "1024-byte packet falls in bucket 3 (512+) and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

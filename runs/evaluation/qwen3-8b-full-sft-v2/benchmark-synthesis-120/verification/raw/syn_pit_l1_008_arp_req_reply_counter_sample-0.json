@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_008_arp_req_reply_counter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c",
+  "source_sha256": "3a1dd8c787eda736f1480971e7ebc1b05c953fe690981915c5727e7decfdff8b",
+  "timestamp": "2026-09-01T22:47:22.561219+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:32:22: error: arithmetic on a pointer to an incomplete type 'struct arphdr'\n   32 |     if ((void *)(arp + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:31:12: note: forward declaration of 'struct arphdr'\n   31 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:12: error: incomplete definition of type 'struct arphdr'\n   36 |     if (arp->ar_op == bpf_htons(ARPOP_REQUEST))\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:31:12: note: forward declaration of 'struct arphdr'\n   31 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:33: error: use of undeclared identifier 'ARPOP_REQUEST'\n   36 |     if (arp->ar_op == bpf_htons(ARPOP_REQUEST))\n      |                                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:33: error: use of undeclared identifier 'ARPOP_REQUEST'\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:33: error: use of undeclared identifier 'ARPOP_REQUEST'\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:33: error: use of undeclared identifier 'ARPOP_REQUEST'\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:32:22: error: arithmetic on a pointer to an incomplete type 'struct arphdr'\n   32 |     if ((void *)(arp + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:31:12: note: forward declaration of 'struct arphdr'\n   31 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:12: error: incomplete definition of type 'struct arphdr'\n   36 |     if (arp->ar_op == bpf_htons(ARPOP_REQUEST))\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:31:12: note: forward declaration of 'struct arphdr'\n   31 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:33: error: use of undeclared identifier 'ARPOP_REQUEST'\n   36 |     if (arp->ar_op == bpf_htons(ARPOP_REQUEST))\n      |                                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:33: error: use of undeclared identifier 'ARPOP_REQUEST'\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:33: error: use of undeclared identifier 'ARPOP_REQUEST'\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_008_arp_req_reply_counter/sample-0.c:36:33: error: use of undeclared identifier 'ARPOP_REQUEST'\n6 errors generated."
+}

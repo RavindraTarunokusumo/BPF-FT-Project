@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_009_gtpu_teid_stateful_quota",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c",
+  "source_sha256": "faf0eac8a7fb4bd3b3db145801c9123c291d6df7c2935038479931ad18b747fd",
+  "timestamp": "2026-09-01T22:47:25.388211+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:54:23: error: no member named 'daddr' in 'struct udphdr'\n   54 |     __u32 teid = udp->daddr;\n      |                  ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:58:65: error: invalid operands to binary expression ('__u32' (aka 'unsigned int') and 'void *')\n   58 |         __u64 new_bytes = stat->bytes_consumed + (ctx->data_end - (void *)(long)ctx->data);\n      |                                                   ~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:54:23: error: no member named 'daddr' in 'struct udphdr'\n   54 |     __u32 teid = udp->daddr;\n      |                  ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:58:65: error: invalid operands to binary expression ('__u32' (aka 'unsigned int') and 'void *')\n   58 |         __u64 new_bytes = stat->bytes_consumed + (ctx->data_end - (void *)(long)ctx->data);\n      |                                                   ~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated."
+}

@@ -1,0 +1,45 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "repair_nrf_l1_eth_hairpin_tx",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_eth_hairpin_tx/sample-0.c",
+  "source_sha256": "9c3521e11c07208909f9405e2a19934f47798045b5b26282a8334c5e4e65146c",
+  "timestamp": "2026-09-01T22:47:41.570819+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_tgkmgk5u/candidate.o\nlibbpf: elf: section(3) xdp, size 256, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 32 insns (256 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_tgkmgk5u/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 865, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 544, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+25         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; eth->h_dest[i] = eth->h_source[i];\n6: (71) r2 = *(u8 *)(r1 +6)           ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n7: (71) r3 = *(u8 *)(r1 +0)           ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n8: (73) *(u8 *)(r1 +6) = r3           ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n9: (73) *(u8 *)(r1 +0) = r2           ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n10: (71) r2 = *(u8 *)(r1 +1)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n11: (71) r3 = *(u8 *)(r1 +7)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n12: (73) *(u8 *)(r1 +1) = r3          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n13: (73) *(u8 *)(r1 +7) = r2          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n14: (71) r2 = *(u8 *)(r1 +2)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n15: (71) r3 = *(u8 *)(r1 +8)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n16: (73) *(u8 *)(r1 +2) = r3          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n17: (73) *(u8 *)(r1 +8) = r2          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n18: (71) r2 = *(u8 *)(r1 +3)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n19: (71) r3 = *(u8 *)(r1 +9)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n20: (73) *(u8 *)(r1 +3) = r3          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n21: (73) *(u8 *)(r1 +9) = r2          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n22: (71) r2 = *(u8 *)(r1 +4)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n23: (71) r3 = *(u8 *)(r1 +10)         ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n24: (73) *(u8 *)(r1 +4) = r3          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n25: (73) *(u8 *)(r1 +10) = r2         ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n26: (71) r2 = *(u8 *)(r1 +11)         ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n27: (71) r3 = *(u8 *)(r1 +5)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n28: (73) *(u8 *)(r1 +11) = r3         ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n29: (73) *(u8 *)(r1 +5) = r2          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n30: (b7) r0 = 3                       ; R0_w=3\n; }\n31: (95) exit\n\nfrom 5 to 31: R0=2 R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n31: R0=2 R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n31: (95) exit\nverification time 248 usec\nstack depth 0\nprocessed 33 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 1,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "tx_hairpin_valid",
+        "description": "Hairpin reflect valid Ethernet frame with XDP_TX",
+        "pass": true,
+        "expected": "XDP_TX",
+        "actual": "XDP_TX"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Pass truncated Ethernet frame with XDP_PASS",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "ERROR",
+        "stderr": "Error: failed to run program: Invalid argument\n"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_trunc' failed: expected XDP_PASS (2), got ERROR (None)"
+}

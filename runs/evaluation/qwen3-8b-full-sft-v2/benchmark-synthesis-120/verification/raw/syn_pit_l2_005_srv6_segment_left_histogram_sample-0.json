@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_005_srv6_segment_left_histogram",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c",
+  "source_sha256": "eb1cc45e25775ba7ba930dc56294026f0f9484ea5e026b806e810c25f4dfae19",
+  "timestamp": "2026-09-01T22:47:23.603739+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:46:22: error: arithmetic on a pointer to an incomplete type 'struct ipv6_sr_hdr'\n   46 |     if ((void *)(srh + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:45:12: note: forward declaration of 'struct ipv6_sr_hdr'\n   45 |     struct ipv6_sr_hdr *srh = (void *)ip6 + sizeof(struct ipv6hdr);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:49:12: error: incomplete definition of type 'struct ipv6_sr_hdr'\n   49 |     if (srh->routing_type != 4)\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:45:12: note: forward declaration of 'struct ipv6_sr_hdr'\n   45 |     struct ipv6_sr_hdr *srh = (void *)ip6 + sizeof(struct ipv6hdr);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:52:19: error: incomplete definition of type 'struct ipv6_sr_hdr'\n   52 |     __u32 sl = srh->segments_left;\n      |                ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:45:12: note: forward declaration of 'struct ipv6_sr_hdr'\n   45 |     struct ipv6_sr_hdr *srh = (void *)ip6 + sizeof(struct ipv6hdr);\n      |            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:46:22: error: arithmetic on a pointer to an incomplete type 'struct ipv6_sr_hdr'\n   46 |     if ((void *)(srh + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:45:12: note: forward declaration of 'struct ipv6_sr_hdr'\n   45 |     struct ipv6_sr_hdr *srh = (void *)ip6 + sizeof(struct ipv6hdr);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:49:12: error: incomplete definition of type 'struct ipv6_sr_hdr'\n   49 |     if (srh->routing_type != 4)\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:45:12: note: forward declaration of 'struct ipv6_sr_hdr'\n   45 |     struct ipv6_sr_hdr *srh = (void *)ip6 + sizeof(struct ipv6hdr);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:52:19: error: incomplete definition of type 'struct ipv6_sr_hdr'\n   52 |     __u32 sl = srh->segments_left;\n      |                ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_005_srv6_segment_left_histogram/sample-0.c:45:12: note: forward declaration of 'struct ipv6_sr_hdr'\n   45 |     struct ipv6_sr_hdr *srh = (void *)ip6 + sizeof(struct ipv6hdr);\n      |            ^\n3 errors generated."
+}

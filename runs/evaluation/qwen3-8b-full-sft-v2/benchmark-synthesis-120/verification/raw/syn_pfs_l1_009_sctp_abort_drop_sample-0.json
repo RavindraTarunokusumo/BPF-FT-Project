@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "syn_pfs_l1_009_sctp_abort_drop",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c",
+  "source_sha256": "d2cb0cd78a4669a3f518c521b2f6bd993889c7f82d189a9b2e767e119c660eca",
+  "timestamp": "2026-09-01T22:47:21.410771+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c:39:23: error: arithmetic on a pointer to an incomplete type 'struct sctphdr'\n   39 |     if ((void *)(sctp + 1) > data_end)\n      |                  ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c:38:12: note: forward declaration of 'struct sctphdr'\n   38 |     struct sctphdr *sctp = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c:42:13: error: incomplete definition of type 'struct sctphdr'\n   42 |     if (sctp->chunk_type == 6)\n      |         ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c:38:12: note: forward declaration of 'struct sctphdr'\n   38 |     struct sctphdr *sctp = (void *)ip + ip_hdr_len;\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c:39:23: error: arithmetic on a pointer to an incomplete type 'struct sctphdr'\n   39 |     if ((void *)(sctp + 1) > data_end)\n      |                  ~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c:38:12: note: forward declaration of 'struct sctphdr'\n   38 |     struct sctphdr *sctp = (void *)ip + ip_hdr_len;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c:42:13: error: incomplete definition of type 'struct sctphdr'\n   42 |     if (sctp->chunk_type == 6)\n      |         ~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_009_sctp_abort_drop/sample-0.c:38:12: note: forward declaration of 'struct sctphdr'\n   38 |     struct sctphdr *sctp = (void *)ip + ip_hdr_len;\n      |            ^\n2 errors generated."
+}

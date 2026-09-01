@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "syn_pfs_l1_006_coap_non_confirmable_drop",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_006_coap_non_confirmable_drop/sample-0.c",
+  "source_sha256": "b3d2ffa2ae5e2d4ac42d8138e34ec00e21fd2fc62e12d3c6231df7ef679b2ab9",
+  "timestamp": "2026-09-01T22:46:48.799910+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_006_coap_non_confirmable_drop/sample-0.c:45:53: error: no member named 'dgram_len' in 'struct udphdr'\n   45 |     if (udp->len < sizeof(*udp) || udp->len > (udp->dgram_len))\n      |                                                ~~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l1_006_coap_non_confirmable_drop/sample-0.c:45:53: error: no member named 'dgram_len' in 'struct udphdr'\n   45 |     if (udp->len < sizeof(*udp) || udp->len > (udp->dgram_len))\n      |                                                ~~~  ^\n1 error generated."
+}

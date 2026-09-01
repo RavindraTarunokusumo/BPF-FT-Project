@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_fib_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_fib_router/sample-0.c",
+  "source_sha256": "751ba69540df4aea5b6b957fd5dd6d48f3eb31388c195c48398a3e6bd0d66c56",
+  "timestamp": "2026-09-01T22:46:41.252321+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_fib_router/sample-0.c:42:16: error: no member named 'protocol' in 'struct bpf_fib_lookup'\n   42 |     fib_params.protocol = ip->protocol;\n      |     ~~~~~~~~~~ ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_fib_router/sample-0.c:42:16: error: no member named 'protocol' in 'struct bpf_fib_lookup'\n   42 |     fib_params.protocol = ip->protocol;\n      |     ~~~~~~~~~~ ^\n1 error generated."
+}

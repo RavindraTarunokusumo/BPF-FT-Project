@@ -1,0 +1,72 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "ptr_l1_set_source_mac",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/ptr_l1_set_source_mac/sample-0.c",
+  "source_sha256": "bd26d7500610be1ccc72d9ce3807d411a60ba0b9d572c10b8a8a15d360aa04da",
+  "timestamp": "2026-09-01T22:46:41.492621+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_yyrc2h4a/candidate.o\nlibbpf: elf: section(3) xdp, size 168, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform_ptr_l1_set_source_mac' at insn offset 0 (0 bytes), code size 21 insns (168 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_yyrc2h4a/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 861, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 224, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform_ptr_l1_set_source_mac': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+14         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r2 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (4f) r3 |= r2                      ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3_w=scalar()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+9        ; R3_w=8\n10: (b7) r2 = 0                       ; R2_w=0\n; eth->h_dest[2] = 0x00;\n11: (73) *(u8 *)(r1 +4) = r2          ; R1_w=pkt(r=14) R2_w=0\n12: (73) *(u8 *)(r1 +3) = r2          ; R1_w=pkt(r=14) R2_w=0\n13: (73) *(u8 *)(r1 +2) = r2          ; R1_w=pkt(r=14) R2_w=0\n14: (73) *(u8 *)(r1 +1) = r2          ; R1_w=pkt(r=14) R2_w=0\n15: (b7) r2 = 66                      ; R2_w=66\n; eth->h_dest[5] = 0x42;\n16: (73) *(u8 *)(r1 +5) = r2          ; R1_w=pkt(r=14) R2_w=66\n17: (b7) r2 = 2                       ; R2_w=2\n; eth->h_dest[0] = 0x02;\n18: (73) *(u8 *)(r1 +0) = r2          ; R1=pkt(r=14) R2=2\n; }\n19: (b7) r0 = 2                       ; R0_w=2\n20: (95) exit\n\nfrom 9 to 19: safe\n\nfrom 4 to 19: safe\nverification time 151 usec\nstack depth 0\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 6,
+    "total_tests": 6,
+    "details": [
+      {
+        "name": "set_src_tcp",
+        "description": "TCP frame source MAC set to 02:00:00:00:00:42",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "set_src_udp",
+        "description": "UDP frame source MAC set to 02:00:00:00:00:42",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "set_src_arp",
+        "description": "ARP frame source MAC set to 02:00:00:00:00:42",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "set_src_vlan",
+        "description": "VLAN frame source MAC set to 02:00:00:00:00:42",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "set_src_runt",
+        "description": "14-byte frame source MAC set to 02:00:00:00:00:42",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "set_src_runt_ffff",
+        "description": "14-byte frame source MAC set to 02:00:00:00:00:42",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

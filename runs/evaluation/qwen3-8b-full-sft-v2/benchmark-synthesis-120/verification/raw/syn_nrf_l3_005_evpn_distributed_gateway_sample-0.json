@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_005_evpn_distributed_gateway",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c",
+  "source_sha256": "222b7d058e1faecb701094212ff46d7eefcbf7b6f46dadfca6ffa9777ba3b106",
+  "timestamp": "2026-09-01T22:46:48.511087+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:53:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   53 |     if (inner_eth->h_dest.addr[0] != 0x00 ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:54:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   54 |         inner_eth->h_dest.addr[1] != 0x00 ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:55:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   55 |         inner_eth->h_dest.addr[2] != 0x5e ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:56:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   56 |         inner_eth->h_dest.addr[3] != 0x00 ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:57:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   57 |         inner_eth->h_dest.addr[4] != 0x01 ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:58:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   58 |         inner_eth->h_dest.addr[5] != 0x01)\n      |         ~~~~~~~~~~~~~~~~~^~~~~\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:53:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   53 |     if (inner_eth->h_dest.addr[0] != 0x00 ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:54:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   54 |         inner_eth->h_dest.addr[1] != 0x00 ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:55:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   55 |         inner_eth->h_dest.addr[2] != 0x5e ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:56:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   56 |         inner_eth->h_dest.addr[3] != 0x00 ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:57:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   57 |         inner_eth->h_dest.addr[4] != 0x01 ||\n      |         ~~~~~~~~~~~~~~~~~^~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c:58:26: error: member reference base type 'unsigned char[6]' is not a structure or union\n   58 |         inner_eth->h_dest.addr[5] != 0x01)\n      |         ~~~~~~~~~~~~~~~~~^~~~~\n6 errors generated."
+}

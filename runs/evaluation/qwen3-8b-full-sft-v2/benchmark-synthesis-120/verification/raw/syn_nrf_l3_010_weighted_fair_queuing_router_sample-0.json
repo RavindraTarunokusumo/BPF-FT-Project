@@ -1,0 +1,94 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_010_weighted_fair_queuing_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_010_weighted_fair_queuing_router/sample-0.c",
+  "source_sha256": "2734ac514e54dadcc32db87819355ad291337d9dc20c4265f01daa2e683b490b",
+  "timestamp": "2026-09-01T22:47:24.588844+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_djs8z7sb/candidate.o\nlibbpf: elf: section(3) xdp, size 224, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_syn_nrf_l3_010_weighted_fair_queuing_router' at insn offset 0 (0 bytes), code size 28 insns (224 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_djs8z7sb/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1029, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 272, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_route_syn_nrf_l3_010_weighted_fair_queuing_router': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_syn_nrf_l3_010_weighted_fair_queuing_router(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+21         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+16      ; R4_w=8\n11: (bf) r4 = r1                      ; R1_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r2 goto pc+13        ; R2=pkt_end() R4=pkt(off=34,r=34)\n; __u32 ip_hlen = ip->ihl * 4;\n14: (71) r3 = *(u8 *)(r3 +0)          ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip_hlen < sizeof(*ip) || ip_hlen > 60)\n15: (57) r3 &= 15                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=15,var_off=(0x0; 0xf))\n16: (b7) r4 = 5                       ; R4_w=5\n; if (ip_hlen < sizeof(*ip) || ip_hlen > 60)\n17: (2d) if r4 > r3 goto pc+9         ; R3_w=scalar(smin=umin=smin32=umin32=5,smax=umax=smax32=umax32=15,var_off=(0x0; 0xf)) R4_w=5\n; __u32 pkt_len = ctx->data_end - ctx->data;\n18: (1f) r2 -= r1                     ; R1=pkt(r=34) R2_w=scalar()\n19: (67) r2 <<= 32                    ; R2_w=scalar(smax=0x7fffffff00000000,umax=0xffffffff00000000,smin32=0,smax32=umax32=0,var_off=(0x0; 0xffffffff00000000))\n20: (77) r2 >>= 32                    ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n21: (b7) r1 = 100                     ; R1_w=100\n22: (b7) r3 = 257                     ; R3=257\n; \n23: (2d) if r3 > r2 goto pc+1         ; R2=scalar(smin=umin=umin32=257,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R3=257\n24: (b7) r1 = 101                     ; R1_w=101\n25: (b7) r2 = 0                       ; R2_w=0\n26: (85) call bpf_redirect#23         ; R0_w=scalar()\n; }\n27: (95) exit\n\nfrom 23 to 25: R0=2 R1=100 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=256,var_off=(0x0; 0x1ff)) R3=257 R4=5 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n25: R0=2 R1=100 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=256,var_off=(0x0; 0x1ff)) R3=257 R4=5 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; \n25: (b7) r2 = 0                       ; R2_w=0\n26: (85) call bpf_redirect#23         ; R0_w=scalar()\n; }\n27: (95) exit\n\nfrom 17 to 27: R0=2 R1=pkt(r=34) R2=pkt_end() R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=4,var_off=(0x0; 0x7)) R4=5 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n27: R0=2 R1=pkt(r=34) R2=pkt_end() R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=4,var_off=(0x0; 0x7)) R4=5 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n27: (95) exit\n\nfrom 13 to 27: safe\n\nfrom 10 to 27: safe\n\nfrom 5 to 27: safe\nverification time 223 usec\nstack depth 0\nprocessed 35 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 8,
+    "total_tests": 9,
+    "details": [
+      {
+        "name": "small_pkt_redirect_if100",
+        "description": "Small packet (len <= 256) redirected to low-latency ifindex 100",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "large_pkt_redirect_if101",
+        "description": "Large packet (len > 256) redirected to bulk ifindex 101",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "small_udp_redirect_if100",
+        "description": "Small UDP packet redirected to low-latency ifindex 100",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "large_udp_redirect_if101",
+        "description": "Large UDP packet redirected to bulk ifindex 101",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_pass",
+        "description": "IPv6 frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vlan_pass",
+        "description": "VLAN frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ip_pass",
+        "description": "Truncated IPv4 packet passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_eth_pass",
+        "description": "Truncated Ethernet frame passed safely",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "ERROR",
+        "stderr": "Error: failed to run program: Invalid argument\n"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'truncated_eth_pass' failed: expected XDP_PASS (2), got ERROR (None)"
+}

@@ -1,0 +1,51 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "repair_pit_l1_total_bytes_delta",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_pit_l1_total_bytes_delta/sample-0.c",
+  "source_sha256": "deb2e684817e1ca859fdbac54caca4d4be75bcb4c9d323e4bfdffd6281329659",
+  "timestamp": "2026-09-01T22:47:36.065802+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_gjl578pu/candidate.o\nlibbpf: elf: section(3) xdp, size 128, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 16 insns (128 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_gjl578pu/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1096, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 208, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'byte_accumulator': at sec_idx 5, offset 0.\nlibbpf: map 'byte_accumulator': found type = 6.\nlibbpf: map 'byte_accumulator': found key [6], sz = 4.\nlibbpf: map 'byte_accumulator': found value [9], sz = 8.\nlibbpf: map 'byte_accumulator': found max_entries = 1.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #6 against 'byte_accumulator'\nlibbpf: prog 'xdp_telemetry': found map 0 (byte_accumulator, sec 5, off 0) for insn #6\nlibbpf: map 'byte_accumulator': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; __u64 len = (__u64)(long)ctx->data_end - (__u64)(long)ctx->data;\n0: (61) r7 = *(u32 *)(r1 +0)          ; R1=ctx() R7_w=pkt(r=0)\n; __u64 len = (__u64)(long)ctx->data_end - (__u64)(long)ctx->data;\n1: (61) r6 = *(u32 *)(r1 +4)          ; R1=ctx() R6_w=pkt_end()\n2: (b7) r1 = 0                        ; R1_w=0\n; __u32 key = 0;\n3: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 3 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 2: (b7) r1 = 0\n4: R1_w=0 R10=fp0 fp-8=0000????\n4: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0\n; \n5: (07) r2 += -4                      ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&byte_accumulator, &key);\n6: (18) r1 = 0xff2125b8caefbc00       ; R1_w=map_ptr(map=byte_accumulato,ks=4,vs=8)\n8: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=byte_accumulato,ks=4,vs=8)\n; if (cnt) {\n9: (15) if r0 == 0x0 goto pc+4        ; R0_w=map_value(map=byte_accumulato,ks=4,vs=8)\n; __u64 len = (__u64)(long)ctx->data_end - (__u64)(long)ctx->data;\n10: (1f) r6 -= r7                     ; R6_w=scalar() R7_w=pkt(r=0)\n; *cnt += len;\n11: (79) r1 = *(u64 *)(r0 +0)         ; R0_w=map_value(map=byte_accumulato,ks=4,vs=8) R1_w=scalar()\n12: (0f) r6 += r1                     ; R1_w=scalar() R6_w=scalar()\n13: (7b) *(u64 *)(r0 +0) = r6         ; R0=map_value(map=byte_accumulato,ks=4,vs=8) R6=scalar()\n; return XDP_PASS;\n14: (b7) r0 = 2                       ; R0_w=2\n15: (95) exit\n\nfrom 9 to 14: safe\nverification time 95 usec\nstack depth 8\nprocessed 16 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_pkt1",
+        "description": "Add first packet bytes to accumulator",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_pkt2",
+        "description": "Add second packet bytes to accumulator",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Add ARP frame bytes to accumulator",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

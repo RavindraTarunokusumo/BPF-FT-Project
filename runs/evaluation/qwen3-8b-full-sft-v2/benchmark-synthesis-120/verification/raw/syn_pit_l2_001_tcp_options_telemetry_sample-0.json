@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_001_tcp_options_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c",
+  "source_sha256": "086d89935e5fa6a2105a12ea130002edee84b8618892932227102bcb578f8d75",
+  "timestamp": "2026-09-01T22:47:24.714404+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:46:26: error: address of bit-field requested\n   46 |     __u32 *key = (void *)&tcp->doff * 4;\n      |                          ^~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:46:37: error: invalid operands to binary expression ('void *' and 'int')\n   46 |     __u32 *key = (void *)&tcp->doff * 4;\n      |                  ~~~~~~~~~~~~~~~~~~ ^ ~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:71:56: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:12:1)'\n   71 |             __sync_fetch_and_add(&tcp_options_freq_map.entries[0], 1);\n      |                                   ~~~~~~~~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:73:56: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:12:1)'\n   73 |             __sync_fetch_and_add(&tcp_options_freq_map.entries[1], 1);\n      |                                   ~~~~~~~~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:75:56: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:12:1)'\n   75 |             __sync_fetch_and_add(&tcp_options_freq_map.entries[2], 1);\n      |                                   ~~~~~~~~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:77:56: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:12:1)'\n   77 |             __sync_fetch_and_add(&tcp_options_freq_map.entries[3], 1);\n      |                                   ~~~~~~~~~~~~~~~~~~~~ ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:46:26: error: address of bit-field requested\n   46 |     __u32 *key = (void *)&tcp->doff * 4;\n      |                          ^~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:46:37: error: invalid operands to binary expression ('void *' and 'int')\n   46 |     __u32 *key = (void *)&tcp->doff * 4;\n      |                  ~~~~~~~~~~~~~~~~~~ ^ ~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:71:56: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:12:1)'\n   71 |             __sync_fetch_and_add(&tcp_options_freq_map.entries[0], 1);\n      |                                   ~~~~~~~~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:73:56: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:12:1)'\n   73 |             __sync_fetch_and_add(&tcp_options_freq_map.entries[1], 1);\n      |                                   ~~~~~~~~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:75:56: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:12:1)'\n   75 |             __sync_fetch_and_add(&tcp_options_freq_map.entries[2], 1);\n      |                                   ~~~~~~~~~~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:77:56: error: no member named 'entries' in 'struct (unnamed at runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:12:1)'\n   77 |             __sync_fetch_and_add(&tcp_options_freq_map.entries[3], 1);\n      |                                   ~~~~~~~~~~~~~~~~~~~~ ^\n6 errors generated."
+}

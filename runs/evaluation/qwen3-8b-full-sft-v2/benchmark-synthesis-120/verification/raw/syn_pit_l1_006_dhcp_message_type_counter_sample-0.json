@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_006_dhcp_message_type_counter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c",
+  "source_sha256": "1b92082ad5f27cd2ed5fe104e01ca9ea7b09ce8d97a4ccfe6a56c028d4fe62a6",
+  "timestamp": "2026-09-01T22:47:27.685762+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:48:9: error: call to undeclared function 'bpf_map_inc'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   48 |         bpf_map_inc(&dhcp_type_map, &key, 1, BPF_MAP_FLAGS);\n      |         ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:48:46: error: use of undeclared identifier 'BPF_MAP_FLAGS'\n   48 |         bpf_map_inc(&dhcp_type_map, &key, 1, BPF_MAP_FLAGS);\n      |                                              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:51:9: error: call to undeclared function 'bpf_map_inc'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   51 |         bpf_map_inc(&dhcp_type_map, &key, 1, BPF_MAP_FLAGS);\n      |         ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:51:46: error: use of undeclared identifier 'BPF_MAP_FLAGS'\n   51 |         bpf_map_inc(&dhcp_type_map, &key, 1, BPF_MAP_FLAGS);\n      |                                              ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:48:9: error: call to undeclared function 'bpf_map_inc'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   48 |         bpf_map_inc(&dhcp_type_map, &key, 1, BPF_MAP_FLAGS);\n      |         ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:48:46: error: use of undeclared identifier 'BPF_MAP_FLAGS'\n   48 |         bpf_map_inc(&dhcp_type_map, &key, 1, BPF_MAP_FLAGS);\n      |                                              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:51:9: error: call to undeclared function 'bpf_map_inc'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   51 |         bpf_map_inc(&dhcp_type_map, &key, 1, BPF_MAP_FLAGS);\n      |         ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l1_006_dhcp_message_type_counter/sample-0.c:51:46: error: use of undeclared identifier 'BPF_MAP_FLAGS'\n   51 |         bpf_map_inc(&dhcp_type_map, &key, 1, BPF_MAP_FLAGS);\n      |                                              ^\n4 errors generated."
+}

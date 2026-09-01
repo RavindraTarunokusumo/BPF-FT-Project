@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "repair_nrf_l3_fib_nexthop_update",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c",
+  "source_sha256": "2b5b8cf5093f0b8579864317100047190c9d6208f3dc5338c06bcfe5cfe6dae0",
+  "timestamp": "2026-09-01T22:47:38.736072+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:17:8: error: redefinition of 'bpf_fib_lookup'\n   17 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:62:28: error: no member named 'source' in 'struct iphdr'\n   62 |     fib_params.sport = ip->source;\n      |                        ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:63:28: error: no member named 'dest' in 'struct iphdr'\n   63 |     fib_params.dport = ip->dest;\n      |                        ~~  ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:17:8: error: redefinition of 'bpf_fib_lookup'\n   17 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:62:28: error: no member named 'source' in 'struct iphdr'\n   62 |     fib_params.sport = ip->source;\n      |                        ~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:63:28: error: no member named 'dest' in 'struct iphdr'\n   63 |     fib_params.dport = ip->dest;\n      |                        ~~  ^\n3 errors generated."
+}

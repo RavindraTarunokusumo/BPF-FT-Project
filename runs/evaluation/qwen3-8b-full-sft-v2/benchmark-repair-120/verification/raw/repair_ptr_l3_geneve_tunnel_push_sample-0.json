@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "repair_ptr_l3_geneve_tunnel_push",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c",
+  "source_sha256": "9855b6c882a26d0e58764207dac7c8fc60569381384f558c437fe43885ddd187",
+  "timestamp": "2026-09-01T22:47:38.436732+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:39:13: error: expected '=' or another designator\n   39 |         .ihl: 5,\n      |             ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:51:14: error: expected '=' or another designator\n   51 |         .dest: bpf_htons(6081),\n      |              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:59:30: error: expected ';' after expression\n   59 |     *geneve++ = GENEVE_Option::OPT_TYPE_TNV;\n      |                              ^\n      |                              ;\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:59:17: error: use of undeclared identifier 'GENEVE_Option'\n   59 |     *geneve++ = GENEVE_Option::OPT_TYPE_TNV;\n      |                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:59:30: error: expected expression\n   59 |     *geneve++ = GENEVE_Option::OPT_TYPE_TNV;\n      |                              ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:39:13: error: expected '=' or another designator\n   39 |         .ihl: 5,\n      |             ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:51:14: error: expected '=' or another designator\n   51 |         .dest: bpf_htons(6081),\n      |              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:59:30: error: expected ';' after expression\n   59 |     *geneve++ = GENEVE_Option::OPT_TYPE_TNV;\n      |                              ^\n      |                              ;\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:59:17: error: use of undeclared identifier 'GENEVE_Option'\n   59 |     *geneve++ = GENEVE_Option::OPT_TYPE_TNV;\n      |                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l3_geneve_tunnel_push/sample-0.c:59:30: error: expected expression\n   59 |     *geneve++ = GENEVE_Option::OPT_TYPE_TNV;\n      |                              ^\n5 errors generated."
+}

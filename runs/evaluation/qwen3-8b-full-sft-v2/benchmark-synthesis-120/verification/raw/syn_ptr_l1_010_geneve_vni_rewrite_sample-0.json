@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_010_geneve_vni_rewrite",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c",
+  "source_sha256": "7a6a13d583c0c29afba3dbb6afee825868115f2819b8f1b050d52a64ad1594f1",
+  "timestamp": "2026-09-01T22:47:24.193472+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:44:25: error: arithmetic on a pointer to an incomplete type 'struct genevehdr'\n   44 |     if ((void *)(geneve + 1) > data_end)\n      |                  ~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:43:12: note: forward declaration of 'struct genevehdr'\n   43 |     struct genevehdr *geneve = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:47:11: error: incomplete definition of type 'struct genevehdr'\n   47 |     geneve->vni[0] = 0x00;\n      |     ~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:43:12: note: forward declaration of 'struct genevehdr'\n   43 |     struct genevehdr *geneve = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:48:11: error: incomplete definition of type 'struct genevehdr'\n   48 |     geneve->vni[1] = 0x55;\n      |     ~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:43:12: note: forward declaration of 'struct genevehdr'\n   43 |     struct genevehdr *geneve = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:49:11: error: incomplete definition of type 'struct genevehdr'\n   49 |     geneve->vni[2] = 0xAA;\n      |     ~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:43:12: note: forward declaration of 'struct genevehdr'\n   43 |     struct genevehdr *geneve = (void *)(udp + 1);\n      |            ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:44:25: error: arithmetic on a pointer to an incomplete type 'struct genevehdr'\n   44 |     if ((void *)(geneve + 1) > data_end)\n      |                  ~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:43:12: note: forward declaration of 'struct genevehdr'\n   43 |     struct genevehdr *geneve = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:47:11: error: incomplete definition of type 'struct genevehdr'\n   47 |     geneve->vni[0] = 0x00;\n      |     ~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:43:12: note: forward declaration of 'struct genevehdr'\n   43 |     struct genevehdr *geneve = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:48:11: error: incomplete definition of type 'struct genevehdr'\n   48 |     geneve->vni[1] = 0x55;\n      |     ~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:43:12: note: forward declaration of 'struct genevehdr'\n   43 |     struct genevehdr *geneve = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:49:11: error: incomplete definition of type 'struct genevehdr'\n   49 |     geneve->vni[2] = 0xAA;\n      |     ~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:43:12: note: forward declaration of 'struct genevehdr'\n   43 |     struct genevehdr *geneve = (void *)(udp + 1);\n      |            ^\n4 errors generated."
+}

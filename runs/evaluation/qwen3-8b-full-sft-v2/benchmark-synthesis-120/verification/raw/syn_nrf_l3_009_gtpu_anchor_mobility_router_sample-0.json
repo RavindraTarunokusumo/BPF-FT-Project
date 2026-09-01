@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_009_gtpu_anchor_mobility_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c",
+  "source_sha256": "8bae79ce1eaa9d62957c8605d7474187e9b9ceabdfbec885c053f97a9d4edd0f",
+  "timestamp": "2026-09-01T22:47:23.662996+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:43:22: error: arithmetic on a pointer to an incomplete type 'struct gtpuhdr'\n   43 |     if ((void *)(gtp + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:42:12: note: forward declaration of 'struct gtpuhdr'\n   42 |     struct gtpuhdr *gtp = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:46:21: error: incomplete definition of type 'struct gtpuhdr'\n   46 |     __u32 teid = gtp->teid;\n      |                  ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:42:12: note: forward declaration of 'struct gtpuhdr'\n   42 |     struct gtpuhdr *gtp = (void *)(udp + 1);\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:43:22: error: arithmetic on a pointer to an incomplete type 'struct gtpuhdr'\n   43 |     if ((void *)(gtp + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:42:12: note: forward declaration of 'struct gtpuhdr'\n   42 |     struct gtpuhdr *gtp = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:46:21: error: incomplete definition of type 'struct gtpuhdr'\n   46 |     __u32 teid = gtp->teid;\n      |                  ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:42:12: note: forward declaration of 'struct gtpuhdr'\n   42 |     struct gtpuhdr *gtp = (void *)(udp + 1);\n      |            ^\n2 errors generated."
+}

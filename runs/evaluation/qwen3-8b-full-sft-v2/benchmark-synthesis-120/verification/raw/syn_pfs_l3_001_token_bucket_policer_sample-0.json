@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_001_token_bucket_policer",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c",
+  "source_sha256": "1d431c04ecb836bc9ae5415564a29c9bc1f7895af37b6fb2dd16f53cd6ab6363",
+  "timestamp": "2026-09-01T22:47:23.424570+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:38:19: error: use of undeclared identifier 'BURST_CAPACITY'\n   38 |     if (pkt_len > BURST_CAPACITY)\n      |                   ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:50:33: error: use of undeclared identifier 'BURST_CAPACITY'\n   50 |                 state->tokens = BURST_CAPACITY;\n      |                                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:61:41: error: use of undeclared identifier 'RATE_BYTES_PER_SEC'\n   61 |         __u64 tokens_added = (elapsed * RATE_BYTES_PER_SEC) / 1000000000;\n      |                                         ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:63:29: error: use of undeclared identifier 'BURST_CAPACITY'\n   63 |         if (state->tokens > BURST_CAPACITY)\n      |                             ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:64:29: error: use of undeclared identifier 'BURST_CAPACITY'\n   64 |             state->tokens = BURST_CAPACITY;\n      |                             ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:38:19: error: use of undeclared identifier 'BURST_CAPACITY'\n   38 |     if (pkt_len > BURST_CAPACITY)\n      |                   ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:50:33: error: use of undeclared identifier 'BURST_CAPACITY'\n   50 |                 state->tokens = BURST_CAPACITY;\n      |                                 ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:61:41: error: use of undeclared identifier 'RATE_BYTES_PER_SEC'\n   61 |         __u64 tokens_added = (elapsed * RATE_BYTES_PER_SEC) / 1000000000;\n      |                                         ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:63:29: error: use of undeclared identifier 'BURST_CAPACITY'\n   63 |         if (state->tokens > BURST_CAPACITY)\n      |                             ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:64:29: error: use of undeclared identifier 'BURST_CAPACITY'\n   64 |             state->tokens = BURST_CAPACITY;\n      |                             ^\n5 errors generated."
+}

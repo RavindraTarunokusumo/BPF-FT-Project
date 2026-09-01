@@ -1,0 +1,79 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_009_tcp_mss_range_histogram",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_009_tcp_mss_range_histogram/sample-0.c",
+  "source_sha256": "282ada86004377dfc5cb666dbbd0a2c8afd844a2b7dae0882726dc40f31f2093",
+  "timestamp": "2026-09-01T22:47:25.808460+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_009_tcp_mss_range_histogram/sample-0.c:52:17: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   52 |         if (opt < (void *)(tcp + 1)) {\n      |             ~~~ ^ ~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_009_tcp_mss_range_histogram/sample-0.c:54:29: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   54 |                 if (opt + 4 <= (void *)(tcp + 1)) {\n      |                     ~~~~~~~ ^  ~~~~~~~~~~~~~~~~~\n2 warnings generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_bcafoad6/candidate.o\nlibbpf: elf: section(3) xdp, size 328, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_syn_pit_l2_009_tcp_mss_range_histogram' at insn offset 0 (0 bytes), code size 41 insns (328 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_bcafoad6/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1415, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 400, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'mss_histogram_map': at sec_idx 5, offset 0.\nlibbpf: map 'mss_histogram_map': found type = 6.\nlibbpf: map 'mss_histogram_map': found key [8], sz = 4.\nlibbpf: map 'mss_histogram_map': found value [11], sz = 8.\nlibbpf: map 'mss_histogram_map': found max_entries = 4.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #32 against 'mss_histogram_map'\nlibbpf: prog 'xdp_telemetry_syn_pit_l2_009_tcp_mss_range_histogram': found map 0 (mss_histogram_map, sec 5, off 0) for insn #32\nlibbpf: map 'mss_histogram_map': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_syn_pit_l2_009_tcp_mss_range_histogram': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r1 > r2 goto pc+34         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r4 != 0x8 goto pc+29       ; R4_w=8\n10: (bf) r4 = r3                      ; R3_w=pkt(r=14) R4_w=pkt(r=14)\n11: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n12: (2d) if r4 > r2 goto pc+26        ; R2=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_TCP)\n13: (71) r3 = *(u8 *)(r3 +23)         ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_TCP)\n14: (55) if r3 != 0x6 goto pc+24      ; R3_w=6\n; unsigned int ip_hdr_len = ip->ihl * 4;\n15: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(off=14,r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; unsigned int ip_hdr_len = ip->ihl * 4;\n16: (67) r3 <<= 2                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n17: (57) r3 &= 60                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n18: (b7) r4 = 20                      ; R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n19: (2d) if r4 > r3 goto pc+19        ; R3_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n20: (0f) r1 += r3\nmark_precise: frame0: last_idx 20 first_idx 12 subseq_idx -1 \nmark_precise: frame0: regs=r3 stack= before 19: (2d) if r4 > r3 goto pc+19\nmark_precise: frame0: regs=r3,r4 stack= before 18: (b7) r4 = 20\nmark_precise: frame0: regs=r3 stack= before 17: (57) r3 &= 60\nmark_precise: frame0: regs=r3 stack= before 16: (67) r3 <<= 2\nmark_precise: frame0: regs=r3 stack= before 15: (71) r3 = *(u8 *)(r1 +0)\n21: R1=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n21: (2d) if r1 > r2 goto pc+17        ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt_end()\n22: (bf) r3 = r1                      ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n23: (07) r3 += 20                     ; R3_w=pkt(id=1,off=34,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (2d) if r3 > r2 goto pc+14        ; R2=pkt_end() R3_w=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (tcp->syn != 1)\n25: (69) r1 = *(u16 *)(r1 +12)        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (tcp->syn != 1)\n26: (57) r1 &= 512                    ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=512,var_off=(0x0; 0x200))\n; if (tcp->syn != 1)\n27: (15) if r1 == 0x0 goto pc+11      ; R1_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=512,var_off=(0x0; 0x200))\n28: (b7) r1 = 0                       ; R1_w=0\n; __u32 key = 0;\n29: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 29 first_idx 21 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 28: (b7) r1 = 0\n30: R1_w=0 R10=fp0 fp-8=0000????\n30: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n31: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&mss_histogram_map, &key);\n32: (18) r1 = 0xff2125b89938aa00      ; R1_w=map_ptr(map=mss_histogram_m,ks=4,vs=8)\n34: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=mss_histogram_m,ks=4,vs=8)\n; if (cnt)\n35: (15) if r0 == 0x0 goto pc+3       ; R0=map_value(map=mss_histogram_m,ks=4,vs=8)\n; *cnt += 1;\n36: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=mss_histogram_m,ks=4,vs=8) R1_w=scalar()\n37: (07) r1 += 1                      ; R1_w=scalar()\n38: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=mss_histogram_m,ks=4,vs=8) R1_w=scalar()\n; }\n39: (b7) r0 = 2                       ; R0_w=2\n40: (95) exit\n\nfrom 35 to 39: R0=0 R10=fp0 fp-8=mmmm????\n39: R0=0 R10=fp0 fp-8=mmmm????\n39: (b7) r0 = 2                       ; R0_w=2\n40: (95) exit\n\nfrom 27 to 39: R1=0 R2=pkt_end() R3=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: R1=0 R2=pkt_end() R3=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: (b7) r0 = 2                       ; R0_w=2\n40: (95) exit\n\nfrom 24 to 39: safe\n\nfrom 21 to 39: safe\n\nfrom 19 to 39: safe\n\nfrom 14 to 39: safe\n\nfrom 12 to 39: safe\n\nfrom 9 to 39: safe\n\nfrom 4 to 39: safe\nverification time 365 usec\nstack depth 8\nprocessed 51 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 7,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "mss_bucket0_pass",
+        "description": "TCP SYN with MSS 1000 (<1200) increments slot 0 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "mss_bucket1_pass",
+        "description": "TCP SYN with MSS 1300 (1200-1400) increments slot 1 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "mss_bucket2_pass",
+        "description": "TCP SYN with MSS 1460 (1401-1460) increments slot 2 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "mss_bucket3_pass",
+        "description": "TCP SYN with MSS 1500 (>1460) increments slot 3 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "syn_no_mss_pass",
+        "description": "TCP SYN without MSS option passes without counting",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ack_pass",
+        "description": "TCP ACK passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_tcp_pass",
+        "description": "Truncated TCP packet passes safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

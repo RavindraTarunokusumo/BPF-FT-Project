@@ -1,0 +1,72 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "repair_pfs_l3_dynamic_port_knocking",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_pfs_l3_dynamic_port_knocking/sample-0.c",
+  "source_sha256": "f52747f49e212114a91ce53230c5579d9361132c16463abf31cd0555087bece6",
+  "timestamp": "2026-09-01T22:47:45.132981+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_x1e_v6cr/candidate.o\nlibbpf: elf: section(3) xdp, size 536, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter' at insn offset 0 (0 bytes), code size 67 insns (536 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_x1e_v6cr/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1619, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 560, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 456, link 1, flags 0, type=2\nlibbpf: looking for externs among 19 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'knock_map': at sec_idx 5, offset 0.\nlibbpf: map 'knock_map': found type = 1.\nlibbpf: map 'knock_map': found key [6], sz = 4.\nlibbpf: map 'knock_map': found value [9], sz = 1.\nlibbpf: map 'knock_map': found max_entries = 1024.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #31 against 'knock_map'\nlibbpf: prog 'xdp_filter': found map 0 (knock_map, sec 5, off 0) for insn #31\nlibbpf: sec '.relxdp': relo #1: insn #56 against 'knock_map'\nlibbpf: prog 'xdp_filter': found map 0 (knock_map, sec 5, off 0) for insn #56\nlibbpf: map 'knock_map': created successfully, fd=4\nlibbpf: prog 'xdp_filter': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r2 = *(u32 *)(r1 +0)          ; R1=ctx() R2_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r2                       ; R1_w=pkt(r=0) R2_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r3 goto pc+60         ; R1_w=pkt(off=14,r=14) R3_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r2 +13)          ; R2_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r2 +12)          ; R2_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+55      ; R4_w=8\n11: (bf) r4 = r2                      ; R2_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r3 goto pc+52        ; R3=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_TCP)\n14: (71) r4 = *(u8 *)(r2 +23)         ; R2=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_TCP)\n15: (55) if r4 != 0x6 goto pc+50      ; R4_w=6\n; __u32 ip_len = (__u32)ip->ihl * 4;\n16: (71) r4 = *(u8 *)(r1 +0)          ; R1=pkt(off=14,r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ip_len = (__u32)ip->ihl * 4;\n17: (67) r4 <<= 2                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r4 &= 60                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r5 = 20                      ; R5_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n20: (2d) if r5 > r4 goto pc+45        ; R4_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n21: (0f) r1 += r4\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r4 stack= before 20: (2d) if r5 > r4 goto pc+45\nmark_precise: frame0: regs=r4,r5 stack= before 19: (b7) r5 = 20\nmark_precise: frame0: regs=r4 stack= before 18: (57) r4 &= 60\nmark_precise: frame0: regs=r4 stack= before 17: (67) r4 <<= 2\nmark_precise: frame0: regs=r4 stack= before 16: (71) r4 = *(u8 *)(r1 +0)\n22: R1=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n22: (2d) if r1 > r3 goto pc+43        ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n23: (bf) r4 = r1                      ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (07) r4 += 20                     ; R4_w=pkt(id=1,off=34,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n25: (2d) if r4 > r3 goto pc+40        ; R3=pkt_end() R4_w=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; __u32 src = ip->saddr;\n26: (61) r2 = *(u32 *)(r2 +26)        ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 src = ip->saddr;\n27: (63) *(u32 *)(r10 -4) = r2        ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n; __u16 dport = bpf_ntohs(tcp->dest);\n28: (69) r6 = *(u16 *)(r1 +2)         ; R1=pkt(id=1,off=14,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R6_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n29: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 src = ip->saddr;\n30: (07) r2 += -4                     ; R2_w=fp-4\n; struct knock_state *st = bpf_map_lookup_elem(&knock_map, &src);\n31: (18) r1 = 0xff2125b9191b8c00      ; R1_w=map_ptr(map=knock_map,ks=4,vs=1)\n33: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=knock_map,ks=4,vs=1)\n34: (bf) r1 = r0                      ; R0=map_value_or_null(id=2,map=knock_map,ks=4,vs=1) R1_w=map_value_or_null(id=2,map=knock_map,ks=4,vs=1)\n35: (b7) r0 = 2                       ; R0_w=2\n; __u16 dport = bpf_ntohs(tcp->dest);\n36: (dc) r6 = be16 r6                 ; R6_w=scalar()\n; if (dport == 1111) {\n37: (15) if r6 == 0x16 goto pc+24     ; R6_w=scalar()\n38: (15) if r6 == 0x8ae goto pc+8     ; R6_w=scalar()\n39: (55) if r6 != 0x457 goto pc+26    ; R6_w=1111\n40: (b7) r1 = 1                       ; R1_w=1\n; struct knock_state new_st = { .stage = 1 };\n41: (73) *(u8 *)(r10 -5) = r1         ; R1_w=1 R10=fp0 fp-8=mmmmm???\n42: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n43: (07) r2 += -4                     ; R2_w=fp-4\n44: (bf) r3 = r10                     ; R3_w=fp0 R10=fp0\n45: (07) r3 += -5                     ; R3_w=fp-5\n46: (05) goto pc+9\n; \n56: (18) r1 = 0xff2125b9191b8c00      ; R1_w=map_ptr(map=knock_map,ks=4,vs=1)\n58: (b7) r4 = 0                       ; R4_w=0\n59: (85) call bpf_map_update_elem#2   ; R0_w=scalar()\n60: (b7) r0 = 2                       ; R0_w=2\n61: (05) goto pc+4\n; }\n66: (95) exit\n\nfrom 39 to 66: R0_w=2 R1_w=map_value_or_null(id=2,map=knock_map,ks=4,vs=1) R6_w=scalar() R10=fp0 fp-8=mmmm????\n66: R0_w=2 R1_w=map_value_or_null(id=2,map=knock_map,ks=4,vs=1) R6_w=scalar() R10=fp0 fp-8=mmmm????\n66: (95) exit\n\nfrom 38 to 47: R0_w=2 R1_w=map_value_or_null(id=2,map=knock_map,ks=4,vs=1) R6_w=2222 R10=fp0 fp-8=mmmm????\n47: R0_w=2 R1_w=map_value_or_null(id=2,map=knock_map,ks=4,vs=1) R6_w=2222 R10=fp0 fp-8=mmmm????\n; if (st && st->stage == 1) {\n47: (15) if r1 == 0x0 goto pc+18      ; R1_w=map_value(map=knock_map,ks=4,vs=1)\n; if (st && st->stage == 1) {\n48: (71) r1 = *(u8 *)(r1 +0)          ; R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (st && st->stage == 1) {\n49: (55) if r1 != 0x1 goto pc+16      ; R1=1\n50: (b7) r1 = 2                       ; R1_w=2\n; struct knock_state new_st = { .stage = 2 };\n51: (73) *(u8 *)(r10 -6) = r1         ; R1_w=2 R10=fp0 fp-8=mmmm?m??\n52: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n53: (07) r2 += -4                     ; R2_w=fp-4\n54: (bf) r3 = r10                     ; R3_w=fp0 R10=fp0\n55: (07) r3 += -6                     ; R3_w=fp-6\n; \n56: (18) r1 = 0xff2125b9191b8c00      ; R1_w=map_ptr(map=knock_map,ks=4,vs=1)\n58: (b7) r4 = 0                       ; R4_w=0\n59: (85) call bpf_map_update_elem#2   ; R0=scalar()\n60: (b7) r0 = 2                       ; R0_w=2\n61: (05) goto pc+4\n; }\n66: (95) exit\n\nfrom 49 to 66: R0=2 R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R6=2222 R10=fp0 fp-8=mmmm????\n66: R0=2 R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R6=2222 R10=fp0 fp-8=mmmm????\n66: (95) exit\n\nfrom 47 to 66: R0_w=2 R1_w=0 R6_w=2222 R10=fp0 fp-8=mmmm????\n66: R0_w=2 R1_w=0 R6_w=2222 R10=fp0 fp-8=mmmm????\n66: (95) exit\n\nfrom 37 to 62: R0_w=2 R1_w=map_value_or_null(id=2,map=knock_map,ks=4,vs=1) R6_w=22 R10=fp0 fp-8=mmmm????\n62: R0_w=2 R1_w=map_value_or_null(id=2,map=knock_map,ks=4,vs=1) R6_w=22 R10=fp0 fp-8=mmmm????\n; if (st && st->stage == 2)\n62: (15) if r1 == 0x0 goto pc+2       ; R1_w=map_value(map=knock_map,ks=4,vs=1)\n; if (st && st->stage == 2)\n63: (71) r1 = *(u8 *)(r1 +0)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (st && st->stage == 2)\n64: (15) if r1 == 0x2 goto pc+1       ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n65: (b7) r0 = 1                       ; R0_w=1\n; }\n66: (95) exit\n\nfrom 64 to 66: R0_w=2 R1_w=2 R6_w=22 R10=fp0 fp-8=mmmm????\n66: R0_w=2 R1_w=2 R6_w=22 R10=fp0 fp-8=mmmm????\n66: (95) exit\n\nfrom 62 to 65: safe\n\nfrom 25 to 66: R0=2 R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(r=34) R3=pkt_end() R4_w=pkt(id=1,off=34,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n66: R0=2 R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(r=34) R3=pkt_end() R4_w=pkt(id=1,off=34,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n66: (95) exit\n\nfrom 22 to 66: R0=2 R1=pkt(id=1,off=14,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(r=34) R3=pkt_end() R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n66: R0=2 R1=pkt(id=1,off=14,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(r=34) R3=pkt_end() R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n66: (95) exit\n\nfrom 20 to 66: R0=2 R1=pkt(off=14,r=34) R2=pkt(r=34) R3=pkt_end() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=19,var_off=(0x0; 0x1c)) R5_w=20 R10=fp0\n66: R0=2 R1=pkt(off=14,r=34) R2=pkt(r=34) R3=pkt_end() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=19,var_off=(0x0; 0x1c)) R5_w=20 R10=fp0\n66: (95) exit\n\nfrom 15 to 66: R0=2 R1=pkt(off=14,r=34) R2=pkt(r=34) R3=pkt_end() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n66: R0=2 R1=pkt(off=14,r=34) R2=pkt(r=34) R3=pkt_end() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n66: (95) exit\n\nfrom 13 to 66: R0=2 R1=pkt(off=14,r=14) R2=pkt(r=14) R3=pkt_end() R4=pkt(off=34,r=0xfffffffffffffffe) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n66: R0=2 R1=pkt(off=14,r=14) R2=pkt(r=14) R3=pkt_end() R4=pkt(off=34,r=0xfffffffffffffffe) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n66: (95) exit\n\nfrom 10 to 66: safe\n\nfrom 5 to 66: safe\nverification time 657 usec\nstack depth 8\nprocessed 84 insns (limit 1000000) max_states_per_insn 1 total_states 8 peak_states 8 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 6,
+    "total_tests": 6,
+    "details": [
+      {
+        "name": "pass_knock_stage1",
+        "description": "Pass initial knock port 1111",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_knock_stage2",
+        "description": "Pass second knock port 2222",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "drop_unknocked_port_22",
+        "description": "Drop SSH port 22 for unknocked host",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "pass_web_traffic",
+        "description": "Pass standard port 80 web traffic",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Pass truncated header safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

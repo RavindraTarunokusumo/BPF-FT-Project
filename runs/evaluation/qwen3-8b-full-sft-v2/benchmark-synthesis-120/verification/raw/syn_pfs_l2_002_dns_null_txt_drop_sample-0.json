@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_002_dns_null_txt_drop",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c",
+  "source_sha256": "e9d42b45ed8d56750aacd545972b0875d3b12becb1cc32832b7eed4aa399d17d",
+  "timestamp": "2026-09-01T22:47:22.510553+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:43:22: error: arithmetic on a pointer to an incomplete type 'struct dns_hdr'\n   43 |     if ((void *)(dns + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:42:12: note: forward declaration of 'struct dns_hdr'\n   42 |     struct dns_hdr *dns = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:46:12: error: incomplete definition of type 'struct dns_hdr'\n   46 |     if (dns->qr != 0)\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:42:12: note: forward declaration of 'struct dns_hdr'\n   42 |     struct dns_hdr *dns = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:49:22: error: incomplete definition of type 'struct dns_hdr'\n   49 |     __u16 qtype = dns->qtype;\n      |                   ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:42:12: note: forward declaration of 'struct dns_hdr'\n   42 |     struct dns_hdr *dns = (void *)(udp + 1);\n      |            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:43:22: error: arithmetic on a pointer to an incomplete type 'struct dns_hdr'\n   43 |     if ((void *)(dns + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:42:12: note: forward declaration of 'struct dns_hdr'\n   42 |     struct dns_hdr *dns = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:46:12: error: incomplete definition of type 'struct dns_hdr'\n   46 |     if (dns->qr != 0)\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:42:12: note: forward declaration of 'struct dns_hdr'\n   42 |     struct dns_hdr *dns = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:49:22: error: incomplete definition of type 'struct dns_hdr'\n   49 |     __u16 qtype = dns->qtype;\n      |                   ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:42:12: note: forward declaration of 'struct dns_hdr'\n   42 |     struct dns_hdr *dns = (void *)(udp + 1);\n      |            ^\n3 errors generated."
+}

@@ -1,0 +1,80 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "nrf_l2_configured_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l2_configured_redirect/sample-0.c",
+  "source_sha256": "5f083d723350712079faa3a8861a89947142cd0a1f4f13b052a06dbec5e74847",
+  "timestamp": "2026-09-01T22:46:43.134326+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_m4k1lkp6/candidate.o\nlibbpf: elf: section(3) xdp, size 160, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_nrf_l2_configured_redirect' at insn offset 0 (0 bytes), code size 20 insns (160 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_m4k1lkp6/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1187, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 256, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'forwarding_config_2': at sec_idx 5, offset 0.\nlibbpf: map 'forwarding_config_2': found type = 2.\nlibbpf: map 'forwarding_config_2': found key [8], sz = 4.\nlibbpf: map 'forwarding_config_2': found value [8], sz = 4.\nlibbpf: map 'forwarding_config_2': found max_entries = 1.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #9 against 'forwarding_config_2'\nlibbpf: prog 'xdp_route_nrf_l2_configured_redirect': found map 0 (forwarding_config_2, sec 5, off 0) for insn #9\nlibbpf: map 'forwarding_config_2': created successfully, fd=4\nlibbpf: prog 'xdp_route_nrf_l2_configured_redirect': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_nrf_l2_configured_redirect(struct xdp_md *ctx) {\n0: (b7) r6 = 2                        ; R6_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r1 > r2 goto pc+13         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n5: (b7) r6 = 0                        ; R6_w=0\n; __u32 key = 0;\n6: (63) *(u32 *)(r10 -4) = r6\nmark_precise: frame0: last_idx 6 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r6 stack= before 5: (b7) r6 = 0\n7: R6_w=0 R10=fp0 fp-8=0000????\n7: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0\n8: (07) r2 += -4                      ; R2_w=fp-4\n; __u32 *val = bpf_map_lookup_elem(&forwarding_config_2, &key);\n9: (18) r1 = 0xff2125b89938bc00       ; R1_w=map_ptr(map=forwarding_conf,ks=4,vs=4)\n11: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=forwarding_conf,ks=4,vs=4)\n; if (!val || *val == 0)\n12: (15) if r0 == 0x0 goto pc+5       ; R0=map_value(map=forwarding_conf,ks=4,vs=4)\n; if (!val || *val == 0)\n13: (61) r1 = *(u32 *)(r0 +0)         ; R0=map_value(map=forwarding_conf,ks=4,vs=4) R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; if (!val || *val == 0)\n14: (15) if r1 == 0x0 goto pc+3       ; R1_w=scalar(smin=umin=umin32=1,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; return bpf_redirect(*val, 0);\n15: (b7) r2 = 0                       ; R2_w=0\n16: (85) call bpf_redirect#23         ; R0_w=scalar()\n17: (bf) r6 = r0                      ; R0_w=scalar(id=2) R6_w=scalar(id=2)\n; }\n18: (bf) r0 = r6                      ; R0_w=scalar(id=2) R6_w=scalar(id=2)\n19: (95) exit\n\nfrom 14 to 18: R0=map_value(map=forwarding_conf,ks=4,vs=4) R1=0 R6=0 R10=fp0 fp-8=mmmm????\n18: R0=map_value(map=forwarding_conf,ks=4,vs=4) R1=0 R6=0 R10=fp0 fp-8=mmmm????\n18: (bf) r0 = r6                      ; R0_w=0 R6=0\n19: (95) exit\n\nfrom 12 to 18: safe\n\nfrom 4 to 18: safe\nverification time 134 usec\nstack depth 8\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 6,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "ip_frame_default_aborted",
+        "description": "IPv4 frame with unconfigured map (ifindex=0) must return XDP_ABORTED",
+        "pass": true,
+        "expected": "XDP_ABORTED",
+        "actual": "XDP_ABORTED"
+      },
+      {
+        "name": "udp_frame_default_aborted",
+        "description": "UDP frame with unconfigured map must return XDP_ABORTED",
+        "pass": true,
+        "expected": "XDP_ABORTED",
+        "actual": "XDP_ABORTED"
+      },
+      {
+        "name": "arp_frame_default_aborted",
+        "description": "ARP frame with unconfigured map must return XDP_ABORTED",
+        "pass": true,
+        "expected": "XDP_ABORTED",
+        "actual": "XDP_ABORTED"
+      },
+      {
+        "name": "icmp_frame_default_aborted",
+        "description": "ICMP frame with unconfigured map must return XDP_ABORTED",
+        "pass": true,
+        "expected": "XDP_ABORTED",
+        "actual": "XDP_ABORTED"
+      },
+      {
+        "name": "vlan_frame_default_aborted",
+        "description": "VLAN frame with unconfigured map must return XDP_ABORTED",
+        "pass": true,
+        "expected": "XDP_ABORTED",
+        "actual": "XDP_ABORTED"
+      },
+      {
+        "name": "runt_frame_pass",
+        "description": "Runt frame (14 bytes) must return XDP_PASS",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "XDP_ABORTED",
+        "stderr": ""
+      },
+      {
+        "name": "large_frame_default_aborted",
+        "description": "1500-byte frame with unconfigured map must return XDP_ABORTED",
+        "pass": true,
+        "expected": "XDP_ABORTED",
+        "actual": "XDP_ABORTED"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'runt_frame_pass' failed: expected XDP_PASS (2), got XDP_ABORTED (0)"
+}

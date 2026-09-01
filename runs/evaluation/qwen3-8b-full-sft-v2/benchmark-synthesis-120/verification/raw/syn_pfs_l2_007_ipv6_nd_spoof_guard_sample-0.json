@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_007_ipv6_nd_spoof_guard",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c",
+  "source_sha256": "1f4e2bf9fdc413345cb38e4994da6c2b91eb28b37f4823bea01bfdcfa24f9d22",
+  "timestamp": "2026-09-01T22:47:25.273096+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:39:23: error: use of undeclared identifier 'ICMPV6_NA'\n   39 |     if (icmp->type != ICMPV6_NA)\n      |                       ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:43:21: error: arithmetic on a pointer to an incomplete type 'struct icmp6_na_hdr'\n   43 |     if ((void *)(na + 1) > data_end)\n      |                  ~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:42:12: note: forward declaration of 'struct icmp6_na_hdr'\n   42 |     struct icmp6_na_hdr *na = (void *)icmp;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:46:21: error: incomplete definition of type 'struct icmp6_na_hdr'\n   46 |     __u32 flags = na->flags;\n      |                   ~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:42:12: note: forward declaration of 'struct icmp6_na_hdr'\n   42 |     struct icmp6_na_hdr *na = (void *)icmp;\n      |            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:39:23: error: use of undeclared identifier 'ICMPV6_NA'\n   39 |     if (icmp->type != ICMPV6_NA)\n      |                       ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:43:21: error: arithmetic on a pointer to an incomplete type 'struct icmp6_na_hdr'\n   43 |     if ((void *)(na + 1) > data_end)\n      |                  ~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:42:12: note: forward declaration of 'struct icmp6_na_hdr'\n   42 |     struct icmp6_na_hdr *na = (void *)icmp;\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:46:21: error: incomplete definition of type 'struct icmp6_na_hdr'\n   46 |     __u32 flags = na->flags;\n      |                   ~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:42:12: note: forward declaration of 'struct icmp6_na_hdr'\n   42 |     struct icmp6_na_hdr *na = (void *)icmp;\n      |            ^\n3 errors generated."
+}

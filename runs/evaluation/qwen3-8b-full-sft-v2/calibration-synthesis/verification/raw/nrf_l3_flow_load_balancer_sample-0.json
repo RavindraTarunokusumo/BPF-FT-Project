@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_flow_load_balancer",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_flow_load_balancer/sample-0.c",
+  "source_sha256": "7c5b447d1d8bb85d9af9e8335ac3d8019906b2ded73043c6dfd1e650382a0b5d",
+  "timestamp": "2026-09-01T22:46:43.084410+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_flow_load_balancer/sample-0.c:49:51: error: incompatible pointer to integer conversion passing '__u32 *' (aka 'unsigned int *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   49 |     int ret = bpf_redirect_map(&backend_devmap_1, &dev_idx, 0);\n      |                                                   ^~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_flow_load_balancer/sample-0.c:49:51: error: incompatible pointer to integer conversion passing '__u32 *' (aka 'unsigned int *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   49 |     int ret = bpf_redirect_map(&backend_devmap_1, &dev_idx, 0);\n      |                                                   ^~~~~~~~\n1 error generated."
+}

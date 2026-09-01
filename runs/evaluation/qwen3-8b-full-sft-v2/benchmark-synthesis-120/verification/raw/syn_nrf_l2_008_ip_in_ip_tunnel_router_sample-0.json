@@ -1,0 +1,81 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_008_ip_in_ip_tunnel_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l2_008_ip_in_ip_tunnel_router/sample-0.c",
+  "source_sha256": "ad0cb7a54329e08b00ba1772051893c73d9b75356b0b2da11a64a41bebf202a0",
+  "timestamp": "2026-09-01T22:47:22.902518+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_bqcspo62/candidate.o\nlibbpf: elf: section(3) xdp, size 304, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_syn_nrf_l2_008_ip_in_ip_tunnel_router' at insn offset 0 (0 bytes), code size 38 insns (304 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_bqcspo62/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1140, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 448, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_route_syn_nrf_l2_008_ip_in_ip_tunnel_router': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_syn_nrf_l2_008_ip_in_ip_tunnel_router(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r2 = r1                       ; R1_w=pkt(r=0) R2_w=pkt(r=0)\n4: (07) r2 += 14                      ; R2_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r2 > r3 goto pc+31         ; R2_w=pkt(off=14,r=14) R3_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+26      ; R4_w=8\n11: (bf) r4 = r1                      ; R1_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r3 goto pc+23        ; R3=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_IP)\n14: (71) r1 = *(u8 *)(r1 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_IP)\n15: (55) if r1 != 0x0 goto pc+21      ; R1_w=0\n; struct iphdr *inner_ip = (void *)ip + ip->ihl * 4;\n16: (71) r1 = *(u8 *)(r2 +0)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(off=14,r=34)\n; struct iphdr *inner_ip = (void *)ip + ip->ihl * 4;\n17: (67) r1 <<= 2                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r1 &= 60                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; struct iphdr *inner_ip = (void *)ip + ip->ihl * 4;\n19: (0f) r2 += r1\nmark_precise: frame0: last_idx 19 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 18: (57) r1 &= 60\nmark_precise: frame0: regs=r1 stack= before 17: (67) r1 <<= 2\nmark_precise: frame0: regs=r1 stack= before 16: (71) r1 = *(u8 *)(r2 +0)\n20: R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2_w=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(inner_ip + 1) > data_end)\n20: (bf) r1 = r2                      ; R1_w=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2_w=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n21: (07) r1 += 20                     ; R1=pkt(id=1,off=34,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(inner_ip + 1) > data_end)\n22: (2d) if r1 > r3 goto pc+14        ; R1=pkt(id=1,off=34,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n; if (d[0] == 10 && d[1] == 1 && d[2] == 0 && d[3] <= 255)\n23: (71) r1 = *(u8 *)(r2 +16)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (d[0] == 10 && d[1] == 1 && d[2] == 0 && d[3] <= 255)\n24: (55) if r1 != 0xa goto pc+12      ; R1_w=10\n; if (d[0] == 10 && d[1] == 1 && d[2] == 0 && d[3] <= 255)\n25: (71) r1 = *(u8 *)(r2 +17)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (d[0] == 10 && d[1] == 1 && d[2] == 0 && d[3] <= 255)\n26: (15) if r1 == 0x2 goto pc+5       ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n27: (55) if r1 != 0x1 goto pc+9       ; R1_w=1\n28: (b7) r1 = 18                      ; R1_w=18\n; if (d[0] == 10 && d[1] == 1 && d[2] == 0 && d[3] <= 255)\n29: (71) r2 = *(u8 *)(r2 +18)         ; R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (d[0] == 10 && d[1] == 1 && d[2] == 0 && d[3] <= 255)\n30: (15) if r2 == 0x0 goto pc+4       ; R2=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n31: (05) goto pc+5\n; }\n37: (95) exit\n\nfrom 30 to 35: R0=2 R1=18 R2=0 R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n35: R0=2 R1=18 R2=0 R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; \n35: (b7) r2 = 0                       ; R2_w=0\n36: (85) call bpf_redirect#23         ; R0_w=scalar()\n; }\n37: (95) exit\n\nfrom 27 to 37: R0=2 R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: R0=2 R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: (95) exit\n\nfrom 26 to 32: R0=2 R1_w=2 R2=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n32: R0=2 R1_w=2 R2=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; if (d[0] == 10 && d[1] == 1 && d[2] == 0 && d[3] <= 255)\n32: (b7) r1 = 19                      ; R1_w=19\n; if (d[0] == 10 && d[1] == 2 && d[2] == 0 && d[3] <= 255)\n33: (71) r2 = *(u8 *)(r2 +18)         ; R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (d[0] == 10 && d[1] == 2 && d[2] == 0 && d[3] <= 255)\n34: (55) if r2 != 0x0 goto pc+2       ; R2=0\n; \n35: (b7) r2 = 0                       ; R2_w=0\n36: (85) call bpf_redirect#23         ; R0_w=scalar()\n; }\n37: (95) exit\n\nfrom 34 to 37: R0=2 R1=19 R2=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: R0=2 R1=19 R2=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: (95) exit\n\nfrom 24 to 37: R0=2 R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: R0=2 R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(id=1,off=14,r=34,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: (95) exit\n\nfrom 22 to 37: R0=2 R1=pkt(id=1,off=34,r=0xfffffffffffffffe,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: R0=2 R1=pkt(id=1,off=34,r=0xfffffffffffffffe,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(id=1,off=14,r=0,smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: (95) exit\n\nfrom 15 to 37: R0=2 R1_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(off=14,r=34) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: R0=2 R1_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(off=14,r=34) R3=pkt_end() R4=pkt(off=34,r=34) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: (95) exit\n\nfrom 13 to 37: R0=2 R1=pkt(r=14) R2=pkt(off=14,r=14) R3=pkt_end() R4=pkt(off=34,r=0xfffffffffffffffe) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: R0=2 R1=pkt(r=14) R2=pkt(off=14,r=14) R3=pkt_end() R4=pkt(off=34,r=0xfffffffffffffffe) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: (95) exit\n\nfrom 10 to 37: safe\n\nfrom 5 to 37: safe\nverification time 551 usec\nstack depth 0\nprocessed 50 insns (limit 1000000) max_states_per_insn 0 total_states 5 peak_states 5 mark_read 3\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 5,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "inner_subnet1_redirect_if18",
+        "description": "IP-in-IP with inner dest 10.1.1.10 redirected to ifindex 18",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "inner_subnet2_redirect_if19",
+        "description": "IP-in-IP with inner dest 10.2.1.20 redirected to ifindex 19",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "inner_other_subnet_pass",
+        "description": "IP-in-IP with inner dest 10.3.1.30 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "direct_tcp_pass",
+        "description": "Direct TCP passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "udp_pass",
+        "description": "UDP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ipinip_pass",
+        "description": "Truncated IP-in-IP packet passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'inner_subnet1_redirect_if18' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)\nTest 'inner_subnet2_redirect_if19' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)"
+}

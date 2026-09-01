@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_003_dhcp_rogue_server_filter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c",
+  "source_sha256": "5c79b5d9a894cd6591597b5d2499603b8e87856312b16d85092506c249679a2a",
+  "timestamp": "2026-09-01T22:46:48.864222+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:25:5: error: unknown type name '__be88'\n   25 |     __be88 chaddr;\n      |     ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:66:44: error: use of undeclared identifier 'auth_dhcp_server'\n   66 |     __be32 *auth_ip = bpf_map_lookup_elem(&auth_dhcp_server, &key);\n      |                                            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:68:27: error: cannot take the address of an rvalue of type 'unsigned int'\n   68 |         auth_ip = (void *)&(0xC0A80101); // Fallback to 192.168.1.1\n      |                           ^ ~~~~~~~~~~\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:25:5: error: unknown type name '__be88'\n   25 |     __be88 chaddr;\n      |     ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:66:44: error: use of undeclared identifier 'auth_dhcp_server'\n   66 |     __be32 *auth_ip = bpf_map_lookup_elem(&auth_dhcp_server, &key);\n      |                                            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:68:27: error: cannot take the address of an rvalue of type 'unsigned int'\n   68 |         auth_ip = (void *)&(0xC0A80101); // Fallback to 192.168.1.1\n      |                           ^ ~~~~~~~~~~\n3 errors generated."
+}

@@ -1,42 +1,42 @@
 {
-  "rollout_dir": "runs\\evaluation\\qwen3-8b-full-sft-v2\\calibration-synthesis",
+  "rollout_dir": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis",
   "total_tasks": 36,
   "total_candidates": 36,
   "num_samples_per_task": 1,
   "metrics": {
     "output_compliance_rate": 1.0,
-    "compilation_pass_rate": 1.0,
-    "kernel_verifier_pass_rate": 1.0,
-    "behavioral_pass_rate": 1.0,
+    "compilation_pass_rate": 0.8055555555555556,
+    "kernel_verifier_pass_rate": 0.75,
+    "behavioral_pass_rate": 0.5833333333333334,
     "pass_at_1": {
-      "passed_tasks": 36,
+      "passed_tasks": 21,
       "total_tasks": 36,
-      "rate": 1.0
+      "rate": 0.5833333333333334
     },
     "pass_at_4": "N/A"
   },
   "breakdowns": {
     "by_category": {
-      "packet_filtering_security": {
-        "total": 9,
-        "compliant": 9,
-        "compile": 9,
-        "verifier": 9,
-        "passed": 9
-      },
       "network_routing_forwarding": {
         "total": 9,
         "compliant": 9,
-        "compile": 9,
-        "verifier": 9,
-        "passed": 9
+        "compile": 6,
+        "verifier": 6,
+        "passed": 3
+      },
+      "packet_filtering_security": {
+        "total": 9,
+        "compliant": 9,
+        "compile": 8,
+        "verifier": 6,
+        "passed": 3
       },
       "packet_inspection_telemetry": {
         "total": 9,
         "compliant": 9,
-        "compile": 9,
-        "verifier": 9,
-        "passed": 9
+        "compile": 6,
+        "verifier": 6,
+        "passed": 6
       },
       "protocol_transformation": {
         "total": 9,
@@ -51,22 +51,22 @@
         "total": 12,
         "compliant": 12,
         "compile": 12,
-        "verifier": 12,
-        "passed": 12
+        "verifier": 11,
+        "passed": 8
       },
       "level_2": {
         "total": 12,
         "compliant": 12,
         "compile": 12,
         "verifier": 12,
-        "passed": 12
+        "passed": 9
       },
       "level_3": {
         "total": 12,
         "compliant": 12,
-        "compile": 12,
-        "verifier": 12,
-        "passed": 12
+        "compile": 5,
+        "verifier": 4,
+        "passed": 4
       }
     }
   }

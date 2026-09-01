@@ -1,0 +1,44 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "repair_nrf_l3_dynamic_devmap_xmit",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l3_dynamic_devmap_xmit/sample-0.c",
+  "source_sha256": "2701ea25c199bbbe30c4d672a5b526aab0b5f77a741e853dc6705cf4fb19371a",
+  "timestamp": "2026-09-01T22:47:41.937408+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_jscjhmm4/candidate.o\nlibbpf: elf: section(3) xdp, size 248, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 31 insns (248 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 64, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_jscjhmm4/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1388, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 320, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'egress_table': at sec_idx 5, offset 0.\nlibbpf: map 'egress_table': found type = 1.\nlibbpf: map 'egress_table': found key [6], sz = 4.\nlibbpf: map 'egress_table': found value [6], sz = 4.\nlibbpf: map 'egress_table': found max_entries = 256.\nlibbpf: map 'tx_ports': at sec_idx 5, offset 32.\nlibbpf: map 'tx_ports': found type = 14.\nlibbpf: map 'tx_ports': found key [6], sz = 4.\nlibbpf: map 'tx_ports': found value [6], sz = 4.\nlibbpf: map 'tx_ports': found max_entries = 4.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #18 against 'egress_table'\nlibbpf: prog 'xdp_forward': found map 0 (egress_table, sec 5, off 0) for insn #18\nlibbpf: sec '.relxdp': relo #1: insn #26 against 'tx_ports'\nlibbpf: prog 'xdp_forward': found map 1 (tx_ports, sec 5, off 32) for insn #26\nlibbpf: map 'egress_table': created successfully, fd=4\nlibbpf: map 'tx_ports': created successfully, fd=5\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+24         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+19      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+16        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 src = ip->saddr;\n14: (61) r1 = *(u32 *)(r1 +26)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 src = ip->saddr;\n15: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n16: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 src = ip->saddr;\n17: (07) r2 += -4                     ; R2_w=fp-4\n; __u32 *val = bpf_map_lookup_elem(&egress_table, &src);\n18: (18) r1 = 0xff2125b887db7800      ; R1_w=map_ptr(map=egress_table,ks=4,vs=4)\n20: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=1,map=egress_table,ks=4,vs=4)\n21: (bf) r1 = r0                      ; R0_w=map_value_or_null(id=1,map=egress_table,ks=4,vs=4) R1_w=map_value_or_null(id=1,map=egress_table,ks=4,vs=4)\n22: (b7) r0 = 2                       ; R0=2\n; if (val) {\n23: (15) if r1 == 0x0 goto pc+6       ; R1=map_value(map=egress_table,ks=4,vs=4)\n; __u32 port = *val & 3;\n24: (61) r2 = *(u32 *)(r1 +0)         ; R1=map_value(map=egress_table,ks=4,vs=4) R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; return bpf_redirect_map(&tx_ports, port, 0);\n25: (57) r2 &= 3                      ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=3,var_off=(0x0; 0x3))\n; return bpf_redirect_map(&tx_ports, port, 0);\n26: (18) r1 = 0xff2125b89938be00      ; R1_w=map_ptr(map=tx_ports,ks=4,vs=4)\n28: (b7) r3 = 0                       ; R3_w=0\n29: (85) call bpf_redirect_map#51     ; R0_w=scalar()\n; }\n30: (95) exit\n\nfrom 23 to 30: R0=2 R1=0 R10=fp0 fp-8=mmmm????\n30: R0=2 R1=0 R10=fp0 fp-8=mmmm????\n30: (95) exit\n\nfrom 13 to 30: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n30: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n30: (95) exit\n\nfrom 10 to 30: safe\n\nfrom 5 to 30: safe\nverification time 223 usec\nstack depth 8\nprocessed 33 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_unmatched",
+        "description": "Pass route lookup miss with XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

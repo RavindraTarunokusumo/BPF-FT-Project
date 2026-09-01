@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_policy_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_policy_router/sample-0.c",
+  "source_sha256": "f741edc6447f69cb71652305dd510302e02de2f2e4e4721c10bd3b16f077d88c",
+  "timestamp": "2026-09-01T22:46:42.724626+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_policy_router/sample-0.c:71:11: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   71 |     __u32 dev_idx = bpf_map_lookup_elem(&policy_devmap, &val->egress_idx);\n      |           ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/nrf_l3_policy_router/sample-0.c:71:11: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   71 |     __u32 dev_idx = bpf_map_lookup_elem(&policy_devmap, &val->egress_idx);\n      |           ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated."
+}

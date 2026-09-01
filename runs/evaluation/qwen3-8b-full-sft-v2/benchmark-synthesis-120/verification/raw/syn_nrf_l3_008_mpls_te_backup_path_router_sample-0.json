@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_008_mpls_te_backup_path_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c",
+  "source_sha256": "add0ea12e4e0897c65c9b8791e06dcb466a83587431f79bf964f26c8e3b7deac",
+  "timestamp": "2026-09-01T22:47:25.935826+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:38:42: error: use of undeclared identifier 'te_health_map'\n   38 |     __u32 *status = bpf_map_lookup_elem(&te_health_map, &key_1000);\n      |                                          ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:38:58: error: use of undeclared identifier 'key_1000'\n   38 |     __u32 *status = bpf_map_lookup_elem(&te_health_map, &key_1000);\n      |                                                          ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:67:5: error: redefinition of 'xdp_tun_mpls_frr'\n   67 | int xdp_tun_mpls_frr(struct xdp_md *ctx) {\n      |     ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:20:5: note: previous definition is here\n   20 | int xdp_tun_mpls_frr(struct xdp_md *ctx) {\n      |     ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:38:42: error: use of undeclared identifier 'te_health_map'\n   38 |     __u32 *status = bpf_map_lookup_elem(&te_health_map, &key_1000);\n      |                                          ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:38:58: error: use of undeclared identifier 'key_1000'\n   38 |     __u32 *status = bpf_map_lookup_elem(&te_health_map, &key_1000);\n      |                                                          ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:67:5: error: redefinition of 'xdp_tun_mpls_frr'\n   67 | int xdp_tun_mpls_frr(struct xdp_md *ctx) {\n      |     ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:20:5: note: previous definition is here\n   20 | int xdp_tun_mpls_frr(struct xdp_md *ctx) {\n      |     ^\n3 errors generated."
+}

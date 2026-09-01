@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_008_dns_id_randomizer",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c",
+  "source_sha256": "42324bd0cf46104b1b35e44b75570279eb8a6b652ae48dfeb61379dd1f1d6e3f",
+  "timestamp": "2026-09-01T22:47:26.586141+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c:51:25: error: no member named 'dgram_id' in 'struct udphdr'\n   51 |     __u16 old_id = udp->dgram_id;\n      |                    ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c:52:10: error: no member named 'dgram_id' in 'struct udphdr'\n   52 |     udp->dgram_id = bpf_ntohs(bpf_htons(old_id) ^ bpf_htons(0xA55A));\n      |     ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c:54:44: error: no member named 'dgram_id' in 'struct udphdr'\n   54 |     __u32 csum = (__u32)udp->check + (udp->dgram_id - old_id);\n      |                                       ~~~  ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c:51:25: error: no member named 'dgram_id' in 'struct udphdr'\n   51 |     __u16 old_id = udp->dgram_id;\n      |                    ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c:52:10: error: no member named 'dgram_id' in 'struct udphdr'\n   52 |     udp->dgram_id = bpf_ntohs(bpf_htons(old_id) ^ bpf_htons(0xA55A));\n      |     ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c:54:44: error: no member named 'dgram_id' in 'struct udphdr'\n   54 |     __u32 csum = (__u32)udp->check + (udp->dgram_id - old_id);\n      |                                       ~~~  ^\n3 errors generated."
+}

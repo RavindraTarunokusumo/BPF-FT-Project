@@ -1,0 +1,79 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_008_ip_in_ip_depth_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_008_ip_in_ip_depth_telemetry/sample-0.c",
+  "source_sha256": "347274f65cf780b94a70d0df312359e0230dc0f58d2f275f8b8a93fc6abb10e5",
+  "timestamp": "2026-09-01T22:47:22.001210+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_kvc1phmh/candidate.o\nlibbpf: elf: section(3) xdp, size 224, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_syn_pit_l2_008_ip_in_ip_depth_telemetry' at insn offset 0 (0 bytes), code size 28 insns (224 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_kvc1phmh/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1298, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 272, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'ipinip_depth_map': at sec_idx 5, offset 0.\nlibbpf: map 'ipinip_depth_map': found type = 6.\nlibbpf: map 'ipinip_depth_map': found key [8], sz = 4.\nlibbpf: map 'ipinip_depth_map': found value [11], sz = 8.\nlibbpf: map 'ipinip_depth_map': found max_entries = 2.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #19 against 'ipinip_depth_map'\nlibbpf: prog 'xdp_telemetry_syn_pit_l2_008_ip_in_ip_depth_telemetry': found map 0 (ipinip_depth_map, sec 5, off 0) for insn #19\nlibbpf: map 'ipinip_depth_map': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_syn_pit_l2_008_ip_in_ip_depth_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+21         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+16       ; R3_w=8\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n12: (2d) if r3 > r2 goto pc+13        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; if (ip->protocol != 4)\n13: (71) r1 = *(u8 *)(r1 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != 4)\n14: (55) if r1 != 0x4 goto pc+11      ; R1_w=4\n15: (b7) r1 = 2                       ; R1_w=2\n; __u32 key = (1 % 2) + 1; // 1 for single, 2 for double\n16: (63) *(u32 *)(r10 -4) = r1        ; R1_w=2 R10=fp0 fp-8=mmmm????\n17: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n18: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&ipinip_depth_map, &key);\n19: (18) r1 = 0xff2125b89938a600      ; R1_w=map_ptr(map=ipinip_depth_ma,ks=4,vs=8)\n21: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=ipinip_depth_ma,ks=4,vs=8)\n; if (cnt)\n22: (15) if r0 == 0x0 goto pc+3       ; R0=map_value(map=ipinip_depth_ma,ks=4,vs=8)\n; *cnt += 1;\n23: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=ipinip_depth_ma,ks=4,vs=8) R1_w=scalar()\n24: (07) r1 += 1                      ; R1_w=scalar()\n25: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=ipinip_depth_ma,ks=4,vs=8) R1_w=scalar()\n; }\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\n\nfrom 22 to 26: R0=0 R10=fp0 fp-8=mmmm????\n26: R0=0 R10=fp0 fp-8=mmmm????\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\n\nfrom 14 to 26: R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt_end() R3=pkt(off=34,r=34) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n26: R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt_end() R3=pkt(off=34,r=34) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n26: (b7) r0 = 2                       ; R0_w=2\n27: (95) exit\n\nfrom 12 to 26: safe\n\nfrom 9 to 26: safe\n\nfrom 4 to 26: safe\nverification time 273 usec\nstack depth 8\nprocessed 34 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 7,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "single_ipinip_pass",
+        "description": "Single IP-in-IP tunnel increments slot 0 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "double_ipinip_pass",
+        "description": "Double nested IP-in-IP tunnel increments slot 1 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "direct_ip_pass",
+        "description": "Direct non-tunneled IP packet passes without counting",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "udp_pass",
+        "description": "UDP packet passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_pass",
+        "description": "IPv6 frame passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ipinip_pass",
+        "description": "Truncated IP-in-IP packet passes safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

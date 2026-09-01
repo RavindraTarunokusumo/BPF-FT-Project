@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_007_arp_target_mac_rewrite",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c",
+  "source_sha256": "5e1e67888a2e7774380aeae17f28c500032d500f473c13b88528ef0b4ce83960",
+  "timestamp": "2026-09-01T22:47:26.180478+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:25:22: error: arithmetic on a pointer to an incomplete type 'struct arphdr'\n   25 |     if ((void *)(arp + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:24:12: note: forward declaration of 'struct arphdr'\n   24 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:28:12: error: incomplete definition of type 'struct arphdr'\n   28 |     if (arp->ar_op != bpf_htons(2))\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:24:12: note: forward declaration of 'struct arphdr'\n   24 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:31:18: error: incomplete definition of type 'struct arphdr'\n   31 |     __u8 *d = arp->ar_tha;\n      |               ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:24:12: note: forward declaration of 'struct arphdr'\n   24 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:25:22: error: arithmetic on a pointer to an incomplete type 'struct arphdr'\n   25 |     if ((void *)(arp + 1) > data_end)\n      |                  ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:24:12: note: forward declaration of 'struct arphdr'\n   24 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:28:12: error: incomplete definition of type 'struct arphdr'\n   28 |     if (arp->ar_op != bpf_htons(2))\n      |         ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:24:12: note: forward declaration of 'struct arphdr'\n   24 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:31:18: error: incomplete definition of type 'struct arphdr'\n   31 |     __u8 *d = arp->ar_tha;\n      |               ~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c:24:12: note: forward declaration of 'struct arphdr'\n   24 |     struct arphdr *arp = (void *)(eth + 1);\n      |            ^\n3 errors generated."
+}

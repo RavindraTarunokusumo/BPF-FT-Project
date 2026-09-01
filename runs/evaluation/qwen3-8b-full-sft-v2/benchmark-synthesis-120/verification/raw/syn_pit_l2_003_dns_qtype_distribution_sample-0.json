@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_003_dns_qtype_distribution",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c",
+  "source_sha256": "25dcdf39258438397f86887df4ba60b7a5c9179083cbc33d0f95a1f1e0b8a84a",
+  "timestamp": "2026-09-01T22:47:25.657203+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:55:46: error: incomplete definition of type 'struct dns_hdr'\n   55 |         qtype = ((struct dns_hdr *)(udp + 1))->qtype;\n      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:55:26: note: forward declaration of 'struct dns_hdr'\n   55 |         qtype = ((struct dns_hdr *)(udp + 1))->qtype;\n      |                          ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:55:46: error: incomplete definition of type 'struct dns_hdr'\n   55 |         qtype = ((struct dns_hdr *)(udp + 1))->qtype;\n      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l2_003_dns_qtype_distribution/sample-0.c:55:26: note: forward declaration of 'struct dns_hdr'\n   55 |         qtype = ((struct dns_hdr *)(udp + 1))->qtype;\n      |                          ^\n1 error generated."
+}

@@ -1,0 +1,52 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "repair_ptr_l1_rewrite_dst_mac",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_ptr_l1_rewrite_dst_mac/sample-0.c",
+  "source_sha256": "98b0883bf0a906dd302671e3909b629335331e63fc1d11fd809820b4d5b6ed58",
+  "timestamp": "2026-09-01T22:47:42.914786+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_c7ntjb0v/candidate.o\nlibbpf: elf: section(3) xdp, size 128, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 16 insns (128 bytes)\nlibbpf: elf: section(4) .rodata, size 6, link 0, flags 2, type=1\nlibbpf: elf: section(5) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_c7ntjb0v/candidate.o is GPL\nlibbpf: elf: section(15) .BTF, size 793, link 0, flags 0, type=1\nlibbpf: elf: section(17) .BTF.ext, size 160, link 0, flags 0, type=1\nlibbpf: elf: section(25) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'candidat.rodata' (global data): at sec_idx 4, offset 0, flags 80.\nlibbpf: map 0 is \"candidat.rodata\"\nlibbpf: map 'candidat.rodata': created successfully, fd=4\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+9          ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n5: (b7) r2 = 153                      ; R2_w=153\n; __builtin_memcpy(eth->h_dest, tmp_mac, ETH_ALEN);\n6: (73) *(u8 *)(r1 +5) = r2           ; R1_w=pkt(r=14) R2_w=153\n7: (b7) r2 = 0                        ; R2_w=0\n8: (73) *(u8 *)(r1 +4) = r2           ; R1_w=pkt(r=14) R2_w=0\n9: (73) *(u8 *)(r1 +3) = r2           ; R1_w=pkt(r=14) R2_w=0\n10: (73) *(u8 *)(r1 +2) = r2          ; R1_w=pkt(r=14) R2_w=0\n11: (73) *(u8 *)(r1 +1) = r2          ; R1_w=pkt(r=14) R2_w=0\n12: (b7) r2 = 2                       ; R2_w=2\n13: (73) *(u8 *)(r1 +0) = r2          ; R1_w=pkt(r=14) R2_w=2\n; }\n14: (b7) r0 = 2                       ; R0_w=2\n15: (95) exit\n\nfrom 4 to 14: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n14: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n14: (b7) r0 = 2                       ; R0_w=2\n15: (95) exit\nverification time 597 usec\nstack depth 0\nprocessed 18 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 2,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_rewrite_tcp",
+        "description": "Rewrite destination MAC on TCP packet",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_rewrite_udp",
+        "description": "Rewrite destination MAC on UDP packet",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Pass truncated packet safely",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "ERROR",
+        "stderr": "Error: failed to run program: Invalid argument\n"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_trunc' failed: expected XDP_PASS (2), got ERROR (None)"
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "repair_pfs_l2_subnet_blacklist",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_pfs_l2_subnet_blacklist/sample-0.c",
+  "source_sha256": "9f5cceb6215e4748aedaf4a7929f6af911b3a0f0bdbee1342b3d5606ffe3445a",
+  "timestamp": "2026-09-01T22:47:44.379779+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_pfs_l2_subnet_blacklist/sample-0.c:29:31: error: invalid operands to binary expression ('__u32 *' (aka 'unsigned int *') and '__u32' (aka 'unsigned int'))\n   29 |     if (( (__u32 *)&ip->saddr & mask) == subnet) {\n      |           ~~~~~~~~~~~~~~~~~~~ ^ ~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_pfs_l2_subnet_blacklist/sample-0.c:29:31: error: invalid operands to binary expression ('__u32 *' (aka 'unsigned int *') and '__u32' (aka 'unsigned int'))\n   29 |     if (( (__u32 *)&ip->saddr & mask) == subnet) {\n      |           ~~~~~~~~~~~~~~~~~~~ ^ ~~~~\n1 error generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_004_dns_domain_freq_tracker",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_004_dns_domain_freq_tracker/sample-0.c",
+  "source_sha256": "159841368d2c06ab49471c2e4dbbddded4f288e18168697360bc2136b4062494",
+  "timestamp": "2026-09-01T22:46:48.113615+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_004_dns_domain_freq_tracker/sample-0.c:71:40: error: 'void *' and 'unsigned char *' are not pointers to compatible types\n   71 |         stat->total_bytes += (data_end - qname);\n      |                               ~~~~~~~~ ^ ~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pit_l3_004_dns_domain_freq_tracker/sample-0.c:71:40: error: 'void *' and 'unsigned char *' are not pointers to compatible types\n   71 |         stat->total_bytes += (data_end - qname);\n      |                               ~~~~~~~~ ^ ~~~~~\n1 error generated."
+}

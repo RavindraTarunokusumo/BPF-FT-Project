@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_006_dns_tunneling_freq_detector",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_006_dns_tunneling_freq_detector/sample-0.c",
+  "source_sha256": "a8bdb0a9f3b55ecc8ca74d6d25ef5e2a9a181de6f58a8732990f74f3771566e7",
+  "timestamp": "2026-09-01T22:47:27.636953+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_006_dns_tunneling_freq_detector/sample-0.c:60:39: error: no member named 'dgram_len' in 'struct udphdr'\n   60 |             stat->total_bytes = (udp->dgram_len - sizeof(struct udphdr));\n      |                                  ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_006_dns_tunneling_freq_detector/sample-0.c:68:35: error: no member named 'dgram_len' in 'struct udphdr'\n   68 |         stat->total_bytes = (udp->dgram_len - sizeof(struct udphdr));\n      |                              ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_006_dns_tunneling_freq_detector/sample-0.c:70:35: error: no member named 'dgram_len' in 'struct udphdr'\n   70 |         __u64 payload_len = (udp->dgram_len - sizeof(struct udphdr));\n      |                              ~~~  ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_006_dns_tunneling_freq_detector/sample-0.c:60:39: error: no member named 'dgram_len' in 'struct udphdr'\n   60 |             stat->total_bytes = (udp->dgram_len - sizeof(struct udphdr));\n      |                                  ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_006_dns_tunneling_freq_detector/sample-0.c:68:35: error: no member named 'dgram_len' in 'struct udphdr'\n   68 |         stat->total_bytes = (udp->dgram_len - sizeof(struct udphdr));\n      |                              ~~~  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_pfs_l3_006_dns_tunneling_freq_detector/sample-0.c:70:35: error: no member named 'dgram_len' in 'struct udphdr'\n   70 |         __u64 payload_len = (udp->dgram_len - sizeof(struct udphdr));\n      |                              ~~~  ^\n3 errors generated."
+}

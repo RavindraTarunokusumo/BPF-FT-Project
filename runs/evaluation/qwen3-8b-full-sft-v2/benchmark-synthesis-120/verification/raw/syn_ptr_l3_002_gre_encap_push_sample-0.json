@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_002_gre_encap_push",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c",
+  "source_sha256": "85da21f1f855b6f01eb2b068173d8d3e8f2a307f3c2a2eafe6d31d9da7512baa",
+  "timestamp": "2026-09-01T22:47:24.347384+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:47:61: error: too few arguments to function call, expected 5, have 4\n   47 |     ip->check = bpf_csum_diff(0, 0, sizeof(struct iphdr), ip);\n      |                 ~~~~~~~~~~~~~                               ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:47:61: error: too few arguments to function call, expected 5, have 4\n   47 |     ip->check = bpf_csum_diff(0, 0, sizeof(struct iphdr), ip);\n      |                 ~~~~~~~~~~~~~                               ^\n1 error generated."
+}

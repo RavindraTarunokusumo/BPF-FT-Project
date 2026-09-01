@@ -1,0 +1,52 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "repair_nrf_l1_ip_subnet_forward",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_ip_subnet_forward/sample-0.c",
+  "source_sha256": "35ec1ccdf97fba475388e176d6c918d4747297306c20a6173f791f38b4c62af0",
+  "timestamp": "2026-09-01T22:47:44.599608+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_ip_subnet_forward/sample-0.c:29:19: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\n   29 |     if (ip->daddr & bpf_htonl(0xFF000000) == bpf_htonl(0x0A000000))\n      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_ip_subnet_forward/sample-0.c:29:19: note: place parentheses around the '==' expression to silence this warning\n   29 |     if (ip->daddr & bpf_htonl(0xFF000000) == bpf_htonl(0x0A000000))\n      |                   ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l1_ip_subnet_forward/sample-0.c:29:19: note: place parentheses around the & expression to evaluate it first\n   29 |     if (ip->daddr & bpf_htonl(0xFF000000) == bpf_htonl(0x0A000000))\n      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~\n1 warning generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val__muor5p7/candidate.o\nlibbpf: elf: section(3) xdp, size 16, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 2 insns (16 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val__muor5p7/candidate.o is GPL\nlibbpf: elf: section(13) .BTF, size 589, link 0, flags 0, type=1\nlibbpf: elf: section(15) .BTF.ext, size 80, link 0, flags 0, type=1\nlibbpf: elf: section(23) .symtab, size 288, link 1, flags 0, type=2\nlibbpf: looking for externs among 12 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; }\n0: (b7) r0 = 2                        ; R0_w=2\n1: (95) exit\nverification time 17 usec\nstack depth 0\nprocessed 2 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 2,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_redirect_10_net",
+        "description": "Redirect 10.0.0.0/8 traffic to ifindex 3",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "pass_outside_subnet",
+        "description": "Pass 192.168.1.1 traffic with XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_redirect_10_net' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)"
+}

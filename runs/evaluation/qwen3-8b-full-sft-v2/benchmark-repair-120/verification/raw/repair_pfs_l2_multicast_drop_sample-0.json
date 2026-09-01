@@ -1,0 +1,73 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "repair_pfs_l2_multicast_drop",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_pfs_l2_multicast_drop/sample-0.c",
+  "source_sha256": "ba8886b6c4ed1c20a2c50ee4df756f41b9c546772830ee7c2d31ab15710accb6",
+  "timestamp": "2026-09-01T22:47:40.158502+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_xcz_e86h/candidate.o\nlibbpf: elf: section(3) xdp, size 296, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter' at insn offset 0 (0 bytes), code size 37 insns (296 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_xcz_e86h/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1151, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 480, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 408, link 1, flags 0, type=2\nlibbpf: looking for externs among 17 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+30         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_dest[0] & 0x01) {\n6: (71) r3 = *(u8 *)(r1 +0)           ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_dest[0] & 0x01) {\n7: (bf) r4 = r3                       ; R3_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (57) r4 &= 1                       ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1,var_off=(0x0; 0x1))\n; if (eth->h_dest[0] & 0x01) {\n9: (15) if r4 == 0x0 goto pc+13       ; R4_w=1\n; if (eth->h_dest[0] == 0xff && eth->h_dest[1] == 0xff &&\n10: (55) if r3 != 0xff goto pc+10     ; R3=255\n; if (eth->h_dest[0] == 0xff && eth->h_dest[1] == 0xff &&\n11: (71) r2 = *(u8 *)(r1 +1)          ; R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_dest[0] == 0xff && eth->h_dest[1] == 0xff &&\n12: (55) if r2 != 0xff goto pc+8      ; R2_w=255\n; eth->h_dest[2] == 0xff && eth->h_dest[3] == 0xff &&\n13: (71) r2 = *(u8 *)(r1 +2)          ; R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[2] == 0xff && eth->h_dest[3] == 0xff &&\n14: (55) if r2 != 0xff goto pc+6      ; R2_w=255\n; eth->h_dest[2] == 0xff && eth->h_dest[3] == 0xff &&\n15: (71) r2 = *(u8 *)(r1 +3)          ; R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[2] == 0xff && eth->h_dest[3] == 0xff &&\n16: (55) if r2 != 0xff goto pc+4      ; R2_w=255\n; eth->h_dest[4] == 0xff && eth->h_dest[5] == 0xff)\n17: (71) r2 = *(u8 *)(r1 +4)          ; R1=pkt(r=14) R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[4] == 0xff && eth->h_dest[5] == 0xff)\n18: (55) if r2 != 0xff goto pc+2      ; R2=255\n; eth->h_dest[4] == 0xff && eth->h_dest[5] == 0xff)\n19: (71) r1 = *(u8 *)(r1 +5)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_dest[0] == 0xff && eth->h_dest[1] == 0xff &&\n20: (15) if r1 == 0xff goto pc+15     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff))\n21: (b7) r0 = 1                       ; R0_w=1\n22: (05) goto pc+13\n; }\n36: (95) exit\n\nfrom 20 to 36: R0=2 R1_w=255 R2=255 R3=255 R4=1 R10=fp0\n36: R0=2 R1_w=255 R2=255 R3=255 R4=1 R10=fp0\n36: (95) exit\n\nfrom 18 to 21: R0=2 R1=pkt(r=14) R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R3=255 R4=1 R10=fp0\n21: R0=2 R1=pkt(r=14) R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R3=255 R4=1 R10=fp0\n; if (eth->h_dest[0] == 0xff && eth->h_dest[1] == 0xff &&\n21: (b7) r0 = 1                       ; R0_w=1\n22: (05) goto pc+13\n; }\n36: (95) exit\n\nfrom 16 to 21: R0=2 R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R3=255 R4=1 R10=fp0\n21: R0=2 R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R3=255 R4=1 R10=fp0\n; if (eth->h_dest[0] == 0xff && eth->h_dest[1] == 0xff &&\n21: (b7) r0 = 1                       ; R0_w=1\n22: (05) goto pc+13\n36: safe\n\nfrom 14 to 21: R0=2 R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R3=255 R4=1 R10=fp0\n21: R0=2 R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R3=255 R4=1 R10=fp0\n21: (b7) r0 = 1                       ; R0_w=1\n22: (05) goto pc+13\n36: safe\n\nfrom 12 to 21: R0=2 R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R3=255 R4=1 R10=fp0\n21: R0=2 R1=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R3=255 R4=1 R10=fp0\n21: (b7) r0 = 1                       ; R0_w=1\n22: (05) goto pc+13\n36: safe\n\nfrom 10 to 21: R0=2 R1=pkt(r=14) R2=pkt_end() R3=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R4=1 R10=fp0\n21: R0=2 R1=pkt(r=14) R2=pkt_end() R3=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff)) R4=1 R10=fp0\n21: (b7) r0 = 1                       ; R0_w=1\n22: (05) goto pc+13\n36: safe\n\nfrom 9 to 23: R0_w=2 R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=0 R10=fp0\n23: R0_w=2 R1_w=pkt(r=14) R2_w=pkt_end() R3_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=0 R10=fp0\n; if (eth->h_proto == bpf_htons(ETH_P_IP)) {\n23: (71) r3 = *(u8 *)(r1 +12)         ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n24: (71) r4 = *(u8 *)(r1 +13)         ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n25: (67) r4 <<= 8                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n26: (4f) r4 |= r3                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar()\n; if (eth->h_proto == bpf_htons(ETH_P_IP)) {\n27: (55) if r4 != 0x8 goto pc+7       ; R4_w=8\n; if ((void *)(ip + 1) > data_end)\n28: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n29: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n; if ((void *)(ip + 1) > data_end)\n30: (2d) if r3 > r2 goto pc+5         ; R2=pkt_end() R3=pkt(off=34,r=34)\n31: (b7) r0 = 1                       ; R0_w=1\n; __u8 first_byte = *(__u8 *)&ip->daddr;\n32: (71) r1 = *(u8 *)(r1 +30)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if ((first_byte & 0xF0) == 0xE0)\n33: (57) r1 &= 240                    ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=240,var_off=(0x0; 0xf0))\n34: (15) if r1 == 0xe0 goto pc+1      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=240,var_off=(0x0; 0xf0))\n35: (b7) r0 = 2\n36: safe\n\nfrom 34 to 36: safe\n\nfrom 30 to 36: safe\n\nfrom 27 to 35: R0=2 R1=pkt(r=14) R2=pkt_end() R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4=scalar() R10=fp0\n35: R0=2 R1=pkt(r=14) R2=pkt_end() R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4=scalar() R10=fp0\n35: (b7) r0 = 2\n36: safe\n\nfrom 5 to 36: safe\nverification time 331 usec\nstack depth 0\nprocessed 59 insns (limit 1000000) max_states_per_insn 0 total_states 6 peak_states 6 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 5,
+    "total_tests": 6,
+    "details": [
+      {
+        "name": "drop_ethernet_multicast",
+        "description": "Drop Ethernet Multicast 01:00:5E",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "drop_ip_multicast_ssdp",
+        "description": "Drop IPv4 multicast 239.255.255.250",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "pass_broadcast",
+        "description": "Pass broadcast traffic",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_unicast",
+        "description": "Pass standard unicast TCP",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Pass truncated safely",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "ERROR",
+        "stderr": "Error: failed to run program: Invalid argument\n"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_trunc' failed: expected XDP_PASS (2), got ERROR (None)"
+}

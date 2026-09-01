@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "repair_nrf_l2_array_devmap_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c",
+  "source_sha256": "4d6c6a0a94e40ba64f4fe09c29927a672e2268d989fc2cd55d45799550c70bc1",
+  "timestamp": "2026-09-01T22:47:44.685473+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:12:18: error: use of undeclared identifier 'BPF_MAP_TYPE_DEVMAP'\n   12 |     __uint(type, BPF_MAP_TYPE_DEVMAP);\n      |                  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:20:35: error: incomplete definition of type 'struct xdp_md'\n   20 |     void *data = (void *)(long)ctx->data;\n      |                                ~~~^\n/usr/include/bpf/bpf_helper_defs.h:35:8: note: forward declaration of 'struct xdp_md'\n   35 | struct xdp_md;\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:21:39: error: incomplete definition of type 'struct xdp_md'\n   21 |     void *data_end = (void *)(long)ctx->data_end;\n      |                                    ~~~^\n/usr/include/bpf/bpf_helper_defs.h:35:8: note: forward declaration of 'struct xdp_md'\n   35 | struct xdp_md;\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:24:16: error: use of undeclared identifier 'XDP_PASS'\n   24 |         return XDP_PASS;\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:27:16: error: use of undeclared identifier 'XDP_PASS'\n   27 |         return XDP_PASS;\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:31:16: error: use of undeclared identifier 'XDP_PASS'\n   31 |         return XDP_PASS;\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:36:20: error: use of undeclared identifier 'XDP_PASS'\n   36 |             return XDP_PASS;\n      |                    ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:39:20: error: use of undeclared identifier 'XDP_PASS'\n   39 |             return XDP_PASS;\n      |                    ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:44:12: error: use of undeclared identifier 'XDP_PASS'\n   44 |     return XDP_PASS;\n      |            ^\n9 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:12:18: error: use of undeclared identifier 'BPF_MAP_TYPE_DEVMAP'\n   12 |     __uint(type, BPF_MAP_TYPE_DEVMAP);\n      |                  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:20:35: error: incomplete definition of type 'struct xdp_md'\n   20 |     void *data = (void *)(long)ctx->data;\n      |                                ~~~^\n/usr/include/bpf/bpf_helper_defs.h:35:8: note: forward declaration of 'struct xdp_md'\n   35 | struct xdp_md;\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:21:39: error: incomplete definition of type 'struct xdp_md'\n   21 |     void *data_end = (void *)(long)ctx->data_end;\n      |                                    ~~~^\n/usr/include/bpf/bpf_helper_defs.h:35:8: note: forward declaration of 'struct xdp_md'\n   35 | struct xdp_md;\n      |        ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:24:16: error: use of undeclared identifier 'XDP_PASS'\n   24 |         return XDP_PASS;\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:27:16: error: use of undeclared identifier 'XDP_PASS'\n   27 |         return XDP_PASS;\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:31:16: error: use of undeclared identifier 'XDP_PASS'\n   31 |         return XDP_PASS;\n      |                ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:36:20: error: use of undeclared identifier 'XDP_PASS'\n   36 |             return XDP_PASS;\n      |                    ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:39:20: error: use of undeclared identifier 'XDP_PASS'\n   39 |             return XDP_PASS;\n      |                    ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c:44:12: error: use of undeclared identifier 'XDP_PASS'\n   44 |     return XDP_PASS;\n      |            ^\n9 errors generated."
+}

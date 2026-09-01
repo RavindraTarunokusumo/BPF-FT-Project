@@ -1,0 +1,100 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "ptr_l3_vlan_pop",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/ptr_l3_vlan_pop/sample-0.c",
+  "source_sha256": "47187fda2424106b07d55adb24335d87152075feab7968b0a14c3c968df3bffb",
+  "timestamp": "2026-09-01T22:46:42.039091+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/candidates/ptr_l3_vlan_pop/sample-0.c:33:10: warning: unused variable 'tmp_h_proto' [-Wunused-variable]\n   33 |     __u8 tmp_h_proto = eth->h_proto;\n      |          ^~~~~~~~~~~\n1 warning generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_6xxk028f/candidate.o\nlibbpf: elf: section(3) xdp, size 168, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform_ptr_l3_vlan_pop' at insn offset 0 (0 bytes), code size 21 insns (168 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_6xxk028f/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 866, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 224, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform_ptr_l3_vlan_pop': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r2 = *(u32 *)(r1 +0)          ; R1=ctx() R2_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r4 = r2                       ; R2_w=pkt(r=0) R4_w=pkt(r=0)\n3: (07) r4 += 14                      ; R4_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r4 > r3 goto pc+14         ; R3_w=pkt_end() R4_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_8021Q))\n5: (71) r4 = *(u8 *)(r2 +13)          ; R2_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r5 = *(u8 *)(r2 +12)          ; R2_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_8021Q))\n9: (55) if r4 != 0x81 goto pc+9       ; R4_w=129\n10: (bf) r4 = r2                      ; R2_w=pkt(r=14) R4_w=pkt(r=14)\n11: (07) r4 += 18                     ; R4=pkt(off=18,r=14)\n12: (2d) if r4 > r3 goto pc+6         ; R3=pkt_end() R4=pkt(off=18,r=18)\n; eth->h_proto = vlan->h_vlan_encapsulated_proto;\n13: (69) r3 = *(u16 *)(r2 +16)        ; R2=pkt(r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; eth->h_proto = vlan->h_vlan_encapsulated_proto;\n14: (73) *(u8 *)(r2 +12) = r3         ; R2=pkt(r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n15: (77) r3 >>= 8                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n16: (73) *(u8 *)(r2 +13) = r3         ; R2=pkt(r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; int res = bpf_xdp_adjust_head(ctx, 4);\n17: (b7) r2 = 4                       ; R2_w=4\n18: (85) call bpf_xdp_adjust_head#44          ; R0_w=scalar()\n; }\n19: (b7) r0 = 2                       ; R0_w=2\n20: (95) exit\n\nfrom 12 to 19: R1=ctx() R2=pkt(r=14) R3=pkt_end() R4=pkt(off=18,r=0xfffffffffffffffe) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n19: R1=ctx() R2=pkt(r=14) R3=pkt_end() R4=pkt(off=18,r=0xfffffffffffffffe) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n19: (b7) r0 = 2                       ; R0_w=2\n20: (95) exit\n\nfrom 9 to 19: safe\n\nfrom 4 to 19: safe\nverification time 165 usec\nstack depth 0\nprocessed 25 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 10,
+    "total_tests": 10,
+    "details": [
+      {
+        "name": "vlan100_ipv4_tcp_popped",
+        "description": "VLAN 100 tag popped from IPv4 TCP frame, resulting in untagged frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vlan200_ipv4_udp_popped",
+        "description": "VLAN 200 tag popped from IPv4 UDP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vlan100_arp_popped",
+        "description": "VLAN 100 tag popped from ARP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "untagged_tcp_pass",
+        "description": "Untagged TCP frame preserved unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "untagged_udp_pass",
+        "description": "Untagged UDP frame preserved unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "untagged_arp_pass",
+        "description": "Untagged ARP frame preserved unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "qinq_pass",
+        "description": "QinQ double-tagged frame (0x88A8) preserved unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_vlan_pass",
+        "description": "Truncated VLAN frame (< 18 bytes) preserved safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "runt_frame_pass",
+        "description": "Runt frame (14 bytes) preserved safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vlan300_ipv4_icmp_popped",
+        "description": "VLAN 300 tag popped from IPv4 ICMP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}
