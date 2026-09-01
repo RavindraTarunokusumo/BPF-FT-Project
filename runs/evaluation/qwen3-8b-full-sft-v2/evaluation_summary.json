@@ -14,26 +14,26 @@
     "total_candidates": 36,
     "compliant_count": 36,
     "compliant_rate": 1.0,
-    "compile_count": 36,
-    "compile_rate": 1.0,
-    "verifier_count": 36,
-    "verifier_rate": 1.0,
-    "behavioral_count": 36,
-    "behavioral_rate": 1.0,
-    "pass1_count": 36,
-    "pass1_rate": 1.0,
+    "compile_count": 29,
+    "compile_rate": 0.8055555555555556,
+    "verifier_count": 27,
+    "verifier_rate": 0.75,
+    "behavioral_count": 21,
+    "behavioral_rate": 0.5833333333333334,
+    "pass1_count": 21,
+    "pass1_rate": 0.5833333333333334,
     "by_category": {
-      "packet_filtering_security": {
-        "total": 9,
-        "passed": 9
-      },
       "network_routing_forwarding": {
         "total": 9,
-        "passed": 9
+        "passed": 3
+      },
+      "packet_filtering_security": {
+        "total": 9,
+        "passed": 3
       },
       "packet_inspection_telemetry": {
         "total": 9,
-        "passed": 9
+        "passed": 6
       },
       "protocol_transformation": {
         "total": 9,
@@ -43,15 +43,15 @@
     "by_difficulty": {
       "level_1": {
         "total": 12,
-        "passed": 12
+        "passed": 8
       },
       "level_2": {
         "total": 12,
-        "passed": 12
+        "passed": 9
       },
       "level_3": {
         "total": 12,
-        "passed": 12
+        "passed": 4
       }
     }
   },
