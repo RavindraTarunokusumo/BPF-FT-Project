@@ -10,51 +10,57 @@
     "total_pass_rate": 0.16666666666666666
   },
   "sft_synthesis": {
-    "total_tasks": 36,
-    "total_candidates": 36,
-    "compliant_count": 36,
+    "total_tasks": 120,
+    "total_candidates": 120,
+    "compliant_count": 120,
     "compliant_rate": 1.0,
-    "compile_count": 29,
-    "compile_rate": 0.8055555555555556,
-    "verifier_count": 27,
-    "verifier_rate": 0.75,
-    "behavioral_count": 21,
-    "behavioral_rate": 0.5833333333333334,
-    "pass1_count": 21,
-    "pass1_rate": 0.5833333333333334,
+    "compile_count": 65,
+    "compile_rate": 0.5416666666666666,
+    "verifier_count": 46,
+    "verifier_rate": 0.38333333333333336,
+    "behavioral_count": 31,
+    "behavioral_rate": 0.25833333333333336,
+    "pass1_count": 31,
+    "pass1_rate": 0.25833333333333336,
     "by_category": {
       "network_routing_forwarding": {
-        "total": 9,
-        "passed": 3
+        "total": 30,
+        "passed": 8
       },
       "packet_filtering_security": {
-        "total": 9,
-        "passed": 3
+        "total": 30,
+        "passed": 5
       },
       "packet_inspection_telemetry": {
-        "total": 9,
-        "passed": 6
+        "total": 30,
+        "passed": 13
       },
       "protocol_transformation": {
-        "total": 9,
-        "passed": 9
+        "total": 30,
+        "passed": 5
       }
     },
     "by_difficulty": {
       "level_1": {
-        "total": 12,
-        "passed": 8
+        "total": 40,
+        "passed": 13
       },
       "level_2": {
-        "total": 12,
-        "passed": 9
+        "total": 40,
+        "passed": 7
       },
       "level_3": {
-        "total": 12,
-        "passed": 4
+        "total": 40,
+        "passed": 11
       }
     }
   },
   "base_synthesis": null,
-  "sft_repair": null
+  "sft_repair": {
+    "failed_synth_tasks_count": 89,
+    "recovered_tasks_count": 12,
+    "recovery_rate": 0.1348314606741573,
+    "post_repair_total_passed_count": 43,
+    "post_repair_total_rate": 0.35833333333333334
+  }
 }

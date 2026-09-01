@@ -1,0 +1,324 @@
+{
+  "analysis_title": "BPF-Guardian Paired SFT v1 -> SFT v2 Transition & McNemar Analysis",
+  "global_summary": {
+    "total_tasks": 276,
+    "v1_pass_count": 114,
+    "v1_pass_rate": 0.41304347826086957,
+    "v2_pass_count": 137,
+    "v2_pass_rate": 0.4963768115942029,
+    "transition_counts": {
+      "fail_to_fail": 126,
+      "fail_to_pass": 36,
+      "pass_to_fail": 13,
+      "pass_to_pass": 101
+    },
+    "mcnemar_test": {
+      "b_regressions": 13,
+      "c_gains": 36,
+      "discordant_pairs_total": 49,
+      "exact_p_value": 0.001402688503695515,
+      "statistically_significant_p05": true,
+      "statistically_significant_p01": true
+    }
+  },
+  "suites": [
+    {
+      "suite_name": "Private Synthesis Benchmark (120 Tasks)",
+      "total_tasks": 120,
+      "v1_source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-synthesis-120/verification/results.jsonl",
+      "v1_source_sha256": "064a2c63b33cde89f56e66bf552f302dcd4aac6724bf15e35af06a55f9d0e4cf",
+      "v2_source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/verification/results.jsonl",
+      "v2_source_sha256": "50d4f39ef98f695bc21dceae9af359bf3da95489a5c8d2bc796929d6285892a6",
+      "v1_pass_count": 19,
+      "v1_pass_rate": 0.15833333333333333,
+      "v2_pass_count": 31,
+      "v2_pass_rate": 0.25833333333333336,
+      "transition_counts": {
+        "fail_to_fail": 84,
+        "fail_to_pass": 17,
+        "pass_to_fail": 5,
+        "pass_to_pass": 14
+      },
+      "mcnemar_test": {
+        "b_regressions_v1_pass_v2_fail": 5,
+        "c_gains_v1_fail_v2_pass": 17,
+        "discordant_pairs_total": 22,
+        "exact_p_value": 0.01690053939819336,
+        "statistically_significant_p05": true,
+        "statistically_significant_p01": false
+      },
+      "breakdown_by_category": {
+        "network_routing_forwarding": {
+          "fail_to_fail": 22,
+          "fail_to_pass": 2,
+          "pass_to_fail": 0,
+          "pass_to_pass": 6,
+          "total": 30
+        },
+        "packet_filtering_security": {
+          "fail_to_fail": 24,
+          "fail_to_pass": 2,
+          "pass_to_fail": 1,
+          "pass_to_pass": 3,
+          "total": 30
+        },
+        "packet_inspection_telemetry": {
+          "fail_to_fail": 14,
+          "fail_to_pass": 8,
+          "pass_to_fail": 3,
+          "pass_to_pass": 5,
+          "total": 30
+        },
+        "protocol_transformation": {
+          "fail_to_fail": 24,
+          "fail_to_pass": 5,
+          "pass_to_fail": 1,
+          "pass_to_pass": 0,
+          "total": 30
+        }
+      },
+      "breakdown_by_difficulty": {
+        "level_1": {
+          "fail_to_fail": 24,
+          "fail_to_pass": 6,
+          "pass_to_fail": 3,
+          "pass_to_pass": 7,
+          "total": 40
+        },
+        "level_2": {
+          "fail_to_fail": 32,
+          "fail_to_pass": 4,
+          "pass_to_fail": 1,
+          "pass_to_pass": 3,
+          "total": 40
+        },
+        "level_3": {
+          "fail_to_fail": 28,
+          "fail_to_pass": 7,
+          "pass_to_fail": 1,
+          "pass_to_pass": 4,
+          "total": 40
+        }
+      },
+      "regressions_list": [
+        "syn_pfs_l1_006_coap_non_confirmable_drop",
+        "syn_pit_l1_004_gtpu_teid_zero_count",
+        "syn_pit_l2_006_ntp_stratum_telemetry",
+        "syn_pit_l3_005_gtpu_bearer_traffic_matrix",
+        "syn_ptr_l1_005_coap_port_remap"
+      ],
+      "gains_list": [
+        "syn_nrf_l2_007_vlan_prio_pcp_traffic_split",
+        "syn_nrf_l3_001_maglev_consistent_hash_lb",
+        "syn_pfs_l1_001_geneve_vni_filter",
+        "syn_pfs_l1_003_gre_checksum_drop",
+        "syn_pit_l1_001_vxlan_vni_counter",
+        "syn_pit_l1_003_mpls_depth_counter",
+        "syn_pit_l1_005_dns_query_response_split",
+        "syn_pit_l2_007_icmpv6_nd_telemetry",
+        "syn_pit_l2_009_tcp_mss_range_histogram",
+        "syn_pit_l3_001_count_min_sketch_heavy_hitters",
+        "syn_pit_l3_003_vxlan_flow_matrix",
+        "syn_pit_l3_010_connection_churn_monitor",
+        "syn_ptr_l1_002_vxlan_strip_vni",
+        "syn_ptr_l2_003_vxlan_decap_to_inner_ethernet",
+        "syn_ptr_l3_003_srv6_end_dx4_decapsulation",
+        "syn_ptr_l3_004_stateful_napt44",
+        "syn_ptr_l3_008_gtpu_teid_remapping_and_csum"
+      ]
+    },
+    {
+      "suite_name": "Private Standalone Repair Benchmark (120 Tasks)",
+      "total_tasks": 120,
+      "v1_source_path": "runs/evaluation/qwen3-8b-full-sft-v1/benchmark-repair-120/verification/results.jsonl",
+      "v1_source_sha256": "5501783f262ccba1b56a750ddb875f5122ce351134d0c265896e55ce53e037a9",
+      "v2_source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-repair-120/verification/results.jsonl",
+      "v2_source_sha256": "e93058df1f2d205784c579c519e77b1677caacde4351732bca020247fed42b7d",
+      "v1_pass_count": 75,
+      "v1_pass_rate": 0.625,
+      "v2_pass_count": 85,
+      "v2_pass_rate": 0.7083333333333334,
+      "transition_counts": {
+        "fail_to_fail": 32,
+        "fail_to_pass": 13,
+        "pass_to_fail": 3,
+        "pass_to_pass": 72
+      },
+      "mcnemar_test": {
+        "b_regressions_v1_pass_v2_fail": 3,
+        "c_gains_v1_fail_v2_pass": 13,
+        "discordant_pairs_total": 16,
+        "exact_p_value": 0.021270751953125,
+        "statistically_significant_p05": true,
+        "statistically_significant_p01": false
+      },
+      "breakdown_by_category": {
+        "network_routing_forwarding": {
+          "fail_to_fail": 14,
+          "fail_to_pass": 2,
+          "pass_to_fail": 0,
+          "pass_to_pass": 14,
+          "total": 30
+        },
+        "packet_filtering_security": {
+          "fail_to_fail": 6,
+          "fail_to_pass": 3,
+          "pass_to_fail": 1,
+          "pass_to_pass": 20,
+          "total": 30
+        },
+        "packet_inspection_telemetry": {
+          "fail_to_fail": 5,
+          "fail_to_pass": 1,
+          "pass_to_fail": 1,
+          "pass_to_pass": 23,
+          "total": 30
+        },
+        "protocol_transformation": {
+          "fail_to_fail": 7,
+          "fail_to_pass": 7,
+          "pass_to_fail": 1,
+          "pass_to_pass": 15,
+          "total": 30
+        }
+      },
+      "breakdown_by_difficulty": {
+        "level_1": {
+          "fail_to_fail": 14,
+          "fail_to_pass": 3,
+          "pass_to_fail": 0,
+          "pass_to_pass": 23,
+          "total": 40
+        },
+        "level_2": {
+          "fail_to_fail": 6,
+          "fail_to_pass": 5,
+          "pass_to_fail": 2,
+          "pass_to_pass": 27,
+          "total": 40
+        },
+        "level_3": {
+          "fail_to_fail": 12,
+          "fail_to_pass": 5,
+          "pass_to_fail": 1,
+          "pass_to_pass": 22,
+          "total": 40
+        }
+      },
+      "regressions_list": [
+        "repair_pfs_l2_subnet_blacklist",
+        "repair_pit_l2_protocol_matrix",
+        "repair_ptr_l3_nptv6_prefix_rewrite"
+      ],
+      "gains_list": [
+        "repair_nrf_l1_subnet_reflector_tx",
+        "repair_nrf_l3_dynamic_devmap_xmit",
+        "repair_pfs_l2_rate_limit_map",
+        "repair_pfs_l2_subnet_range_guard",
+        "repair_pfs_l2_vlan_double_tag",
+        "repair_pit_l1_total_bytes_delta",
+        "repair_ptr_l1_zero_ip_id",
+        "repair_ptr_l2_decap_gre_tunnel",
+        "repair_ptr_l2_vxlan_header_strip",
+        "repair_ptr_l3_gtp_u_decap",
+        "repair_ptr_l3_nat_tcp_csum_fold",
+        "repair_ptr_l3_tcp_mss_clamping",
+        "repair_ptr_l3_vlan_push_and_retag"
+      ]
+    },
+    {
+      "suite_name": "Calibration Synthesis Suite (36 Tasks)",
+      "total_tasks": 36,
+      "v1_source_path": "runs/evaluation/qwen3-8b-full-sft-v1/rollout-001/verification/results.jsonl",
+      "v1_source_sha256": "8674ac0d17631afb85b1a49a24d2e1524f4de176f2e455c188155161794013f0",
+      "v2_source_path": "runs/evaluation/qwen3-8b-full-sft-v2/calibration-synthesis/verification/results.jsonl",
+      "v2_source_sha256": "208b642b23bef6740e95b24c3e5e45108a7a00e4a1b0fce857c0ad9d9f9edc0e",
+      "v1_pass_count": 20,
+      "v1_pass_rate": 0.5555555555555556,
+      "v2_pass_count": 21,
+      "v2_pass_rate": 0.5833333333333334,
+      "transition_counts": {
+        "fail_to_fail": 10,
+        "fail_to_pass": 6,
+        "pass_to_fail": 5,
+        "pass_to_pass": 15
+      },
+      "mcnemar_test": {
+        "b_regressions_v1_pass_v2_fail": 5,
+        "c_gains_v1_fail_v2_pass": 6,
+        "discordant_pairs_total": 11,
+        "exact_p_value": 1.0,
+        "statistically_significant_p05": false,
+        "statistically_significant_p01": false
+      },
+      "breakdown_by_category": {
+        "network_routing_forwarding": {
+          "fail_to_fail": 5,
+          "fail_to_pass": 1,
+          "pass_to_fail": 1,
+          "pass_to_pass": 2,
+          "total": 9
+        },
+        "packet_filtering_security": {
+          "fail_to_fail": 4,
+          "fail_to_pass": 1,
+          "pass_to_fail": 2,
+          "pass_to_pass": 2,
+          "total": 9
+        },
+        "packet_inspection_telemetry": {
+          "fail_to_fail": 1,
+          "fail_to_pass": 0,
+          "pass_to_fail": 2,
+          "pass_to_pass": 6,
+          "total": 9
+        },
+        "protocol_transformation": {
+          "fail_to_fail": 0,
+          "fail_to_pass": 4,
+          "pass_to_fail": 0,
+          "pass_to_pass": 5,
+          "total": 9
+        }
+      },
+      "breakdown_by_difficulty": {
+        "level_1": {
+          "fail_to_fail": 1,
+          "fail_to_pass": 2,
+          "pass_to_fail": 3,
+          "pass_to_pass": 6,
+          "total": 12
+        },
+        "level_2": {
+          "fail_to_fail": 3,
+          "fail_to_pass": 1,
+          "pass_to_fail": 0,
+          "pass_to_pass": 8,
+          "total": 12
+        },
+        "level_3": {
+          "fail_to_fail": 6,
+          "fail_to_pass": 3,
+          "pass_to_fail": 2,
+          "pass_to_pass": 1,
+          "total": 12
+        }
+      },
+      "regressions_list": [
+        "nrf_l1_icmp_reflector",
+        "pfs_l1_tcp23_drop",
+        "pfs_l1_udp53_drop",
+        "pit_l3_ipv4_flow_counter",
+        "pit_l3_tcp_flow_outcomes"
+      ],
+      "gains_list": [
+        "nrf_l1_subnet_reflector",
+        "pfs_l2_source_subnet_exception",
+        "ptr_l1_swap_mac",
+        "ptr_l3_icmp_echo_reply",
+        "ptr_l3_tcp_dnat",
+        "ptr_l3_vlan_pop"
+      ]
+    }
+  ]
+}

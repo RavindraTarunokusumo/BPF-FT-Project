@@ -1,0 +1,98 @@
+{
+  "evaluation_name": "Controlled Synthesis Repair@1 Evaluation (Qwen3-8B SFT v2)",
+  "model": "Qwen/Qwen3-8B SFT v2",
+  "checkpoint": "tinker://9461002d-2321-5858-8184-5604f9304283:train:0/sampler_weights/final",
+  "total_synthesis_tasks": 120,
+  "initial_synthesis_pass1": {
+    "passed": 31,
+    "total": 120,
+    "rate": 0.25833333333333336
+  },
+  "repair1_metrics": {
+    "eligible_failures": 89,
+    "recovered_tasks": 12,
+    "recovery_rate": 0.1348314606741573,
+    "compilation_pass_count": 58,
+    "kernel_verifier_pass_count": 37
+  },
+  "end_to_end_solve2": {
+    "definition": "1 synthesis attempt followed by at most 1 diagnostic-guided repair attempt (deterministic Solve@2, not Pass@2 sampling)",
+    "total_solved": 43,
+    "total_tasks": 120,
+    "solve2_rate": 0.35833333333333334,
+    "absolute_gain_over_pass1": 0.1
+  },
+  "breakdown_by_original_failure_stage": {
+    "compilation": {
+      "total": 55,
+      "compile_pass": 24,
+      "verifier_pass": 20,
+      "recovered": 11
+    },
+    "behavioral": {
+      "total": 15,
+      "compile_pass": 15,
+      "verifier_pass": 15,
+      "recovered": 0
+    },
+    "kernel_verifier": {
+      "total": 19,
+      "compile_pass": 19,
+      "verifier_pass": 2,
+      "recovered": 1
+    }
+  },
+  "breakdown_by_category": {
+    "network_routing_forwarding": {
+      "total": 30,
+      "initial_pass": 8,
+      "repairs_eligible": 22,
+      "recovered": 1,
+      "solve2_pass": 9
+    },
+    "packet_filtering_security": {
+      "total": 30,
+      "initial_pass": 5,
+      "repairs_eligible": 25,
+      "recovered": 2,
+      "solve2_pass": 7
+    },
+    "packet_inspection_telemetry": {
+      "total": 30,
+      "initial_pass": 13,
+      "repairs_eligible": 17,
+      "recovered": 5,
+      "solve2_pass": 18
+    },
+    "protocol_transformation": {
+      "total": 30,
+      "initial_pass": 5,
+      "repairs_eligible": 25,
+      "recovered": 4,
+      "solve2_pass": 9
+    }
+  },
+  "breakdown_by_difficulty": {
+    "level_1": {
+      "total": 40,
+      "initial_pass": 13,
+      "repairs_eligible": 27,
+      "recovered": 5,
+      "solve2_pass": 18
+    },
+    "level_2": {
+      "total": 40,
+      "initial_pass": 7,
+      "repairs_eligible": 33,
+      "recovered": 3,
+      "solve2_pass": 10
+    },
+    "level_3": {
+      "total": 40,
+      "initial_pass": 11,
+      "repairs_eligible": 29,
+      "recovered": 4,
+      "solve2_pass": 15
+    }
+  }
+}
