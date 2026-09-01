@@ -32,12 +32,12 @@ if [[ -f "$ROLLOUT_DIR/manifest.json" ]]; then
     RAW_MANIFEST_INDEX=$(grep -oE '"benchmark_index(_path)?": "[^"]*' "$ROLLOUT_DIR/manifest.json" | cut -d'"' -f4 | sed 's/\\\\/\//g' || true)
     if [[ -n "$RAW_MANIFEST_INDEX" && -f "$RAW_MANIFEST_INDEX" ]]; then
         BENCHMARK_INDEX="$RAW_MANIFEST_INDEX"
+    elif [[ "$ROLLOUT_DIR" =~ "synthesis" && -f "data/benchmark/synthesis/index.jsonl" ]]; then
+        BENCHMARK_INDEX="data/benchmark/synthesis/index.jsonl"
     elif [[ "$ROLLOUT_DIR" =~ "calibration" && -f "data/calibration/index.jsonl" ]]; then
         BENCHMARK_INDEX="data/calibration/index.jsonl"
     elif [[ "$ROLLOUT_DIR" =~ "repair" && -f "data/benchmark/repair/index.jsonl" ]]; then
         BENCHMARK_INDEX="data/benchmark/repair/index.jsonl"
-    elif [[ "$ROLLOUT_DIR" =~ "synthesis" && -f "data/benchmark/synthesis/index.jsonl" ]]; then
-        BENCHMARK_INDEX="data/benchmark/synthesis/index.jsonl"
     fi
 fi
 

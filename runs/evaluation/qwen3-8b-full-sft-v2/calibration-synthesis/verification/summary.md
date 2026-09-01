@@ -1,5 +1,11 @@
 # BPF-Guardian Benchmark Verification Summary
 
+**Verification Mode**: `empirical` (Live Linux Kernel Verifier)
+**Host Kernel**: `Linux 6.8.0-106-generic x86_64`
+**Toolchain**: `Ubuntu clang version 18.1.3 (1ubuntu1)` | `bpftool v7.4.0` | `libbpf v1.4`
+**Candidate Set Hash**: `8ba93b6016e085da90b69b7349c8f1ac162222b63b2caf342f1b0b6ccb949d42`
+**Raw Results Hash**: `a78c78cc4ff7bad473fdc37eb44313354960ebdbf59b468b66439115430dfe91`
+
 ## Aggregate Metrics
 | Metric | Passed / Total | Rate |
 |---|---|---|

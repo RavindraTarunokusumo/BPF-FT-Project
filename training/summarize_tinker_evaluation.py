@@ -34,10 +34,17 @@ CALIBRATION_BASELINE = {
 }
 
 
-def load_results_file(results_path: Path) -> List[Dict[str, Any]]:
+def load_results_file(results_path: Path, allow_mock: bool = False) -> List[Dict[str, Any]]:
     if not results_path.is_file():
         raise FileNotFoundError(f"Verification results file not found: {results_path}")
-    return [json.loads(line) for line in results_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    records = [json.loads(line) for line in results_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    if not allow_mock:
+        for r in records:
+            if r.get("verification_mode") == "mock":
+                raise ValueError(
+                    f"Quarantine violation: Cannot generate empirical evaluation report using mock verification results in {results_path}"
+                )
+    return records
 
 
 def compute_rollout_metrics(records: List[Dict[str, Any]]) -> Dict[str, Any]:
