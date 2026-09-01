@@ -1,0 +1,66 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "syn_pfs_l1_005_mpls_bos_filter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l1_005_mpls_bos_filter/sample-0.c",
+  "source_sha256": "4205af2290e740b5b97de08dec604948b82169b6314334cae52b0217923f771d",
+  "timestamp": "2026-09-01T23:13:39.081442+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_1bl8unpu/candidate.o\nlibbpf: elf: section(3) xdp, size 152, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_syn_pfs_l1_005_mpls_bos_filter' at insn offset 0 (0 bytes), code size 19 insns (152 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_1bl8unpu/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 910, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 240, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_syn_pfs_l1_005_mpls_bos_filter': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter_syn_pfs_l1_005_mpls_bos_filter(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+12         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto != bpf_htons(0x8847))\n6: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(0x8847))\n10: (55) if r4 != 0x4788 goto pc+7    ; R4_w=18312\n11: (07) r3 += 22                     ; R3=pkt(off=22,r=14)\n12: (2d) if r3 > r2 goto pc+5         ; R2=pkt_end() R3=pkt(off=22,r=22)\n; if ((mpls->label & bos_mask) == 0)\n13: (61) r1 = *(u32 *)(r1 +0)         ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; if ((mpls->label & bos_mask) == 0)\n14: (57) r1 &= 1                      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1,var_off=(0x0; 0x1))\n15: (b7) r0 = 1                       ; R0_w=1\n; \n16: (15) if r1 == 0x0 goto pc+1       ; R1_w=1\n17: (b7) r0 = 2                       ; R0_w=2\n; }\n18: (95) exit\n\nfrom 16 to 18: R0_w=1 R1_w=0 R2=pkt_end() R3=pkt(off=22,r=22) R4=18312 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n18: R0_w=1 R1_w=0 R2=pkt_end() R3=pkt(off=22,r=22) R4=18312 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n18: (95) exit\n\nfrom 12 to 18: R0=2 R1=pkt(off=14,r=14) R2=pkt_end() R3=pkt(off=22,r=0xfffffffffffffffe) R4=18312 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n18: R0=2 R1=pkt(off=14,r=14) R2=pkt_end() R3=pkt(off=22,r=0xfffffffffffffffe) R4=18312 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n18: (95) exit\n\nfrom 10 to 18: safe\n\nfrom 5 to 18: safe\nverification time 179 usec\nstack depth 0\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 4,
+    "total_tests": 5,
+    "details": [
+      {
+        "name": "mpls_nobos_drop",
+        "description": "MPLS unicast frame where top label has BOS=0 (stacked) must be dropped",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "mpls_bos_pass",
+        "description": "MPLS unicast frame where top label has BOS=1 must pass",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "XDP_DROP",
+        "stderr": ""
+      },
+      {
+        "name": "ipv4_pass",
+        "description": "Standard IPv4 frame must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_mpls_pass",
+        "description": "Truncated MPLS frame must pass safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'mpls_bos_pass' failed: expected XDP_PASS (2), got XDP_DROP (1)"
+}

@@ -1,0 +1,93 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_008_mpls_vpn_flow_stats",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l3_008_mpls_vpn_flow_stats/sample-0.c",
+  "source_sha256": "fe6afc86cd17901ed555f592ca706b1c83728605157bdca5f3d3a2635312eefd",
+  "timestamp": "2026-09-01T23:13:37.591782+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l3_008_mpls_vpn_flow_stats/sample-0.c:44:39: warning: comparison of distinct pointer types ('unsigned char *' and 'void *') [-Wcompare-distinct-pointer-types]\n   44 |     if (ptr + sizeof(struct mpls_hdr) > data_end)\n      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~\n1 warning generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_tm0bjlhd/candidate.o\nlibbpf: elf: section(3) xdp, size 336, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_syn_pit_l3_008_mpls_vpn_flow_stats' at insn offset 0 (0 bytes), code size 42 insns (336 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_tm0bjlhd/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1548, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 336, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'vpn_stats_map': at sec_idx 5, offset 0.\nlibbpf: map 'vpn_stats_map': found type = 1.\nlibbpf: map 'vpn_stats_map': found key [8], sz = 4.\nlibbpf: map 'vpn_stats_map': found value [11], sz = 16.\nlibbpf: map 'vpn_stats_map': found max_entries = 1024.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #17 against 'vpn_stats_map'\nlibbpf: prog 'xdp_telemetry_syn_pit_l3_008_mpls_vpn_flow_stats': found map 0 (vpn_stats_map, sec 5, off 0) for insn #17\nlibbpf: sec '.relxdp': relo #1: insn #36 against 'vpn_stats_map'\nlibbpf: prog 'xdp_telemetry_syn_pit_l3_008_mpls_vpn_flow_stats': found map 0 (vpn_stats_map, sec 5, off 0) for insn #36\nlibbpf: map 'vpn_stats_map': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_syn_pit_l3_008_mpls_vpn_flow_stats': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r6 = *(u32 *)(r1 +4)          ; R1=ctx() R6_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r7 = *(u32 *)(r1 +0)          ; R1=ctx() R7_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r1 = r7                       ; R1_w=pkt(r=0) R7_w=pkt(r=0)\n3: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r1 > r6 goto pc+35         ; R1_w=pkt(off=14,r=14) R6_w=pkt_end()\n; if (eth->h_proto != bpf_htons(0x8847))\n5: (71) r1 = *(u8 *)(r7 +13)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7_w=pkt(r=14)\n6: (67) r1 <<= 8                      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r2 = *(u8 *)(r7 +12)          ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7_w=pkt(r=14)\n8: (4f) r1 |= r2                      ; R1_w=scalar() R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(0x8847))\n9: (55) if r1 != 0x4788 goto pc+30    ; R1_w=18312\n10: (bf) r1 = r7                      ; R1_w=pkt(r=14) R7_w=pkt(r=14)\n11: (07) r1 += 22                     ; R1=pkt(off=22,r=14)\n12: (2d) if r1 > r6 goto pc+27        ; R1=pkt(off=22,r=22) R6=pkt_end()\n; __u32 bos_label = mpls->label;\n13: (61) r1 = *(u32 *)(r7 +14)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=22)\n; __u32 key = bos_label;\n14: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n15: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 bos_label = mpls->label;\n16: (07) r2 += -4                     ; R2_w=fp-4\n; struct mpls_stats *stats = bpf_map_lookup_elem(&vpn_stats_map, &key);\n17: (18) r1 = 0xff2125b9191b9c00      ; R1_w=map_ptr(map=vpn_stats_map,ks=4,vs=16)\n19: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=1,map=vpn_stats_map,ks=4,vs=16)\n; \n20: (1f) r6 -= r7                     ; R6=scalar() R7=pkt(r=22)\n; if (stats) {\n21: (15) if r0 == 0x0 goto pc+7       ; R0=map_value(map=vpn_stats_map,ks=4,vs=16)\n; stats->pkts += 1;\n22: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=vpn_stats_map,ks=4,vs=16) R1_w=scalar()\n23: (07) r1 += 1                      ; R1_w=scalar()\n24: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=vpn_stats_map,ks=4,vs=16) R1_w=scalar()\n; stats->bytes += ((__u64)data_end - (__u64)data);\n25: (79) r1 = *(u64 *)(r0 +8)         ; R0=map_value(map=vpn_stats_map,ks=4,vs=16) R1_w=scalar()\n26: (0f) r1 += r6                     ; R1_w=scalar() R6=scalar()\n27: (7b) *(u64 *)(r0 +8) = r1         ; R0=map_value(map=vpn_stats_map,ks=4,vs=16) R1_w=scalar()\n28: (05) goto pc+11\n; }\n40: (b7) r0 = 2                       ; R0_w=2\n41: (95) exit\n\nfrom 21 to 29: R0=0 R6=scalar() R7=pkt(r=22) R10=fp0 fp-8=mmmm????\n29: R0=0 R6=scalar() R7=pkt(r=22) R10=fp0 fp-8=mmmm????\n; struct mpls_stats initial = {1, ((__u64)data_end - (__u64)data)};\n29: (7b) *(u64 *)(r10 -16) = r6       ; R6=scalar() R10=fp0 fp-16_w=mmmmmmmm\n30: (b7) r1 = 1                       ; R1_w=1\n31: (7b) *(u64 *)(r10 -24) = r1       ; R1_w=1 R10=fp0 fp-24_w=1\n32: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n33: (07) r2 += -4                     ; R2_w=fp-4\n34: (bf) r3 = r10                     ; R3_w=fp0 R10=fp0\n35: (07) r3 += -24                    ; R3_w=fp-24\n; bpf_map_update_elem(&vpn_stats_map, &key, &initial, BPF_ANY);\n36: (18) r1 = 0xff2125b9191b9c00      ; R1_w=map_ptr(map=vpn_stats_map,ks=4,vs=16)\n38: (b7) r4 = 0                       ; R4_w=0\n39: (85) call bpf_map_update_elem#2\n40: safe\n\nfrom 12 to 40: safe\n\nfrom 9 to 40: safe\n\nfrom 4 to 40: safe\nverification time 275 usec\nstack depth 24\nprocessed 44 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 9,
+    "total_tests": 9,
+    "details": [
+      {
+        "name": "vpn_label_100_pass",
+        "description": "MPLS frame with VPN Label 100 updates VPN stats and passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vpn_label_100_pkt2_pass",
+        "description": "Second packet on VPN Label 100 updates cumulative bytes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vpn_label_200_pass",
+        "description": "MPLS frame with VPN Label 200 updates separate VPN entry",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vpn_multi_label_pass",
+        "description": "Stacked MPLS frame extracts bottom VPN label",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "non_mpls_ipv4_pass",
+        "description": "Non-MPLS IPv4 passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "udp_pass",
+        "description": "UDP packet passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "icmp_pass",
+        "description": "ICMP packet passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_mpls_pass",
+        "description": "Truncated MPLS frame passes safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

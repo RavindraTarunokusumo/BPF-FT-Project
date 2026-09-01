@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_007_geneve_metadata_insertion",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l3_007_geneve_metadata_insertion/sample-0.c",
+  "source_sha256": "f9c022d8044c9da7b24ada36c22709be2fbd9ab304f772d30574315b73184a04",
+  "timestamp": "2026-09-01T23:13:38.366898+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l3_007_geneve_metadata_insertion/sample-0.c:62:36: error: no member named 'hdr_len' in 'struct genevehdr'\n   62 |     __u8 *opt = (void *)gen + gen->hdr_len;\n      |                               ~~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l3_007_geneve_metadata_insertion/sample-0.c:62:36: error: no member named 'hdr_len' in 'struct genevehdr'\n   62 |     __u8 *opt = (void *)gen + gen->hdr_len;\n      |                               ~~~  ^\n1 error generated."
+}

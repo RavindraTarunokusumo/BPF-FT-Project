@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "syn_nrf_l1_002_vlan_trunk_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c",
+  "source_sha256": "fcb061151ee4411d2693658b26b3290ed4cd2bc4d0bba1c8ea0d4345535b918b",
+  "timestamp": "2026-09-01T23:14:11.412268+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c:35:22: error: call to undeclared function 'bpf_ntoh64'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   35 |         __be64 tmp = bpf_ntoh64((__be64)eth->h_dest);\n      |                      ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c:36:23: error: call to undeclared function 'bpf_htons64'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   36 |         eth->h_dest = bpf_htons64((__u64)eth->h_source);\n      |                       ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c:36:21: error: array type 'unsigned char[6]' is not assignable\n   36 |         eth->h_dest = bpf_htons64((__u64)eth->h_source);\n      |         ~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c:37:23: error: array type 'unsigned char[6]' is not assignable\n   37 |         eth->h_source = bpf_ntoh64(tmp);\n      |         ~~~~~~~~~~~~~ ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c:35:22: error: call to undeclared function 'bpf_ntoh64'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   35 |         __be64 tmp = bpf_ntoh64((__be64)eth->h_dest);\n      |                      ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c:36:23: error: call to undeclared function 'bpf_htons64'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   36 |         eth->h_dest = bpf_htons64((__u64)eth->h_source);\n      |                       ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c:36:21: error: array type 'unsigned char[6]' is not assignable\n   36 |         eth->h_dest = bpf_htons64((__u64)eth->h_source);\n      |         ~~~~~~~~~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_002_vlan_trunk_reflector/sample-0.c:37:23: error: array type 'unsigned char[6]' is not assignable\n   37 |         eth->h_source = bpf_ntoh64(tmp);\n      |         ~~~~~~~~~~~~~ ^\n4 errors generated."
+}

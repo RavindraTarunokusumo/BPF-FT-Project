@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_002_gre_encap_push",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c",
+  "source_sha256": "197daff4dff5413cf65de736cc44f3222f55ace36db7e195ab627df16259a761",
+  "timestamp": "2026-09-01T23:14:12.578786+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:47:37: error: incompatible integer to pointer conversion passing 'unsigned long' to parameter of type '__be32 *' (aka 'unsigned int *') [-Wint-conversion]\n   47 |     ip->check = bpf_csum_diff(0, 0, sizeof(struct iphdr), ip, 0);\n      |                                     ^~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:47:59: error: incompatible pointer to integer conversion passing 'struct iphdr *' to parameter of type '__u32' (aka 'unsigned int') [-Wint-conversion]\n   47 |     ip->check = bpf_csum_diff(0, 0, sizeof(struct iphdr), ip, 0);\n      |                                                           ^~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:47:37: error: incompatible integer to pointer conversion passing 'unsigned long' to parameter of type '__be32 *' (aka 'unsigned int *') [-Wint-conversion]\n   47 |     ip->check = bpf_csum_diff(0, 0, sizeof(struct iphdr), ip, 0);\n      |                                     ^~~~~~~~~~~~~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:47:59: error: incompatible pointer to integer conversion passing 'struct iphdr *' to parameter of type '__u32' (aka 'unsigned int') [-Wint-conversion]\n   47 |     ip->check = bpf_csum_diff(0, 0, sizeof(struct iphdr), ip, 0);\n      |                                                           ^~\n2 errors generated."
+}

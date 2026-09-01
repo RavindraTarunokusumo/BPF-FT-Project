@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_007_vxlan_tenant_acl_matrix",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c",
+  "source_sha256": "131c6808e93e9b438364652757c3cf2aef4f5e1ac226544ab54da802706a33d3",
+  "timestamp": "2026-09-01T23:14:12.249148+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:52:45: error: use of undeclared identifier 'vni_tenant_map'\n   52 |     __u32 *tenant_id = bpf_map_lookup_elem(&vni_tenant_map, &vni);\n      |                                             ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:72:9: error: no member named 'family' in 'struct bpf_lpm_trie_key'\n   72 |     key.family = BPF_LPM_TRIE_IP4;\n      |     ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:72:18: error: use of undeclared identifier 'BPF_LPM_TRIE_IP4'\n   72 |     key.family = BPF_LPM_TRIE_IP4;\n      |                  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:73:26: error: no member named 'key' in 'struct bpf_lpm_trie_key'\n   73 |     __builtin_memcpy(key.key, &inner_ip->saddr, sizeof(inner_ip->saddr));\n      |                      ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:74:9: error: no member named 'key_len' in 'struct bpf_lpm_trie_key'\n   74 |     key.key_len = sizeof(inner_ip->saddr);\n      |     ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:76:42: error: use of undeclared identifier 'acl_lpm_map'\n   76 |     __u32 *policy = bpf_map_lookup_elem(&acl_lpm_map, &key);\n      |                                          ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:52:45: error: use of undeclared identifier 'vni_tenant_map'\n   52 |     __u32 *tenant_id = bpf_map_lookup_elem(&vni_tenant_map, &vni);\n      |                                             ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:72:9: error: no member named 'family' in 'struct bpf_lpm_trie_key'\n   72 |     key.family = BPF_LPM_TRIE_IP4;\n      |     ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:72:18: error: use of undeclared identifier 'BPF_LPM_TRIE_IP4'\n   72 |     key.family = BPF_LPM_TRIE_IP4;\n      |                  ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:73:26: error: no member named 'key' in 'struct bpf_lpm_trie_key'\n   73 |     __builtin_memcpy(key.key, &inner_ip->saddr, sizeof(inner_ip->saddr));\n      |                      ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:74:9: error: no member named 'key_len' in 'struct bpf_lpm_trie_key'\n   74 |     key.key_len = sizeof(inner_ip->saddr);\n      |     ~~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:76:42: error: use of undeclared identifier 'acl_lpm_map'\n   76 |     __u32 *policy = bpf_map_lookup_elem(&acl_lpm_map, &key);\n      |                                          ^\n6 errors generated."
+}

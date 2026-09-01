@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_003_dhcp_rogue_server_filter",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c",
+  "source_sha256": "b005b63f8cf2c4d51eb9faabed8b2dc75dfec515a6dd413e0a1fcf77fdeeb7af",
+  "timestamp": "2026-09-01T23:13:38.100982+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:69:44: error: use of undeclared identifier 'auth_dhcp_server'\n   69 |     __be32 *auth_ip = bpf_map_lookup_elem(&auth_dhcp_server, &key);\n      |                                            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:71:27: error: cannot take the address of an rvalue of type 'unsigned int'\n   71 |         auth_ip = (void *)&(0xC0A80101); // Fallback to 192.168.1.1\n      |                           ^ ~~~~~~~~~~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:69:44: error: use of undeclared identifier 'auth_dhcp_server'\n   69 |     __be32 *auth_ip = bpf_map_lookup_elem(&auth_dhcp_server, &key);\n      |                                            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:71:27: error: cannot take the address of an rvalue of type 'unsigned int'\n   71 |         auth_ip = (void *)&(0xC0A80101); // Fallback to 192.168.1.1\n      |                           ^ ~~~~~~~~~~\n2 errors generated."
+}

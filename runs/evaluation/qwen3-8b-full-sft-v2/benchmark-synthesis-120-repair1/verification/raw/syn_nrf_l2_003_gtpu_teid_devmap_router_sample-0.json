@@ -1,0 +1,81 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_003_gtpu_teid_devmap_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l2_003_gtpu_teid_devmap_router/sample-0.c",
+  "source_sha256": "07be2f43026dda89a168322035c9cab107b41c2a53f64f57dad5cd8b28281bb8",
+  "timestamp": "2026-09-01T23:13:38.576144+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_7gqz6amv/candidate.o\nlibbpf: elf: section(3) xdp, size 352, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_syn_nrf_l2_003_gtpu_teid_devmap_router' at insn offset 0 (0 bytes), code size 44 insns (352 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_7gqz6amv/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1264, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 448, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_route_syn_nrf_l2_003_gtpu_teid_devmap_router': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_syn_nrf_l2_003_gtpu_teid_devmap_router(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r2 = r1                       ; R1_w=pkt(r=0) R2_w=pkt(r=0)\n4: (07) r2 += 14                      ; R2_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r2 > r3 goto pc+37         ; R2_w=pkt(off=14,r=14) R3_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+32      ; R4_w=8\n11: (bf) r4 = r1                      ; R1_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r3 goto pc+29        ; R3=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_UDP)\n14: (71) r1 = *(u8 *)(r1 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_UDP)\n15: (55) if r1 != 0x11 goto pc+27     ; R1_w=17\n; unsigned int ip_hdr_len = ip->ihl * 4;\n16: (71) r1 = *(u8 *)(r2 +0)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(off=14,r=34)\n; unsigned int ip_hdr_len = ip->ihl * 4;\n17: (67) r1 <<= 2                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r1 &= 60                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r4 = 20                      ; R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n20: (2d) if r4 > r1 goto pc+22        ; R1_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n21: (0f) r2 += r1\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 20: (2d) if r4 > r1 goto pc+22\nmark_precise: frame0: regs=r1,r4 stack= before 19: (b7) r4 = 20\nmark_precise: frame0: regs=r1 stack= before 18: (57) r1 &= 60\nmark_precise: frame0: regs=r1 stack= before 17: (67) r1 <<= 2\nmark_precise: frame0: regs=r1 stack= before 16: (71) r1 = *(u8 *)(r2 +0)\n22: R1=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n22: (2d) if r2 > r3 goto pc+20        ; R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n; if ((void *)(udp + 1) > data_end)\n23: (bf) r1 = r2                      ; R1_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (07) r1 += 8                      ; R1_w=pkt(id=1,off=22,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(udp + 1) > data_end)\n25: (2d) if r1 > r3 goto pc+17        ; R1_w=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n; if (udp->dest != bpf_htons(2152))\n26: (69) r4 = *(u16 *)(r2 +2)         ; R2=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (udp->dest != bpf_htons(2152))\n27: (55) if r4 != 0x6808 goto pc+15   ; R4_w=26632\n28: (bf) r4 = r2                      ; R2=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n29: (07) r4 += 20                     ; R4=pkt(id=1,off=34,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n30: (2d) if r4 > r3 goto pc+12        ; R3=pkt_end() R4=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (gtp->hdr_len < sizeof(struct gtpuhdr) || (void *)gtp + gtp->hdr_len > data_end)\n31: (71) r4 = *(u8 *)(r2 +9)          ; R2=pkt(id=1,off=14,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n32: (b7) r5 = 12                      ; R5_w=12\n; if (gtp->hdr_len < sizeof(struct gtpuhdr) || (void *)gtp + gtp->hdr_len > data_end)\n33: (2d) if r5 > r4 goto pc+9         ; R4_w=scalar(smin=umin=smin32=umin32=12,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5_w=12\n34: (0f) r1 += r4\nmark_precise: frame0: last_idx 34 first_idx 30 subseq_idx -1 \nmark_precise: frame0: regs=r4 stack= before 33: (2d) if r5 > r4 goto pc+9\nmark_precise: frame0: regs=r4,r5 stack= before 32: (b7) r5 = 12\nmark_precise: frame0: regs=r4 stack= before 31: (71) r4 = *(u8 *)(r2 +9)\n35: R1_w=pkt(id=2,off=22,r=0,smin=umin=smin32=umin32=32,smax=umax=smax32=umax32=315,var_off=(0x0; 0x1ff)) R4_w=scalar(smin=umin=smin32=umin32=12,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n35: (2d) if r1 > r3 goto pc+7         ; R1_w=pkt(id=2,off=22,r=22,smin=umin=smin32=umin32=32,smax=umax=smax32=umax32=315,var_off=(0x0; 0x1ff)) R3=pkt_end()\n36: (b7) r1 = 30                      ; R1_w=30\n; if (gtp->teid == bpf_htons(0x00000100))\n37: (69) r2 = *(u16 *)(r2 +10)        ; R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (gtp->teid == bpf_htons(0x00000100))\n38: (15) if r2 == 0x1 goto pc+2       ; R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n39: (55) if r2 != 0x2 goto pc+3       ; R2=2\n40: (b7) r1 = 31                      ; R1_w=31\n; \n41: (b7) r2 = 0                       ; R2_w=0\n42: (85) call bpf_redirect#23         ; R0_w=scalar()\n; }\n43: (95) exit\n\nfrom 39 to 43: R0=2 R1=30 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=pkt_end() R4=scalar(smin=umin=smin32=umin32=12,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5=12 R10=fp0\n43: R0=2 R1=30 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=pkt_end() R4=scalar(smin=umin=smin32=umin32=12,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5=12 R10=fp0\n43: (95) exit\n\nfrom 38 to 41: R0=2 R1=30 R2=1 R3=pkt_end() R4=scalar(smin=umin=smin32=umin32=12,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5=12 R10=fp0\n41: R0=2 R1=30 R2=1 R3=pkt_end() R4=scalar(smin=umin=smin32=umin32=12,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5=12 R10=fp0\n; \n41: (b7) r2 = 0                       ; R2_w=0\n42: (85) call bpf_redirect#23         ; R0=scalar()\n; }\n43: (95) exit\n\nfrom 35 to 43: safe\n\nfrom 33 to 43: safe\n\nfrom 30 to 43: safe\n\nfrom 27 to 43: safe\n\nfrom 25 to 43: safe\n\nfrom 22 to 43: safe\n\nfrom 20 to 43: safe\n\nfrom 15 to 43: safe\n\nfrom 13 to 43: safe\n\nfrom 10 to 43: safe\n\nfrom 5 to 43: safe\nverification time 386 usec\nstack depth 0\nprocessed 59 insns (limit 1000000) max_states_per_insn 0 total_states 5 peak_states 5 mark_read 4\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 5,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "teid_100_redirect_if30",
+        "description": "GTP-U TEID 0x100 redirected to slice 1 ifindex 30",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "teid_200_redirect_if31",
+        "description": "GTP-U TEID 0x200 redirected to slice 2 ifindex 31",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "teid_999_pass",
+        "description": "GTP-U TEID 0x999 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "non_gtpu_udp_pass",
+        "description": "UDP to port 2153 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "tcp_pass",
+        "description": "TCP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_gtpu_pass",
+        "description": "Truncated GTP-U packet passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'teid_100_redirect_if30' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)\nTest 'teid_200_redirect_if31' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)"
+}

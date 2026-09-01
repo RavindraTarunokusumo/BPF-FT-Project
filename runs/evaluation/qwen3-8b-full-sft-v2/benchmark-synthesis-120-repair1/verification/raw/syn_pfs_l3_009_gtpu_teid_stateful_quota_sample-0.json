@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_009_gtpu_teid_stateful_quota",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c",
+  "source_sha256": "f105553981796fffe03690ca5b82681ef5fbdd13ba698a3e899d3e4cd3efab67",
+  "timestamp": "2026-09-01T23:14:13.658917+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:54:23: error: no member named 'daddr' in 'struct udphdr'\n   54 |     __u32 teid = udp->daddr;\n      |                  ~~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:54:23: error: no member named 'daddr' in 'struct udphdr'\n   54 |     __u32 teid = udp->daddr;\n      |                  ~~~  ^\n1 error generated."
+}

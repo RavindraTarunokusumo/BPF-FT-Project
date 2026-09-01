@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_004_vxlan_inner_l3_distribution",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c",
+  "source_sha256": "0fa0e2749e7d372392653572f36632b768868724ac883ef0c2f8036a20ac5f4b",
+  "timestamp": "2026-09-01T23:14:14.952716+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:50:21: error: arithmetic on a pointer to an incomplete type 'struct vxlan_hdr'\n   50 |     if ((void *)(vx + 1) > data_end)\n      |                  ~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:49:12: note: forward declaration of 'struct vxlan_hdr'\n   49 |     struct vxlan_hdr *vx = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:53:44: error: arithmetic on a pointer to an incomplete type 'struct vxlan_hdr'\n   53 |     struct ethhdr *inner_eth = (void *)(vx + 1);\n      |                                         ~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:49:12: note: forward declaration of 'struct vxlan_hdr'\n   49 |     struct vxlan_hdr *vx = (void *)(udp + 1);\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:50:21: error: arithmetic on a pointer to an incomplete type 'struct vxlan_hdr'\n   50 |     if ((void *)(vx + 1) > data_end)\n      |                  ~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:49:12: note: forward declaration of 'struct vxlan_hdr'\n   49 |     struct vxlan_hdr *vx = (void *)(udp + 1);\n      |            ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:53:44: error: arithmetic on a pointer to an incomplete type 'struct vxlan_hdr'\n   53 |     struct ethhdr *inner_eth = (void *)(vx + 1);\n      |                                         ~~ ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_004_vxlan_inner_l3_distribution/sample-0.c:49:12: note: forward declaration of 'struct vxlan_hdr'\n   49 |     struct vxlan_hdr *vx = (void *)(udp + 1);\n      |            ^\n2 errors generated."
+}

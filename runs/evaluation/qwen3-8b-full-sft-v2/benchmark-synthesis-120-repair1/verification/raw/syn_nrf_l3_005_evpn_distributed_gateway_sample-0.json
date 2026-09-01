@@ -1,0 +1,95 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_005_evpn_distributed_gateway",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l3_005_evpn_distributed_gateway/sample-0.c",
+  "source_sha256": "d988f93353ee7dbf8716eb9c29107f3edd2ae1c3370229619e6d7fec050cee4e",
+  "timestamp": "2026-09-01T23:13:37.734069+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_y7gv4144/candidate.o\nlibbpf: elf: section(3) xdp, size 416, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_syn_nrf_l3_005_evpn_distributed_gateway' at insn offset 0 (0 bytes), code size 52 insns (416 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_y7gv4144/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1589, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 432, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'redirect_map': at sec_idx 5, offset 0.\nlibbpf: map 'redirect_map': found type = 6.\nlibbpf: map 'redirect_map': found key [8], sz = 4.\nlibbpf: map 'redirect_map': found value [8], sz = 4.\nlibbpf: map 'redirect_map': found max_entries = 64.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #42 against 'redirect_map'\nlibbpf: prog 'xdp_route_syn_nrf_l3_005_evpn_distributed_gateway': found map 0 (redirect_map, sec 5, off 0) for insn #42\nlibbpf: map 'redirect_map': created successfully, fd=4\nlibbpf: prog 'xdp_route_syn_nrf_l3_005_evpn_distributed_gateway': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_syn_nrf_l3_005_evpn_distributed_gateway(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+45         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+40      ; R4_w=8\n11: (bf) r4 = r3                      ; R3_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r2 goto pc+37        ; R2=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_UDP)\n14: (71) r3 = *(u8 *)(r3 +23)         ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_UDP)\n15: (55) if r3 != 0x11 goto pc+35     ; R3_w=17\n; unsigned int ip_hdr_len = ip->ihl * 4;\n16: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(off=14,r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; unsigned int ip_hdr_len = ip->ihl * 4;\n17: (67) r3 <<= 2                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r3 &= 60                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r4 = 20                      ; R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n20: (2d) if r4 > r3 goto pc+30        ; R3_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n21: (0f) r1 += r3\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r3 stack= before 20: (2d) if r4 > r3 goto pc+30\nmark_precise: frame0: regs=r3,r4 stack= before 19: (b7) r4 = 20\nmark_precise: frame0: regs=r3 stack= before 18: (57) r3 &= 60\nmark_precise: frame0: regs=r3 stack= before 17: (67) r3 <<= 2\nmark_precise: frame0: regs=r3 stack= before 16: (71) r3 = *(u8 *)(r1 +0)\n22: R1=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n22: (2d) if r1 > r2 goto pc+28        ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt_end()\n23: (bf) r3 = r1                      ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (07) r3 += 8                      ; R3_w=pkt(id=1,off=22,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n25: (2d) if r3 > r2 goto pc+25        ; R2=pkt_end() R3_w=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (udp->dest != bpf_htons(4789))\n26: (69) r3 = *(u16 *)(r1 +2)         ; R1=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (udp->dest != bpf_htons(4789))\n27: (55) if r3 != 0xb512 goto pc+23   ; R3_w=0xb512\n28: (bf) r3 = r1                      ; R1=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n29: (07) r3 += 22                     ; R3=pkt(id=1,off=36,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n30: (2d) if r3 > r2 goto pc+20        ; R2=pkt_end() R3=pkt(id=1,off=36,r=36,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (inner_eth->h_proto != bpf_htons(ETH_P_IP))\n31: (71) r3 = *(u8 *)(r1 +21)         ; R1=pkt(id=1,off=14,r=36,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n32: (67) r3 <<= 8                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n33: (71) r4 = *(u8 *)(r1 +20)         ; R1=pkt(id=1,off=14,r=36,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n34: (4f) r3 |= r4                     ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (inner_eth->h_proto != bpf_htons(ETH_P_IP))\n35: (55) if r3 != 0x8 goto pc+15      ; R3_w=8\n36: (07) r1 += 42                     ; R1_w=pkt(id=1,off=56,r=36,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n37: (2d) if r1 > r2 goto pc+13        ; R1_w=pkt(id=1,off=56,r=56,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt_end()\n38: (b7) r1 = 20                      ; R1_w=20\n; __u32 key = (inner_ip->daddr & 0xFFFFFFF0) == bpf_htons(10 * 256 * 256 + 1 * 256 + 0) ? 10 : 20;\n39: (63) *(u32 *)(r10 -4) = r1        ; R1_w=20 R10=fp0 fp-8=mmmm????\n40: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n41: (07) r2 += -4                     ; R2_w=fp-4\n; __u32 *val = bpf_map_lookup_elem(&redirect_map, &key);\n42: (18) r1 = 0xff2125b9191bac00      ; R1_w=map_ptr(map=redirect_map,ks=4,vs=4)\n44: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=redirect_map,ks=4,vs=4)\n45: (bf) r1 = r0                      ; R0=map_value_or_null(id=2,map=redirect_map,ks=4,vs=4) R1_w=map_value_or_null(id=2,map=redirect_map,ks=4,vs=4)\n46: (b7) r0 = 2                       ; R0_w=2\n; if (val)\n47: (15) if r1 == 0x0 goto pc+3       ; R1_w=map_value(map=redirect_map,ks=4,vs=4)\n; return bpf_redirect(*val, 0);\n48: (61) r1 = *(u32 *)(r1 +0)         ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n49: (b7) r2 = 0                       ; R2_w=0\n50: (85) call bpf_redirect#23         ; R0_w=scalar()\n; }\n51: (95) exit\n\nfrom 47 to 51: R0_w=2 R1_w=0 R10=fp0 fp-8=mmmm????\n51: R0_w=2 R1_w=0 R10=fp0 fp-8=mmmm????\n51: (95) exit\n\nfrom 37 to 51: R0=2 R1=pkt(id=1,off=56,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt_end() R3=8 R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n51: R0=2 R1=pkt(id=1,off=56,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt_end() R3=8 R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n51: (95) exit\n\nfrom 35 to 51: safe\n\nfrom 30 to 51: safe\n\nfrom 27 to 51: safe\n\nfrom 25 to 51: safe\n\nfrom 22 to 51: safe\n\nfrom 20 to 51: safe\n\nfrom 15 to 51: safe\n\nfrom 13 to 51: safe\n\nfrom 10 to 51: safe\n\nfrom 5 to 51: safe\nverification time 417 usec\nstack depth 8\nprocessed 63 insns (limit 1000000) max_states_per_insn 0 total_states 5 peak_states 5 mark_read 4\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 7,
+    "total_tests": 9,
+    "details": [
+      {
+        "name": "evpn_subnet1_redirect_if70",
+        "description": "EVPN anycast traffic to 10.0.1.10 redirected to ifindex 70",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "evpn_subnet2_redirect_if71",
+        "description": "EVPN anycast traffic to 10.0.2.20 redirected to ifindex 71",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "evpn_other_mac_pass",
+        "description": "EVPN packet to non-gateway MAC passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "non_vxlan_udp_pass",
+        "description": "UDP to port 4790 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "tcp_pass",
+        "description": "TCP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "icmp_pass",
+        "description": "ICMP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_vxlan_pass",
+        "description": "Truncated VXLAN packet passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ip_pass",
+        "description": "Truncated IPv4 packet passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'evpn_subnet1_redirect_if70' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)\nTest 'evpn_subnet2_redirect_if71' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)"
+}

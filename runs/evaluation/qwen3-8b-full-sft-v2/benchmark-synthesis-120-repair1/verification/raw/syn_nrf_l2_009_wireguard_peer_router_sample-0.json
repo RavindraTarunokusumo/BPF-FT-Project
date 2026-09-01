@@ -1,0 +1,81 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_009_wireguard_peer_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l2_009_wireguard_peer_router/sample-0.c",
+  "source_sha256": "43956b739ef475d966f943a50807b90fb69182cbf2c554b4849bcc7120ade207",
+  "timestamp": "2026-09-01T23:14:13.715934+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_o6mytx03/candidate.o\nlibbpf: elf: section(3) xdp, size 320, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_syn_nrf_l2_009_wireguard_peer_router' at insn offset 0 (0 bytes), code size 40 insns (320 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_o6mytx03/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1220, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 432, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_route_syn_nrf_l2_009_wireguard_peer_router': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_syn_nrf_l2_009_wireguard_peer_router(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r2 = r1                       ; R1_w=pkt(r=0) R2_w=pkt(r=0)\n4: (07) r2 += 14                      ; R2_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r2 > r3 goto pc+33         ; R2_w=pkt(off=14,r=14) R3_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+28      ; R4_w=8\n11: (bf) r4 = r1                      ; R1_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r3 goto pc+25        ; R3=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_UDP)\n14: (71) r1 = *(u8 *)(r1 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_UDP)\n15: (55) if r1 != 0x11 goto pc+23     ; R1_w=17\n; __u32 ip_hlen = ip->ihl * 4;\n16: (71) r1 = *(u8 *)(r2 +0)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(off=14,r=34)\n; __u32 ip_hlen = ip->ihl * 4;\n17: (67) r1 <<= 2                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r1 &= 60                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r4 = 20                      ; R4_w=20\n; if (ip_hlen < sizeof(*ip) || ip_hlen > 60)\n20: (2d) if r4 > r1 goto pc+18        ; R1_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=20\n; struct udphdr *udp = (void *)ip + ip_hlen;\n21: (0f) r2 += r1\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 20: (2d) if r4 > r1 goto pc+18\nmark_precise: frame0: regs=r1,r4 stack= before 19: (b7) r4 = 20\nmark_precise: frame0: regs=r1 stack= before 18: (57) r1 &= 60\nmark_precise: frame0: regs=r1 stack= before 17: (67) r1 <<= 2\nmark_precise: frame0: regs=r1 stack= before 16: (71) r1 = *(u8 *)(r2 +0)\n22: R1_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2_w=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(udp + 1) > data_end)\n22: (bf) r1 = r2                      ; R1_w=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2_w=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n23: (07) r1 += 8                      ; R1=pkt(id=1,off=22,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(udp + 1) > data_end)\n24: (2d) if r1 > r3 goto pc+14        ; R1=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n; if (udp->dest != bpf_htons(51820))\n25: (69) r4 = *(u16 *)(r2 +2)         ; R2=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (udp->dest != bpf_htons(51820))\n26: (55) if r4 != 0x6cca goto pc+12   ; R4_w=27850\n27: (bf) r4 = r2                      ; R2=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n28: (07) r4 += 28                     ; R4_w=pkt(id=1,off=42,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n29: (2d) if r4 > r3 goto pc+9         ; R3=pkt_end() R4_w=pkt(id=1,off=42,r=42,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (*wireguard_type != 4)\n30: (61) r1 = *(u32 *)(r1 +0)         ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; if (*wireguard_type != 4)\n31: (55) if r1 != 0x4 goto pc+7       ; R1_w=4\n32: (b7) r1 = 25                      ; R1_w=25\n; __u32 idx = *receiver_index;\n33: (61) r2 = *(u32 *)(r2 +12)        ; R2=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; if (idx == 0x11111111)\n34: (15) if r2 == 0x11111111 goto pc+2        ; R2=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n35: (55) if r2 != 0x22222222 goto pc+3        ; R2=0x22222222\n36: (b7) r1 = 26                      ; R1_w=26\n; \n37: (b7) r2 = 0                       ; R2_w=0\n38: (85) call bpf_redirect#23         ; R0_w=scalar()\n; }\n39: (95) exit\n\nfrom 35 to 39: R0=2 R1=25 R2=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R3=pkt_end() R4=pkt(id=1,off=42,r=42,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: R0=2 R1=25 R2=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R3=pkt_end() R4=pkt(id=1,off=42,r=42,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: (95) exit\n\nfrom 34 to 37: R0=2 R1=25 R2=0x11111111 R3=pkt_end() R4=pkt(id=1,off=42,r=42,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n37: R0=2 R1=25 R2=0x11111111 R3=pkt_end() R4=pkt(id=1,off=42,r=42,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; \n37: (b7) r2 = 0                       ; R2_w=0\n38: (85) call bpf_redirect#23         ; R0=scalar()\n; }\n39: (95) exit\n\nfrom 31 to 39: safe\n\nfrom 29 to 39: safe\n\nfrom 26 to 39: safe\n\nfrom 24 to 39: safe\n\nfrom 20 to 39: safe\n\nfrom 15 to 39: safe\n\nfrom 13 to 39: safe\n\nfrom 10 to 39: safe\n\nfrom 5 to 39: safe\nverification time 376 usec\nstack depth 0\nprocessed 53 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 3\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 5,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "wg_peer1_redirect_if25",
+        "description": "WireGuard Data with Receiver Index 0x11111111 redirected to ifindex 25",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "wg_peer2_redirect_if26",
+        "description": "WireGuard Data with Receiver Index 0x22222222 redirected to ifindex 26",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "wg_peer_other_pass",
+        "description": "WireGuard Data with other Receiver Index passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "wg_handshake_pass",
+        "description": "WireGuard Handshake Initiation passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "non_wg_udp_pass",
+        "description": "UDP to port 51821 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "tcp_pass",
+        "description": "TCP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_wg_pass",
+        "description": "Truncated WireGuard packet passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'wg_peer1_redirect_if25' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)\nTest 'wg_peer2_redirect_if26' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)"
+}

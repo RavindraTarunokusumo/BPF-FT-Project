@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_002_nat64_stateless_translator",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l2_002_nat64_stateless_translator/sample-0.c",
+  "source_sha256": "ed4c2c8c3bd88d8e88b9d82a48ec000d2017c1258b1af1fc9e8549d2f2db5907",
+  "timestamp": "2026-09-01T23:13:37.541177+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l2_002_nat64_stateless_translator/sample-0.c:49:42: warning: cast to smaller integer type '__u32' (aka 'unsigned int') from 'struct iphdr *' [-Wpointer-to-int-cast]\n   49 |     __u16 csum = bpf_csum_diff(0, 0, 20, (__u32)ip);\n      |                                          ^~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l2_002_nat64_stateless_translator/sample-0.c:49:51: error: too few arguments to function call, expected 5, have 4\n   49 |     __u16 csum = bpf_csum_diff(0, 0, 20, (__u32)ip);\n      |                  ~~~~~~~~~~~~~                    ^\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l2_002_nat64_stateless_translator/sample-0.c:49:42: warning: cast to smaller integer type '__u32' (aka 'unsigned int') from 'struct iphdr *' [-Wpointer-to-int-cast]\n   49 |     __u16 csum = bpf_csum_diff(0, 0, 20, (__u32)ip);\n      |                                          ^~~~~~~~~\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l2_002_nat64_stateless_translator/sample-0.c:49:51: error: too few arguments to function call, expected 5, have 4\n   49 |     __u16 csum = bpf_csum_diff(0, 0, 20, (__u32)ip);\n      |                  ~~~~~~~~~~~~~                    ^\n1 warning and 1 error generated."
+}

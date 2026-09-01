@@ -1,0 +1,81 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_005_vxlan_vni_egress_dispatcher",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c",
+  "source_sha256": "2546e32ae10d781eecf91a93e2aaea6abbaeb5f59f97b21aae65211aea9d64ef",
+  "timestamp": "2026-09-01T23:14:14.472572+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_4nf1av21/candidate.o\nlibbpf: elf: section(3) xdp, size 312, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_vxlan_vni_egress_dispatcher' at insn offset 0 (0 bytes), code size 39 insns (312 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_4nf1av21/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1111, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 384, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_vxlan_vni_egress_dispatcher': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_vxlan_vni_egress_dispatcher(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r2 = r1                       ; R1_w=pkt(r=0) R2_w=pkt(r=0)\n4: (07) r2 += 14                      ; R2_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r2 > r3 goto pc+32         ; R2_w=pkt(off=14,r=14) R3_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+27      ; R4_w=8\n11: (bf) r4 = r1                      ; R1_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r3 goto pc+24        ; R3=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_UDP)\n14: (71) r1 = *(u8 *)(r1 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_UDP)\n15: (55) if r1 != 0x11 goto pc+22     ; R1_w=17\n; unsigned int ip_hdr_len = ip->ihl * 4;\n16: (71) r1 = *(u8 *)(r2 +0)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=pkt(off=14,r=34)\n; unsigned int ip_hdr_len = ip->ihl * 4;\n17: (67) r1 <<= 2                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r1 &= 60                     ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r4 = 20                      ; R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n20: (2d) if r4 > r1 goto pc+17        ; R1_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n21: (0f) r2 += r1\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 20: (2d) if r4 > r1 goto pc+17\nmark_precise: frame0: regs=r1,r4 stack= before 19: (b7) r4 = 20\nmark_precise: frame0: regs=r1 stack= before 18: (57) r1 &= 60\nmark_precise: frame0: regs=r1 stack= before 17: (67) r1 <<= 2\nmark_precise: frame0: regs=r1 stack= before 16: (71) r1 = *(u8 *)(r2 +0)\n22: R1=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_hdr_len < sizeof(struct iphdr) || (void *)ip + ip_hdr_len > data_end)\n22: (2d) if r2 > r3 goto pc+15        ; R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n23: (bf) r1 = r2                      ; R1_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (07) r1 += 8                      ; R1_w=pkt(id=1,off=22,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n25: (2d) if r1 > r3 goto pc+12        ; R1_w=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n; if (udp->dest != bpf_htons(4789))\n26: (69) r1 = *(u16 *)(r2 +2)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R2=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (udp->dest != bpf_htons(4789))\n27: (55) if r1 != 0xb512 goto pc+10   ; R1_w=0xb512\n28: (bf) r1 = r2                      ; R1_w=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt(id=1,off=14,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n29: (07) r1 += 16                     ; R1=pkt(id=1,off=30,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n30: (2d) if r1 > r3 goto pc+7         ; R1=pkt(id=1,off=30,r=30,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n31: (b7) r1 = 40                      ; R1_w=40\n; __u32 vni = vx->vni;\n32: (61) r2 = *(u32 *)(r2 +12)        ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; if (vni == 100) {\n33: (15) if r2 == 0x64 goto pc+2      ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n34: (55) if r2 != 0xc8 goto pc+3      ; R2_w=200\n35: (b7) r1 = 41                      ; R1_w=41\n; \n36: (b7) r2 = 0                       ; R2_w=0\n37: (85) call bpf_redirect#23         ; R0=scalar()\n; }\n38: (95) exit\n\nfrom 34 to 38: safe\n\nfrom 33 to 36: R0=2 R1_w=40 R2_w=100 R3=pkt_end() R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n36: R0=2 R1_w=40 R2_w=100 R3=pkt_end() R4=20 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; \n36: (b7) r2 = 0                       ; R2_w=0\n37: (85) call bpf_redirect#23\n38: safe\n\nfrom 30 to 38: safe\n\nfrom 27 to 38: safe\n\nfrom 25 to 38: safe\n\nfrom 22 to 38: safe\n\nfrom 20 to 38: safe\n\nfrom 15 to 38: safe\n\nfrom 13 to 38: safe\n\nfrom 10 to 38: safe\n\nfrom 5 to 38: safe\nverification time 634 usec\nstack depth 0\nprocessed 52 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 4\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 5,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "vxlan_vni100_redirect_if40",
+        "description": "VXLAN VNI 100 redirected to ifindex 40",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "vxlan_vni200_redirect_if41",
+        "description": "VXLAN VNI 200 redirected to ifindex 41",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "vxlan_vni300_pass",
+        "description": "VXLAN VNI 300 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "non_vxlan_udp_pass",
+        "description": "UDP to port 4790 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "tcp_pass",
+        "description": "TCP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_vxlan_pass",
+        "description": "Truncated VXLAN packet passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'vxlan_vni100_redirect_if40' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)\nTest 'vxlan_vni200_redirect_if41' failed: expected XDP_REDIRECT (4), got XDP_PASS (2)"
+}

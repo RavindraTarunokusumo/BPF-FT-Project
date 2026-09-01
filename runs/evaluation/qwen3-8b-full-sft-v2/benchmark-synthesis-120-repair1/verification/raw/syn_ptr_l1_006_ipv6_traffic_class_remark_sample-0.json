@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_006_ipv6_traffic_class_remark",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l1_006_ipv6_traffic_class_remark/sample-0.c",
+  "source_sha256": "1403de42dddc580171fb9b19faf0ead22ab180ce14e8c4c5c72a2dc1ade85ebd",
+  "timestamp": "2026-09-01T23:13:38.522712+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l1_006_ipv6_traffic_class_remark/sample-0.c:39:10: error: no member named 'dscp' in 'struct udphdr'\n   39 |     udp->dscp = 0xB8;\n      |     ~~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_ptr_l1_006_ipv6_traffic_class_remark/sample-0.c:39:10: error: no member named 'dscp' in 'struct udphdr'\n   39 |     udp->dscp = 0xB8;\n      |     ~~~  ^\n1 error generated."
+}

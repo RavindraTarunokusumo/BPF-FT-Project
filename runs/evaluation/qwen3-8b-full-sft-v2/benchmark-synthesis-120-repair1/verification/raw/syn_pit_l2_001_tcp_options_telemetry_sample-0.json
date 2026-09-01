@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_001_tcp_options_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c",
+  "source_sha256": "bee1847af74bc88485c95a2266e6c42ddfd7693df71c238b6754209eadac6371",
+  "timestamp": "2026-09-01T23:14:13.060861+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:72:62: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'const void *' [-Wint-conversion]\n   72 |             bpf_map_update_elem(&tcp_options_freq_map, &key, 1, BPF_ADD);\n      |                                                              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:75:62: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'const void *' [-Wint-conversion]\n   75 |             bpf_map_update_elem(&tcp_options_freq_map, &key, 1, BPF_ADD);\n      |                                                              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:78:62: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'const void *' [-Wint-conversion]\n   78 |             bpf_map_update_elem(&tcp_options_freq_map, &key, 1, BPF_ADD);\n      |                                                              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:81:62: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'const void *' [-Wint-conversion]\n   81 |             bpf_map_update_elem(&tcp_options_freq_map, &key, 1, BPF_ADD);\n      |                                                              ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:72:62: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'const void *' [-Wint-conversion]\n   72 |             bpf_map_update_elem(&tcp_options_freq_map, &key, 1, BPF_ADD);\n      |                                                              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:75:62: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'const void *' [-Wint-conversion]\n   75 |             bpf_map_update_elem(&tcp_options_freq_map, &key, 1, BPF_ADD);\n      |                                                              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:78:62: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'const void *' [-Wint-conversion]\n   78 |             bpf_map_update_elem(&tcp_options_freq_map, &key, 1, BPF_ADD);\n      |                                                              ^\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_001_tcp_options_telemetry/sample-0.c:81:62: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'const void *' [-Wint-conversion]\n   81 |             bpf_map_update_elem(&tcp_options_freq_map, &key, 1, BPF_ADD);\n      |                                                              ^\n4 errors generated."
+}

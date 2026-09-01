@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_002_ecmp_multipath_router",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l3_002_ecmp_multipath_router/sample-0.c",
+  "source_sha256": "4c359b06765e9d201773dc512d10094ce076ab3ee21a4a25fbbf894fa7fa63d1",
+  "timestamp": "2026-09-01T23:14:15.389809+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l3_002_ecmp_multipath_router/sample-0.c:49:39: error: too few arguments to function call, expected 3, have 2\n   49 |     return bpf_redirect_map(ifindex, 0);\n      |            ~~~~~~~~~~~~~~~~           ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\nruns/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l3_002_ecmp_multipath_router/sample-0.c:49:39: error: too few arguments to function call, expected 3, have 2\n   49 |     return bpf_redirect_map(ifindex, 0);\n      |            ~~~~~~~~~~~~~~~~           ^\n1 error generated."
+}

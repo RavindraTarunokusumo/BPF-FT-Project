@@ -1,0 +1,79 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_010_gre_flags_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c",
+  "source_sha256": "3adb27aaa23095e26e06cffcf1e5c6a48b1d550514fbcd996397993b3dabded1",
+  "timestamp": "2026-09-01T23:14:10.544779+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val__ec7q2qt/candidate.o\nlibbpf: elf: section(3) xdp, size 344, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_syn_pit_l2_010_gre_flags_telemetry' at insn offset 0 (0 bytes), code size 43 insns (344 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val__ec7q2qt/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1437, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 432, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 432, link 1, flags 0, type=2\nlibbpf: looking for externs among 18 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'gre_flags_freq_map': at sec_idx 5, offset 0.\nlibbpf: map 'gre_flags_freq_map': found type = 6.\nlibbpf: map 'gre_flags_freq_map': found key [8], sz = 4.\nlibbpf: map 'gre_flags_freq_map': found value [11], sz = 8.\nlibbpf: map 'gre_flags_freq_map': found max_entries = 3.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #34 against 'gre_flags_freq_map'\nlibbpf: prog 'xdp_telemetry_syn_pit_l2_010_gre_flags_telemetry': found map 0 (gre_flags_freq_map, sec 5, off 0) for insn #34\nlibbpf: map 'gre_flags_freq_map': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_syn_pit_l2_010_gre_flags_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+36         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (4f) r4 |= r3                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r4 != 0x8 goto pc+31       ; R4_w=8\n; if ((void *)(ip + 1) > data_end)\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n; if ((void *)(ip + 1) > data_end)\n12: (2d) if r3 > r2 goto pc+28        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_GRE)\n13: (71) r4 = *(u8 *)(r1 +23)         ; R1=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_GRE)\n14: (55) if r4 != 0x2f goto pc+26     ; R4_w=47\n15: (07) r1 += 58                     ; R1_w=pkt(off=58,r=34)\n16: (2d) if r1 > r2 goto pc+24        ; R1_w=pkt(off=58,r=58) R2=pkt_end()\n17: (b7) r1 = 0                       ; R1_w=0\n; __u32 key = 0;\n18: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 18 first_idx 12 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 17: (b7) r1 = 0\n19: R1_w=0 R10=fp0 fp-8=0000????\n; if (gre->flags & bpf_htons(0x2000))\n19: (61) r1 = *(u32 *)(r3 +0)         ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R3=pkt(off=34,r=58)\n; if (gre->flags & bpf_htons(0x2000))\n20: (bf) r2 = r1                      ; R1_w=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R2_w=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n21: (57) r2 &= 32                     ; R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=32,var_off=(0x0; 0x20))\n; if (gre->flags & bpf_htons(0x2000))\n22: (55) if r2 != 0x0 goto pc+9       ; R2=0\n; else if (gre->flags & bpf_htons(0x1000))\n23: (bf) r2 = r1                      ; R1=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R2_w=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n24: (57) r2 &= 16                     ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=16,var_off=(0x0; 0x10))\n; else if (gre->flags & bpf_htons(0x1000))\n25: (15) if r2 == 0x0 goto pc+2       ; R2_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=16,var_off=(0x0; 0x10))\n26: (b7) r1 = 1                       ; R1_w=1\n27: (05) goto pc+3\n; \n31: (63) *(u32 *)(r10 -4) = r1        ; R1_w=1 R10=fp0 fp-8=mmmm????\n32: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&gre_flags_freq_map, &key);\n33: (07) r2 += -4                     ; R2_w=fp-4\n34: (18) r1 = 0xff2125b8caefb600      ; R1_w=map_ptr(map=gre_flags_freq_,ks=4,vs=8)\n36: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=gre_flags_freq_,ks=4,vs=8)\n; if (cnt)\n37: (15) if r0 == 0x0 goto pc+3       ; R0=map_value(map=gre_flags_freq_,ks=4,vs=8)\n; *cnt += 1;\n38: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=gre_flags_freq_,ks=4,vs=8) R1_w=scalar()\n39: (07) r1 += 1                      ; R1_w=scalar()\n40: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=gre_flags_freq_,ks=4,vs=8) R1_w=scalar()\n; }\n41: (b7) r0 = 2                       ; R0_w=2\n42: (95) exit\n\nfrom 37 to 41: R0=0 R10=fp0 fp-8=mmmm????\n41: R0=0 R10=fp0 fp-8=mmmm????\n41: (b7) r0 = 2                       ; R0_w=2\n42: (95) exit\n\nfrom 25 to 28: R1=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R2=0 R3=pkt(off=34,r=58) R4=47 R10=fp0 fp-8=0000????\n28: R1=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R2=0 R3=pkt(off=34,r=58) R4=47 R10=fp0 fp-8=0000????\n; else if (gre->flags & bpf_htons(0x8000))\n28: (57) r1 &= 128                    ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=128,var_off=(0x0; 0x80))\n; else if (gre->flags & bpf_htons(0x8000))\n29: (15) if r1 == 0x0 goto pc+2       ; R1_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=128,var_off=(0x0; 0x80))\n30: (b7) r1 = 2                       ; R1_w=2\n; \n31: (63) *(u32 *)(r10 -4) = r1        ; R1_w=2 R10=fp0 fp-8=mmmm????\n32: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&gre_flags_freq_map, &key);\n33: (07) r2 += -4                     ; R2_w=fp-4\n34: (18) r1 = 0xff2125b8caefb600      ; R1_w=map_ptr(map=gre_flags_freq_,ks=4,vs=8)\n36: (85) call bpf_map_lookup_elem#1\n37: safe\n\nfrom 29 to 32: R1=0 R2=0 R3=pkt(off=34,r=58) R4=47 R10=fp0 fp-8=0000????\n32: R1=0 R2=0 R3=pkt(off=34,r=58) R4=47 R10=fp0 fp-8=0000????\n; \n32: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u64 *cnt = bpf_map_lookup_elem(&gre_flags_freq_map, &key);\n33: (07) r2 += -4                     ; R2_w=fp-4\n34: (18) r1 = 0xff2125b8caefb600      ; R1_w=map_ptr(map=gre_flags_freq_,ks=4,vs=8)\n36: (85) call bpf_map_lookup_elem#1\n37: safe\n\nfrom 22 to 32: safe\n\nfrom 16 to 41: R1_w=pkt(off=58,r=0xfffffffffffffffe) R2=pkt_end() R3=pkt(off=34,r=34) R4_w=47 R10=fp0\n41: R1_w=pkt(off=58,r=0xfffffffffffffffe) R2=pkt_end() R3=pkt(off=34,r=34) R4_w=47 R10=fp0\n; }\n41: (b7) r0 = 2                       ; R0_w=2\n42: (95) exit\n\nfrom 14 to 41: R1=pkt(r=34) R2=pkt_end() R3=pkt(off=34,r=34) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n41: R1=pkt(r=34) R2=pkt_end() R3=pkt(off=34,r=34) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n41: (b7) r0 = 2                       ; R0_w=2\n42: (95) exit\n\nfrom 12 to 41: safe\n\nfrom 9 to 41: safe\n\nfrom 4 to 41: safe\nverification time 399 usec\nstack depth 8\nprocessed 63 insns (limit 1000000) max_states_per_insn 0 total_states 6 peak_states 6 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 7,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "gre_key_flag_pass",
+        "description": "GRE with Key flag increments slot 0 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "gre_seq_flag_pass",
+        "description": "GRE with Seq flag increments slot 1 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "gre_csum_flag_pass",
+        "description": "GRE with Checksum flag increments slot 2 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "gre_no_flags_pass",
+        "description": "GRE without optional flags passes without counting",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "udp_pass",
+        "description": "UDP packet passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "tcp_pass",
+        "description": "TCP packet passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_gre_pass",
+        "description": "Truncated GRE packet passes safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

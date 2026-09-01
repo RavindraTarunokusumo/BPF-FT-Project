@@ -1,0 +1,65 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "syn_nrf_l1_001_mpls_label_forward",
+  "candidate_id": "sample-0",
+  "source_path": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120-repair1/candidates/syn_nrf_l1_001_mpls_label_forward/sample-0.c",
+  "source_sha256": "cf2704a99abe00de100fcb688b2254d34ff20b89a20ee3af2b463b417feb4355",
+  "timestamp": "2026-09-01T23:14:12.139600+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_xy89ptbr/candidate.o\nlibbpf: elf: section(3) xdp, size 184, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_syn_nrf_l1_001_mpls_label_forward' at insn offset 0 (0 bytes), code size 23 insns (184 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_xy89ptbr/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 948, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 256, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_route_syn_nrf_l1_001_mpls_label_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_syn_nrf_l1_001_mpls_label_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+16         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto != bpf_htons(0x8847))\n6: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(0x8847))\n10: (55) if r4 != 0x4788 goto pc+11   ; R4_w=18312\n11: (07) r3 += 18                     ; R3=pkt(off=18,r=14)\n12: (2d) if r3 > r2 goto pc+9         ; R2=pkt_end() R3=pkt(off=18,r=18)\n; __u32 label = bpf_ntohl(mpls->entry) >> 12;\n13: (61) r1 = *(u32 *)(r1 +0)         ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n14: (dc) r1 = be64 r1                 ; R1_w=scalar()\n; __u32 label = bpf_ntohl(mpls->entry) >> 12;\n15: (77) r1 >>= 44                    ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xfffff,var_off=(0x0; 0xfffff))\n; if (label == 100)\n16: (15) if r1 == 0x64 goto pc+2      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xfffff,var_off=(0x0; 0xfffff))\n17: (55) if r1 != 0xc8 goto pc+4      ; R1_w=200\n18: (b7) r0 = 3                       ; R0_w=3\n; \n19: (bf) r1 = r0                      ; R0_w=3 R1_w=3\n20: (b7) r2 = 0                       ; R2_w=0\n21: (85) call bpf_redirect#23         ; R0=scalar()\n; }\n22: (95) exit\n\nfrom 17 to 22: safe\n\nfrom 16 to 19: R0=2 R1_w=100 R2=pkt_end() R3=pkt(off=18,r=18) R4=18312 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n19: R0=2 R1_w=100 R2=pkt_end() R3=pkt(off=18,r=18) R4=18312 R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; \n19: (bf) r1 = r0                      ; R0=2 R1_w=2\n20: (b7) r2 = 0                       ; R2_w=0\n21: (85) call bpf_redirect#23\n22: safe\n\nfrom 12 to 22: safe\n\nfrom 10 to 22: safe\n\nfrom 5 to 22: safe\nverification time 181 usec\nstack depth 0\nprocessed 31 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 5,
+    "total_tests": 5,
+    "details": [
+      {
+        "name": "label_100_redirect_if2",
+        "description": "MPLS label 100 redirected to ifindex 2",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "label_200_redirect_if3",
+        "description": "MPLS label 200 redirected to ifindex 3",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "label_300_pass",
+        "description": "MPLS label 300 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv4_pass",
+        "description": "IPv4 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_mpls_pass",
+        "description": "Truncated MPLS passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}
