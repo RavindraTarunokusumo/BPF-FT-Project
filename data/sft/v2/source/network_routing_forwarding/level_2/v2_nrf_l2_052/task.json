@@ -1,0 +1,51 @@
+{
+  "task_id": "v2_nrf_l2_052",
+  "application_category": "network_routing_forwarding",
+  "category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "nrf_ecmp_hash_loadbalancer",
+  "template_family": "nrf_ecmp_hash_loadbalancer",
+  "semantic_family": "nrf_ecmp_hash_loadbalancer",
+  "instruction": "Write an XDP program that implements 5-tuple canonical ECMP load balancing for TCP/UDP traffic. Calculate a verifier-safe hash over (saddr, daddr, sport, dport, protocol), and forward packet across 4 backend interfaces using `bpf_redirect(target_ifindex, 0)` where target_ifindex is `10 + (hash % 4)`. Pass non-IP traffic with XDP_PASS.",
+  "requirements": [
+    "Parse Ethernet, IPv4 headers and verify TCP or UDP protocol",
+    "Account for variable IPv4 IHL and parse L4 ports",
+    "Extract 5-tuple: source IP, destination IP, source port, destination port, protocol",
+    "Compute 32-bit hash: (saddr ^ daddr) + (sport << 16 | dport) + protocol",
+    "Calculate backend ifindex = 10 + (hash % 4)",
+    "Return bpf_redirect(backend_ifindex, 0) for matching L4 traffic, XDP_PASS for others",
+    "Verifier-safe packet boundary checks",
+    "Entry point SEC(\"xdp\") and GPL license"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "tcp_ecmp_redirect",
+      "description": "TCP flow must be redirected to calculated backend interface",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640203e80050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_REDIRECT",
+      "fixture_file": "fixtures/tcp_ecmp_redirect.bin"
+    },
+    {
+      "name": "udp_ecmp_redirect",
+      "description": "UDP flow must be redirected to calculated backend interface",
+      "packet_hex": "02000000000202000000000108004500001c1234000040117c5ac0000205c633640a07d0003500080000",
+      "expected_action": "XDP_REDIRECT",
+      "fixture_file": "fixtures/udp_ecmp_redirect.bin"
+    },
+    {
+      "name": "icmp_pass",
+      "description": "ICMP traffic without L4 ports must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040017c6ac0000201c633640208006496123400014543484f5f5041594c4f41445f31323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/icmp_pass.bin"
+    },
+    {
+      "name": "truncated_packet_pass",
+      "description": "Truncated packet must return XDP_PASS safely",
+      "packet_hex": "0200000000020200000000010800450000281234",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_packet_pass.bin"
+    }
+  ]
+}

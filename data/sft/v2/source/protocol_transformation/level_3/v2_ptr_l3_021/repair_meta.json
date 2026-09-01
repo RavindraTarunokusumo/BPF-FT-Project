@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_ptr_l3_021",
+  "fault_class": "verifier",
+  "fault_injection_id": "missing_bounds_check",
+  "diagnostic_sha256": "061f1b33643a497cf8db14832b8aa7ec03ae5d7507028a274c180ef7adf5ea0a"
+}

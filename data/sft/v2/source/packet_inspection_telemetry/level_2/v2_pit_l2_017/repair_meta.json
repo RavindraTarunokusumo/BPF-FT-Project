@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pit_l2_017",
+  "fault_class": "verifier",
+  "fault_injection_id": "missing_map_null_check",
+  "diagnostic_sha256": "4423da91bf2613af3d4a081737814f00e3276c30638ee2586bce31d666d55093"
+}

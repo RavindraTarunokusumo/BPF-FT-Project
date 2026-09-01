@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_ptr_l3_014",
+  "fault_class": "verifier",
+  "fault_injection_id": "missing_map_null_check",
+  "diagnostic_sha256": "9443eb0d3af0007931b0adb41ea7c05466667bb0288a2fdb4ce6756c7280c832"
+}

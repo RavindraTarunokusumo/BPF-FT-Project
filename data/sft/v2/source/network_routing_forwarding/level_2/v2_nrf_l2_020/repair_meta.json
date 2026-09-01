@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_nrf_l2_020",
+  "fault_class": "verifier",
+  "fault_injection_id": "uninitialized_stack_read",
+  "diagnostic_sha256": "8cae769c86aa917ebbb67354ac61206a363f00c7b818da9278b4e9572c5416d1"
+}

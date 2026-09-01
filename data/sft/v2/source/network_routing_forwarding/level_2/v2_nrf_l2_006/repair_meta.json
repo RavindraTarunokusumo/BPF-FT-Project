@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_nrf_l2_006",
+  "fault_class": "compiler",
+  "fault_injection_id": "syntax_mismatched_parenthesis",
+  "diagnostic_sha256": "614b7a75e1a0e6b439bf9f30b59d947b25aeec3de58fd28fcd4c3d8e1e678846"
+}

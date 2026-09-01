@@ -1,0 +1,35 @@
+{
+  "task_id": "v2_pfs_l3_005",
+  "validator": "packet_action",
+  "test_count": 4,
+  "tests": [
+    {
+      "name": "match_vlan_vid_drop",
+      "description": "VLAN VID 1065 must return XDP_DROP",
+      "packet_hex": "020000000002020000000001810004290800450000281234000040067c65c0000201c633640230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/match_vlan_vid_drop.bin"
+    },
+    {
+      "name": "different_vlan_vid_pass",
+      "description": "Different VLAN VID 1066 must return XDP_PASS",
+      "packet_hex": "0200000000020200000000018100042a0800450000281234000040067c65c0000201c633640230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/different_vlan_vid_pass.bin"
+    },
+    {
+      "name": "untagged_frame_pass",
+      "description": "Untagged Ethernet frame must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/untagged_frame_pass.bin"
+    },
+    {
+      "name": "truncated_vlan_frame_pass",
+      "description": "Truncated VLAN frame must return XDP_PASS safely",
+      "packet_hex": "020000000002020000000001810004",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_vlan_frame_pass.bin"
+    }
+  ]
+}

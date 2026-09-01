@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_ptr_l1_032",
+  "fault_class": "behavioral",
+  "fault_injection_id": "fixed_offset_ihl_bug",
+  "diagnostic_sha256": "42e7696662aa7b8d4204d641c6634dccdd6707a69758d5321aea111619f282dd"
+}

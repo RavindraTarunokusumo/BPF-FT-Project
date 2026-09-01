@@ -1,0 +1,2 @@
+candidate.c:45:16: error: use of undeclared identifier 'XDP_TX'
+1 error generated.

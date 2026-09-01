@@ -1,0 +1,50 @@
+{
+  "task_id": "v2_pfs_l1_055",
+  "application_category": "packet_filtering_security",
+  "category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "pfs_tunnel_vxlan_filter",
+  "template_family": "pfs_tunnel_vxlan_filter",
+  "semantic_family": "pfs_tunnel_vxlan_filter",
+  "instruction": "Write an XDP program that inspects VXLAN tunnel traffic on UDP port 4789. If the VXLAN VNI matches 49835 and the inner packet is IPv4 targeting port 443, drop the packet (XDP_DROP). Pass all other valid tunnel traffic and non-tunnel packets with XDP_PASS.",
+  "requirements": [
+    "Parse outer Ethernet, IPv4, and UDP headers",
+    "Verify UDP destination port is 4789 (bpf_htons(4789))",
+    "Parse 8-byte VXLAN header and extract 24-bit VNI (target VNI: 49835)",
+    "Parse inner Ethernet and inner IPv4 headers",
+    "If inner protocol is TCP or UDP targeting port 443 with VNI 49835, return XDP_DROP",
+    "Perform bounds checking at every encapsulation layer and return XDP_PASS on truncation",
+    "Entry point SEC(\"xdp\") and GPL license"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "match_vxlan_target_drop",
+      "description": "VXLAN VNI 49835 with inner port 443 must be dropped",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b5004600000800000000c2ab000200000000020200000000010800450000281234000040067c65c0000201c6336402303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/match_vxlan_target_drop.bin"
+    },
+    {
+      "name": "non_match_vni_pass",
+      "description": "Different VNI must return XDP_PASS",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b5004600000800000000c2ac000200000000020200000000010800450000281234000040067c65c0000201c6336402303901bb000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_match_vni_pass.bin"
+    },
+    {
+      "name": "non_match_inner_port_pass",
+      "description": "Different inner destination port must return XDP_PASS",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b5004600000800000000c2ab000200000000020200000000010800450000281234000040067c65c0000201c6336402303901bc000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_match_inner_port_pass.bin"
+    },
+    {
+      "name": "truncated_packet_pass",
+      "description": "Truncated packet boundary check must return XDP_PASS safely",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_packet_pass.bin"
+    }
+  ]
+}

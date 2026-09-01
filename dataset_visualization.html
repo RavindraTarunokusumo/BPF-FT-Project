@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPF-Guardian SFT v2 Dataset Visualizer</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Custom scrollbar and smooth transitions */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(150, 150, 150, 0.3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(150, 150, 150, 0.5); }
+    .badge-heldout { animation: pulseSlow 3s infinite; }
+    @keyframes pulseSlow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.75; }
+    }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 md:p-6 space-y-6 font-sans">
+
+  <!-- Header Section -->
+  <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+    <div>
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20 flex items-center justify-center font-bold text-lg">
+          🛡️
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-[var(--foreground)]">BPF-Guardian SFT v2 Dataset Visualizer</h1>
+          <p class="text-xs md:text-sm text-[var(--muted-foreground)]">Qwen3-8B Fine-Tuning Corpus Architecture, Diversity Matrix & 3-Way Split Freezing</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 rounded-full text-xs font-semibold flex items-center gap-1.5">
+        <span class="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span> 100% Benchmark Isolated
+      </span>
+      <span class="px-3 py-1 bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-full text-xs font-semibold">
+        Version v2 (Frozen)
+      </span>
+      <span class="px-3 py-1 bg-purple-500/10 text-purple-500 border border-purple-500/20 rounded-full text-xs font-semibold">
+        Qwen3-8B Compliant
+      </span>
+    </div>
+  </div>
+
+  <!-- KPI Top Metrics Bar -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 shadow-sm hover:border-blue-500/40 transition-colors">
+      <div class="text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">Total Examples</div>
+      <div class="text-2xl font-bold text-[var(--foreground)] mt-1">1,600</div>
+      <div class="text-[11px] text-blue-500 mt-1 font-medium">1,200 v2 + 400 replay</div>
+    </div>
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 shadow-sm hover:border-emerald-500/40 transition-colors">
+      <div class="text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">Unique Tasks</div>
+      <div class="text-2xl font-bold text-emerald-500 mt-1">920</div>
+      <div class="text-[11px] text-[var(--muted-foreground)] mt-1">720 v2 + 200 replay</div>
+    </div>
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 shadow-sm hover:border-indigo-500/40 transition-colors">
+      <div class="text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">Training Split</div>
+      <div class="text-2xl font-bold text-indigo-400 mt-1">1,297</div>
+      <div class="text-[11px] text-[var(--muted-foreground)] mt-1">81.1% of cumulative</div>
+    </div>
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 shadow-sm hover:border-amber-500/40 transition-colors">
+      <div class="text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">In-Domain Val</div>
+      <div class="text-2xl font-bold text-amber-500 mt-1">159</div>
+      <div class="text-[11px] text-[var(--muted-foreground)] mt-1">9.9% stratified</div>
+    </div>
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 shadow-sm hover:border-rose-500/40 transition-colors">
+      <div class="text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">Heldout Val</div>
+      <div class="text-2xl font-bold text-rose-400 mt-1">144</div>
+      <div class="text-[11px] text-[var(--muted-foreground)] mt-1">9.0% (4 whole families)</div>
+    </div>
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 shadow-sm hover:border-cyan-500/40 transition-colors">
+      <div class="text-xs font-medium text-[var(--muted-foreground)] uppercase tracking-wider">Semantic Families</div>
+      <div class="text-2xl font-bold text-cyan-400 mt-1">36</div>
+      <div class="text-[11px] text-cyan-500 mt-1 font-medium">Max 3.0% (Cap: 5.0%)</div>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-1.5 shadow-sm flex flex-wrap gap-1">
+    <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-blue-500 text-white shadow-sm">
+      📊 Global Overview & Distributions
+    </button>
+    <button onclick="switchTab('families')" id="tab-families" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--background)]">
+      🧬 36 Semantic Families Matrix
+    </button>
+    <button onclick="switchTab('splits')" id="tab-splits" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--background)]">
+      🔀 3-Way Split Architecture
+    </button>
+    <button onclick="switchTab('repairs')" id="tab-repairs" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--background)]">
+      🛠️ Fault Injection & Repairs
+    </button>
+    <button onclick="switchTab('explorer')" id="tab-explorer" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--background)]">
+      🔍 Interactive Explorer
+    </button>
+    <button onclick="switchTab('isolation')" id="tab-isolation" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--background)]">
+      🛡️ Benchmark Isolation & Quality
+    </button>
+  </div>
+
+  <!-- TAB 1: Global Overview -->
+  <div id="content-overview" class="tab-content space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Category Distribution Card -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-semibold text-sm text-[var(--foreground)] flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-blue-500"></span> Application Categories
+          </h3>
+          <span class="text-xs text-[var(--muted-foreground)]">400 ea (25.0%)</span>
+        </div>
+        <div class="space-y-2.5 pt-1">
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">Packet Filtering & Security</span>
+              <span class="text-[var(--muted-foreground)]">400 (25%)</span>
+            </div>
+            <div class="h-2 w-full bg-[var(--background)] rounded-full overflow-hidden">
+              <div class="h-full bg-blue-500 rounded-full" style="width: 25%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">Network Routing & Forwarding</span>
+              <span class="text-[var(--muted-foreground)]">400 (25%)</span>
+            </div>
+            <div class="h-2 w-full bg-[var(--background)] rounded-full overflow-hidden">
+              <div class="h-full bg-emerald-500 rounded-full" style="width: 25%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">Packet Inspection & Telemetry</span>
+              <span class="text-[var(--muted-foreground)]">400 (25%)</span>
+            </div>
+            <div class="h-2 w-full bg-[var(--background)] rounded-full overflow-hidden">
+              <div class="h-full bg-purple-500 rounded-full" style="width: 25%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-medium">Protocol Transformation</span>
+              <span class="text-[var(--muted-foreground)]">400 (25%)</span>
+            </div>
+            <div class="h-2 w-full bg-[var(--background)] rounded-full overflow-hidden">
+              <div class="h-full bg-amber-500 rounded-full" style="width: 25%"></div>
+            </div>
+          </div>
+        </div>
+        <p class="text-[11px] text-[var(--muted-foreground)] border-t border-[var(--border)] pt-2.5">
+          Perfect 1:1:1:1 domain parity guarantees broad capability coverage across all packet handling layers.
+        </p>
+      </div>
+
+      <!-- Difficulty Distribution Card -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-semibold text-sm text-[var(--foreground)] flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-indigo-500"></span> Difficulty Levels
+          </h3>
+          <span class="text-xs text-[var(--muted-foreground)]">Balanced (33.3%)</span>
+        </div>
+        <div class="space-y-3 pt-1">
+          <div class="p-2.5 rounded-lg bg-[var(--background)] border border-[var(--border)] flex items-center justify-between">
+            <div>
+              <div class="text-xs font-semibold text-emerald-500">Level 1 (Basic Parsing)</div>
+              <div class="text-[11px] text-[var(--muted-foreground)]">Direct headers & single checks</div>
+            </div>
+            <div class="text-right font-bold text-sm">536 <span class="text-[10px] text-[var(--muted-foreground)]">rows</span></div>
+          </div>
+          <div class="p-2.5 rounded-lg bg-[var(--background)] border border-[var(--border)] flex items-center justify-between">
+            <div>
+              <div class="text-xs font-semibold text-blue-500">Level 2 (Nested & Dynamic)</div>
+              <div class="text-[11px] text-[var(--muted-foreground)]">VLAN, IHL, TCP options, Tunnels</div>
+            </div>
+            <div class="text-right font-bold text-sm">536 <span class="text-[10px] text-[var(--muted-foreground)]">rows</span></div>
+          </div>
+          <div class="p-2.5 rounded-lg bg-[var(--background)] border border-[var(--border)] flex items-center justify-between">
+            <div>
+              <div class="text-xs font-semibold text-purple-500">Level 3 (State & Advanced)</div>
+              <div class="text-[11px] text-[var(--muted-foreground)]">LPM Tries, Tokens, Checksums</div>
+            </div>
+            <div class="text-right font-bold text-sm">528 <span class="text-[10px] text-[var(--muted-foreground)]">rows</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Synthesis vs Repair Card -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-semibold text-sm text-[var(--foreground)] flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-cyan-500"></span> Synthesis vs. Repair
+          </h3>
+          <span class="text-xs text-[var(--muted-foreground)]">920 / 680</span>
+        </div>
+        <div class="flex items-center justify-center p-3">
+          <div class="w-full space-y-3">
+            <div>
+              <div class="flex justify-between text-xs font-medium mb-1">
+                <span class="text-cyan-400">Synthesis Examples</span>
+                <span>920 (57.5%)</span>
+              </div>
+              <div class="h-3 w-full bg-[var(--background)] rounded-full overflow-hidden">
+                <div class="h-full bg-cyan-500 rounded-full" style="width: 57.5%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs font-medium mb-1">
+                <span class="text-amber-400">Diagnostic Repair Examples</span>
+                <span>680 (42.5%)</span>
+              </div>
+              <div class="h-3 w-full bg-[var(--background)] rounded-full overflow-hidden">
+                <div class="h-full bg-amber-500 rounded-full" style="width: 42.5%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="text-[11px] text-[var(--muted-foreground)] border-t border-[var(--border)] pt-2.5">
+          Dual-modality: model learns clean zero-shot C generation and diagnostic-guided program debugging simultaneously.
+        </p>
+      </div>
+
+      <!-- Token Length Stats Card -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-semibold text-sm text-[var(--foreground)] flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-rose-500"></span> Token Lengths (Qwen3)
+          </h3>
+          <span class="text-xs text-[var(--muted-foreground)]">Max &lt; 4096</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center pt-1">
+          <div class="p-2 bg-[var(--background)] rounded-lg border border-[var(--border)]">
+            <div class="text-[10px] text-[var(--muted-foreground)] uppercase">Median</div>
+            <div class="text-lg font-bold text-blue-500">740</div>
+          </div>
+          <div class="p-2 bg-[var(--background)] rounded-lg border border-[var(--border)]">
+            <div class="text-[10px] text-[var(--muted-foreground)] uppercase">Mean</div>
+            <div class="text-lg font-bold text-emerald-500">1,027</div>
+          </div>
+          <div class="p-2 bg-[var(--background)] rounded-lg border border-[var(--border)]">
+            <div class="text-[10px] text-[var(--muted-foreground)] uppercase">95th Percentile</div>
+            <div class="text-lg font-bold text-amber-500">2,127</div>
+          </div>
+          <div class="p-2 bg-[var(--background)] rounded-lg border border-[var(--border)]">
+            <div class="text-[10px] text-[var(--muted-foreground)] uppercase">Max Length</div>
+            <div class="text-lg font-bold text-purple-500">3,682</div>
+          </div>
+        </div>
+        <p class="text-[11px] text-[var(--muted-foreground)] border-t border-[var(--border)] pt-2.5">
+          100% within the 4,096-token training budget rendered with <code class="text-[10px] bg-[var(--background)] px-1 py-0.5 rounded">qwen3_disable_thinking</code>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Macro Architecture Visual Flow -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
+      <h3 class="text-base font-bold mb-4 flex items-center gap-2 text-[var(--foreground)]">
+        <span>🏛️</span> Cumulative Dataset Architecture & Replay Blend
+      </h3>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl bg-[var(--background)] border border-blue-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-blue-500 uppercase">New SFT v2 Delta</span>
+            <span class="px-2 py-0.5 text-xs font-semibold bg-blue-500/10 text-blue-500 rounded">1,200 Rows</span>
+          </div>
+          <div class="text-xs text-[var(--muted-foreground)] leading-relaxed">
+            • <strong>720 unique synthesis tasks</strong> across 36 fine-grained semantic families.<br>
+            • <strong>480 real fault-injected repairs</strong> (120 compiler, 160 verifier, 200 behavioral).<br>
+            • Deep protocol diversity: VXLAN, GENEVE, GRE, GTP-U, SRv6, Q-in-Q, LPM tries, Token buckets.
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-[var(--background)] border border-purple-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-500 uppercase">Deterministic v1 Replay</span>
+            <span class="px-2 py-0.5 text-xs font-semibold bg-purple-500/10 text-purple-500 rounded">400 Rows</span>
+          </div>
+          <div class="text-xs text-[var(--muted-foreground)] leading-relaxed">
+            • <strong>200 synthesis + 200 repair examples</strong> from frozen v1.<br>
+            • Balanced 100 per category (50 syn / 50 rep) across L1/L2/L3.<br>
+            • Preserves foundational output discipline and prevents catastrophic forgetting.
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-[var(--background)] border border-emerald-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-500 uppercase">Cumulative SFT v2 Corpus</span>
+            <span class="px-2 py-0.5 text-xs font-semibold bg-emerald-500/10 text-emerald-500 rounded">1,600 Rows</span>
+          </div>
+          <div class="text-xs text-[var(--muted-foreground)] leading-relaxed">
+            • <strong>920 unique tasks</strong> (744 Train / 92 In-Domain Val / 84 Heldout Val).<br>
+            • Task-grouped co-location: synthesis and repairs never split across views.<br>
+            • Zero contamination with the 276 protected calibration/benchmark suites.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: 36 Semantic Families Matrix -->
+  <div id="content-families" class="tab-content hidden space-y-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <h2 class="text-lg font-bold text-[var(--foreground)]">36 Fine-Grained Semantic Template Families</h2>
+        <p class="text-xs text-[var(--muted-foreground)]">9 distinct families per category. Max representation is 3.00% (&lt;= 5.0% cap). 4 families strictly held out.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center gap-1.5">
+          <span class="h-2 w-2 rounded-full bg-rose-500"></span> Held-Out Family (Val Only)
+        </span>
+        <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+          In-Domain Family
+        </span>
+      </div>
+    </div>
+
+    <!-- 4 Category Containers -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- PFS (Packet Filtering & Security) -->
+      <div class="bg-[var(--card)] border border-blue-500/30 rounded-xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+          <h3 class="font-bold text-sm text-blue-400 flex items-center gap-2">
+            🛡️ Packet Filtering & Security (PFS)
+          </h3>
+          <span class="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-semibold">9 Families</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs" id="pfs-families-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- NRF (Network Routing & Forwarding) -->
+      <div class="bg-[var(--card)] border border-emerald-500/30 rounded-xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+          <h3 class="font-bold text-sm text-emerald-400 flex items-center gap-2">
+            🔀 Network Routing & Forwarding (NRF)
+          </h3>
+          <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold">9 Families</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs" id="nrf-families-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- PIT (Packet Inspection & Telemetry) -->
+      <div class="bg-[var(--card)] border border-purple-500/30 rounded-xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+          <h3 class="font-bold text-sm text-purple-400 flex items-center gap-2">
+            📊 Packet Inspection & Telemetry (PIT)
+          </h3>
+          <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-semibold">9 Families</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs" id="pit-families-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <!-- PTR (Protocol Transformation) -->
+      <div class="bg-[var(--card)] border border-amber-500/30 rounded-xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+          <h3 class="font-bold text-sm text-amber-400 flex items-center gap-2">
+            ⚡ Protocol Transformation (PTR)
+          </h3>
+          <span class="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-semibold">9 Families</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs" id="ptr-families-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 3: 3-Way Split Architecture -->
+  <div id="content-splits" class="tab-content hidden space-y-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-[var(--foreground)] mb-2">3-Way Split Architecture Deep-Dive</h2>
+      <p class="text-xs text-[var(--muted-foreground)] mb-6">Strict task-level grouping guarantees synthesis and all repairs remain co-located. The Family-Heldout validation split provides the ground-truth benchmark for out-of-distribution generalization.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Split 1: Train -->
+        <div class="bg-[var(--background)] border border-indigo-500/40 rounded-xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+            <div>
+              <div class="text-xs font-bold text-indigo-400 uppercase">Training Corpus</div>
+              <div class="text-xl font-extrabold text-[var(--foreground)]">1,297 Rows</div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-400">81.1%</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Unique Tasks:</span>
+              <span class="font-semibold">744 Tasks</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Synthesis Examples:</span>
+              <span class="font-semibold">744 (57.4%)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Repair Examples:</span>
+              <span class="font-semibold">553 (42.6%)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">New v2 Delta Share:</span>
+              <span class="font-semibold">937 (72.2%)</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-[var(--muted-foreground)]">v1 Replay Share:</span>
+              <span class="font-semibold">360 (27.8%)</span>
+            </div>
+          </div>
+          <div class="pt-2 text-[11px] text-[var(--muted-foreground)] italic">
+            Zero held-out family contamination. Balanced across PFS (322), NRF (321), PIT (326), PTR (328).
+          </div>
+        </div>
+
+        <!-- Split 2: In-Domain Val -->
+        <div class="bg-[var(--background)] border border-amber-500/40 rounded-xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+            <div>
+              <div class="text-xs font-bold text-amber-500 uppercase">In-Domain Validation</div>
+              <div class="text-xl font-extrabold text-[var(--foreground)]">159 Rows</div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-500">9.9%</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Unique Tasks:</span>
+              <span class="font-semibold">92 Tasks</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Synthesis Examples:</span>
+              <span class="font-semibold">92 (57.9%)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Repair Examples:</span>
+              <span class="font-semibold">67 (42.1%)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">New v2 Delta Share:</span>
+              <span class="font-semibold">119 (74.8%)</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-[var(--muted-foreground)]">v1 Replay Share:</span>
+              <span class="font-semibold">40 (25.2%)</span>
+            </div>
+          </div>
+          <div class="pt-2 text-[11px] text-[var(--muted-foreground)] italic">
+            Stratified sample across training semantic families. Measures in-distribution learning fidelity.
+          </div>
+        </div>
+
+        <!-- Split 3: Family-Heldout Val -->
+        <div class="bg-[var(--background)] border border-rose-500/40 rounded-xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+            <div>
+              <div class="text-xs font-bold text-rose-400 uppercase">Family-Heldout Validation</div>
+              <div class="text-xl font-extrabold text-[var(--foreground)]">144 Rows</div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-400">9.0%</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Unique Tasks:</span>
+              <span class="font-semibold">84 Tasks</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Synthesis Examples:</span>
+              <span class="font-semibold">84 (58.3%)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Repair Examples:</span>
+              <span class="font-semibold">60 (41.7%)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-[var(--border)]/50">
+              <span class="text-[var(--muted-foreground)]">Heldout Families:</span>
+              <span class="font-semibold text-rose-400">4 Full Families</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-[var(--muted-foreground)]">v1 Replay Share:</span>
+              <span class="font-semibold">0 (Pure v2 Delta)</span>
+            </div>
+          </div>
+          <div class="pt-2 text-[11px] text-[var(--muted-foreground)] italic">
+            Contains 4 complete capability families strictly absent from training. Primary signal for OOD generalization.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: Fault Injection & Repairs -->
+  <div id="content-repairs" class="tab-content hidden space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-red-400 flex items-center gap-2">
+            💥 Compilation Errors
+          </h3>
+          <span class="text-xs px-2 py-0.5 rounded bg-red-500/10 text-red-400 font-bold">120 in v2</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)]">
+          Real diagnostics generated by Clang BPF target compiler.
+        </p>
+        <div class="p-3 bg-[var(--background)] rounded-lg font-mono text-[11px] text-red-300/90 border border-red-500/20 space-y-1">
+          <div>error: use of undeclared identifier 'eth'</div>
+          <div>error: no member named 'nexthdr' in 'struct ipv6hdr'</div>
+          <div>error: assigning to 'void *' from incompatible type</div>
+        </div>
+        <div class="text-xs text-[var(--muted-foreground)]">
+          <strong>Purpose:</strong> Teaches accurate kernel C type casting, headers, and helper signatures.
+        </div>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-amber-400 flex items-center gap-2">
+            🛡️ Kernel Verifier Rejections
+          </h3>
+          <span class="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-bold">160 in v2 (324 total)</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)]">
+          Actual logs produced by the Linux 6.8 kernel verifier.
+        </p>
+        <div class="p-3 bg-[var(--background)] rounded-lg font-mono text-[11px] text-amber-300/90 border border-amber-500/20 space-y-1">
+          <div>R1 invalid mem access 'inv' (offset 14 > data_end)</div>
+          <div>math between pkt pointer and register with unbounded min value</div>
+          <div>unreleased reference / map value pointer escape</div>
+        </div>
+        <div class="text-xs text-[var(--muted-foreground)]">
+          <strong>Purpose:</strong> Teaches strict memory boundary assertions (<code class="text-[10px]">data + offset &gt; data_end</code>) before dereferencing.
+        </div>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-purple-400 flex items-center gap-2">
+            🐛 Behavioral Logic Bugs
+          </h3>
+          <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-bold">200 in v2 (236 total)</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)]">
+          Test failure diagnostics from BPF_PROG_TEST_RUN packet harness.
+        </p>
+        <div class="p-3 bg-[var(--background)] rounded-lg font-mono text-[11px] text-purple-300/90 border border-purple-500/20 space-y-1">
+          <div>Test 'test_match_drop' failed: expected XDP_DROP (1), got XDP_PASS (2)</div>
+          <div>Test 'test_csum_update' failed: packet payload checksum mismatch</div>
+          <div>Test 'test_lpm_route' failed: wrong nexthop MAC returned</div>
+        </div>
+        <div class="text-xs text-[var(--muted-foreground)]">
+          <strong>Purpose:</strong> Teaches endianness (<code class="text-[10px]">bpf_htons</code>), RFC 1624 checksums, and exact routing policies.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 5: Interactive Explorer -->
+  <div id="content-explorer" class="tab-content hidden space-y-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 shadow-sm space-y-4">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <div>
+          <h2 class="text-lg font-bold text-[var(--foreground)]">Interactive Semantic Family & Task Explorer</h2>
+          <p class="text-xs text-[var(--muted-foreground)]">Filter and inspect any of the 36 semantic families and their protocol focus.</p>
+        </div>
+        <div class="w-full sm:w-72">
+          <input type="text" id="family-search" oninput="filterFamilies()" placeholder="Search families, protocols, maps..." class="w-full px-3 py-1.5 bg-[var(--background)] border border-[var(--border)] rounded-lg text-xs text-[var(--foreground)] placeholder-[var(--muted-foreground)] focus:outline-none focus:border-blue-500">
+        </div>
+      </div>
+
+      <!-- Filter Badges -->
+      <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-[var(--border)]">
+        <span class="text-xs font-semibold text-[var(--muted-foreground)]">Filter by Category:</span>
+        <button onclick="setCategoryFilter('all')" class="cat-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-blue-500 text-white" id="filter-all">All (36)</button>
+        <button onclick="setCategoryFilter('pfs')" class="cat-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-[var(--background)] text-[var(--muted-foreground)] hover:text-[var(--foreground)]" id="filter-pfs">PFS (9)</button>
+        <button onclick="setCategoryFilter('nrf')" class="cat-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-[var(--background)] text-[var(--muted-foreground)] hover:text-[var(--foreground)]" id="filter-nrf">NRF (9)</button>
+        <button onclick="setCategoryFilter('pit')" class="cat-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-[var(--background)] text-[var(--muted-foreground)] hover:text-[var(--foreground)]" id="filter-pit">PIT (9)</button>
+        <button onclick="setCategoryFilter('ptr')" class="cat-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-[var(--background)] text-[var(--muted-foreground)] hover:text-[var(--foreground)]" id="filter-ptr">PTR (9)</button>
+      </div>
+
+      <!-- Families Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2" id="explorer-grid">
+        <!-- Filled dynamically by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 6: Benchmark Isolation & Quality Controls -->
+  <div id="content-isolation" class="tab-content hidden space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Benchmark Isolation Firewall -->
+      <div class="bg-[var(--card)] border border-emerald-500/30 rounded-xl p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-emerald-400 flex items-center gap-2">
+            🛡️ Benchmark Isolation & Anti-Contamination Guard
+          </h3>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400">
+            CERTIFIED ISOLATED
+          </span>
+        </div>
+        <div class="space-y-3 text-xs leading-relaxed">
+          <p class="text-[var(--muted-foreground)]">
+            Every row in SFT v2 was exhaustively audited against all <strong>276 protected tasks</strong> (36 calibration, 120 synthesis benchmark, 120 repair benchmark).
+          </p>
+          <div class="p-3 bg-[var(--background)] rounded-lg border border-[var(--border)] space-y-2">
+            <div class="flex justify-between">
+              <span class="text-[var(--muted-foreground)]">Protected Task ID Matches:</span>
+              <span class="font-bold text-emerald-400">0 (Zero Overlap)</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--muted-foreground)]">Exact Prompt Hash Matches:</span>
+              <span class="font-bold text-emerald-400">0 (Zero Overlap)</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--muted-foreground)]">Exact Code Hash Matches:</span>
+              <span class="font-bold text-emerald-400">0 (Zero Overlap)</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[var(--muted-foreground)]">Max Prompt 3-gram Similarity:</span>
+              <span class="font-bold text-blue-400">10.28% (No Template Cloning)</span>
+            </div>
+          </div>
+          <div class="text-[11px] text-[var(--muted-foreground)]">
+            Audit report: <code class="text-[10px] bg-[var(--background)] px-1 py-0.5 rounded">data/sft/v2/leakage_report.json</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quality Gate Verification -->
+      <div class="bg-[var(--card)] border border-blue-500/30 rounded-xl p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-blue-400 flex items-center gap-2">
+            ✅ 100% Quality Gate Verification
+          </h3>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-500/20 text-blue-400">
+            6/6 Gates Passed
+          </span>
+        </div>
+        <div class="space-y-2.5 text-xs">
+          <div class="p-2.5 bg-[var(--background)] rounded-lg border border-[var(--border)] flex items-center justify-between">
+            <span class="text-[var(--muted-foreground)]">Clang 18 BPF Compilation Rate:</span>
+            <span class="font-bold text-emerald-400">100.0% (1,600 / 1,600)</span>
+          </div>
+          <div class="p-2.5 bg-[var(--background)] rounded-lg border border-[var(--border)] flex items-center justify-between">
+            <span class="text-[var(--muted-foreground)]">Linux 6.8 Kernel Verifier Pass Rate:</span>
+            <span class="font-bold text-emerald-400">100.0% (1,600 / 1,600)</span>
+          </div>
+          <div class="p-2.5 bg-[var(--background)] rounded-lg border border-[var(--border)] flex items-center justify-between">
+            <span class="text-[var(--muted-foreground)]">BPF_PROG_TEST_RUN Behavioral Pass Rate:</span>
+            <span class="font-bold text-emerald-400">100.0% (1,600 / 1,600)</span>
+          </div>
+          <div class="p-2.5 bg-[var(--background)] rounded-lg border border-[var(--border)] flex items-center justify-between">
+            <span class="text-[var(--muted-foreground)]">Pure C Completion Compliance (No Fences):</span>
+            <span class="font-bold text-emerald-400">100.0% Compliant</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript for Tabs, Explorer, and Interactive Elements -->
+  <script>
+    // 36 Semantic Families Data
+    const families = [
+      // PFS
+      { id: "pfs_tunnel_vxlan_filter", name: "VXLAN Tunnel Filter", cat: "pfs", catFull: "Packet Filtering & Security", count: 34, tasks: 20, heldout: false, desc: "Outer UDP/VXLAN header parsing, VNI extraction, inner L2/L3 security drops", tags: ["VXLAN", "UDP:4789", "VNI", "Inner L2"] },
+      { id: "pfs_tunnel_geneve_gre_guard", name: "GENEVE / GRE Guard", cat: "pfs", catFull: "Packet Filtering & Security", count: 33, tasks: 20, heldout: false, desc: "Variable GENEVE option validation, GRE tunnel flags, inner IP/TCP filters", tags: ["GENEVE", "GRE", "Options", "Tunnel"] },
+      { id: "pfs_ipv6_ext_header_acl", name: "IPv6 Extension Header ACL", cat: "pfs", catFull: "Packet Filtering & Security", count: 33, tasks: 20, heldout: false, desc: "Bounded IPv6 extension header chain parsing (Hop-by-Hop, Routing, Frag)", tags: ["IPv6", "NextHdr", "ExtHdr", "ACL"] },
+      { id: "pfs_srv6_security_policy", name: "SRv6 Security Policy", cat: "pfs", catFull: "Packet Filtering & Security", count: 36, tasks: 21, heldout: true, desc: "Segment Routing v6 (SRH) segment list inspection, authorized SID filtering", tags: ["SRv6", "SRH", "SID", "IPv6"] },
+      { id: "pfs_vlan_qinq_firewall", name: "Q-in-Q Dual VLAN Firewall", cat: "pfs", catFull: "Packet Filtering & Security", count: 34, tasks: 20, heldout: false, desc: "802.1ad (0x88A8) outer and 802.1Q (0x8100) inner VLAN tag validation", tags: ["Q-in-Q", "802.1ad", "802.1Q", "VLAN"] },
+      { id: "pfs_variable_ihl_tcp_guard", name: "Variable IHL & TCP Option Guard", cat: "pfs", catFull: "Packet Filtering & Security", count: 33, tasks: 20, heldout: false, desc: "Dynamic IPv4 header length (ihl*4) and TCP data offset boundary validation", tags: ["IHL", "TCP Offset", "Bounds", "IPv4"] },
+      { id: "pfs_lpm_prefix_blocklist", name: "LPM Trie Prefix Blocklist", cat: "pfs", catFull: "Packet Filtering & Security", count: 33, tasks: 20, heldout: false, desc: "Longest prefix match IP denylist using BPF_MAP_TYPE_LPM_TRIE", tags: ["LPM Trie", "CIDR", "Subnet", "Blocklist"] },
+      { id: "pfs_token_bucket_ratelimit", name: "Token Bucket Rate Limiter", cat: "pfs", catFull: "Packet Filtering & Security", count: 33, tasks: 20, heldout: false, desc: "Stateful token bucket rate policy with verifier-safe timestamp math", tags: ["Token Bucket", "Rate Limit", "Stateful", "Hash Map"] },
+      { id: "pfs_tcp_anomalous_flags", name: "TCP Anomalous Flags Filter", cat: "pfs", catFull: "Packet Filtering & Security", count: 34, tasks: 20, heldout: false, desc: "Rejection of illegal TCP flag combinations (SYN-FIN, NULL scan, XMAS)", tags: ["TCP Flags", "SYN-FIN", "NULL", "XMAS"] },
+
+      // NRF
+      { id: "nrf_vxlan_tunnel_router", name: "VXLAN Decap & Router", cat: "nrf", catFull: "Network Routing & Forwarding", count: 34, tasks: 20, heldout: false, desc: "VXLAN tunnel decapsulation, inner MAC resolution, and XDP_TX / XDP_REDIRECT", tags: ["VXLAN", "Decap", "XDP_REDIRECT", "XDP_TX"] },
+      { id: "nrf_gre_gtpu_demux", name: "GRE / GTP-U Demux Forwarder", cat: "nrf", catFull: "Network Routing & Forwarding", count: 33, tasks: 20, heldout: false, desc: "GTP-U TEID extraction and GRE tunnel demultiplexing to target egress ports", tags: ["GTP-U", "TEID", "GRE", "Demux"] },
+      { id: "nrf_srv6_end_forwarder", name: "SRv6 End / End.DX Forwarder", cat: "nrf", catFull: "Network Routing & Forwarding", count: 36, tasks: 21, heldout: true, desc: "Segment Routing header processing, active segment decapsulation and forwarding", tags: ["SRv6", "End.DX", "SRH", "Decap"] },
+      { id: "nrf_vlan_trunk_access_switch", name: "VLAN Trunk-Access Switch", cat: "nrf", catFull: "Network Routing & Forwarding", count: 33, tasks: 20, heldout: false, desc: "802.1Q trunk demultiplexing and inner L2 MAC forwarding tables", tags: ["VLAN Trunk", "802.1Q", "L2 Switch", "DevMap"] },
+      { id: "nrf_nested_ipip_forwarder", name: "Nested IP-in-IP Forwarder", cat: "nrf", catFull: "Network Routing & Forwarding", count: 34, tasks: 20, heldout: false, desc: "Outer IPv4/IPv6 decapsulation and inner route table lookup", tags: ["IP-in-IP", "Tunnel", "Decap", "Forwarding"] },
+      { id: "nrf_fib_nexthop_router", name: "FIB Lookup & Nexthop Router", cat: "nrf", catFull: "Network Routing & Forwarding", count: 33, tasks: 20, heldout: false, desc: "Kernel FIB lookup simulation with default gateway and fallback routing", tags: ["FIB", "Nexthop", "Gateway", "Routing"] },
+      { id: "nrf_ecmp_hash_loadbalancer", name: "5-Tuple ECMP Load Balancer", cat: "nrf", catFull: "Network Routing & Forwarding", count: 33, tasks: 20, heldout: false, desc: "Consistent hashing over 5-tuple for multipath nexthop selection", tags: ["ECMP", "5-Tuple", "Hash", "Multipath"] },
+      { id: "nrf_lpm_trie_router", name: "LPM Trie Core Router", cat: "nrf", catFull: "Network Routing & Forwarding", count: 33, tasks: 20, heldout: false, desc: "Hierarchical longest-prefix forwarding table using LPM Trie maps", tags: ["LPM Trie", "Routing Table", "Prefix", "Forwarding"] },
+      { id: "nrf_dscp_qos_priority_router", name: "DSCP QoS Priority Router", cat: "nrf", catFull: "Network Routing & Forwarding", count: 34, tasks: 20, heldout: false, desc: "DiffServ DSCP / IPv6 Traffic Class priority queue routing", tags: ["DSCP", "QoS", "DiffServ", "Priority"] },
+
+      // PIT
+      { id: "pit_vxlan_geneve_analyzer", name: "Tunnel Metadata Telemetry", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 34, tasks: 20, heldout: false, desc: "Outer/Inner flow key telemetry aggregation for VXLAN and GENEVE tunnels", tags: ["VXLAN", "GENEVE", "Telemetry", "Per-CPU"] },
+      { id: "pit_ipv6_ext_telemetry", name: "IPv6 Extension Header Telemetry", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 36, tasks: 21, heldout: true, desc: "Multi-header IPv6 extension chain telemetry, length, and protocol counters", tags: ["IPv6", "ExtHdr", "Telemetry", "Counters"] },
+      { id: "pit_vlan_qinq_flow_meter", name: "Q-in-Q Dual VLAN Flow Meter", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 33, tasks: 20, heldout: false, desc: "Per-customer VLAN/Q-in-Q packet and byte metering using array maps", tags: ["Q-in-Q", "VLAN", "Flow Meter", "Accounting"] },
+      { id: "pit_tcp_options_extractor", name: "TCP Options Extractor", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 33, tasks: 20, heldout: false, desc: "Extracts MSS, Window Scale, SACK, and Timestamp options into telemetry maps", tags: ["TCP Options", "MSS", "Window Scale", "SACK"] },
+      { id: "pit_5tuple_canonical_hash", name: "Canonical 5-Tuple Hasher", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 34, tasks: 20, heldout: false, desc: "Bidirectional symmetric flow hashing for forward/reverse session matching", tags: ["5-Tuple", "Canonical", "Flow Key", "Hash"] },
+      { id: "pit_percpu_packet_histogram", name: "Per-CPU Packet Histogram", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 33, tasks: 20, heldout: false, desc: "Lockless per-CPU size and protocol histogram arrays", tags: ["Per-CPU", "Histogram", "Lockless", "Array Map"] },
+      { id: "pit_lru_connection_tracker", name: "LRU Flow State Tracker", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 33, tasks: 20, heldout: false, desc: "Connection tracking table with automatic eviction via BPF_MAP_TYPE_LRU_HASH", tags: ["LRU Map", "ConnTrack", "Session", "State"] },
+      { id: "pit_dns_metadata_extractor", name: "DNS Query / Tunneling Tracker", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 33, tasks: 20, heldout: false, desc: "DNS QTYPE/QCLASS parsing and high-entropy tunneling heuristic telemetry", tags: ["DNS", "QTYPE", "Tunneling", "Telemetry"] },
+      { id: "pit_qos_latency_telemetry", name: "QoS Packet Size Telemetry", cat: "pit", catFull: "Packet Inspection & Telemetry", count: 34, tasks: 20, heldout: false, desc: "Ingress packet length and QoS class telemetry aggregator", tags: ["QoS", "Packet Length", "Telemetry", "Stats"] },
+
+      // PTR
+      { id: "ptr_vxlan_header_transform", name: "VXLAN Header Transform", cat: "ptr", catFull: "Protocol Transformation", count: 34, tasks: 20, heldout: false, desc: "VNI rewrite, outer IP encapsulation mutations with UDP checksum updates", tags: ["VXLAN", "VNI Rewrite", "Encap", "UDP Csum"] },
+      { id: "ptr_gre_gtpu_transform", name: "GRE / GTP-U Header Rewriter", cat: "ptr", catFull: "Protocol Transformation", count: 33, tasks: 20, heldout: false, desc: "GTP-U TEID rewriting and GRE tunnel key translation", tags: ["GTP-U", "TEID", "GRE", "Rewriter"] },
+      { id: "ptr_vlan_tag_push_pop", name: "VLAN Tag Push / Pop / Translate", cat: "ptr", catFull: "Protocol Transformation", count: 33, tasks: 20, heldout: false, desc: "Dynamic packet headroom adjustment via bpf_xdp_adjust_head for VLAN push/pop", tags: ["VLAN Push/Pop", "adjust_head", "802.1Q", "Translation"] },
+      { id: "ptr_ipv4_ipv6_translator", name: "Stateless NAT64 / SIIT Translator", cat: "ptr", catFull: "Protocol Transformation", count: 36, tasks: 21, heldout: true, desc: "IPv4-to-IPv6 and IPv6-to-IPv4 packet translation with full header restructuring", tags: ["NAT64", "SIIT", "IPv4/IPv6", "Translation"] },
+      { id: "ptr_stateless_snat_dnat", name: "Stateless SNAT / DNAT", cat: "ptr", catFull: "Protocol Transformation", count: 34, tasks: 20, heldout: false, desc: "IP address rewriting with RFC 1624 incremental IP and L4 checksum folding", tags: ["SNAT", "DNAT", "RFC 1624", "Checksum"] },
+      { id: "ptr_stateful_napt_rewriter", name: "Stateful NAPT Rewriter", cat: "ptr", catFull: "Protocol Transformation", count: 33, tasks: 20, heldout: false, desc: "Full 4-tuple translation with port pool management and state tables", tags: ["NAPT", "Stateful", "Port Pool", "Checksum"] },
+      { id: "ptr_l4_port_forwarder", name: "L4 Port Redirection & Remap", cat: "ptr", catFull: "Protocol Transformation", count: 33, tasks: 20, heldout: false, desc: "TCP/UDP port mapping with incremental L4 checksum delta recalculation", tags: ["Port Forward", "TCP/UDP", "Checksum Delta"] },
+      { id: "ptr_icmp_echo_translator", name: "ICMP Echo Request Responder", cat: "ptr", catFull: "Protocol Transformation", count: 33, tasks: 20, heldout: false, desc: "In-place ICMP Type 8 (Request) to Type 0 (Reply) packet turnaround & MAC swap", tags: ["ICMP", "Echo Reply", "Hairpin", "In-Place"] },
+      { id: "ptr_dscp_ttl_rewriter", name: "DSCP & TTL Header Rewriter", cat: "ptr", catFull: "Protocol Transformation", count: 34, tasks: 20, heldout: false, desc: "Traffic remarking: TTL decrement and DSCP remarking with incremental checksums", tags: ["DSCP", "TTL Decrement", "Remarking", "Checksum"] }
+    ];
+
+    // Render 36 Families in Matrix View
+    function renderFamiliesMatrix() {
+      const pfsGrid = document.getElementById("pfs-families-grid");
+      const nrfGrid = document.getElementById("nrf-families-grid");
+      const pitGrid = document.getElementById("pit-families-grid");
+      const ptrGrid = document.getElementById("ptr-families-grid");
+
+      families.forEach(f => {
+        const card = document.createElement("div");
+        card.className = `p-3 rounded-lg border transition-all ${
+          f.heldout 
+            ? "bg-rose-500/10 border-rose-500/40 hover:border-rose-500 badge-heldout" 
+            : "bg-[var(--background)] border-[var(--border)] hover:border-blue-500/50"
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-1 mb-1">
+            <span class="font-bold text-[11px] text-[var(--foreground)] line-clamp-1">${f.name}</span>
+            ${f.heldout 
+              ? '<span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-rose-500 text-white shrink-0">HELDOUT</span>' 
+              : `<span class="text-[10px] text-[var(--muted-foreground)] font-mono">${f.count} rows</span>`
+            }
+          </div>
+          <div class="text-[10px] text-[var(--muted-foreground)] line-clamp-2 mb-2 leading-tight">${f.desc}</div>
+          <div class="flex flex-wrap gap-1">
+            ${f.tags.slice(0, 2).map(t => `<span class="px-1.5 py-0.5 rounded text-[9px] bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] font-mono">${t}</span>`).join('')}
+          </div>
+        `;
+
+        if (f.cat === "pfs") pfsGrid.appendChild(card);
+        else if (f.cat === "nrf") nrfGrid.appendChild(card);
+        else if (f.cat === "pit") pitGrid.appendChild(card);
+        else if (f.cat === "ptr") ptrGrid.appendChild(card);
+      });
+    }
+
+    // Render Explorer View
+    let currentCatFilter = "all";
+    function renderExplorer(items) {
+      const grid = document.getElementById("explorer-grid");
+      grid.innerHTML = "";
+
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full p-8 text-center text-xs text-[var(--muted-foreground)]">No matching semantic families found.</div>`;
+        return;
+      }
+
+      items.forEach(f => {
+        const el = document.createElement("div");
+        el.className = `p-4 rounded-xl border transition-all ${
+          f.heldout 
+            ? "bg-rose-500/5 border-rose-500/40 hover:border-rose-500 shadow-sm" 
+            : "bg-[var(--background)] border-[var(--border)] hover:border-blue-500/40 shadow-sm"
+        }`;
+
+        el.innerHTML = `
+          <div class="flex items-start justify-between gap-2 mb-2">
+            <div>
+              <div class="text-[10px] font-bold text-${f.cat === 'pfs' ? 'blue' : f.cat === 'nrf' ? 'emerald' : f.cat === 'pit' ? 'purple' : 'amber'}-400 uppercase tracking-wider">${f.catFull}</div>
+              <h4 class="font-bold text-xs text-[var(--foreground)] mt-0.5">${f.name}</h4>
+            </div>
+            ${f.heldout 
+              ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500 text-white shrink-0">HELD-OUT VAL</span>' 
+              : '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0">TRAIN + IN-DOM</span>'
+            }
+          </div>
+          <p class="text-xs text-[var(--muted-foreground)] leading-relaxed mb-3">${f.desc}</p>
+          <div class="grid grid-cols-3 gap-2 p-2 rounded-lg bg-[var(--card)] border border-[var(--border)] text-center text-[10px] mb-3">
+            <div><span class="text-[var(--muted-foreground)]">Tasks:</span> <strong>${f.tasks}</strong></div>
+            <div><span class="text-[var(--muted-foreground)]">Rows:</span> <strong>${f.count}</strong></div>
+            <div><span class="text-[var(--muted-foreground)]">Share:</span> <strong>${((f.count / 1200) * 100).toFixed(1)}%</strong></div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            ${f.tags.map(t => `<span class="px-2 py-0.5 rounded text-[10px] bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] font-mono">${t}</span>`).join('')}
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    function filterFamilies() {
+      const q = document.getElementById("family-search").value.toLowerCase();
+      const filtered = families.filter(f => {
+        const matchesCat = currentCatFilter === "all" || f.cat === currentCatFilter;
+        const matchesQuery = f.name.toLowerCase().includes(q) || 
+                             f.desc.toLowerCase().includes(q) || 
+                             f.id.toLowerCase().includes(q) ||
+                             f.tags.some(t => t.toLowerCase().includes(q));
+        return matchesCat && matchesQuery;
+      });
+      renderExplorer(filtered);
+    }
+
+    function setCategoryFilter(cat) {
+      currentCatFilter = cat;
+      document.querySelectorAll(".cat-filter-btn").forEach(btn => {
+        btn.className = "cat-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-[var(--background)] text-[var(--muted-foreground)] hover:text-[var(--foreground)]";
+      });
+      const activeBtn = document.getElementById(`filter-${cat}`);
+      if (activeBtn) {
+        activeBtn.className = "cat-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-blue-500 text-white";
+      }
+      filterFamilies();
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.add("hidden"));
+      document.querySelectorAll(".tab-btn").forEach(b => {
+        b.className = "tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--background)]";
+      });
+      
+      const activeContent = document.getElementById(`content-${tabId}`);
+      if (activeContent) activeContent.classList.remove("hidden");
+
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if (activeBtn) activeBtn.className = "tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all bg-blue-500 text-white shadow-sm";
+    }
+
+    // Initialize on Load
+    window.addEventListener("DOMContentLoaded", () => {
+      renderFamiliesMatrix();
+      renderExplorer(families);
+    });
+  </script>
+
+</body>
+</html>

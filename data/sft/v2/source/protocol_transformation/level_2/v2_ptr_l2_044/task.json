@@ -1,0 +1,52 @@
+{
+  "task_id": "v2_ptr_l2_044",
+  "application_category": "protocol_transformation",
+  "category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "ptr_icmp_echo_translator",
+  "template_family": "ptr_icmp_echo_translator",
+  "semantic_family": "ptr_icmp_echo_translator",
+  "instruction": "Write an XDP program that intercepts incoming ICMP Echo Request (type 8) packets targeting IP 198.51.144.54. Transform each Echo Request directly into an ICMP Echo Reply (type 0) in-place: (1) Swap Ethernet source and destination MAC addresses, (2) Swap IPv4 source and destination addresses, (3) Change ICMP type from 8 to 0, (4) Incrementally adjust the ICMP checksum, and transmit back out the ingress interface with XDP_TX. Pass all non-ICMP and non-matching packets.",
+  "requirements": [
+    "Parse Ethernet, IPv4, and ICMP headers",
+    "Match IPv4 destination address equal to 198.51.144.54 (bpf_inet_addr or integer constant)",
+    "Verify ICMP type is 8 (Echo Request) and code is 0",
+    "Swap eth->h_source and eth->h_dest",
+    "Swap ip->saddr and ip->daddr",
+    "Update icmp->type = 0 and update icmp->checksum (add 0x0800 with fold)",
+    "Return XDP_TX for translated replies, XDP_PASS for other traffic",
+    "Verify all header bounds before access",
+    "Entry point SEC(\"xdp\") and GPL license"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "icmp_echo_req_tx",
+      "description": "Matching ICMP Echo Request must be translated to Reply and return XDP_TX",
+      "packet_hex": "02000000000202000000000108004500002d1234000040015031c0000201c633903608006496123400014543484f5f5041594c4f41445f31323334",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/icmp_echo_req_tx.bin"
+    },
+    {
+      "name": "other_ip_icmp_pass",
+      "description": "ICMP Echo Request to different IP must return XDP_PASS",
+      "packet_hex": "02000000000202000000000108004500002d123400004001179fc0000201c633c8c808006496123400014543484f5f5041594c4f41445f31323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/other_ip_icmp_pass.bin"
+    },
+    {
+      "name": "tcp_packet_pass",
+      "description": "TCP packet must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040065031c0000201c633903630390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_packet_pass.bin"
+    },
+    {
+      "name": "truncated_icmp_pass",
+      "description": "Truncated ICMP packet must return XDP_PASS safely",
+      "packet_hex": "02000000000202000000000108004500002d123400004001",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_icmp_pass.bin"
+    }
+  ]
+}

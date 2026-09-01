@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pfs_l2_022",
+  "fault_class": "verifier",
+  "fault_injection_id": "missing_map_null_check",
+  "diagnostic_sha256": "f899c541961be943bd3597652a43934fd9245c776a340c07af43592fa6a70f24"
+}

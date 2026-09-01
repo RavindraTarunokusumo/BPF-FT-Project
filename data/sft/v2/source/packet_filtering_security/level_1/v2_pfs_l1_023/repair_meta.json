@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pfs_l1_023",
+  "fault_class": "verifier",
+  "fault_injection_id": "uninitialized_stack_read",
+  "diagnostic_sha256": "51ce3a77ece1dcab4592b1e6461c89aa02cb64ad2b2b5e8743956f1b34c17003"
+}

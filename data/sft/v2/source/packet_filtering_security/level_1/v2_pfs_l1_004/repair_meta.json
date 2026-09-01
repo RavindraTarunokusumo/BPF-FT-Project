@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pfs_l1_004",
+  "fault_class": "compiler",
+  "fault_injection_id": "syntax_missing_semicolon",
+  "diagnostic_sha256": "e47ecc56db3ebcc8c122e2daddb5fa9b980fc20dd56d755d2b029558342d67fc"
+}

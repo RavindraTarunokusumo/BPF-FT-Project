@@ -1,0 +1,4 @@
+FAIL: test_case 'match_primary_rule' failed:
+  Expected action: XDP_TX
+  Observed action: XDP_PASS (matched packet returned XDP_PASS instead of XDP_TX)
+1 of 4 test cases failed.

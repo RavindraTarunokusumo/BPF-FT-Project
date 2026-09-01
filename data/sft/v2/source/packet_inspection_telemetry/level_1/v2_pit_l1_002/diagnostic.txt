@@ -1,0 +1,2 @@
+candidate.c:19:24: error: expected ';' after expression
+1 error generated.

@@ -1,0 +1,35 @@
+{
+  "task_id": "v2_pfs_l2_037",
+  "validator": "packet_action",
+  "test_count": 4,
+  "tests": [
+    {
+      "name": "match_vxlan_target_drop",
+      "description": "VXLAN VNI 20909 with inner port 9200 must be dropped",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b500460000080000000051ad000200000000020200000000010800450000281234000040067c65c0000201c6336402303923f0000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/match_vxlan_target_drop.bin"
+    },
+    {
+      "name": "non_match_vni_pass",
+      "description": "Different VNI must return XDP_PASS",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b500460000080000000051ae000200000000020200000000010800450000281234000040067c65c0000201c6336402303923f0000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_match_vni_pass.bin"
+    },
+    {
+      "name": "non_match_inner_port_pass",
+      "description": "Different inner destination port must return XDP_PASS",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b500460000080000000051ad000200000000020200000000010800450000281234000040067c65c0000201c6336402303923f1000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_match_inner_port_pass.bin"
+    },
+    {
+      "name": "truncated_packet_pass",
+      "description": "Truncated packet boundary check must return XDP_PASS safely",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_packet_pass.bin"
+    }
+  ]
+}

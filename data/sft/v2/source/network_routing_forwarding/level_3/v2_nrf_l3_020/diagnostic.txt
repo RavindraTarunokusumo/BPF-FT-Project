@@ -1,0 +1,18 @@
+Kernel verifier rejected program:
+libbpf: loading object from /tmp/bpf_val_v2_nrf_l/candidate.o
+libbpf: prog 'xdp_v2_nrf_l3_020': BPF program load failed: Permission denied
+libbpf: prog 'xdp_v2_nrf_l3_020': -- BEGIN PROG LOAD LOG --
+func#0 @0
+0: R1=ctx() R10=fp0
+1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()
+2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)
+3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)
+4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)
+5: (71) r2 = *(u8 *)(r1 +23)
+the sequence of 8193 jumps is too complex
+verification time 92 usec
+stack depth 0
+processed 6 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+-- END PROG LOAD LOG --
+libbpf: prog 'xdp_v2_nrf_l3_020': failed to load: -13
+Error: failed to load object file

@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_ptr_l2_013",
+  "fault_class": "verifier",
+  "fault_injection_id": "unbounded_loop_complexity",
+  "diagnostic_sha256": "02acb9837d74d3d4d0de3cfeede454ca82b5f5986717f71223e1d868303b0468"
+}

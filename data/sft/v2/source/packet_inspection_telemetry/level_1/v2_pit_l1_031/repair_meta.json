@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pit_l1_031",
+  "fault_class": "behavioral",
+  "fault_injection_id": "missing_action_logic",
+  "diagnostic_sha256": "f86d0b08fec6cbc66a97eab26e50c50d7406f772b1832524018cef5c0b660b28"
+}

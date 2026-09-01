@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pit_l1_005",
+  "fault_class": "compiler",
+  "fault_injection_id": "missing_endian_header",
+  "diagnostic_sha256": "7ac21031659da0d0a28619e4e3aa9e27e340ba284d13a4cf9184c37a5ffc7364"
+}

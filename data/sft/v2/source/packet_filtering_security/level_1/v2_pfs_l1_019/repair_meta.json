@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pfs_l1_019",
+  "fault_class": "verifier",
+  "fault_injection_id": "unbounded_loop_complexity",
+  "diagnostic_sha256": "8998c9d3d86381a2fe336dfce793b4068768db4a9bfc7e79658d15f5069c6eab"
+}

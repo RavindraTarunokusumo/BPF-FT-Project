@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_nrf_l3_019",
+  "fault_class": "verifier",
+  "fault_injection_id": "missing_map_null_check",
+  "diagnostic_sha256": "573a80e688d28257531d4dc6c94ecff8d2bbb8756b8fd526d69eeea878c38174"
+}

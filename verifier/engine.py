@@ -246,7 +246,7 @@ class BPFValidator:
                 return result
 
             # 3. Behavioral Tests
-            test_cases = task_spec.get("tests", [])
+            test_cases = task_spec.get("tests") or task_spec.get("test_cases", [])
             total_tests = len(test_cases)
             passed_tests = 0
             details: List[Dict[str, Any]] = []

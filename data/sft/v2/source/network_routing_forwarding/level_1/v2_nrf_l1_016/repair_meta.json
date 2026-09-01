@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_nrf_l1_016",
+  "fault_class": "verifier",
+  "fault_injection_id": "missing_bounds_check",
+  "diagnostic_sha256": "374917112db3fd5292f90cf273e54699811cd2398a3e44b9802ff1c82e5b0462"
+}

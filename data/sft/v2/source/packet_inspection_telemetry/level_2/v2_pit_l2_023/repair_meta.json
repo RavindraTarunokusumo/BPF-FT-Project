@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pit_l2_023",
+  "fault_class": "verifier",
+  "fault_injection_id": "unbounded_loop_complexity",
+  "diagnostic_sha256": "17fcd495992d5f642bda4999a5c7e701abe95acac11a0222c9ed94466dd034e5"
+}

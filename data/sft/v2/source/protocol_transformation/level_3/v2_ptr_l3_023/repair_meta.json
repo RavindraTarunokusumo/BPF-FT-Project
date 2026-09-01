@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_ptr_l3_023",
+  "fault_class": "verifier",
+  "fault_injection_id": "invalid_pointer_arithmetic",
+  "diagnostic_sha256": "159d68519c0f163a65cf48c9752a51f3ab7712d4b4a800d4589f30d902ff5c69"
+}

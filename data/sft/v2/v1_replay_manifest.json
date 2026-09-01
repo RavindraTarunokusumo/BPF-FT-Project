@@ -1,0 +1,1646 @@
+{
+  "version": "v2",
+  "description": "Deterministic 400-example replay subset selected from frozen SFT v1",
+  "selection_seed": 42,
+  "source_v1_train_path": "data/sft/frozen/v1/train.jsonl",
+  "source_v1_train_sha256": "71dd50816dfa752591546b4c4f85ce2d3f5793b07b99c786dc211879841daa80",
+  "source_v1_validation_path": "data/sft/frozen/v1/validation.jsonl",
+  "source_v1_validation_sha256": "2a61c686c0c862cac56ff4c447edee6f3f4906f08da528bc0f258b3a9ad3f39e",
+  "total_selected_tasks": 200,
+  "total_selected_examples": 400,
+  "example_types": {
+    "repair": 200,
+    "synthesis": 200
+  },
+  "categories": {
+    "network_routing_forwarding": 100,
+    "packet_filtering_security": 100,
+    "packet_inspection_telemetry": 100,
+    "protocol_transformation": 100
+  },
+  "difficulties": {
+    "level_1": 136,
+    "level_2": 136,
+    "level_3": 128
+  },
+  "template_families": {
+    "nrf_l2_mac_swap": 34,
+    "nrf_next_hop_routing_map": 34,
+    "nrf_ecmp_5tuple_load_balancer": 32,
+    "pfs_tcp_port_filter": 6,
+    "pfs_udp_port_filter": 6,
+    "pfs_ip_protocol_filter": 8,
+    "pfs_tcp_flags_filter": 6,
+    "pfs_ip_ttl_or_size_filter": 8,
+    "pfs_map_ip_denylist": 34,
+    "pfs_stateful_conn_tracker": 32,
+    "pit_packet_size_classifier": 34,
+    "pit_protocol_histogram_map": 34,
+    "pit_flow_telemetry_tracker": 32,
+    "ptr_ip_dscp_remarking": 34,
+    "ptr_stateless_snat_map": 34,
+    "ptr_stateful_napt_rewriter": 32
+  },
+  "selected_tasks": [
+    {
+      "task_id": "nrf_l1_005",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_005",
+      "repair_example_id": "sft_rep_nrf_l1_005_01"
+    },
+    {
+      "task_id": "nrf_l1_006",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_006",
+      "repair_example_id": "sft_rep_nrf_l1_006_01"
+    },
+    {
+      "task_id": "nrf_l1_013",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_013",
+      "repair_example_id": "sft_rep_nrf_l1_013_01"
+    },
+    {
+      "task_id": "nrf_l1_014",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_014",
+      "repair_example_id": "sft_rep_nrf_l1_014_01"
+    },
+    {
+      "task_id": "nrf_l1_015",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_015",
+      "repair_example_id": "sft_rep_nrf_l1_015_01"
+    },
+    {
+      "task_id": "nrf_l1_017",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_017",
+      "repair_example_id": "sft_rep_nrf_l1_017_01"
+    },
+    {
+      "task_id": "nrf_l1_029",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_029",
+      "repair_example_id": "sft_rep_nrf_l1_029_01"
+    },
+    {
+      "task_id": "nrf_l1_031",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_031",
+      "repair_example_id": "sft_rep_nrf_l1_031_01"
+    },
+    {
+      "task_id": "nrf_l1_033",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_033",
+      "repair_example_id": "sft_rep_nrf_l1_033_01"
+    },
+    {
+      "task_id": "nrf_l1_035",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_035",
+      "repair_example_id": "sft_rep_nrf_l1_035_01"
+    },
+    {
+      "task_id": "nrf_l1_038",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_038",
+      "repair_example_id": "sft_rep_nrf_l1_038_01"
+    },
+    {
+      "task_id": "nrf_l1_039",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_039",
+      "repair_example_id": "sft_rep_nrf_l1_039_01"
+    },
+    {
+      "task_id": "nrf_l1_041",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_041",
+      "repair_example_id": "sft_rep_nrf_l1_041_01"
+    },
+    {
+      "task_id": "nrf_l1_045",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_045",
+      "repair_example_id": "sft_rep_nrf_l1_045_01"
+    },
+    {
+      "task_id": "nrf_l1_047",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_047",
+      "repair_example_id": "sft_rep_nrf_l1_047_01"
+    },
+    {
+      "task_id": "nrf_l1_053",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_053",
+      "repair_example_id": "sft_rep_nrf_l1_053_01"
+    },
+    {
+      "task_id": "nrf_l1_058",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "template_family": "nrf_l2_mac_swap",
+      "synthesis_example_id": "sft_syn_nrf_l1_058",
+      "repair_example_id": "sft_rep_nrf_l1_058_01"
+    },
+    {
+      "task_id": "nrf_l2_001",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_001",
+      "repair_example_id": "sft_rep_nrf_l2_001_01"
+    },
+    {
+      "task_id": "nrf_l2_002",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_002",
+      "repair_example_id": "sft_rep_nrf_l2_002_01"
+    },
+    {
+      "task_id": "nrf_l2_013",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_013",
+      "repair_example_id": "sft_rep_nrf_l2_013_01"
+    },
+    {
+      "task_id": "nrf_l2_014",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_014",
+      "repair_example_id": "sft_rep_nrf_l2_014_01"
+    },
+    {
+      "task_id": "nrf_l2_018",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_018",
+      "repair_example_id": "sft_rep_nrf_l2_018_01"
+    },
+    {
+      "task_id": "nrf_l2_021",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_021",
+      "repair_example_id": "sft_rep_nrf_l2_021_01"
+    },
+    {
+      "task_id": "nrf_l2_022",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_022",
+      "repair_example_id": "sft_rep_nrf_l2_022_01"
+    },
+    {
+      "task_id": "nrf_l2_023",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_023",
+      "repair_example_id": "sft_rep_nrf_l2_023_01"
+    },
+    {
+      "task_id": "nrf_l2_026",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_026",
+      "repair_example_id": "sft_rep_nrf_l2_026_01"
+    },
+    {
+      "task_id": "nrf_l2_029",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_029",
+      "repair_example_id": "sft_rep_nrf_l2_029_01"
+    },
+    {
+      "task_id": "nrf_l2_035",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_035",
+      "repair_example_id": "sft_rep_nrf_l2_035_01"
+    },
+    {
+      "task_id": "nrf_l2_038",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_038",
+      "repair_example_id": "sft_rep_nrf_l2_038_01"
+    },
+    {
+      "task_id": "nrf_l2_043",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_043",
+      "repair_example_id": "sft_rep_nrf_l2_043_01"
+    },
+    {
+      "task_id": "nrf_l2_054",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_054",
+      "repair_example_id": "sft_rep_nrf_l2_054_01"
+    },
+    {
+      "task_id": "nrf_l2_057",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_057",
+      "repair_example_id": "sft_rep_nrf_l2_057_01"
+    },
+    {
+      "task_id": "nrf_l2_059",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_059",
+      "repair_example_id": "sft_rep_nrf_l2_059_01"
+    },
+    {
+      "task_id": "nrf_l2_061",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "template_family": "nrf_next_hop_routing_map",
+      "synthesis_example_id": "sft_syn_nrf_l2_061",
+      "repair_example_id": "sft_rep_nrf_l2_061_01"
+    },
+    {
+      "task_id": "nrf_l3_001",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_001",
+      "repair_example_id": "sft_rep_nrf_l3_001_01"
+    },
+    {
+      "task_id": "nrf_l3_002",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_002",
+      "repair_example_id": "sft_rep_nrf_l3_002_01"
+    },
+    {
+      "task_id": "nrf_l3_005",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_005",
+      "repair_example_id": "sft_rep_nrf_l3_005_01"
+    },
+    {
+      "task_id": "nrf_l3_006",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_006",
+      "repair_example_id": "sft_rep_nrf_l3_006_01"
+    },
+    {
+      "task_id": "nrf_l3_007",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_007",
+      "repair_example_id": "sft_rep_nrf_l3_007_01"
+    },
+    {
+      "task_id": "nrf_l3_010",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_010",
+      "repair_example_id": "sft_rep_nrf_l3_010_01"
+    },
+    {
+      "task_id": "nrf_l3_013",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_013",
+      "repair_example_id": "sft_rep_nrf_l3_013_01"
+    },
+    {
+      "task_id": "nrf_l3_015",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_015",
+      "repair_example_id": "sft_rep_nrf_l3_015_01"
+    },
+    {
+      "task_id": "nrf_l3_018",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_018",
+      "repair_example_id": "sft_rep_nrf_l3_018_01"
+    },
+    {
+      "task_id": "nrf_l3_019",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_019",
+      "repair_example_id": "sft_rep_nrf_l3_019_01"
+    },
+    {
+      "task_id": "nrf_l3_022",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_022",
+      "repair_example_id": "sft_rep_nrf_l3_022_01"
+    },
+    {
+      "task_id": "nrf_l3_023",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_023",
+      "repair_example_id": "sft_rep_nrf_l3_023_01"
+    },
+    {
+      "task_id": "nrf_l3_026",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_026",
+      "repair_example_id": "sft_rep_nrf_l3_026_01"
+    },
+    {
+      "task_id": "nrf_l3_029",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_029",
+      "repair_example_id": "sft_rep_nrf_l3_029_01"
+    },
+    {
+      "task_id": "nrf_l3_030",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_030",
+      "repair_example_id": "sft_rep_nrf_l3_030_01"
+    },
+    {
+      "task_id": "nrf_l3_031",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "template_family": "nrf_ecmp_5tuple_load_balancer",
+      "synthesis_example_id": "sft_syn_nrf_l3_031",
+      "repair_example_id": "sft_rep_nrf_l3_031_01"
+    },
+    {
+      "task_id": "pfs_l1_010",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_tcp_port_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_010",
+      "repair_example_id": "sft_rep_pfs_l1_010_01"
+    },
+    {
+      "task_id": "pfs_l1_011",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_tcp_port_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_011",
+      "repair_example_id": "sft_rep_pfs_l1_011_01"
+    },
+    {
+      "task_id": "pfs_l1_015",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_tcp_port_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_015",
+      "repair_example_id": "sft_rep_pfs_l1_015_01"
+    },
+    {
+      "task_id": "pfs_l1_023",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_udp_port_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_023",
+      "repair_example_id": "sft_rep_pfs_l1_023_01"
+    },
+    {
+      "task_id": "pfs_l1_026",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_udp_port_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_026",
+      "repair_example_id": "sft_rep_pfs_l1_026_01"
+    },
+    {
+      "task_id": "pfs_l1_029",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_udp_port_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_029",
+      "repair_example_id": "sft_rep_pfs_l1_029_01"
+    },
+    {
+      "task_id": "pfs_l1_033",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_ip_protocol_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_033",
+      "repair_example_id": "sft_rep_pfs_l1_033_01"
+    },
+    {
+      "task_id": "pfs_l1_035",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_ip_protocol_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_035",
+      "repair_example_id": "sft_rep_pfs_l1_035_01"
+    },
+    {
+      "task_id": "pfs_l1_037",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_ip_protocol_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_037",
+      "repair_example_id": "sft_rep_pfs_l1_037_01"
+    },
+    {
+      "task_id": "pfs_l1_039",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_ip_protocol_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_039",
+      "repair_example_id": "sft_rep_pfs_l1_039_01"
+    },
+    {
+      "task_id": "pfs_l1_042",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_tcp_flags_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_042",
+      "repair_example_id": "sft_rep_pfs_l1_042_01"
+    },
+    {
+      "task_id": "pfs_l1_043",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_tcp_flags_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_043",
+      "repair_example_id": "sft_rep_pfs_l1_043_01"
+    },
+    {
+      "task_id": "pfs_l1_045",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_tcp_flags_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_045",
+      "repair_example_id": "sft_rep_pfs_l1_045_01"
+    },
+    {
+      "task_id": "pfs_l1_049",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_ip_ttl_or_size_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_049",
+      "repair_example_id": "sft_rep_pfs_l1_049_01"
+    },
+    {
+      "task_id": "pfs_l1_055",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_ip_ttl_or_size_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_055",
+      "repair_example_id": "sft_rep_pfs_l1_055_01"
+    },
+    {
+      "task_id": "pfs_l1_058",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_ip_ttl_or_size_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_058",
+      "repair_example_id": "sft_rep_pfs_l1_058_01"
+    },
+    {
+      "task_id": "pfs_l1_061",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "template_family": "pfs_ip_ttl_or_size_filter",
+      "synthesis_example_id": "sft_syn_pfs_l1_061",
+      "repair_example_id": "sft_rep_pfs_l1_061_01"
+    },
+    {
+      "task_id": "pfs_l2_001",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_001",
+      "repair_example_id": "sft_rep_pfs_l2_001_01"
+    },
+    {
+      "task_id": "pfs_l2_003",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_003",
+      "repair_example_id": "sft_rep_pfs_l2_003_01"
+    },
+    {
+      "task_id": "pfs_l2_014",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_014",
+      "repair_example_id": "sft_rep_pfs_l2_014_01"
+    },
+    {
+      "task_id": "pfs_l2_025",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_025",
+      "repair_example_id": "sft_rep_pfs_l2_025_01"
+    },
+    {
+      "task_id": "pfs_l2_027",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_027",
+      "repair_example_id": "sft_rep_pfs_l2_027_01"
+    },
+    {
+      "task_id": "pfs_l2_029",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_029",
+      "repair_example_id": "sft_rep_pfs_l2_029_01"
+    },
+    {
+      "task_id": "pfs_l2_030",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_030",
+      "repair_example_id": "sft_rep_pfs_l2_030_01"
+    },
+    {
+      "task_id": "pfs_l2_033",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_033",
+      "repair_example_id": "sft_rep_pfs_l2_033_01"
+    },
+    {
+      "task_id": "pfs_l2_034",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_034",
+      "repair_example_id": "sft_rep_pfs_l2_034_01"
+    },
+    {
+      "task_id": "pfs_l2_035",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_035",
+      "repair_example_id": "sft_rep_pfs_l2_035_01"
+    },
+    {
+      "task_id": "pfs_l2_037",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_037",
+      "repair_example_id": "sft_rep_pfs_l2_037_01"
+    },
+    {
+      "task_id": "pfs_l2_038",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_038",
+      "repair_example_id": "sft_rep_pfs_l2_038_01"
+    },
+    {
+      "task_id": "pfs_l2_047",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_047",
+      "repair_example_id": "sft_rep_pfs_l2_047_01"
+    },
+    {
+      "task_id": "pfs_l2_054",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_054",
+      "repair_example_id": "sft_rep_pfs_l2_054_01"
+    },
+    {
+      "task_id": "pfs_l2_055",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_055",
+      "repair_example_id": "sft_rep_pfs_l2_055_01"
+    },
+    {
+      "task_id": "pfs_l2_061",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_061",
+      "repair_example_id": "sft_rep_pfs_l2_061_01"
+    },
+    {
+      "task_id": "pfs_l2_062",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "template_family": "pfs_map_ip_denylist",
+      "synthesis_example_id": "sft_syn_pfs_l2_062",
+      "repair_example_id": "sft_rep_pfs_l2_062_01"
+    },
+    {
+      "task_id": "pfs_l3_001",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_001",
+      "repair_example_id": "sft_rep_pfs_l3_001_01"
+    },
+    {
+      "task_id": "pfs_l3_005",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_005",
+      "repair_example_id": "sft_rep_pfs_l3_005_01"
+    },
+    {
+      "task_id": "pfs_l3_006",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_006",
+      "repair_example_id": "sft_rep_pfs_l3_006_01"
+    },
+    {
+      "task_id": "pfs_l3_007",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_007",
+      "repair_example_id": "sft_rep_pfs_l3_007_01"
+    },
+    {
+      "task_id": "pfs_l3_009",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_009",
+      "repair_example_id": "sft_rep_pfs_l3_009_01"
+    },
+    {
+      "task_id": "pfs_l3_013",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_013",
+      "repair_example_id": "sft_rep_pfs_l3_013_01"
+    },
+    {
+      "task_id": "pfs_l3_015",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_015",
+      "repair_example_id": "sft_rep_pfs_l3_015_01"
+    },
+    {
+      "task_id": "pfs_l3_017",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_017",
+      "repair_example_id": "sft_rep_pfs_l3_017_01"
+    },
+    {
+      "task_id": "pfs_l3_018",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_018",
+      "repair_example_id": "sft_rep_pfs_l3_018_01"
+    },
+    {
+      "task_id": "pfs_l3_019",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_019",
+      "repair_example_id": "sft_rep_pfs_l3_019_01"
+    },
+    {
+      "task_id": "pfs_l3_021",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_021",
+      "repair_example_id": "sft_rep_pfs_l3_021_01"
+    },
+    {
+      "task_id": "pfs_l3_023",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_023",
+      "repair_example_id": "sft_rep_pfs_l3_023_01"
+    },
+    {
+      "task_id": "pfs_l3_025",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_025",
+      "repair_example_id": "sft_rep_pfs_l3_025_01"
+    },
+    {
+      "task_id": "pfs_l3_026",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_026",
+      "repair_example_id": "sft_rep_pfs_l3_026_01"
+    },
+    {
+      "task_id": "pfs_l3_027",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_027",
+      "repair_example_id": "sft_rep_pfs_l3_027_01"
+    },
+    {
+      "task_id": "pfs_l3_029",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "template_family": "pfs_stateful_conn_tracker",
+      "synthesis_example_id": "sft_syn_pfs_l3_029",
+      "repair_example_id": "sft_rep_pfs_l3_029_01"
+    },
+    {
+      "task_id": "pit_l1_006",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_006",
+      "repair_example_id": "sft_rep_pit_l1_006_01"
+    },
+    {
+      "task_id": "pit_l1_013",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_013",
+      "repair_example_id": "sft_rep_pit_l1_013_01"
+    },
+    {
+      "task_id": "pit_l1_014",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_014",
+      "repair_example_id": "sft_rep_pit_l1_014_01"
+    },
+    {
+      "task_id": "pit_l1_015",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_015",
+      "repair_example_id": "sft_rep_pit_l1_015_01"
+    },
+    {
+      "task_id": "pit_l1_022",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_022",
+      "repair_example_id": "sft_rep_pit_l1_022_01"
+    },
+    {
+      "task_id": "pit_l1_025",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_025",
+      "repair_example_id": "sft_rep_pit_l1_025_01"
+    },
+    {
+      "task_id": "pit_l1_026",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_026",
+      "repair_example_id": "sft_rep_pit_l1_026_01"
+    },
+    {
+      "task_id": "pit_l1_033",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_033",
+      "repair_example_id": "sft_rep_pit_l1_033_01"
+    },
+    {
+      "task_id": "pit_l1_041",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_041",
+      "repair_example_id": "sft_rep_pit_l1_041_01"
+    },
+    {
+      "task_id": "pit_l1_043",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_043",
+      "repair_example_id": "sft_rep_pit_l1_043_01"
+    },
+    {
+      "task_id": "pit_l1_045",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_045",
+      "repair_example_id": "sft_rep_pit_l1_045_01"
+    },
+    {
+      "task_id": "pit_l1_047",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_047",
+      "repair_example_id": "sft_rep_pit_l1_047_01"
+    },
+    {
+      "task_id": "pit_l1_049",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_049",
+      "repair_example_id": "sft_rep_pit_l1_049_01"
+    },
+    {
+      "task_id": "pit_l1_050",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_050",
+      "repair_example_id": "sft_rep_pit_l1_050_01"
+    },
+    {
+      "task_id": "pit_l1_058",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_058",
+      "repair_example_id": "sft_rep_pit_l1_058_01"
+    },
+    {
+      "task_id": "pit_l1_061",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_061",
+      "repair_example_id": "sft_rep_pit_l1_061_01"
+    },
+    {
+      "task_id": "pit_l1_063",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "template_family": "pit_packet_size_classifier",
+      "synthesis_example_id": "sft_syn_pit_l1_063",
+      "repair_example_id": "sft_rep_pit_l1_063_01"
+    },
+    {
+      "task_id": "pit_l2_001",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_001",
+      "repair_example_id": "sft_rep_pit_l2_001_01"
+    },
+    {
+      "task_id": "pit_l2_006",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_006",
+      "repair_example_id": "sft_rep_pit_l2_006_01"
+    },
+    {
+      "task_id": "pit_l2_009",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_009",
+      "repair_example_id": "sft_rep_pit_l2_009_01"
+    },
+    {
+      "task_id": "pit_l2_011",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_011",
+      "repair_example_id": "sft_rep_pit_l2_011_01"
+    },
+    {
+      "task_id": "pit_l2_014",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_014",
+      "repair_example_id": "sft_rep_pit_l2_014_01"
+    },
+    {
+      "task_id": "pit_l2_015",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_015",
+      "repair_example_id": "sft_rep_pit_l2_015_01"
+    },
+    {
+      "task_id": "pit_l2_019",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_019",
+      "repair_example_id": "sft_rep_pit_l2_019_01"
+    },
+    {
+      "task_id": "pit_l2_021",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_021",
+      "repair_example_id": "sft_rep_pit_l2_021_01"
+    },
+    {
+      "task_id": "pit_l2_023",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_023",
+      "repair_example_id": "sft_rep_pit_l2_023_01"
+    },
+    {
+      "task_id": "pit_l2_030",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_030",
+      "repair_example_id": "sft_rep_pit_l2_030_01"
+    },
+    {
+      "task_id": "pit_l2_033",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_033",
+      "repair_example_id": "sft_rep_pit_l2_033_01"
+    },
+    {
+      "task_id": "pit_l2_034",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_034",
+      "repair_example_id": "sft_rep_pit_l2_034_01"
+    },
+    {
+      "task_id": "pit_l2_043",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_043",
+      "repair_example_id": "sft_rep_pit_l2_043_01"
+    },
+    {
+      "task_id": "pit_l2_049",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_049",
+      "repair_example_id": "sft_rep_pit_l2_049_01"
+    },
+    {
+      "task_id": "pit_l2_053",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_053",
+      "repair_example_id": "sft_rep_pit_l2_053_01"
+    },
+    {
+      "task_id": "pit_l2_054",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_054",
+      "repair_example_id": "sft_rep_pit_l2_054_01"
+    },
+    {
+      "task_id": "pit_l2_063",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "template_family": "pit_protocol_histogram_map",
+      "synthesis_example_id": "sft_syn_pit_l2_063",
+      "repair_example_id": "sft_rep_pit_l2_063_01"
+    },
+    {
+      "task_id": "pit_l3_002",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_002",
+      "repair_example_id": "sft_rep_pit_l3_002_01"
+    },
+    {
+      "task_id": "pit_l3_005",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_005",
+      "repair_example_id": "sft_rep_pit_l3_005_01"
+    },
+    {
+      "task_id": "pit_l3_007",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_007",
+      "repair_example_id": "sft_rep_pit_l3_007_01"
+    },
+    {
+      "task_id": "pit_l3_009",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_009",
+      "repair_example_id": "sft_rep_pit_l3_009_01"
+    },
+    {
+      "task_id": "pit_l3_010",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_010",
+      "repair_example_id": "sft_rep_pit_l3_010_01"
+    },
+    {
+      "task_id": "pit_l3_011",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_011",
+      "repair_example_id": "sft_rep_pit_l3_011_01"
+    },
+    {
+      "task_id": "pit_l3_015",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_015",
+      "repair_example_id": "sft_rep_pit_l3_015_01"
+    },
+    {
+      "task_id": "pit_l3_017",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_017",
+      "repair_example_id": "sft_rep_pit_l3_017_01"
+    },
+    {
+      "task_id": "pit_l3_018",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_018",
+      "repair_example_id": "sft_rep_pit_l3_018_01"
+    },
+    {
+      "task_id": "pit_l3_021",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_021",
+      "repair_example_id": "sft_rep_pit_l3_021_01"
+    },
+    {
+      "task_id": "pit_l3_022",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_022",
+      "repair_example_id": "sft_rep_pit_l3_022_01"
+    },
+    {
+      "task_id": "pit_l3_023",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_023",
+      "repair_example_id": "sft_rep_pit_l3_023_01"
+    },
+    {
+      "task_id": "pit_l3_025",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_025",
+      "repair_example_id": "sft_rep_pit_l3_025_01"
+    },
+    {
+      "task_id": "pit_l3_026",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_026",
+      "repair_example_id": "sft_rep_pit_l3_026_01"
+    },
+    {
+      "task_id": "pit_l3_030",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_030",
+      "repair_example_id": "sft_rep_pit_l3_030_01"
+    },
+    {
+      "task_id": "pit_l3_031",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "template_family": "pit_flow_telemetry_tracker",
+      "synthesis_example_id": "sft_syn_pit_l3_031",
+      "repair_example_id": "sft_rep_pit_l3_031_01"
+    },
+    {
+      "task_id": "ptr_l1_005",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_005",
+      "repair_example_id": "sft_rep_ptr_l1_005_01"
+    },
+    {
+      "task_id": "ptr_l1_006",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_006",
+      "repair_example_id": "sft_rep_ptr_l1_006_01"
+    },
+    {
+      "task_id": "ptr_l1_007",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_007",
+      "repair_example_id": "sft_rep_ptr_l1_007_01"
+    },
+    {
+      "task_id": "ptr_l1_015",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_015",
+      "repair_example_id": "sft_rep_ptr_l1_015_01"
+    },
+    {
+      "task_id": "ptr_l1_017",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_017",
+      "repair_example_id": "sft_rep_ptr_l1_017_01"
+    },
+    {
+      "task_id": "ptr_l1_018",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_018",
+      "repair_example_id": "sft_rep_ptr_l1_018_01"
+    },
+    {
+      "task_id": "ptr_l1_019",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_019",
+      "repair_example_id": "sft_rep_ptr_l1_019_01"
+    },
+    {
+      "task_id": "ptr_l1_025",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_025",
+      "repair_example_id": "sft_rep_ptr_l1_025_01"
+    },
+    {
+      "task_id": "ptr_l1_031",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_031",
+      "repair_example_id": "sft_rep_ptr_l1_031_01"
+    },
+    {
+      "task_id": "ptr_l1_033",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_033",
+      "repair_example_id": "sft_rep_ptr_l1_033_01"
+    },
+    {
+      "task_id": "ptr_l1_034",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_034",
+      "repair_example_id": "sft_rep_ptr_l1_034_01"
+    },
+    {
+      "task_id": "ptr_l1_035",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_035",
+      "repair_example_id": "sft_rep_ptr_l1_035_01"
+    },
+    {
+      "task_id": "ptr_l1_039",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_039",
+      "repair_example_id": "sft_rep_ptr_l1_039_01"
+    },
+    {
+      "task_id": "ptr_l1_041",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_041",
+      "repair_example_id": "sft_rep_ptr_l1_041_01"
+    },
+    {
+      "task_id": "ptr_l1_042",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_042",
+      "repair_example_id": "sft_rep_ptr_l1_042_01"
+    },
+    {
+      "task_id": "ptr_l1_054",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_054",
+      "repair_example_id": "sft_rep_ptr_l1_054_01"
+    },
+    {
+      "task_id": "ptr_l1_061",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "template_family": "ptr_ip_dscp_remarking",
+      "synthesis_example_id": "sft_syn_ptr_l1_061",
+      "repair_example_id": "sft_rep_ptr_l1_061_01"
+    },
+    {
+      "task_id": "ptr_l2_002",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_002",
+      "repair_example_id": "sft_rep_ptr_l2_002_01"
+    },
+    {
+      "task_id": "ptr_l2_009",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_009",
+      "repair_example_id": "sft_rep_ptr_l2_009_01"
+    },
+    {
+      "task_id": "ptr_l2_014",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_014",
+      "repair_example_id": "sft_rep_ptr_l2_014_01"
+    },
+    {
+      "task_id": "ptr_l2_017",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_017",
+      "repair_example_id": "sft_rep_ptr_l2_017_01"
+    },
+    {
+      "task_id": "ptr_l2_019",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_019",
+      "repair_example_id": "sft_rep_ptr_l2_019_01"
+    },
+    {
+      "task_id": "ptr_l2_022",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_022",
+      "repair_example_id": "sft_rep_ptr_l2_022_01"
+    },
+    {
+      "task_id": "ptr_l2_025",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_025",
+      "repair_example_id": "sft_rep_ptr_l2_025_01"
+    },
+    {
+      "task_id": "ptr_l2_035",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_035",
+      "repair_example_id": "sft_rep_ptr_l2_035_01"
+    },
+    {
+      "task_id": "ptr_l2_038",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_038",
+      "repair_example_id": "sft_rep_ptr_l2_038_01"
+    },
+    {
+      "task_id": "ptr_l2_039",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_039",
+      "repair_example_id": "sft_rep_ptr_l2_039_01"
+    },
+    {
+      "task_id": "ptr_l2_041",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_041",
+      "repair_example_id": "sft_rep_ptr_l2_041_01"
+    },
+    {
+      "task_id": "ptr_l2_042",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_042",
+      "repair_example_id": "sft_rep_ptr_l2_042_01"
+    },
+    {
+      "task_id": "ptr_l2_045",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_045",
+      "repair_example_id": "sft_rep_ptr_l2_045_01"
+    },
+    {
+      "task_id": "ptr_l2_051",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_051",
+      "repair_example_id": "sft_rep_ptr_l2_051_01"
+    },
+    {
+      "task_id": "ptr_l2_053",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_053",
+      "repair_example_id": "sft_rep_ptr_l2_053_01"
+    },
+    {
+      "task_id": "ptr_l2_054",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_054",
+      "repair_example_id": "sft_rep_ptr_l2_054_01"
+    },
+    {
+      "task_id": "ptr_l2_061",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "template_family": "ptr_stateless_snat_map",
+      "synthesis_example_id": "sft_syn_ptr_l2_061",
+      "repair_example_id": "sft_rep_ptr_l2_061_01"
+    },
+    {
+      "task_id": "ptr_l3_002",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_002",
+      "repair_example_id": "sft_rep_ptr_l3_002_01"
+    },
+    {
+      "task_id": "ptr_l3_003",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_003",
+      "repair_example_id": "sft_rep_ptr_l3_003_01"
+    },
+    {
+      "task_id": "ptr_l3_005",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_005",
+      "repair_example_id": "sft_rep_ptr_l3_005_01"
+    },
+    {
+      "task_id": "ptr_l3_006",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_006",
+      "repair_example_id": "sft_rep_ptr_l3_006_01"
+    },
+    {
+      "task_id": "ptr_l3_007",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_007",
+      "repair_example_id": "sft_rep_ptr_l3_007_01"
+    },
+    {
+      "task_id": "ptr_l3_011",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_011",
+      "repair_example_id": "sft_rep_ptr_l3_011_01"
+    },
+    {
+      "task_id": "ptr_l3_018",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_018",
+      "repair_example_id": "sft_rep_ptr_l3_018_01"
+    },
+    {
+      "task_id": "ptr_l3_019",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_019",
+      "repair_example_id": "sft_rep_ptr_l3_019_01"
+    },
+    {
+      "task_id": "ptr_l3_021",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_021",
+      "repair_example_id": "sft_rep_ptr_l3_021_01"
+    },
+    {
+      "task_id": "ptr_l3_022",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_022",
+      "repair_example_id": "sft_rep_ptr_l3_022_01"
+    },
+    {
+      "task_id": "ptr_l3_023",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_023",
+      "repair_example_id": "sft_rep_ptr_l3_023_01"
+    },
+    {
+      "task_id": "ptr_l3_025",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_025",
+      "repair_example_id": "sft_rep_ptr_l3_025_01"
+    },
+    {
+      "task_id": "ptr_l3_026",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_026",
+      "repair_example_id": "sft_rep_ptr_l3_026_01"
+    },
+    {
+      "task_id": "ptr_l3_027",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_027",
+      "repair_example_id": "sft_rep_ptr_l3_027_01"
+    },
+    {
+      "task_id": "ptr_l3_030",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_030",
+      "repair_example_id": "sft_rep_ptr_l3_030_01"
+    },
+    {
+      "task_id": "ptr_l3_031",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "template_family": "ptr_stateful_napt_rewriter",
+      "synthesis_example_id": "sft_syn_ptr_l3_031",
+      "repair_example_id": "sft_rep_ptr_l3_031_01"
+    }
+  ]
+}

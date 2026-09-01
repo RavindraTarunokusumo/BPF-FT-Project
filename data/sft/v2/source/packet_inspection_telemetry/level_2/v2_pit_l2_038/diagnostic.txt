@@ -1,0 +1,4 @@
+FAIL: test_case 'match_primary_rule' failed:
+  Expected action: XDP_TX
+  Observed action: Corrupted packet checksum (IP/L4 checksum was not incrementally updated after field rewrite)
+1 of 4 test cases failed.

@@ -1,0 +1,4 @@
+FAIL: test_case 'match_primary_rule' failed:
+  Expected action: XDP_DROP
+  Observed action: XDP_PASS (misaligned L4 offset assuming fixed 20-byte IP header)
+1 of 4 test cases failed.

@@ -1,0 +1,88 @@
+{
+  "dataset_version": "v2",
+  "report_type": "quality_assurance_and_verification_report",
+  "generated_at": "2026-09-01T15:22:31.257532+00:00",
+  "composition_summary": {
+    "v2_delta_total_examples": 1200,
+    "v2_delta_synthesis_examples": 720,
+    "v2_delta_repair_examples": 480,
+    "v2_delta_unique_tasks": 720,
+    "cumulative_corpus_total_examples": 1600,
+    "v1_replay_examples": 400
+  },
+  "quality_gate_metrics": {
+    "compilation_rate": 1.0,
+    "kernel_verifier_rate": 1.0,
+    "behavioral_tests_pass_rate": 1.0,
+    "c_completion_compliance_rate": 1.0,
+    "negative_safety_marker_compliance": 1.0,
+    "deterministic_reproducibility_rate": 1.0
+  },
+  "repair_fault_distribution": {
+    "v2_delta": {
+      "compiler": 120,
+      "verifier": 160,
+      "behavioral": 200,
+      "total": 480
+    },
+    "cumulative": {
+      "compiler": 120,
+      "verifier": 324,
+      "behavioral": 236
+    }
+  },
+  "token_length_distributions": {
+    "model_name": "Qwen/Qwen3-8B",
+    "renderer_name": "qwen3_disable_thinking",
+    "max_sequence_length": 4096,
+    "v2_delta": {
+      "min": 608,
+      "max": 2186,
+      "mean": 928.9625,
+      "median": 706,
+      "p95": 1495,
+      "total_tokens": 1114755
+    },
+    "train": {
+      "min": 381,
+      "max": 3682,
+      "mean": 1026.8774094063224,
+      "median": 740,
+      "p95": 2127,
+      "total_tokens": 1331860
+    },
+    "validation_in_domain": {
+      "min": 381,
+      "max": 3672,
+      "mean": 993.4779874213837,
+      "median": 706,
+      "p95": 2103,
+      "total_tokens": 157963
+    },
+    "validation_family_heldout": {
+      "min": 610,
+      "max": 1500,
+      "mean": 919.3194444444445,
+      "median": 706,
+      "p95": 1484,
+      "total_tokens": 132382
+    }
+  },
+  "category_distribution": {
+    "network_routing_forwarding": 300,
+    "packet_filtering_security": 300,
+    "packet_inspection_telemetry": 300,
+    "protocol_transformation": 300
+  },
+  "difficulty_distribution": {
+    "level_1": 400,
+    "level_2": 400,
+    "level_3": 400
+  },
+  "semantic_family_summary": {
+    "total_families": 36,
+    "max_family_quota_pct": 3.0,
+    "quota_ceiling_pct": 5.0,
+    "compliant": true
+  }
+}

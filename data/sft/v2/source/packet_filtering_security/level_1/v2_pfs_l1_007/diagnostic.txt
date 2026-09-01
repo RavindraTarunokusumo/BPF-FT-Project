@@ -1,0 +1,2 @@
+candidate.c:24:18: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+1 error generated.

@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_ptr_l3_005",
+  "fault_class": "compiler",
+  "fault_injection_id": "undeclared_action_macro",
+  "diagnostic_sha256": "f3bf75c9588c0099434145cd2563d20f1ac0027773e76d14c6a78222ede58f3d"
+}

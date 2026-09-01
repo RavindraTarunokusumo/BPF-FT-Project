@@ -1,0 +1,4 @@
+FAIL: test_case 'match_primary_rule' failed:
+  Expected action: XDP_DROP
+  Observed action: XDP_PASS (port comparison failed due to host byte order without bpf_htons)
+1 of 4 test cases failed.

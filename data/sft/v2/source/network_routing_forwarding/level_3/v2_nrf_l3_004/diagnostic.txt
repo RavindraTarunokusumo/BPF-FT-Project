@@ -1,0 +1,2 @@
+candidate.c:28:17: error: call to undeclared function 'bpf_map_lookup_elem'
+1 error generated.

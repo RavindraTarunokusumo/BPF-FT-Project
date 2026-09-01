@@ -1,0 +1,35 @@
+{
+  "task_id": "v2_pfs_l3_055",
+  "validator": "packet_action",
+  "test_count": 4,
+  "tests": [
+    {
+      "name": "match_vxlan_target_drop",
+      "description": "VXLAN VNI 51235 with inner port 5353 must be dropped",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b5004600000800000000c823000200000000020200000000010800450000281234000040067c65c0000201c6336402303914e9000003e8000000005002ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/match_vxlan_target_drop.bin"
+    },
+    {
+      "name": "non_match_vni_pass",
+      "description": "Different VNI must return XDP_PASS",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b5004600000800000000c824000200000000020200000000010800450000281234000040067c65c0000201c6336402303914e9000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_match_vni_pass.bin"
+    },
+    {
+      "name": "non_match_inner_port_pass",
+      "description": "Different inner destination port must return XDP_PASS",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201c6336402c35012b5004600000800000000c823000200000000020200000000010800450000281234000040067c65c0000201c6336402303914ea000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_match_inner_port_pass.bin"
+    },
+    {
+      "name": "truncated_packet_pass",
+      "description": "Truncated packet boundary check must return XDP_PASS safely",
+      "packet_hex": "02000000000202000000000108004500005a1234000040117c28c0000201",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_packet_pass.bin"
+    }
+  ]
+}

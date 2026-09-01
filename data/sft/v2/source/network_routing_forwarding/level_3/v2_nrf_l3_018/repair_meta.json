@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_nrf_l3_018",
+  "fault_class": "verifier",
+  "fault_injection_id": "invalid_pointer_arithmetic",
+  "diagnostic_sha256": "bc84fd864f35b8ba90ba9185f3e9a4a2a3082b51b862e10eec862d274ae9d5df"
+}

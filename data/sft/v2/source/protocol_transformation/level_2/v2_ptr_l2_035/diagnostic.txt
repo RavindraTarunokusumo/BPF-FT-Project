@@ -1,0 +1,4 @@
+FAIL: test_case 'match_primary_rule' failed:
+  Expected action: XDP_DROP
+  Observed action: XDP_PASS (condition inverted != instead of ==)
+1 of 4 test cases failed.

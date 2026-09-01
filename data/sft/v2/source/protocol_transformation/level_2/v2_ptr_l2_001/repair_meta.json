@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_ptr_l2_001",
+  "fault_class": "compiler",
+  "fault_injection_id": "struct_member_typo",
+  "diagnostic_sha256": "dbfc62cdf2d2690128fab741b1e447db15b0ea6e41574831eeff4a67e7e00d02"
+}

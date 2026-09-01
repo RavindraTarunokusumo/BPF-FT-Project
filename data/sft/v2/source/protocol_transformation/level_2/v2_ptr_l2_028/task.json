@@ -1,0 +1,49 @@
+{
+  "task_id": "v2_ptr_l2_028",
+  "application_category": "protocol_transformation",
+  "category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "ptr_vxlan_header_transform",
+  "template_family": "ptr_vxlan_header_transform",
+  "semantic_family": "ptr_vxlan_header_transform",
+  "instruction": "Write a complete, verifier-safe XDP program for semantic family `ptr_vxlan_header_transform`. Inspect incoming traffic matching target criteria (Port 53, Subnet 198.51.128.0/24, or Protocol specific tags). Apply specified filtering, routing, telemetry, or transformation action. Pass all non-matching and truncated packets safely with XDP_PASS.",
+  "requirements": [
+    "Parse Ethernet and network layer headers",
+    "Validate packet boundaries and handle protocol fields safely",
+    "Target parameterization: port=53, vid=3064, vni=18596",
+    "Maintain verifier safety with proper bounds and null checks",
+    "Return valid XDP action (XDP_PASS, XDP_DROP, XDP_TX, or XDP_REDIRECT)",
+    "Entry point SEC(\"xdp\") and GPL license"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "match_primary_rule",
+      "description": "Target rule on port 53 must return XDP_TX",
+      "packet_hex": "0200000000020200000000010800450000281234000040117c5ac0000201c63364023039003500080000",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/match_primary_rule.bin"
+    },
+    {
+      "name": "non_matching_port_pass",
+      "description": "Non-matching port must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040117c5ac0000201c63364023039003600080000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_matching_port_pass.bin"
+    },
+    {
+      "name": "non_ip_arp_pass",
+      "description": "ARP/Non-IP packet must return XDP_PASS",
+      "packet_hex": "020000000002020000000001080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_ip_arp_pass.bin"
+    },
+    {
+      "name": "truncated_packet_pass",
+      "description": "Truncated packet must return XDP_PASS safely",
+      "packet_hex": "02000000000202000000000108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_packet_pass.bin"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "task_id": "v2_pfs_l2_018",
+  "validator": "packet_action",
+  "test_count": 4,
+  "tests": [
+    {
+      "name": "syn_fin_anomaly_drop",
+      "description": "SYN-FIN flag combination must be dropped",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005003ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_fin_anomaly_drop.bin"
+    },
+    {
+      "name": "null_scan_anomaly_drop",
+      "description": "NULL scan (0 flags) must be dropped",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005000ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/null_scan_anomaly_drop.bin"
+    },
+    {
+      "name": "xmas_scan_anomaly_drop",
+      "description": "Xmas scan (FIN-PSH-URG) must be dropped",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005029ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/xmas_scan_anomaly_drop.bin"
+    },
+    {
+      "name": "normal_syn_pass",
+      "description": "Normal SYN packet must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/normal_syn_pass.bin"
+    }
+  ]
+}

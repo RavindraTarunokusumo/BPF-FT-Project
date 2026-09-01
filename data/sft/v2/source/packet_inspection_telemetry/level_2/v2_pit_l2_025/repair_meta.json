@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pit_l2_025",
+  "fault_class": "behavioral",
+  "fault_injection_id": "inverted_match_condition",
+  "diagnostic_sha256": "ab92e1410073b95642f89af4c65b26c887302ce18bc3db7ecd71dff494bbd65d"
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pit_l3_012",
+  "fault_class": "verifier",
+  "fault_injection_id": "uninitialized_stack_read",
+  "diagnostic_sha256": "3ee64c3eba5e379f02ca746962480a33e7b6510bae89ba9d9f2d2d935462a6d4"
+}

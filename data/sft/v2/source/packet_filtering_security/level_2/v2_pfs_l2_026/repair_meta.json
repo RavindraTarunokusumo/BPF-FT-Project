@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_pfs_l2_026",
+  "fault_class": "behavioral",
+  "fault_injection_id": "endianness_mismatch",
+  "diagnostic_sha256": "f0bdd6de6a7eb3ad7eb360993c83b631c65e955d8d2ea70db6c45d7ec06853fc"
+}

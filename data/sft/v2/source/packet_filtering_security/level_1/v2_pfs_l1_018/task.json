@@ -1,0 +1,50 @@
+{
+  "task_id": "v2_pfs_l1_018",
+  "application_category": "packet_filtering_security",
+  "category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "pfs_tcp_anomalous_flags",
+  "template_family": "pfs_tcp_anomalous_flags",
+  "semantic_family": "pfs_tcp_anomalous_flags",
+  "instruction": "Write an XDP program that inspects incoming TCP packets on IPv4. Drop packets (XDP_DROP) exhibiting TCP flag anomalies: (1) SYN and FIN set simultaneously, (2) NULL scan (all flags 0), or (3) Xmas scan (FIN, PSH, and URG all set). Pass normal TCP traffic and non-TCP packets with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 headers",
+    "Verify IP protocol is IPPROTO_TCP",
+    "Account for variable IPv4 IHL and check TCP header bounds",
+    "Read TCP flags byte from offset 13 of TCP header",
+    "Check for SYN+FIN (flags & 0x03 == 0x03), NULL (flags == 0), or Xmas (flags & 0x29 == 0x29)",
+    "Return XDP_DROP for anomalous flag sets, XDP_PASS for standard packets",
+    "Entry point SEC(\"xdp\") and GPL license"
+  ],
+  "gold_candidate_id": null,
+  "tests": [
+    {
+      "name": "syn_fin_anomaly_drop",
+      "description": "SYN-FIN flag combination must be dropped",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005003ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/syn_fin_anomaly_drop.bin"
+    },
+    {
+      "name": "null_scan_anomaly_drop",
+      "description": "NULL scan (0 flags) must be dropped",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005000ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/null_scan_anomaly_drop.bin"
+    },
+    {
+      "name": "xmas_scan_anomaly_drop",
+      "description": "Xmas scan (FIN-PSH-URG) must be dropped",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005029ffff00000000",
+      "expected_action": "XDP_DROP",
+      "fixture_file": "fixtures/xmas_scan_anomaly_drop.bin"
+    },
+    {
+      "name": "normal_syn_pass",
+      "description": "Normal SYN packet must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c633640230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/normal_syn_pass.bin"
+    }
+  ]
+}

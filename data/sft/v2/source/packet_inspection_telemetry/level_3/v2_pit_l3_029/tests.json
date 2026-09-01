@@ -1,0 +1,35 @@
+{
+  "task_id": "v2_pit_l3_029",
+  "validator": "packet_action",
+  "test_count": 4,
+  "tests": [
+    {
+      "name": "match_primary_rule",
+      "description": "Target rule on port 4789 must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c6336402303912b5000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/match_primary_rule.bin"
+    },
+    {
+      "name": "non_matching_port_pass",
+      "description": "Non-matching port must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040067c65c0000201c6336402303912b6000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_matching_port_pass.bin"
+    },
+    {
+      "name": "non_ip_arp_pass",
+      "description": "ARP/Non-IP packet must return XDP_PASS",
+      "packet_hex": "020000000002020000000001080600000000000000000000000000000000000000000000000000000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/non_ip_arp_pass.bin"
+    },
+    {
+      "name": "truncated_packet_pass",
+      "description": "Truncated packet must return XDP_PASS safely",
+      "packet_hex": "02000000000202000000000108004500",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_packet_pass.bin"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "v2_nrf_l1_024",
+  "fault_class": "verifier",
+  "fault_injection_id": "unbounded_loop_complexity",
+  "diagnostic_sha256": "56480a2e24c2c2fb85b6261a16a6aa50d268e5acb10d88a3054e0b6206c079d8"
+}

@@ -1,0 +1,35 @@
+{
+  "task_id": "v2_ptr_l2_008",
+  "validator": "packet_action",
+  "test_count": 4,
+  "tests": [
+    {
+      "name": "icmp_echo_req_tx",
+      "description": "Matching ICMP Echo Request must be translated to Reply and return XDP_TX",
+      "packet_hex": "02000000000202000000000108004500002d1234000040017455c0000201c6336c1208006496123400014543484f5f5041594c4f41445f31323334",
+      "expected_action": "XDP_TX",
+      "fixture_file": "fixtures/icmp_echo_req_tx.bin"
+    },
+    {
+      "name": "other_ip_icmp_pass",
+      "description": "ICMP Echo Request to different IP must return XDP_PASS",
+      "packet_hex": "02000000000202000000000108004500002d123400004001179fc0000201c633c8c808006496123400014543484f5f5041594c4f41445f31323334",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/other_ip_icmp_pass.bin"
+    },
+    {
+      "name": "tcp_packet_pass",
+      "description": "TCP packet must return XDP_PASS",
+      "packet_hex": "0200000000020200000000010800450000281234000040067455c0000201c6336c1230390050000003e8000000005002ffff00000000",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/tcp_packet_pass.bin"
+    },
+    {
+      "name": "truncated_icmp_pass",
+      "description": "Truncated ICMP packet must return XDP_PASS safely",
+      "packet_hex": "02000000000202000000000108004500002d123400004001",
+      "expected_action": "XDP_PASS",
+      "fixture_file": "fixtures/truncated_icmp_pass.bin"
+    }
+  ]
+}
