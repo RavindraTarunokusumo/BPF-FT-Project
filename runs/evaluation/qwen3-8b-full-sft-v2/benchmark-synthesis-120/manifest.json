@@ -1,0 +1,17 @@
+{
+  "rollout_id": "benchmark-synthesis-120",
+  "model_name": "Qwen/Qwen3-8B",
+  "sampler_checkpoint": "tinker://9461002d-2321-5858-8184-5604f9304283:train:0/sampler_weights/final",
+  "renderer_name": "qwen3_disable_thinking",
+  "is_mock": false,
+  "num_tasks": 120,
+  "num_samples_per_task": 1,
+  "total_samples": 120,
+  "temperature": 0.0,
+  "seed": 42,
+  "max_tokens": 2048,
+  "output_compliance_rate": 1.0,
+  "total_generated_tokens": 63553,
+  "benchmark_index_path": "data\\benchmark\\synthesis\\index.jsonl",
+  "candidates_dir": "runs/evaluation/qwen3-8b-full-sft-v2/benchmark-synthesis-120/candidates"
+}
