@@ -1,0 +1,45 @@
+{
+  "task_id": "rl_train_pfs_l2_06",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "xdp_ttl_filter",
+  "template_family": "xdp_header_inspect",
+  "semantic_signature": "pfs_l2_ttl_7",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects IPv4 traffic and drops packets with TTL <= 7. All other packets pass.",
+  "requirements": [
+    "Validate Ethernet and IPv4 headers",
+    "Check ip->ttl <= 7",
+    "Return XDP_DROP on match, XDP_PASS otherwise",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 4,
+  "task_sha256": "5a6005cfc0401e250098b14dec3ba459136ba5edfbf07bf7f49366c35594aea6",
+  "test_fixtures": [
+    {
+      "name": "drop_ttl_7",
+      "fixture_file": "fixtures/drop_ttl_7.bin",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "drop_ttl_0",
+      "fixture_file": "fixtures/drop_ttl_0.bin",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_ttl_64",
+      "fixture_file": "fixtures/pass_ttl_64.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_non_ip",
+      "fixture_file": "fixtures/pass_non_ip.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

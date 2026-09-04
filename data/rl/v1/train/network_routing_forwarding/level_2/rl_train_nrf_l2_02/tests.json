@@ -1,0 +1,24 @@
+{
+  "task_id": "rl_train_nrf_l2_02",
+  "test_count": 2,
+  "test_cases": [
+    {
+      "name": "test_forward_subnet",
+      "description": "Packet to 10.3.1.1 forwarded via XDP_TX",
+      "fixture_file": "fixtures/test_forward_subnet.bin",
+      "packet_hex": "5254001234565254006543210800450000281234000040069be6c0a8010a0a03010130390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_other_subnet",
+      "description": "Packet to other subnet passed via XDP_PASS",
+      "fixture_file": "fixtures/test_pass_other_subnet.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e540c0a8010ac0a8010130390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

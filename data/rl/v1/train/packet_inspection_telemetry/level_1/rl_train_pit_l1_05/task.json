@@ -1,0 +1,46 @@
+{
+  "task_id": "rl_train_pit_l1_05",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "xdp_telemetry_counter",
+  "template_family": "xdp_stateless_counter",
+  "semantic_signature": "pit_l1_port80_counter",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that implements Count TCP port 80 packets using a BPF_MAP_TYPE_ARRAY. All traffic must pass with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY",
+    "Validate Ethernet bounds",
+    "Increment counter with atomic add",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 4,
+  "task_sha256": "388bd43ba7f6417297bc99a207db8992b235eafa1d05251daecc3a3c3566bd72",
+  "test_fixtures": [
+    {
+      "name": "test_pass_1",
+      "fixture_file": "fixtures/test_pass_1.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_2",
+      "fixture_file": "fixtures/test_pass_2.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_3",
+      "fixture_file": "fixtures/test_pass_3.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_arp",
+      "fixture_file": "fixtures/test_pass_arp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

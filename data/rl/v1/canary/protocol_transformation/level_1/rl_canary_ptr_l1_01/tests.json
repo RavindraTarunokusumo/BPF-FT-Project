@@ -1,0 +1,24 @@
+{
+  "task_id": "rl_canary_ptr_l1_01",
+  "test_count": 2,
+  "test_cases": [
+    {
+      "name": "test_mac_swap",
+      "description": "Ethernet MACs swapped and forwarded via XDP_TX",
+      "fixture_file": "fixtures/test_mac_swap.bin",
+      "packet_hex": "66778899aabb001122334455080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_arp",
+      "description": "Non-IPv4 ARP frame passed safely with XDP_PASS",
+      "fixture_file": "fixtures/test_pass_arp.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "split": "train",
+  "task_count": 96,
+  "index_sha256": "fae224f40c5b69bb496cae83423286e55dce15231ad8657c9c4ad32fac5596a1",
+  "categories": {
+    "packet_filtering_security": 24,
+    "packet_inspection_telemetry": 24,
+    "protocol_transformation": 24,
+    "network_routing_forwarding": 24
+  },
+  "difficulties": {
+    "level_1": 32,
+    "level_2": 32,
+    "level_3": 32
+  }
+}

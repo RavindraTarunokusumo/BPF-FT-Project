@@ -1,0 +1,16 @@
+{
+  "split": "canary",
+  "task_count": 12,
+  "index_sha256": "99f77eaf40851a6622c1df02dbff3caf8ceef52d5b1f9bbe441442e70749f7f8",
+  "categories": {
+    "packet_filtering_security": 3,
+    "packet_inspection_telemetry": 3,
+    "protocol_transformation": 3,
+    "network_routing_forwarding": 3
+  },
+  "difficulties": {
+    "level_1": 4,
+    "level_2": 4,
+    "level_3": 4
+  }
+}

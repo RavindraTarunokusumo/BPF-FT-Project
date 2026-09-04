@@ -1,0 +1,40 @@
+{
+  "task_id": "rl_train_pit_l2_07",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "xdp_protocol_histogram",
+  "template_family": "xdp_telemetry_hist",
+  "semantic_signature": "pit_l2_hist_8",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that indexes a protocol histogram array map by IP protocol number and increments the counter. All packets pass with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map with 256 entries",
+    "Validate Ethernet and IPv4 bounds",
+    "Lookup protocol slot and increment counter",
+    "Return XDP_PASS",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "a52a16d9781565461cd8cd8f5236f947698e2c4b2089bb7a26133c4b54c31c72",
+  "test_fixtures": [
+    {
+      "name": "test_hist_tcp",
+      "fixture_file": "fixtures/test_hist_tcp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_hist_udp",
+      "fixture_file": "fixtures/test_hist_udp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_hist_icmp",
+      "fixture_file": "fixtures/test_hist_icmp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

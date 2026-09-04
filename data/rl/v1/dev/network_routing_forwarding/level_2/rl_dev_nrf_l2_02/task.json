@@ -1,0 +1,34 @@
+{
+  "task_id": "rl_dev_nrf_l2_02",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_prefix_router",
+  "template_family": "xdp_subnet_forward",
+  "semantic_signature": "nrf_l2_prefix_11",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that routes traffic destined for 10.11.0.0/16. If matched and TTL > 1, decrement TTL and forward with XDP_TX. Pass all other traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 bounds",
+    "Check destination in 10.11.0.0/16",
+    "Decrement TTL and return XDP_TX",
+    "Return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "316edef1694271488ef942ec0d043495513ec2d64983071b9bfaaabcd40ba0d8",
+  "test_fixtures": [
+    {
+      "name": "test_forward_subnet",
+      "fixture_file": "fixtures/test_forward_subnet.bin",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_other_subnet",
+      "fixture_file": "fixtures/test_pass_other_subnet.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

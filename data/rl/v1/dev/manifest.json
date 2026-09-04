@@ -1,0 +1,16 @@
+{
+  "split": "dev",
+  "task_count": 24,
+  "index_sha256": "2ed3af2cda75a410e6c65548fc6e6280a8cdf336ec530e8107504b13413a5ebc",
+  "categories": {
+    "packet_filtering_security": 6,
+    "packet_inspection_telemetry": 6,
+    "protocol_transformation": 6,
+    "network_routing_forwarding": 6
+  },
+  "difficulties": {
+    "level_1": 8,
+    "level_2": 8,
+    "level_3": 8
+  }
+}

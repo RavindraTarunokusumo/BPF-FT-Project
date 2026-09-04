@@ -1,0 +1,34 @@
+{
+  "task_id": "rl_dev_nrf_l3_02",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "xdp_flow_lb",
+  "template_family": "xdp_hash_lb",
+  "semantic_signature": "nrf_l3_lb_11",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that hashes incoming TCP flows across 4 backends in a BPF_MAP_TYPE_ARRAY and forwards with XDP_TX. Non-TCP traffic passes with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map with 4 entries",
+    "Validate Ethernet, IP, and TCP headers",
+    "Compute 4-tuple flow hash",
+    "Return XDP_TX for TCP flows, XDP_PASS for others",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "f36ab809db6eee134db6c6f31816983b1397fc085bfc61091516c97a2fad0dba",
+  "test_fixtures": [
+    {
+      "name": "test_lb_forward",
+      "fixture_file": "fixtures/test_lb_forward.bin",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_non_ip_pass",
+      "fixture_file": "fixtures/test_non_ip_pass.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

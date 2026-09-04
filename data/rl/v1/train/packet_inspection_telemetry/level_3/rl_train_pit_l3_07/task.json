@@ -1,0 +1,34 @@
+{
+  "task_id": "rl_train_pit_l3_07",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "xdp_flow_tracker",
+  "template_family": "xdp_flow_bytes",
+  "semantic_signature": "pit_l3_flow_8",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that aggregates per-source-IP byte counters in a BPF_MAP_TYPE_HASH map. Return XDP_PASS for all traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_HASH map for source IP to byte count",
+    "Validate Ethernet and IPv4 bounds",
+    "Lookup and accumulate byte length",
+    "Return XDP_PASS",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "5ee5115b44b74d5f2b672bb7162bd5bee6e9b497123e606749968ff97c142782",
+  "test_fixtures": [
+    {
+      "name": "test_flow_1",
+      "fixture_file": "fixtures/test_flow_1.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_flow_2",
+      "fixture_file": "fixtures/test_flow_2.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

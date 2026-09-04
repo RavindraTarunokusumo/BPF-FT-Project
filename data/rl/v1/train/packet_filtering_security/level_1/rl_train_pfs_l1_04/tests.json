@@ -1,0 +1,51 @@
+{
+  "task_id": "rl_train_pfs_l1_04",
+  "test_count": 5,
+  "test_cases": [
+    {
+      "name": "drop_tcp_143",
+      "description": "IPv4 TCP packet with destination port 143 must be dropped",
+      "fixture_file": "fixtures/drop_tcp_143.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039008f000003e8000000005002fffff7c30000",
+      "packet_len": 54,
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_tcp_other_port",
+      "description": "IPv4 TCP packet with other destination port must pass",
+      "fixture_file": "fixtures/pass_tcp_other_port.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_udp",
+      "description": "IPv4 UDP packet must pass unconditionally",
+      "fixture_file": "fixtures/pass_udp.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039008f00080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_icmp",
+      "description": "IPv4 ICMP packet must pass unconditionally",
+      "fixture_file": "fixtures/pass_icmp.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_truncated",
+      "description": "Truncated packet must pass safely without crash",
+      "fixture_file": "fixtures/pass_truncated.bin",
+      "packet_hex": "5254001234565254006543210800",
+      "packet_len": 14,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

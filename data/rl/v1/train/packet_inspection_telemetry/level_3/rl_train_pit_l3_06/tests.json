@@ -1,0 +1,24 @@
+{
+  "task_id": "rl_train_pit_l3_06",
+  "test_count": 2,
+  "test_cases": [
+    {
+      "name": "test_flow_1",
+      "description": "Flow 1 packet tracked",
+      "fixture_file": "fixtures/test_flow_1.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006549a0a0000010a00000230390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_flow_2",
+      "description": "Flow 2 packet tracked",
+      "fixture_file": "fixtures/test_flow_2.bin",
+      "packet_hex": "52540012345652540065432108004500001c12340000401154970a0000030a0000043039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

@@ -1,0 +1,2153 @@
+{
+  "eval_name": "benchmark_synthesis_000035",
+  "sampler_checkpoint": "tinker://a5e21df2-a4fe-54ce-9781-800ce6c75689:train:0/sampler_weights/000035",
+  "timestamp": "2026-09-04T20:53:39.143461+00:00",
+  "total_tasks": 120,
+  "pass_count": 29,
+  "pass_rate": 0.2417,
+  "compile_rate": 0.4667,
+  "verifier_rate": 0.35,
+  "compliance_rate": 0.9917,
+  "average_reward": 0.3472,
+  "duration_seconds": 899.71,
+  "results": [
+    {
+      "task_id": "syn_pfs_l1_001_geneve_vni_filter",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_001_geneve_vni_filter",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0619,
+        "total_seconds": 0.0633
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_002_vxlan_flags_filter",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_002_vxlan_flags_filter",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0782,
+        "verifier_seconds": 0.0106,
+        "total_seconds": 0.0911
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_003_gre_checksum_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_003_gre_checksum_drop",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0767,
+        "verifier_seconds": 0.0111,
+        "behavioral_seconds": 0.0481,
+        "total_seconds": 0.1371
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_004_gtpu_echo_req_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_004_gtpu_echo_req_drop",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0901,
+        "total_seconds": 0.0932
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_005_mpls_bos_filter",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_005_mpls_bos_filter",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0518,
+        "total_seconds": 0.0533
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_006_coap_non_confirmable_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_006_coap_non_confirmable_drop",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0627,
+        "total_seconds": 0.0672
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_007_wireguard_init_filter",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_007_wireguard_init_filter",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.8099999999999999,
+      "timing": {
+        "compile_seconds": 0.095,
+        "verifier_seconds": 0.0174,
+        "behavioral_seconds": 0.0548,
+        "total_seconds": 0.1692
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_008_arp_gratuitous_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_008_arp_gratuitous_drop",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0619,
+        "total_seconds": 0.0635
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_009_sctp_abort_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_009_sctp_abort_drop",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0822,
+        "total_seconds": 0.0841
+      }
+    },
+    {
+      "task_id": "syn_pfs_l1_010_ipv6_hop_by_hop_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l1_010_ipv6_hop_by_hop_drop",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.099,
+        "verifier_seconds": 0.01,
+        "behavioral_seconds": 0.0554,
+        "total_seconds": 0.1671
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_001_tcp_mss_clamp_filter",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_001_tcp_mss_clamp_filter",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0742,
+        "verifier_seconds": 0.0105,
+        "total_seconds": 0.0865
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_002_dns_null_txt_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_002_dns_null_txt_drop",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0804,
+        "verifier_seconds": 0.0092,
+        "total_seconds": 0.0923
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_003_dhcp_rogue_server_filter",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_003_dhcp_rogue_server_filter",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.75,
+      "timing": {
+        "compile_seconds": 0.0655,
+        "verifier_seconds": 0.0117,
+        "behavioral_seconds": 0.0545,
+        "total_seconds": 0.1328
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_004_qinq_double_vlan_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_004_qinq_double_vlan_drop",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0559,
+        "total_seconds": 0.0573
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_005_ntp_monlist_guard",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_005_ntp_monlist_guard",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0695,
+        "total_seconds": 0.0712
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_006_geneve_opt_critical_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_006_geneve_opt_critical_drop",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0644,
+        "total_seconds": 0.0658
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_007_ipv6_nd_spoof_guard",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_007_ipv6_nd_spoof_guard",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.1074,
+        "total_seconds": 0.1102
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_008_quic_initial_short_token_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_008_quic_initial_short_token_drop",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.068,
+        "verifier_seconds": 0.0138,
+        "behavioral_seconds": 0.0546,
+        "total_seconds": 0.1376
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_009_ip_in_ip_nested_loopback_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_009_ip_in_ip_nested_loopback_drop",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0588,
+        "total_seconds": 0.0602
+      }
+    },
+    {
+      "task_id": "syn_pfs_l2_010_tcp_window_zero_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l2_010_tcp_window_zero_drop",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0588,
+        "verifier_seconds": 0.009,
+        "behavioral_seconds": 0.0465,
+        "total_seconds": 0.1155
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_001_token_bucket_policer",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_001_token_bucket_policer",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0583,
+        "total_seconds": 0.0596
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_002_bloom_filter_ip_blocklist",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_002_bloom_filter_ip_blocklist",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.7944444444444444,
+      "timing": {
+        "compile_seconds": 0.0627,
+        "verifier_seconds": 0.014,
+        "behavioral_seconds": 0.0925,
+        "total_seconds": 0.1705
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_003_tcp_syn_flood_guard",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_003_tcp_syn_flood_guard",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0974,
+        "verifier_seconds": 0.0126,
+        "behavioral_seconds": 0.0813,
+        "total_seconds": 0.1933
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_004_port_knock_auth",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_004_port_knock_auth",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.8722222222222221,
+      "timing": {
+        "compile_seconds": 0.0946,
+        "verifier_seconds": 0.0177,
+        "behavioral_seconds": 0.0906,
+        "total_seconds": 0.2051
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_005_tcp_handshake_state_tracker",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_005_tcp_handshake_state_tracker",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.5611111111111111,
+      "timing": {
+        "compile_seconds": 0.0724,
+        "verifier_seconds": 0.0108,
+        "behavioral_seconds": 0.0735,
+        "total_seconds": 0.158
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_006_dns_tunneling_freq_detector",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_006_dns_tunneling_freq_detector",
+      "compliance_pass": false,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.0,
+      "timing": {
+        "compile_seconds": 0.0691,
+        "total_seconds": 0.0725
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_007_vxlan_tenant_acl_matrix",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_007_vxlan_tenant_acl_matrix",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0605,
+        "total_seconds": 0.0626
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_008_sliding_window_ddos_limiter",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_008_sliding_window_ddos_limiter",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.1055,
+        "verifier_seconds": 30.1068,
+        "total_seconds": 30.2142
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_009_gtpu_teid_stateful_quota",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_009_gtpu_teid_stateful_quota",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0499,
+        "total_seconds": 0.0513
+      }
+    },
+    {
+      "task_id": "syn_pfs_l3_010_dynamic_ip_reputation_quarantine",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pfs_l3_010_dynamic_ip_reputation_quarantine",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0847,
+        "total_seconds": 0.0867
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_001_vxlan_vni_counter",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_001_vxlan_vni_counter",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0684,
+        "verifier_seconds": 0.0122,
+        "behavioral_seconds": 0.0411,
+        "total_seconds": 0.1229
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_002_gre_protocol_split",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_002_gre_protocol_split",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0535,
+        "total_seconds": 0.0548
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_003_mpls_depth_counter",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_003_mpls_depth_counter",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0663,
+        "verifier_seconds": 0.0089,
+        "behavioral_seconds": 0.033,
+        "total_seconds": 0.1101
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_004_gtpu_teid_zero_count",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_004_gtpu_teid_zero_count",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0512,
+        "total_seconds": 0.0526
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_005_dns_query_response_split",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_005_dns_query_response_split",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.071,
+        "verifier_seconds": 0.0149,
+        "behavioral_seconds": 0.0667,
+        "total_seconds": 0.1545
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_006_dhcp_message_type_counter",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_006_dhcp_message_type_counter",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0591,
+        "total_seconds": 0.0607
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_007_coap_method_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_007_coap_method_telemetry",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.067,
+        "total_seconds": 0.0684
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_008_arp_req_reply_counter",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_008_arp_req_reply_counter",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0589,
+        "total_seconds": 0.061
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_009_ipv6_next_header_split",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_009_ipv6_next_header_split",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0584,
+        "verifier_seconds": 0.0092,
+        "behavioral_seconds": 0.0421,
+        "total_seconds": 0.1107
+      }
+    },
+    {
+      "task_id": "syn_pit_l1_010_quic_packet_type_counter",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l1_010_quic_packet_type_counter",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.1147,
+        "verifier_seconds": 0.0127,
+        "behavioral_seconds": 0.07,
+        "total_seconds": 0.2026
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_001_tcp_options_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_001_tcp_options_telemetry",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0558,
+        "total_seconds": 0.0574
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_002_geneve_opt_class_histogram",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_002_geneve_opt_class_histogram",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0602,
+        "total_seconds": 0.0617
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_003_dns_qtype_distribution",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_003_dns_qtype_distribution",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.049,
+        "total_seconds": 0.0502
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_004_vxlan_inner_l3_distribution",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_004_vxlan_inner_l3_distribution",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.065,
+        "verifier_seconds": 0.0102,
+        "behavioral_seconds": 0.0503,
+        "total_seconds": 0.1266
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_005_srv6_segment_left_histogram",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_005_srv6_segment_left_histogram",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0689,
+        "total_seconds": 0.0708
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_006_ntp_stratum_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_006_ntp_stratum_telemetry",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0563,
+        "total_seconds": 0.0579
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_007_icmpv6_nd_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_007_icmpv6_nd_telemetry",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0896,
+        "verifier_seconds": 0.0114,
+        "behavioral_seconds": 0.0854,
+        "total_seconds": 0.1879
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_008_ip_in_ip_depth_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_008_ip_in_ip_depth_telemetry",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0696,
+        "verifier_seconds": 0.0085,
+        "behavioral_seconds": 0.0528,
+        "total_seconds": 0.1324
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_009_tcp_mss_range_histogram",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_009_tcp_mss_range_histogram",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.067,
+        "verifier_seconds": 0.0087,
+        "behavioral_seconds": 0.0466,
+        "total_seconds": 0.1235
+      }
+    },
+    {
+      "task_id": "syn_pit_l2_010_gre_flags_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l2_010_gre_flags_telemetry",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.072,
+        "total_seconds": 0.0736
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_001_count_min_sketch_heavy_hitters",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_001_count_min_sketch_heavy_hitters",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0683,
+        "verifier_seconds": 0.013,
+        "behavioral_seconds": 0.0705,
+        "total_seconds": 0.1535
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_002_tcp_rtt_syn_ack_tracker",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_002_tcp_rtt_syn_ack_tracker",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.076,
+        "verifier_seconds": 0.013,
+        "behavioral_seconds": 0.0773,
+        "total_seconds": 0.168
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_003_vxlan_flow_matrix",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_003_vxlan_flow_matrix",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0597,
+        "total_seconds": 0.0613
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_004_dns_domain_freq_tracker",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_004_dns_domain_freq_tracker",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0665,
+        "verifier_seconds": 0.0132,
+        "total_seconds": 0.0826
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_005_gtpu_bearer_traffic_matrix",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_005_gtpu_bearer_traffic_matrix",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0547,
+        "total_seconds": 0.0561
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_006_tcp_out_of_order_detector",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_006_tcp_out_of_order_detector",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0731,
+        "verifier_seconds": 0.0077,
+        "behavioral_seconds": 0.0587,
+        "total_seconds": 0.1407
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_007_wireguard_session_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_007_wireguard_session_telemetry",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0736,
+        "verifier_seconds": 0.0099,
+        "total_seconds": 0.0853
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_008_mpls_vpn_flow_stats",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_008_mpls_vpn_flow_stats",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0694,
+        "total_seconds": 0.0707
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_009_srv6_path_latency_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_009_srv6_path_latency_telemetry",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0536,
+        "total_seconds": 0.0551
+      }
+    },
+    {
+      "task_id": "syn_pit_l3_010_connection_churn_monitor",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_pit_l3_010_connection_churn_monitor",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.065,
+        "total_seconds": 0.0667
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_001_mpls_pop_single_label",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_001_mpls_pop_single_label",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0577,
+        "total_seconds": 0.0602
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_002_vxlan_strip_vni",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_002_vxlan_strip_vni",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0586,
+        "total_seconds": 0.0602
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_003_gre_strip_key_flag",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_003_gre_strip_key_flag",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0552,
+        "total_seconds": 0.0567
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_004_gtpu_teid_rewrite",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_004_gtpu_teid_rewrite",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0646,
+        "total_seconds": 0.0675
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_005_coap_port_remap",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_005_coap_port_remap",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0675,
+        "verifier_seconds": 0.0102,
+        "behavioral_seconds": 0.043,
+        "total_seconds": 0.1221
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_006_ipv6_traffic_class_remark",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_006_ipv6_traffic_class_remark",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0587,
+        "total_seconds": 0.0601
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_007_arp_target_mac_rewrite",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_007_arp_target_mac_rewrite",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0643,
+        "total_seconds": 0.0659
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_008_dns_id_randomizer",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_008_dns_id_randomizer",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0716,
+        "total_seconds": 0.0729
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_009_ntp_stratum_clamp",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_009_ntp_stratum_clamp",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0667,
+        "verifier_seconds": 0.0094,
+        "total_seconds": 0.0782
+      }
+    },
+    {
+      "task_id": "syn_ptr_l1_010_geneve_vni_rewrite",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l1_010_geneve_vni_rewrite",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0569,
+        "total_seconds": 0.0586
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_001_tcp_mss_clamp_rewrite",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_001_tcp_mss_clamp_rewrite",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0678,
+        "verifier_seconds": 0.0094,
+        "total_seconds": 0.0787
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_002_nat64_stateless_translator",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_002_nat64_stateless_translator",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0589,
+        "total_seconds": 0.0604
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_003_vxlan_decap_to_inner_ethernet",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_003_vxlan_decap_to_inner_ethernet",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0686,
+        "verifier_seconds": 0.0088,
+        "behavioral_seconds": 0.0548,
+        "total_seconds": 0.1333
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_004_gre_decap_to_inner_ipv4",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_004_gre_decap_to_inner_ipv4",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0787,
+        "verifier_seconds": 0.011,
+        "total_seconds": 0.0917
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_005_qinq_to_single_vlan",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_005_qinq_to_single_vlan",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0585,
+        "total_seconds": 0.0604
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_006_geneve_opt_strip",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_006_geneve_opt_strip",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.1041,
+        "total_seconds": 0.1099
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_007_ipv4_options_strip",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_007_ipv4_options_strip",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0896,
+        "verifier_seconds": 0.0092,
+        "total_seconds": 0.1006
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_008_ip_in_ip_decap",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_008_ip_in_ip_decap",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0613,
+        "verifier_seconds": 0.0079,
+        "total_seconds": 0.0708
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_009_gtpu_decap_to_inner_ipv4",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_009_gtpu_decap_to_inner_ipv4",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0725,
+        "verifier_seconds": 0.0093,
+        "total_seconds": 0.0833
+      }
+    },
+    {
+      "task_id": "syn_ptr_l2_010_tcp_timestamp_strip",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l2_010_tcp_timestamp_strip",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0778,
+        "verifier_seconds": 0.0075,
+        "total_seconds": 0.0873
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_001_vxlan_encap_push",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_001_vxlan_encap_push",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0554,
+        "total_seconds": 0.0573
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_002_gre_encap_push",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_002_gre_encap_push",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0585,
+        "total_seconds": 0.0603
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_003_srv6_end_dx4_decapsulation",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_003_srv6_end_dx4_decapsulation",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0642,
+        "verifier_seconds": 0.0132,
+        "behavioral_seconds": 0.0609,
+        "total_seconds": 0.1396
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_004_stateful_napt44",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_004_stateful_napt44",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.083,
+        "verifier_seconds": 0.0147,
+        "behavioral_seconds": 0.0882,
+        "total_seconds": 0.1876
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_005_icmp_ttl_expired_generator",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_005_icmp_ttl_expired_generator",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0697,
+        "total_seconds": 0.0711
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_006_icmp_port_unreachable_generator",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_006_icmp_port_unreachable_generator",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.2664,
+        "verifier_seconds": 0.0137,
+        "total_seconds": 0.2868
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_007_geneve_metadata_insertion",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_007_geneve_metadata_insertion",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0591,
+        "total_seconds": 0.0606
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_008_gtpu_teid_remapping_and_csum",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_008_gtpu_teid_remapping_and_csum",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0704,
+        "verifier_seconds": 0.0092,
+        "behavioral_seconds": 0.0704,
+        "total_seconds": 0.1517
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_009_mpls_push_dual_label_vpn",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_009_mpls_push_dual_label_vpn",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0548,
+        "total_seconds": 0.0568
+      }
+    },
+    {
+      "task_id": "syn_ptr_l3_010_payload_pattern_masking",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_ptr_l3_010_payload_pattern_masking",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0508,
+        "total_seconds": 0.0527
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_001_mpls_label_forward",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_001_mpls_label_forward",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0609,
+        "total_seconds": 0.0625
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_002_vlan_trunk_reflector",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_002_vlan_trunk_reflector",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0526,
+        "total_seconds": 0.0539
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_003_gre_tunnel_reflector",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_003_gre_tunnel_reflector",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.8099999999999999,
+      "timing": {
+        "compile_seconds": 0.0641,
+        "verifier_seconds": 0.0097,
+        "behavioral_seconds": 0.0315,
+        "total_seconds": 0.1065
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_004_vxlan_vni_reflector",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_004_vxlan_vni_reflector",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0637,
+        "total_seconds": 0.0662
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_005_gtpu_upf_reflector",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_005_gtpu_upf_reflector",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0581,
+        "total_seconds": 0.0626
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_006_ipv6_multicast_forward",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_006_ipv6_multicast_forward",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0651,
+        "verifier_seconds": 0.0081,
+        "behavioral_seconds": 0.0299,
+        "total_seconds": 0.1041
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_007_proxy_arp_responder",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_007_proxy_arp_responder",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.057,
+        "total_seconds": 0.0583
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_008_coap_server_redirect",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_008_coap_server_redirect",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0642,
+        "verifier_seconds": 0.0084,
+        "behavioral_seconds": 0.0496,
+        "total_seconds": 0.1234
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_009_dns_cache_redirect",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_009_dns_cache_redirect",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0767,
+        "verifier_seconds": 0.0105,
+        "behavioral_seconds": 0.053,
+        "total_seconds": 0.1415
+      }
+    },
+    {
+      "task_id": "syn_nrf_l1_010_quic_edge_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l1_010_quic_edge_router",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0767,
+        "verifier_seconds": 0.0114,
+        "behavioral_seconds": 0.0448,
+        "total_seconds": 0.1343
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_001_mpls_routing_table_redirect",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_001_mpls_routing_table_redirect",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0507,
+        "total_seconds": 0.0526
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_002_ipv6_lpm_trie_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_002_ipv6_lpm_trie_router",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.75,
+      "timing": {
+        "compile_seconds": 0.0697,
+        "verifier_seconds": 0.0079,
+        "behavioral_seconds": 0.0441,
+        "total_seconds": 0.1231
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_003_gtpu_teid_devmap_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_003_gtpu_teid_devmap_router",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0713,
+        "total_seconds": 0.078
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_004_dscp_qos_priority_split",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_004_dscp_qos_priority_split",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.85,
+      "timing": {
+        "compile_seconds": 0.0624,
+        "verifier_seconds": 0.0085,
+        "behavioral_seconds": 0.0534,
+        "total_seconds": 0.1269
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_005_vxlan_vni_egress_dispatcher",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_005_vxlan_vni_egress_dispatcher",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.05,
+        "total_seconds": 0.0512
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_006_geneve_opt_class_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_006_geneve_opt_class_router",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0845,
+        "total_seconds": 0.0878
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_007_vlan_prio_pcp_traffic_split",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_007_vlan_prio_pcp_traffic_split",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0635,
+        "verifier_seconds": 0.0092,
+        "behavioral_seconds": 0.0514,
+        "total_seconds": 0.1252
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_008_ip_in_ip_tunnel_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_008_ip_in_ip_tunnel_router",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.75,
+      "timing": {
+        "compile_seconds": 0.0767,
+        "verifier_seconds": 0.012,
+        "behavioral_seconds": 0.0583,
+        "total_seconds": 0.1486
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_009_wireguard_peer_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_009_wireguard_peer_router",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.75,
+      "timing": {
+        "compile_seconds": 0.0776,
+        "verifier_seconds": 0.0098,
+        "behavioral_seconds": 0.0495,
+        "total_seconds": 0.1382
+      }
+    },
+    {
+      "task_id": "syn_nrf_l2_010_tcp_syn_steering_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l2_010_tcp_syn_steering_router",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0669,
+        "verifier_seconds": 0.0086,
+        "behavioral_seconds": 0.0474,
+        "total_seconds": 0.1254
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_001_maglev_consistent_hash_lb",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_001_maglev_consistent_hash_lb",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0638,
+        "total_seconds": 0.0658
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_002_ecmp_multipath_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_002_ecmp_multipath_router",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0558,
+        "total_seconds": 0.0574
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_003_stateful_session_lb",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_003_stateful_session_lb",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.7944444444444444,
+      "timing": {
+        "compile_seconds": 0.0652,
+        "verifier_seconds": 0.0082,
+        "behavioral_seconds": 0.0568,
+        "total_seconds": 0.1321
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_004_srv6_to_gtpu_translation_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_004_srv6_to_gtpu_translation_router",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0653,
+        "total_seconds": 0.0668
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_005_evpn_distributed_gateway",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_005_evpn_distributed_gateway",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0909,
+        "total_seconds": 0.0936
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_006_dynamic_link_failover",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_006_dynamic_link_failover",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.6388888888888888,
+      "timing": {
+        "compile_seconds": 0.0666,
+        "verifier_seconds": 0.0081,
+        "behavioral_seconds": 0.0558,
+        "total_seconds": 0.1319
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_007_flow_cache_fast_path_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_007_flow_cache_fast_path_router",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0721,
+        "verifier_seconds": 0.0115,
+        "behavioral_seconds": 0.072,
+        "total_seconds": 0.157
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_008_mpls_te_backup_path_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_008_mpls_te_backup_path_router",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0651,
+        "total_seconds": 0.0674
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_009_gtpu_anchor_mobility_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_009_gtpu_anchor_mobility_router",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0591,
+        "total_seconds": 0.0607
+      }
+    },
+    {
+      "task_id": "syn_nrf_l3_010_weighted_fair_queuing_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_benchmark_synthesis_000035_syn_nrf_l3_010_weighted_fair_queuing_router",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.8722222222222221,
+      "timing": {
+        "compile_seconds": 0.0669,
+        "verifier_seconds": 0.0081,
+        "behavioral_seconds": 0.0585,
+        "total_seconds": 0.1347
+      }
+    }
+  ]
+}

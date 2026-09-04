@@ -1,0 +1,34 @@
+{
+  "task_id": "rl_train_ptr_l1_06",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "xdp_mac_swap",
+  "template_family": "xdp_header_rewrite",
+  "semantic_signature": "ptr_l1_swap_mac_7",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that swaps source and destination Ethernet MAC addresses and returns XDP_TX for incoming IPv4 packets. Non-IPv4 traffic (like ARP) and truncated frames must pass with XDP_PASS.",
+  "requirements": [
+    "Validate struct ethhdr bounds against data_end",
+    "Check eth->h_proto == bpf_htons(ETH_P_IP)",
+    "Swap eth->h_dest and eth->h_source using temporary buffer",
+    "Return XDP_TX for IPv4, XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "02414ba0a5bc6e9160f0fd264c4d3b753bbb7e9a3b7c382da0829fc1846d5899",
+  "test_fixtures": [
+    {
+      "name": "test_mac_swap",
+      "fixture_file": "fixtures/test_mac_swap.bin",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_arp",
+      "fixture_file": "fixtures/test_pass_arp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

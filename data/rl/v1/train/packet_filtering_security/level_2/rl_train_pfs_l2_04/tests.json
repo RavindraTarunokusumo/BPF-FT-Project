@@ -1,0 +1,42 @@
+{
+  "task_id": "rl_train_pfs_l2_04",
+  "test_count": 4,
+  "test_cases": [
+    {
+      "name": "drop_ttl_5",
+      "description": "TTL 5 dropped",
+      "fixture_file": "fixtures/drop_ttl_5.bin",
+      "packet_hex": "5254001234565254006543210800450000241234000005012037c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "drop_ttl_0",
+      "description": "TTL 0 dropped",
+      "fixture_file": "fixtures/drop_ttl_0.bin",
+      "packet_hex": "5254001234565254006543210800450000241234000000012537c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_ttl_64",
+      "description": "TTL 64 passed",
+      "fixture_file": "fixtures/pass_ttl_64.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_non_ip",
+      "description": "Non-IP passed",
+      "fixture_file": "fixtures/pass_non_ip.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

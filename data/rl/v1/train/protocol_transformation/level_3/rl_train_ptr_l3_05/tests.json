@@ -1,0 +1,24 @@
+{
+  "task_id": "rl_train_ptr_l3_05",
+  "test_count": 2,
+  "test_cases": [
+    {
+      "name": "test_dnat",
+      "description": "Target packet translated and forwarded",
+      "fixture_file": "fixtures/test_dnat.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006a28ac0a801640102030430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_other_pass",
+      "description": "Non-matching packet passes",
+      "fixture_file": "fixtures/test_other_pass.bin",
+      "packet_hex": "5254001234565254006543210800450000281234000040069680c0a801640808080830390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

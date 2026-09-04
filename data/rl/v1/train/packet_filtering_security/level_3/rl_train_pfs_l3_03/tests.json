@@ -1,0 +1,33 @@
+{
+  "task_id": "rl_train_pfs_l3_03",
+  "test_count": 3,
+  "test_cases": [
+    {
+      "name": "drop_blocked",
+      "description": "Source 10.0.0.4 dropped",
+      "fixture_file": "fixtures/drop_blocked.bin",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cef0a000004c0a8010130390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_allowed",
+      "description": "Source 192.168.1.100 passed",
+      "fixture_file": "fixtures/pass_allowed.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e4e6c0a80164c0a8010130390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_non_ip",
+      "description": "ARP passed",
+      "fixture_file": "fixtures/pass_non_ip.bin",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

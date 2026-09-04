@@ -1,0 +1,33 @@
+{
+  "task_id": "rl_train_pit_l2_03",
+  "test_count": 3,
+  "test_cases": [
+    {
+      "name": "test_hist_tcp",
+      "description": "TCP packet processed and passed",
+      "fixture_file": "fixtures/test_hist_tcp.bin",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "packet_len": 54,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_hist_udp",
+      "description": "UDP packet processed and passed",
+      "fixture_file": "fixtures/test_hist_udp.bin",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "packet_len": 42,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_hist_icmp",
+      "description": "ICMP packet processed and passed",
+      "fixture_file": "fixtures/test_hist_icmp.bin",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "packet_len": 50,
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

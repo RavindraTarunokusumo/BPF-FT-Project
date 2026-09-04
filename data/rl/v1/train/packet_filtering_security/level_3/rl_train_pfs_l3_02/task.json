@@ -1,0 +1,39 @@
+{
+  "task_id": "rl_train_pfs_l3_02",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "xdp_map_filter",
+  "template_family": "xdp_stateful_blocklist",
+  "semantic_signature": "pfs_l3_ip_block_3",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program with a BPF_MAP_TYPE_HASH map that drops packets from 10.0.0.3. Pass all other traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_HASH map",
+    "Validate Ethernet and IPv4 bounds",
+    "Lookup source IP and drop on match",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "7a3184e2c586963f6317a433f1aeadde2dfa89454a16025b6bd1458a68615b9b",
+  "test_fixtures": [
+    {
+      "name": "drop_blocked",
+      "fixture_file": "fixtures/drop_blocked.bin",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_allowed",
+      "fixture_file": "fixtures/pass_allowed.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_non_ip",
+      "fixture_file": "fixtures/pass_non_ip.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

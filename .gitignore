@@ -10,5 +10,6 @@ wandb/
 artifacts/**/*_raw/
 artifacts/**/*_tinker_raw/
 artifacts/**/*.safetensors
-
-
+*.tar.gz
+runs/tinker/*/records/
+runs/tinker/*/*/records/

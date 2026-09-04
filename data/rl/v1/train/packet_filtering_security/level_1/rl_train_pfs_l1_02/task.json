@@ -1,0 +1,54 @@
+{
+  "task_id": "rl_train_pfs_l1_02",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "xdp_port_filter",
+  "template_family": "xdp_stateless_filter",
+  "semantic_signature": "ipv4+tcp_dport_25+drop",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write a complete, self-contained Linux XDP program that inspects incoming IPv4 TCP traffic and drops packets destined for port 25 (smtp). All other packets, including TCP to other ports, non-TCP traffic, and truncated packets, must be passed with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet header bounds against data_end",
+    "Validate IPv4 header bounds and protocol == IPPROTO_TCP",
+    "Compute and validate variable IPv4 header length (ip->ihl * 4)",
+    "Validate TCP header bounds against data_end",
+    "Drop packet with XDP_DROP if tcp->dest == bpf_htons(25)",
+    "Return XDP_PASS for all other packets",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "expected_fixture_count": 5,
+  "task_sha256": "4d91a3c95c15daec01638d4ae1960b9a78b816156752cdc14327d79e3563e033",
+  "test_fixtures": [
+    {
+      "name": "drop_tcp_25",
+      "fixture_file": "fixtures/drop_tcp_25.bin",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_tcp_other_port",
+      "fixture_file": "fixtures/pass_tcp_other_port.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_udp",
+      "fixture_file": "fixtures/pass_udp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_icmp",
+      "fixture_file": "fixtures/pass_icmp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_truncated",
+      "fixture_file": "fixtures/pass_truncated.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

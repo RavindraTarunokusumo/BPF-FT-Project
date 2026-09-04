@@ -1,0 +1,40 @@
+{
+  "task_id": "rl_train_nrf_l1_02",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "xdp_udp_reflector",
+  "template_family": "xdp_stateless_reflect",
+  "semantic_signature": "nrf_l1_reflect_5003",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that reflects incoming UDP packets destined for port 5003 back out the incoming interface with XDP_TX by swapping Ethernet MACs, IPv4 addresses, and UDP ports. All other traffic must pass with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IP, and UDP headers",
+    "Check udp->dest == bpf_htons(5003)",
+    "Swap MACs, IPs, and UDP ports",
+    "Return XDP_TX on match, XDP_PASS otherwise",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "a090e2cb36039603db81115064b50697f05089b8d464eb0c2c272733bc7c423a",
+  "test_fixtures": [
+    {
+      "name": "test_reflect_udp",
+      "fixture_file": "fixtures/test_reflect_udp.bin",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_other_udp",
+      "fixture_file": "fixtures/test_pass_other_udp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_tcp",
+      "fixture_file": "fixtures/test_pass_tcp.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "task_id": "rl_train_ptr_l2_02",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "xdp_icmp_reply",
+  "template_family": "xdp_packet_transform",
+  "semantic_signature": "ptr_l2_icmp_reply_3",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects incoming ICMP Echo Requests (type 8), swaps Ethernet MAC addresses, swaps IPv4 source and destination addresses, sets ICMP type to 0 (Echo Reply), and returns XDP_TX. Non-ICMP traffic passes with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet, IP, and ICMP headers",
+    "Check icmp->type == 8",
+    "Swap MACs and IP addresses",
+    "Set icmp->type = 0 and return XDP_TX",
+    "Return XDP_PASS for non-matching traffic",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "6f001ae5d3da941347671b0e45a11337ab483ccaf56653bd0097e6afb7da90aa",
+  "test_fixtures": [
+    {
+      "name": "test_icmp_echo",
+      "fixture_file": "fixtures/test_icmp_echo.bin",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_tcp_pass",
+      "fixture_file": "fixtures/test_tcp_pass.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

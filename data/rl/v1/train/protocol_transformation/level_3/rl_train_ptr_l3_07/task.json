@@ -1,0 +1,34 @@
+{
+  "task_id": "rl_train_ptr_l3_07",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "xdp_dnat_table",
+  "template_family": "xdp_map_nat",
+  "semantic_signature": "ptr_l3_dnat_8",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program with a BPF_MAP_TYPE_HASH map that implements destination address translation (DNAT). If dest IP is 1.2.3.4 or in map, translate dest IP and forward with XDP_TX. Other traffic passes with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_HASH map for destination IP",
+    "Validate Ethernet and IPv4 headers",
+    "Rewrite ip->daddr on match and return XDP_TX",
+    "Return XDP_PASS on non-match",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "d994427aecc5fb86e708587c5f5c3b9cf313952726049247413cc18becc91a71",
+  "test_fixtures": [
+    {
+      "name": "test_dnat",
+      "fixture_file": "fixtures/test_dnat.bin",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_other_pass",
+      "fixture_file": "fixtures/test_other_pass.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

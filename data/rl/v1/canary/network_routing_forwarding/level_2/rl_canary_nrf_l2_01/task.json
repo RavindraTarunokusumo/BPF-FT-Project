@@ -1,0 +1,34 @@
+{
+  "task_id": "rl_canary_nrf_l2_01",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "xdp_prefix_router",
+  "template_family": "xdp_subnet_forward",
+  "semantic_signature": "nrf_l2_prefix_1",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that routes traffic destined for 10.1.0.0/16. If matched and TTL > 1, decrement TTL and forward with XDP_TX. Pass all other traffic with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet and IPv4 bounds",
+    "Check destination in 10.1.0.0/16",
+    "Decrement TTL and return XDP_TX",
+    "Return XDP_PASS for other traffic",
+    "SEC(\"xdp\") and GPL license"
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "0952a24da3575ef9a7d720b0c35ba55cca8d00b1a8faa7abc2608ddea1ed6e5e",
+  "test_fixtures": [
+    {
+      "name": "test_forward_subnet",
+      "fixture_file": "fixtures/test_forward_subnet.bin",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "test_pass_other_subnet",
+      "fixture_file": "fixtures/test_pass_other_subnet.bin",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}
