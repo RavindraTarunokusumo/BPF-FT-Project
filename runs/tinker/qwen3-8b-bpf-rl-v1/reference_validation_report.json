@@ -1,0 +1,39 @@
+{
+  "canary": {
+    "split": "canary",
+    "total_tasks": 12,
+    "passed_tasks": 12,
+    "failed_tasks_count": 0,
+    "task_pass_rate": 1.0,
+    "total_fixtures": 34,
+    "passed_fixtures": 34,
+    "fixture_pass_rate": 1.0,
+    "failed_tasks": [],
+    "split_sha256": "ef2bcebd6fc6e50a00f02a40202fecb3449fecdd51b6549a86775575838ad54d"
+  },
+  "dev": {
+    "split": "dev",
+    "total_tasks": 24,
+    "passed_tasks": 24,
+    "failed_tasks_count": 0,
+    "task_pass_rate": 1.0,
+    "total_fixtures": 68,
+    "passed_fixtures": 68,
+    "fixture_pass_rate": 1.0,
+    "failed_tasks": [],
+    "split_sha256": "d414163d4a145d7459f1449f94a70ddc1fe3f9ecf011eaaea1ed7283806541f5"
+  },
+  "train": {
+    "split": "train",
+    "total_tasks": 96,
+    "passed_tasks": 96,
+    "failed_tasks_count": 0,
+    "task_pass_rate": 1.0,
+    "total_fixtures": 272,
+    "passed_fixtures": 272,
+    "fixture_pass_rate": 1.0,
+    "failed_tasks": [],
+    "split_sha256": "19dd1934693667cdd31d024b2acb1b5b371df07fa685a5e1f6bca0f4f9042d45"
+  },
+  "aggregate_task_pool_sha256": "bd62dc1dea4d48ef9fe04017e9c6de2f355664184221a2351c23bdc3eac48fcd"
+}

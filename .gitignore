@@ -13,3 +13,8 @@ artifacts/**/*.safetensors
 *.tar.gz
 runs/tinker/*/records/
 runs/tinker/*/*/records/
+runs/tinker/**/iteration_*/
+runs/tinker/**/verifier_records/
+runs/tinker/**/ref_val_records/
+runs/tinker/**/*.log
+runs/tinker/**/code.diff
