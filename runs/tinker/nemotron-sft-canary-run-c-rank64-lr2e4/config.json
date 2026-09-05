@@ -1,0 +1,47 @@
+{
+  "log_path": "C:\\Users\\rvind\\OneDrive\\Desktop\\Projects\\BPF-FT-Project\\runs\\tinker\\nemotron-sft-canary-run-c-rank64-lr2e4",
+  "model_name": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+  "recipe_name": "bpf_guardian_nemotron_sft_v1",
+  "load_checkpoint_path": null,
+  "renderer_name": "nemotron3_ultra_disable_thinking",
+  "dataset_builder": {
+    "common_config": {
+      "model_name_for_tokenizer": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+      "renderer_name": "nemotron3_ultra_disable_thinking",
+      "max_length": 4096,
+      "batch_size": 32,
+      "train_on_what": "last_assistant_message"
+    },
+    "train_file": "C:\\Users\\rvind\\OneDrive\\Desktop\\Projects\\BPF-FT-Project\\data\\sft\\frozen\\v2\\train.jsonl",
+    "validation_file": "C:\\Users\\rvind\\OneDrive\\Desktop\\Projects\\BPF-FT-Project\\data\\sft\\frozen\\v2\\validation_in_domain.jsonl",
+    "shuffle_train": true,
+    "seed": 42
+  },
+  "learning_rate": 0.0002,
+  "lr_schedule": "cosine",
+  "num_epochs": 1,
+  "lora_rank": 64,
+  "base_url": null,
+  "evaluator_builders": [
+    {}
+  ],
+  "infrequent_evaluator_builders": [],
+  "save_every": 20,
+  "save_every_tokens": 0,
+  "save_every_seconds": 0.0,
+  "eval_every": 10,
+  "infrequent_eval_every": 100,
+  "ttl_seconds": 604800,
+  "rolling_save_every": 0,
+  "rolling_ttl_seconds": 7200,
+  "async_periodic_saves": false,
+  "adam_beta1": 0.9,
+  "adam_beta2": 0.95,
+  "adam_eps": 1e-08,
+  "wandb_project": null,
+  "wandb_name": null,
+  "enable_trace": false,
+  "span_chart_every": 0,
+  "max_steps": null,
+  "submit_ahead": 1
+}
