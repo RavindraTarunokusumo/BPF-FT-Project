@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_train_nrf_l3_10",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "train_nrf_l3_route_gw_10",
+  "template_family": "xdp_lpm_mac_router",
+  "semantic_signature": "nrf_l3_lpm_route_210",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must lookup route entry in 'routing_trie_210' and update Ethernet destination address. On route hit, rewrite destination MAC to next-hop gateway and return XDP_TX; on route miss, return XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_LPM_TRIE map 'routing_trie_210' with BPF_F_NO_PREALLOC",
+    "Define LPM key struct with __u32 prefixlen and __u32 data members",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Perform bpf_map_lookup_elem on ip->daddr with prefixlen=32",
+    "On route match, update eth->h_dest with next-hop MAC and return XDP_TX",
+    "On route miss or non-IP, return XDP_PASS",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_unmatched",
+      "description": "Unmatched IP passes default",
+      "packet_hex": "525400123456525400654321080045000028123400004006e50fc0a8010ac0a8013230390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "e1ffe67eda6856604b3b4293834d7ec21e1540d91a185752f3f1619595bdec07"
+}

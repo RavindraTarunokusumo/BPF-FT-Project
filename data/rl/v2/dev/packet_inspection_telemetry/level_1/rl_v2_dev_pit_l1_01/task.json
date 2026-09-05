@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_dev_pit_l1_01",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "dev_pit_l1_size_hist_dev01",
+  "template_family": "xdp_size_histogram",
+  "semantic_signature": "pit_l1_size_hist_1",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must record packet size distribution in histogram array 'size_hist_01' (<128, 128-512, 512-1024, >1024). Bin 0: len < 128, Bin 1: 128 <= len < 512, Bin 2: 512 <= len < 1024, Bin 3: len >= 1024. Return XDP_PASS for all frames.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map 'size_hist_1' with 4 entries and __u64 values",
+    "Calculate total wire frame length as (ctx->data_end - ctx->data)",
+    "Assign bin: <128 -> 0, <512 -> 1, <1024 -> 2, >=1024 -> 3",
+    "Atomically increment bin counter using __sync_fetch_and_add",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_small",
+      "description": "Small 54 byte frame in bin 0",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_medium",
+      "description": "Medium 200 byte frame in bin 1",
+      "packet_hex": "5254001234565254006543210800450000bc123400004011e48ec0a8010ac0a801143039003500a8000041414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "00969c8a648c86bfe6f8cf9b3db48ce486b1000da6c416ff20ef29ac2fd83915"
+}

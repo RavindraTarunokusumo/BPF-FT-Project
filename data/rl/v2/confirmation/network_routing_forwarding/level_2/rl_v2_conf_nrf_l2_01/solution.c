@@ -1,0 +1,37 @@
+#include <linux/bpf.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
+#include <linux/if_ether.h>
+#include <linux/ip.h>
+
+SEC("xdp")
+int xdp_ecmp_1(struct xdp_md *ctx) {
+    void *data_end = (void *)(long)ctx->data_end;
+    void *data = (void *)(long)ctx->data;
+
+    struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+        return XDP_PASS;
+
+    struct iphdr *ip = (void *)(eth + 1);
+    if ((void *)(ip + 1) > data_end)
+        return XDP_PASS;
+
+    __u32 hash = ip->saddr ^ ip->daddr;
+    eth->h_dest[0] = 0x52;
+    eth->h_dest[1] = 0x54;
+    eth->h_dest[2] = 0x00;
+    eth->h_dest[3] = 0x00;
+    eth->h_dest[4] = 0x00;
+
+    if ((hash & 1) == 0)
+        eth->h_dest[5] = 0x0a;
+    else
+        eth->h_dest[5] = 0x0b;
+
+    return XDP_TX;
+}
+
+char _license[] SEC("license") = "GPL";

@@ -28,7 +28,7 @@ In strict adherence to the safety mandate of `RL_V1_Handoff.md`:
 - **Step Trajectory**: 50 optimizer steps completed (batch size 2 groups $\times$ group size 4 = 8 rollouts per step, 400 total training rollouts).
 - **Constant Reward Rate**: **62.00%** (satisfies the $< 70.0\%$ constraint). 38% of groups contained mixed rewards, providing effective policy gradient updates.
 - **Average Step Reward**: **0.7808** across the 50 steps.
-- **KL Regularization**: With $\beta = 0.05$ against frozen SFT v2, mean KL was **0.001675** and maximum KL was **0.008570** (well below the $0.05$ boundary), demonstrating that the policy remained safely anchored to the reference distribution without degenerate policy collapse.
+- **KL Regularization**: The training run utilized a KL penalty coefficient $\beta = 0.05$ against the frozen SFT v2 reference policy (`compute_post_kl: false` was configured). The logged pre-update batch sampling metric `kl_policy_base` showed a mean of **0.001675** and maximum of **0.008570**. (Note: $\beta = 0.05$ is the loss objective coefficient, not a divergence threshold).
 - **Compiler and Verifier Pass Rates**: Across the 400 training rollouts, compilation pass rate averaged 87.2%, kernel verifier pass rate averaged 85.8%, and functional pass rate averaged 64.2%.
 
 ### 1.2 Development Set Checkpoint Trajectory ($T=0.0$)
@@ -46,7 +46,7 @@ Periodic checkpoints saved during pilot training were evaluated on `data/rl/v1/d
 
 **Observations**:
 1. Checkpoint `000035` achieved peak performance: **18/24 (75.00%) functional pass rate**, with **100.0% compilation**, **100.0% verifier pass**, and an average reward of **0.9097**.
-2. Beyond step 35, the model experienced slight over-optimization on the training task distribution, returning to 16/24 at step 50.
+2. Note on Selection Bias: Checkpoint `000035` was selected after repeated post-hoc measurements across 6 candidate checkpoints on this small 24-task development set. Beyond step 35, performance dropped back to 16/24 at step 50.
 
 ### 1.3 Protected Benchmark Generalization & Paired McNemar Analysis
 Selected checkpoint `000035` was evaluated on all 276 protected benchmark tasks at $T=0.0$:
@@ -58,9 +58,10 @@ Selected checkpoint `000035` was evaluated on all 276 protected benchmark tasks 
 | **Private Standalone Repair**| 120 | 85 (70.8%) | 85 (70.8%) | 85 | +0 | -0 | 35 | +0 | $1.0000$ |
 | **Combined Benchmarks** | **276** | **137 (49.6%)** | **134 (48.6%)** | **129** | **+5** | **-8** | **134** | **-3** | **$0.5811$** |
 
-**Statistical Significance**:
-- With $p = 0.7266$ on Synthesis and $p = 1.0000$ on Repair, there is **zero statistically significant regression** from SFT v2 ($p \gg 0.05$).
-- In Standalone Repair, the RL model achieved **100% retention (85/85)** with 0 regressions, proving that synthesis RLVR training preserved the model's diagnostic repair capabilities.
+**Statistical Significance & Caveats**:
+- Under the exact two-sided McNemar test, **no statistically significant difference was detected** vs SFT v2 on Synthesis ($p = 0.7266$), Repair ($p = 1.0000$), or Combined ($p = 0.5811$).
+- However, failure to reject the null does not imply absence of regression: observed point estimates declined by 2 tasks on protected synthesis (31 $\to$ 29) and 3 tasks overall (137 $\to$ 134).
+- In Standalone Repair, all 85 previously passing repair tasks were retained in this deterministic evaluation (85/85), providing evidence of retention rather than universal preservation across unseen repair distributions.
 
 ---
 

@@ -1,0 +1,43 @@
+{
+  "task_id": "rl_v2_train_nrf_l2_07",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "train_nrf_l2_subnet_router_07",
+  "template_family": "xdp_subnet_router",
+  "semantic_signature": "nrf_l2_subnet_17",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that routes traffic: if destination IP belongs to subnet 10.17.0.0/16, rewrite destination MAC to next-hop gateway 52:54:00:00:00:01 and return XDP_TX. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Check if ip->daddr matches subnet prefix 10.17.0.0/16",
+    "Rewrite eth->h_dest to 52:54:00:00:00:01 on match and return XDP_TX",
+    "Return XDP_PASS for other destination IPs and non-IP traffic",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "tx_matched_subnet",
+      "description": "Subnet 10.17.x transmitted",
+      "packet_hex": "5254001234565254006543210800450000281234000040069ba7c0a8010a0a11013230390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_unmatched_ip",
+      "description": "Other subnet passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e540c0a8010ac0a8010130390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "3ea73c7d0794b0f7395033841410ba76926424aa6f1b5e0485527457f5ff876d"
+}

@@ -1,0 +1,36 @@
+{
+  "task_id": "rl_v2_dev_ptr_l2_04",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "dev_ptr_l2_vlan_retag_dev04",
+  "template_family": "xdp_vlan_retag",
+  "semantic_signature": "ptr_l2_retag_130_230",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must reassign virtual network identifier from VLAN 130 to service VLAN 230 in-place. Modify the TCI field in-place without adjusting packet head. Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet and 802.1Q header bounds against data_end",
+    "Check if eth->h_proto == ETH_P_8021Q and vlan_id == 130",
+    "Overwrite vlan->h_vlan_TCI in-place preserving priority bits and setting VID to 230",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_retagged",
+      "description": "VLAN 130 retagged to 230 and passed",
+      "packet_hex": "52540012345652540065432181000082080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Untagged passed unmodified",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "5e19cb662825ccf7bdb743f34c77685d3d90c229169da286387d23e43d0f5983"
+}

@@ -1,0 +1,1111 @@
+{
+  "eval_name": "confirmation_step_000010",
+  "sampler_checkpoint": "tinker://9af95d8c-46ca-5964-a2c8-60aeaac88997:train:0/sampler_weights/000010",
+  "timestamp": "2026-09-05T18:07:31.952754+00:00",
+  "total_tasks": 60,
+  "pass_count": 35,
+  "pass_rate": 0.5833,
+  "compile_rate": 0.6833,
+  "verifier_rate": 0.5833,
+  "compliance_rate": 1.0,
+  "average_reward": 0.5997,
+  "duration_seconds": 359.68,
+  "results": [
+    {
+      "task_id": "rl_v2_conf_pfs_l1_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l1_01",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 1.6571,
+        "verifier_seconds": 0.0307,
+        "behavioral_seconds": 0.0453,
+        "total_seconds": 1.7374
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l1_02",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l1_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0563,
+        "verifier_seconds": 0.0077,
+        "behavioral_seconds": 0.0312,
+        "total_seconds": 0.0962
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l1_03",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l1_03",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0679,
+        "verifier_seconds": 0.0073,
+        "behavioral_seconds": 0.0329,
+        "total_seconds": 0.1093
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l1_04",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l1_04",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0621,
+        "verifier_seconds": 0.0108,
+        "behavioral_seconds": 0.0417,
+        "total_seconds": 0.1158
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l1_05",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l1_05",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0609,
+        "verifier_seconds": 0.0081,
+        "behavioral_seconds": 0.0367,
+        "total_seconds": 0.1069
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l2_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l2_01",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0763,
+        "verifier_seconds": 0.0094,
+        "behavioral_seconds": 0.0233,
+        "total_seconds": 0.1102
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l2_02",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l2_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0784,
+        "verifier_seconds": 0.0094,
+        "behavioral_seconds": 0.0323,
+        "total_seconds": 0.1216
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l2_03",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l2_03",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0749,
+        "verifier_seconds": 0.0186,
+        "behavioral_seconds": 0.0356,
+        "total_seconds": 0.1305
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l2_04",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l2_04",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0661,
+        "verifier_seconds": 0.0087,
+        "behavioral_seconds": 0.0238,
+        "total_seconds": 0.0998
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l2_05",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l2_05",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0628,
+        "verifier_seconds": 0.007,
+        "behavioral_seconds": 0.0175,
+        "total_seconds": 0.0882
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l3_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l3_01",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0558,
+        "total_seconds": 0.0579
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l3_02",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l3_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0915,
+        "verifier_seconds": 0.0105,
+        "total_seconds": 0.104
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l3_03",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l3_03",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0727,
+        "verifier_seconds": 0.0139,
+        "behavioral_seconds": 0.0199,
+        "total_seconds": 0.1085
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l3_04",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l3_04",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0788,
+        "verifier_seconds": 0.0104,
+        "behavioral_seconds": 0.0168,
+        "total_seconds": 0.1074
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pfs_l3_05",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pfs_l3_05",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0577,
+        "total_seconds": 0.0596
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l1_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l1_01",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0659,
+        "verifier_seconds": 0.0078,
+        "behavioral_seconds": 0.0211,
+        "total_seconds": 0.0959
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l1_02",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l1_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.068,
+        "verifier_seconds": 0.0097,
+        "behavioral_seconds": 0.0256,
+        "total_seconds": 0.1051
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l1_03",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l1_03",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0874,
+        "verifier_seconds": 0.0183,
+        "behavioral_seconds": 0.0437,
+        "total_seconds": 0.151
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l1_04",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l1_04",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0654,
+        "verifier_seconds": 0.0136,
+        "behavioral_seconds": 0.0266,
+        "total_seconds": 0.1066
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l1_05",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l1_05",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0683,
+        "verifier_seconds": 0.0097,
+        "behavioral_seconds": 0.0207,
+        "total_seconds": 0.0997
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l2_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l2_01",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0632,
+        "verifier_seconds": 0.0093,
+        "behavioral_seconds": 0.0304,
+        "total_seconds": 0.104
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l2_02",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l2_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0727,
+        "verifier_seconds": 0.008,
+        "behavioral_seconds": 0.0297,
+        "total_seconds": 0.1119
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l2_03",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l2_03",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.1094,
+        "verifier_seconds": 0.0114,
+        "behavioral_seconds": 0.0509,
+        "total_seconds": 0.1739
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l2_04",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l2_04",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0653,
+        "verifier_seconds": 0.0092,
+        "behavioral_seconds": 0.0205,
+        "total_seconds": 0.0968
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l2_05",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l2_05",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0659,
+        "verifier_seconds": 0.013,
+        "behavioral_seconds": 0.0367,
+        "total_seconds": 0.1171
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l3_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l3_01",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.065,
+        "total_seconds": 0.0672
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l3_02",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l3_02",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0627,
+        "total_seconds": 0.0643
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l3_03",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l3_03",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0553,
+        "total_seconds": 0.0571
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l3_04",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l3_04",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.054,
+        "total_seconds": 0.0568
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_nrf_l3_05",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_nrf_l3_05",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0552,
+        "total_seconds": 0.0578
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l1_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l1_01",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.061,
+        "total_seconds": 0.0627
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l1_02",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l1_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.069,
+        "verifier_seconds": 0.0133,
+        "total_seconds": 0.0838
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l1_03",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l1_03",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.062,
+        "total_seconds": 0.0643
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l1_04",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l1_04",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.05,
+        "total_seconds": 0.0519
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l1_05",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l1_05",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0469,
+        "total_seconds": 0.049
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l2_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l2_01",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.069,
+        "verifier_seconds": 0.0125,
+        "behavioral_seconds": 0.0193,
+        "total_seconds": 0.1022
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l2_02",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l2_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0664,
+        "verifier_seconds": 0.0134,
+        "behavioral_seconds": 0.0182,
+        "total_seconds": 0.0992
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l2_03",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l2_03",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0685,
+        "verifier_seconds": 0.0124,
+        "behavioral_seconds": 0.0183,
+        "total_seconds": 0.1014
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l2_04",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l2_04",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.078,
+        "verifier_seconds": 0.0142,
+        "behavioral_seconds": 0.019,
+        "total_seconds": 0.1128
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l2_05",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l2_05",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0698,
+        "verifier_seconds": 0.0134,
+        "behavioral_seconds": 0.0163,
+        "total_seconds": 0.1013
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l3_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l3_01",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0643,
+        "verifier_seconds": 0.0106,
+        "total_seconds": 0.0766
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l3_02",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l3_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.1121,
+        "verifier_seconds": 0.0159,
+        "behavioral_seconds": 0.0248,
+        "total_seconds": 0.1562
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l3_03",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l3_03",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0689,
+        "verifier_seconds": 0.0139,
+        "behavioral_seconds": 0.016,
+        "total_seconds": 0.1005
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l3_04",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l3_04",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0787,
+        "verifier_seconds": 0.0121,
+        "total_seconds": 0.0924
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_pit_l3_05",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_pit_l3_05",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.06,
+        "verifier_seconds": 0.0087,
+        "behavioral_seconds": 0.0138,
+        "total_seconds": 0.0842
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l1_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l1_01",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0999,
+        "verifier_seconds": 0.0093,
+        "behavioral_seconds": 0.0128,
+        "total_seconds": 0.1231
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l1_02",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l1_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0612,
+        "verifier_seconds": 0.0079,
+        "behavioral_seconds": 0.0134,
+        "total_seconds": 0.0839
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l1_03",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l1_03",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.1027,
+        "verifier_seconds": 0.0117,
+        "behavioral_seconds": 0.0201,
+        "total_seconds": 0.1402
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l1_04",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l1_04",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0856,
+        "verifier_seconds": 0.0115,
+        "behavioral_seconds": 0.0146,
+        "total_seconds": 0.1194
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l1_05",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l1_05",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "functional_pass": true,
+      "passed": true,
+      "total_reward": 1.0,
+      "timing": {
+        "compile_seconds": 0.0666,
+        "verifier_seconds": 0.0105,
+        "behavioral_seconds": 0.0168,
+        "total_seconds": 0.0951
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l2_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l2_01",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0576,
+        "total_seconds": 0.0595
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l2_02",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l2_02",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0544,
+        "total_seconds": 0.0563
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l2_03",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l2_03",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0586,
+        "total_seconds": 0.0601
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l2_04",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l2_04",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0954,
+        "total_seconds": 0.1001
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l2_05",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l2_05",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0601,
+        "total_seconds": 0.0623
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l3_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l3_01",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0687,
+        "total_seconds": 0.0734
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l3_02",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l3_02",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0714,
+        "verifier_seconds": 0.0098,
+        "total_seconds": 0.0834
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l3_03",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l3_03",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0502,
+        "total_seconds": 0.0518
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l3_04",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l3_04",
+      "compliance_pass": true,
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.02,
+      "timing": {
+        "compile_seconds": 0.0545,
+        "total_seconds": 0.0592
+      }
+    },
+    {
+      "task_id": "rl_v2_conf_ptr_l3_05",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "rollout_id": "eval_confirmation_step_000010_rl_v2_conf_ptr_l3_05",
+      "compliance_pass": true,
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "functional_pass": false,
+      "passed": false,
+      "total_reward": 0.1,
+      "timing": {
+        "compile_seconds": 0.0896,
+        "verifier_seconds": 0.0115,
+        "total_seconds": 0.1044
+      }
+    }
+  ]
+}

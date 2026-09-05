@@ -1,0 +1,50 @@
+{
+  "task_id": "rl_v2_dev_nrf_l2_03",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_family": "dev_nrf_l2_vlan_30",
+  "template_family": "xdp_vlan_demux_router",
+  "semantic_signature": "nrf_l2_vlan_30",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that demuxes VLAN traffic: transmit virtual network frames with VLAN tag 30 via XDP_TX. Pass all other packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet and 802.1Q header bounds against data_end",
+    "Check if eth->h_proto == ETH_P_8021Q and vlan_id == 30",
+    "Return XDP_TX on matching VLAN ID",
+    "Return XDP_PASS for other VLAN IDs, untagged packets, and non-IP traffic",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "tx_vlan_30",
+      "description": "VLAN 30 transmitted",
+      "packet_hex": "5254001234565254006543218100001e080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_other_vlan",
+      "description": "VLAN 999 passed",
+      "packet_hex": "525400123456525400654321810003e7080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Untagged passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 4,
+  "task_sha256": "4be12101fabcc5608551eb82c15fd38ccc026a1217b2d27a64f127cd6760c7b3"
+}

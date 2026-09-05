@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_canary_nrf_l3_01",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "canary_nrf_l3_lpm_router",
+  "template_family": "xdp_lpm_router",
+  "semantic_signature": "nrf_l3_lpm_canary",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that performs IPv4 route lookups using BPF_MAP_TYPE_LPM_TRIE map 'route_table_canary'. On route match, transmit with XDP_TX; on route miss, forward with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_LPM_TRIE map 'route_table_canary' with BPF_F_NO_PREALLOC",
+    "Define LPM key struct with __u32 prefixlen and __u32 data members",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Perform bpf_map_lookup_elem with prefixlen=32 on ip->daddr",
+    "Return XDP_TX on route match, XDP_PASS on route miss or non-IP",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_unrouted",
+      "description": "Unrouted IP passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e50fc0a8010ac0a8013230390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "9ddf438700d3b2290ed2f8970f434f728dfaf43f4b24be32652ee3301144d158"
+}

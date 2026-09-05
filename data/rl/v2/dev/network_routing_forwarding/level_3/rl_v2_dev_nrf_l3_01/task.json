@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_dev_nrf_l3_01",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "dev_nrf_l3_fallback_dev01",
+  "template_family": "xdp_lpm_fallback_router",
+  "semantic_signature": "nrf_l3_fallback_1",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must route IPv4 traffic using 'dev_route_table_01' and fallback to default gateway on miss. On route hit, rewrite destination MAC to route gateway and XDP_TX; on route miss, rewrite destination MAC to default gateway 52:54:00:00:00:fe and forward with XDP_TX.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_LPM_TRIE map 'dev_route_table_1' with BPF_F_NO_PREALLOC",
+    "Define LPM key struct with __u32 prefixlen and __u32 data members",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Lookup ip->daddr in dev_route_table_1",
+    "On hit rewrite destination MAC to route MAC; on miss rewrite to default gateway 52:54:00:00:00:fe",
+    "Return XDP_TX for all routed IPv4 packets, XDP_PASS for non-IP",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "tx_default_gw",
+      "description": "Unmatched routed to default gateway",
+      "packet_hex": "5254001234565254006543210800450000281234000040068340c0a8010ac0a8630130390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "cd206a57290f38f9b6a40ea65f96b001ca8568b62e1d7a0b5e85ce21967f5ded"
+}

@@ -1,0 +1,919 @@
+{
+  "timestamp": "2026-09-05T15:12:51.268322+00:00",
+  "phase": "phase_7_sampling_only_canary",
+  "sampler_checkpoint": "tinker://9461002d-2321-5858-8184-5604f9304283:train:0/sampler_weights/final",
+  "tasks_evaluated": 12,
+  "total_rollouts": 48,
+  "compile_rate": 0.4375,
+  "verifier_rate": 0.4167,
+  "functional_pass_rate": 0.4167,
+  "average_reward": 0.43,
+  "duration_seconds": 70.38,
+  "rollouts": [
+    {
+      "task_id": "rl_v2_canary_pfs_l1_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_pfs_l1_01_s0",
+      "source_sha256": "5f0443fdc110c2610888f59c02c74fb87f837dc955ac08a659b036b35a47dede",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.081,
+        "verifier_seconds": 0.0095,
+        "behavioral_seconds": 0.0426,
+        "total_seconds": 0.1359
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l1_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_pfs_l1_01_s1",
+      "source_sha256": "5f0443fdc110c2610888f59c02c74fb87f837dc955ac08a659b036b35a47dede",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0751,
+        "verifier_seconds": 0.0124,
+        "behavioral_seconds": 0.0467,
+        "total_seconds": 0.1351
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l1_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_pfs_l1_01_s2",
+      "source_sha256": "5f0443fdc110c2610888f59c02c74fb87f837dc955ac08a659b036b35a47dede",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0652,
+        "verifier_seconds": 0.0076,
+        "behavioral_seconds": 0.0317,
+        "total_seconds": 0.1059
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l1_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_pfs_l1_01_s3",
+      "source_sha256": "50db3843cb3a164e634263c64ef5e714f1f890cbc339036d869b181ae01df136",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0597,
+        "verifier_seconds": 0.0084,
+        "behavioral_seconds": 0.1236,
+        "total_seconds": 0.1928
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l2_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_pfs_l2_01_s0",
+      "source_sha256": "c884c1d826970a9f467a9c158ba637bba9f8d698ad313613569bdf8726e249c9",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0983,
+        "verifier_seconds": 0.0107,
+        "behavioral_seconds": 0.0392,
+        "total_seconds": 0.1495
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l2_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_pfs_l2_01_s1",
+      "source_sha256": "f6d89d1fb2e32ae10c63eb18b87873d274d50535ef1506de15836589b6c8d93a",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0757,
+        "verifier_seconds": 0.0107,
+        "behavioral_seconds": 0.0361,
+        "total_seconds": 0.1236
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l2_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_pfs_l2_01_s2",
+      "source_sha256": "89207afacd53bc000c77924fe75a792565e30a9bd044fe8113a94d97913a5117",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0633,
+        "verifier_seconds": 0.0105,
+        "behavioral_seconds": 0.0379,
+        "total_seconds": 0.1132
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l2_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_pfs_l2_01_s3",
+      "source_sha256": "576251bfa89fdc3cb74f706f2f3ca75f1b0e76a911f0191e726a3bbc9ad35e8b",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0654,
+        "verifier_seconds": 0.0158,
+        "behavioral_seconds": 0.042,
+        "total_seconds": 0.1253
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l3_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_pfs_l3_01_s0",
+      "source_sha256": "24b3a0dd784177a98cfb6382982301dbb3d2b0b2bb194741838bb35250eaeb84",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.1017,
+        "total_seconds": 0.1066
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l3_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_pfs_l3_01_s1",
+      "source_sha256": "9899511f6558334e89c68e4649983bff8617785c69b2f14f8f6e53167e244290",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.077,
+        "total_seconds": 0.0794
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l3_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_pfs_l3_01_s2",
+      "source_sha256": "15e2b38f79e3968087d05b7b12318c8111277108f3cdad18f6de8249e28e319e",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0779,
+        "total_seconds": 0.083
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l3_01",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_pfs_l3_01_s3",
+      "source_sha256": "70bd3e926bd62fa3fcbc702a1bed37d7613bea0541f54eb5d7e5f97aa21e2466",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0864,
+        "total_seconds": 0.0886
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l1_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_nrf_l1_01_s0",
+      "source_sha256": "03886f7bfab629c30601411767fde4dfae74f63b9b1a5424f6b5fa80e9519e13",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0682,
+        "total_seconds": 0.0771
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l1_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_nrf_l1_01_s1",
+      "source_sha256": "a5eae9ad0782d0d16b78c6ede7b75ffe4d92fa3d4ccc19f97cca8283d5bb58bb",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0639,
+        "total_seconds": 0.0656
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l1_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_nrf_l1_01_s2",
+      "source_sha256": "a5eae9ad0782d0d16b78c6ede7b75ffe4d92fa3d4ccc19f97cca8283d5bb58bb",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.074,
+        "total_seconds": 0.0761
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l1_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_nrf_l1_01_s3",
+      "source_sha256": "a5eae9ad0782d0d16b78c6ede7b75ffe4d92fa3d4ccc19f97cca8283d5bb58bb",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0638,
+        "total_seconds": 0.0672
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l2_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_nrf_l2_01_s0",
+      "source_sha256": "b3b61a4ccb0c58ed1af0a4b9c921f1db0fd42e93863b00beb3fb032018b3826a",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0746,
+        "verifier_seconds": 0.0143,
+        "behavioral_seconds": 0.0322,
+        "total_seconds": 0.1232
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l2_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_nrf_l2_01_s1",
+      "source_sha256": "b3b61a4ccb0c58ed1af0a4b9c921f1db0fd42e93863b00beb3fb032018b3826a",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0796,
+        "verifier_seconds": 0.0115,
+        "behavioral_seconds": 0.0238,
+        "total_seconds": 0.1158
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l2_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_nrf_l2_01_s2",
+      "source_sha256": "0991d1025dc033df8fa709e2e3433f488e2f9384c1c6713181ca926c02032389",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0782,
+        "verifier_seconds": 0.0104,
+        "behavioral_seconds": 0.0404,
+        "total_seconds": 0.1301
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l2_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_nrf_l2_01_s3",
+      "source_sha256": "b3b61a4ccb0c58ed1af0a4b9c921f1db0fd42e93863b00beb3fb032018b3826a",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0626,
+        "verifier_seconds": 0.0092,
+        "behavioral_seconds": 0.0223,
+        "total_seconds": 0.0952
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l3_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_nrf_l3_01_s0",
+      "source_sha256": "8d5ebbf49215e6246d12a0ea9ae1aaf9f4fb24ad7e860d97ade6546279d5a78c",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0716,
+        "total_seconds": 0.0731
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l3_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_nrf_l3_01_s1",
+      "source_sha256": "9c6e7b8b6877536e482eacf8441a5a5f2908070983d6354cc8caa8e35aece57a",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0623,
+        "total_seconds": 0.0644
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l3_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_nrf_l3_01_s2",
+      "source_sha256": "9c6e7b8b6877536e482eacf8441a5a5f2908070983d6354cc8caa8e35aece57a",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0513,
+        "total_seconds": 0.0528
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l3_01",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_nrf_l3_01_s3",
+      "source_sha256": "9c6e7b8b6877536e482eacf8441a5a5f2908070983d6354cc8caa8e35aece57a",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0557,
+        "total_seconds": 0.0592
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l1_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_pit_l1_01_s0",
+      "source_sha256": "a2ef38dac54fde5a19007dd1f23272cb0e4b77ba0d19deededee7bd72d5d3f01",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0697,
+        "verifier_seconds": 0.01,
+        "behavioral_seconds": 0.0303,
+        "total_seconds": 0.1117
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l1_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_pit_l1_01_s1",
+      "source_sha256": "ae7e5bc55edd2f73c4e7e8c79f4cb3e2b5a19d0b4a21524f1b34742084c15f64",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0666,
+        "total_seconds": 0.0678
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l1_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_pit_l1_01_s2",
+      "source_sha256": "0424577025f49378247c62b5d278b6d50f32076a0da799bf567be21ff856d563",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0705,
+        "verifier_seconds": 0.012,
+        "behavioral_seconds": 0.0164,
+        "total_seconds": 0.0998
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l1_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_pit_l1_01_s3",
+      "source_sha256": "f532ebed84dd246b065953f180f4783c57993768aee2a0af2a78edc821d5d6ce",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0628,
+        "total_seconds": 0.0647
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l2_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_pit_l2_01_s0",
+      "source_sha256": "db1b7b13c3ed9a9613c69bc7d65d6fc8726d338aa3400fd616271d7300879bd2",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0662,
+        "total_seconds": 0.0679
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l2_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_pit_l2_01_s1",
+      "source_sha256": "db1b7b13c3ed9a9613c69bc7d65d6fc8726d338aa3400fd616271d7300879bd2",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0677,
+        "total_seconds": 0.0696
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l2_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_pit_l2_01_s2",
+      "source_sha256": "db1b7b13c3ed9a9613c69bc7d65d6fc8726d338aa3400fd616271d7300879bd2",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0623,
+        "total_seconds": 0.0641
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l2_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_pit_l2_01_s3",
+      "source_sha256": "e3597324686644a5c263a8dcc717e9a4ce081a05b79ad01681ef6204cf9610fe",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0604,
+        "total_seconds": 0.0614
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l3_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_pit_l3_01_s0",
+      "source_sha256": "0bb36f7bdd0c20529dee13faac10a34c65982790224ad1cceaf518e95576e391",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0831,
+        "total_seconds": 0.0847
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l3_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_pit_l3_01_s1",
+      "source_sha256": "a33d80603314d1c834829e17a094e27df7dcbc482ce57174acdae80aa4c4c249",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0799,
+        "verifier_seconds": 0.0108,
+        "behavioral_seconds": 0.0214,
+        "total_seconds": 0.1141
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l3_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_pit_l3_01_s2",
+      "source_sha256": "877b779468264c17950b0c0ea484058b3f7dec143e1865d624be42d683e19758",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0765,
+        "verifier_seconds": 0.0183,
+        "behavioral_seconds": 0.0288,
+        "total_seconds": 0.1254
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l3_01",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_pit_l3_01_s3",
+      "source_sha256": "11b06b515dd8db01fda850372e6dff0d3a098b14a25cbb4aa6b8ff3c84134541",
+      "compile_pass": true,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.1,
+      "is_functionally_correct": false,
+      "stage_reached": "compile",
+      "timing": {
+        "compile_seconds": 0.1044,
+        "verifier_seconds": 0.0173,
+        "total_seconds": 0.1239
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l1_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_ptr_l1_01_s0",
+      "source_sha256": "463e60aed265761640b851b9dda7fe69a9b6ea010d14819203ac260dd42151a2",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0858,
+        "verifier_seconds": 0.0143,
+        "behavioral_seconds": 0.0179,
+        "total_seconds": 0.1225
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l1_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_ptr_l1_01_s1",
+      "source_sha256": "10e84ec5d0dffb088be172d5c2f9de199b16c4ce6857aa83348f56720454e7a9",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.071,
+        "verifier_seconds": 0.0122,
+        "behavioral_seconds": 0.0192,
+        "total_seconds": 0.1036
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l1_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_ptr_l1_01_s2",
+      "source_sha256": "65891a232f7c1e9a653a7beb253415e251cae5f28f1464c5296926d9daace9b2",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0616,
+        "verifier_seconds": 0.008,
+        "behavioral_seconds": 0.0149,
+        "total_seconds": 0.0855
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l1_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_ptr_l1_01_s3",
+      "source_sha256": "463e60aed265761640b851b9dda7fe69a9b6ea010d14819203ac260dd42151a2",
+      "compile_pass": true,
+      "verifier_pass": true,
+      "behavioral_pass": true,
+      "total_reward": 1.0,
+      "is_functionally_correct": true,
+      "stage_reached": "full_pass",
+      "timing": {
+        "compile_seconds": 0.0643,
+        "verifier_seconds": 0.0084,
+        "behavioral_seconds": 0.0148,
+        "total_seconds": 0.0886
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l2_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_ptr_l2_01_s0",
+      "source_sha256": "c9407c64280dbb64645948daa3aa37325bc6b8d55b239e431ed37f6701dd2d30",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0768,
+        "total_seconds": 0.0793
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l2_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_ptr_l2_01_s1",
+      "source_sha256": "45362d74cc6ab59afa22cfa83167ce4048ee45cfa1d617d445b275cc61d62ba9",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0539,
+        "total_seconds": 0.0556
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l2_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_ptr_l2_01_s2",
+      "source_sha256": "c5f002911e51c1b670f2ceb32e2889e5e5ac9f6c2726fa6c5d9a7ae331f4e43b",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0574,
+        "total_seconds": 0.0591
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l2_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_ptr_l2_01_s3",
+      "source_sha256": "c6f98885f403ebc84bf884d9e616b40b683ff542c8b88a0f95dd7a80c82ffb31",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.0764,
+        "total_seconds": 0.0788
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l3_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "sample_index": 0,
+      "rollout_id": "canary_rl_v2_canary_ptr_l3_01_s0",
+      "source_sha256": "c2a54006f452c1c40186a61fd3c32f4fc5b307e95075a30f798a8c997f678d0f",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.2321,
+        "total_seconds": 0.2341
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l3_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "sample_index": 1,
+      "rollout_id": "canary_rl_v2_canary_ptr_l3_01_s1",
+      "source_sha256": "1b5714c22bb8aa31c16ad0f92f4e611baa14e62e3f40d29306965eb780e98511",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.175,
+        "total_seconds": 0.1767
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l3_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "sample_index": 2,
+      "rollout_id": "canary_rl_v2_canary_ptr_l3_01_s2",
+      "source_sha256": "c2a54006f452c1c40186a61fd3c32f4fc5b307e95075a30f798a8c997f678d0f",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.2859,
+        "total_seconds": 0.2877
+      }
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l3_01",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "sample_index": 3,
+      "rollout_id": "canary_rl_v2_canary_ptr_l3_01_s3",
+      "source_sha256": "c2a54006f452c1c40186a61fd3c32f4fc5b307e95075a30f798a8c997f678d0f",
+      "compile_pass": false,
+      "verifier_pass": false,
+      "behavioral_pass": false,
+      "total_reward": 0.02,
+      "is_functionally_correct": false,
+      "stage_reached": "compliance",
+      "timing": {
+        "compile_seconds": 0.194,
+        "total_seconds": 0.1958
+      }
+    }
+  ]
+}

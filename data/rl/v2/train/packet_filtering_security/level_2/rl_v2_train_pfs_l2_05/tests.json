@@ -1,0 +1,40 @@
+{
+  "task_id": "rl_v2_train_pfs_l2_05",
+  "tests": [
+    {
+      "name": "drop_min",
+      "description": "Port 9000 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430392328000003e8000000005002ffffd52a0000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "drop_max",
+      "description": "Port 9050 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039235a000003e8000000005002ffffd4f80000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_below",
+      "description": "Port 8999 passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430392327000003e8000000005002ffffd52b0000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_above",
+      "description": "Port 9051 passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039235b000003e8000000005002ffffd4f70000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

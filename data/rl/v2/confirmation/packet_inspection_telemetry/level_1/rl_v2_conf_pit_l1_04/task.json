@@ -1,0 +1,44 @@
+{
+  "task_id": "rl_v2_conf_pit_l1_04",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "conf_pit_l1_tcp_flag_conf04",
+  "template_family": "xdp_tcp_flag_counter",
+  "semantic_signature": "pit_l1_flags_4",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must count TCP control bits across 5 array indices in 'tcp_flags_04'. Map SYN->0, ACK->1, FIN->2, RST->3, PSH->4. Return XDP_PASS for all traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map 'tcp_flags_4' with 8 entries and __u64 values",
+    "Verify Ethernet, IPv4, and TCP header bounds against data_end",
+    "Inspect TCP flags and increment matching index: SYN->0, ACK->1, FIN->2, RST->3, PSH->4",
+    "Atomically increment counter via __sync_fetch_and_add",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_syn",
+      "description": "SYN flag incremented",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_ack",
+      "description": "ACK flag incremented",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010fffff7f40000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_udp",
+      "description": "Non-TCP passes without counting",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "e80707b9f13d023a3a84fda62561eb3297f22b5e7f96544b85ac2e036145278c"
+}

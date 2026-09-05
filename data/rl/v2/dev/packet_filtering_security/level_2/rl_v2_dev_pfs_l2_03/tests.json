@@ -1,0 +1,19 @@
+{
+  "task_id": "rl_v2_dev_pfs_l2_03",
+  "tests": [
+    {
+      "name": "drop_runt_28",
+      "description": "28 byte runt dropped",
+      "packet_hex": "52540012345652540065432108004500000e000000004000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_normal_54",
+      "description": "54 byte frame passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

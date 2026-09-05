@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_conf_ptr_l2_04",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "conf_ptr_l2_vlan_push_conf04",
+  "template_family": "xdp_vlan_push",
+  "semantic_signature": "ptr_l2_push_304",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must push virtual network tag 304 onto untagged packets expanding packet head. Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet header bounds against data_end",
+    "Check if frame is untagged IPv4 (eth->h_proto == ETH_P_IP)",
+    "Invoke bpf_xdp_adjust_head(ctx, -(int)sizeof(struct vlan_hdr)) to expand head by 4 bytes",
+    "Re-validate packet pointers and rewrite Ethernet header with ETH_P_8021Q",
+    "Insert struct vlan_hdr with vlan_id == 304 and encapsulated ETH_P_IP",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_untagged_pushed",
+      "description": "Untagged pushed with VLAN 304 and passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "972fef70d78d7ebd61092b12eebfa9e6b8d2f9e4e4a6e39980ab4d21d11495bf"
+}

@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_conf_ptr_l2_03",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "conf_ptr_l2_vlan_push_conf03",
+  "template_family": "xdp_vlan_push",
+  "semantic_signature": "ptr_l2_push_303",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must insert VLAN tag 303 between Ethernet header and IP datagram via adjust_head(-4). Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet header bounds against data_end",
+    "Check if frame is untagged IPv4 (eth->h_proto == ETH_P_IP)",
+    "Invoke bpf_xdp_adjust_head(ctx, -(int)sizeof(struct vlan_hdr)) to expand head by 4 bytes",
+    "Re-validate packet pointers and rewrite Ethernet header with ETH_P_8021Q",
+    "Insert struct vlan_hdr with vlan_id == 303 and encapsulated ETH_P_IP",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_untagged_pushed",
+      "description": "Untagged pushed with VLAN 303 and passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "19a8e54990c62dbd66aed6e22e7b42258502a95d48bcefd5d1843a3c3752d166"
+}

@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_conf_ptr_l3_02",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "conf_ptr_l3_gre_decap_conf02",
+  "template_family": "xdp_gre_decap",
+  "semantic_signature": "ptr_l3_gre_2",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must remove GRE encapsulation wrapper (IPv4 + 4-byte GRE) to expose inner Ethernet/IP frame. Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet and outer IPv4 header bounds against data_end",
+    "Check if outer_ip->protocol == 47 (IPPROTO_GRE)",
+    "Calculate total encapsulation length: (outer_ip->ihl * 4) + 4 bytes GRE header",
+    "Back up Ethernet header and shift packet head forward by outer_len + 4 using bpf_xdp_adjust_head",
+    "Re-validate packet pointers and restore Ethernet header with ETH_P_IP",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_decap_gre",
+      "description": "GRE tunnel packet decapsulated and passed",
+      "packet_hex": "52540012345652540065432108004500004012340000402f50d90a4202010a4200fe00000800450000281234000040068348c0a83201c0a8320230390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_normal_tcp",
+      "description": "Normal non-tunneled TCP passed unmodified",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "0abe18069bcd9f80fd948b0e6cb637e6c61475a73e96bed5ae5af8c8f3e4c233"
+}

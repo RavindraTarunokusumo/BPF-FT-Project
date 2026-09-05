@@ -1,0 +1,40 @@
+{
+  "task_id": "rl_v2_train_pfs_l1_06",
+  "tests": [
+    {
+      "name": "drop_pop3",
+      "description": "TCP port 110 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039006e000003e8000000005002fffff7e40000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_unrelated",
+      "description": "Other TCP port passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039270f000003e8000000005002ffffd1430000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "drop_with_options",
+      "description": "TCP with IP options dropped",
+      "packet_hex": "52540012345652540065432108004600002c123400004006e429c0a8010ac0a80114000000003039006e000003e8000000005002fffff7e40000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_truncated",
+      "description": "Truncated header passes",
+      "packet_hex": "525400123456525400654321080045000010",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "task_id": "rl_v2_conf_pfs_l1_01",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "conf_pfs_l1_gre",
+  "template_family": "xdp_ip_protocol_filter",
+  "semantic_signature": "pfs_l1_proto_gre_47",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network layer packets and drops Generic Routing Encapsulation GRE tunnel datagrams matching IPv4 protocol 47. Forward all other packets.",
+  "requirements": [
+    "Verify Ethernet header bounds against data_end",
+    "Verify IPv4 header bounds and inspect ip->protocol",
+    "Drop packet with XDP_DROP if ip->protocol equals 47",
+    "Return XDP_PASS for non-matching protocols or malformed frames",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "drop_gre",
+      "description": "Protocol 47 dropped",
+      "packet_hex": "52540012345652540065432108004500001c12340000402fe510c0a8010ac0a80114aabbccddeeff1122",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_tcp",
+      "description": "Standard TCP passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_udp",
+      "description": "Standard UDP passes",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "Non-IP ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_truncated",
+      "description": "Truncated header passes",
+      "packet_hex": "525400123456525400654321080045000010",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 5,
+  "task_sha256": "d2a3132bf5531baca5ac3d60cf84085e279e39a0bd2e8a77b79bb07aec40bdbe"
+}

@@ -1,0 +1,300 @@
+{
+  "total_compared": 36,
+  "fail_to_fail": 15,
+  "fail_to_pass": 0,
+  "pass_to_fail": 1,
+  "pass_to_pass": 20,
+  "net_gain": -1,
+  "mcnemar_stat": 0.0,
+  "mcnemar_p_value": 1.0,
+  "transitions": [
+    {
+      "task_id": "nrf_l1_icmp_reflector",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "nrf_l1_subnet_reflector",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "nrf_l1_udp_reflector",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "nrf_l2_configured_redirect",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "nrf_l2_prefix_redirect",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "nrf_l2_protocol_redirect",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "nrf_l3_fib_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "nrf_l3_flow_load_balancer",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "nrf_l3_policy_router",
+      "category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pfs_l1_icmp_echo_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pfs_l1_tcp23_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pfs_l1_udp53_drop",
+      "category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pfs_l2_source_subnet_exception",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pfs_l2_syn_privileged_ports",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pfs_l2_vlan_tcp443",
+      "category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pfs_l3_configured_blocklist",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pfs_l3_multivector_guard",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pfs_l3_source_packet_quota",
+      "category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pit_l1_ipv4_split",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pit_l1_total_bytes",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pit_l1_total_packets",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pit_l2_length_histogram",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pit_l2_protocol_counters",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pit_l2_tcp_flag_counters",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "pit_l3_ipv4_flow_counter",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pit_l3_tcp_flow_outcomes",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "pit_l3_vlan_dualstack_telemetry",
+      "category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "transition": "fail->fail",
+      "baseline_pass": false,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "ptr_l1_set_destination_mac",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "ptr_l1_set_source_mac",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "ptr_l1_swap_mac",
+      "category": "protocol_transformation",
+      "difficulty": "level_1",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "ptr_l2_decrement_ttl",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "ptr_l2_rewrite_ipv4_destination",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "ptr_l2_rewrite_udp_port",
+      "category": "protocol_transformation",
+      "difficulty": "level_2",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "ptr_l3_icmp_echo_reply",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "transition": "pass->fail",
+      "baseline_pass": true,
+      "candidate_pass": false
+    },
+    {
+      "task_id": "ptr_l3_tcp_dnat",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    },
+    {
+      "task_id": "ptr_l3_vlan_pop",
+      "category": "protocol_transformation",
+      "difficulty": "level_3",
+      "transition": "pass->pass",
+      "baseline_pass": true,
+      "candidate_pass": true
+    }
+  ]
+}

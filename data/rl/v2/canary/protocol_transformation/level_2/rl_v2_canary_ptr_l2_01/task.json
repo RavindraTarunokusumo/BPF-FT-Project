@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_canary_ptr_l2_01",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "canary_ptr_l2_vlan_pcp_remark",
+  "template_family": "xdp_vlan_pcp_remarker",
+  "semantic_signature": "ptr_l2_vlan_pcp_voice_canary",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that remarks the 3-bit Priority Code Point (PCP) on 802.1Q tagged frames to voice priority level 5 in-place. Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Ensure Ethernet and 802.1Q VLAN headers are within data_end bounds",
+    "Inspect eth->h_proto for ETH_P_8021Q (0x8100)",
+    "Extract vlan_TCI, keep VID and DEI bits intact, and overwrite bits 13-15 with PCP value 5",
+    "Store modified vlan_TCI in network byte order in-place without head adjustments",
+    "Forward all packets unconditionally using XDP_PASS",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_remarked_pcp",
+      "description": "VLAN PCP remarked to 5 and passed",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Untagged packet passed unchanged",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "967d3954acf4c797ad5d54a287e61a3ab6a3e651400dd4df104a3f9d07ee019d"
+}

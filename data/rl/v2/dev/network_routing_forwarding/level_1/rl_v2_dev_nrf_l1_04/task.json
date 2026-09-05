@@ -1,0 +1,44 @@
+{
+  "task_id": "rl_v2_dev_nrf_l1_04",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "dev_nrf_l1_ttl_dec_dev04",
+  "template_family": "xdp_ttl_decrement_forwarder",
+  "semantic_signature": "nrf_l1_ttl_dec_4",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must decrement IPv4 time-to-live field on benchmark traffic and emit via XDP_TX. Drop packets if TTL is 1 or less; forward non-IP with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Confirm eth->h_proto == ETH_P_IP",
+    "Drop packet with XDP_DROP if ip->ttl <= 1",
+    "Decrement ip->ttl and recalculate IPv4 header checksum ip->check",
+    "Return XDP_TX for forwarded packets, XDP_PASS for non-IP traffic",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "tx_forwarded",
+      "description": "TTL 64 forwarded with XDP_TX",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "drop_expired",
+      "description": "TTL 1 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400000106242ec0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "ab3332f4a945ebd2ddbf8d32d40bc0c5f7c345aebd34a463c6d33fe70817e2cd"
+}

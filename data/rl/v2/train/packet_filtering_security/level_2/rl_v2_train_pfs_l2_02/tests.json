@@ -1,0 +1,40 @@
+{
+  "task_id": "rl_v2_train_pfs_l2_02",
+  "tests": [
+    {
+      "name": "drop_min",
+      "description": "Port 6000 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430391770000003e8000000005002ffffe0e20000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "drop_max",
+      "description": "Port 6050 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303917a2000003e8000000005002ffffe0b00000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_below",
+      "description": "Port 5999 passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039176f000003e8000000005002ffffe0e30000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_above",
+      "description": "Port 6051 passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303917a3000003e8000000005002ffffe0af0000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

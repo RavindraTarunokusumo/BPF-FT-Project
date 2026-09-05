@@ -1,0 +1,43 @@
+{
+  "task_id": "rl_v2_dev_pfs_l2_02",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "dev_pfs_l2_ip_options_drop",
+  "template_family": "xdp_ip_attribute_filter",
+  "semantic_signature": "pfs_l2_attr_ip_options_drop",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and must drop IPv4 datagrams carrying IP options where internet header length IHL exceeds 5. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet header bounds against data_end",
+    "Verify IPv4 header bounds against data_end",
+    "Drop packet with XDP_DROP if ip->ihl > 5",
+    "Return XDP_PASS for standard IHL 5 or non-IP traffic",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "drop_ihl_6",
+      "description": "IHL 6 with options dropped",
+      "packet_hex": "52540012345652540065432108004600002c123400004006e429c0a8010ac0a801140000000030390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_ihl_5",
+      "description": "Standard IHL 5 passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "f0860a2aa3e8ffcc0cb166b40dcf1d1d7a3396cd5f3a0925729b4178b5d52b17"
+}

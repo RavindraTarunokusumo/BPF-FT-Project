@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_conf_pfs_l3_03",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "conf_pfs_l3_protocol_quota_enforce",
+  "template_family": "xdp_stateful_quota_filter",
+  "semantic_signature": "pfs_l3_conf_protocol_quota_enforce",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and must enforce protocol budget in BPF_MAP_TYPE_ARRAY map 'protocol_budget_map' dropping when protocol count exceeds limit. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map 'protocol_budget_map' with 256 entries and value __u64",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Lookup ip->protocol index and increment count",
+    "Drop packet with XDP_DROP if protocol count exceeds 50000",
+    "Return XDP_PASS otherwise",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_untracked",
+      "description": "Untracked client passes",
+      "packet_hex": "5254001234565254006543210800450000281234000040069aac0a020232c0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "ec44e97c773e3abedcc83841415c7485ae6731d52e527d4d0c80bc5c35afd6b9"
+}

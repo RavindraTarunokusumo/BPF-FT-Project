@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_dev_ptr_l3_01",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_family": "dev_ptr_l3_six_in_four_dev01",
+  "template_family": "xdp_6in4_decap",
+  "semantic_signature": "ptr_l3_6in4_1",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must decapsulate 6in4 tunnel packets (protocol 41) by stripping outer IPv4 and restoring ETH_P_IPV6. Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet and outer IPv4 header bounds against data_end",
+    "Check if outer_ip->protocol == 41 (IPPROTO_IPV6)",
+    "Calculate variable outer IPv4 header length (outer_ip->ihl * 4)",
+    "Back up Ethernet header and update h_proto to ETH_P_IPV6 (0x86DD)",
+    "Invoke bpf_xdp_adjust_head(ctx, outer_len) and restore updated Ethernet header",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_decap_6in4",
+      "description": "6in4 tunnel packet decapsulated and passed",
+      "packet_hex": "52540012345652540065432108004500005012340000402951b90a4d01010a4d00fe600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_normal_tcp",
+      "description": "Normal non-tunneled TCP passed unmodified",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "87f96c8f8b32a6f29cf6a1aa0a7e2ba475d1bfa46b97751bfa73e239def5db2a"
+}

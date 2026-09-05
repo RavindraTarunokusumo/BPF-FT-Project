@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_dev_pfs_l3_04",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "dev_pfs_l3_burst_throttle",
+  "template_family": "xdp_stateful_filter",
+  "semantic_signature": "pfs_l3_dev_burst_throttle",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and must throttle bursty IP packets using BPF_MAP_TYPE_HASH map 'burst_timestamp_map' dropping back-to-back arrivals. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_HASH map 'burst_timestamp_map' with key __u32 and value __u64",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Query current timestamp with bpf_ktime_get_ns() and lookup ip->saddr",
+    "Drop packet with XDP_DROP if (now - last_time) < 1000000ULL",
+    "Update timestamp in map and return XDP_PASS",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_untracked",
+      "description": "Untracked client passes",
+      "packet_hex": "5254001234565254006543210800450000281234000040069bad0a010132c0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "51aa9ac2581d082e77b6e35c2574ac255c608fa62fd558d6bdd15f347ed07451"
+}

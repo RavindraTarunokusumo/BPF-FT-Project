@@ -1,0 +1,26 @@
+{
+  "task_id": "rl_v2_conf_pit_l1_04",
+  "tests": [
+    {
+      "name": "pass_syn",
+      "description": "SYN flag incremented",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_ack",
+      "description": "ACK flag incremented",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005010fffff7f40000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_udp",
+      "description": "Non-TCP passes without counting",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

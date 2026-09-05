@@ -1,0 +1,19 @@
+{
+  "task_id": "rl_v2_canary_ptr_l1_01",
+  "tests": [
+    {
+      "name": "pass_zeroed_udp",
+      "description": "UDP checksum zeroed and passed",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500084c01",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "canary": {
+    "split": "canary",
+    "total_tasks": 12,
+    "passed_tasks": 12,
+    "failed_tasks_count": 0,
+    "task_pass_rate": 1.0,
+    "total_fixtures": 32,
+    "passed_fixtures": 32,
+    "fixture_pass_rate": 1.0,
+    "failed_tasks": [],
+    "split_sha256": "b7bc8ee13049d51933cc3c5f1dda5fa4763e9a2198dc56b2f0e00931ddf38837"
+  },
+  "aggregate_task_pool_sha256": "11f69dd74c4796d8777da998a97ece2adaea607f04f2b5bc88800e193387b951"
+}

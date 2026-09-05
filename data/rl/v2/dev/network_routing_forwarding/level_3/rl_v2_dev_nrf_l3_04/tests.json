@@ -1,0 +1,19 @@
+{
+  "task_id": "rl_v2_dev_nrf_l3_04",
+  "tests": [
+    {
+      "name": "tx_default_gw",
+      "description": "Unmatched routed to default gateway",
+      "packet_hex": "5254001234565254006543210800450000281234000040068340c0a8010ac0a8630130390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

@@ -32,7 +32,7 @@ from tinker_cookbook.rl.types import (
 )
 
 from training.rl.kernel_executor import KernelExecutor, check_output_compliance, extract_c_source
-from training.rl.reward import compute_rlvr_reward
+from training.rl.reward import InfrastructureRewardError, compute_rlvr_reward
 
 logger = logging.getLogger("bpf_guardian_rl.env")
 
@@ -164,10 +164,14 @@ class BPFEnv(Env):
 
         # Compute bounded RLVR reward
         expected_fixtures = self.task.get("expected_fixture_count")
-        reward_breakdown = compute_rlvr_reward(
-            verification.to_dict(),
-            expected_fixture_count=expected_fixtures,
-        )
+        try:
+            reward_breakdown = compute_rlvr_reward(
+                verification.to_dict(),
+                expected_fixture_count=expected_fixtures,
+            )
+        except InfrastructureRewardError as e:
+            logger.error("Infrastructure reward error in rollout %s: %s", rollout_id, e)
+            raise RuntimeError(f"INFRASTRUCTURE_ERROR: {e}") from e
 
         metrics: Metrics = {
             "reward/total": float(reward_breakdown.total_reward),
@@ -211,12 +215,18 @@ class BPFEnvGroupBuilder(EnvGroupBuilder):
         renderer_name: str = "qwen3_disable_thinking",
         records_dir: str = "runs/tinker/qwen3-8b-bpf-rl-v1/verifier_records",
         group_index: int = 0,
+        sampler: Optional[Any] = None,
+        sampler_state_path: Optional[str] = None,
+        task_sampling_prob: float = 0.0,
     ):
         self.task = task
         self.group_size = group_size
         self.renderer_name = renderer_name
         self.records_dir = records_dir
         self.group_index = group_index
+        self.sampler = sampler
+        self.sampler_state_path = sampler_state_path
+        self.task_sampling_prob = task_sampling_prob
 
     async def make_envs(self) -> Sequence[Env]:
         from tinker_cookbook.tokenizer_utils import get_tokenizer

@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_conf_pit_l2_04",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "conf_pit_l2_flow_5tuple_conf04",
+  "template_family": "xdp_flow_tracker",
+  "semantic_signature": "pit_l2_flow_5tuple_4",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must index end-to-end network flows by 5-tuple in LRU map 'flow_table_04'. Key: (saddr, daddr, sport, dport, proto). Return XDP_PASS for all traffic.",
+  "requirements": [
+    "Define struct flow_key containing saddr, daddr, sport, dport, proto",
+    "Define BPF_MAP_TYPE_LRU_HASH map 'flow_table_04' with key struct flow_key and value __u64",
+    "Verify Ethernet, IPv4, and L4 transport header bounds against data_end",
+    "Populate 5-tuple key and atomically increment packet count in flow map",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_tcp_flow",
+      "description": "TCP 5-tuple flow tracked and passed",
+      "packet_hex": "52540012345652540065432108004500002812340000400651970a0101010a02020203e80050000003e8000000005002ffff24540000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "d69147d5de4bda0beaa30170de0aac6028d100c83c07ec4508efebda6d647908"
+}

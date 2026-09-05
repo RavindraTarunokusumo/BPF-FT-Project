@@ -27,6 +27,7 @@ from training.rl.reward import (
     WEIGHT_COMPLIANCE,
     WEIGHT_FIXTURES,
     WEIGHT_VERIFIER,
+    InfrastructureRewardError,
     RewardBreakdown,
     compute_rlvr_reward,
 )
@@ -177,21 +178,21 @@ def test_reward_complete_suite_pass():
     assert r.stage_reached == "full_pass"
 
 
-def test_reward_infrastructure_error_fail_closed():
+def test_reward_infrastructure_error_raises_infrastructure_reward_error():
     result = {
         "infrastructure_error": True,
+        "error_message": "Kernel panic or SSH timeout",
         "output_compliance": {"compliant": True},
         "compile": {"pass": True},
         "verifier": {"pass": True},
         "behavioral": {"total_tests": 4, "passed_tests": 4, "details": []},
     }
-    r = compute_rlvr_reward(result, expected_fixture_count=4)
-    assert r.total_reward == 0.0
-    assert r.is_infrastructure_error is True
-    assert r.stage_reached == "infrastructure_error"
+    with pytest.raises(InfrastructureRewardError) as excinfo:
+        compute_rlvr_reward(result, expected_fixture_count=4)
+    assert "Infrastructure failure cannot produce scalar reward" in str(excinfo.value)
 
 
-def test_reward_fixture_count_mismatch_fail_closed():
+def test_reward_fixture_count_mismatch_raises_infrastructure_reward_error():
     # Model executed 3 tests but expected 4 -> infrastructure/harness failure
     result = {
         "infrastructure_error": False,
@@ -204,10 +205,157 @@ def test_reward_fixture_count_mismatch_fail_closed():
             "details": [{"name": f"t{i}", "pass": True, "weight": 1.0} for i in range(3)],
         },
     }
-    r = compute_rlvr_reward(result, expected_fixture_count=4)
-    assert r.total_reward == 0.0
-    assert r.is_infrastructure_error is True
-    assert r.stage_reached == "fixture_count_mismatch"
+    with pytest.raises(InfrastructureRewardError) as excinfo:
+        compute_rlvr_reward(result, expected_fixture_count=4)
+    assert "Fixture count mismatch: expected 4, got 3" in str(excinfo.value)
+
+
+def test_direct_reward_caller_cannot_obtain_numeric_reward_on_infra_error():
+    result = {
+        "infrastructure_error": True,
+        "error_message": "Subprocess timeout",
+        "output_compliance": {"compliant": True},
+        "compile": {"pass": True},
+        "verifier": {"pass": True},
+        "behavioral": {"total_tests": 4, "passed_tests": 4, "details": []},
+    }
+    with pytest.raises(InfrastructureRewardError):
+        _ = compute_rlvr_reward(result, expected_fixture_count=4)
+
+
+def test_fixture_count_mismatch_treated_as_invalid_infrastructure_not_model_failure():
+    # Even if compilation and verifier passed, a fixture count mismatch must fail closed
+    # as an infrastructure error and NEVER award compliance/compile/verifier points.
+    result = {
+        "infrastructure_error": False,
+        "output_compliance": {"compliant": True},
+        "compile": {"pass": True},
+        "verifier": {"pass": True},
+        "behavioral": {
+            "total_tests": 2,
+            "passed_tests": 2,
+            "details": [{"name": "t0", "pass": True, "weight": 1.0}, {"name": "t1", "pass": True, "weight": 1.0}],
+        },
+    }
+    with pytest.raises(InfrastructureRewardError):
+        compute_rlvr_reward(result, expected_fixture_count=5)
+
+
+@pytest.mark.asyncio
+async def test_env_excludes_infrastructure_failures_from_training():
+    from unittest.mock import AsyncMock, MagicMock
+    from training.rl.bpf_env import BPFEnv
+    from training.rl.kernel_executor import VerificationResult
+
+    mock_renderer = MagicMock()
+    mock_renderer.tokenizer.decode.return_value = "SEC(\"xdp\") int prog() { return 2; }"
+    mock_executor = MagicMock()
+
+    # Case 1: executor reports infrastructure_error=True
+    infra_res = VerificationResult(
+        rollout_id="r1",
+        task_id="t1",
+        source_sha256="abc",
+        task_sha256="def",
+        output_compliance={"compliant": True},
+        compile={"pass": False},
+        verifier={"pass": False},
+        behavioral={"pass": False, "total_tests": 0, "passed_tests": 0, "details": []},
+        cleanup_passed=True,
+        infrastructure_error=True,
+        error_message="SSH connection lost",
+        timeout_stage=None,
+        raw_log_path="/tmp/log",
+        timing={},
+        passed=False,
+        diagnostic=None,
+    )
+    mock_executor.evaluate_candidate = AsyncMock(return_value=infra_res)
+
+    task = {"task_id": "test_task", "expected_fixture_count": 4}
+    env = BPFEnv(task=task, renderer=mock_renderer, executor=mock_executor)
+
+    with pytest.raises(RuntimeError) as excinfo:
+        await env.step([1, 2, 3])
+    assert "INFRASTRUCTURE_ERROR" in str(excinfo.value)
+
+    # Case 2: fixture count mismatch inside env.step()
+    mismatch_res = VerificationResult(
+        rollout_id="r2",
+        task_id="t1",
+        source_sha256="abc",
+        task_sha256="def",
+        output_compliance={"compliant": True},
+        compile={"pass": True},
+        verifier={"pass": True},
+        behavioral={"pass": True, "total_tests": 2, "passed_tests": 2, "details": []},
+        cleanup_passed=True,
+        infrastructure_error=False,
+        error_message=None,
+        timeout_stage=None,
+        raw_log_path="/tmp/log",
+        timing={},
+        passed=True,
+        diagnostic=None,
+    )
+    mock_executor.evaluate_candidate = AsyncMock(return_value=mismatch_res)
+
+    with pytest.raises(RuntimeError) as excinfo2:
+        await env.step([1, 2, 3])
+    assert "INFRASTRUCTURE_ERROR" in str(excinfo2.value)
+
+
+def test_retry_does_not_submit_duplicate_rewards():
+    # Simulate a retry mechanism where attempt 1 fails due to infrastructure fault
+    # and attempt 2 succeeds: only 1 valid reward is submitted, with unique rollout IDs.
+    records = []
+    task = {"task_id": "t_retry", "expected_fixture_count": 2}
+
+    def attempt_rollout(rollout_id: str, infra_fail: bool):
+        if infra_fail:
+            res = {
+                "infrastructure_error": True,
+                "error_message": "Transient network timeout",
+                "output_compliance": {"compliant": True},
+                "compile": {"pass": True},
+                "verifier": {"pass": True},
+                "behavioral": {"total_tests": 2, "passed_tests": 2, "details": []},
+            }
+            try:
+                compute_rlvr_reward(res, expected_fixture_count=task["expected_fixture_count"])
+            except InfrastructureRewardError:
+                # Discard attempt, do NOT record reward
+                return None
+        else:
+            res = {
+                "infrastructure_error": False,
+                "output_compliance": {"compliant": True},
+                "compile": {"pass": True},
+                "verifier": {"pass": True},
+                "behavioral": {
+                    "total_tests": 2,
+                    "passed_tests": 2,
+                    "details": [{"name": "f1", "pass": True, "weight": 1.0}, {"name": "f2", "pass": True, "weight": 1.0}],
+                },
+            }
+            reward = compute_rlvr_reward(res, expected_fixture_count=task["expected_fixture_count"])
+            return {"rollout_id": rollout_id, "reward": reward.total_reward}
+
+    # Attempt 1: Infrastructure failure
+    out1 = attempt_rollout("rollout_attempt_1", infra_fail=True)
+    assert out1 is None
+    if out1 is not None:
+        records.append(out1)
+
+    # Attempt 2: Successful retry
+    out2 = attempt_rollout("rollout_attempt_2", infra_fail=False)
+    assert out2 is not None
+    records.append(out2)
+
+    # Exactly 1 record submitted, no duplicates
+    assert len(records) == 1
+    assert records[0]["rollout_id"] == "rollout_attempt_2"
+    assert records[0]["reward"] == 1.00
 
 
 def test_reward_deterministic_recomputation():

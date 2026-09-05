@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_canary_pit_l3_01",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "canary_pit_l3_handshake_tracker",
+  "template_family": "xdp_dual_telemetry",
+  "semantic_signature": "pit_l3_dual_handshake_canary",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that records flow telemetry using two maps: update per-client packet counts in LRU hash 'flow_stat_map' and update global totals in array map 'global_traffic_map' (index 0). Return XDP_PASS for all traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_LRU_HASH map 'flow_stat_map' with key __u32 and value __u64",
+    "Define BPF_MAP_TYPE_ARRAY map 'global_traffic_map' with 2 entries and value __u64",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Update per-client packet count in flow_stat_map for ip->saddr",
+    "Atomically increment global counter in global_traffic_map at index 0",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_client",
+      "description": "Client packet counted in dual maps",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "01ef2bb276e184303c3f25255c6ba60466aeeec66e74c9c6a6809547b24d4a71"
+}

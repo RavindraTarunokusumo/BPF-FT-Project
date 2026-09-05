@@ -1,0 +1,44 @@
+{
+  "task_id": "rl_v2_dev_pit_l3_04",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "dev_pit_l3_tcp_win_dev04",
+  "template_family": "xdp_tcp_window_telemetry",
+  "semantic_signature": "pit_l3_tcp_win_4",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must collect window advertising frequency histogram in array map 'win_dist_04'. Bin 0: win < 4096, Bin 1: 4096 <= win < 16384, Bin 2: 16384 <= win < 65535, Bin 3: win >= 65535. Return XDP_PASS for all frames.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map 'win_dist_04' with 4 entries and __u64 values",
+    "Verify Ethernet, IPv4, and TCP header bounds against data_end",
+    "Inspect bpf_ntohs(tcp->window) and select bucket: <4k -> 0, <16k -> 1, <65535 -> 2, >=65535 -> 3",
+    "Atomically increment window bucket counter using __sync_fetch_and_add",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_small_win",
+      "description": "Small window in bin 0 passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e800000000500203e8f41a0000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_large_win",
+      "description": "Large window in bin 3 passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "7cce071345afd2d5f3b05c8139e047dfe4d31ebb12fca5c55d30892f38a82974"
+}

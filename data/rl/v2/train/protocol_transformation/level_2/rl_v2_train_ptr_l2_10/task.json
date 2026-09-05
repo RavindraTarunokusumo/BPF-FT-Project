@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_train_ptr_l2_10",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "train_ptr_l2_vlan_pop_tr10",
+  "template_family": "xdp_vlan_pop",
+  "semantic_signature": "ptr_l2_pop_160",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must decapsulate tagged packets with VLAN ID 160. Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Validate Ethernet header bounds against data_end",
+    "Check if eth->h_proto == ETH_P_8021Q and vlan_id == 160",
+    "Save copy of Ethernet header and update h_proto to encapsulated inner protocol",
+    "Invoke bpf_xdp_adjust_head(ctx, (int)sizeof(struct vlan_hdr)) to pop 4 bytes",
+    "Re-validate packet pointers data and data_end after bpf_xdp_adjust_head",
+    "Restore Ethernet header and return XDP_PASS",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_vlan_decap",
+      "description": "VLAN 160 popped and passed",
+      "packet_hex": "525400123456525400654321810000a0080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Untagged passed unchanged",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "e1754e59785e6ae4cc15970767cc220791f21feb13ea435b8047945ffcc1bcde"
+}

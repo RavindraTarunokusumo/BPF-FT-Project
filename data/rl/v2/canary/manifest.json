@@ -1,0 +1,149 @@
+{
+  "split": "canary",
+  "task_count": 12,
+  "categories": [
+    "network_routing_forwarding",
+    "packet_filtering_security",
+    "packet_inspection_telemetry",
+    "protocol_transformation"
+  ],
+  "difficulties": [
+    "level_1",
+    "level_2",
+    "level_3"
+  ],
+  "tasks": [
+    {
+      "task_id": "rl_v2_canary_pfs_l1_01",
+      "application_category": "packet_filtering_security",
+      "difficulty": "level_1",
+      "task_family": "canary_pfs_l1_icmp_echo",
+      "template_family": "xdp_icmp_filter",
+      "semantic_signature": "pfs_l1_icmp_echo_req",
+      "expected_fixture_count": 5,
+      "task_sha256": "8c3d5dd9a6d42eee8a731feb0597aa49745b99208db994fff5a027c15e4d33bb",
+      "relative_path": "packet_filtering_security/level_1/rl_v2_canary_pfs_l1_01"
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l2_01",
+      "application_category": "packet_filtering_security",
+      "difficulty": "level_2",
+      "task_family": "canary_pfs_l2_udp_length_check",
+      "template_family": "xdp_udp_boundary_filter",
+      "semantic_signature": "pfs_l2_udp_min_len",
+      "expected_fixture_count": 4,
+      "task_sha256": "f4da58fa9a9d301c295261b7a9591c6dbc61e406751b4a9c5f4b84073cf78ca5",
+      "relative_path": "packet_filtering_security/level_2/rl_v2_canary_pfs_l2_01"
+    },
+    {
+      "task_id": "rl_v2_canary_pfs_l3_01",
+      "application_category": "packet_filtering_security",
+      "difficulty": "level_3",
+      "task_family": "canary_pfs_l3_array_ip_filter",
+      "template_family": "xdp_array_filter",
+      "semantic_signature": "pfs_l3_array_ip_canary",
+      "expected_fixture_count": 2,
+      "task_sha256": "ea790fe48e773f978e20e2d4fa4fd8e90c8790449592304cb0d778b076162d42",
+      "relative_path": "packet_filtering_security/level_3/rl_v2_canary_pfs_l3_01"
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l1_01",
+      "application_category": "network_routing_forwarding",
+      "difficulty": "level_1",
+      "task_family": "canary_nrf_l1_vlan_reflect",
+      "template_family": "xdp_vlan_reflector",
+      "semantic_signature": "nrf_l1_vlan_reflect_canary",
+      "expected_fixture_count": 4,
+      "task_sha256": "bbf505a47b529a201c9d25a980ab1af4ec8823ede68430e59bcd2c47567bf02b",
+      "relative_path": "network_routing_forwarding/level_1/rl_v2_canary_nrf_l1_01"
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l2_01",
+      "application_category": "network_routing_forwarding",
+      "difficulty": "level_2",
+      "task_family": "canary_nrf_l2_proto_demux",
+      "template_family": "xdp_proto_demux_router",
+      "semantic_signature": "nrf_l2_proto_demux_canary",
+      "expected_fixture_count": 3,
+      "task_sha256": "72a6d7921fce9d04ecdaedf6cb6940c3fb2ba94e0d24561f174cf65ce9c49911",
+      "relative_path": "network_routing_forwarding/level_2/rl_v2_canary_nrf_l2_01"
+    },
+    {
+      "task_id": "rl_v2_canary_nrf_l3_01",
+      "application_category": "network_routing_forwarding",
+      "difficulty": "level_3",
+      "task_family": "canary_nrf_l3_lpm_router",
+      "template_family": "xdp_lpm_router",
+      "semantic_signature": "nrf_l3_lpm_canary",
+      "expected_fixture_count": 2,
+      "task_sha256": "9ddf438700d3b2290ed2f8970f434f728dfaf43f4b24be32652ee3301144d158",
+      "relative_path": "network_routing_forwarding/level_3/rl_v2_canary_nrf_l3_01"
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l1_01",
+      "application_category": "packet_inspection_telemetry",
+      "difficulty": "level_1",
+      "task_family": "canary_pit_l1_frame_type_counter",
+      "template_family": "xdp_frame_counter",
+      "semantic_signature": "pit_l1_frame_type_canary",
+      "expected_fixture_count": 2,
+      "task_sha256": "d0e93514aece4240ba742b846a3786238045d39925f1326066351b94340b528c",
+      "relative_path": "packet_inspection_telemetry/level_1/rl_v2_canary_pit_l1_01"
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l2_01",
+      "application_category": "packet_inspection_telemetry",
+      "difficulty": "level_2",
+      "task_family": "canary_pit_l2_vlan_usage",
+      "template_family": "xdp_vlan_counter",
+      "semantic_signature": "pit_l2_vlan_counter_canary",
+      "expected_fixture_count": 2,
+      "task_sha256": "fcc229d04e57da85fa20a76a0bf3874d0b85ec4387f672ded386eba40a7a99df",
+      "relative_path": "packet_inspection_telemetry/level_2/rl_v2_canary_pit_l2_01"
+    },
+    {
+      "task_id": "rl_v2_canary_pit_l3_01",
+      "application_category": "packet_inspection_telemetry",
+      "difficulty": "level_3",
+      "task_family": "canary_pit_l3_handshake_tracker",
+      "template_family": "xdp_dual_telemetry",
+      "semantic_signature": "pit_l3_dual_handshake_canary",
+      "expected_fixture_count": 2,
+      "task_sha256": "01ef2bb276e184303c3f25255c6ba60466aeeec66e74c9c6a6809547b24d4a71",
+      "relative_path": "packet_inspection_telemetry/level_3/rl_v2_canary_pit_l3_01"
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l1_01",
+      "application_category": "protocol_transformation",
+      "difficulty": "level_1",
+      "task_family": "canary_ptr_l1_udp_csum_zero",
+      "template_family": "xdp_udp_csum_zero",
+      "semantic_signature": "ptr_l1_udp_csum_zero_canary",
+      "expected_fixture_count": 2,
+      "task_sha256": "64788d51eb8a69474444b1a8dcb6ac012a906625eb9ac60e74a5369528c0feae",
+      "relative_path": "protocol_transformation/level_1/rl_v2_canary_ptr_l1_01"
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l2_01",
+      "application_category": "protocol_transformation",
+      "difficulty": "level_2",
+      "task_family": "canary_ptr_l2_vlan_pcp_remark",
+      "template_family": "xdp_vlan_pcp_remarker",
+      "semantic_signature": "ptr_l2_vlan_pcp_voice_canary",
+      "expected_fixture_count": 2,
+      "task_sha256": "967d3954acf4c797ad5d54a287e61a3ab6a3e651400dd4df104a3f9d07ee019d",
+      "relative_path": "protocol_transformation/level_2/rl_v2_canary_ptr_l2_01"
+    },
+    {
+      "task_id": "rl_v2_canary_ptr_l3_01",
+      "application_category": "protocol_transformation",
+      "difficulty": "level_3",
+      "task_family": "canary_ptr_l3_4in6_decap_canary",
+      "template_family": "xdp_4in6_decap",
+      "semantic_signature": "ptr_l3_4in6_decap_canary",
+      "expected_fixture_count": 2,
+      "task_sha256": "67780f858bb6416c1895382590aaea9c7ae7cca40aaabe0ffcf358af781513f7",
+      "relative_path": "protocol_transformation/level_3/rl_v2_canary_ptr_l3_01"
+    }
+  ]
+}

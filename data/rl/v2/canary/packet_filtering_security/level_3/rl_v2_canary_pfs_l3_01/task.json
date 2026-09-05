@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_canary_pfs_l3_01",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "canary_pfs_l3_array_ip_filter",
+  "template_family": "xdp_array_filter",
+  "semantic_signature": "pfs_l3_array_ip_canary",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects incoming IPv4 packets and checks if the source IP address matches index 0 in BPF_MAP_TYPE_ARRAY map 'blocked_ip_map'. If matched, drop the packet with XDP_DROP; otherwise pass with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map 'blocked_ip_map' with max_entries 1 and value_size __u32",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Perform bpf_map_lookup_elem with key index 0",
+    "Drop packet with XDP_DROP if map lookup succeeds and ip->saddr equals *blocked_ip",
+    "Return XDP_PASS otherwise",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_unmatched",
+      "description": "Unmatched IP passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e505c0a80132c0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "ea790fe48e773f978e20e2d4fa4fd8e90c8790449592304cb0d778b076162d42"
+}

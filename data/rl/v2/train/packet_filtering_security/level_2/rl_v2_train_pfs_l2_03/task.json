@@ -1,0 +1,59 @@
+{
+  "task_id": "rl_v2_train_pfs_l2_03",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "train_pfs_l2_range_7000",
+  "template_family": "xdp_port_range_filter",
+  "semantic_signature": "pfs_l2_range_7000_7050",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and drops incoming TCP packets targeting diagnostic socket port range between 7000 and 7050 inclusive. Forward all other packets.",
+  "requirements": [
+    "Verify Ethernet header bounds against data_end",
+    "Verify IPv4 header bounds and confirm protocol is IPPROTO_TCP",
+    "Safely validate variable IPv4 header length (ip->ihl * 4)",
+    "Verify TCP header bounds against data_end",
+    "Drop packet with XDP_DROP if destination port satisfies dport >= 7000 and dport <= 7050",
+    "Return XDP_PASS for non-matching or malformed traffic",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "drop_min",
+      "description": "Port 7000 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430391b58000003e8000000005002ffffdcfa0000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "drop_max",
+      "description": "Port 7050 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430391b8a000003e8000000005002ffffdcc80000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_below",
+      "description": "Port 6999 passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430391b57000003e8000000005002ffffdcfb0000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_above",
+      "description": "Port 7051 passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430391b8b000003e8000000005002ffffdcc70000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 5,
+  "task_sha256": "c1256d7d5ea8d6266c91329ebe5b148ab94833e5e53ad1e45a05fee2559596d5"
+}

@@ -1,0 +1,45 @@
+{
+  "task_id": "rl_v2_conf_pfs_l2_04",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "conf_pfs_l2_tcp_zero_window",
+  "template_family": "xdp_tcp_flags_filter",
+  "semantic_signature": "pfs_l2_flags_tcp_zero_window",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and must drop unsolicited TCP packets with advertised window size equal to zero. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet header bounds against data_end",
+    "Verify IPv4 header bounds and confirm protocol is IPPROTO_TCP",
+    "Safely validate variable IPv4 header length (ip->ihl * 4)",
+    "Verify TCP header bounds against data_end",
+    "Drop packet with XDP_DROP if tcp->window equals 0",
+    "Return XDP_PASS for non-matching or malformed traffic",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "drop_zero_win",
+      "description": "Zero window dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e80000000050020000f8020000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_win_64k",
+      "description": "Window 65535 passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 3,
+  "task_sha256": "d59cb8553c4f21169b72b8602ce1d49b0508eaefd45900a44a2f051570b47407"
+}

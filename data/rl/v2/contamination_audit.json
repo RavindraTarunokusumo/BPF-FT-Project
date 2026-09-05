@@ -1,0 +1,20 @@
+{
+  "audit_passed": true,
+  "total_tasks_audited": 564,
+  "task_counts_by_split": {
+    "rl_v2_canary": 12,
+    "rl_v2_train": 144,
+    "rl_v2_dev": 48,
+    "rl_v2_confirmation": 60,
+    "protected_calibration": 36,
+    "protected_synthesis": 120,
+    "protected_repair": 120,
+    "rl_v1_dev": 24
+  },
+  "total_violations": 0,
+  "violations": [],
+  "audit_config": {
+    "jaccard_instruction_threshold": 0.8,
+    "jaccard_requirements_threshold": 0.85
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "task_id": "rl_v2_conf_nrf_l2_05",
+  "tests": [
+    {
+      "name": "tx_gw_a",
+      "description": "Even hash routed to Gateway A",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "tx_gw_b",
+      "description": "Odd hash routed to Gateway B",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52cc0a8010ac0a8011530390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "task_id": "rl_v2_dev_pfs_l2_03",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "dev_pfs_l2_runt_frame_drop",
+  "template_family": "xdp_ip_attribute_filter",
+  "semantic_signature": "pfs_l2_attr_runt_frame_drop",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and must discard undersized runt frames where total packet wire length is strictly less than 40 bytes. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Calculate total packet length from ctx->data and ctx->data_end",
+    "Drop packet with XDP_DROP if length is strictly less than 40 bytes",
+    "Return XDP_PASS for frames with length >= 40 bytes",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "drop_runt_28",
+      "description": "28 byte runt dropped",
+      "packet_hex": "52540012345652540065432108004500000e000000004000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_normal_54",
+      "description": "54 byte frame passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "1189882ad2722e1d6a92a251b0175fc6941fc77753e3abc1bd5ef16cdb49dca4"
+}

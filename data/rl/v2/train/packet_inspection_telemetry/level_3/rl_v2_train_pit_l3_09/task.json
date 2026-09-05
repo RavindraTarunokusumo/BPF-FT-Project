@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_v2_train_pit_l3_09",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_family": "train_pit_l3_dual_telemetry_09",
+  "template_family": "xdp_dual_map_telemetry",
+  "semantic_signature": "pit_l3_dual_map_9",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must collect endpoint telemetry in 'client_flow_09' while updating global tally in 'sys_stats_09'. Return XDP_PASS for all traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_LRU_HASH map 'client_flow_09' with key __u32 and value __u64",
+    "Define BPF_MAP_TYPE_ARRAY map 'sys_stats_09' with 4 entries and value __u64",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Lookup ip->saddr in client_flow_09 and increment counter",
+    "Lookup index 0 in sys_stats_09 and increment global counter",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_ip",
+      "description": "IP tracked in both maps and passed",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cdf0a000001c0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "d3b2014f8c95bf73cdd4f2dcbd25c827ae9abb91bd0f16917fea1f1b87eca826"
+}

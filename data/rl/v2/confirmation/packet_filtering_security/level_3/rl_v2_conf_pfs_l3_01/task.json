@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_conf_pfs_l3_01",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_family": "conf_pfs_l3_dst_port_quota",
+  "template_family": "xdp_stateful_quota_filter",
+  "semantic_signature": "pfs_l3_conf_dst_port_quota",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and must enforce service quota in BPF_MAP_TYPE_HASH map 'port_quota_map' dropping when destination port hits 1000 packets. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_HASH map 'port_quota_map' with key __u16 and value __u64",
+    "Verify Ethernet, IPv4, and TCP header bounds against data_end",
+    "Lookup tcp->dest in port_quota_map and atomically increment count",
+    "Drop packet with XDP_DROP if packet count exceeds 1000",
+    "Return XDP_PASS otherwise",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_untracked",
+      "description": "Untracked client passes",
+      "packet_hex": "5254001234565254006543210800450000281234000040069aac0a020232c0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "cedc7139e5e07a219589766e2d41d1e1efc0d60862867eef63833ab662f2644e"
+}

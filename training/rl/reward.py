@@ -50,6 +50,13 @@ class RewardBreakdown:
         }
 
 
+class InfrastructureRewardError(Exception):
+    """Raised when verification encounters an infrastructure error or invalid fixture state.
+    Infrastructure errors must fail closed and never produce numeric scalar rewards.
+    """
+    pass
+
+
 # Constant reward weights
 WEIGHT_COMPLIANCE = 0.02
 WEIGHT_COMPILE = 0.08
@@ -71,21 +78,15 @@ def compute_rlvr_reward(
 
     Returns:
         RewardBreakdown with scalar components and total reward
+
+    Raises:
+        InfrastructureRewardError: If an infrastructure error occurred or fixture count mismatches.
     """
-    # 0. Infrastructure failure check
+    # 0. Infrastructure failure check - fail closed, NEVER return scalar reward
     is_infra_error = result.get("infrastructure_error", False)
     if is_infra_error:
-        return RewardBreakdown(
-            compliance_reward=0.0,
-            compile_reward=0.0,
-            verifier_reward=0.0,
-            fixture_reward=0.0,
-            complete_bonus=0.0,
-            total_reward=0.0,
-            is_functionally_correct=False,
-            is_infrastructure_error=True,
-            stage_reached="infrastructure_error",
-        )
+        err_msg = result.get("error_message") or "Infrastructure error during verification"
+        raise InfrastructureRewardError(f"Infrastructure failure cannot produce scalar reward: {err_msg}")
 
     compliance_pass = bool(result.get("output_compliance", {}).get("compliant", False))
     compile_pass = bool(result.get("compile", {}).get("pass", False))
@@ -96,20 +97,11 @@ def compute_rlvr_reward(
     passed_fixtures = behavioral.get("passed_tests", 0)
     fixtures_details = behavioral.get("details", [])
 
-    # Validate fixture count consistency
+    # Validate fixture count consistency - mismatch is an infrastructure/harness failure
     if expected_fixture_count is not None and expected_fixture_count > 0:
-        if total_fixtures != expected_fixture_count:
-            # Fixture count mismatch is an infrastructure failure
-            return RewardBreakdown(
-                compliance_reward=0.0,
-                compile_reward=0.0,
-                verifier_reward=0.0,
-                fixture_reward=0.0,
-                complete_bonus=0.0,
-                total_reward=0.0,
-                is_functionally_correct=False,
-                is_infrastructure_error=True,
-                stage_reached="fixture_count_mismatch",
+        if compile_pass and verifier_pass and total_fixtures != expected_fixture_count:
+            raise InfrastructureRewardError(
+                f"Fixture count mismatch: expected {expected_fixture_count}, got {total_fixtures}"
             )
 
     # 1. Output compliance

@@ -1,0 +1,51 @@
+{
+  "task_id": "rl_v2_train_pit_l1_12",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "train_pit_l1_proto_stats_12",
+  "template_family": "xdp_protocol_counter",
+  "semantic_signature": "pit_l1_proto_312",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must increment protocol usage counters in BPF_MAP_TYPE_ARRAY map 'proto_stats_312'. Map TCP to index 1, UDP to index 2, ICMP to index 3, and other IP/non-IP to index 0. Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map 'proto_stats_312' with 16 entries and __u64 values",
+    "Safely validate Ethernet and IPv4 header bounds against data_end",
+    "Map TCP to index 1, UDP to index 2, ICMP to index 3, non-IP/other to index 0",
+    "Perform atomic counter addition using __sync_fetch_and_add",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_tcp",
+      "description": "TCP packet counted and passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_udp",
+      "description": "UDP packet counted and passed",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500080000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_icmp",
+      "description": "ICMP packet counted and passed",
+      "packet_hex": "525400123456525400654321080045000024123400004001e536c0a8010ac0a8011408009fa0123400015445535450494e47",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame counted in index 0",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 4,
+  "task_sha256": "08eeddcc2da7d8e950867d9f4a3f6027043a279392fa6e8c1ae0853d25c28857"
+}

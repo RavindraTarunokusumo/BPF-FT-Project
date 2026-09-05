@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_canary_pit_l1_01",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_family": "canary_pit_l1_frame_type_counter",
+  "template_family": "xdp_frame_counter",
+  "semantic_signature": "pit_l1_frame_type_canary",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects ingress frames and records EtherType distribution in BPF_MAP_TYPE_ARRAY map 'frame_type_map' with 4 entries: index 1 for IPv4, index 2 for ARP, index 0 for others. Return XDP_PASS for all traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_ARRAY map 'frame_type_map' with 4 entries and __u64 value type",
+    "Verify Ethernet header bounds against data_end",
+    "Map eth->h_proto to index: ETH_P_IP -> 1, ETH_P_ARP -> 2, other -> 0",
+    "Atomically increment counter at selected index using __sync_fetch_and_add",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_ipv4",
+      "description": "IPv4 counted and passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP counted and passed",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "d0e93514aece4240ba742b846a3786238045d39925f1326066351b94340b528c"
+}

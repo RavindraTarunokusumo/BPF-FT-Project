@@ -1,0 +1,50 @@
+{
+  "task_id": "rl_v2_canary_nrf_l1_01",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_family": "canary_nrf_l1_vlan_reflect",
+  "template_family": "xdp_vlan_reflector",
+  "semantic_signature": "nrf_l1_vlan_reflect_canary",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects 802.1Q VLAN tagged traffic. If tagged with VLAN ID 100, transmit the packet back out the same interface using XDP_TX. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet and 802.1Q VLAN header bounds against data_end",
+    "Check if eth->h_proto == ETH_P_8021Q and vlan_id == 100",
+    "Return XDP_TX for matching VLAN packets",
+    "Return XDP_PASS for other VLAN IDs, untagged traffic, or malformed frames",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "tx_vlan_100",
+      "description": "VLAN 100 transmitted",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_TX",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_vlan_200",
+      "description": "VLAN 200 passed",
+      "packet_hex": "525400123456525400654321810000c8080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Untagged passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 4,
+  "task_sha256": "bbf505a47b529a201c9d25a980ab1af4ec8823ede68430e59bcd2c47567bf02b"
+}

@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_conf_nrf_l3_03",
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_family": "conf_nrf_l3_redirect_conf03",
+  "template_family": "xdp_lpm_redirect_router",
+  "semantic_signature": "nrf_l3_redirect_3",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must dispatch verified traffic across network interfaces looked up in 'redirect_route_03'. On route match, lookup returns target interface index ifindex; forward packet with bpf_redirect(ifindex, 0). On route miss, return XDP_PASS.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_LPM_TRIE map 'redirect_route_3' with BPF_F_NO_PREALLOC and __u32 ifindex value",
+    "Define LPM key struct with __u32 prefixlen and __u32 data members",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Lookup ip->daddr in redirect_route_3 with prefixlen=32",
+    "On route hit invoke bpf_redirect(*ifindex, 0); on route miss return XDP_PASS",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_unrouted",
+      "description": "Unrouted IP passes",
+      "packet_hex": "5254001234565254006543210800450000281234000040069ce9c0a8010a0a00000130390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "db0f16cacab567b326d4444ee026a55efe64aafe13adfbdee6373be3ea54b19f"
+}

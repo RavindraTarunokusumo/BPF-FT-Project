@@ -45,13 +45,19 @@ from tinker_cookbook.rl.train import KLReferenceConfig
 from training.rl.bpf_env import build_task_prompt
 from training.rl.config import (
     DEFAULT_BASE_MODEL,
+    DEFAULT_CANARY_DIR_V2,
+    DEFAULT_CONFIRMATION_DIR_V2,
     DEFAULT_DEV_DIR,
+    DEFAULT_DEV_DIR_V2,
     DEFAULT_RENDERER_NAME,
     DEFAULT_RUN_DIR,
+    DEFAULT_RUN_DIR_V2,
     DEFAULT_TRAIN_DIR,
+    DEFAULT_TRAIN_DIR_V2,
     SFT_V2_CHECKPOINT,
     SFT_V2_SAMPLER_CHECKPOINT,
     BPFRLConfig,
+    BPFRLV2Config,
 )
 from training.rl.dataset import BPFRLDatasetBuilder, load_protected_task_ids, load_tasks_from_dir
 from training.rl.kernel_executor import KernelExecutor, check_output_compliance, extract_c_source
@@ -62,6 +68,80 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger("bpf_guardian_rl.train")
+
+
+def install_sampler_feedback_hook():
+    """Hooks tinker_cookbook rollout collection to feed training outcomes back into BPFPrioritySampler."""
+    import tinker_cookbook.rl.rollouts as rollouts
+    import tinker_cookbook.rl.train as rl_train
+
+    orig_impl = rollouts._do_group_rollout_and_filter_constant_reward_impl
+
+    async def hooked_impl(
+        sampling_client: tinker.SamplingClient,
+        env_group_builder: Any,
+        max_tokens: int,
+        temperature: float,
+        do_remove_constant_reward_groups: bool,
+        enable_logging: bool = True,
+        strategy: Any = None,
+        termination: Any = None,
+    ):
+        # Run rollout without filtering constant groups yet, to collect full metrics
+        traj_group = await orig_impl(
+            sampling_client=sampling_client,
+            env_group_builder=env_group_builder,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            do_remove_constant_reward_groups=False,
+            enable_logging=enable_logging,
+            strategy=strategy,
+            termination=termination,
+        )
+        if traj_group is None:
+            return None
+
+        rewards = traj_group.get_total_rewards()
+        is_constant = rollouts.all_same(rewards)
+
+        # Determine if any trajectory achieved full functional pass
+        full_pass = False
+        for traj in traj_group.trajectories_G:
+            if traj.transitions:
+                last_m = traj.transitions[-1].metrics or {}
+                if last_m.get("pass/functional", 0.0) == 1.0 or last_m.get("reward/bonus", 0.0) > 0.0:
+                    full_pass = True
+                    break
+
+        # Feed outcome back to priority sampler if attached
+        sampler = getattr(env_group_builder, "sampler", None)
+        task = getattr(env_group_builder, "task", None)
+        if sampler is not None and task is not None:
+            task_id = task.get("task_id")
+            if task_id:
+                sampler.update_outcome(
+                    task_id=task_id,
+                    rewards=rewards,
+                    full_pass=full_pass,
+                    is_constant_group=is_constant,
+                )
+                state_path = getattr(env_group_builder, "sampler_state_path", None)
+                if state_path:
+                    try:
+                        sampler.save_state(Path(state_path))
+                    except Exception as e:
+                        logger.warning("Failed to save sampler state to %s: %s", state_path, e)
+
+        # Apply constant reward filtering if requested
+        if do_remove_constant_reward_groups and is_constant:
+            return None
+
+        return traj_group
+
+    rollouts._do_group_rollout_and_filter_constant_reward_impl = hooked_impl
+    rollouts.do_group_rollout_and_filter_constant_reward = hooked_impl
+    rl_train.do_group_rollout_and_filter_constant_reward = hooked_impl
+    logger.info("Installed BPFPrioritySampler outcome feedback hook in tinker_cookbook")
 
 
 async def run_sampling_only_canary(
@@ -194,17 +274,20 @@ def build_tinker_rl_config(
     """Builds official tinker_cookbook.rl.train.Config object."""
     max_steps = cfg.canary_max_steps if mode == "canary" else cfg.pilot_max_steps
     save_every = cfg.canary_save_every if mode == "canary" else cfg.pilot_save_every
-    eval_every = cfg.pilot_eval_every if mode == "pilot" else max_steps
 
     train_data_dir = cfg.canary_data_dir if mode == "canary" else cfg.train_data_dir
+    sampler_state_path = f"{cfg.run_dir}/{mode}/sampler_state.json"
 
     dataset_builder = BPFRLDatasetBuilder(
         train_dir=train_data_dir,
-        dev_dir=None,  # Dedicated eval runs via evaluate_rl.py at T=0.0 per RL_V1 spec
+        dev_dir=None,  # Dedicated eval runs via evaluate_rl.py at T=0.0 per RL spec
         group_size=cfg.group_size,
         renderer_name=cfg.renderer_name,
         records_dir=f"{cfg.run_dir}/verifier_records",
         batch_size=cfg.problem_groups_per_step,
+        use_priority_sampler=getattr(cfg, "use_priority_sampler", False),
+        sampler_seed=getattr(cfg, "sampler_seed", 42),
+        sampler_state_path=sampler_state_path,
     )
 
     kl_ref_config = KLReferenceConfig(
@@ -230,6 +313,7 @@ def build_tinker_rl_config(
         loss_fn=cfg.loss_fn,
         lora_rank=cfg.lora_rank,
         temperature=cfg.sampling_temperature,
+        compute_post_kl=getattr(cfg, "compute_post_kl", False),
         remove_constant_reward_groups=cfg.remove_constant_reward_groups,
         max_steps=max_steps,
     )
@@ -239,32 +323,72 @@ def build_tinker_rl_config(
 
 def main():
     parser = argparse.ArgumentParser(description="BPF-Guardian RLVR Training Controller")
+    parser.add_argument("--phase", type=int, choices=[1, 2], default=2, help="Experiment phase (1 or 2)")
     parser.add_argument("--mode", choices=["sampling_only", "canary", "pilot"], default="sampling_only")
-    parser.add_argument("--canary-dir", type=str, default="data/rl/v1/canary")
-    parser.add_argument("--train-dir", type=str, default="data/rl/v1/train")
-    parser.add_argument("--dev-dir", type=str, default="data/rl/v1/dev")
-    parser.add_argument("--output-dir", type=str, default="runs/tinker/qwen3-8b-bpf-rl-v1")
+    parser.add_argument("--canary-dir", type=str, default=None)
+    parser.add_argument("--train-dir", type=str, default=None)
+    parser.add_argument("--dev-dir", type=str, default=None)
+    parser.add_argument("--output-dir", type=str, default=None)
     parser.add_argument("--max-steps", type=int, default=None)
     parser.add_argument("--group-size", type=int, default=4)
     parser.add_argument("--temperature", type=float, default=0.8)
-    parser.add_argument("--learning-rate", type=float, default=5e-6)
+    parser.add_argument("--learning-rate", type=float, default=None)
+    parser.add_argument("--disable-priority-sampler", action="store_true", help="Disable priority sampler")
     parser.add_argument("--confirm-paid-run", action="store_true", help="Explicitly allow paid training run")
     args = parser.parse_args()
 
-    output_dir = Path(args.output_dir)
+    # Determine default paths and config based on phase
+    if args.phase == 2:
+        canary_dir = args.canary_dir or str(DEFAULT_CANARY_DIR_V2)
+        train_dir = args.train_dir or str(DEFAULT_TRAIN_DIR_V2)
+        dev_dir = args.dev_dir or str(DEFAULT_DEV_DIR_V2)
+        output_dir_str = args.output_dir or str(DEFAULT_RUN_DIR_V2)
+        learning_rate = args.learning_rate or 3e-6
+        cfg = BPFRLV2Config(
+            canary_data_dir=canary_dir,
+            train_data_dir=train_dir,
+            dev_data_dir=dev_dir,
+            run_dir=output_dir_str,
+            group_size=args.group_size,
+            sampling_temperature=args.temperature,
+            learning_rate=learning_rate,
+            use_priority_sampler=not args.disable_priority_sampler,
+        )
+    else:
+        canary_dir = args.canary_dir or str(DEFAULT_CANARY_DIR)
+        train_dir = args.train_dir or str(DEFAULT_TRAIN_DIR)
+        dev_dir = args.dev_dir or str(DEFAULT_DEV_DIR)
+        output_dir_str = args.output_dir or str(DEFAULT_RUN_DIR)
+        learning_rate = args.learning_rate or 5e-6
+        cfg = BPFRLConfig(
+            canary_data_dir=canary_dir,
+            train_data_dir=train_dir,
+            dev_data_dir=dev_dir,
+            run_dir=output_dir_str,
+            group_size=args.group_size,
+            sampling_temperature=args.temperature,
+            learning_rate=learning_rate,
+            use_priority_sampler=not args.disable_priority_sampler,
+        )
+
+    output_dir = Path(cfg.run_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     if args.mode == "sampling_only":
         summary = asyncio.run(
             run_sampling_only_canary(
-                canary_dir=Path(args.canary_dir),
+                canary_dir=Path(cfg.canary_data_dir),
                 output_dir=output_dir / "canary_sampling",
-                group_size=args.group_size,
-                temperature=args.temperature,
+                group_size=cfg.group_size,
+                temperature=cfg.sampling_temperature,
             )
         )
         print("Sampling Canary completed successfully. Results saved to:", output_dir / "canary_sampling")
         return
+
+    # Install outcome feedback hook if priority sampler enabled
+    if cfg.use_priority_sampler:
+        install_sampler_feedback_hook()
 
     # Paid training run
     if not args.confirm_paid_run:
@@ -272,15 +396,6 @@ def main():
         print("Preflight check passed. To launch paid training run, pass --confirm-paid-run.")
         return
 
-    cfg = BPFRLConfig(
-        canary_data_dir=args.canary_dir,
-        train_data_dir=args.train_dir,
-        dev_data_dir=args.dev_dir,
-        run_dir=args.output_dir,
-        group_size=args.group_size,
-        sampling_temperature=args.temperature,
-        learning_rate=args.learning_rate,
-    )
     if args.max_steps:
         if args.mode == "canary":
             cfg.canary_max_steps = args.max_steps
@@ -288,7 +403,8 @@ def main():
             cfg.pilot_max_steps = args.max_steps
 
     tinker_cfg = build_tinker_rl_config(cfg, mode=args.mode)
-    logger.info("Launching RL training mode '%s' (max_steps=%d)...", args.mode, tinker_cfg.max_steps)
+    logger.info("Launching Phase %d RL training mode '%s' (max_steps=%d, lr=%s, priority_sampler=%s)...",
+                args.phase, args.mode, tinker_cfg.max_steps, cfg.learning_rate, cfg.use_priority_sampler)
     asyncio.run(rl_train.main(tinker_cfg))
 
 

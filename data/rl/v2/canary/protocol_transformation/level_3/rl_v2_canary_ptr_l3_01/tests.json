@@ -1,0 +1,19 @@
+{
+  "task_id": "rl_v2_canary_ptr_l3_01",
+  "tests": [
+    {
+      "name": "pass_decap_4in6",
+      "description": "4in6 tunnel decapsulated and passed",
+      "packet_hex": "52540012345652540065432186dd600000000028044020010db800000000000000000000000120010db800000000000000000000000245000028123400004006ab48c0a81e01c0a81e0230390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_normal_v6",
+      "description": "Standard non-tunneled IPv6 TCP passed unmodified",
+      "packet_hex": "52540012345652540065432186dd600000000014064020010db800000000000000000000000120010db800000000000000000000000230390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "task_id": "rl_v2_train_pfs_l1_11",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_family": "train_pfs_l1_redis",
+  "template_family": "xdp_tcp_port_filter",
+  "semantic_signature": "pfs_l1_tcp_redis_6379",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and drops unauthenticated cache command packets sent to Redis server on TCP port 6379. Forward all other packets.",
+  "requirements": [
+    "Verify Ethernet header bounds against data_end",
+    "Verify IPv4 header bounds and confirm protocol is IPPROTO_TCP",
+    "Safely calculate and validate variable IPv4 header length (ip->ihl * 4)",
+    "Verify TCP header bounds against data_end",
+    "Drop packet with XDP_DROP if destination port equals 6379",
+    "Return XDP_PASS for non-matching or malformed traffic",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "drop_redis",
+      "description": "TCP port 6379 dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a80114303918eb000003e8000000005002ffffdf670000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_unrelated",
+      "description": "Other TCP port passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a801143039270f000003e8000000005002ffffd1430000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "drop_with_options",
+      "description": "TCP with IP options dropped",
+      "packet_hex": "52540012345652540065432108004600002c123400004006e429c0a8010ac0a8011400000000303918eb000003e8000000005002ffffdf670000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_truncated",
+      "description": "Truncated header passes",
+      "packet_hex": "525400123456525400654321080045000010",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 5,
+  "task_sha256": "68f8db6f382275a3bbb42b9ce3a7518112435fafa94018d01781a7ed572e4ffe"
+}

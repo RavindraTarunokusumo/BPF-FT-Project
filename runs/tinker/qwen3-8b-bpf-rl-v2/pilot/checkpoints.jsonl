@@ -1,0 +1,10 @@
+{"name": "000005", "batch": 5, "state_path": "tinker://f5c556b8-5e81-596f-9fee-907df6076feb:train:0/weights/000005", "sampler_path": "tinker://f5c556b8-5e81-596f-9fee-907df6076feb:train:0/sampler_weights/000005"}
+{"name": "final", "batch": 5, "state_path": "tinker://f5c556b8-5e81-596f-9fee-907df6076feb:train:0/weights/final", "sampler_path": "tinker://f5c556b8-5e81-596f-9fee-907df6076feb:train:0/sampler_weights/final"}
+{"name": "000010", "batch": 10, "state_path": "tinker://9af95d8c-46ca-5964-a2c8-60aeaac88997:train:0/weights/000010", "sampler_path": "tinker://9af95d8c-46ca-5964-a2c8-60aeaac88997:train:0/sampler_weights/000010"}
+{"name": "final", "batch": 10, "state_path": "tinker://9af95d8c-46ca-5964-a2c8-60aeaac88997:train:0/weights/final", "sampler_path": "tinker://9af95d8c-46ca-5964-a2c8-60aeaac88997:train:0/sampler_weights/final"}
+{"name": "000015", "batch": 15, "state_path": "tinker://0febe09b-9c6b-5b16-8db3-bbcd5387c9dc:train:0/weights/000015", "sampler_path": "tinker://0febe09b-9c6b-5b16-8db3-bbcd5387c9dc:train:0/sampler_weights/000015"}
+{"name": "final", "batch": 15, "state_path": "tinker://0febe09b-9c6b-5b16-8db3-bbcd5387c9dc:train:0/weights/final", "sampler_path": "tinker://0febe09b-9c6b-5b16-8db3-bbcd5387c9dc:train:0/sampler_weights/final"}
+{"name": "000020", "batch": 20, "state_path": "tinker://0ca7db1f-f616-5cca-b1b8-f85c06bf7d41:train:0/weights/000020", "sampler_path": "tinker://0ca7db1f-f616-5cca-b1b8-f85c06bf7d41:train:0/sampler_weights/000020"}
+{"name": "final", "batch": 20, "state_path": "tinker://0ca7db1f-f616-5cca-b1b8-f85c06bf7d41:train:0/weights/final", "sampler_path": "tinker://0ca7db1f-f616-5cca-b1b8-f85c06bf7d41:train:0/sampler_weights/final"}
+{"name": "000025", "batch": 25, "state_path": "tinker://1e37b232-7c31-578b-9b08-e88612a93e39:train:0/weights/000025", "sampler_path": "tinker://1e37b232-7c31-578b-9b08-e88612a93e39:train:0/sampler_weights/000025"}
+{"name": "final", "batch": 25, "state_path": "tinker://1e37b232-7c31-578b-9b08-e88612a93e39:train:0/weights/final", "sampler_path": "tinker://1e37b232-7c31-578b-9b08-e88612a93e39:train:0/sampler_weights/final"}

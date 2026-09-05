@@ -1,0 +1,19 @@
+{
+  "task_id": "rl_v2_conf_pit_l3_01",
+  "tests": [
+    {
+      "name": "pass_ip",
+      "description": "Timestamp tracked and passed",
+      "packet_hex": "5254001234565254006543210800450000281234000040069cd70a080001c0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

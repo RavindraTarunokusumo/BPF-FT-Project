@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_v2_canary_pit_l2_01",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "canary_pit_l2_vlan_usage",
+  "template_family": "xdp_vlan_counter",
+  "semantic_signature": "pit_l2_vlan_counter_canary",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects 802.1Q VLAN tagged frames and records traffic volume in BPF_MAP_TYPE_LRU_HASH map 'vlan_usage_map' keyed by VLAN ID. Return XDP_PASS for all traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_LRU_HASH map 'vlan_usage_map' with key __u16 and value __u64",
+    "Verify Ethernet and 802.1Q header bounds against data_end",
+    "Extract 12-bit VLAN identifier from vlan->h_vlan_TCI",
+    "Lookup VLAN ID in map and atomically increment counter, or initialize with 1",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_vlan_100",
+      "description": "VLAN 100 counted and passed",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Untagged passed unmodified",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "fcc229d04e57da85fa20a76a0bf3874d0b85ec4387f672ded386eba40a7a99df"
+}

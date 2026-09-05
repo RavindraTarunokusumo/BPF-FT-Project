@@ -1,0 +1,26 @@
+{
+  "version": "rl_v2",
+  "total_tasks": 264,
+  "splits": {
+    "canary": {
+      "task_count": 12,
+      "manifest_sha256": "0d1552304185589659c1fd574c11bcadb71046dba6588116f18381a3c8fc6bc1",
+      "index_sha256": "e530d29d743fa7e670f23f41bf7cbb9e47df4c13d63117c05361a2124cf7f963"
+    },
+    "train": {
+      "task_count": 144,
+      "manifest_sha256": "f3d8da516c9d9c14002cb6a7942dbc92f56bc6f6ad4d0200d74d0f7a2c932817",
+      "index_sha256": "ca8e19f3cb1f24b50c5d4f20471c2c7397a80aa8424b18795de468a3f7cfca26"
+    },
+    "dev": {
+      "task_count": 48,
+      "manifest_sha256": "084aa4638349d6b61d9ab591f7c83f6f7f05b662532b9133097e136220359cd9",
+      "index_sha256": "4216a04a7793a9e7edd2b2db4da99044ac9a70dab56aeffc070817acdc71a2a4"
+    },
+    "confirmation": {
+      "task_count": 60,
+      "manifest_sha256": "517c9a6ca463ec02a732268d98216b15ac0cc2c65f6549e1c45699519e40063e",
+      "index_sha256": "4ec351b6d7709bb830ef798ac7e493d6b9d709777d8c9a92a0bdde0edb42003a"
+    }
+  }
+}

@@ -14,6 +14,7 @@ import chz
 from tinker_cookbook.rl.types import EnvGroupBuilder, RLDataset, RLDatasetBuilder
 
 from training.rl.bpf_env import BPFEnvGroupBuilder
+from training.rl.sampler import BPFPrioritySampler
 
 logger = logging.getLogger("bpf_guardian_rl.dataset")
 
@@ -98,18 +99,29 @@ class BPFRLDataset(RLDataset):
         renderer_name: str = "qwen3_disable_thinking",
         records_dir: str = "runs/tinker/qwen3-8b-bpf-rl-v1/verifier_records",
         batch_size: int = 2,
+        sampler: Optional[BPFPrioritySampler] = None,
+        sampler_state_path: Optional[str] = None,
     ):
         self.tasks = tasks
         self.group_size = group_size
         self.renderer_name = renderer_name
         self.records_dir = records_dir
         self.batch_size = max(1, batch_size)
+        self.sampler = sampler
+        self.sampler_state_path = sampler_state_path
 
     def get_batch(self, index: int) -> Sequence[EnvGroupBuilder]:
         n = len(self.tasks)
         if n == 0:
             return []
-        batch_tasks = [self.tasks[(index * self.batch_size + i) % n] for i in range(self.batch_size)]
+
+        if self.sampler is not None:
+            sampled_items = self.sampler.sample_batch(self.batch_size)
+            batch_tasks = [task for task, _prob in sampled_items]
+            batch_probs = [prob for _task, prob in sampled_items]
+        else:
+            batch_tasks = [self.tasks[(index * self.batch_size + i) % n] for i in range(self.batch_size)]
+            batch_probs = [1.0 / n] * len(batch_tasks)
 
         return [
             BPFEnvGroupBuilder(
@@ -118,6 +130,9 @@ class BPFRLDataset(RLDataset):
                 renderer_name=self.renderer_name,
                 records_dir=self.records_dir,
                 group_index=index * self.batch_size + i,
+                sampler=self.sampler,
+                sampler_state_path=self.sampler_state_path,
+                task_sampling_prob=batch_probs[i],
             )
             for i, task in enumerate(batch_tasks)
         ]
@@ -136,6 +151,9 @@ class BPFRLDatasetBuilder(RLDatasetBuilder):
     renderer_name: str = "qwen3_disable_thinking"
     records_dir: str = "runs/tinker/qwen3-8b-bpf-rl-v1/verifier_records"
     batch_size: int = 2
+    use_priority_sampler: bool = True
+    sampler_seed: int = 42
+    sampler_state_path: str | None = None
 
     async def __call__(self) -> tuple[RLDataset, RLDataset | None]:
         train_path = Path(self.train_dir)
@@ -154,12 +172,29 @@ class BPFRLDatasetBuilder(RLDatasetBuilder):
                     "RL datasets must be strictly disjoint from evaluation benchmarks."
                 )
 
+        sampler: Optional[BPFPrioritySampler] = None
+        if self.use_priority_sampler:
+            if self.sampler_state_path and Path(self.sampler_state_path).is_file():
+                sampler = BPFPrioritySampler.load_state(Path(self.sampler_state_path), tasks=train_tasks)
+                logger.info(
+                    "Resumed BPFPrioritySampler from %s (step %d) on %d training tasks",
+                    self.sampler_state_path, sampler.step, len(train_tasks)
+                )
+            else:
+                sampler = BPFPrioritySampler(tasks=train_tasks, seed=self.sampler_seed)
+                logger.info(
+                    "Initialized BPFPrioritySampler (seed=%d) with %d training tasks across 12 cells",
+                    self.sampler_seed, len(train_tasks)
+                )
+
         train_dataset = BPFRLDataset(
             tasks=train_tasks,
             group_size=self.group_size,
             renderer_name=self.renderer_name,
             records_dir=self.records_dir,
             batch_size=self.batch_size,
+            sampler=sampler,
+            sampler_state_path=self.sampler_state_path,
         )
 
         dev_dataset: Optional[RLDataset] = None
@@ -181,12 +216,15 @@ class BPFRLDatasetBuilder(RLDatasetBuilder):
                 if overlap:
                     raise ValueError(f"Train and dev task sets overlap: {overlap}")
 
+                # Dev dataset NEVER consumes priority sampler; evaluates sequentially at T=0.0
                 dev_dataset = BPFRLDataset(
                     tasks=dev_tasks,
                     group_size=1,  # Dev evaluation uses single sample per task at T=0.0
                     renderer_name=self.renderer_name,
                     records_dir=self.records_dir,
                     batch_size=self.batch_size,
+                    sampler=None,
+                    sampler_state_path=None,
                 )
 
         return train_dataset, dev_dataset

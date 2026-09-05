@@ -1,0 +1,19 @@
+{
+  "task_id": "rl_v2_train_ptr_l3_05",
+  "tests": [
+    {
+      "name": "pass_decap_ipip",
+      "description": "IPIP tunnel packet decapsulated and passed",
+      "packet_hex": "52540012345652540065432108004500003c1234000040044ddc0a5805010a5800fe45000028123400004006ab48c0a81e01c0a81e0230390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_normal_tcp",
+      "description": "Normal non-tunneled TCP passed unmodified",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}

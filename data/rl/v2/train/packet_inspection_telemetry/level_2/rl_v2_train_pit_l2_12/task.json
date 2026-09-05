@@ -1,0 +1,36 @@
+{
+  "task_id": "rl_v2_train_pit_l2_12",
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_family": "train_pit_l2_src_telemetry_12",
+  "template_family": "xdp_src_ip_counter",
+  "semantic_signature": "pit_l2_src_ip_12",
+  "split": "train",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must track sender packet rates in BPF_MAP_TYPE_LRU_HASH map 'src_stat_map_12'. Return XDP_PASS for all traffic.",
+  "requirements": [
+    "Define BPF_MAP_TYPE_LRU_HASH map 'src_stat_map_12' with key __u32 and value __u64",
+    "Verify Ethernet and IPv4 header bounds against data_end",
+    "Lookup ip->saddr and atomically increment counter, or initialize with 1",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_ip",
+      "description": "IPv4 packet counted and passed",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP frame passes unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "expected_fixture_count": 2,
+  "task_sha256": "87c867af2389c345ae8961cbdbb65e36ddfaeaf18fe9b5ae0fbc387e1f4d4710"
+}

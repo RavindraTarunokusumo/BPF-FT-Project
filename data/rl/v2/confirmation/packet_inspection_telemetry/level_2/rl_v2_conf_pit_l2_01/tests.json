@@ -1,0 +1,19 @@
+{
+  "task_id": "rl_v2_conf_pit_l2_01",
+  "tests": [
+    {
+      "name": "pass_tcp_flow",
+      "description": "TCP 5-tuple flow tracked and passed",
+      "packet_hex": "52540012345652540065432108004500002812340000400651970a0101010a02020203e80050000003e8000000005002ffff24540000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ]
+}
