@@ -132,13 +132,20 @@ def validate_manifest_and_splits(
         manifest_sha = compute_file_sha256(manifest_path)
         manifest_data = json.loads(manifest_path.read_text(encoding="utf-8"))
 
-        if manifest_data.get("train_sha256") and manifest_data["train_sha256"] != current_train_sha:
+        expected_train_sha = manifest_data.get("train_sha256") or manifest_data.get("outputs", {}).get("train_sha256")
+        expected_val_sha = (
+            manifest_data.get("validation_sha256")
+            or manifest_data.get("outputs", {}).get("validation_in_domain_sha256")
+            or manifest_data.get("outputs", {}).get("validation_sha256")
+        )
+
+        if expected_train_sha and expected_train_sha != current_train_sha:
             raise ValueError(
-                f"Train file SHA-256 mismatch! Manifest: {manifest_data['train_sha256']}, Actual: {current_train_sha}"
+                f"Train file SHA-256 mismatch! Manifest: {expected_train_sha}, Actual: {current_train_sha}"
             )
-        if manifest_data.get("validation_sha256") and manifest_data["validation_sha256"] != current_val_sha:
+        if expected_val_sha and expected_val_sha != current_val_sha:
             raise ValueError(
-                f"Validation file SHA-256 mismatch! Manifest: {manifest_data['validation_sha256']}, Actual: {current_val_sha}"
+                f"Validation file SHA-256 mismatch! Manifest: {expected_val_sha}, Actual: {current_val_sha}"
             )
 
     train_rows = load_jsonl_rows(train_path)
@@ -349,9 +356,10 @@ async def run_training(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="BPF-Guardian Tinker SFT Controller")
-    parser.add_argument("--train-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v1" / "train.jsonl")
-    parser.add_argument("--validation-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v1" / "validation.jsonl")
-    parser.add_argument("--manifest-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v1" / "freeze_manifest.json")
+    parser.add_argument("--train-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v2" / "train.jsonl")
+    parser.add_argument("--validation-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v2" / "validation_in_domain.jsonl")
+    parser.add_argument("--heldout-validation-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v2" / "validation_family_heldout.jsonl")
+    parser.add_argument("--manifest-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v2" / "freeze_manifest.json")
     parser.add_argument("--log-root", type=Path, default=PROJECT_ROOT / "runs" / "tinker")
     parser.add_argument("--run-id", type=str, default=None, help="Custom run ID (defaults to <profile>-<fingerprint>)")
     
@@ -493,6 +501,21 @@ def main() -> None:
     }
     (log_path / "run_metadata.json").write_text(json.dumps(run_metadata, indent=2) + "\n", encoding="utf-8")
 
+    # Build optional heldout validation evaluator
+    evaluator_builders = []
+    if args.heldout_validation_file and args.heldout_validation_file.is_file():
+        print(f"  Registering heldout evaluator: {args.heldout_validation_file}")
+        heldout_builder = FrozenSFTDatasetBuilder(
+            common_config=common_config,
+            train_file=str(args.train_file),
+            validation_file=str(args.heldout_validation_file),
+        )
+        _, heldout_dataset = heldout_builder()
+        tokenizer = train.get_tokenizer(model_name)
+        evaluator_builders.append(
+            lambda: train.NLLEvaluator.from_dataset(heldout_dataset, name="val_heldout", tokenizer=tokenizer)
+        )
+
     # 5. Assemble train.Config
     config = train.Config(
         log_path=str(log_path),
@@ -500,6 +523,7 @@ def main() -> None:
         recipe_name=recipe_name,
         renderer_name=renderer_name,
         dataset_builder=dataset_builder,
+        evaluator_builders=evaluator_builders,
         learning_rate=args.learning_rate,
         lr_schedule=args.lr_schedule,
         num_epochs=args.num_epochs,

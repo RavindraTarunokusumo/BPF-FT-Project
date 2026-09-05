@@ -179,9 +179,10 @@ async def sample_suite(
     suite_name: str,
     suite_info: Dict[str, Any],
     output_base_dir: Path,
-    profile_name: str = "nemotron-3.5-lightning",
     seed: int = 42,
     mock: bool = False,
+    profile_name: str = "nemotron-3.5-lightning",
+    sampler_checkpoint: Optional[str] = None,
 ) -> Path:
     """Generates rollout completions for one evaluation suite."""
     out_dir = output_base_dir / suite_name
@@ -198,12 +199,13 @@ async def sample_suite(
     prof = get_model_profile(profile_name)
 
     logger.info(
-        ">>> Sampling suite '%s' (%d tasks, T=%.2f, top_p=%s, Profile=%s)...",
+        ">>> Sampling suite '%s' (%d tasks, T=%.2f, top_p=%s, Profile=%s, Checkpoint=%s)...",
         suite_name,
         suite_info["total"],
         temp,
         str(top_p),
         profile_name,
+        sampler_checkpoint or "base",
     )
     
     if suite_info["type"] == "repair":
@@ -211,6 +213,7 @@ async def sample_suite(
             benchmark_index=suite_info["index"],
             output_dir=out_dir,
             model_name=prof.model_name,
+            sampler_checkpoint=sampler_checkpoint,
             renderer_name=prof.renderer_name,
             temperature=temp,
             seed=seed,
@@ -222,6 +225,7 @@ async def sample_suite(
         await run_benchmark_rollout(
             benchmark_index=suite_info["index"],
             output_dir=out_dir,
+            sampler_checkpoint=sampler_checkpoint,
             num_samples=1,
             temperature=temp,
             seed=seed,
@@ -234,11 +238,11 @@ async def sample_suite(
     return out_dir
 
 
-def verify_suite_on_vps(suite_name: str, local_suite_dir: Path) -> Dict[str, Any]:
+def verify_suite_on_vps(suite_name: str, local_suite_dir: Path, output_root_name: str = "nemotron-3.5-lightning-base") -> Dict[str, Any]:
     """Executes live empirical kernel verification on the Hostinger Linux VPS."""
     logger.info(">>> Verifying suite '%s' live on Hostinger Linux VPS...", suite_name)
     
-    remote_suite_dir = f"{REMOTE_PROJECT_ROOT}/runs/evaluation/nemotron-3.5-lightning-base/{suite_name}"
+    remote_suite_dir = f"{REMOTE_PROJECT_ROOT}/runs/evaluation/{output_root_name}/{suite_name}"
     
     # 1. Sync candidate programs to VPS
     sync_directory_to_vps(local_suite_dir, remote_suite_dir)
@@ -322,8 +326,9 @@ async def run_phase_n1(
     mock: bool = False,
     skip_sampling: bool = False,
     suites_to_run: Optional[List[str]] = None,
+    sampler_checkpoint: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Runs complete Phase N1 untuned baseline evaluation."""
+    """Runs complete Phase N1 untuned baseline evaluation or SFT checkpoint evaluation."""
     output_root.mkdir(parents=True, exist_ok=True)
     active_suites = {k: v for k, v in SUITES.items() if suites_to_run is None or k in suites_to_run}
     
@@ -338,12 +343,13 @@ async def run_phase_n1(
                 output_base_dir=output_root,
                 seed=42,
                 mock=mock,
+                sampler_checkpoint=sampler_checkpoint,
             )
             
     # 2. VPS verification phase
     for name in active_suites:
         local_dir = output_root / name
-        results = verify_suite_on_vps(name, local_dir)
+        results = verify_suite_on_vps(name, local_dir, output_root_name=output_root.name)
         suite_results[name] = results
         
     # 3. Master summary report & McNemar analysis
@@ -390,6 +396,7 @@ async def run_phase_n1(
         "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "model_profile": "nemotron-3.5-lightning",
         "model_name": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+        "sampler_checkpoint": sampler_checkpoint or "base",
         "revision": "a9904d24bcc1d289a1950fa9d2b978c47cf903b9",
         "license": "OpenMDW-1.1",
         "total_suites_evaluated": len(suite_results),
@@ -406,13 +413,14 @@ async def run_phase_n1(
     }
     
     (output_root / "master_summary.json").write_text(json.dumps(master_summary, indent=2) + "\n", encoding="utf-8")
-    logger.info("Phase N1 evaluation complete! Master summary saved to %s", output_root / "master_summary.json")
+    logger.info("Evaluation complete! Master summary saved to %s", output_root / "master_summary.json")
     return master_summary
 
 
 def main():
-    parser = argparse.ArgumentParser(description="BPF-Guardian Phase N1 Evaluation Driver")
+    parser = argparse.ArgumentParser(description="BPF-Guardian Evaluation Driver")
     parser.add_argument("--output-root", type=Path, default=PROJECT_ROOT / "runs" / "evaluation" / "nemotron-3.5-lightning-base")
+    parser.add_argument("--sampler-checkpoint", type=str, default=None, help="Tinker sampler checkpoint path")
     parser.add_argument("--mock", action="store_true", help="Generate synthetic mock rollouts for offline testing")
     parser.add_argument("--skip-sampling", action="store_true", help="Skip sampling and verify existing candidates")
     parser.add_argument("--suites", nargs="+", default=None, help="Specific suites to run (e.g. calibration-36)")
@@ -424,6 +432,7 @@ def main():
             mock=args.mock,
             skip_sampling=args.skip_sampling,
             suites_to_run=args.suites,
+            sampler_checkpoint=args.sampler_checkpoint,
         )
     )
 
