@@ -137,13 +137,17 @@ def run_ssh_command(cmd: str) -> Tuple[int, str, str]:
     return res.returncode, res.stdout, res.stderr
 
 
+import posixpath
+
+
 def sync_directory_to_vps(local_dir: Path, remote_dir: str) -> None:
     """Syncs a local directory to the VPS via tar over SSH."""
     logger.info("Syncing %s -> VPS %s...", local_dir, remote_dir)
-    run_ssh_command(f"mkdir -p '{remote_dir}'")
+    remote_parent = posixpath.dirname(remote_dir)
+    run_ssh_command(f"mkdir -p '{remote_parent}'")
     
     tar_cmd = ["tar", "-czf", "-", "-C", str(local_dir.parent), local_dir.name]
-    ssh_target = ["ssh", "-i", str(SSH_KEY), f"{VPS_USER}@{VPS_HOST}", f"tar -xzf - -C '{Path(remote_dir).parent}'"]
+    ssh_target = ["ssh", "-i", str(SSH_KEY), f"{VPS_USER}@{VPS_HOST}", f"tar -xzf - -C '{remote_parent}'"]
     
     p1 = subprocess.Popen(tar_cmd, stdout=subprocess.PIPE)
     p2 = subprocess.Popen(ssh_target, stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -157,8 +161,10 @@ def sync_directory_from_vps(remote_dir: str, local_dir: Path) -> None:
     """Syncs a directory back from VPS via tar over SSH."""
     logger.info("Fetching VPS %s -> %s...", remote_dir, local_dir)
     local_dir.parent.mkdir(parents=True, exist_ok=True)
+    remote_parent = posixpath.dirname(remote_dir)
+    remote_name = posixpath.basename(remote_dir)
     
-    ssh_src = ["ssh", "-i", str(SSH_KEY), f"{VPS_USER}@{VPS_HOST}", f"tar -czf - -C '{Path(remote_dir).parent}' '{Path(remote_dir).name}'"]
+    ssh_src = ["ssh", "-i", str(SSH_KEY), f"{VPS_USER}@{VPS_HOST}", f"tar -czf - -C '{remote_parent}' '{remote_name}'"]
     tar_dest = ["tar", "-xzf", "-", "-C", str(local_dir.parent)]
     
     p1 = subprocess.Popen(ssh_src, stdout=subprocess.PIPE)

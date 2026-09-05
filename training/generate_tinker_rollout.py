@@ -316,6 +316,7 @@ async def run_benchmark_rollout(
     mock: bool = False,
     profile: Optional[Union[str, ModelProfile]] = None,
     top_p: Optional[float] = None,
+    concurrency: int = 4,
 ) -> Dict[str, Any]:
     active_profile = get_model_profile(profile)
     resolved_model = model_name or active_profile.model_name
@@ -350,21 +351,26 @@ async def run_benchmark_rollout(
     all_records: List[Dict[str, Any]] = []
     prompts_list: List[Dict[str, Any]] = []
 
-    print(f"\n[+] Generating rollouts for {len(tasks)} benchmark tasks ({num_samples} sample(s)/task, T={temperature}, Profile={active_profile.name})...")
+    print(f"\n[+] Generating rollouts for {len(tasks)} benchmark tasks ({num_samples} sample(s)/task, T={temperature}, Profile={active_profile.name}, Concurrency={concurrency})...")
 
-    for task_idx, task in enumerate(tasks, start=1):
+    sem = asyncio.Semaphore(concurrency)
+    completed = 0
+
+    async def run_single_task(task: Dict[str, Any]):
+        nonlocal completed
         t_id = task["task_id"]
-        task_records = await generate_rollouts_for_task(
-            task=task,
-            sampling_client=sampling_client,
-            renderer=renderer,
-            num_samples=num_samples,
-            temperature=temperature,
-            base_seed=seed,
-            max_tokens=resolved_max_tokens,
-            mock=mock,
-            top_p=top_p,
-        )
+        async with sem:
+            task_records = await generate_rollouts_for_task(
+                task=task,
+                sampling_client=sampling_client,
+                renderer=renderer,
+                num_samples=num_samples,
+                temperature=temperature,
+                base_seed=seed,
+                max_tokens=resolved_max_tokens,
+                mock=mock,
+                top_p=top_p,
+            )
 
         task_cand_dir = candidates_dir / t_id
         task_cand_dir.mkdir(parents=True, exist_ok=True)
@@ -372,16 +378,21 @@ async def run_benchmark_rollout(
         for rec in task_records:
             sample_file = task_cand_dir / f"{rec['sample_id']}.c"
             sample_file.write_text(rec["extracted_c_source"], encoding="utf-8", newline="\n")
-            all_records.append(rec)
 
-        prompts_list.append({
+        completed += 1
+        if completed % 10 == 0 or completed == len(tasks):
+            print(f"    Progress: {completed}/{len(tasks)} tasks processed.", flush=True)
+
+        return task_records, {
             "task_id": t_id,
             "prompt_hash": task_records[0]["prompt_hash"],
             "messages": task_records[0]["prompt_messages"],
-        })
+        }
 
-        if task_idx % 10 == 0 or task_idx == len(tasks):
-            print(f"    Progress: {task_idx}/{len(tasks)} tasks processed.")
+    task_results = await asyncio.gather(*(run_single_task(t) for t in tasks))
+    for t_recs, p_rec in task_results:
+        all_records.extend(t_recs)
+        prompts_list.append(p_rec)
 
     # Write generation records and prompts JSONL
     gen_records_file = output_dir / "generation_records.jsonl"

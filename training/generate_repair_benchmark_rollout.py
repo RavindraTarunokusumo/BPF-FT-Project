@@ -104,6 +104,7 @@ async def run_repair_benchmark_rollout(
     max_tokens: int = 2048,
     mock: bool = False,
     top_p: Optional[float] = None,
+    concurrency: int = 4,
 ) -> Dict[str, Any]:
     benchmark_index = benchmark_index.resolve()
     output_dir = output_dir.resolve()
@@ -141,9 +142,11 @@ async def run_repair_benchmark_rollout(
 
     stop_seqs = renderer.get_stop_sequences()
 
-    bench_base = benchmark_index.parent
+    sem = asyncio.Semaphore(concurrency)
+    completed = 0
 
-    for idx, task_meta in enumerate(tasks, start=1):
+    async def process_task(task_meta: Dict[str, Any]):
+        nonlocal completed
         task_id = task_meta["task_id"]
         category = task_meta.get("application_category", "packet_filtering_security")
         difficulty = task_meta.get("difficulty", "level_1")
@@ -203,11 +206,12 @@ async def run_repair_benchmark_rollout(
             if top_p is not None:
                 sampling_kwargs["top_p"] = top_p
             sampling_params = tinker.SamplingParams(**sampling_kwargs)
-            sample_result = await sampling_client.sample_async(
-                prompt=prompt_model_input,
-                num_samples=1,
-                sampling_params=sampling_params,
-            )
+            async with sem:
+                sample_result = await sampling_client.sample_async(
+                    prompt=prompt_model_input,
+                    num_samples=1,
+                    sampling_params=sampling_params,
+                )
             sampled_seq = sample_result.sequences[0]
             token_ids = list(sampled_seq.tokens)
             raw_text = renderer.tokenizer.decode(token_ids)
@@ -235,16 +239,23 @@ async def run_repair_benchmark_rollout(
             "finish_reason": finish_reason,
             "compliance": compliance,
         }
-        generation_records.append(record)
 
-        prompts_records.append({
+        prompt_rec = {
             "task_id": task_id,
             "prompt_hash": prompt_hash,
             "messages": messages,
-        })
+        }
 
-        if idx % 10 == 0 or idx == len(tasks):
-            print(f"    Progress: {idx}/{len(tasks)} repair benchmark tasks generated.", flush=True)
+        completed += 1
+        if completed % 10 == 0 or completed == len(tasks):
+            print(f"    Progress: {completed}/{len(tasks)} repair benchmark tasks generated.", flush=True)
+
+        return record, prompt_rec
+
+    results = await asyncio.gather(*(process_task(t) for t in tasks))
+    for rec, prec in results:
+        generation_records.append(rec)
+        prompts_records.append(prec)
 
     # Write prompts.jsonl and generation_records.jsonl
     (output_dir / "prompts.jsonl").write_text(
