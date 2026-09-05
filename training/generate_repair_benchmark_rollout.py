@@ -103,6 +103,7 @@ async def run_repair_benchmark_rollout(
     seed: int = 42,
     max_tokens: int = 2048,
     mock: bool = False,
+    top_p: Optional[float] = None,
 ) -> Dict[str, Any]:
     benchmark_index = benchmark_index.resolve()
     output_dir = output_dir.resolve()
@@ -193,12 +194,15 @@ async def run_repair_benchmark_rollout(
             token_ids = [100, 200, 300]
             finish_reason = "STOP_SEQUENCE"
         else:
-            sampling_params = tinker.SamplingParams(
-                max_tokens=max_tokens,
-                temperature=temperature,
-                seed=seed,
-                stop=stop_seqs,
-            )
+            sampling_kwargs: Dict[str, Any] = {
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+                "seed": seed,
+                "stop": stop_seqs,
+            }
+            if top_p is not None:
+                sampling_kwargs["top_p"] = top_p
+            sampling_params = tinker.SamplingParams(**sampling_kwargs)
             sample_result = await sampling_client.sample_async(
                 prompt=prompt_model_input,
                 num_samples=1,

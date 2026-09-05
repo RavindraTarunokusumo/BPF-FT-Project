@@ -148,13 +148,23 @@ def build_task_prompt(task_meta: Dict[str, Any]) -> List[Dict[str, str]]:
     category = task_meta.get("application_category", "packet_filtering_security")
     difficulty = task_meta.get("difficulty", "level_1")
     
-    # Check if a specific task.json exists in calibration or inbox
+    # Check if task_meta already has instruction/requirements or resolve task.json
     task_json_path = None
-    for candidate_dir in [
+    candidates = [
         PROJECT_ROOT / "data" / "calibration" / category / difficulty / task_id / "task.json",
         PROJECT_ROOT / "data" / "benchmark" / "synthesis" / category / difficulty / task_id / "task.json",
+        PROJECT_ROOT / "data" / "rl" / "v2" / "dev" / category / difficulty / task_id / "task.json",
+        PROJECT_ROOT / "data" / "rl" / "v2" / "confirmation" / category / difficulty / task_id / "task.json",
         PROJECT_ROOT / "data" / "inbox" / category / difficulty / task_id / "task.json",
-    ]:
+    ]
+    if "relative_path" in task_meta:
+        rel = task_meta["relative_path"]
+        candidates.extend([
+            PROJECT_ROOT / "data" / "rl" / "v2" / "dev" / rel / "task.json",
+            PROJECT_ROOT / "data" / "rl" / "v2" / "confirmation" / rel / "task.json",
+            PROJECT_ROOT / "data" / rel / "task.json",
+        ])
+    for candidate_dir in candidates:
         if candidate_dir.is_file():
             task_json_path = candidate_dir
             break
@@ -230,6 +240,7 @@ async def generate_rollouts_for_task(
     base_seed: int,
     max_tokens: int,
     mock: bool = False,
+    top_p: Optional[float] = None,
 ) -> List[Dict[str, Any]]:
     task_id = task["task_id"]
     messages = build_task_prompt(task)
@@ -249,12 +260,15 @@ async def generate_rollouts_for_task(
             token_ids = [100, 200, 300]
             termination = "STOP_SEQUENCE"
         else:
-            sampling_params = tinker.SamplingParams(
-                max_tokens=max_tokens,
-                temperature=temperature,
-                seed=seed,
-                stop=stop_seqs,
-            )
+            sampling_kwargs: Dict[str, Any] = {
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+                "seed": seed,
+                "stop": stop_seqs,
+            }
+            if top_p is not None:
+                sampling_kwargs["top_p"] = top_p
+            sampling_params = tinker.SamplingParams(**sampling_kwargs)
             sample_result = await sampling_client.sample_async(
                 prompt=prompt_model_input,
                 num_samples=1,
@@ -301,6 +315,7 @@ async def run_benchmark_rollout(
     max_tokens: Optional[int] = None,
     mock: bool = False,
     profile: Optional[Union[str, ModelProfile]] = None,
+    top_p: Optional[float] = None,
 ) -> Dict[str, Any]:
     active_profile = get_model_profile(profile)
     resolved_model = model_name or active_profile.model_name
@@ -348,6 +363,7 @@ async def run_benchmark_rollout(
             base_seed=seed,
             max_tokens=resolved_max_tokens,
             mock=mock,
+            top_p=top_p,
         )
 
         task_cand_dir = candidates_dir / t_id
@@ -404,6 +420,7 @@ async def run_benchmark_rollout(
         "samples_per_task": num_samples,
         "total_samples": total_samples,
         "temperature": temperature,
+        "top_p": top_p,
         "seed": seed,
         "max_tokens": resolved_max_tokens,
         "output_compliance_rate": (compliant_samples / total_samples) if total_samples > 0 else 0.0,
@@ -436,6 +453,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--renderer-name", type=str, default=None, help="Renderer name override")
     parser.add_argument("--num-samples", type=int, default=1, help="Samples per task (1 for Pass@1, 4 for Pass@4)")
     parser.add_argument("--temperature", type=float, default=0.0, help="Sampling temperature (0.0 for Pass@1)")
+    parser.add_argument("--top-p", type=float, default=None, help="Top-p nucleus sampling cutoff")
     parser.add_argument("--seed", type=int, default=42, help="Base random seed")
     parser.add_argument("--max-tokens", type=int, default=None, help="Max new tokens override")
     parser.add_argument("--mock", action="store_true", help="Generate synthetic mock outputs without calling Tinker API")
