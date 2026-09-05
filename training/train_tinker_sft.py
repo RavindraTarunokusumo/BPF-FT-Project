@@ -46,14 +46,16 @@ from tinker_cookbook.supervised import train
 from tinker_cookbook.supervised.types import ChatDatasetBuilderCommonConfig
 
 from training.dataset_builder import FrozenSFTDatasetBuilder, load_jsonl_rows
+from training.model_profiles import get_model_profile
 
-DEFAULT_MODEL_NAME = "Qwen/Qwen3-8B"
-DEFAULT_RENDERER_NAME = "qwen3_disable_thinking"
-DEFAULT_RECIPE_NAME = "bpf_guardian_sft_v1"
+DEFAULT_PROFILE = get_model_profile("nemotron-3.5-lightning")
+DEFAULT_MODEL_NAME = DEFAULT_PROFILE.model_name
+DEFAULT_RENDERER_NAME = DEFAULT_PROFILE.renderer_name
+DEFAULT_RECIPE_NAME = "bpf_guardian_nemotron_sft_v1"
 
 # Hyperparameters
 DEFAULT_LEARNING_RATE = 2e-4
-DEFAULT_LR_SCHEDULE = "linear"
+DEFAULT_LR_SCHEDULE = "cosine"
 DEFAULT_NUM_EPOCHS = 3
 DEFAULT_LORA_RANK = 32
 DEFAULT_BATCH_SIZE = 32
@@ -351,12 +353,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--validation-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v1" / "validation.jsonl")
     parser.add_argument("--manifest-file", type=Path, default=PROJECT_ROOT / "data" / "sft" / "frozen" / "v1" / "freeze_manifest.json")
     parser.add_argument("--log-root", type=Path, default=PROJECT_ROOT / "runs" / "tinker")
-    parser.add_argument("--run-id", type=str, default=None, help="Custom run ID (defaults to qwen3-8b-<fingerprint>)")
+    parser.add_argument("--run-id", type=str, default=None, help="Custom run ID (defaults to <profile>-<fingerprint>)")
     
-    # Model & Renderer
-    parser.add_argument("--model-name", type=str, default=DEFAULT_MODEL_NAME)
-    parser.add_argument("--renderer-name", type=str, default=DEFAULT_RENDERER_NAME)
-    parser.add_argument("--recipe-name", type=str, default=DEFAULT_RECIPE_NAME)
+    # Model Profile & Overrides
+    parser.add_argument("--model-profile", type=str, default="nemotron-3.5-lightning", help="Model profile to use (e.g. nemotron-3.5-lightning or qwen3-8b)")
+    parser.add_argument("--model-name", type=str, default=None, help="Model ID override")
+    parser.add_argument("--renderer-name", type=str, default=None, help="Renderer name override")
+    parser.add_argument("--recipe-name", type=str, default=None, help="Recipe name override")
 
     # Hyperparameters
     parser.add_argument("--learning-rate", type=float, default=DEFAULT_LEARNING_RATE)
@@ -388,13 +391,22 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    profile = get_model_profile(args.model_profile)
+
+    model_name = args.model_name or profile.model_name
+    renderer_name = args.renderer_name or profile.renderer_name
+    recipe_name = args.recipe_name or f"bpf_guardian_{profile.family}_sft_v1"
+    max_length = args.max_length or profile.max_sequence_length
 
     print("=" * 75)
     print("BPF-Guardian Tinker SFT Training Controller")
+    print(f"Model Profile:           {profile.name}")
     print(f"Tinker SDK Version:      {tinker.__version__}")
     print(f"Tinker Cookbook Version: {tinker_cookbook.__version__}")
-    print(f"Model:                   {args.model_name}")
-    print(f"Renderer:                {args.renderer_name}")
+    print(f"Model:                   {model_name}")
+    print(f"Renderer:                {renderer_name}")
+    print(f"License:                 {profile.license}")
+    print(f"Revision:                {profile.revision}")
     print("=" * 75)
 
     # 1. Manifest & Split Validation
@@ -412,16 +424,16 @@ def main() -> None:
         train_sha256=split_info["train_sha256"],
         val_sha256=split_info["val_sha256"],
         manifest_sha256=split_info["manifest_sha256"],
-        model_name=args.model_name,
-        renderer_name=args.renderer_name,
+        model_name=model_name,
+        renderer_name=renderer_name,
         learning_rate=args.learning_rate,
         lr_schedule=args.lr_schedule,
         num_epochs=args.num_epochs,
         lora_rank=args.lora_rank,
         batch_size=args.batch_size,
-        max_length=args.max_length,
+        max_length=max_length,
     )
-    run_id = args.run_id or f"qwen3-8b-{fingerprint}"
+    run_id = args.run_id or f"{profile.family}-{fingerprint}"
     log_path = (args.log_root / run_id).resolve()
     log_path.mkdir(parents=True, exist_ok=True)
 
@@ -433,9 +445,9 @@ def main() -> None:
     # 3. Build dataset builder and count tokens
     print("\n[3/5] Initializing tokenizer, renderer, and dataset builder...")
     common_config = ChatDatasetBuilderCommonConfig(
-        model_name_for_tokenizer=args.model_name,
-        renderer_name=args.renderer_name,
-        max_length=args.max_length,
+        model_name_for_tokenizer=model_name,
+        renderer_name=renderer_name,
+        max_length=max_length,
         batch_size=args.batch_size,
         train_on_what=renderers.TrainOnWhat.LAST_ASSISTANT_MESSAGE,
     )
@@ -453,21 +465,24 @@ def main() -> None:
 
     # 4. Check capabilities
     print("\n[4/5] Checking remote Tinker API connection...")
-    asyncio.run(check_tinker_capabilities(args.model_name))
+    asyncio.run(check_tinker_capabilities(model_name))
 
     # Save run metadata for complete reproducibility
     run_metadata = {
         "run_id": run_id,
         "fingerprint": fingerprint,
-        "model_name": args.model_name,
-        "renderer_name": args.renderer_name,
-        "recipe_name": args.recipe_name,
+        "model_profile": profile.name,
+        "model_name": model_name,
+        "renderer_name": renderer_name,
+        "recipe_name": recipe_name,
+        "license": profile.license,
+        "revision": profile.revision,
         "learning_rate": args.learning_rate,
         "lr_schedule": args.lr_schedule,
         "num_epochs": args.num_epochs,
         "lora_rank": args.lora_rank,
         "batch_size": args.batch_size,
-        "max_length": args.max_length,
+        "max_length": max_length,
         "save_every": args.save_every,
         "eval_every": args.eval_every,
         "tinker_version": tinker.__version__,
@@ -481,9 +496,9 @@ def main() -> None:
     # 5. Assemble train.Config
     config = train.Config(
         log_path=str(log_path),
-        model_name=args.model_name,
-        recipe_name=args.recipe_name,
-        renderer_name=args.renderer_name,
+        model_name=model_name,
+        recipe_name=recipe_name,
+        renderer_name=renderer_name,
         dataset_builder=dataset_builder,
         learning_rate=args.learning_rate,
         lr_schedule=args.lr_schedule,

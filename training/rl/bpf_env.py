@@ -31,6 +31,7 @@ from tinker_cookbook.rl.types import (
     StopCondition,
 )
 
+from training.rl.config import DEFAULT_RENDERER_NAME
 from training.rl.kernel_executor import KernelExecutor, check_output_compliance, extract_c_source
 from training.rl.reward import InfrastructureRewardError, compute_rlvr_reward
 
@@ -212,7 +213,7 @@ class BPFEnvGroupBuilder(EnvGroupBuilder):
         self,
         task: Dict[str, Any],
         group_size: int = 4,
-        renderer_name: str = "qwen3_disable_thinking",
+        renderer_name: str = DEFAULT_RENDERER_NAME,
         records_dir: str = "runs/tinker/qwen3-8b-bpf-rl-v1/verifier_records",
         group_index: int = 0,
         sampler: Optional[Any] = None,

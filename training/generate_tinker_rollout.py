@@ -43,10 +43,13 @@ from tinker_cookbook import renderers
 from tinker_cookbook.renderers import get_renderer
 from tinker_cookbook.tokenizer_utils import get_tokenizer
 
+from training.model_profiles import ModelProfile, get_model_profile
+
+DEFAULT_PROFILE = get_model_profile("nemotron-3.5-lightning")
 DEFAULT_BENCHMARK_INDEX = PROJECT_ROOT / "data" / "calibration" / "index.jsonl"
-DEFAULT_MODEL_NAME = "Qwen/Qwen3-8B"
-DEFAULT_RENDERER_NAME = "qwen3_disable_thinking"
-DEFAULT_MAX_NEW_TOKENS = 2048
+DEFAULT_MODEL_NAME = DEFAULT_PROFILE.model_name
+DEFAULT_RENDERER_NAME = DEFAULT_PROFILE.renderer_name
+DEFAULT_MAX_NEW_TOKENS = DEFAULT_PROFILE.max_new_tokens
 
 SYNTHESIS_SYSTEM_PROMPT = """You are an expert Linux kernel eBPF and XDP systems programmer.
 Write complete, self-contained, compilation-ready, and verifier-safe C source code for Linux XDP programs."""
@@ -289,21 +292,27 @@ async def generate_rollouts_for_task(
 async def run_benchmark_rollout(
     benchmark_index: Path,
     output_dir: Path,
-    model_name: str = DEFAULT_MODEL_NAME,
+    model_name: Optional[str] = None,
     sampler_checkpoint: Optional[str] = None,
-    renderer_name: str = DEFAULT_RENDERER_NAME,
+    renderer_name: Optional[str] = None,
     num_samples: int = 1,
     temperature: float = 0.0,
     seed: int = 42,
-    max_tokens: int = DEFAULT_MAX_NEW_TOKENS,
+    max_tokens: Optional[int] = None,
     mock: bool = False,
+    profile: Optional[Union[str, ModelProfile]] = None,
 ) -> Dict[str, Any]:
+    active_profile = get_model_profile(profile)
+    resolved_model = model_name or active_profile.model_name
+    resolved_renderer = renderer_name or active_profile.renderer_name
+    resolved_max_tokens = max_tokens or active_profile.max_new_tokens
+
     tasks = load_benchmark_tasks(benchmark_index)
     if not tasks:
         raise ValueError(f"No tasks found in benchmark index: {benchmark_index}")
 
-    tokenizer = get_tokenizer(model_name)
-    renderer = get_renderer(renderer_name, tokenizer)
+    tokenizer = active_profile.get_tokenizer()
+    renderer = active_profile.get_renderer(tokenizer=tokenizer)
 
     sampling_client = None
     if not mock:
@@ -314,9 +323,9 @@ async def run_benchmark_rollout(
                 model_path=sampler_checkpoint
             )
         else:
-            print(f"[+] Creating sampling client for base model: {model_name}")
+            print(f"[+] Creating sampling client for base model: {resolved_model}")
             sampling_client = await service_client.create_sampling_client_async(
-                base_model=model_name
+                base_model=resolved_model
             )
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -326,7 +335,7 @@ async def run_benchmark_rollout(
     all_records: List[Dict[str, Any]] = []
     prompts_list: List[Dict[str, Any]] = []
 
-    print(f"\n[+] Generating rollouts for {len(tasks)} benchmark tasks ({num_samples} sample(s)/task, T={temperature})...")
+    print(f"\n[+] Generating rollouts for {len(tasks)} benchmark tasks ({num_samples} sample(s)/task, T={temperature}, Profile={active_profile.name})...")
 
     for task_idx, task in enumerate(tasks, start=1):
         t_id = task["task_id"]
@@ -337,7 +346,7 @@ async def run_benchmark_rollout(
             num_samples=num_samples,
             temperature=temperature,
             base_seed=seed,
-            max_tokens=max_tokens,
+            max_tokens=resolved_max_tokens,
             mock=mock,
         )
 
@@ -369,28 +378,34 @@ async def run_benchmark_rollout(
         for p in prompts_list:
             f.write(json.dumps(p) + "\n")
 
-    # Compute rollout statistics
+    # Compute rollout summary statistics
     total_samples = len(all_records)
     compliant_samples = sum(1 for r in all_records if r["compliance"]["compliant"])
     total_tokens = sum(r["num_generated_tokens"] for r in all_records)
 
     try:
-        cand_dir_str = str(candidates_dir.resolve().relative_to(PROJECT_ROOT.resolve())).replace("\\", "/")
+        cand_dir_str = str(candidates_dir.relative_to(PROJECT_ROOT))
     except ValueError:
-        cand_dir_str = str(candidates_dir.resolve()).replace("\\", "/")
+        cand_dir_str = str(candidates_dir)
 
     manifest = {
         "rollout_id": output_dir.name,
-        "model_name": model_name,
+        "benchmark": benchmark_index.stem,
+        "model_profile": active_profile.name,
+        "model_name": resolved_model,
         "sampler_checkpoint": sampler_checkpoint,
-        "renderer_name": renderer_name,
+        "renderer_name": resolved_renderer,
         "is_mock": mock,
+        "license": active_profile.license,
+        "revision": active_profile.revision,
         "num_tasks": len(tasks),
+        "total_tasks": len(tasks),
         "num_samples_per_task": num_samples,
+        "samples_per_task": num_samples,
         "total_samples": total_samples,
         "temperature": temperature,
         "seed": seed,
-        "max_tokens": max_tokens,
+        "max_tokens": resolved_max_tokens,
         "output_compliance_rate": (compliant_samples / total_samples) if total_samples > 0 else 0.0,
         "total_generated_tokens": total_tokens,
         "benchmark_index_path": str(benchmark_index),
@@ -401,6 +416,7 @@ async def run_benchmark_rollout(
     manifest_file.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
     print(f"\n[+] Benchmark Rollout Complete!")
+    print(f"    Profile:                 {active_profile.name}")
     print(f"    Total Samples:           {total_samples}")
     print(f"    Output Compliance Rate:  {manifest['output_compliance_rate']:.1%}")
     print(f"    Total Generated Tokens:  {total_tokens:,}")
@@ -414,13 +430,14 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="BPF-Guardian Benchmark Rollout Generator")
     parser.add_argument("--benchmark-index", type=Path, default=DEFAULT_BENCHMARK_INDEX)
     parser.add_argument("--output-dir", type=Path, required=True, help="Destination directory for rollout artifacts")
-    parser.add_argument("--model-name", type=str, default=DEFAULT_MODEL_NAME)
+    parser.add_argument("--model-profile", type=str, default="nemotron-3.5-lightning", help="Model profile to use")
+    parser.add_argument("--model-name", type=str, default=None, help="Model name override")
     parser.add_argument("--sampler-checkpoint", type=str, default=None, help="Tinker sampler checkpoint URL")
-    parser.add_argument("--renderer-name", type=str, default=DEFAULT_RENDERER_NAME)
+    parser.add_argument("--renderer-name", type=str, default=None, help="Renderer name override")
     parser.add_argument("--num-samples", type=int, default=1, help="Samples per task (1 for Pass@1, 4 for Pass@4)")
     parser.add_argument("--temperature", type=float, default=0.0, help="Sampling temperature (0.0 for Pass@1)")
     parser.add_argument("--seed", type=int, default=42, help="Base random seed")
-    parser.add_argument("--max-tokens", type=int, default=DEFAULT_MAX_NEW_TOKENS)
+    parser.add_argument("--max-tokens", type=int, default=None, help="Max new tokens override")
     parser.add_argument("--mock", action="store_true", help="Generate synthetic mock outputs without calling Tinker API")
     return parser.parse_args()
 
@@ -439,6 +456,7 @@ def main() -> None:
             seed=args.seed,
             max_tokens=args.max_tokens,
             mock=args.mock,
+            profile=args.model_profile,
         )
     )
 

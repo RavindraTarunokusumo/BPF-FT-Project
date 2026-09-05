@@ -9,9 +9,16 @@ import dataclasses
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-# Default Checkpoints & Models
-DEFAULT_BASE_MODEL = "Qwen/Qwen3-8B"
-DEFAULT_RENDERER_NAME = "qwen3_disable_thinking"
+from training.model_profiles import get_model_profile
+
+# Active Model Profile Defaults
+DEFAULT_PROFILE = get_model_profile("nemotron-3.5-lightning")
+DEFAULT_BASE_MODEL = DEFAULT_PROFILE.model_name
+DEFAULT_RENDERER_NAME = DEFAULT_PROFILE.renderer_name
+
+# Legacy Qwen Checkpoints & Models
+QWEN_BASE_MODEL = "Qwen/Qwen3-8B"
+QWEN_RENDERER_NAME = "qwen3_disable_thinking"
 SFT_V2_CHECKPOINT = "tinker://9461002d-2321-5858-8184-5604f9304283:train:0/weights/final"
 SFT_V2_SAMPLER_CHECKPOINT = "tinker://9461002d-2321-5858-8184-5604f9304283:train:0/sampler_weights/final"
 

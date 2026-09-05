@@ -14,6 +14,7 @@ import chz
 from tinker_cookbook.rl.types import EnvGroupBuilder, RLDataset, RLDatasetBuilder
 
 from training.rl.bpf_env import BPFEnvGroupBuilder
+from training.rl.config import DEFAULT_RENDERER_NAME
 from training.rl.sampler import BPFPrioritySampler
 
 logger = logging.getLogger("bpf_guardian_rl.dataset")
@@ -96,7 +97,7 @@ class BPFRLDataset(RLDataset):
         self,
         tasks: List[Dict[str, Any]],
         group_size: int = 4,
-        renderer_name: str = "qwen3_disable_thinking",
+        renderer_name: str = DEFAULT_RENDERER_NAME,
         records_dir: str = "runs/tinker/qwen3-8b-bpf-rl-v1/verifier_records",
         batch_size: int = 2,
         sampler: Optional[BPFPrioritySampler] = None,
@@ -148,7 +149,7 @@ class BPFRLDatasetBuilder(RLDatasetBuilder):
     train_dir: str = "data/rl/v1/train"
     dev_dir: str | None = "data/rl/v1/dev"
     group_size: int = 4
-    renderer_name: str = "qwen3_disable_thinking"
+    renderer_name: str = DEFAULT_RENDERER_NAME
     records_dir: str = "runs/tinker/qwen3-8b-bpf-rl-v1/verifier_records"
     batch_size: int = 2
     use_priority_sampler: bool = True

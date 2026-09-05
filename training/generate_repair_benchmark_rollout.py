@@ -278,21 +278,27 @@ def main():
     parser = argparse.ArgumentParser(description="Generate 120-task repair benchmark rollout via Tinker")
     parser.add_argument("--benchmark-index", type=Path, default=PROJECT_ROOT / "data" / "benchmark" / "repair" / "index.jsonl")
     parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--model-name", type=str, default=DEFAULT_MODEL_NAME)
+    parser.add_argument("--model-profile", type=str, default="nemotron-3.5-lightning", help="Model profile (e.g. nemotron-3.5-lightning or qwen3-8b)")
+    parser.add_argument("--model-name", type=str, default=None, help="Model ID override")
     parser.add_argument("--sampler-checkpoint", type=str, default=None)
-    parser.add_argument("--renderer-name", type=str, default=DEFAULT_RENDERER_NAME)
+    parser.add_argument("--renderer-name", type=str, default=None, help="Renderer name override")
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max-tokens", type=int, default=2048)
     parser.add_argument("--mock", action="store_true")
 
     args = parser.parse_args()
+    from training.model_profiles import get_model_profile
+    prof = get_model_profile(args.model_profile)
+    model_name = args.model_name or prof.model_name
+    renderer_name = args.renderer_name or prof.renderer_name
+
     asyncio.run(run_repair_benchmark_rollout(
         benchmark_index=args.benchmark_index,
         output_dir=args.output_dir,
-        model_name=args.model_name,
+        model_name=model_name,
         sampler_checkpoint=args.sampler_checkpoint,
-        renderer_name=args.renderer_name,
+        renderer_name=renderer_name,
         temperature=args.temperature,
         seed=args.seed,
         max_tokens=args.max_tokens,
@@ -302,3 +308,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

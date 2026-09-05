@@ -42,6 +42,7 @@ import tinker
 from tinker_cookbook import renderers
 from tinker_cookbook.renderers import get_renderer
 
+from training.model_profiles import ModelProfile, get_model_profile
 from training.rl.bpf_env import build_task_prompt
 from training.rl.config import DEFAULT_RENDERER_NAME, SFT_V2_SAMPLER_CHECKPOINT
 from training.rl.dataset import load_tasks_from_dir
@@ -79,19 +80,28 @@ async def evaluate_dataset(
     eval_name: str,
     temperature: float = 0.0,
     max_tokens: int = 2048,
+    profile: Optional[Union[str, ModelProfile]] = None,
 ) -> Dict[str, Any]:
     """Evaluates a model checkpoint on a set of tasks at T=0.0."""
     logger.info("Evaluating %d tasks on '%s' (T=%.1f)...", len(tasks), eval_name, temperature)
     records_dir = output_dir / eval_name / "records"
     records_dir.mkdir(parents=True, exist_ok=True)
 
-    from tinker_cookbook.tokenizer_utils import get_tokenizer
+    active_profile = get_model_profile(profile)
+    tokenizer = active_profile.get_tokenizer()
+    renderer = active_profile.get_renderer(tokenizer=tokenizer)
+    executor = KernelExecutor(records_dir=records_dir)
 
     service = tinker.ServiceClient()
-    sampler = service.create_sampling_client(sampler_checkpoint)
-    tokenizer = get_tokenizer("Qwen/Qwen3-8B")
-    renderer = get_renderer(DEFAULT_RENDERER_NAME, tokenizer=tokenizer)
-    executor = KernelExecutor(records_dir=records_dir)
+    if sampler_checkpoint.startswith("tinker://"):
+        sampler = service.create_sampling_client(sampler_checkpoint)
+    elif sampler_checkpoint in ("base", active_profile.model_name):
+        sampler = await service.create_sampling_client_async(base_model=active_profile.model_name)
+    else:
+        try:
+            sampler = service.create_sampling_client(sampler_checkpoint)
+        except Exception:
+            sampler = await service.create_sampling_client_async(base_model=sampler_checkpoint)
 
     results: List[Dict[str, Any]] = []
     t0 = time.time()
@@ -284,8 +294,9 @@ def main():
     parser = argparse.ArgumentParser(description="BPF-Guardian RLVR Evaluation Driver")
     parser.add_argument("--data-dir", type=str, required=True, help="Directory containing evaluation tasks")
     parser.add_argument("--sampler-checkpoint", type=str, default=SFT_V2_SAMPLER_CHECKPOINT, help="Tinker sampler checkpoint path")
+    parser.add_argument("--model-profile", type=str, default="nemotron-3.5-lightning", help="Model profile to use")
     parser.add_argument("--eval-name", type=str, required=True, help="Name of evaluation split (e.g. dev_baseline)")
-    parser.add_argument("--output-dir", type=str, default="runs/tinker/qwen3-8b-bpf-rl-v1", help="Output directory")
+    parser.add_argument("--output-dir", type=str, default="runs/tinker/nemotron-3.5-lightning", help="Output directory")
     parser.add_argument("--temperature", type=float, default=0.0, help="Sampling temperature")
     parser.add_argument("--max-tokens", type=int, default=2048, help="Max tokens per generation")
     parser.add_argument("--compare-with", type=str, default=None, help="Path to baseline summary.json for paired McNemar analysis")
@@ -304,6 +315,7 @@ def main():
             eval_name=args.eval_name,
             temperature=args.temperature,
             max_tokens=args.max_tokens,
+            profile=args.model_profile,
         )
     )
 
