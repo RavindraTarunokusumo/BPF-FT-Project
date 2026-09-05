@@ -110,6 +110,10 @@ def find_task_test_spec(
         PROJECT_ROOT / "data" / "calibration" / task_id / "tests.json",
         PROJECT_ROOT / "data" / "benchmark" / "synthesis" / category / difficulty / task_id / "tests.json",
         PROJECT_ROOT / "data" / "benchmark" / "repair" / category / difficulty / task_id / "tests.json",
+        PROJECT_ROOT / "data" / "rl" / "v2" / "dev" / category / difficulty / task_id / "tests.json",
+        PROJECT_ROOT / "data" / "rl" / "v2" / "confirmation" / category / difficulty / task_id / "tests.json",
+        PROJECT_ROOT / "data" / "rl" / "v2" / "canary" / category / difficulty / task_id / "tests.json",
+        PROJECT_ROOT / "data" / "rl" / "v2" / "train" / category / difficulty / task_id / "tests.json",
     ])
 
     for p in possible_paths:
@@ -119,6 +123,14 @@ def find_task_test_spec(
                 return data
             except Exception:
                 pass
+
+    # Fallback search for task_id/tests.json in data directory
+    for match in (PROJECT_ROOT / "data").rglob(f"{task_id}/tests.json"):
+        try:
+            return json.loads(match.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
     return None
 
 
