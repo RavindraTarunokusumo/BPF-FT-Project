@@ -1,0 +1,44 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "repair_nrf_l1_direct_egress_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l1_direct_egress_redirect/sample-0.c",
+  "source_sha256": "f967bd1905bae7bbcb192be22b020cca85f1adb5c9fba5aaaa8799eb41279fec",
+  "timestamp": "2026-09-05T20:40:32.863964+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_x3q8tmbw/candidate.o\nlibbpf: elf: section(3) xdp, size 72, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 9 insns (72 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_x3q8tmbw/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 790, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 176, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r1 > r2 goto pc+3          ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; return bpf_redirect(2, 0);\n5: (b7) r1 = 2                        ; R1_w=2\n6: (b7) r2 = 0                        ; R2_w=0\n7: (85) call bpf_redirect#23          ; R0=scalar()\n; }\n8: (95) exit\n\nfrom 4 to 8: safe\nverification time 60 usec\nstack depth 0\nprocessed 10 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_redirect_tcp",
+        "description": "Redirect TCP frame to ifindex 2",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      },
+      {
+        "name": "pass_redirect_arp",
+        "description": "Redirect ARP frame to ifindex 2",
+        "pass": true,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_REDIRECT"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

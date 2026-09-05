@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_pfs_l3_01",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c",
+  "source_sha256": "9a63c35614efffd4fb06111667d50b72b578ea3339ac30870e6939117bb4222f",
+  "timestamp": "2026-09-05T20:41:03.233754+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:20:22: error: invalid application of 'sizeof' to an incomplete type 'struct eth_hdr'\n   20 |     if (data + sizeof(*eth) > data_end)\n      |                      ^~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:19:12: note: forward declaration of 'struct eth_hdr'\n   19 |     struct eth_hdr *eth = data;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:24:45: error: arithmetic on a pointer to an incomplete type 'struct eth_hdr'\n   24 |     struct iphdr *ip = (struct iphdr *)(eth + 1);\n      |                                         ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:19:12: note: forward declaration of 'struct eth_hdr'\n   19 |     struct eth_hdr *eth = data;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:29:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   29 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:45:31: error: use of undeclared identifier 'port_quota_map'\n   45 |     val = bpf_map_lookup_elem(port_quota_map, &key, &zero, BPF_ANY);\n      |                               ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:49:29: error: use of undeclared identifier 'port_quota_map'\n   49 |         bpf_map_update_elem(port_quota_map, &key, val, BPF_ANY);\n      |                             ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:20:22: error: invalid application of 'sizeof' to an incomplete type 'struct eth_hdr'\n   20 |     if (data + sizeof(*eth) > data_end)\n      |                      ^~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:19:12: note: forward declaration of 'struct eth_hdr'\n   19 |     struct eth_hdr *eth = data;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:24:45: error: arithmetic on a pointer to an incomplete type 'struct eth_hdr'\n   24 |     struct iphdr *ip = (struct iphdr *)(eth + 1);\n      |                                         ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:19:12: note: forward declaration of 'struct eth_hdr'\n   19 |     struct eth_hdr *eth = data;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:29:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   29 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:45:31: error: use of undeclared identifier 'port_quota_map'\n   45 |     val = bpf_map_lookup_elem(port_quota_map, &key, &zero, BPF_ANY);\n      |                               ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c:49:29: error: use of undeclared identifier 'port_quota_map'\n   49 |         bpf_map_update_elem(port_quota_map, &key, val, BPF_ANY);\n      |                             ^\n5 errors generated."
+}

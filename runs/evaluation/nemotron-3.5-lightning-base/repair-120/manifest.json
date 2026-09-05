@@ -1,0 +1,15 @@
+{
+  "benchmark_index": "data/benchmark/repair/index.jsonl",
+  "benchmark_type": "repair_benchmark_120",
+  "total_tasks": 120,
+  "total_samples": 120,
+  "model_name": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+  "sampler_checkpoint": null,
+  "renderer_name": "nemotron3_ultra_disable_thinking",
+  "temperature": 0.0,
+  "seed": 42,
+  "max_tokens": 2048,
+  "compliant_count": 0,
+  "compliance_rate": 0.0,
+  "total_generated_tokens": 57997
+}

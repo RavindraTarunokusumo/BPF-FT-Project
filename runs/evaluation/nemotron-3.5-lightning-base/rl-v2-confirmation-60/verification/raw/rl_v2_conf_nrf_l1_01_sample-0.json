@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_nrf_l1_01",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_01/sample-0.c",
+  "source_sha256": "a0f2800b0af3ace984bba00bef245d4ba0d0b2051a208e33e694894fa138086e",
+  "timestamp": "2026-09-05T20:41:05.260964+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_01/sample-0.c:13:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n   13 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_01/sample-0.c:13:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n   13 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated."
+}

@@ -1,0 +1,52 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "repair_ptr_l1_swap_eth_mac",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l1_swap_eth_mac/sample-0.c",
+  "source_sha256": "ff28f7cc5163d48e946ea8d91413aa6dc0079eb477165ccdaf319c926bfcbdd3",
+  "timestamp": "2026-09-05T20:40:34.738939+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_oqvm7dvo/candidate.o\nlibbpf: elf: section(3) xdp, size 248, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 31 insns (248 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_oqvm7dvo/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 823, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 528, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+24         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; eth->h_dest[i] = eth->h_source[i];\n5: (71) r2 = *(u8 *)(r1 +6)           ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u8 tmp = eth->h_dest[i];\n6: (71) r3 = *(u8 *)(r1 +0)           ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp;\n7: (73) *(u8 *)(r1 +6) = r3           ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n8: (73) *(u8 *)(r1 +0) = r2           ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u8 tmp = eth->h_dest[i];\n9: (71) r2 = *(u8 *)(r1 +1)           ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n10: (71) r3 = *(u8 *)(r1 +7)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n11: (73) *(u8 *)(r1 +1) = r3          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp;\n12: (73) *(u8 *)(r1 +7) = r2          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u8 tmp = eth->h_dest[i];\n13: (71) r2 = *(u8 *)(r1 +2)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n14: (71) r3 = *(u8 *)(r1 +8)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n15: (73) *(u8 *)(r1 +2) = r3          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp;\n16: (73) *(u8 *)(r1 +8) = r2          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u8 tmp = eth->h_dest[i];\n17: (71) r2 = *(u8 *)(r1 +3)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n18: (71) r3 = *(u8 *)(r1 +9)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n19: (73) *(u8 *)(r1 +3) = r3          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp;\n20: (73) *(u8 *)(r1 +9) = r2          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u8 tmp = eth->h_dest[i];\n21: (71) r2 = *(u8 *)(r1 +4)          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n22: (71) r3 = *(u8 *)(r1 +10)         ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n23: (73) *(u8 *)(r1 +4) = r3          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp;\n24: (73) *(u8 *)(r1 +10) = r2         ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n25: (71) r2 = *(u8 *)(r1 +11)         ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u8 tmp = eth->h_dest[i];\n26: (71) r3 = *(u8 *)(r1 +5)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp;\n27: (73) *(u8 *)(r1 +11) = r3         ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n28: (73) *(u8 *)(r1 +5) = r2          ; R1_w=pkt(r=14) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; }\n29: (b7) r0 = 2                       ; R0_w=2\n30: (95) exit\n\nfrom 4 to 29: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n29: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n29: (b7) r0 = 2                       ; R0_w=2\n30: (95) exit\nverification time 482 usec\nstack depth 0\nprocessed 33 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 2,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_swap_tcp",
+        "description": "Swap Ethernet MAC addresses on TCP packet",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_swap_arp",
+        "description": "Swap Ethernet MAC addresses on ARP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Pass truncated packet unchanged",
+        "pass": false,
+        "expected": "XDP_PASS",
+        "actual": "ERROR",
+        "stderr": "Error: failed to run program: Invalid argument\n"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_trunc' failed: expected XDP_PASS (2), got ERROR (None)"
+}

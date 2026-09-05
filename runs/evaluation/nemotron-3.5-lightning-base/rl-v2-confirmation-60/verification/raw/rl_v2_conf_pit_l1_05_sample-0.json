@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_pit_l1_05",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c",
+  "source_sha256": "7a76a15dbc399c420aa8956e22698041f6c831db2c8111f93224f72fb04211a8",
+  "timestamp": "2026-09-05T20:41:04.651110+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:27:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   27 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:35:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   35 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:45:25: error: use of undeclared identifier 'bpf_map_fd_tcp_flags_05'\n   45 |     bpf_map_update_elem(bpf_map_fd_tcp_flags_05, &zero, &zero, BPF_ANY);\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:72:35: error: use of undeclared identifier 'bpf_map_fd_tcp_flags_05'\n   72 |     counter = bpf_map_lookup_elem(bpf_map_fd_tcp_flags_05, &idx);\n      |                                   ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:27:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   27 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:35:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   35 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:45:25: error: use of undeclared identifier 'bpf_map_fd_tcp_flags_05'\n   45 |     bpf_map_update_elem(bpf_map_fd_tcp_flags_05, &zero, &zero, BPF_ANY);\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:72:35: error: use of undeclared identifier 'bpf_map_fd_tcp_flags_05'\n   72 |     counter = bpf_map_lookup_elem(bpf_map_fd_tcp_flags_05, &idx);\n      |                                   ^\n4 errors generated."
+}

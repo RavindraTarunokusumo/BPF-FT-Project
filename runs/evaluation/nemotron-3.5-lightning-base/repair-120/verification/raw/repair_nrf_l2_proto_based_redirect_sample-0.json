@@ -1,0 +1,53 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "repair_nrf_l2_proto_based_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l2_proto_based_redirect/sample-0.c",
+  "source_sha256": "26dcec50b53b20430bc5e79e507fba6540787b83c1e9501c61140f9d5bf575cf",
+  "timestamp": "2026-09-05T20:40:42.372266+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_1jafudq9/candidate.o\nlibbpf: elf: section(3) xdp, size 192, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 24 insns (192 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_1jafudq9/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1071, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 240, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'proto_devmap': at sec_idx 5, offset 0.\nlibbpf: map 'proto_devmap': found type = 14.\nlibbpf: map 'proto_devmap': found key [6], sz = 4.\nlibbpf: map 'proto_devmap': found value [6], sz = 4.\nlibbpf: map 'proto_devmap': found max_entries = 2.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #19 against 'proto_devmap'\nlibbpf: prog 'xdp_forward': found map 0 (proto_devmap, sec 5, off 0) for insn #19\nlibbpf: map 'proto_devmap': created successfully, fd=4\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+17         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+12      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+9         ; R2=pkt_end() R3=pkt(off=34,r=34)\n14: (b7) r2 = 0                       ; R2_w=0\n; if (ip->protocol == IPPROTO_TCP) {\n15: (71) r1 = *(u8 *)(r1 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol == IPPROTO_TCP) {\n16: (15) if r1 == 0x6 goto pc+2       ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n17: (55) if r1 != 0x11 goto pc+5      ; R1_w=17\n18: (b7) r2 = 1                       ; R2_w=1\n; \n19: (18) r1 = 0xff2125b887795800      ; R1_w=map_ptr(map=proto_devmap,ks=4,vs=4)\n21: (b7) r3 = 0                       ; R3_w=0\n22: (85) call bpf_redirect_map#51     ; R0=scalar()\n; }\n23: (95) exit\n\nfrom 17 to 23: safe\n\nfrom 16 to 19: R0=2 R1_w=6 R2_w=0 R3=pkt(off=34,r=34) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n19: R0=2 R1_w=6 R2_w=0 R3=pkt(off=34,r=34) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; \n19: (18) r1 = 0xff2125b887795800      ; R1_w=map_ptr(map=proto_devmap,ks=4,vs=4)\n21: (b7) r3 = 0                       ; R3_w=0\n22: (85) call bpf_redirect_map#51\n23: safe\n\nfrom 13 to 23: safe\n\nfrom 10 to 23: safe\n\nfrom 5 to 23: safe\nverification time 237 usec\nstack depth 0\nprocessed 31 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 1,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_redirect_tcp",
+        "description": "Redirect TCP to proto_devmap slot 0",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_ABORTED",
+        "stderr": ""
+      },
+      {
+        "name": "pass_redirect_udp",
+        "description": "Redirect UDP to proto_devmap slot 1",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_ABORTED",
+        "stderr": ""
+      },
+      {
+        "name": "pass_icmp",
+        "description": "Pass ICMP with XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_redirect_tcp' failed: expected XDP_REDIRECT (4), got XDP_ABORTED (0)\nTest 'pass_redirect_udp' failed: expected XDP_REDIRECT (4), got XDP_ABORTED (0)"
+}

@@ -1,0 +1,26 @@
+#include <linux/bpf.h>
+#include <linux/if_ether.h>
+#include <bpf/bpf_endian.h>
+#include <bpf/bpf_helpers.h>
+
+SEC("xdp")
+int xdp_forward(struct xdp_md *ctx) {
+    void *data = (void *)(long)ctx->data;
+    void *data_end = (void *)(long)ctx->data_end;
+    struct ethhdr *eth = data;
+
+    /* Verify Ethernet header fits within the captured frame */
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+
+    /* Rewrite the destination MAC address (6 bytes, ETH_ALEN) */
+    __u8 nexthop_mac[6] = {0x52, 0x54, 0x00, 0x11, 0x22, 0x33};
+    for (int i = 0; i < 6; i++) {
+        eth->h_dest[i] = nexthop_mac[i];
+    }
+
+    /* Redirect to interface index 2 */
+    return bpf_redirect(2, 0);
+}
+
+char LICENSE[] SEC("license") = "GPL";

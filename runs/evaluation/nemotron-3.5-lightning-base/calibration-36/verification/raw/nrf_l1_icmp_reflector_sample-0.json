@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "nrf_l1_icmp_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l1_icmp_reflector/sample-0.c",
+  "source_sha256": "229f481778665a7e94574127bb1136f20c809a00f60fc6e4dea22fba07ab825a",
+  "timestamp": "2026-09-05T20:40:19.949629+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l1_icmp_reflector/sample-0.c:14:10: fatal error: 'linux/skbuff.h' file not found\n   14 | #include <linux/skbuff.h>\n      |          ^~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l1_icmp_reflector/sample-0.c:14:10: fatal error: 'linux/skbuff.h' file not found\n   14 | #include <linux/skbuff.h>\n      |          ^~~~~~~~~~~~~~~~\n1 error generated."
+}

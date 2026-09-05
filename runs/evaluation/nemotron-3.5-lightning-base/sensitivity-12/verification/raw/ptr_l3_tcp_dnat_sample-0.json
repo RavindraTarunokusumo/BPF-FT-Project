@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "ptr_l3_tcp_dnat",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l3_tcp_dnat/sample-0.c",
+  "source_sha256": "712668aa7560d4939845c451d684a0b0ce844d25f3a4b16fbfe7c28d9e199f98",
+  "timestamp": "2026-09-05T20:41:16.673438+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l3_tcp_dnat/sample-0.c:13:10: fatal error: 'bpf/ctx.h' file not found\n   13 | #include <bpf/ctx.h>\n      |          ^~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l3_tcp_dnat/sample-0.c:13:10: fatal error: 'bpf/ctx.h' file not found\n   13 | #include <bpf/ctx.h>\n      |          ^~~~~~~~~~~\n1 error generated."
+}

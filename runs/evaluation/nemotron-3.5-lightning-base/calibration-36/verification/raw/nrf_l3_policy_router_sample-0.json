@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_policy_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l3_policy_router/sample-0.c",
+  "source_sha256": "b2655a103c03a0fc8a38a6fb4c69041720d8c6d366f663e32616a675779cb16f",
+  "timestamp": "2026-09-05T20:40:20.746804+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l3_policy_router/sample-0.c:17:10: fatal error: 'bpf/ctx.h' file not found\n   17 | #include <bpf/ctx.h>\n      |          ^~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l3_policy_router/sample-0.c:17:10: fatal error: 'bpf/ctx.h' file not found\n   17 | #include <bpf/ctx.h>\n      |          ^~~~~~~~~~~\n1 error generated."
+}

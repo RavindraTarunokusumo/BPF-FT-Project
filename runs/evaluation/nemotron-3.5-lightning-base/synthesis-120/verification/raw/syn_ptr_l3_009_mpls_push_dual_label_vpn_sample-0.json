@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_009_mpls_push_dual_label_vpn",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c",
+  "source_sha256": "4241edf94d9f2e329e428d828ded2ae6bad748b58e683bd497686c121780dd94",
+  "timestamp": "2026-09-05T20:40:25.227303+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:49:14: error: expected expression\n   49 |         *(uint32_t *)(ip - 1) = bpf_htonl((MPLS_OUTER_LABEL << 1) | 0); /* BOS=0 */\n      |                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:49:4: error: use of undeclared identifier 'uint32_t'\n   49 |         *(uint32_t *)(ip - 1) = bpf_htonl((MPLS_OUTER_LABEL << 1) | 0); /* BOS=0 */\n      |           ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:54:14: error: expected expression\n   54 |         *(uint32_t *)(ip - 1 + 4) = bpf_htonl((MPLS_INNER_LABEL << 1) | 1); /* BOS=1 */\n      |                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:54:4: error: use of undeclared identifier 'uint32_t'\n   54 |         *(uint32_t *)(ip - 1 + 4) = bpf_htonl((MPLS_INNER_LABEL << 1) | 1); /* BOS=1 */\n      |           ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:49:14: error: expected expression\n   49 |         *(uint32_t *)(ip - 1) = bpf_htonl((MPLS_OUTER_LABEL << 1) | 0); /* BOS=0 */\n      |                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:49:4: error: use of undeclared identifier 'uint32_t'\n   49 |         *(uint32_t *)(ip - 1) = bpf_htonl((MPLS_OUTER_LABEL << 1) | 0); /* BOS=0 */\n      |           ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:54:14: error: expected expression\n   54 |         *(uint32_t *)(ip - 1 + 4) = bpf_htonl((MPLS_INNER_LABEL << 1) | 1); /* BOS=1 */\n      |                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_009_mpls_push_dual_label_vpn/sample-0.c:54:4: error: use of undeclared identifier 'uint32_t'\n   54 |         *(uint32_t *)(ip - 1 + 4) = bpf_htonl((MPLS_INNER_LABEL << 1) | 1); /* BOS=1 */\n      |           ^\n4 errors generated."
+}

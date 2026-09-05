@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_008_ip_in_ip_decap",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c",
+  "source_sha256": "f8657f20719759233da10a993ba851fcf0296889b4cb4916dff94ec3586b9e41",
+  "timestamp": "2026-09-05T20:40:26.060094+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:5: error: expected parameter declarator\n   13 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:4: note: to match this '('\n   13 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   13 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:11: error: expected ';' after top level declarator\n   13 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:51:6: error: call to undeclared function 'bpf_xdp_adjust_head'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   51 |         if (bpf_xdp_adjust_head(ctx, 20))\n      |             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:69:17: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   69 |         eth->h_proto = bpf_htons(ETH_P_IP);\n      |                        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:75:16: error: expected ';' after top level declarator\n   75 | char _license[] SEC(\"license\") = \"GPL\";\n      |                ^\n      |                ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:75:6: warning: tentative array definition assumed to have one element\n   75 | char _license[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:5: error: expected parameter declarator\n   13 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:4: note: to match this '('\n   13 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   13 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:13:11: error: expected ';' after top level declarator\n   13 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:51:6: error: call to undeclared function 'bpf_xdp_adjust_head'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   51 |         if (bpf_xdp_adjust_head(ctx, 20))\n      |             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:69:17: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   69 |         eth->h_proto = bpf_htons(ETH_P_IP);\n      |                        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:75:16: error: expected ';' after top level declarator\n   75 | char _license[] SEC(\"license\") = \"GPL\";\n      |                ^\n      |                ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_008_ip_in_ip_decap/sample-0.c:75:6: warning: tentative array definition assumed to have one element\n   75 | char _license[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 7 errors generated."
+}

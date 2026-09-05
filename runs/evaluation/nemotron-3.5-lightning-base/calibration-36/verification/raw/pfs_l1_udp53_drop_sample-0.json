@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "pfs_l1_udp53_drop",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c",
+  "source_sha256": "7dc77e0421493b9cfc39c7ed8a71377859b0679f9454c78cdde6b8ab69c24103",
+  "timestamp": "2026-09-05T20:40:20.547381+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:5: error: expected parameter declarator\n    8 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:4: note: to match this '('\n    8 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n    8 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:11: error: expected ';' after top level declarator\n    8 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:20:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   20 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:44:22: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   44 |     if (udp->dest == bpf_htons(53)) {\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:53:15: error: expected ';' after top level declarator\n   53 | char LICENSE[] SEC(\"license\") = \"GPL\";\n      |               ^\n      |               ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:53:6: warning: tentative array definition assumed to have one element\n   53 | char LICENSE[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:5: error: expected parameter declarator\n    8 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:4: note: to match this '('\n    8 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n    8 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:8:11: error: expected ';' after top level declarator\n    8 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:20:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   20 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:44:22: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   44 |     if (udp->dest == bpf_htons(53)) {\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:53:15: error: expected ';' after top level declarator\n   53 | char LICENSE[] SEC(\"license\") = \"GPL\";\n      |               ^\n      |               ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l1_udp53_drop/sample-0.c:53:6: warning: tentative array definition assumed to have one element\n   53 | char LICENSE[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 7 errors generated."
+}

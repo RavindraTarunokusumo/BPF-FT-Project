@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_ptr_l1_01",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_ptr_l1_01/sample-0.c",
+  "source_sha256": "8ada4e469018712b8fe999a860fdd14bcfe7d5e71936b747bade5ecedd987ab3",
+  "timestamp": "2026-09-05T20:40:52.554707+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_ptr_l1_01/sample-0.c:2:10: fatal error: 'linux/if/ether.h' file not found\n    2 | #include <linux/if/ether.h>\n      |          ^~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_ptr_l1_01/sample-0.c:2:10: fatal error: 'linux/if/ether.h' file not found\n    2 | #include <linux/if/ether.h>\n      |          ^~~~~~~~~~~~~~~~~~\n1 error generated."
+}

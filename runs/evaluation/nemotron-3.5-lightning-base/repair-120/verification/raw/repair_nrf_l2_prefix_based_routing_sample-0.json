@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "repair_nrf_l2_prefix_based_routing",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l2_prefix_based_routing/sample-0.c",
+  "source_sha256": "281f9d75348e6ae504ddf9e71d22fcf997c31f97d17a057cfe7e8e6def417ee3",
+  "timestamp": "2026-09-05T20:40:33.963838+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l2_prefix_based_routing/sample-0.c:45:15: error: call to undeclared function 'bpf_lpm_trie_lookup'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   45 |     int ret = bpf_lpm_trie_lookup(&lpm_routes, &key, &ifindex, sizeof(ifindex));\n      |               ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l2_prefix_based_routing/sample-0.c:45:15: error: call to undeclared function 'bpf_lpm_trie_lookup'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   45 |     int ret = bpf_lpm_trie_lookup(&lpm_routes, &key, &ifindex, sizeof(ifindex));\n      |               ^\n1 error generated."
+}

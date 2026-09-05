@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_002_tcp_rtt_syn_ack_tracker",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c",
+  "source_sha256": "2c4f6f5f5f60e8c2f4d238378b42880d052e0a7246945f1b0700343730ea9f2c",
+  "timestamp": "2026-09-05T20:40:24.498017+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:71:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   71 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:146:25: error: use of undeclared identifier 'IPPROTO_TCP'\n  146 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:213:5: error: unterminated /* comment\n  213 |     /* \n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:215:68: error: expected '}'\n  215 |      * This prevents matching the same SYN again if another SYN-ACK\n      |                                                                    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:128:1: note: to match this '{'\n  128 | {\n      | ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:71:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   71 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:146:25: error: use of undeclared identifier 'IPPROTO_TCP'\n  146 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:213:5: error: unterminated /* comment\n  213 |     /* \n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:215:68: error: expected '}'\n  215 |      * This prevents matching the same SYN again if another SYN-ACK\n      |                                                                    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_002_tcp_rtt_syn_ack_tracker/sample-0.c:128:1: note: to match this '{'\n  128 | {\n      | ^\n4 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_002_gre_encap_push",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c",
+  "source_sha256": "3b8f44f48986bd62cf73a4f0bae237bde7a9729bafd6c9ebed1594b2536b5882",
+  "timestamp": "2026-09-05T20:40:27.986943+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:106:15: error: no member named 'source' in 'struct iphdr'\n  106 |     outer_ip->source = 0; /* Initialize to 0 for checksum */\n      |     ~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:107:15: error: no member named 'dest' in 'struct iphdr'\n  107 |     outer_ip->dest = 0;\n      |     ~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:110:60: error: no member named 'source' in 'struct iphdr'\n  110 |     outer_ip->check = bpf_csum_diff(0, 0, 0, 0, &outer_ip->source);\n      |                                                  ~~~~~~~~  ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:106:15: error: no member named 'source' in 'struct iphdr'\n  106 |     outer_ip->source = 0; /* Initialize to 0 for checksum */\n      |     ~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:107:15: error: no member named 'dest' in 'struct iphdr'\n  107 |     outer_ip->dest = 0;\n      |     ~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_002_gre_encap_push/sample-0.c:110:60: error: no member named 'source' in 'struct iphdr'\n  110 |     outer_ip->check = bpf_csum_diff(0, 0, 0, 0, &outer_ip->source);\n      |                                                  ~~~~~~~~  ^\n3 errors generated."
+}

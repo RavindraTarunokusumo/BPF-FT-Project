@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_003_gre_strip_key_flag",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c",
+  "source_sha256": "1d562e5881c246bb3173561617df98b85acc72673377a6edc9ddbc38a5c4b654",
+  "timestamp": "2026-09-05T20:40:26.871919+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:4:10: fatal error: 'linux/gre.h' file not found\n    4 | #include <linux/gre.h>\n      |          ^~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_003_gre_strip_key_flag/sample-0.c:4:10: fatal error: 'linux/gre.h' file not found\n    4 | #include <linux/gre.h>\n      |          ^~~~~~~~~~~~~\n1 error generated."
+}

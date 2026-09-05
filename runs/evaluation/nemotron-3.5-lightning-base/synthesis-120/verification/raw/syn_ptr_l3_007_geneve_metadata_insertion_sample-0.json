@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_007_geneve_metadata_insertion",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_007_geneve_metadata_insertion/sample-0.c",
+  "source_sha256": "7fa60d1c3aa29f9e497890b72c6d0e4c2377b8acf3fda1f2ee3ea6cac4f514ac",
+  "timestamp": "2026-09-05T20:40:24.598132+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_007_geneve_metadata_insertion/sample-0.c:8:10: fatal error: 'bpf_helpers.h' file not found\n    8 | #include \"bpf_helpers.h\"\n      |          ^~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_007_geneve_metadata_insertion/sample-0.c:8:10: fatal error: 'bpf_helpers.h' file not found\n    8 | #include \"bpf_helpers.h\"\n      |          ^~~~~~~~~~~~~~~\n1 error generated."
+}

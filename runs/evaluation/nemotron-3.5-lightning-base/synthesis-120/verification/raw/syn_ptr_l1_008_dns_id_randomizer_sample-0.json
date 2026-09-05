@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_008_dns_id_randomizer",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c",
+  "source_sha256": "b6d461754a7ec75fcacb9c8e29e85d829b47ad793f7180ade00ecc7c9387059f",
+  "timestamp": "2026-09-05T20:40:29.567453+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c:5:10: fatal error: 'bpf/ctx.h' file not found\n    5 | #include <bpf/ctx.h>\n      |          ^~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_008_dns_id_randomizer/sample-0.c:5:10: fatal error: 'bpf/ctx.h' file not found\n    5 | #include <bpf/ctx.h>\n      |          ^~~~~~~~~~~\n1 error generated."
+}

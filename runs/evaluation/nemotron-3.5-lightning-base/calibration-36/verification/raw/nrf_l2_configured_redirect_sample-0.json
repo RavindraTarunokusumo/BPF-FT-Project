@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "nrf_l2_configured_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c",
+  "source_sha256": "6f0d7f3a2e20e36fd7798203b4273364239e5231a94656b9aef88d8a409acea2",
+  "timestamp": "2026-09-05T20:40:21.017880+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:12:2: error: unknown type name '__uint'; did you mean '__u_int'?\n   12 |         __uint  type, BPF_MAP_TYPE_ARRAY;\n      |         ^~~~~~\n      |         __u_int\n/usr/include/x86_64-linux-gnu/bits/types.h:33:22: note: '__u_int' declared here\n   33 | typedef unsigned int __u_int;\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:13:2: error: unknown type name '__uint'; did you mean '__u_int'?\n   13 |         __uint  max_entries, 1;\n      |         ^~~~~~\n      |         __u_int\n/usr/include/x86_64-linux-gnu/bits/types.h:33:22: note: '__u_int' declared here\n   33 | typedef unsigned int __u_int;\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:13:22: error: expected member name or ';' after declaration specifiers\n   13 |         __uint  max_entries, 1;\n      |         ~~~~~~               ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:13:21: error: expected ';' at end of declaration list\n   13 |         __uint  max_entries, 1;\n      |                             ^\n      |                             ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:50:60: error: too many arguments to function call, expected 2, have 3\n   50 |         p_ifindex = bpf_map_lookup_elem(&forwarding_config, &key, &ifindex);\n      |                     ~~~~~~~~~~~~~~~~~~~                           ^~~~~~~~\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:12:2: error: unknown type name '__uint'; did you mean '__u_int'?\n   12 |         __uint  type, BPF_MAP_TYPE_ARRAY;\n      |         ^~~~~~\n      |         __u_int\n/usr/include/x86_64-linux-gnu/bits/types.h:33:22: note: '__u_int' declared here\n   33 | typedef unsigned int __u_int;\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:13:2: error: unknown type name '__uint'; did you mean '__u_int'?\n   13 |         __uint  max_entries, 1;\n      |         ^~~~~~\n      |         __u_int\n/usr/include/x86_64-linux-gnu/bits/types.h:33:22: note: '__u_int' declared here\n   33 | typedef unsigned int __u_int;\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:13:22: error: expected member name or ';' after declaration specifiers\n   13 |         __uint  max_entries, 1;\n      |         ~~~~~~               ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:13:21: error: expected ';' at end of declaration list\n   13 |         __uint  max_entries, 1;\n      |                             ^\n      |                             ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/nrf_l2_configured_redirect/sample-0.c:50:60: error: too many arguments to function call, expected 2, have 3\n   50 |         p_ifindex = bpf_map_lookup_elem(&forwarding_config, &key, &ifindex);\n      |                     ~~~~~~~~~~~~~~~~~~~                           ^~~~~~~~\n5 errors generated."
+}

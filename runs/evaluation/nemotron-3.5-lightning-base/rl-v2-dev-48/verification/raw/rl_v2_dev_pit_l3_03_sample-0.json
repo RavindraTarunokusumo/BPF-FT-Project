@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_pit_l3_03",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c",
+  "source_sha256": "e0464044a98c87c29a77d7f423832a9d13b81b7ce07c671cfc6219250458f687",
+  "timestamp": "2026-09-05T20:40:47.049371+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:28:25: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   28 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:37:39: error: use of undeclared identifier 'size_t'; did you mean 'sizeof'?\n   37 |     if (ip->ihl < 5 || ip->ihl * 4 > (size_t)(data_end - (void *)ip))\n      |                                       ^~~~~~\n      |                                       sizeof\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:37:39: error: use of undeclared identifier 'size_t'; did you mean 'sizeof'?\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:41:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   41 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:60:17: error: call to undeclared function 'bpf_ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   60 |     __u16 win = bpf_ntohs(tcp->window);\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:74:27: error: use of undeclared identifier 'win_dist_03'\n   74 |     __sync_fetch_and_add(&win_dist_03[bucket], 1);\n      |                           ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:28:25: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   28 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:37:39: error: use of undeclared identifier 'size_t'; did you mean 'sizeof'?\n   37 |     if (ip->ihl < 5 || ip->ihl * 4 > (size_t)(data_end - (void *)ip))\n      |                                       ^~~~~~\n      |                                       sizeof\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:37:39: error: use of undeclared identifier 'size_t'; did you mean 'sizeof'?\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:41:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   41 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:60:17: error: call to undeclared function 'bpf_ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   60 |     __u16 win = bpf_ntohs(tcp->window);\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_03/sample-0.c:74:27: error: use of undeclared identifier 'win_dist_03'\n   74 |     __sync_fetch_and_add(&win_dist_03[bucket], 1);\n      |                           ^\n6 errors generated."
+}

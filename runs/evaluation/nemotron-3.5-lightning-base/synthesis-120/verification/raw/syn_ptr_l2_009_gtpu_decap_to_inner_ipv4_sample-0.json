@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_009_gtpu_decap_to_inner_ipv4",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c",
+  "source_sha256": "185bf66c44faacf71cdf4aa44780c9383e6b18c0189dd3e06151c32ce26b43c3",
+  "timestamp": "2026-09-05T20:40:28.443242+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:5: error: expected parameter declarator\n   15 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:4: note: to match this '('\n   15 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   15 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:11: error: expected ';' after top level declarator\n   15 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:36:22: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   36 |     if (udp->dest != bpf_htons(2152))\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:45:15: error: call to undeclared function 'bpf_xdp_adjust_head'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   45 |     int ret = bpf_xdp_adjust_head(ctx, 36);\n      |               ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:5: error: expected parameter declarator\n   15 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:4: note: to match this '('\n   15 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   15 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:15:11: error: expected ';' after top level declarator\n   15 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:36:22: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   36 |     if (udp->dest != bpf_htons(2152))\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_009_gtpu_decap_to_inner_ipv4/sample-0.c:45:15: error: call to undeclared function 'bpf_xdp_adjust_head'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   45 |     int ret = bpf_xdp_adjust_head(ctx, 36);\n      |               ^\n6 errors generated."
+}

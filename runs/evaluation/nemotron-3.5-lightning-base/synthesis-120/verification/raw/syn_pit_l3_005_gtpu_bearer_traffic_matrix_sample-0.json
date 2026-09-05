@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_005_gtpu_bearer_traffic_matrix",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c",
+  "source_sha256": "71631271c2dcbd699c369798735b2361779b66086e79db0898cf0b2d6eda2c0e",
+  "timestamp": "2026-09-05T20:40:24.545955+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:57:25: error: use of undeclared identifier 'IPPROTO_UDP'\n   57 |     if (ip->protocol != IPPROTO_UDP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:93:22: warning: comparison of distinct pointer types ('__u32 *' (aka 'unsigned int *') and 'void *') [-Wcompare-distinct-pointer-types]\n   93 |     if (teid_ptr + 1 > data_end)\n      |         ~~~~~~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:104:61: error: too many arguments to function call, expected 2, have 3\n  104 |     int ret = bpf_map_lookup_elem(bearer_matrix_map, &teid, &stats);\n      |               ~~~~~~~~~~~~~~~~~~~                           ^~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:124:25: error: passing 'struct (unnamed struct at /root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:24:1)' to parameter of incompatible type 'void *'\n  124 |     bpf_map_update_elem(bearer_matrix_map, &teid, &stats, BPF_ANY);\n      |                         ^~~~~~~~~~~~~~~~~\n1 warning and 3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:57:25: error: use of undeclared identifier 'IPPROTO_UDP'\n   57 |     if (ip->protocol != IPPROTO_UDP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:93:22: warning: comparison of distinct pointer types ('__u32 *' (aka 'unsigned int *') and 'void *') [-Wcompare-distinct-pointer-types]\n   93 |     if (teid_ptr + 1 > data_end)\n      |         ~~~~~~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:104:61: error: too many arguments to function call, expected 2, have 3\n  104 |     int ret = bpf_map_lookup_elem(bearer_matrix_map, &teid, &stats);\n      |               ~~~~~~~~~~~~~~~~~~~                           ^~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:124:25: error: passing 'struct (unnamed struct at /root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_005_gtpu_bearer_traffic_matrix/sample-0.c:24:1)' to parameter of incompatible type 'void *'\n  124 |     bpf_map_update_elem(bearer_matrix_map, &teid, &stats, BPF_ANY);\n      |                         ^~~~~~~~~~~~~~~~~\n1 warning and 3 errors generated."
+}

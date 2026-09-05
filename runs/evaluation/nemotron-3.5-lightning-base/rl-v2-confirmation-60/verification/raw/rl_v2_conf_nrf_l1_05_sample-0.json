@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_nrf_l1_05",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c",
+  "source_sha256": "1e66316bffc686e931fb096db466c224281b6206c7dc14a416b7dddcd88a5862",
+  "timestamp": "2026-09-05T20:40:59.865065+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:5: error: expected parameter declarator\n   30 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:4: note: to match this '('\n   30 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   30 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:11: error: expected ';' after top level declarator\n   30 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:46:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   46 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:61:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   61 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:82:15: error: expected ';' after top level declarator\n   82 | char LICENSE[] SEC(\"license\") = \"GPL\";\n      |               ^\n      |               ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:82:6: warning: tentative array definition assumed to have one element\n   82 | char LICENSE[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:5: error: expected parameter declarator\n   30 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:4: note: to match this '('\n   30 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   30 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:30:11: error: expected ';' after top level declarator\n   30 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:46:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   46 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:61:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   61 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:82:15: error: expected ';' after top level declarator\n   82 | char LICENSE[] SEC(\"license\") = \"GPL\";\n      |               ^\n      |               ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l1_05/sample-0.c:82:6: warning: tentative array definition assumed to have one element\n   82 | char LICENSE[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 7 errors generated."
+}

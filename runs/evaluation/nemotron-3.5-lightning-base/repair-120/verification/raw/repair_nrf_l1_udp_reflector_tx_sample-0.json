@@ -1,0 +1,51 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "repair_nrf_l1_udp_reflector_tx",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l1_udp_reflector_tx/sample-0.c",
+  "source_sha256": "b529256b057e77b98834df60ac5f72566f7fde5cf204ee0b96b9a6a1437b7219",
+  "timestamp": "2026-09-05T20:40:35.985066+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_cktz1zbx/candidate.o\nlibbpf: elf: section(3) xdp, size 408, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 51 insns (408 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_cktz1zbx/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1058, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 688, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+44         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+39      ; R4_w=8\n11: (bf) r4 = r1                      ; R1_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r2 goto pc+36        ; R2=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_UDP)\n14: (71) r4 = *(u8 *)(r1 +23)         ; R1=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_UDP)\n15: (55) if r4 != 0x11 goto pc+34     ; R4_w=17\n; __u32 ip_len = (__u32)ip->ihl * 4;\n16: (71) r4 = *(u8 *)(r3 +0)          ; R3=pkt(off=14,r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ip_len = (__u32)ip->ihl * 4;\n17: (67) r4 <<= 2                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r4 &= 60                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r5 = 20                      ; R5_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n20: (2d) if r5 > r4 goto pc+29        ; R4_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n21: (0f) r3 += r4\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r4 stack= before 20: (2d) if r5 > r4 goto pc+29\nmark_precise: frame0: regs=r4,r5 stack= before 19: (b7) r5 = 20\nmark_precise: frame0: regs=r4 stack= before 18: (57) r4 &= 60\nmark_precise: frame0: regs=r4 stack= before 17: (67) r4 <<= 2\nmark_precise: frame0: regs=r4 stack= before 16: (71) r4 = *(u8 *)(r3 +0)\n22: R3=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n22: (2d) if r3 > r2 goto pc+27        ; R2=pkt_end() R3=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n23: (07) r3 += 8                      ; R3_w=pkt(id=1,off=22,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (2d) if r3 > r2 goto pc+25        ; R2=pkt_end() R3_w=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; eth->h_dest[i] = eth->h_source[i];\n25: (71) r2 = *(u8 *)(r1 +6)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n26: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n27: (73) *(u8 *)(r1 +6) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n28: (73) *(u8 *)(r1 +0) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n29: (71) r2 = *(u8 *)(r1 +1)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n30: (71) r3 = *(u8 *)(r1 +7)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n31: (73) *(u8 *)(r1 +1) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n32: (73) *(u8 *)(r1 +7) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n33: (71) r2 = *(u8 *)(r1 +2)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n34: (71) r3 = *(u8 *)(r1 +8)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n35: (73) *(u8 *)(r1 +2) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n36: (73) *(u8 *)(r1 +8) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n37: (71) r2 = *(u8 *)(r1 +3)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n38: (71) r3 = *(u8 *)(r1 +9)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n39: (73) *(u8 *)(r1 +3) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n40: (73) *(u8 *)(r1 +9) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n41: (71) r2 = *(u8 *)(r1 +4)          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n42: (71) r3 = *(u8 *)(r1 +10)         ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n43: (73) *(u8 *)(r1 +4) = r3          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n44: (73) *(u8 *)(r1 +10) = r2         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n45: (71) r2 = *(u8 *)(r1 +11)         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; tmp[i] = eth->h_dest[i];\n46: (71) r3 = *(u8 *)(r1 +5)          ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_source[i] = tmp[i];\n47: (73) *(u8 *)(r1 +11) = r3         ; R1=pkt(r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; eth->h_dest[i] = eth->h_source[i];\n48: (73) *(u8 *)(r1 +5) = r2          ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n49: (b7) r0 = 3                       ; R0=3\n; }\n50: (95) exit\n\nfrom 24 to 50: safe\n\nfrom 22 to 50: safe\n\nfrom 20 to 50: safe\n\nfrom 15 to 50: safe\n\nfrom 13 to 50: safe\n\nfrom 10 to 50: safe\n\nfrom 5 to 50: safe\nverification time 1456 usec\nstack depth 0\nprocessed 58 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 3\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "tx_udp_reflector",
+        "description": "Reflect UDP packet back out interface",
+        "pass": true,
+        "expected": "XDP_TX",
+        "actual": "XDP_TX"
+      },
+      {
+        "name": "pass_tcp",
+        "description": "Pass TCP packet unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "ptr_l1_set_source_mac",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c",
+  "source_sha256": "4b23e88dc54077cea40521b98811fbfa710fef60ae38a784549c9b42e84698b9",
+  "timestamp": "2026-09-05T20:40:20.049679+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:5: error: expected parameter declarator\n   13 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:4: note: to match this '('\n   13 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   13 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:11: error: expected ';' after top level declarator\n   13 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:42:16: error: expected ';' after top level declarator\n   42 | char _license[] SEC(\"license\") = \"GPL\";\n      |                ^\n      |                ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:42:6: warning: tentative array definition assumed to have one element\n   42 | char _license[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:5: error: expected parameter declarator\n   13 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:4: note: to match this '('\n   13 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   13 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:13:11: error: expected ';' after top level declarator\n   13 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:42:16: error: expected ';' after top level declarator\n   42 | char _license[] SEC(\"license\") = \"GPL\";\n      |                ^\n      |                ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l1_set_source_mac/sample-0.c:42:6: warning: tentative array definition assumed to have one element\n   42 | char _license[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 5 errors generated."
+}

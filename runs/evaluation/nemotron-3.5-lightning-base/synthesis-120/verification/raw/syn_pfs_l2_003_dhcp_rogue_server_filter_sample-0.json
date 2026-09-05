@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_003_dhcp_rogue_server_filter",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c",
+  "source_sha256": "ef5cabf6aa6ae5218eea203beeb1d6057ae6d6df5d95dc59c97ccfdeda92857b",
+  "timestamp": "2026-09-05T20:40:24.409499+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:5:10: fatal error: 'bpf/ctx/skb.h' file not found\n    5 | #include <bpf/ctx/skb.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_003_dhcp_rogue_server_filter/sample-0.c:5:10: fatal error: 'bpf/ctx/skb.h' file not found\n    5 | #include <bpf/ctx/skb.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated."
+}

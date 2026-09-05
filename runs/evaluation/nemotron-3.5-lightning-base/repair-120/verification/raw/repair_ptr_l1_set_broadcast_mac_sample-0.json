@@ -1,0 +1,44 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "repair_ptr_l1_set_broadcast_mac",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l1_set_broadcast_mac/sample-0.c",
+  "source_sha256": "055d9626d31d57f3842f91ec937a86405d98eefa64ced2a737584f6ae855ab8d",
+  "timestamp": "2026-09-05T20:40:32.693530+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_92eq6ty7/candidate.o\nlibbpf: elf: section(3) xdp, size 144, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 18 insns (144 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_92eq6ty7/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 749, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 160, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+11         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n5: (b7) r2 = 255                      ; R2_w=255\n; eth->h_dest[i] = 0xFF;\n6: (73) *(u8 *)(r1 +3) = r2           ; R1_w=pkt(r=14) R2_w=255\n7: (b7) r2 = -1                       ; R2_w=-1\n8: (b7) r3 = -1                       ; R3_w=-1\n9: (77) r3 >>= 16                     ; R3_w=0xffffffffffff\n10: (73) *(u8 *)(r1 +2) = r3          ; R1_w=pkt(r=14) R3_w=0xffffffffffff\n11: (73) *(u8 *)(r1 +4) = r2          ; R1_w=pkt(r=14) R2_w=-1\n12: (73) *(u8 *)(r1 +0) = r2          ; R1_w=pkt(r=14) R2_w=-1\n13: (77) r2 >>= 8                     ; R2_w=0xffffffffffffff\n14: (73) *(u8 *)(r1 +5) = r2          ; R1_w=pkt(r=14) R2_w=0xffffffffffffff\n15: (73) *(u8 *)(r1 +1) = r2          ; R1_w=pkt(r=14) R2_w=0xffffffffffffff\n; }\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\n\nfrom 4 to 16: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n16: R1=pkt(r=0) R2=pkt_end() R3=pkt(off=14,r=0xfffffffffffffffe) R10=fp0\n16: (b7) r0 = 2                       ; R0_w=2\n17: (95) exit\nverification time 115 usec\nstack depth 0\nprocessed 20 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_broadcast_tcp",
+        "description": "Set destination MAC to broadcast on TCP packet",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_broadcast_arp",
+        "description": "Set destination MAC to broadcast on ARP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

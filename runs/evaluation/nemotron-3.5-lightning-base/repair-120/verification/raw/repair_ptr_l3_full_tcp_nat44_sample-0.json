@@ -1,0 +1,44 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "repair_ptr_l3_full_tcp_nat44",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_full_tcp_nat44/sample-0.c",
+  "source_sha256": "59ba217f9de9e17c4b9cce34ebbd94a8271c4206721e7df3eff8ec00aacb555b",
+  "timestamp": "2026-09-05T20:40:42.202225+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_35l0plft/candidate.o\nlibbpf: elf: section(3) xdp, size 248, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 31 insns (248 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_35l0plft/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 970, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 320, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r2 = *(u32 *)(r1 +0)          ; R1=ctx() R2_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r1 = r2                       ; R1_w=pkt(r=0) R2_w=pkt(r=0)\n3: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r1 > r3 goto pc+24         ; R1_w=pkt(off=14,r=14) R3_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r4 = *(u8 *)(r2 +13)          ; R2_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r5 = *(u8 *)(r2 +12)          ; R2_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r4 != 0x8 goto pc+19       ; R4_w=8\n10: (bf) r4 = r2                      ; R2_w=pkt(r=14) R4_w=pkt(r=14)\n11: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n12: (2d) if r4 > r3 goto pc+16        ; R3=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_TCP)\n13: (71) r4 = *(u8 *)(r2 +23)         ; R2=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_TCP)\n14: (55) if r4 != 0x6 goto pc+14      ; R4_w=6\n; __u32 ip_len = (__u32)ip->ihl * 4;\n15: (71) r4 = *(u8 *)(r1 +0)          ; R1=pkt(off=14,r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ip_len = (__u32)ip->ihl * 4;\n16: (67) r4 <<= 2                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n17: (57) r4 &= 60                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n18: (b7) r5 = 20                      ; R5_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n19: (2d) if r5 > r4 goto pc+9         ; R4_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n20: (0f) r1 += r4\nmark_precise: frame0: last_idx 20 first_idx 12 subseq_idx -1 \nmark_precise: frame0: regs=r4 stack= before 19: (2d) if r5 > r4 goto pc+9\nmark_precise: frame0: regs=r4,r5 stack= before 18: (b7) r5 = 20\nmark_precise: frame0: regs=r4 stack= before 17: (57) r4 &= 60\nmark_precise: frame0: regs=r4 stack= before 16: (67) r4 <<= 2\nmark_precise: frame0: regs=r4 stack= before 15: (71) r4 = *(u8 *)(r1 +0)\n21: R1=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n21: (2d) if r1 > r3 goto pc+7         ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n22: (bf) r4 = r1                      ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n23: (07) r4 += 20                     ; R4_w=pkt(id=1,off=34,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (2d) if r4 > r3 goto pc+4         ; R3=pkt_end() R4_w=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n25: (b7) r3 = 23344070                ; R3_w=0x16433c6\n; ip->saddr = new_src;\n26: (63) *(u32 *)(r2 +26) = r3        ; R2=pkt(r=34) R3_w=0x16433c6\n27: (b7) r2 = 8270                    ; R2_w=8270\n; tcp->source = bpf_htons(20000);\n28: (6b) *(u16 *)(r1 +0) = r2         ; R1=pkt(id=1,off=14,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=8270\n; }\n29: (b7) r0 = 2                       ; R0_w=2\n30: (95) exit\n\nfrom 24 to 29: safe\n\nfrom 21 to 29: safe\n\nfrom 19 to 29: safe\n\nfrom 14 to 29: safe\n\nfrom 12 to 29: safe\n\nfrom 9 to 29: safe\n\nfrom 4 to 29: safe\nverification time 219 usec\nstack depth 0\nprocessed 38 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_full_nat44",
+        "description": "Rewrite source IP and source port with checksum updates",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

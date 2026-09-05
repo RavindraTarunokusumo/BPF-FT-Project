@@ -1,0 +1,51 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "repair_pit_l2_packet_rate_decay",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pit_l2_packet_rate_decay/sample-0.c",
+  "source_sha256": "daddb16739b04db72dc7e5c99519e62be115349e5b50c865d10d2283b4369d70",
+  "timestamp": "2026-09-05T20:40:41.078871+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pit_l2_packet_rate_decay/sample-0.c:30:15: warning: unused variable 'decay_factor' [-Wunused-variable]\n   30 |         __u64 decay_factor = (delta > 0) ? (delta >> 30) : 1;\n      |               ^~~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pit_l2_packet_rate_decay/sample-0.c:18:34: warning: unused parameter 'ctx' [-Wunused-parameter]\n   18 | int xdp_telemetry(struct xdp_md *ctx) {\n      |                                  ^\n2 warnings generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_y_y_jusa/candidate.o\nlibbpf: elf: section(3) xdp, size 160, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 20 insns (160 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_y_y_jusa/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1183, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 272, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'rate_stats': at sec_idx 5, offset 0.\nlibbpf: map 'rate_stats': found type = 6.\nlibbpf: map 'rate_stats': found key [6], sz = 4.\nlibbpf: map 'rate_stats': found value [9], sz = 16.\nlibbpf: map 'rate_stats': found max_entries = 1.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #6 against 'rate_stats'\nlibbpf: prog 'xdp_telemetry': found map 0 (rate_stats, sec 5, off 0) for insn #6\nlibbpf: map 'rate_stats': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; __u64 now = bpf_ktime_get_ns();\n0: (85) call bpf_ktime_get_ns#5       ; R0_w=scalar()\n1: (bf) r6 = r0                       ; R0_w=scalar(id=1) R6_w=scalar(id=1)\n2: (b7) r1 = 0                        ; R1_w=0\n; __u32 key = 0;\n3: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 3 first_idx 0 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 2: (b7) r1 = 0\n4: R1_w=0 R10=fp0 fp-8=0000????\n4: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0\n; __u64 now = bpf_ktime_get_ns();\n5: (07) r2 += -4                      ; R2_w=fp-4\n; struct rate_val *val = bpf_map_lookup_elem(&rate_stats, &key);\n6: (18) r1 = 0xff2125b89938b000       ; R1_w=map_ptr(map=rate_stats,ks=4,vs=16)\n8: (85) call bpf_map_lookup_elem#1    ; R0=map_value_or_null(id=2,map=rate_stats,ks=4,vs=16)\n; if (!val)\n9: (15) if r0 == 0x0 goto pc+8        ; R0=map_value(map=rate_stats,ks=4,vs=16)\n10: (b7) r1 = 1                       ; R1_w=1\n; if (val->last_ts != 0) {\n11: (79) r2 = *(u64 *)(r0 +0)         ; R0=map_value(map=rate_stats,ks=4,vs=16) R2_w=scalar()\n; if (val->last_ts != 0) {\n12: (15) if r2 == 0x0 goto pc+3       ; R2_w=scalar(umin=1)\n; val->rate_acc = (val->rate_acc >> 3) + 1; \n13: (79) r1 = *(u64 *)(r0 +8)         ; R0=map_value(map=rate_stats,ks=4,vs=16) R1_w=scalar()\n; val->rate_acc = (val->rate_acc >> 3) + 1; \n14: (77) r1 >>= 3                     ; R1_w=scalar(smin=0,smax=umax=0x1fffffffffffffff,var_off=(0x0; 0x1fffffffffffffff))\n; val->rate_acc = (val->rate_acc >> 3) + 1; \n15: (07) r1 += 1                      ; R1_w=scalar(smin=umin=1,smax=umax=0x2000000000000000,var_off=(0x0; 0x3fffffffffffffff))\n; val->last_ts = now;\n16: (7b) *(u64 *)(r0 +0) = r6         ; R0=map_value(map=rate_stats,ks=4,vs=16) R6=scalar(id=1)\n; \n17: (7b) *(u64 *)(r0 +8) = r1         ; R0=map_value(map=rate_stats,ks=4,vs=16) R1=scalar(smin=umin=1,smax=umax=0x2000000000000000,var_off=(0x0; 0x3fffffffffffffff))\n; }\n18: (b7) r0 = 2                       ; R0_w=2\n19: (95) exit\n\nfrom 12 to 16: R0=map_value(map=rate_stats,ks=4,vs=16) R1_w=1 R2_w=0 R6=scalar(id=1) R10=fp0 fp-8=mmmm????\n16: R0=map_value(map=rate_stats,ks=4,vs=16) R1_w=1 R2_w=0 R6=scalar(id=1) R10=fp0 fp-8=mmmm????\n; val->last_ts = now;\n16: (7b) *(u64 *)(r0 +0) = r6         ; R0=map_value(map=rate_stats,ks=4,vs=16) R6=scalar(id=1)\n; \n17: (7b) *(u64 *)(r0 +8) = r1\n18: safe\n\nfrom 9 to 18: safe\nverification time 131 usec\nstack depth 8\nprocessed 23 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_tcp",
+        "description": "Update rate stats for TCP",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_udp",
+        "description": "Update rate stats for UDP",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Update rate stats for ARP",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

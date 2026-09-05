@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "repair_nrf_l3_fib_lookup_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_lookup_router/sample-0.c",
+  "source_sha256": "0189d10b1332b5ff861424953b70d56cc3b08aca1c7d6ebfd4f6428a3367894d",
+  "timestamp": "2026-09-05T20:40:38.503457+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_lookup_router/sample-0.c:35:25: error: use of undeclared identifier 'AF_INET'\n   35 |     fib_params.family = AF_INET;\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_lookup_router/sample-0.c:40:34: warning: incompatible pointer types passing 'struct bpf_fib_lookup *' to parameter of type 'struct bpf_fib_lookup *' [-Wincompatible-pointer-types]\n   40 |     int rc = bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0);\n      |                                  ^~~~~~~~~~~\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_lookup_router/sample-0.c:35:25: error: use of undeclared identifier 'AF_INET'\n   35 |     fib_params.family = AF_INET;\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_lookup_router/sample-0.c:40:34: warning: incompatible pointer types passing 'struct bpf_fib_lookup *' to parameter of type 'struct bpf_fib_lookup *' [-Wincompatible-pointer-types]\n   40 |     int rc = bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0);\n      |                                  ^~~~~~~~~~~\n1 warning and 1 error generated."
+}

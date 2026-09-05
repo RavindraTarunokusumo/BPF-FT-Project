@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_009_gtpu_teid_stateful_quota",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c",
+  "source_sha256": "9142c03afc6b46f955e2af01abbc10cb173fc16433e513c7c24ef178df712b2e",
+  "timestamp": "2026-09-05T20:40:28.700043+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:71:22: warning: comparison of distinct pointer types ('struct iphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   71 |     if (ip + ip->ihl > data_end)\n      |         ~~~~~~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:78:25: error: use of undeclared identifier 'IPPROTO_UDP'\n   78 |     if (ip->protocol != IPPROTO_UDP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:169:56: error: too many arguments to function call, expected 2, have 3\n  169 |     stat = bpf_map_lookup_elem(&teid_quota_map, &teid, &zero);\n      |            ~~~~~~~~~~~~~~~~~~~                         ^~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:206:5: error: use of undeclared identifier 'current_pk'; did you mean 'current_pkts'?\n  206 |     current_pk\n      |     ^~~~~~~~~~\n      |     current_pkts\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:179:11: note: 'current_pkts' declared here\n  179 |     __u64 current_pkts = 0;\n      |           ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:206:15: error: expected ';' after expression\n  206 |     current_pk\n      |               ^\n      |               ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:206:15: error: expected '}'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:45:1: note: to match this '{'\n   45 | {\n      | ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:206:5: warning: expression result unused [-Wunused-value]\n  206 |     current_pk\n      |     ^~~~~~~~~~\n2 warnings and 5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:71:22: warning: comparison of distinct pointer types ('struct iphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   71 |     if (ip + ip->ihl > data_end)\n      |         ~~~~~~~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:78:25: error: use of undeclared identifier 'IPPROTO_UDP'\n   78 |     if (ip->protocol != IPPROTO_UDP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:169:56: error: too many arguments to function call, expected 2, have 3\n  169 |     stat = bpf_map_lookup_elem(&teid_quota_map, &teid, &zero);\n      |            ~~~~~~~~~~~~~~~~~~~                         ^~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:206:5: error: use of undeclared identifier 'current_pk'; did you mean 'current_pkts'?\n  206 |     current_pk\n      |     ^~~~~~~~~~\n      |     current_pkts\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:179:11: note: 'current_pkts' declared here\n  179 |     __u64 current_pkts = 0;\n      |           ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:206:15: error: expected ';' after expression\n  206 |     current_pk\n      |               ^\n      |               ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:206:15: error: expected '}'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:45:1: note: to match this '{'\n   45 | {\n      | ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_009_gtpu_teid_stateful_quota/sample-0.c:206:5: warning: expression result unused [-Wunused-value]\n  206 |     current_pk\n      |     ^~~~~~~~~~\n2 warnings and 5 errors generated."
+}

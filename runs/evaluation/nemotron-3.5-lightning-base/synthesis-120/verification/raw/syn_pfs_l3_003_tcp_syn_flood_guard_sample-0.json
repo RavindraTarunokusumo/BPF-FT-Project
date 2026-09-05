@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_003_tcp_syn_flood_guard",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_003_tcp_syn_flood_guard/sample-0.c",
+  "source_sha256": "149967a489dd85c504a06f77e810a7f2e37741965b0f1f87d939f062b7a8051b",
+  "timestamp": "2026-09-05T20:40:25.488997+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_003_tcp_syn_flood_guard/sample-0.c:2:10: fatal error: 'linux/if/ether.h' file not found\n    2 | #include <linux/if/ether.h>\n      |          ^~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_003_tcp_syn_flood_guard/sample-0.c:2:10: fatal error: 'linux/if/ether.h' file not found\n    2 | #include <linux/if/ether.h>\n      |          ^~~~~~~~~~~~~~~~~~\n1 error generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "pfs_l2_vlan_tcp443",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c",
+  "source_sha256": "39da12c0358a0f991c9a5996be131259d4cc21c61a979283cc82c8dbab2a7a3b",
+  "timestamp": "2026-09-05T20:40:21.226738+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:12:10: fatal error: 'bpf/ctx/skb.h' file not found\n   12 | #include <bpf/ctx/skb.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:12:10: fatal error: 'bpf/ctx/skb.h' file not found\n   12 | #include <bpf/ctx/skb.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated."
+}

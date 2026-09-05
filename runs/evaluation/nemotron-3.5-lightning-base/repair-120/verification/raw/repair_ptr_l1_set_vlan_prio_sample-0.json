@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "repair_ptr_l1_set_vlan_prio",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l1_set_vlan_prio/sample-0.c",
+  "source_sha256": "aae2906b8cf5183000be9cbbb27f5160c3c30ad69e47822e6f48e3bbd331e45e",
+  "timestamp": "2026-09-05T20:40:38.555756+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l1_set_vlan_prio/sample-0.c:25:37: error: call to undeclared function 'ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   25 |         vlh->h_vlan_TCI = (__be16)((ntohs(vlh->h_vlan_TCI) & 0x1FFF) | (7 << 13));\n      |                                     ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l1_set_vlan_prio/sample-0.c:25:37: error: call to undeclared function 'ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   25 |         vlh->h_vlan_TCI = (__be16)((ntohs(vlh->h_vlan_TCI) & 0x1FFF) | (7 << 13));\n      |                                     ^\n1 error generated."
+}
