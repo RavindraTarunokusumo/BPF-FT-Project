@@ -141,6 +141,7 @@ async def run_repair_benchmark_rollout(
     prompts_records: List[Dict[str, Any]] = []
 
     stop_seqs = renderer.get_stop_sequences()
+    bench_base = benchmark_index.parent
 
     sem = asyncio.Semaphore(concurrency)
     completed = 0
