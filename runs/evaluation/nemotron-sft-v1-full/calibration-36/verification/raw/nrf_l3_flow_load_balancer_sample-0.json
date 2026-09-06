@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_flow_load_balancer",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c",
+  "source_sha256": "7007e52976f610b6fc35fc4a32573582e6fad847d7b24bac00e44fe2e4f752ad",
+  "timestamp": "2026-09-06T20:17:38.754940+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c:29:48: error: no member named 'sport' in 'struct iphdr'\n   29 |     __u32 hash = (ip->saddr ^ ip->daddr ^ (ip->sport << 16 | ip->dport) ^ ip->protocol) & 1;\n      |                                            ~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c:29:66: error: no member named 'dport' in 'struct iphdr'\n   29 |     __u32 hash = (ip->saddr ^ ip->daddr ^ (ip->sport << 16 | ip->dport) ^ ip->protocol) & 1;\n      |                                                              ~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c:31:47: error: use of undeclared identifier 'backend_macs'\n   31 |     unsigned char *mac = bpf_map_lookup_elem(&backend_macs, &hash);\n      |                                               ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c:34:34: error: use of undeclared identifier 'backend_devmap'\n   34 |         return bpf_redirect_map(&backend_devmap, hash, 0);\n      |                                  ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c:29:48: error: no member named 'sport' in 'struct iphdr'\n   29 |     __u32 hash = (ip->saddr ^ ip->daddr ^ (ip->sport << 16 | ip->dport) ^ ip->protocol) & 1;\n      |                                            ~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c:29:66: error: no member named 'dport' in 'struct iphdr'\n   29 |     __u32 hash = (ip->saddr ^ ip->daddr ^ (ip->sport << 16 | ip->dport) ^ ip->protocol) & 1;\n      |                                                              ~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c:31:47: error: use of undeclared identifier 'backend_macs'\n   31 |     unsigned char *mac = bpf_map_lookup_elem(&backend_macs, &hash);\n      |                                               ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_flow_load_balancer/sample-0.c:34:34: error: use of undeclared identifier 'backend_devmap'\n   34 |         return bpf_redirect_map(&backend_devmap, hash, 0);\n      |                                  ^\n4 errors generated."
+}

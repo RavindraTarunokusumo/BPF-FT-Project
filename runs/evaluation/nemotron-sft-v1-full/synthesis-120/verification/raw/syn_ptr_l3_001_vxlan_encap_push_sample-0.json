@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_001_vxlan_encap_push",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c",
+  "source_sha256": "3c2611f62a2ce33b570177a564c9f7d0fff34603b5b04f95ddaf22b83045461d",
+  "timestamp": "2026-09-06T20:17:45.224677+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:29:17: error: call to undeclared function 'ip_hdr'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   29 |     ip->saddr = ip_hdr(ip)->saddr;\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:29:29: error: member reference type 'int' is not a pointer\n   29 |     ip->saddr = ip_hdr(ip)->saddr;\n      |                 ~~~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:30:29: error: member reference type 'int' is not a pointer\n   30 |     ip->daddr = ip_hdr(ip)->daddr;\n      |                 ~~~~~~~~~~  ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:29:17: error: call to undeclared function 'ip_hdr'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   29 |     ip->saddr = ip_hdr(ip)->saddr;\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:29:29: error: member reference type 'int' is not a pointer\n   29 |     ip->saddr = ip_hdr(ip)->saddr;\n      |                 ~~~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:30:29: error: member reference type 'int' is not a pointer\n   30 |     ip->daddr = ip_hdr(ip)->daddr;\n      |                 ~~~~~~~~~~  ^\n3 errors generated."
+}

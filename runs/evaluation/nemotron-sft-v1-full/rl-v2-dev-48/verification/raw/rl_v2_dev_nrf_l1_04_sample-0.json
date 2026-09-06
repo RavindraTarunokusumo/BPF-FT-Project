@@ -1,0 +1,51 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_nrf_l1_04",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l1_04/sample-0.c",
+  "source_sha256": "7cbe46c59810eba5c782546f3655cc85fae501297aa6af857bad25c5801815a2",
+  "timestamp": "2026-09-06T20:18:18.769657+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_uk2a3d9o/candidate.o\nlibbpf: elf: section(3) xdp, size 224, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_rl_v2_dev_nrf_l1_04' at insn offset 0 (0 bytes), code size 28 insns (224 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_uk2a3d9o/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 963, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 288, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_route_rl_v2_dev_nrf_l1_04': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_rl_v2_dev_nrf_l1_04(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+21         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+16      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+13        ; R2=pkt_end() R3=pkt(off=34,r=34)\n14: (b7) r0 = 1                       ; R0_w=1\n; if (ip->ttl <= 1)\n15: (71) r2 = *(u8 *)(r1 +22)         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n16: (b7) r3 = 2                       ; R3_w=2\n; if (ip->ttl <= 1)\n17: (2d) if r3 > r2 goto pc+9         ; R2_w=scalar(smin=umin=smin32=umin32=2,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3_w=2\n; ip->ttl -= 1;\n18: (07) r2 += -1                     ; R2_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff))\n19: (73) *(u8 *)(r1 +22) = r2         ; R1=pkt(r=34) R2_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff))\n; __u32 csum = (__u32)ip->check + 0x0100;\n20: (69) r2 = *(u16 *)(r1 +24)        ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n21: (b7) r3 = 257                     ; R3=257\n; ip->check = (csum >= 0x10000) ? (csum - 0xFFFF) : csum;\n22: (25) if r2 > 0xfeff goto pc+1     ; R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xfeff,var_off=(0x0; 0xffff))\n23: (b7) r3 = 256                     ; R3_w=256\n24: (0f) r3 += r2                     ; R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xfeff,var_off=(0x0; 0xffff)) R3_w=scalar(smin=umin=smin32=umin32=256,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; ip->check = (csum >= 0x10000) ? (csum - 0xFFFF) : csum;\n25: (6b) *(u16 *)(r1 +24) = r3        ; R1=pkt(r=34) R3_w=scalar(smin=umin=smin32=umin32=256,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n26: (b7) r0 = 3                       ; R0_w=3\n; }\n27: (95) exit\n\nfrom 22 to 24: R0=1 R1=pkt(r=34) R2=scalar(smin=umin=smin32=umin32=0xff00,smax=umax=smax32=umax32=0xffff,var_off=(0xff00; 0xff)) R3=257 R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n24: R0=1 R1=pkt(r=34) R2=scalar(smin=umin=smin32=umin32=0xff00,smax=umax=smax32=umax32=0xffff,var_off=(0xff00; 0xff)) R3=257 R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; ip->check = (csum >= 0x10000) ? (csum - 0xFFFF) : csum;\n24: (0f) r3 += r2                     ; R2=scalar(smin=umin=smin32=umin32=0xff00,smax=umax=smax32=umax32=0xffff,var_off=(0xff00; 0xff)) R3_w=scalar(smin=umin=smin32=umin32=0x10001,smax=umax=smax32=umax32=0x10100,var_off=(0x10000; 0x1ff))\n; ip->check = (csum >= 0x10000) ? (csum - 0xFFFF) : csum;\n25: (6b) *(u16 *)(r1 +24) = r3        ; R1=pkt(r=34) R3_w=scalar(smin=umin=smin32=umin32=0x10001,smax=umax=smax32=umax32=0x10100,var_off=(0x10000; 0x1ff))\n26: (b7) r0 = 3                       ; R0=3\n; }\n27: (95) exit\n\nfrom 17 to 27: safe\n\nfrom 13 to 27: safe\n\nfrom 10 to 27: safe\n\nfrom 5 to 27: safe\nverification time 226 usec\nstack depth 0\nprocessed 36 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "tx_forwarded",
+        "description": "TTL 64 forwarded with XDP_TX",
+        "pass": true,
+        "expected": "XDP_TX",
+        "actual": "XDP_TX"
+      },
+      {
+        "name": "drop_expired",
+        "description": "TTL 1 dropped",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "pass_arp",
+        "description": "ARP passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

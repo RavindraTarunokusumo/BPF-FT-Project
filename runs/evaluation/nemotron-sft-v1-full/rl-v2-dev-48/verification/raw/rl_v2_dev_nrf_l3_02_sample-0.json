@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_nrf_l3_02",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_02/sample-0.c",
+  "source_sha256": "bee5eacb7a0957a894e533449f6749cc9bcec55462b46f3cd460f29f647ba7a8",
+  "timestamp": "2026-09-06T20:18:18.628634+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_02/sample-0.c:51:64: error: use of undeclared identifier 'fe'\n   51 |     unsigned char default_gw_mac[ETH_ALEN] = {52, 54, 0, 0, 0, fe};\n      |                                                                ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_02/sample-0.c:51:64: error: use of undeclared identifier 'fe'\n   51 |     unsigned char default_gw_mac[ETH_ALEN] = {52, 54, 0, 0, 0, fe};\n      |                                                                ^\n1 error generated."
+}

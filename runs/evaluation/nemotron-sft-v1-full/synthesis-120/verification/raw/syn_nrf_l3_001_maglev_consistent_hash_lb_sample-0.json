@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_001_maglev_consistent_hash_lb",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c",
+  "source_sha256": "e2ac5b77bfee3f98f8181976a0bfd7814ad5b073038804a9a446621721c8899a",
+  "timestamp": "2026-09-06T20:17:49.238061+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:33:16: error: call to undeclared function 'ip_hdr'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   33 |         hash = ip_hdr(tcp)->saddr ^ ip_hdr(tcp)->daddr ^ tcp->source ^ tcp->dest;\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:33:29: error: member reference type 'int' is not a pointer\n   33 |         hash = ip_hdr(tcp)->saddr ^ ip_hdr(tcp)->daddr ^ tcp->source ^ tcp->dest;\n      |                ~~~~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:33:50: error: member reference type 'int' is not a pointer\n   33 |         hash = ip_hdr(tcp)->saddr ^ ip_hdr(tcp)->daddr ^ tcp->source ^ tcp->dest;\n      |                                     ~~~~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:38:16: error: call to undeclared function 'ip_hdr'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   38 |         hash = ip_hdr(udp)->saddr ^ ip_hdr(udp)->daddr ^ udp->source ^ udp->dest;\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:38:29: error: member reference type 'int' is not a pointer\n   38 |         hash = ip_hdr(udp)->saddr ^ ip_hdr(udp)->daddr ^ udp->source ^ udp->dest;\n      |                ~~~~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:38:50: error: member reference type 'int' is not a pointer\n   38 |         hash = ip_hdr(udp)->saddr ^ ip_hdr(udp)->daddr ^ udp->source ^ udp->dest;\n      |                                     ~~~~~~~~~~~  ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:33:16: error: call to undeclared function 'ip_hdr'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   33 |         hash = ip_hdr(tcp)->saddr ^ ip_hdr(tcp)->daddr ^ tcp->source ^ tcp->dest;\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:33:29: error: member reference type 'int' is not a pointer\n   33 |         hash = ip_hdr(tcp)->saddr ^ ip_hdr(tcp)->daddr ^ tcp->source ^ tcp->dest;\n      |                ~~~~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:33:50: error: member reference type 'int' is not a pointer\n   33 |         hash = ip_hdr(tcp)->saddr ^ ip_hdr(tcp)->daddr ^ tcp->source ^ tcp->dest;\n      |                                     ~~~~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:38:16: error: call to undeclared function 'ip_hdr'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   38 |         hash = ip_hdr(udp)->saddr ^ ip_hdr(udp)->daddr ^ udp->source ^ udp->dest;\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:38:29: error: member reference type 'int' is not a pointer\n   38 |         hash = ip_hdr(udp)->saddr ^ ip_hdr(udp)->daddr ^ udp->source ^ udp->dest;\n      |                ~~~~~~~~~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_001_maglev_consistent_hash_lb/sample-0.c:38:50: error: member reference type 'int' is not a pointer\n   38 |         hash = ip_hdr(udp)->saddr ^ ip_hdr(udp)->daddr ^ udp->source ^ udp->dest;\n      |                                     ~~~~~~~~~~~  ^\n6 errors generated."
+}

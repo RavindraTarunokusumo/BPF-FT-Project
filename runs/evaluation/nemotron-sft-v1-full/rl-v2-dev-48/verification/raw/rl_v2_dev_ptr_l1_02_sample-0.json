@@ -1,0 +1,44 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_ptr_l1_02",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_ptr_l1_02/sample-0.c",
+  "source_sha256": "ddd54bd0ab8cc5cb8225d677ff76f9207ffd0a866e599431896a1086473c4d14",
+  "timestamp": "2026-09-06T20:18:15.895722+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_2sj9khg0/candidate.o\nlibbpf: elf: section(3) xdp, size 232, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform_rl_v2_dev_ptr_l1_02' at insn offset 0 (0 bytes), code size 29 insns (232 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_2sj9khg0/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 918, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 304, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform_rl_v2_dev_ptr_l1_02': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+22         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+17       ; R3_w=8\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n12: (2d) if r3 > r2 goto pc+14        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; if (ip->ttl <= 1)\n13: (71) r2 = *(u8 *)(r1 +22)         ; R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n14: (b7) r3 = 2                       ; R3_w=2\n; if (ip->ttl <= 1)\n15: (2d) if r3 > r2 goto pc+11        ; R2_w=scalar(smin=umin=smin32=umin32=2,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3_w=2\n; __u32 csum = ip->check + bpf_htons(0x0100);\n16: (69) r4 = *(u16 *)(r1 +24)        ; R1=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; while (csum >> 16)\n17: (07) r4 += 1                      ; R4_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0x10000,var_off=(0x0; 0x1ffff))\n18: (bf) r5 = r4                      ; R4_w=scalar(id=1,smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0x10000,var_off=(0x0; 0x1ffff)) R5_w=scalar(id=1,smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0x10000,var_off=(0x0; 0x1ffff))\n19: (57) r5 &= 65535                  ; R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n20: (b7) r3 = 1                       ; R3=1\n; ip->check = bpf_htons((__u16)csum);\n21: (5d) if r5 != r4 goto pc+1        ; R4=scalar(id=1,smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R5=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n22: (bf) r3 = r4                      ; R3_w=scalar(id=1,smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4=scalar(id=1,smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; ip->ttl -= 1;\n23: (07) r2 += -1                     ; R2_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff))\n24: (73) *(u8 *)(r1 +22) = r2         ; R1=pkt(r=34) R2_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff))\n; ip->check = bpf_htons((__u16)csum);\n25: (dc) r3 = be16 r3                 ; R3_w=scalar()\n; ip->check = bpf_htons((__u16)csum);\n26: (6b) *(u16 *)(r1 +24) = r3        ; R1=pkt(r=34) R3_w=scalar()\n; }\n27: (b7) r0 = 2                       ; R0_w=2\n28: (95) exit\n\nfrom 21 to 23: R1=pkt(r=34) R2=scalar(smin=umin=smin32=umin32=2,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=1 R4=scalar(id=1,smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0x10000,var_off=(0x0; 0x1ffff)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0\n23: R1=pkt(r=34) R2=scalar(smin=umin=smin32=umin32=2,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=1 R4=scalar(id=1,smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=0x10000,var_off=(0x0; 0x1ffff)) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0\n; ip->ttl -= 1;\n23: (07) r2 += -1                     ; R2_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff))\n24: (73) *(u8 *)(r1 +22) = r2         ; R1=pkt(r=34) R2_w=scalar(smin=umin=smin32=umin32=1,smax=umax=smax32=umax32=254,var_off=(0x0; 0xff))\n; ip->check = bpf_htons((__u16)csum);\n25: (dc) r3 = be16 r3                 ; R3_w=scalar()\n; ip->check = bpf_htons((__u16)csum);\n26: (6b) *(u16 *)(r1 +24) = r3        ; R1=pkt(r=34) R3_w=scalar()\n; }\n27: (b7) r0 = 2                       ; R0_w=2\n28: (95) exit\n\nfrom 15 to 27: R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1,var_off=(0x0; 0x1)) R3_w=2 R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n27: R1=pkt(r=34) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1,var_off=(0x0; 0x1)) R3_w=2 R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n27: (b7) r0 = 2                       ; R0_w=2\n28: (95) exit\n\nfrom 12 to 27: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n27: R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n27: (b7) r0 = 2                       ; R0_w=2\n28: (95) exit\n\nfrom 9 to 27: safe\n\nfrom 4 to 27: safe\nverification time 356 usec\nstack depth 0\nprocessed 41 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_decremented",
+        "description": "TTL 64 decremented to 63 and passed",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Non-IP ARP frame passed without alteration",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

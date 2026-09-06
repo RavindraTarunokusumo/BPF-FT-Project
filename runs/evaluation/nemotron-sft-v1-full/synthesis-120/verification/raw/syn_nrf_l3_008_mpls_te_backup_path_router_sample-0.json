@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_008_mpls_te_backup_path_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c",
+  "source_sha256": "5573ed637fdf609658f9202851cf47d3794de60fe433d81e21521099b4b198ad",
+  "timestamp": "2026-09-06T20:17:52.867198+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:47:20: error: call to undeclared function 'xdp_redirect_ifindex'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   47 |             return xdp_redirect_ifindex(ctx, 90);\n      |                    ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:47:20: error: call to undeclared function 'xdp_redirect_ifindex'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   47 |             return xdp_redirect_ifindex(ctx, 90);\n      |                    ^\n1 error generated."
+}

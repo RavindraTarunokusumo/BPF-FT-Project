@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "syn_nrf_l1_003_gre_tunnel_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_003_gre_tunnel_reflector/sample-0.c",
+  "source_sha256": "fb65e2c0cafa57e699ff10928a25249fe0b32b500fceb2186293d62b51bf3578",
+  "timestamp": "2026-09-06T20:17:51.387300+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_003_gre_tunnel_reflector/sample-0.c:48:9: error: no member named 'checksum' in 'struct iphdr'\n   48 |     ip->checksum = ~csum;\n      |     ~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_003_gre_tunnel_reflector/sample-0.c:48:9: error: no member named 'checksum' in 'struct iphdr'\n   48 |     ip->checksum = ~csum;\n      |     ~~  ^\n1 error generated."
+}

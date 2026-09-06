@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_007_ipv4_options_strip",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c",
+  "source_sha256": "381e26a77172ee6eab54d1a2d4a9ee78537cad54c43a13bac1104bb3ed1678e9",
+  "timestamp": "2026-09-06T20:17:51.040946+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:42:29: error: call to undeclared function 'ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   42 |     ip->tot_len = bpf_htons(ntohs(ip->tot_len) - 4);\n      |                             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:31:18: warning: unused variable 'ip_hdr_len' [-Wunused-variable]\n   31 |     unsigned int ip_hdr_len = ip->ihl * 4;\n      |                  ^~~~~~~~~~\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:42:29: error: call to undeclared function 'ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   42 |     ip->tot_len = bpf_htons(ntohs(ip->tot_len) - 4);\n      |                             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_007_ipv4_options_strip/sample-0.c:31:18: warning: unused variable 'ip_hdr_len' [-Wunused-variable]\n   31 |     unsigned int ip_hdr_len = ip->ihl * 4;\n      |                  ^~~~~~~~~~\n1 warning and 1 error generated."
+}

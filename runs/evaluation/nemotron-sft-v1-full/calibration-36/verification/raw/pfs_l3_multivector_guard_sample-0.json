@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "pfs_l3_multivector_guard",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_multivector_guard/sample-0.c",
+  "source_sha256": "4606646e71a36c3c102f20342dd90d6dc32e32176ff46e6dcc7cc1f56a904efc",
+  "timestamp": "2026-09-06T20:17:38.702506+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_multivector_guard/sample-0.c:46:32: error: no member named 'flags' in 'struct tcphdr'\n   46 |         if (tcp->syn && ((tcp->flags & 0x12) == 0x02)) {\n      |                           ~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_multivector_guard/sample-0.c:61:13: error: address argument to atomic builtin must be a pointer to integer or pointer ('struct (unnamed struct at /root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_multivector_guard/sample-0.c:19:1) *' invalid)\n   61 |             __sync_fetch_and_add(&drop_reasons, &key, sizeof(__u64));\n      |             ^                    ~~~~~~~~~~~~~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_multivector_guard/sample-0.c:46:32: error: no member named 'flags' in 'struct tcphdr'\n   46 |         if (tcp->syn && ((tcp->flags & 0x12) == 0x02)) {\n      |                           ~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_multivector_guard/sample-0.c:61:13: error: address argument to atomic builtin must be a pointer to integer or pointer ('struct (unnamed struct at /root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_multivector_guard/sample-0.c:19:1) *' invalid)\n   61 |             __sync_fetch_and_add(&drop_reasons, &key, sizeof(__u64));\n      |             ^                    ~~~~~~~~~~~~~\n2 errors generated."
+}

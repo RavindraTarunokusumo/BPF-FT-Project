@@ -1,0 +1,79 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_004_qinq_double_vlan_drop",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_004_qinq_double_vlan_drop/sample-0.c",
+  "source_sha256": "0a3c6f9851aa21e37bce7d6746458c9f56f0c9c843edeeaa5f70bae536ee8c14",
+  "timestamp": "2026-09-06T20:17:54.079761+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_387ma5xr/candidate.o\nlibbpf: elf: section(3) xdp, size 232, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_syn_pfs_l2_004_qinq_double_vlan_drop' at insn offset 0 (0 bytes), code size 29 insns (232 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_387ma5xr/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1199, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 352, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_filter_syn_pfs_l2_004_qinq_double_vlan_drop': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter_syn_pfs_l2_004_qinq_double_vlan_drop(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+22         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto != bpf_htons(0x88A8) && eth->h_proto != bpf_htons(0x8100))\n6: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(0x88A8) && eth->h_proto != bpf_htons(0x8100))\n10: (15) if r4 == 0xa888 goto pc+1    ; R4_w=scalar()\n11: (55) if r4 != 0x81 goto pc+16     ; R4=129\n; if ((void *)(outer_vlan + 1) > data_end)\n12: (bf) r4 = r3                      ; R3=pkt(r=14) R4_w=pkt(r=14)\n13: (07) r4 += 18                     ; R4_w=pkt(off=18,r=14)\n; if ((void *)(outer_vlan + 1) > data_end)\n14: (2d) if r4 > r2 goto pc+13        ; R2=pkt_end() R4_w=pkt(off=18,r=18)\n; if (outer_vlan->h_vlan_encapsulated_proto != bpf_htons(0x8100))\n15: (69) r5 = *(u16 *)(r3 +16)        ; R3=pkt(r=18) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (outer_vlan->h_vlan_encapsulated_proto != bpf_htons(0x8100))\n16: (55) if r5 != 0x81 goto pc+11     ; R5_w=129\n17: (07) r3 += 22                     ; R3_w=pkt(off=22,r=18)\n18: (2d) if r3 > r2 goto pc+9         ; R2=pkt_end() R3_w=pkt(off=22,r=22)\n; __u16 inner_vid = bpf_ntohs(inner_vlan->h_vlan_TCI) & 0x0FFF;\n19: (69) r2 = *(u16 *)(r4 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=pkt(off=18,r=22)\n; __u16 inner_vid = bpf_ntohs(inner_vlan->h_vlan_TCI) & 0x0FFF;\n20: (57) r2 &= 65295                  ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n21: (b7) r0 = 1                       ; R0=1\n; if (outer_vid == 100 && inner_vid == 200)\n22: (15) if r2 == 0xc800 goto pc+1    ; R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n23: (b7) r0 = 2                       ; R0_w=2\n; __u16 outer_vid = bpf_ntohs(outer_vlan->h_vlan_TCI) & 0x0FFF;\n24: (69) r1 = *(u16 *)(r1 +0)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; __u16 outer_vid = bpf_ntohs(outer_vlan->h_vlan_TCI) & 0x0FFF;\n25: (57) r1 &= 65295                  ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n; if (outer_vid == 100 && inner_vid == 200)\n26: (15) if r1 == 0x6400 goto pc+1    ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n27: (b7) r0 = 2                       ; R0_w=2\n; }\n28: (95) exit\n\nfrom 26 to 28: R0_w=2 R1_w=25600 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f)) R3=pkt(off=22,r=22) R4=pkt(off=18,r=22) R5=129 R10=fp0\n28: R0_w=2 R1_w=25600 R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f)) R3=pkt(off=22,r=22) R4=pkt(off=18,r=22) R5=129 R10=fp0\n28: (95) exit\n\nfrom 22 to 24: R0=1 R1=pkt(off=14,r=22) R2=0xc800 R3=pkt(off=22,r=22) R4=pkt(off=18,r=22) R5=129 R10=fp0\n24: R0=1 R1=pkt(off=14,r=22) R2=0xc800 R3=pkt(off=22,r=22) R4=pkt(off=18,r=22) R5=129 R10=fp0\n; __u16 outer_vid = bpf_ntohs(outer_vlan->h_vlan_TCI) & 0x0FFF;\n24: (69) r1 = *(u16 *)(r1 +0)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; __u16 outer_vid = bpf_ntohs(outer_vlan->h_vlan_TCI) & 0x0FFF;\n25: (57) r1 &= 65295                  ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n; if (outer_vid == 100 && inner_vid == 200)\n26: (15) if r1 == 0x6400 goto pc+1    ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n27: (b7) r0 = 2                       ; R0_w=2\n; }\n28: (95) exit\n\nfrom 26 to 28: R0=1 R1_w=25600 R2=0xc800 R3=pkt(off=22,r=22) R4=pkt(off=18,r=22) R5=129 R10=fp0\n28: R0=1 R1_w=25600 R2=0xc800 R3=pkt(off=22,r=22) R4=pkt(off=18,r=22) R5=129 R10=fp0\n28: (95) exit\n\nfrom 18 to 28: R0=2 R1=pkt(off=14,r=18) R2=pkt_end() R3_w=pkt(off=22,r=0xfffffffffffffffe) R4_w=pkt(off=18,r=18) R5_w=129 R10=fp0\n28: R0=2 R1=pkt(off=14,r=18) R2=pkt_end() R3_w=pkt(off=22,r=0xfffffffffffffffe) R4_w=pkt(off=18,r=18) R5_w=129 R10=fp0\n28: (95) exit\n\nfrom 16 to 28: R0=2 R1=pkt(off=14,r=18) R2=pkt_end() R3=pkt(r=18) R4_w=pkt(off=18,r=18) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0\n28: R0=2 R1=pkt(off=14,r=18) R2=pkt_end() R3=pkt(r=18) R4_w=pkt(off=18,r=18) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0\n28: (95) exit\n\nfrom 14 to 28: R0=2 R1=pkt(off=14,r=14) R2=pkt_end() R3=pkt(r=14) R4=pkt(off=18,r=0xfffffffffffffffe) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n28: R0=2 R1=pkt(off=14,r=14) R2=pkt_end() R3=pkt(r=14) R4=pkt(off=18,r=0xfffffffffffffffe) R5=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n28: (95) exit\n\nfrom 11 to 28: safe\n\nfrom 10 to 12: R0_w=2 R1_w=pkt(off=14,r=14) R2_w=pkt_end() R3_w=pkt(r=14) R4_w=0xa888 R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n12: R0_w=2 R1_w=pkt(off=14,r=14) R2_w=pkt_end() R3_w=pkt(r=14) R4_w=0xa888 R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; if ((void *)(outer_vlan + 1) > data_end)\n12: (bf) r4 = r3                      ; R3_w=pkt(r=14) R4_w=pkt(r=14)\n13: (07) r4 += 18                     ; R4_w=pkt(off=18,r=14)\n; if ((void *)(outer_vlan + 1) > data_end)\n14: (2d) if r4 > r2 goto pc+13        ; R2_w=pkt_end() R4_w=pkt(off=18,r=18)\n; if (outer_vlan->h_vlan_encapsulated_proto != bpf_htons(0x8100))\n15: (69) r5 = *(u16 *)(r3 +16)        ; R3_w=pkt(r=18) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (outer_vlan->h_vlan_encapsulated_proto != bpf_htons(0x8100))\n16: (55) if r5 != 0x81 goto pc+11     ; R5_w=129\n17: (07) r3 += 22                     ; R3=pkt(off=22,r=18)\n18: (2d) if r3 > r2 goto pc+9         ; R2=pkt_end() R3=pkt(off=22,r=22)\n; __u16 inner_vid = bpf_ntohs(inner_vlan->h_vlan_TCI) & 0x0FFF;\n19: (69) r2 = *(u16 *)(r4 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4=pkt(off=18,r=22)\n; __u16 inner_vid = bpf_ntohs(inner_vlan->h_vlan_TCI) & 0x0FFF;\n20: (57) r2 &= 65295                  ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0f,var_off=(0x0; 0xff0f))\n21: (b7) r0 = 1\n22: safe\n\nfrom 18 to 28: safe\n\nfrom 16 to 28: safe\n\nfrom 14 to 28: safe\n\nfrom 5 to 28: safe\nverification time 355 usec\nstack depth 0\nprocessed 55 insns (limit 1000000) max_states_per_insn 0 total_states 5 peak_states 5 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 7,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "qinq_100_200_drop",
+        "description": "802.1ad QinQ frame with outer VID 100 and inner VID 200 must be dropped",
+        "pass": true,
+        "expected": "XDP_DROP",
+        "actual": "XDP_DROP"
+      },
+      {
+        "name": "qinq_100_300_pass",
+        "description": "QinQ frame with outer VID 100 and inner VID 300 must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "qinq_200_100_pass",
+        "description": "QinQ frame with outer VID 200 and inner VID 100 must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "single_vlan_100_pass",
+        "description": "Single 802.1Q VLAN tagged frame (VID 100) must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "untagged_pass",
+        "description": "Untagged Ethernet frame must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_qinq_pass",
+        "description": "Truncated QinQ frame must pass safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

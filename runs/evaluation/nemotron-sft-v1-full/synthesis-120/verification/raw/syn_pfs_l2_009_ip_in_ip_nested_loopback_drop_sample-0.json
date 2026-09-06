@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_009_ip_in_ip_nested_loopback_drop",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_009_ip_in_ip_nested_loopback_drop/sample-0.c",
+  "source_sha256": "4eaa3fbd87cad97d161b5d19f02c01f9947f48844f5307f5e97910a31c0f186f",
+  "timestamp": "2026-09-06T20:17:44.588870+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_009_ip_in_ip_nested_loopback_drop/sample-0.c:39:10: error: call to undeclared function 'ntohl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   39 |     if ((ntohl(inner_ip->daddr) & 0xFF000000) == 0x7F000000)\n      |          ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_009_ip_in_ip_nested_loopback_drop/sample-0.c:39:10: error: call to undeclared function 'ntohl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   39 |     if ((ntohl(inner_ip->daddr) & 0xFF000000) == 0x7F000000)\n      |          ^\n1 error generated."
+}

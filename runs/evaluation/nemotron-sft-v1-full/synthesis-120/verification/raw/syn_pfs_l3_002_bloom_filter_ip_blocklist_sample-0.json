@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_002_bloom_filter_ip_blocklist",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c",
+  "source_sha256": "6e0b2b8b552d116b19e5df83270288abce01ba3fa3d1519da3533906fc62e7e8",
+  "timestamp": "2026-09-06T20:17:45.800196+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c:35:21: error: call to undeclared function 'ntohl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   35 |     __u32 hash_ip = ntohl(ip->saddr) % 4096;\n      |                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c:41:11: error: incompatible pointer to integer conversion initializing '__u64' (aka 'unsigned long long') with an expression of type 'void *' [-Wint-conversion]\n   41 |     __u64 word1 = bpf_map_lookup_elem(&bloom_filter, &hash1);\n      |           ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c:45:11: error: incompatible pointer to integer conversion initializing '__u64' (aka 'unsigned long long') with an expression of type 'void *' [-Wint-conversion]\n   45 |     __u64 word2 = bpf_map_lookup_elem(&bloom_filter, &hash2);\n      |           ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c:49:11: error: incompatible pointer to integer conversion initializing '__u64' (aka 'unsigned long long') with an expression of type 'void *' [-Wint-conversion]\n   49 |     __u64 word3 = bpf_map_lookup_elem(&bloom_filter, &hash3);\n      |           ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c:35:21: error: call to undeclared function 'ntohl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   35 |     __u32 hash_ip = ntohl(ip->saddr) % 4096;\n      |                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c:41:11: error: incompatible pointer to integer conversion initializing '__u64' (aka 'unsigned long long') with an expression of type 'void *' [-Wint-conversion]\n   41 |     __u64 word1 = bpf_map_lookup_elem(&bloom_filter, &hash1);\n      |           ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c:45:11: error: incompatible pointer to integer conversion initializing '__u64' (aka 'unsigned long long') with an expression of type 'void *' [-Wint-conversion]\n   45 |     __u64 word2 = bpf_map_lookup_elem(&bloom_filter, &hash2);\n      |           ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_002_bloom_filter_ip_blocklist/sample-0.c:49:11: error: incompatible pointer to integer conversion initializing '__u64' (aka 'unsigned long long') with an expression of type 'void *' [-Wint-conversion]\n   49 |     __u64 word3 = bpf_map_lookup_elem(&bloom_filter, &hash3);\n      |           ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n4 errors generated."
+}

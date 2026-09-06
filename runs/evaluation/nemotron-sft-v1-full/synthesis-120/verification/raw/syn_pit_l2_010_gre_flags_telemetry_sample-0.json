@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_010_gre_flags_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c",
+  "source_sha256": "998ad5e5f22501d202419aeed2ed6dd02a48b89cabfd4c8ebf596e5a2a439841",
+  "timestamp": "2026-09-06T20:17:47.388826+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:46:22: error: arithmetic on a pointer to an incomplete type 'struct grehdr'\n   46 |     if ((void *)(gre + 1) > data_end)\n      |                  ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:45:12: note: forward declaration of 'struct grehdr'\n   45 |     struct grehdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:49:22: error: incomplete definition of type 'struct grehdr'\n   49 |     __u32 flags = gre->flags;\n      |                   ~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:45:12: note: forward declaration of 'struct grehdr'\n   45 |     struct grehdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:46:22: error: arithmetic on a pointer to an incomplete type 'struct grehdr'\n   46 |     if ((void *)(gre + 1) > data_end)\n      |                  ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:45:12: note: forward declaration of 'struct grehdr'\n   45 |     struct grehdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:49:22: error: incomplete definition of type 'struct grehdr'\n   49 |     __u32 flags = gre->flags;\n      |                   ~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_010_gre_flags_telemetry/sample-0.c:45:12: note: forward declaration of 'struct grehdr'\n   45 |     struct grehdr *gre = (void *)ip + ip_hdr_len;\n      |            ^\n2 errors generated."
+}

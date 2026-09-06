@@ -1,0 +1,44 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_pfs_l3_04",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_pfs_l3_04/sample-0.c",
+  "source_sha256": "c5abb126140213589b7e347709caf321578847c402fa15fa126a3382bf7964dc",
+  "timestamp": "2026-09-06T20:18:21.657433+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_6s6pgg_c/candidate.o\nlibbpf: elf: section(3) xdp, size 320, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter_rl_v2_dev_pfs_l3_04' at insn offset 0 (0 bytes), code size 40 insns (320 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_6s6pgg_c/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1401, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 368, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'burst_timestamp_map': at sec_idx 5, offset 0.\nlibbpf: map 'burst_timestamp_map': found type = 1.\nlibbpf: map 'burst_timestamp_map': found key [8], sz = 4.\nlibbpf: map 'burst_timestamp_map': found value [11], sz = 8.\nlibbpf: map 'burst_timestamp_map': found max_entries = 10000.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #21 against 'burst_timestamp_map'\nlibbpf: prog 'xdp_filter_rl_v2_dev_pfs_l3_04': found map 0 (burst_timestamp_map, sec 5, off 0) for insn #21\nlibbpf: sec '.relxdp': relo #1: insn #34 against 'burst_timestamp_map'\nlibbpf: prog 'xdp_filter_rl_v2_dev_pfs_l3_04': found map 0 (burst_timestamp_map, sec 5, off 0) for insn #34\nlibbpf: map 'burst_timestamp_map': created successfully, fd=4\nlibbpf: prog 'xdp_filter_rl_v2_dev_pfs_l3_04': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter_rl_v2_dev_pfs_l3_04(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+33         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+28      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+25        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 src_ip = ip->saddr;\n14: (61) r1 = *(u32 *)(r1 +26)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 src_ip = ip->saddr;\n15: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n; __u64 now = bpf_ktime_get_ns();\n16: (85) call bpf_ktime_get_ns#5      ; R0_w=scalar()\n17: (bf) r6 = r0                      ; R0_w=scalar(id=1) R6_w=scalar(id=1)\n; __u64 now = bpf_ktime_get_ns();\n18: (7b) *(u64 *)(r10 -16) = r6       ; R6_w=scalar(id=1) R10=fp0 fp-16_w=mmmmmmmm\n19: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 src_ip = ip->saddr;\n20: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *last_time = bpf_map_lookup_elem(&burst_timestamp_map, &src_ip);\n21: (18) r1 = 0xff2125b906b37400      ; R1_w=map_ptr(map=burst_timestamp,ks=4,vs=8)\n23: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=burst_timestamp,ks=4,vs=8)\n; if (last_time) {\n24: (15) if r0 == 0x0 goto pc+5       ; R0=map_value(map=burst_timestamp,ks=4,vs=8)\n; if ((now - *last_time) < 1000000ULL)\n25: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=burst_timestamp,ks=4,vs=8) R1_w=scalar()\n; if ((now - *last_time) < 1000000ULL)\n26: (1f) r6 -= r1                     ; R1_w=scalar() R6_w=scalar()\n27: (b7) r0 = 1                       ; R0_w=1\n28: (b7) r1 = 1000000                 ; R1_w=0xf4240\n; if ((now - *last_time) < 1000000ULL)\n29: (2d) if r1 > r6 goto pc+9         ; R1_w=0xf4240 R6_w=scalar(umin=0xf4240)\n30: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; bpf_map_update_elem(&burst_timestamp_map, &src_ip, &now, BPF_ANY);\n31: (07) r2 += -4                     ; R2_w=fp-4\n32: (bf) r3 = r10                     ; R3_w=fp0 R10=fp0\n33: (07) r3 += -16                    ; R3_w=fp-16\n34: (18) r1 = 0xff2125b906b37400      ; R1_w=map_ptr(map=burst_timestamp,ks=4,vs=8)\n36: (b7) r4 = 0                       ; R4_w=0\n37: (85) call bpf_map_update_elem#2   ; R0=scalar()\n38: (b7) r0 = 2                       ; R0_w=2\n; }\n39: (95) exit\n\nfrom 29 to 39: R0_w=1 R1_w=0xf4240 R6_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xf423f,var_off=(0x0; 0xfffff)) R10=fp0 fp-8=mmmm???? fp-16=mmmmmmmm\n39: R0_w=1 R1_w=0xf4240 R6_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xf423f,var_off=(0x0; 0xfffff)) R10=fp0 fp-8=mmmm???? fp-16=mmmmmmmm\n39: (95) exit\n\nfrom 24 to 30: R0=0 R6=scalar(id=1) R10=fp0 fp-8=mmmm???? fp-16=mmmmmmmm\n30: R0=0 R6=scalar(id=1) R10=fp0 fp-8=mmmm???? fp-16=mmmmmmmm\n; if ((now - *last_time) < 1000000ULL)\n30: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; bpf_map_update_elem(&burst_timestamp_map, &src_ip, &now, BPF_ANY);\n31: (07) r2 += -4                     ; R2_w=fp-4\n32: (bf) r3 = r10                     ; R3_w=fp0 R10=fp0\n33: (07) r3 += -16                    ; R3_w=fp-16\n34: (18) r1 = 0xff2125b906b37400      ; R1_w=map_ptr(map=burst_timestamp,ks=4,vs=8)\n36: (b7) r4 = 0                       ; R4_w=0\n37: (85) call bpf_map_update_elem#2\n38: safe\n\nfrom 13 to 39: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n39: R0=2 R1=pkt(r=14) R2=pkt_end() R3=pkt(off=34,r=0xfffffffffffffffe) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n; }\n39: (95) exit\n\nfrom 10 to 39: safe\n\nfrom 5 to 39: safe\nverification time 363 usec\nstack depth 16\nprocessed 50 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_untracked",
+        "description": "Untracked client passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "ARP passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

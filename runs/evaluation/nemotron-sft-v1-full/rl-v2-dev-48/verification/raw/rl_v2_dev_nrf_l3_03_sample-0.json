@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_nrf_l3_03",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_03/sample-0.c",
+  "source_sha256": "3c957b30b172edea81a37f25dc26e7079cf24358a588e956f86db7c504eef96b",
+  "timestamp": "2026-09-06T20:18:17.569248+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_03/sample-0.c:22:5: error: type name requires a specifier or qualifier\n   22 |     __flags(BPF_F_NO_PREALLOC);\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_03/sample-0.c:22:13: error: a parameter list without types is only allowed in a function definition\n   22 |     __flags(BPF_F_NO_PREALLOC);\n      |             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_03/sample-0.c:51:37: error: incompatible integer to pointer conversion passing '__u32' (aka 'unsigned int') to parameter of type 'const void *' [-Wint-conversion]\n   51 |         __builtin_memcpy(d->h_dest, r->data, ETH_ALEN);\n      |                                     ^~~~~~~\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_03/sample-0.c:22:5: error: type name requires a specifier or qualifier\n   22 |     __flags(BPF_F_NO_PREALLOC);\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_03/sample-0.c:22:13: error: a parameter list without types is only allowed in a function definition\n   22 |     __flags(BPF_F_NO_PREALLOC);\n      |             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_03/sample-0.c:51:37: error: incompatible integer to pointer conversion passing '__u32' (aka 'unsigned int') to parameter of type 'const void *' [-Wint-conversion]\n   51 |         __builtin_memcpy(d->h_dest, r->data, ETH_ALEN);\n      |                                     ^~~~~~~\n3 errors generated."
+}

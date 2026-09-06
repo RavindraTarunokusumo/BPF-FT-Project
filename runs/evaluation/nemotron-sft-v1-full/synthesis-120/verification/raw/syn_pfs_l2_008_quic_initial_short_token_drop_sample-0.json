@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_008_quic_initial_short_token_drop",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_008_quic_initial_short_token_drop/sample-0.c",
+  "source_sha256": "c1e9a02a6e610131bbc393c6936292d67167eac2e8a923738ad69b12f0d71433",
+  "timestamp": "2026-09-06T20:17:54.200820+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_008_quic_initial_short_token_drop/sample-0.c:31:13: error: no member named 'dport' in 'struct iphdr'\n   31 |     if (ip->dport != bpf_htons(443))\n      |         ~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_008_quic_initial_short_token_drop/sample-0.c:31:13: error: no member named 'dport' in 'struct iphdr'\n   31 |     if (ip->dport != bpf_htons(443))\n      |         ~~  ^\n1 error generated."
+}

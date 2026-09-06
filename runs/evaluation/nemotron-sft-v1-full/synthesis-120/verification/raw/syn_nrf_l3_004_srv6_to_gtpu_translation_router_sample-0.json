@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_004_srv6_to_gtpu_translation_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c",
+  "source_sha256": "1cbee4456aab29fee813159fa86550a76bd8d13c64b5e8b54cd4e921fb7dfdb1",
+  "timestamp": "2026-09-06T20:17:50.602940+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:35:22: error: arithmetic on a pointer to an incomplete type 'struct ipv6_hdr'\n   35 |     if ((void *)(ip6 + 1) > data_end)\n      |                  ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:34:12: note: forward declaration of 'struct ipv6_hdr'\n   34 |     struct ipv6_hdr *ip6 = (void *)(eth + 1);\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:38:12: error: incomplete definition of type 'struct ipv6_hdr'\n   38 |     if (ip6->nexthdr != 43)\n      |         ~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:34:12: note: forward declaration of 'struct ipv6_hdr'\n   34 |     struct ipv6_hdr *ip6 = (void *)(eth + 1);\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:41:41: error: arithmetic on a pointer to an incomplete type 'struct ipv6_hdr'\n   41 |     struct srv6_hdr *srh = (void *)(ip6 + 1);\n      |                                     ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:34:12: note: forward declaration of 'struct ipv6_hdr'\n   34 |     struct ipv6_hdr *ip6 = (void *)(eth + 1);\n      |            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:35:22: error: arithmetic on a pointer to an incomplete type 'struct ipv6_hdr'\n   35 |     if ((void *)(ip6 + 1) > data_end)\n      |                  ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:34:12: note: forward declaration of 'struct ipv6_hdr'\n   34 |     struct ipv6_hdr *ip6 = (void *)(eth + 1);\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:38:12: error: incomplete definition of type 'struct ipv6_hdr'\n   38 |     if (ip6->nexthdr != 43)\n      |         ~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:34:12: note: forward declaration of 'struct ipv6_hdr'\n   34 |     struct ipv6_hdr *ip6 = (void *)(eth + 1);\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:41:41: error: arithmetic on a pointer to an incomplete type 'struct ipv6_hdr'\n   41 |     struct srv6_hdr *srh = (void *)(ip6 + 1);\n      |                                     ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l3_004_srv6_to_gtpu_translation_router/sample-0.c:34:12: note: forward declaration of 'struct ipv6_hdr'\n   34 |     struct ipv6_hdr *ip6 = (void *)(eth + 1);\n      |            ^\n3 errors generated."
+}

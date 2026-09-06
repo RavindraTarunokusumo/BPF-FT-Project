@@ -1,0 +1,79 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_002_nat64_stateless_translator",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_002_nat64_stateless_translator/sample-0.c",
+  "source_sha256": "42a04e7a6991e716695d706f71cded066869ae31dd54db3b31f1170b9ae90d1e",
+  "timestamp": "2026-09-06T20:17:42.939303+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_002_nat64_stateless_translator/sample-0.c:36:15: warning: unused variable 's' [-Wunused-variable]\n   36 |         __u8 *s = (void *)&ipv6->saddr;\n      |               ^\n1 warning generated.\n",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_usbzr8ph/candidate.o\nlibbpf: elf: section(3) xdp, size 312, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform_syn_ptr_l2_002_nat64_stateless_translator' at insn offset 0 (0 bytes), code size 39 insns (312 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_usbzr8ph/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 1108, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 496, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform_syn_ptr_l2_002_nat64_stateless_translator': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+32         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IPV6))\n9: (55) if r3 != 0xdd86 goto pc+27    ; R3_w=0xdd86\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 54                     ; R3=pkt(off=54,r=14)\n12: (2d) if r3 > r2 goto pc+24        ; R2=pkt_end() R3=pkt(off=54,r=54)\n; if (d[0] == 0x64 && d[1] == 0xFF && d[2] == 0x9B) {\n13: (71) r2 = *(u8 *)(r1 +38)         ; R1=pkt(r=54) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (d[0] == 0x64 && d[1] == 0xFF && d[2] == 0x9B) {\n14: (55) if r2 != 0x64 goto pc+22     ; R2_w=100\n; if (d[0] == 0x64 && d[1] == 0xFF && d[2] == 0x9B) {\n15: (71) r2 = *(u8 *)(r1 +39)         ; R1=pkt(r=54) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (d[0] == 0x64 && d[1] == 0xFF && d[2] == 0x9B) {\n16: (55) if r2 != 0xff goto pc+20     ; R2_w=255\n; if (d[0] == 0x64 && d[1] == 0xFF && d[2] == 0x9B) {\n17: (71) r2 = *(u8 *)(r1 +40)         ; R1=pkt(r=54) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (d[0] == 0x64 && d[1] == 0xFF && d[2] == 0x9B) {\n18: (55) if r2 != 0x9b goto pc+18     ; R2_w=155\n19: (b7) r2 = 8                       ; R2_w=8\n; eth->h_proto = bpf_htons(ETH_P_IP);\n20: (73) *(u8 *)(r1 +12) = r2         ; R1=pkt(r=54) R2_w=8\n21: (b7) r2 = 0                       ; R2_w=0\n22: (73) *(u8 *)(r1 +13) = r2         ; R1=pkt(r=54) R2_w=0\n; new_ip->daddr = 0;\n23: (63) *(u32 *)(r1 +30) = r2        ; R1=pkt(r=54) R2_w=0\n24: (b7) r2 = 16777536                ; R2_w=0x1000140\n; new_ip->ttl = 64;\n25: (63) *(u32 *)(r1 +22) = r2        ; R1=pkt(r=54) R2_w=0x1000140\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n26: (71) r2 = *(u8 *)(r1 +51)         ; R1=pkt(r=54) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n27: (67) r2 <<= 8                     ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n28: (71) r3 = *(u8 *)(r1 +50)         ; R1=pkt(r=54) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n29: (4f) r2 |= r3                     ; R2_w=scalar() R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n30: (71) r3 = *(u8 *)(r1 +52)         ; R1=pkt(r=54) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n31: (67) r3 <<= 16                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n32: (4f) r2 |= r3                     ; R2_w=scalar() R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n33: (71) r3 = *(u8 *)(r1 +53)         ; R1=pkt(r=54) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n34: (67) r3 <<= 24                    ; R3_w=scalar(smin=0,smax=umax=umax32=0xff000000,smax32=0x7f000000,var_off=(0x0; 0xff000000))\n; __u32 ipv4_dst = (__u32)d[12] | ((__u32)d[13] << 8) | ((__u32)d[14] << 16) | ((__u32)d[15] << 24);\n35: (4f) r2 |= r3                     ; R2_w=scalar() R3_w=scalar(smin=0,smax=umax=umax32=0xff000000,smax32=0x7f000000,var_off=(0x0; 0xff000000))\n; new_ip->saddr = ipv4_dst;\n36: (63) *(u32 *)(r1 +26) = r2        ; R1=pkt(r=54) R2=scalar()\n; }\n37: (b7) r0 = 2                       ; R0_w=2\n38: (95) exit\n\nfrom 18 to 37: safe\n\nfrom 16 to 37: safe\n\nfrom 14 to 37: safe\n\nfrom 12 to 37: safe\n\nfrom 9 to 37: safe\n\nfrom 4 to 37: safe\nverification time 300 usec\nstack depth 0\nprocessed 45 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 7,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "nat64_translate_pass",
+        "description": "IPv6 packet with NAT64 prefix translated to IPv4",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "nat64_translate_udp_pass",
+        "description": "IPv6 UDP packet translated to IPv4 UDP",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_other_prefix_pass",
+        "description": "IPv6 packet without NAT64 prefix passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv4_pass",
+        "description": "IPv4 traffic passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "icmp_pass",
+        "description": "ICMP packet passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ipv6_pass",
+        "description": "Truncated IPv6 header passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

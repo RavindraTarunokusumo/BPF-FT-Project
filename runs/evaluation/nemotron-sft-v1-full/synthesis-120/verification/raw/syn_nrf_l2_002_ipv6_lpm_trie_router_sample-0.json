@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_002_ipv6_lpm_trie_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c",
+  "source_sha256": "0cfc09b709d2b9dc601e7facfa32c405c41b6b02fef2dfed90aad8dfe5b97721",
+  "timestamp": "2026-09-06T20:17:43.315663+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c:15:22: error: use of undeclared identifier 'BPF_MAX_RND_KEY'\n   15 |     __type(key, __u8[BPF_MAX_RND_KEY]);\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c:36:14: error: use of undeclared identifier 'BPF_MAX_RND_KEY'\n   36 |     __u8 key[BPF_MAX_RND_KEY] = {0};\n      |              ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c:43:16: error: call to undeclared function 'bpf_lpm_trie_lookup'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   43 |     __u32 *p = bpf_lpm_trie_lookup(&routing_table, key, sizeof(key));\n      |                ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c:15:22: error: use of undeclared identifier 'BPF_MAX_RND_KEY'\n   15 |     __type(key, __u8[BPF_MAX_RND_KEY]);\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c:36:14: error: use of undeclared identifier 'BPF_MAX_RND_KEY'\n   36 |     __u8 key[BPF_MAX_RND_KEY] = {0};\n      |              ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l2_002_ipv6_lpm_trie_router/sample-0.c:43:16: error: call to undeclared function 'bpf_lpm_trie_lookup'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   43 |     __u32 *p = bpf_lpm_trie_lookup(&routing_table, key, sizeof(key));\n      |                ^\n3 errors generated."
+}

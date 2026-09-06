@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_010_geneve_vni_rewrite",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c",
+  "source_sha256": "dae666931c4ae95b963fc89886a5562ba5b41c37eb6020fa20cac07c520d471d",
+  "timestamp": "2026-09-06T20:17:50.548806+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:52:16: error: subscripted value is not an array, pointer, or vector\n   52 |     geneve->vni[0] = 0x00;\n      |     ~~~~~~~~~~~^~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:53:16: error: subscripted value is not an array, pointer, or vector\n   53 |     geneve->vni[1] = 0x55;\n      |     ~~~~~~~~~~~^~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:54:16: error: subscripted value is not an array, pointer, or vector\n   54 |     geneve->vni[2] = 0xAA;\n      |     ~~~~~~~~~~~^~\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:52:16: error: subscripted value is not an array, pointer, or vector\n   52 |     geneve->vni[0] = 0x00;\n      |     ~~~~~~~~~~~^~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:53:16: error: subscripted value is not an array, pointer, or vector\n   53 |     geneve->vni[1] = 0x55;\n      |     ~~~~~~~~~~~^~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l1_010_geneve_vni_rewrite/sample-0.c:54:16: error: subscripted value is not an array, pointer, or vector\n   54 |     geneve->vni[2] = 0xAA;\n      |     ~~~~~~~~~~~^~\n3 errors generated."
+}

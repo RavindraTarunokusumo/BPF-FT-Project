@@ -1,0 +1,66 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "syn_nrf_l1_007_proxy_arp_responder",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_007_proxy_arp_responder/sample-0.c",
+  "source_sha256": "afe48e078001fbc8c8b1a7fd8c723052ca3d1ab67f7f4cdf223e20f4ae23f852",
+  "timestamp": "2026-09-06T20:17:50.660129+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_kscgiaj5/candidate.o\nlibbpf: elf: section(3) xdp, size 640, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_syn_nrf_l1_007_proxy_arp_responder' at insn offset 0 (0 bytes), code size 80 insns (640 bytes)\nlibbpf: elf: section(4) .rodata, size 7, link 0, flags 2, type=1\nlibbpf: elf: section(5) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_kscgiaj5/candidate.o is GPL\nlibbpf: elf: section(15) .BTF, size 1420, link 0, flags 0, type=1\nlibbpf: elf: section(17) .BTF.ext, size 512, link 0, flags 0, type=1\nlibbpf: elf: section(25) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'candidat.rodata' (global data): at sec_idx 4, offset 0, flags 80.\nlibbpf: map 0 is \"candidat.rodata\"\nlibbpf: map 'candidat.rodata': created successfully, fd=4\nlibbpf: prog 'xdp_syn_nrf_l1_007_proxy_arp_responder': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_syn_nrf_l1_007_proxy_arp_responder(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+73         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_ARP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_ARP))\n10: (55) if r3 != 0x608 goto pc+68    ; R3_w=1544\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 46                     ; R3=pkt(off=46,r=14)\n13: (2d) if r3 > r2 goto pc+65        ; R2=pkt_end() R3=pkt(off=46,r=46)\n; if (arp->ar_op != bpf_htons(1))\n14: (69) r2 = *(u16 *)(r1 +20)        ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (arp->ar_op != bpf_htons(1))\n15: (55) if r2 != 0x100 goto pc+63    ; R2_w=256\n; if (arp->ar_tip != bpf_htonl(1921681001U))\n16: (61) r2 = *(u32 *)(r1 +42)        ; R1=pkt(r=46) R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; if (arp->ar_tip != bpf_htonl(1921681001U))\n17: (55) if r2 != 0x69868a72 goto pc+61       ; R2_w=0x69868a72\n; __builtin_memcpy(tmp_mac, eth->h_dest, ETH_ALEN);\n18: (71) r2 = *(u8 *)(r1 +5)          ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n19: (67) r2 <<= 8                     ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n20: (71) r3 = *(u8 *)(r1 +4)          ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n21: (4f) r2 |= r3                     ; R2_w=scalar() R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n22: (6b) *(u16 *)(r10 -4) = r2        ; R2_w=scalar() R10=fp0 fp-8=??mm????\n23: (71) r2 = *(u8 *)(r1 +1)          ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n24: (67) r2 <<= 8                     ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n25: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n26: (4f) r2 |= r3                     ; R2_w=scalar() R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n27: (71) r3 = *(u8 *)(r1 +2)          ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n28: (67) r3 <<= 16                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000))\n29: (71) r4 = *(u8 *)(r1 +3)          ; R1=pkt(r=46) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n30: (67) r4 <<= 24                    ; R4_w=scalar(smin=0,smax=umax=umax32=0xff000000,smax32=0x7f000000,var_off=(0x0; 0xff000000))\n31: (4f) r4 |= r3                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000)) R4_w=scalar()\n32: (4f) r4 |= r2                     ; R2_w=scalar() R4_w=scalar()\n33: (63) *(u32 *)(r10 -8) = r4        ; R4_w=scalar() R10=fp0 fp-8=??mmmmmm\n34: (b7) r2 = 512                     ; R2_w=512\n; arp->ar_op = bpf_htons(2);\n35: (6b) *(u16 *)(r1 +20) = r2        ; R1=pkt(r=46) R2_w=512\n; __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);\n36: (71) r2 = *(u8 *)(r1 +6)          ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n37: (b7) r3 = 2                       ; R3_w=2\n; __builtin_memcpy(eth->h_source, \"\\x02\\x00\\x00\\x00\\x00\\x01\", ETH_ALEN);\n38: (73) *(u8 *)(r1 +6) = r3          ; R1=pkt(r=46) R3_w=2\n; __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);\n39: (71) r3 = *(u8 *)(r1 +8)          ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n40: (73) *(u8 *)(r1 +2) = r3          ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n41: (71) r3 = *(u8 *)(r1 +9)          ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n42: (73) *(u8 *)(r1 +3) = r3          ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n43: (73) *(u8 *)(r1 +0) = r2          ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n44: (71) r2 = *(u8 *)(r1 +7)          ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n45: (73) *(u8 *)(r1 +1) = r2          ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n46: (b7) r2 = 0                       ; R2_w=0\n; __builtin_memcpy(eth->h_source, \"\\x02\\x00\\x00\\x00\\x00\\x01\", ETH_ALEN);\n47: (73) *(u8 *)(r1 +8) = r2          ; R1=pkt(r=46) R2_w=0\n48: (73) *(u8 *)(r1 +9) = r2          ; R1=pkt(r=46) R2_w=0\n49: (73) *(u8 *)(r1 +7) = r2          ; R1=pkt(r=46) R2_w=0\n; __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);\n50: (71) r3 = *(u8 *)(r1 +10)         ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __builtin_memcpy(eth->h_source, \"\\x02\\x00\\x00\\x00\\x00\\x01\", ETH_ALEN);\n51: (73) *(u8 *)(r1 +10) = r2         ; R1=pkt(r=46) R2_w=0\n; __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);\n52: (71) r2 = *(u8 *)(r1 +11)         ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n53: (b7) r4 = 1                       ; R4_w=1\n; __builtin_memcpy(eth->h_source, \"\\x02\\x00\\x00\\x00\\x00\\x01\", ETH_ALEN);\n54: (73) *(u8 *)(r1 +11) = r4         ; R1=pkt(r=46) R4_w=1\n; __builtin_memcpy(eth->h_dest, eth->h_source, ETH_ALEN);\n55: (73) *(u8 *)(r1 +4) = r3          ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n56: (73) *(u8 *)(r1 +5) = r2          ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __builtin_memcpy(arp->ar_sha, arp->ar_tha, ETH_ALEN);\n57: (61) r2 = *(u32 *)(r1 +34)        ; R1=pkt(r=46) R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n58: (63) *(u32 *)(r1 +22) = r2        ; R1=pkt(r=46) R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n59: (69) r2 = *(u16 *)(r1 +38)        ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n60: (6b) *(u16 *)(r1 +26) = r2        ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n61: (b7) r2 = 1770424946              ; R2_w=0x69868a72\n; __builtin_memcpy(arp->ar_tha, tmp_mac, ETH_ALEN);\n62: (69) r3 = *(u16 *)(r10 -4)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-8=??mmmmmm\n63: (61) r4 = *(u32 *)(r10 -8)        ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=??mmmmmm\n; arp->ar_tip = bpf_htonl(1921681001U);\n64: (63) *(u32 *)(r1 +42) = r2        ; R1=pkt(r=46) R2_w=0x69868a72\n; __builtin_memcpy(&arp->ar_sip, &arp->ar_tip, sizeof(__u32));\n65: (63) *(u32 *)(r1 +30) = r2        ; R1=pkt(r=46) R2_w=0x69868a72\n; __builtin_memcpy(arp->ar_tha, tmp_mac, ETH_ALEN);\n66: (bf) r2 = r4                      ; R2_w=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R4_w=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n67: (77) r2 >>= 24                    ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n68: (73) *(u8 *)(r1 +37) = r2         ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n69: (bf) r2 = r4                      ; R2_w=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R4_w=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n70: (77) r2 >>= 16                    ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n71: (73) *(u8 *)(r1 +36) = r2         ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n72: (73) *(u8 *)(r1 +34) = r4         ; R1=pkt(r=46) R4_w=scalar(id=1,smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n73: (77) r4 >>= 8                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffffff,var_off=(0x0; 0xffffff))\n74: (73) *(u8 *)(r1 +35) = r4         ; R1=pkt(r=46) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffffff,var_off=(0x0; 0xffffff))\n75: (73) *(u8 *)(r1 +38) = r3         ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n76: (77) r3 >>= 8                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n77: (73) *(u8 *)(r1 +39) = r3         ; R1=pkt(r=46) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n78: (b7) r0 = 3                       ; R0=3\n; }\n79: (95) exit\n\nfrom 17 to 79: safe\n\nfrom 15 to 79: safe\n\nfrom 13 to 79: safe\n\nfrom 10 to 79: safe\n\nfrom 5 to 79: safe\nverification time 494 usec\nstack depth 8\nprocessed 85 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 4,
+    "total_tests": 5,
+    "details": [
+      {
+        "name": "proxy_arp_target_match_tx",
+        "description": "ARP Request for 192.168.100.1 answered with proxy reply and XDP_TX",
+        "pass": false,
+        "expected": "XDP_TX",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "proxy_arp_other_target_pass",
+        "description": "ARP Request for 192.168.100.2 passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv4_pass",
+        "description": "IPv4 traffic passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_pass",
+        "description": "IPv6 traffic passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_arp_pass",
+        "description": "Truncated ARP frame passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'proxy_arp_target_match_tx' failed: expected XDP_TX (3), got XDP_PASS (2)"
+}

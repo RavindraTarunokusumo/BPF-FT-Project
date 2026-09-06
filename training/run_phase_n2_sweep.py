@@ -172,6 +172,12 @@ async def main_async() -> None:
     args = parser.parse_args()
 
     canary_summaries: Dict[str, Any] = {}
+    canary_results_file = SWEEP_ROOT / "canary_results.json"
+    if canary_results_file.is_file():
+        try:
+            canary_summaries = json.loads(canary_results_file.read_text(encoding="utf-8"))
+        except Exception:
+            pass
 
     # Step 1: Run 4 Bounded Canaries
     if not args.skip_canaries:

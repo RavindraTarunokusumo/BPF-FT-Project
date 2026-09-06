@@ -1,0 +1,74 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "nrf_l1_subnet_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l1_subnet_reflector/sample-0.c",
+  "source_sha256": "f79c82afac5813dcdf1d5b804c9253180d8be9bbbba661626d45ec94e9e2972e",
+  "timestamp": "2026-09-06T20:17:39.643145+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val__qt645v5/candidate.o\nlibbpf: elf: section(3) xdp, size 16, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_nrf_l1_subnet_reflector' at insn offset 0 (0 bytes), code size 2 insns (16 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val__qt645v5/candidate.o is GPL\nlibbpf: elf: section(13) .BTF, size 598, link 0, flags 0, type=1\nlibbpf: elf: section(15) .BTF.ext, size 80, link 0, flags 0, type=1\nlibbpf: elf: section(23) .symtab, size 288, link 1, flags 0, type=2\nlibbpf: looking for externs among 12 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_route_nrf_l1_subnet_reflector': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; }\n0: (b7) r0 = 2                        ; R0_w=2\n1: (95) exit\nverification time 23 usec\nstack depth 0\nprocessed 2 insns (limit 1000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 4,
+    "total_tests": 6,
+    "details": [
+      {
+        "name": "subnet_dst_1_reflect_tx",
+        "description": "Packet to 192.0.2.1 must swap MACs and return XDP_TX",
+        "pass": false,
+        "expected": "XDP_TX",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "subnet_dst_100_reflect_tx",
+        "description": "Packet to 192.0.2.100 must swap MACs and return XDP_TX",
+        "pass": false,
+        "expected": "XDP_TX",
+        "actual": "XDP_PASS",
+        "stderr": ""
+      },
+      {
+        "name": "other_subnet_pass",
+        "description": "Packet to 192.0.3.1 must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "lan_dst_pass",
+        "description": "Packet to 10.0.0.1 must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame must pass",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_ip_pass",
+        "description": "Truncated IPv4 header must pass safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'subnet_dst_1_reflect_tx' failed: expected XDP_TX (3), got XDP_PASS (2)\nTest 'subnet_dst_100_reflect_tx' failed: expected XDP_TX (3), got XDP_PASS (2)"
+}
