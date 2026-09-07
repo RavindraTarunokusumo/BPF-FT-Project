@@ -60,6 +60,40 @@
     pre, code {
       font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
     }
+    /* Interactive Hero Chart Styles */
+    .chart-bar-item {
+      cursor: pointer;
+      outline: none;
+    }
+    .chart-bar {
+      transform-box: fill-box;
+      transform-origin: bottom center;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.22s ease, opacity 0.2s ease;
+    }
+    .chart-bar-label {
+      pointer-events: none;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.2s ease, font-weight 0.2s ease, opacity 0.2s ease;
+    }
+    .chart-bar-item:hover .chart-bar,
+    .chart-bar-item:focus .chart-bar {
+      transform: translateY(-6px) scaleY(1.02);
+      filter: drop-shadow(0 0 14px currentColor) brightness(1.3);
+    }
+    .chart-bar-item:hover .chart-bar-label,
+    .chart-bar-item:focus .chart-bar-label {
+      transform: translateY(-6px);
+      fill: #ffffff;
+      font-weight: 800;
+    }
+    /* Dim non-hovered bars when any bar is hovered */
+    .chart-svg:has(.chart-bar-item:hover) .chart-bar-item:not(:hover) .chart-bar {
+      opacity: 0.38;
+      filter: grayscale(25%);
+    }
+    .chart-svg:has(.chart-bar-item:hover) .chart-bar-item:not(:hover) .chart-bar-label {
+      opacity: 0.3;
+    }
+
     /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #080c14; }
@@ -119,7 +153,7 @@
         </h1>
 
         <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-          State-of-the-art specialized foundation model for verifiable in-kernel networking, powered by 
+          Specialized eBPF/XDP coding model for verifiable in-kernel networking, powered by 
           <strong class="text-white font-semibold">Nemotron-3.5-Lightning-30B</strong>, 
           family-heldout SFT curriculum, and diagnostic-guided multi-turn RLVR.
         </p>
@@ -129,7 +163,7 @@
           <div class="p-5 rounded-2xl bg-dark-card border border-dark-border text-left hover:border-brand-500/40 transition-all">
             <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Protected Synthesis</div>
             <div class="text-3xl font-extrabold text-brand-400 mt-1">49.2%</div>
-            <div class="text-xs text-brand-300/80 mt-1 font-medium">▲ +90.3% vs Prior SOTA (Solve@2)</div>
+            <div class="text-xs text-brand-300/80 mt-1 font-medium">▲ +90.3% vs Prior Baseline (Solve@2)</div>
           </div>
           <div class="p-5 rounded-2xl bg-dark-card border border-dark-border text-left hover:border-brand-500/40 transition-all">
             <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Standalone Repair</div>
@@ -163,59 +197,208 @@
           <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Generational Performance Progression</h2>
           <p class="text-sm text-slate-400 mt-1">Evaluated directly on Hostinger Linux VPS (`6.8.0-106-generic`) with live `BPF_PROG_TEST_RUN` execution.</p>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/10 text-brand-300 border border-brand-500/30 text-xs font-medium">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span> Matplotlib Generated Visualizations
-          </span>
-        </div>
       </div>
 
       <!-- Hero Bar Chart Container -->
       <div class="rounded-2xl bg-dark-card border border-dark-border p-4 sm:p-6 overflow-hidden glow-accent">
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <h3 class="text-base font-semibold text-white flex items-center gap-2">
-            <span class="text-brand-400">📊</span> Primary Suite Benchmark Comparison: Base vs Prior SOTA vs SFT vs RL
+            Primary Suite Benchmark Comparison: Base vs Prior Baseline vs SFT vs RL
           </h3>
-          <span class="text-xs font-mono text-slate-400">High-Resolution 300 DPI</span>
+          <div class="flex items-center gap-2">
+            <button id="view-interactive-btn" onclick="toggleMainChart('svg')" class="px-3 py-1 rounded-lg bg-brand-500/20 text-brand-300 border border-brand-500/40 text-xs font-semibold transition-all">
+              Interactive SVG (Hover Active)
+            </button>
+            <button id="view-png-btn" onclick="toggleMainChart('png')" class="px-3 py-1 rounded-lg bg-dark-surface text-slate-400 hover:text-white border border-dark-border text-xs font-semibold transition-all">
+              Static 300 DPI PNG
+            </button>
+          </div>
         </div>
-        <div class="overflow-x-auto rounded-xl bg-dark-bg p-2 border border-dark-border/60">
-          <img src="assets/performance_hero_bar.png" alt="BPF-Guardian Benchmark Performance Across Training Stages" class="w-full h-auto rounded-lg shadow-lg">
+        
+        <!-- Chart Wrapper (Relative for Tooltip Positioning) -->
+        <div id="chart-container-relative" class="relative overflow-x-auto rounded-xl bg-dark-bg p-2 sm:p-4 border border-dark-border/60">
+          
+          <!-- Floating Interactive Tooltip -->
+          <div id="chart-tooltip" class="pointer-events-none absolute z-30 hidden -translate-x-1/2 -translate-y-full rounded-xl bg-slate-900/95 px-3.5 py-2.5 text-xs text-white shadow-2xl border border-brand-500/50 backdrop-blur-md transition-opacity duration-150 font-sans min-w-[210px]">
+            <div id="tooltip-series" class="font-bold text-brand-300 text-xs"></div>
+            <div id="tooltip-suite" class="text-slate-400 text-[11px] mt-0.5"></div>
+            <div class="flex items-baseline justify-between gap-3 mt-1.5 pt-1.5 border-t border-slate-800">
+              <span id="tooltip-val" class="text-base font-extrabold text-white font-mono"></span>
+              <span id="tooltip-count" class="text-slate-400 font-mono text-xs"></span>
+            </div>
+            <div id="tooltip-badge" class="mt-1 text-[11px] text-emerald-400 font-medium"></div>
+          </div>
+
+          <!-- Interactive SVG Chart -->
+          <div id="svg-chart-wrapper" class="w-full">
+<svg id="interactive-hero-chart" class="chart-svg w-full h-auto select-none rounded-xl" viewBox="0 0 1000 530" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions & Gradients -->
+  <defs>
+    <linearGradient id="rl-bar-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6EE7B7" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <filter id="glow-mint" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Background Panel -->
+  <rect width="1000" height="530" fill="#0B0F19" rx="14" stroke="#1E293B" stroke-width="1.2" />
+  <!-- Y-Axis Gridlines & Labels -->
+  <line x1="65" y1="420.0" x2="965" y2="420.0" stroke="#334155" stroke-width="1.2"  />
+  <text x="56" y="424.0" text-anchor="end" fill="#94A3B8" font-size="11.5" font-family="'JetBrains Mono', monospace">0%</text>
+  <line x1="65" y1="356.0" x2="965" y2="356.0" stroke="#1E293B" stroke-width="0.8" stroke-dasharray="4 4" />
+  <text x="56" y="360.0" text-anchor="end" fill="#94A3B8" font-size="11.5" font-family="'JetBrains Mono', monospace">20%</text>
+  <line x1="65" y1="292.0" x2="965" y2="292.0" stroke="#1E293B" stroke-width="0.8" stroke-dasharray="4 4" />
+  <text x="56" y="296.0" text-anchor="end" fill="#94A3B8" font-size="11.5" font-family="'JetBrains Mono', monospace">40%</text>
+  <line x1="65" y1="228.0" x2="965" y2="228.0" stroke="#1E293B" stroke-width="0.8" stroke-dasharray="4 4" />
+  <text x="56" y="232.0" text-anchor="end" fill="#94A3B8" font-size="11.5" font-family="'JetBrains Mono', monospace">60%</text>
+  <line x1="65" y1="164.0" x2="965" y2="164.0" stroke="#1E293B" stroke-width="0.8" stroke-dasharray="4 4" />
+  <text x="56" y="168.0" text-anchor="end" fill="#94A3B8" font-size="11.5" font-family="'JetBrains Mono', monospace">80%</text>
+  <line x1="65" y1="100.0" x2="965" y2="100.0" stroke="#1E293B" stroke-width="0.8" stroke-dasharray="4 4" />
+  <text x="56" y="104.0" text-anchor="end" fill="#94A3B8" font-size="11.5" font-family="'JetBrains Mono', monospace">100%</text>
+  <text transform="rotate(-90)" x="-260" y="18" fill="#94A3B8" font-size="11.5" font-weight="600" text-anchor="middle" font-family="'Inter', sans-serif">Pass Rate (%)</text>
+  <!-- Chart Top Header & Callout Badge -->
+  <text x="65" y="30" fill="#F8FAFC" font-size="16" font-weight="bold" font-family="'Inter', sans-serif">BPF-Guardian Benchmark Performance Across Training Stages</text>
+  <text x="65" y="48" fill="#94A3B8" font-size="11" font-family="'Inter', sans-serif">Live In-Kernel Verification (Linux 6.8.0-106-generic)  •  Zero Mock Verifiers  •  Pass Rates Measured at T=0.0</text>
+  <g transform="translate(680, 14)">
+    <rect width="285" height="42" rx="8" fill="#064E3B" stroke="#34D399" stroke-width="1.2" opacity="0.95" />
+    <text x="12" y="18" fill="#6EE7B7" font-size="10.5" font-weight="bold" font-family="'Inter', sans-serif">▲ +90.3% Relative Gain on Synthesis</text>
+    <text x="12" y="33" fill="#A7F3D0" font-size="9.5" font-family="'Inter', sans-serif">▲ Live In-Kernel: Zero Mock Verifiers</text>
+  </g>
+  <!-- Series Legend -->
+  <g class="chart-legend" font-size="11" font-family="'Inter', sans-serif">
+    <rect x="65" y="68" width="13" height="13" rx="3" fill="#475569" stroke="#64748B" stroke-width="1.2" />
+    <text x="83" y="79" fill="#E2E8F0">Base Model (Nemotron 30B)</text>
+    <rect x="262.0" y="68" width="13" height="13" rx="3" fill="#6366F1" stroke="#818CF8" stroke-width="1.2" />
+    <text x="280.0" y="79" fill="#E2E8F0">Prior Baseline (Qwen3-8B SFT v2)</text>
+    <rect x="505.2" y="68" width="13" height="13" rx="3" fill="#059669" stroke="#10B981" stroke-width="1.2" />
+    <text x="523.2" y="79" fill="#E2E8F0">Nemotron SFT v1</text>
+    <rect x="636.2" y="68" width="13" height="13" rx="3" fill="#34D399" stroke="#6EE7B7" stroke-width="1.2" />
+    <text x="654.2" y="79" fill="#E2E8F0">Nemotron RL N3 (Ours)</text>
+  </g>
+  <!-- Bars & Value Labels -->
+  <!-- Category: Protected Private Synthesis -->
+  <g class="chart-bar-item" data-model="Base Model (Nemotron 30B)" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="0.0%" data-count="0 / 120 (0.0%)" data-badge="Untuned zero-shot baseline" data-color="#64748B" tabindex="0">
+    <rect class="chart-bar" x="96.5" y="416.0" width="36" height="4.0" rx="4" fill="#475569" stroke="#64748B" stroke-width="1.4" style="color: #64748B;" />
+    <text class="chart-bar-label" x="114.5" y="410.0" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">0.0%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Prior Baseline (Qwen3-8B SFT v2)" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="25.8%" data-count="31 / 120 (25.8%)" data-badge="Prior dense 8B baseline" data-color="#818CF8" tabindex="0">
+    <rect class="chart-bar" x="138.5" y="337.4" width="36" height="82.6" rx="4" fill="#6366F1" stroke="#818CF8" stroke-width="1.4" style="color: #818CF8;" />
+    <text class="chart-bar-label" x="156.5" y="329.4" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">25.8%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Nemotron SFT v1" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="40.0%" data-count="48 / 120 (40.0%)" data-badge="+55.0% relative over prior baseline" data-color="#10B981" tabindex="0">
+    <rect class="chart-bar" x="180.5" y="292.0" width="36" height="128.0" rx="4" fill="#059669" stroke="#10B981" stroke-width="1.4" style="color: #10B981;" />
+    <text class="chart-bar-label" x="198.5" y="284.0" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">40.0%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Nemotron RL N3 (Ours)" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="44.2%" data-count="53 / 120 (44.2%)" data-badge="+71.3% relative gain (Pass@1)" data-color="#6EE7B7" tabindex="0">
+    <rect class="chart-bar" x="222.5" y="278.6" width="36" height="141.4" rx="4" fill="url(#rl-bar-grad)" stroke="#6EE7B7" stroke-width="1.4" style="color: #6EE7B7;" />
+    <text class="chart-bar-label" x="240.5" y="270.6" text-anchor="middle" fill="#6EE7B7" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="bold">44.2%</text>
+  </g>
+  <text x="177.5" y="450" text-anchor="middle" fill="#F8FAFC" font-size="12" font-weight="bold" font-family="'Inter', sans-serif">Protected Private Synthesis</text>
+  <text x="177.5" y="470" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="'JetBrains Mono', monospace">(120 Tasks, Pass@1)</text>
+  <!-- Category: Protected Synthesis -->
+  <g class="chart-bar-item" data-model="Base Model (Nemotron 30B)" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="0.0%" data-count="0 / 120 (0.0%)" data-badge="Untuned zero-shot baseline" data-color="#64748B" tabindex="0">
+    <rect class="chart-bar" x="321.5" y="416.0" width="36" height="4.0" rx="4" fill="#475569" stroke="#64748B" stroke-width="1.4" style="color: #64748B;" />
+    <text class="chart-bar-label" x="339.5" y="410.0" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">0.0%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Prior Baseline (Qwen3-8B SFT v2)" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="28.3%" data-count="34 / 120 (28.3%)" data-badge="Single-turn + repair retry" data-color="#818CF8" tabindex="0">
+    <rect class="chart-bar" x="363.5" y="329.4" width="36" height="90.6" rx="4" fill="#6366F1" stroke="#818CF8" stroke-width="1.4" style="color: #818CF8;" />
+    <text class="chart-bar-label" x="381.5" y="321.4" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">28.3%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Nemotron SFT v1" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="45.8%" data-count="55 / 120 (45.8%)" data-badge="+61.8% relative over prior baseline" data-color="#10B981" tabindex="0">
+    <rect class="chart-bar" x="405.5" y="273.4" width="36" height="146.6" rx="4" fill="#059669" stroke="#10B981" stroke-width="1.4" style="color: #10B981;" />
+    <text class="chart-bar-label" x="423.5" y="265.4" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">45.8%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Nemotron RL N3 (Ours)" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="49.2%" data-count="59 / 120 (49.2%)" data-badge="▲ +90.3% Relative Gain (Solve@2)" data-color="#6EE7B7" tabindex="0">
+    <rect class="chart-bar" x="447.5" y="262.6" width="36" height="157.4" rx="4" fill="url(#rl-bar-grad)" stroke="#6EE7B7" stroke-width="1.4" style="color: #6EE7B7;" />
+    <text class="chart-bar-label" x="465.5" y="254.6" text-anchor="middle" fill="#6EE7B7" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="bold">49.2%</text>
+  </g>
+  <text x="402.5" y="450" text-anchor="middle" fill="#F8FAFC" font-size="12" font-weight="bold" font-family="'Inter', sans-serif">Protected Synthesis</text>
+  <text x="402.5" y="470" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="'JetBrains Mono', monospace">(120 Tasks, Solve@2 Multi-Turn)</text>
+  <!-- Category: Confirmation Benchmark -->
+  <g class="chart-bar-item" data-model="Base Model (Nemotron 30B)" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="33.3%" data-count="20 / 60 (33.3%)" data-badge="Zero-shot baseline" data-color="#64748B" tabindex="0">
+    <rect class="chart-bar" x="546.5" y="313.4" width="36" height="106.6" rx="4" fill="#475569" stroke="#64748B" stroke-width="1.4" style="color: #64748B;" />
+    <text class="chart-bar-label" x="564.5" y="305.4" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">33.3%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Prior Baseline (Qwen3-8B SFT v2)" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="55.0%" data-count="33 / 60 (55.0%)" data-badge="Prior dense 8B baseline" data-color="#818CF8" tabindex="0">
+    <rect class="chart-bar" x="588.5" y="244.0" width="36" height="176.0" rx="4" fill="#6366F1" stroke="#818CF8" stroke-width="1.4" style="color: #818CF8;" />
+    <text class="chart-bar-label" x="606.5" y="236.0" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">55.0%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Nemotron SFT v1" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="70.0%" data-count="42 / 60 (70.0%)" data-badge="+27.3% relative over prior baseline" data-color="#10B981" tabindex="0">
+    <rect class="chart-bar" x="630.5" y="196.0" width="36" height="224.0" rx="4" fill="#059669" stroke="#10B981" stroke-width="1.4" style="color: #10B981;" />
+    <text class="chart-bar-label" x="648.5" y="188.0" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">70.0%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Nemotron RL N3 (Ours)" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="73.3%" data-count="44 / 60 (73.3%)" data-badge="▲ +33.3% Relative Gain" data-color="#6EE7B7" tabindex="0">
+    <rect class="chart-bar" x="672.5" y="185.4" width="36" height="234.6" rx="4" fill="url(#rl-bar-grad)" stroke="#6EE7B7" stroke-width="1.4" style="color: #6EE7B7;" />
+    <text class="chart-bar-label" x="690.5" y="177.4" text-anchor="middle" fill="#6EE7B7" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="bold">73.3%</text>
+  </g>
+  <text x="627.5" y="450" text-anchor="middle" fill="#F8FAFC" font-size="12" font-weight="bold" font-family="'Inter', sans-serif">Confirmation Benchmark</text>
+  <text x="627.5" y="470" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="'JetBrains Mono', monospace">(60 Unseen Tasks)</text>
+  <!-- Category: Combined Protected Suite -->
+  <g class="chart-bar-item" data-model="Base Model (Nemotron 30B)" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="28.6%" data-count="79 / 276 (28.6%)" data-badge="Combined zero-shot baseline" data-color="#64748B" tabindex="0">
+    <rect class="chart-bar" x="771.5" y="328.5" width="36" height="91.5" rx="4" fill="#475569" stroke="#64748B" stroke-width="1.4" style="color: #64748B;" />
+    <text class="chart-bar-label" x="789.5" y="320.5" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">28.6%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Prior Baseline (Qwen3-8B SFT v2)" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="49.6%" data-count="137 / 276 (49.6%)" data-badge="Prior combined benchmark" data-color="#818CF8" tabindex="0">
+    <rect class="chart-bar" x="813.5" y="261.3" width="36" height="158.7" rx="4" fill="#6366F1" stroke="#818CF8" stroke-width="1.4" style="color: #818CF8;" />
+    <text class="chart-bar-label" x="831.5" y="253.3" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">49.6%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Nemotron SFT v1" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="60.9%" data-count="168 / 276 (60.9%)" data-badge="+31 net solved tasks" data-color="#10B981" tabindex="0">
+    <rect class="chart-bar" x="855.5" y="225.1" width="36" height="194.9" rx="4" fill="#059669" stroke="#10B981" stroke-width="1.4" style="color: #10B981;" />
+    <text class="chart-bar-label" x="873.5" y="217.1" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">60.9%</text>
+  </g>
+  <g class="chart-bar-item" data-model="Nemotron RL N3 (Ours)" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="62.3%" data-count="172 / 276 (62.3%)" data-badge="▲ +35 Net Solved Tasks (p < 0.0001)" data-color="#6EE7B7" tabindex="0">
+    <rect class="chart-bar" x="897.5" y="220.6" width="36" height="199.4" rx="4" fill="url(#rl-bar-grad)" stroke="#6EE7B7" stroke-width="1.4" style="color: #6EE7B7;" />
+    <text class="chart-bar-label" x="915.5" y="212.6" text-anchor="middle" fill="#6EE7B7" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="bold">62.3%</text>
+  </g>
+  <text x="852.5" y="450" text-anchor="middle" fill="#F8FAFC" font-size="12" font-weight="bold" font-family="'Inter', sans-serif">Combined Protected Suite</text>
+  <text x="852.5" y="470" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="'JetBrains Mono', monospace">(276 Comprehensive Tasks)</text>
+</svg>
+          </div>
+
+          <!-- High-Res Static PNG (Initially Hidden, Toggleable) -->
+          <div id="png-chart-wrapper" class="w-full hidden">
+            <img src="assets/performance_hero_bar.png" alt="BPF-Guardian Benchmark Performance Across Training Stages" class="w-full h-auto rounded-lg shadow-lg">
+          </div>
+
         </div>
       </div>
 
-      <!-- Two-Column Chart Row: 4-Panel Details & Domain Scaling -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Detailed Progression & Domain Scaling Panels (Stacked Full-Size) -->
+      <div class="space-y-6">
         
-        <!-- 4-Panel Detailed Suite Breakdown -->
-        <div class="rounded-2xl bg-dark-card border border-dark-border p-5 space-y-4 hover:border-brand-500/30 transition-all">
-          <div class="flex justify-between items-start">
+        <!-- Comprehensive 4-Panel Suite Breakdown (Full-Size) -->
+        <div class="rounded-2xl bg-dark-card border border-dark-border p-5 sm:p-7 space-y-4 hover:border-brand-500/30 transition-all">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 class="font-bold text-white text-base">Comprehensive 4-Panel Suite Breakdown</h3>
-              <p class="text-xs text-slate-400 mt-0.5">Synthesis, Standalone Repair, Confirmation & Combined suites</p>
+              <h3 class="font-bold text-white text-base sm:text-lg">Comprehensive 4-Panel Suite Breakdown</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Synthesis, Standalone Repair, Confirmation &amp; Combined suites</p>
             </div>
-            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-brand-300 font-mono font-medium">4 Panels</span>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-brand-300 font-mono font-medium self-start sm:self-auto">4 Panels &bull; Full Breakdown</span>
           </div>
-          <div class="rounded-xl overflow-hidden border border-dark-border/70 bg-dark-bg">
-            <img src="assets/performance_progression.png" alt="4-Panel Detailed Suite Breakdown" class="w-full h-auto">
+          <div class="rounded-xl overflow-hidden border border-dark-border/70 bg-dark-bg p-2">
+            <img src="assets/performance_progression.png" alt="Comprehensive 4-Panel Suite Breakdown" class="w-full h-auto rounded-lg shadow-lg">
           </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
             <strong class="text-brand-300">Key takeaway:</strong> On Protected Synthesis, base untuned Nemotron scores 0.0%, Qwen SFT v2 achieves 25.8%, Nemotron SFT v1 reaches 45.0%, and Multi-turn RL peaks at <strong class="text-white">49.2% Solve@2</strong> (+35 net solved tasks on combined benchmarks).
           </p>
         </div>
 
-        <!-- Domain Robustness & Complexity Scaling -->
-        <div class="rounded-2xl bg-dark-card border border-dark-border p-5 space-y-4 hover:border-brand-500/30 transition-all">
-          <div class="flex justify-between items-start">
+        <!-- Domain Robustness & Complexity Scaling (Full-Size beneath) -->
+        <div class="rounded-2xl bg-dark-card border border-dark-border p-5 sm:p-7 space-y-4 hover:border-brand-500/30 transition-all">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 class="font-bold text-white text-base">Domain Robustness & Complexity Scaling</h3>
-              <p class="text-xs text-slate-400 mt-0.5">Packet Filtering, Routing, Telemetry & Transformations</p>
+              <h3 class="font-bold text-white text-base sm:text-lg">Domain Robustness &amp; Complexity Scaling</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Packet Filtering, Routing, Telemetry &amp; Transformations across algorithmic difficulty levels</p>
             </div>
-            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-brand-300 font-mono font-medium">Domain & Level</span>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-brand-300 font-mono font-medium self-start sm:self-auto">Domain &amp; Level Analysis</span>
           </div>
-          <div class="rounded-xl overflow-hidden border border-dark-border/70 bg-dark-bg">
-            <img src="assets/domain_breakdown.png" alt="Domain Robustness and Complexity Scaling" class="w-full h-auto">
+          <div class="rounded-xl overflow-hidden border border-dark-border/70 bg-dark-bg p-2">
+            <img src="assets/domain_breakdown.png" alt="Domain Robustness and Complexity Scaling" class="w-full h-auto rounded-lg shadow-lg">
           </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
             <strong class="text-brand-300">Key takeaway:</strong> Performance scales robustly across all 4 networking domains (PFS, NRF, PIT, PTR) and complexity levels (Level 1 Ingress 87.5%, Level 2 Stateful Maps 66.7%, Level 3 Advanced Consistent Hashing 47.9%).
           </p>
         </div>
@@ -227,7 +410,7 @@
         <div class="p-4 sm:p-6 border-b border-dark-border flex justify-between items-center">
           <div>
             <h3 class="text-base font-bold text-white">Full Live VPS Kernel 6.8 Empirical Scorecard</h3>
-            <p class="text-xs text-slate-400">Statistically paired McNemar significance comparisons against prior SOTA</p>
+            <p class="text-xs text-slate-400">Statistically paired McNemar significance comparisons against prior baseline</p>
           </div>
           <span class="px-3 py-1 bg-brand-500/10 text-brand-300 border border-brand-500/30 rounded-full text-xs font-semibold">T = 0.0 Deterministic</span>
         </div>
@@ -238,7 +421,7 @@
                 <th class="px-5 py-3.5">Evaluation Benchmark</th>
                 <th class="px-4 py-3.5 text-center">Suite Size</th>
                 <th class="px-4 py-3.5 text-center">Base Nemotron 30B</th>
-                <th class="px-4 py-3.5 text-center">Prior SOTA (Qwen3-8B)</th>
+                <th class="px-4 py-3.5 text-center">Prior Baseline (Qwen3-8B)</th>
                 <th class="px-4 py-3.5 text-center text-emerald-400">Nemotron SFT v1</th>
                 <th class="px-4 py-3.5 text-center text-brand-300 font-bold bg-brand-500/5">Nemotron RL N3 (Ours)</th>
                 <th class="px-4 py-3.5 text-right text-brand-400">Relative Gain</th>
@@ -517,7 +700,7 @@
         <div class="p-6 rounded-2xl bg-dark-card border border-dark-border space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-semibold">Branch: main</span>
-            <span class="text-xs text-emerald-400 font-semibold">SFT v1 Champion</span>
+            <span class="text-xs text-emerald-400 font-semibold">Nemotron SFT v1</span>
           </div>
           <h3 class="text-lg font-bold text-white">nemotron-3.5-lightning-bpf-guardian</h3>
           <p class="text-xs text-slate-400 leading-relaxed">
@@ -532,11 +715,11 @@
         <div class="p-6 rounded-2xl bg-dark-card border border-brand-500/40 glow-accent space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono px-2.5 py-1 rounded bg-brand-500/20 text-brand-300 font-semibold">Branch: rl-n3</span>
-            <span class="text-xs text-brand-400 font-semibold">RL N3 Champion</span>
+            <span class="text-xs text-brand-400 font-semibold">Nemotron RL N3</span>
           </div>
           <h3 class="text-lg font-bold text-white">Multi-Turn Repair RLVR</h3>
           <p class="text-xs text-slate-400 leading-relaxed">
-            Trained with two-turn live in-kernel reward loop. Achieves <strong>49.2% Solve@2</strong> on Protected Synthesis (+90.3% over prior SOTA) and <strong>73.3%</strong> on Confirmation.
+            Trained with two-turn live in-kernel reward loop. Achieves <strong>49.2% Solve@2</strong> on Protected Synthesis (+90.3% over prior baseline) and <strong>73.3%</strong> on Confirmation.
           </p>
           <div class="text-xs font-mono text-brand-300 bg-dark-surface p-3 rounded-lg border border-brand-500/30">
             revision="rl-n3" &bull; 1.47 GB Safetensors
@@ -566,10 +749,22 @@
           <span class="font-mono text-xs text-slate-300 flex items-center gap-2">
             <span class="h-2 w-2 rounded-full bg-brand-400"></span> Python: Load &amp; Generate Verified eBPF with PEFT
           </span>
-          <span class="text-xs text-slate-400 font-mono">PyTorch / Transformers / PEFT</span>
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-slate-400 font-mono hidden sm:inline">PyTorch / Transformers / PEFT</span>
+            <button id="copy-code-btn" type="button" onclick="copyPythonCode()" aria-label="Copy Python code snippet"
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-dark-card hover:bg-slate-800 text-slate-300 hover:text-brand-300 text-xs font-mono border border-dark-border hover:border-brand-500/40 transition-all focus:outline-none focus:ring-2 focus:ring-brand-500/40 cursor-pointer">
+              <svg id="copy-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+              <svg id="check-icon" class="w-3.5 h-3.5 hidden text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span id="copy-text">Copy</span>
+            </button>
+          </div>
         </div>
         <div class="p-5 font-mono text-xs text-slate-300 overflow-x-auto bg-dark-bg leading-relaxed">
-<pre><span class="text-brand-400">import</span> torch
+<pre id="python-code"><span class="text-brand-400">import</span> torch
 <span class="text-brand-400">from</span> transformers <span class="text-brand-400">import</span> AutoTokenizer, AutoModelForCausalLM
 <span class="text-brand-400">from</span> peft <span class="text-brand-400">import</span> PeftModel
 
@@ -582,7 +777,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
     torch_dtype=torch.bfloat16,
     device_map=<span class="text-emerald-300">"auto"</span>
 )
-<span class="text-slate-500"># Load SFT champion (revision="main") or RL champion (revision="rl-n3")</span>
+<span class="text-slate-500"># Load SFT model (revision="main") or RL model (revision="rl-n3")</span>
 model = PeftModel.from_pretrained(base_model, peft_id, revision=<span class="text-emerald-300">"rl-n3"</span>)
 
 prompt = <span class="text-emerald-300">"""You are an expert Linux kernel eBPF developer. Write a complete, self-contained XDP C program that inspects incoming IPv4 TCP packets, extracts the destination port, and drops packets targeting port 8080. Output ONLY raw C source code."""</span>
@@ -708,11 +903,18 @@ Running fixture 03: Maglev hash lookup collision probe...
 
     <!-- SECTION 6: CITATION & FOOTER -->
     <section class="border-t border-dark-border pt-10 space-y-6">
+      <div class="rounded-2xl bg-dark-card border border-dark-border p-6 space-y-2">
+        <h3 class="text-base font-bold text-white">Acknowledgements</h3>
+        <p class="text-xs text-slate-300">
+          <strong>Compute</strong>: Fine-tuned and evaluated via <a href="https://thinkingmachines.ai/" target="_blank" class="text-brand-400 font-semibold hover:underline">Thinking Machines</a>.
+        </p>
+      </div>
+
       <div class="rounded-2xl bg-dark-card border border-dark-border p-6 space-y-4">
         <h3 class="text-base font-bold text-white">BibTeX Citation</h3>
         <pre class="bg-dark-bg p-4 rounded-xl border border-dark-border font-mono text-xs text-slate-300 overflow-x-auto">
 @misc{nemotron_bpf_guardian_2026,
-  author = {BPF-Guardian Research Team},
+  author = {Tarunokusumo, Ravindra},
   title = {Nemotron-3.5-Lightning BPF-Guardian: Verified In-Kernel eBPF/XDP Generation},
   year = {2026},
   publisher = {Hugging Face},
@@ -727,6 +929,132 @@ Running fixture 03: Maglev hash lookup collision probe...
     </section>
 
   </main>
+
+  <script>
+    // Tooltip & Hover interaction for Interactive Main Chart
+    document.addEventListener('DOMContentLoaded', () => {
+      const chartContainer = document.getElementById('chart-container-relative');
+      const tooltip = document.getElementById('chart-tooltip');
+      const ttSeries = document.getElementById('tooltip-series');
+      const ttSuite = document.getElementById('tooltip-suite');
+      const ttVal = document.getElementById('tooltip-val');
+      const ttCount = document.getElementById('tooltip-count');
+      const ttBadge = document.getElementById('tooltip-badge');
+
+      const barItems = document.querySelectorAll('.chart-bar-item');
+      barItems.forEach(item => {
+        item.addEventListener('mouseenter', (e) => {
+          const model = item.getAttribute('data-model');
+          const suite = item.getAttribute('data-suite');
+          const val = item.getAttribute('data-val');
+          const count = item.getAttribute('data-count');
+          const badge = item.getAttribute('data-badge');
+          const color = item.getAttribute('data-color');
+
+          if (ttSeries) {
+            ttSeries.innerText = model;
+            ttSeries.style.color = color || '#34D399';
+          }
+          if (ttSuite) ttSuite.innerText = suite;
+          if (ttVal) ttVal.innerText = val;
+          if (ttCount) ttCount.innerText = count;
+          if (ttBadge) ttBadge.innerText = badge;
+
+          if (tooltip) {
+            tooltip.classList.remove('hidden');
+            positionTooltip(e);
+          }
+        });
+
+        item.addEventListener('mousemove', (e) => {
+          positionTooltip(e);
+        });
+
+        item.addEventListener('mouseleave', () => {
+          if (tooltip) tooltip.classList.add('hidden');
+        });
+      });
+
+      function positionTooltip(e) {
+        if (!chartContainer || !tooltip) return;
+        const rect = chartContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top - 14;
+        tooltip.style.left = `${Math.max(110, Math.min(rect.width - 110, x))}px`;
+        tooltip.style.top = `${Math.max(40, y)}px`;
+      }
+    });
+
+    // Chart view toggle (SVG vs PNG)
+    function toggleMainChart(view) {
+      const svgWrapper = document.getElementById('svg-chart-wrapper');
+      const pngWrapper = document.getElementById('png-chart-wrapper');
+      const svgBtn = document.getElementById('view-interactive-btn');
+      const pngBtn = document.getElementById('view-png-btn');
+
+      if (!svgWrapper || !pngWrapper || !svgBtn || !pngBtn) return;
+
+      if (view === 'svg') {
+        svgWrapper.classList.remove('hidden');
+        pngWrapper.classList.add('hidden');
+        svgBtn.className = 'px-3 py-1 rounded-lg bg-brand-500/20 text-brand-300 border border-brand-500/40 text-xs font-semibold transition-all cursor-pointer';
+        pngBtn.className = 'px-3 py-1 rounded-lg bg-dark-surface text-slate-400 hover:text-white border border-dark-border text-xs font-semibold transition-all cursor-pointer';
+      } else {
+        svgWrapper.classList.add('hidden');
+        pngWrapper.classList.remove('hidden');
+        pngBtn.className = 'px-3 py-1 rounded-lg bg-brand-500/20 text-brand-300 border border-brand-500/40 text-xs font-semibold transition-all cursor-pointer';
+        svgBtn.className = 'px-3 py-1 rounded-lg bg-dark-surface text-slate-400 hover:text-white border border-dark-border text-xs font-semibold transition-all cursor-pointer';
+      }
+    }
+
+    // Copy codeblock button handler
+    function copyPythonCode() {
+      const codeElement = document.getElementById('python-code');
+      if (!codeElement) return;
+      const text = codeElement.innerText;
+      
+      const copyBtn = document.getElementById('copy-code-btn');
+      const copyIcon = document.getElementById('copy-icon');
+      const checkIcon = document.getElementById('check-icon');
+      const copyText = document.getElementById('copy-text');
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showCopied).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+
+      function showCopied() {
+        if (copyIcon) copyIcon.classList.add('hidden');
+        if (checkIcon) checkIcon.classList.remove('hidden');
+        if (copyText) copyText.innerText = 'Copied!';
+        if (copyBtn) copyBtn.classList.add('border-emerald-500/60', 'text-emerald-300');
+
+        setTimeout(() => {
+          if (copyIcon) copyIcon.classList.remove('hidden');
+          if (checkIcon) checkIcon.classList.add('hidden');
+          if (copyText) copyText.innerText = 'Copy';
+          if (copyBtn) copyBtn.classList.remove('border-emerald-500/60', 'text-emerald-300');
+        }, 2000);
+      }
+
+      function fallbackCopy() {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showCopied();
+        } catch (err) {
+          console.error('Copy fallback failed', err);
+        }
+        document.body.removeChild(textarea);
+      }
+    }
+  </script>
 
 </body>
 </html>
