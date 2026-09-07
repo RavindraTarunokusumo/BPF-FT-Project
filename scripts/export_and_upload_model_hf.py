@@ -82,6 +82,9 @@ pipeline_tag: text-generation
 
 It establishes the state of the art on verifiable eBPF/XDP network program synthesis and diagnostic-guided repair, outperforming dense 8B baselines by **+90.3% relative gain** on protected synthesis benchmarks.
 
+> 🚀 **Interactive Visual Showcase**: [Launch Live Architecture & Workflow Dashboard ↗](https://ravindratarunokusumo.github.io/BPF-FT-Project/)  
+> *(Displays live interactive pipeline diagrams, dataset breakdowns, benchmark figures, and in-kernel test logs)*
+
 ---
 
 ## Visual Performance Progression
