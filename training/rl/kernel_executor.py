@@ -282,7 +282,10 @@ class KernelExecutor:
 
             if not result.compile["pass"]:
                 result.passed = False
-                result.diagnostic = f"Compilation failed:\n{proc_c.stderr.strip()}"
+                c_err = proc_c.stderr.strip()
+                if len(c_err) > 4000:
+                    c_err = "...[truncated]...\n" + c_err[-4000:]
+                result.diagnostic = f"Compilation failed:\n{c_err}"
                 self._persist_result(result, rollout_record_dir)
                 return result
 
@@ -308,7 +311,7 @@ class KernelExecutor:
                 v_pass = proc_v.returncode == 0 and pin_path.exists()
                 result.verifier["stdout"] = proc_v.stdout[:10000]
                 result.verifier["stderr"] = proc_v.stderr[:10000]
-                result.verifier["log"] = proc_v.stderr if not v_pass else ""
+                result.verifier["log"] = proc_v.stderr[-10000:] if not v_pass else ""
                 result.verifier["pass"] = v_pass
             except subprocess.TimeoutExpired:
                 timing["verifier_seconds"] = round(time.perf_counter() - t_ver_start, 4)
@@ -326,6 +329,8 @@ class KernelExecutor:
             if not result.verifier["pass"]:
                 result.passed = False
                 err_text = proc_v.stderr.strip() or proc_v.stdout.strip()
+                if len(err_text) > 4000:
+                    err_text = "...[truncated]...\n" + err_text[-4000:]
                 result.diagnostic = f"Kernel verifier rejected program:\n{err_text}"
                 self._persist_result(result, rollout_record_dir)
                 return result

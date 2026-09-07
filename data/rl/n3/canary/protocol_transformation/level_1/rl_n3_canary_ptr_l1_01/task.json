@@ -1,0 +1,38 @@
+{
+  "task_id": "rl_n3_canary_ptr_l1_01",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_family": "canary_ptr_l1_udp_csum_zero",
+  "template_family": "xdp_udp_csum_zero",
+  "semantic_signature": "ptr_l1_udp_csum_zero_canary",
+  "split": "canary",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects UDP packets and zeroes the UDP checksum field (udp->check = 0) to bypass L4 checksum validation. Forward all traffic with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet, IPv4, and UDP header bounds against data_end",
+    "Confirm eth->h_proto == ETH_P_IP and ip->protocol == IPPROTO_UDP",
+    "Safely calculate variable IPv4 header length (ip->ihl * 4)",
+    "Set udp->check = 0 in-place",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_zeroed_udp",
+      "description": "UDP checksum zeroed and passed",
+      "packet_hex": "52540012345652540065432108004500001c123400004011e52ec0a8010ac0a801143039003500084c01",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passed unmodified",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "phase": "phase_n3",
+  "expected_fixture_count": 2,
+  "task_sha256": "b201d071351cbff71de17404b8a24f72a19d22f670dbc56ee807d1f76614ad55"
+}

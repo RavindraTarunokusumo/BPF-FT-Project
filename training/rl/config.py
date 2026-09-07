@@ -22,6 +22,12 @@ QWEN_RENDERER_NAME = "qwen3_disable_thinking"
 SFT_V2_CHECKPOINT = "tinker://9461002d-2321-5858-8184-5604f9304283:train:0/weights/final"
 SFT_V2_SAMPLER_CHECKPOINT = "tinker://9461002d-2321-5858-8184-5604f9304283:train:0/sampler_weights/final"
 
+# Phase N2 / N3 Nemotron Checkpoints
+NEMOTRON_BASE_MODEL = "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16"
+NEMOTRON_RENDERER_NAME = "nemotron3_ultra_disable_thinking"
+NEMOTRON_SFT_V1_CHECKPOINT = "tinker://8dd51b37-9331-52a3-b929-3a8ad0b731c2:train:0/weights/final"
+NEMOTRON_SFT_V1_SAMPLER_CHECKPOINT = "tinker://8dd51b37-9331-52a3-b929-3a8ad0b731c2:train:0/sampler_weights/final"
+
 # Default Paths (Phase 1)
 DEFAULT_RUN_DIR = Path("runs/tinker/qwen3-8b-bpf-rl-v1")
 DEFAULT_CANARY_DIR = Path("data/rl/v1/canary")
@@ -34,6 +40,15 @@ DEFAULT_CANARY_DIR_V2 = Path("data/rl/v2/canary")
 DEFAULT_TRAIN_DIR_V2 = Path("data/rl/v2/train")
 DEFAULT_DEV_DIR_V2 = Path("data/rl/v2/dev")
 DEFAULT_CONFIRMATION_DIR_V2 = Path("data/rl/v2/confirmation")
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
+# Default Paths (Phase N3)
+DEFAULT_RUN_DIR_N3 = PROJECT_ROOT / "runs" / "tinker" / "nemotron-bpf-rl-n3"
+DEFAULT_CANARY_DIR_N3 = PROJECT_ROOT / "data" / "rl" / "n3" / "canary"
+DEFAULT_TRAIN_DIR_N3 = PROJECT_ROOT / "data" / "rl" / "n3" / "train"
+DEFAULT_DEV_DIR_N3 = PROJECT_ROOT / "data" / "rl" / "n3" / "dev"
+DEFAULT_CONFIRMATION_DIR_N3 = PROJECT_ROOT / "data" / "rl" / "n3" / "confirmation"
 
 
 @dataclasses.dataclass
@@ -114,3 +129,55 @@ class BPFRLV2Config(BPFRLConfig):
 
     # Wandb
     wandb_run_name: Optional[str] = "qwen3-8b-rl-v2"
+
+
+@dataclasses.dataclass
+class BPFRLN3Config(BPFRLConfig):
+    """Phase N3 Diagnostic-Guided Repair RLVR Configuration (Nemotron-3.5-Lightning)."""
+
+    base_model: str = NEMOTRON_BASE_MODEL
+    load_checkpoint_path: str = NEMOTRON_SFT_V1_CHECKPOINT
+    kl_reference_checkpoint: str = NEMOTRON_SFT_V1_SAMPLER_CHECKPOINT
+    renderer_name: str = NEMOTRON_RENDERER_NAME
+
+    # LoRA and Sampling
+    lora_rank: int = 32
+    group_size: int = 4
+    sampling_temperature: float = 0.8
+    max_tokens: int = 2048
+
+    # Optimization
+    learning_rate: float = 3e-6
+    lr_schedule_type: str = "constant"
+    loss_fn: str = "importance_sampling"
+    kl_penalty_coef: float = 0.05
+    compute_post_kl: bool = True
+    remove_constant_reward_groups: bool = True
+    problem_groups_per_step: int = 2
+
+    # Steps and Schedules
+    canary_max_steps: int = 5
+    canary_save_every: int = 1
+    pilot_max_steps: int = 50
+    pilot_save_every: int = 5
+    pilot_eval_every: int = 5
+    early_stopping_patience: int = 3
+
+    # Sampler settings
+    use_priority_sampler: bool = True
+    sampler_seed: int = 42
+
+    # Two-turn reward settings
+    turn1_success_reward: float = 1.00
+    turn2_recovery_reward: float = 0.95
+
+    # Directory Paths (Phase N3)
+    run_dir: str = str(DEFAULT_RUN_DIR_N3).replace("\\", "/")
+    canary_data_dir: str = str(DEFAULT_CANARY_DIR_N3).replace("\\", "/")
+    train_data_dir: str = str(DEFAULT_TRAIN_DIR_N3).replace("\\", "/")
+    dev_data_dir: str = str(DEFAULT_DEV_DIR_N3).replace("\\", "/")
+    confirmation_data_dir: str = str(DEFAULT_CONFIRMATION_DIR_N3).replace("\\", "/")
+
+    # Wandb
+    wandb_run_name: Optional[str] = "nemotron-3.5-lightning-rl-n3"
+

@@ -1,0 +1,238 @@
+{
+  "suites": {
+    "n3-confirmation-60": {
+      "suite": "n3-confirmation-60",
+      "n_tasks": 60,
+      "pass_at_1": {
+        "baseline": {
+          "count": 41,
+          "rate": 0.6833
+        },
+        "candidate": {
+          "count": 42,
+          "rate": 0.7
+        },
+        "contingency_table": {
+          "n11": 38,
+          "n10": 3,
+          "n01": 4,
+          "n00": 15
+        },
+        "mcnemar_stat": 0.0,
+        "p_value": 1.0,
+        "significant_at_05": false
+      },
+      "solve_at_2": {
+        "baseline": {
+          "count": 43,
+          "rate": 0.7167
+        },
+        "candidate": {
+          "count": 44,
+          "rate": 0.7333
+        },
+        "contingency_table": {
+          "n11": 41,
+          "n10": 2,
+          "n01": 3,
+          "n00": 14
+        },
+        "mcnemar_stat": 0.0,
+        "p_value": 1.0,
+        "significant_at_05": false
+      },
+      "recovery_breakdown": {
+        "baseline": {
+          "compile": {
+            "fails": 18,
+            "rec": 2,
+            "rate": 0.1111
+          },
+          "verifier": {
+            "fails": 0,
+            "rec": 0,
+            "rate": 0.0
+          },
+          "behavioral": {
+            "fails": 1,
+            "rec": 0,
+            "rate": 0.0
+          }
+        },
+        "candidate": {
+          "compile": {
+            "fails": 17,
+            "rec": 2,
+            "rate": 0.1176
+          },
+          "verifier": {
+            "fails": 0,
+            "rec": 0,
+            "rate": 0.0
+          },
+          "behavioral": {
+            "fails": 1,
+            "rec": 0,
+            "rate": 0.0
+          }
+        }
+      }
+    },
+    "n3-dev-48": {
+      "suite": "n3-dev-48",
+      "n_tasks": 48,
+      "pass_at_1": {
+        "baseline": {
+          "count": 24,
+          "rate": 0.5
+        },
+        "candidate": {
+          "count": 23,
+          "rate": 0.4792
+        },
+        "contingency_table": {
+          "n11": 22,
+          "n10": 2,
+          "n01": 1,
+          "n00": 23
+        },
+        "mcnemar_stat": 0.0,
+        "p_value": 1.0,
+        "significant_at_05": false
+      },
+      "solve_at_2": {
+        "baseline": {
+          "count": 24,
+          "rate": 0.5
+        },
+        "candidate": {
+          "count": 23,
+          "rate": 0.4792
+        },
+        "contingency_table": {
+          "n11": 22,
+          "n10": 2,
+          "n01": 1,
+          "n00": 23
+        },
+        "mcnemar_stat": 0.0,
+        "p_value": 1.0,
+        "significant_at_05": false
+      },
+      "recovery_breakdown": {
+        "baseline": {
+          "compile": {
+            "fails": 24,
+            "rec": 0,
+            "rate": 0.0
+          },
+          "verifier": {
+            "fails": 0,
+            "rec": 0,
+            "rate": 0.0
+          },
+          "behavioral": {
+            "fails": 0,
+            "rec": 0,
+            "rate": 0.0
+          }
+        },
+        "candidate": {
+          "compile": {
+            "fails": 24,
+            "rec": 0,
+            "rate": 0.0
+          },
+          "verifier": {
+            "fails": 0,
+            "rec": 0,
+            "rate": 0.0
+          },
+          "behavioral": {
+            "fails": 1,
+            "rec": 0,
+            "rate": 0.0
+          }
+        }
+      }
+    },
+    "protected-synthesis-120": {
+      "suite": "protected-synthesis-120",
+      "n_tasks": 120,
+      "pass_at_1": {
+        "baseline": {
+          "count": 48,
+          "rate": 0.4
+        },
+        "candidate": {
+          "count": 53,
+          "rate": 0.4417
+        },
+        "contingency_table": {
+          "n11": 46,
+          "n10": 2,
+          "n01": 7,
+          "n00": 65
+        },
+        "mcnemar_stat": 1.7778,
+        "p_value": 0.1797,
+        "significant_at_05": false
+      },
+      "solve_at_2": {
+        "baseline": {
+          "count": 55,
+          "rate": 0.4583
+        },
+        "candidate": {
+          "count": 59,
+          "rate": 0.4917
+        },
+        "contingency_table": {
+          "n11": 53,
+          "n10": 2,
+          "n01": 6,
+          "n00": 59
+        },
+        "mcnemar_stat": 1.125,
+        "p_value": 0.2891,
+        "significant_at_05": false
+      },
+      "recovery_breakdown": {
+        "baseline": {
+          "compile": {
+            "fails": 53,
+            "rec": 7,
+            "rate": 0.1321
+          },
+          "verifier": {
+            "fails": 0,
+            "rec": 0,
+            "rate": 0.0
+          },
+          "behavioral": {
+            "fails": 19,
+            "rec": 0,
+            "rate": 0.0
+          }
+        },
+        "candidate": {
+          "compile": {
+            "fails": 49,
+            "rec": 6,
+            "rate": 0.1224
+          },
+          "verifier": {
+            "fails": 0,
+            "rec": 0,
+            "rate": 0.0
+          },
+          "behavioral": {
+            "fails": 18,
+            "rec": 0,
+            "rate": 0.0
+          }
+        }
+      }
+    }
+  }
+}
