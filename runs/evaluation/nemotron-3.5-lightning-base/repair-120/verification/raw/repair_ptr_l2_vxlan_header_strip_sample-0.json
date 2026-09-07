@@ -1,0 +1,44 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "repair_ptr_l2_vxlan_header_strip",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_vxlan_header_strip/sample-0.c",
+  "source_sha256": "7d4fcff8b2cd3ef24113ca1b29fe9042aa6cd3e8af3264805b9450f0711a5f6f",
+  "timestamp": "2026-09-05T20:40:40.996425+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_xybrm00m/candidate.o\nlibbpf: elf: section(3) xdp, size 288, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform' at insn offset 0 (0 bytes), code size 36 insns (288 bytes)\nlibbpf: elf: section(4) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_xybrm00m/candidate.o is GPL\nlibbpf: elf: section(14) .BTF, size 989, link 0, flags 0, type=1\nlibbpf: elf: section(16) .BTF.ext, size 352, link 0, flags 0, type=1\nlibbpf: elf: section(24) .symtab, size 336, link 1, flags 0, type=2\nlibbpf: looking for externs among 14 symbols...\nlibbpf: collected 0 externs total\nlibbpf: prog 'xdp_transform': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r3 = *(u32 *)(r1 +4)          ; R1=ctx() R3_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r4 = *(u32 *)(r1 +0)          ; R1=ctx() R4_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r2 = r4                       ; R2_w=pkt(r=0) R4_w=pkt(r=0)\n3: (07) r2 += 14                      ; R2_w=pkt(off=14,r=0)\n4: (b7) r0 = 2                        ; R0_w=2\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r2 > r3 goto pc+29         ; R2_w=pkt(off=14,r=14) R3_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r5 = *(u8 *)(r4 +13)          ; R4_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r5 <<= 8                      ; R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r0 = *(u8 *)(r4 +12)          ; R0_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=pkt(r=14)\n9: (4f) r5 |= r0                      ; R0_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R5_w=scalar()\n10: (b7) r0 = 2                       ; R0_w=2\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n11: (55) if r5 != 0x8 goto pc+23      ; R5_w=8\n12: (bf) r5 = r4                      ; R4_w=pkt(r=14) R5_w=pkt(r=14)\n13: (07) r5 += 34                     ; R5=pkt(off=34,r=14)\n14: (2d) if r5 > r3 goto pc+20        ; R3=pkt_end() R5=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_UDP)\n15: (71) r4 = *(u8 *)(r4 +23)         ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_UDP)\n16: (55) if r4 != 0x11 goto pc+18     ; R4_w=17\n; __u32 ip_len = (__u32)ip->ihl * 4;\n17: (71) r4 = *(u8 *)(r2 +0)          ; R2=pkt(off=14,r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ip_len = (__u32)ip->ihl * 4;\n18: (67) r4 <<= 2                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n19: (57) r4 &= 60                     ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n20: (b7) r5 = 20                      ; R5_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n21: (2d) if r5 > r4 goto pc+13        ; R4_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n22: (0f) r2 += r4\nmark_precise: frame0: last_idx 22 first_idx 14 subseq_idx -1 \nmark_precise: frame0: regs=r4 stack= before 21: (2d) if r5 > r4 goto pc+13\nmark_precise: frame0: regs=r4,r5 stack= before 20: (b7) r5 = 20\nmark_precise: frame0: regs=r4 stack= before 19: (57) r4 &= 60\nmark_precise: frame0: regs=r4 stack= before 18: (67) r4 <<= 2\nmark_precise: frame0: regs=r4 stack= before 17: (71) r4 = *(u8 *)(r2 +0)\n23: R2=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n23: (2d) if r2 > r3 goto pc+11        ; R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end()\n24: (bf) r4 = r2                      ; R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n25: (07) r4 += 8                      ; R4_w=pkt(id=1,off=22,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n26: (2d) if r4 > r3 goto pc+8         ; R3=pkt_end() R4_w=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (udp->dest != bpf_htons(4789))\n27: (69) r2 = *(u16 *)(r2 +2)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (udp->dest != bpf_htons(4789))\n28: (55) if r2 != 0xb512 goto pc+6    ; R2_w=0xb512\n; if (bpf_xdp_adjust_head(ctx, 50))\n29: (b7) r2 = 50                      ; R2_w=50\n30: (85) call bpf_xdp_adjust_head#44          ; R0=scalar()\n31: (bf) r1 = r0                      ; R0=scalar(id=2) R1_w=scalar(id=2)\n32: (b7) r0 = 1                       ; R0_w=1\n; if (bpf_xdp_adjust_head(ctx, 50))\n33: (55) if r1 != 0x0 goto pc+1       ; R1_w=0\n34: (b7) r0 = 2                       ; R0_w=2\n; }\n35: (95) exit\n\nfrom 33 to 35: R0_w=1 R1_w=scalar(id=2,umin=1) R10=fp0\n35: R0_w=1 R1_w=scalar(id=2,umin=1) R10=fp0\n35: (95) exit\n\nfrom 28 to 35: R0=2 R1=ctx() R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=pkt_end() R4_w=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n35: R0=2 R1=ctx() R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=pkt_end() R4_w=pkt(id=1,off=22,r=22,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n35: (95) exit\n\nfrom 26 to 35: R0=2 R1=ctx() R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4_w=pkt(id=1,off=22,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n35: R0=2 R1=ctx() R2=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4_w=pkt(id=1,off=22,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n35: (95) exit\n\nfrom 23 to 35: R0=2 R1=ctx() R2=pkt(id=1,off=14,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n35: R0=2 R1=ctx() R2=pkt(id=1,off=14,r=0xfffffffffffffffe,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=pkt_end() R4=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R5=20 R10=fp0\n35: (95) exit\n\nfrom 21 to 35: safe\n\nfrom 16 to 35: safe\n\nfrom 14 to 35: safe\n\nfrom 11 to 35: safe\n\nfrom 5 to 35: safe\nverification time 336 usec\nstack depth 0\nprocessed 45 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_decap_vxlan",
+        "description": "Decap VXLAN header and pass inner frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_other",
+        "description": "Pass standard TCP frame unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

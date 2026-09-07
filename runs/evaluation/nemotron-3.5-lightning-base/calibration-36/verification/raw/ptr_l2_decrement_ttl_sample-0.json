@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "ptr_l2_decrement_ttl",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c",
+  "source_sha256": "3cd7f2453a7eb33f5242b717d1994a2ac4048d0442a25f9aa918e0e3f692fb6c",
+  "timestamp": "2026-09-05T20:40:20.859907+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:41:22: error: invalid application of 'sizeof' to an incomplete type 'struct eth_hdr'\n   41 |     if (data + sizeof(*eth) > data_end)\n      |                      ^~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:31:12: note: forward declaration of 'struct eth_hdr'\n   31 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:47:18: error: incomplete definition of type 'struct eth_hdr'\n   47 |     h_proto = eth->h_proto;\n      |               ~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:31:12: note: forward declaration of 'struct eth_hdr'\n   31 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:48:20: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   48 |     if (h_proto != bpf_htons(ETH_P_IP))\n      |                    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:52:22: error: invalid application of 'sizeof' to an incomplete type 'struct eth_hdr'\n   52 |     if (data + sizeof(*eth) + sizeof(*ip) > data_end)\n      |                      ^~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:31:12: note: forward declaration of 'struct eth_hdr'\n   31 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:55:31: error: arithmetic on a pointer to an incomplete type 'struct eth_hdr'\n   55 |     ip = (struct iphdr *)(eth + 1);\n      |                           ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:31:12: note: forward declaration of 'struct eth_hdr'\n   31 |     struct eth_hdr *eth;\n      |            ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:41:22: error: invalid application of 'sizeof' to an incomplete type 'struct eth_hdr'\n   41 |     if (data + sizeof(*eth) > data_end)\n      |                      ^~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:31:12: note: forward declaration of 'struct eth_hdr'\n   31 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:47:18: error: incomplete definition of type 'struct eth_hdr'\n   47 |     h_proto = eth->h_proto;\n      |               ~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:31:12: note: forward declaration of 'struct eth_hdr'\n   31 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:48:20: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   48 |     if (h_proto != bpf_htons(ETH_P_IP))\n      |                    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:52:22: error: invalid application of 'sizeof' to an incomplete type 'struct eth_hdr'\n   52 |     if (data + sizeof(*eth) + sizeof(*ip) > data_end)\n      |                      ^~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:31:12: note: forward declaration of 'struct eth_hdr'\n   31 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:55:31: error: arithmetic on a pointer to an incomplete type 'struct eth_hdr'\n   55 |     ip = (struct iphdr *)(eth + 1);\n      |                           ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l2_decrement_ttl/sample-0.c:31:12: note: forward declaration of 'struct eth_hdr'\n   31 |     struct eth_hdr *eth;\n      |            ^\n5 errors generated."
+}

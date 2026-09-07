@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_006_geneve_opt_strip",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c",
+  "source_sha256": "2fa9a4b3c9314386fa4cd4622d19eaa9996799a31e82ef9f0005d9bddc0b4b9f",
+  "timestamp": "2026-09-06T20:17:47.722145+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:53:14: error: no member named 'opt_len' in 'struct genevehdr'\n   53 |     if (gen->opt_len > 0)\n      |         ~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:54:14: error: no member named 'opt_len' in 'struct genevehdr'\n   54 |         gen->opt_len = 0;\n      |         ~~~  ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:53:14: error: no member named 'opt_len' in 'struct genevehdr'\n   53 |     if (gen->opt_len > 0)\n      |         ~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:54:14: error: no member named 'opt_len' in 'struct genevehdr'\n   54 |         gen->opt_len = 0;\n      |         ~~~  ^\n2 errors generated."
+}

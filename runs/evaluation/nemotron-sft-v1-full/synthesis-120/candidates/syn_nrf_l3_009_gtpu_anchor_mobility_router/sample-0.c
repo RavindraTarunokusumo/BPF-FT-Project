@@ -1,0 +1,62 @@
+#include <linux/bpf.h>
+#include <linux/if_ether.h>
+#include <linux/ip.h>
+#include <linux/ipv6.h>
+#include <linux/tcp.h>
+#include <linux/udp.h>
+#include <linux/icmp.h>
+#include <linux/in.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
+
+struct gtpuhdr {
+    __u8  version_npdui;
+    __u8  message_type;
+    __be16 length;
+    __be32 teid;
+};
+
+SEC("xdp")
+int xdp_route_syn_nrf_l3_009_gtpu_anchor_mobility_router(struct xdp_md *ctx) {
+    void *data = (void *)(long)ctx->data;
+    void *data_end = (void *)(long)ctx->data_end;
+
+    struct ethhdr *eth = data;
+    if ((void *)(eth + 1) > data_end)
+        return XDP_PASS;
+
+    if (eth->h_proto != bpf_htons(ETH_P_IP))
+        return XDP_PASS;
+
+    struct iphdr *ip = (void *)(eth + 1);
+    if ((void *)(ip + 1) > data_end)
+        return XDP_PASS;
+
+    if (ip->protocol != IPPROTO_UDP)
+        return XDP_PASS;
+
+    __u32 ip_hlen = ip->ihl * 4;
+    if (ip_hlen < sizeof(*ip) || ip_hlen > 60)
+        return XDP_PASS;
+
+    struct udphdr *udp = (void *)ip + ip_hlen;
+    if ((void *)(udp + 1) > data_end)
+        return XDP_PASS;
+
+    if (udp->dest != bpf_htons(2152))
+        return XDP_PASS;
+
+    struct gtpuhdr *gtp = (void *)(udp + 1);
+    if ((void *)(gtp + 1) > data_end)
+        return XDP_PASS;
+
+    __u32 teid = bpf_ntohl(gtp->teid);
+    if (teid == 0x0000A001)
+        return bpf_redirect(95, 0);
+    if (teid == 0x0000A002)
+        return bpf_redirect(96, 0);
+
+    return XDP_PASS;
+}
+
+char _license[] SEC("license") = "GPL";

@@ -1,0 +1,65 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_007_arp_target_mac_rewrite",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_ptr_l1_007_arp_target_mac_rewrite/sample-0.c",
+  "source_sha256": "5b6e080a7128e1d48ffc9b04b36fabd180aa0cf22a159d38c74973175413e1da",
+  "timestamp": "2026-09-06T20:17:53.177374+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_rs2qmw63/candidate.o\nlibbpf: elf: section(3) xdp, size 232, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_transform_syn_ptr_l1_007_arp_target_mac_rewrite' at insn offset 0 (0 bytes), code size 29 insns (232 bytes)\nlibbpf: elf: section(4) .rodata.str1.1, size 7, link 0, flags 32, type=1\nlibbpf: elf: section(5) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_rs2qmw63/candidate.o is GPL\nlibbpf: elf: section(15) .BTF, size 944, link 0, flags 0, type=1\nlibbpf: elf: section(17) .BTF.ext, size 224, link 0, flags 0, type=1\nlibbpf: elf: section(25) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map '.rodata.str1.1' (global data): at sec_idx 4, offset 0, flags 80.\nlibbpf: map 0 is \".rodata.str1.1\"\nlibbpf: map '.rodata.str1.1': created successfully, fd=4\nlibbpf: prog 'xdp_transform_syn_ptr_l1_007_arp_target_mac_rewrite': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+22         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_ARP))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_ARP))\n9: (55) if r3 != 0x608 goto pc+17     ; R3_w=1544\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 46                     ; R3=pkt(off=46,r=14)\n12: (2d) if r3 > r2 goto pc+14        ; R2=pkt_end() R3=pkt(off=46,r=46)\n; if (arp->ar_op == bpf_htons(2)) {\n13: (69) r2 = *(u16 *)(r1 +20)        ; R1=pkt(r=46) R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; if (arp->ar_op == bpf_htons(2)) {\n14: (55) if r2 != 0x200 goto pc+12    ; R2_w=512\n15: (b7) r2 = 238                     ; R2_w=238\n; __builtin_memcpy(arp->ar_tha, \"\\x02\\xAA\\xBB\\xCC\\xDD\\xEE\", ETH_ALEN);\n16: (73) *(u8 *)(r1 +39) = r2         ; R1=pkt(r=46) R2_w=238\n17: (b7) r2 = 221                     ; R2_w=221\n18: (73) *(u8 *)(r1 +38) = r2         ; R1=pkt(r=46) R2_w=221\n19: (b7) r2 = 204                     ; R2_w=204\n20: (73) *(u8 *)(r1 +37) = r2         ; R1=pkt(r=46) R2_w=204\n21: (b7) r2 = 187                     ; R2_w=187\n22: (73) *(u8 *)(r1 +36) = r2         ; R1=pkt(r=46) R2_w=187\n23: (b7) r2 = 170                     ; R2_w=170\n24: (73) *(u8 *)(r1 +35) = r2         ; R1=pkt(r=46) R2_w=170\n25: (b7) r2 = 2                       ; R2_w=2\n26: (73) *(u8 *)(r1 +34) = r2         ; R1=pkt(r=46) R2=2\n; }\n27: (b7) r0 = 2                       ; R0_w=2\n28: (95) exit\n\nfrom 14 to 27: safe\n\nfrom 12 to 27: safe\n\nfrom 9 to 27: safe\n\nfrom 4 to 27: safe\nverification time 136 usec\nstack depth 0\nprocessed 33 insns (limit 1000000) max_states_per_insn 0 total_states 2 peak_states 2 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 5,
+    "total_tests": 5,
+    "details": [
+      {
+        "name": "arp_reply_target_mac_rewrite_pass",
+        "description": "ARP Reply Target MAC rewritten to 02:aa:bb:cc:dd:ee",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_req_pass",
+        "description": "ARP Request passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv4_pass",
+        "description": "IPv4 traffic passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_pass",
+        "description": "IPv6 traffic passed unchanged",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_arp_pass",
+        "description": "Truncated ARP frame passed safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

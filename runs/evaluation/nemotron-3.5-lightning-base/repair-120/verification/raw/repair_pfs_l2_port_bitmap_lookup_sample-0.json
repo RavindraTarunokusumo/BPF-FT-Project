@@ -1,0 +1,79 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "repair_pfs_l2_port_bitmap_lookup",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_port_bitmap_lookup/sample-0.c",
+  "source_sha256": "72c903c2f02c66ab74514510bd33230da17e4a21d3c011ac77df6a39284ee5f1",
+  "timestamp": "2026-09-05T20:40:35.206872+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_2p95_58g/candidate.o\nlibbpf: elf: section(3) xdp, size 376, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_filter' at insn offset 0 (0 bytes), code size 47 insns (376 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_2p95_58g/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1374, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 448, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'port_bitmap': at sec_idx 5, offset 0.\nlibbpf: map 'port_bitmap': found type = 2.\nlibbpf: map 'port_bitmap': found key [6], sz = 4.\nlibbpf: map 'port_bitmap': found value [6], sz = 4.\nlibbpf: map 'port_bitmap': found max_entries = 2048.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #33 against 'port_bitmap'\nlibbpf: prog 'xdp_filter': found map 0 (port_bitmap, sec 5, off 0) for insn #33\nlibbpf: map 'port_bitmap': created successfully, fd=4\nlibbpf: prog 'xdp_filter': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_filter(struct xdp_md *ctx)\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+40         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+35      ; R4_w=8\n11: (bf) r4 = r3                      ; R3_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r2 goto pc+32        ; R2=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_TCP)\n14: (71) r3 = *(u8 *)(r3 +23)         ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_TCP)\n15: (55) if r3 != 0x6 goto pc+30      ; R3_w=6\n; __u32 ip_len = (__u32)ip->ihl * 4;\n16: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(off=14,r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; __u32 ip_len = (__u32)ip->ihl * 4;\n17: (67) r3 <<= 2                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r3 &= 60                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r4 = 20                      ; R4_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n20: (2d) if r4 > r3 goto pc+25        ; R3_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=20\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n21: (0f) r1 += r3\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r3 stack= before 20: (2d) if r4 > r3 goto pc+25\nmark_precise: frame0: regs=r3,r4 stack= before 19: (b7) r4 = 20\nmark_precise: frame0: regs=r3 stack= before 18: (57) r3 &= 60\nmark_precise: frame0: regs=r3 stack= before 17: (67) r3 <<= 2\nmark_precise: frame0: regs=r3 stack= before 16: (71) r3 = *(u8 *)(r1 +0)\n22: R1=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if (ip_len < sizeof(struct iphdr) || (void *)ip + ip_len > data_end)\n22: (2d) if r1 > r2 goto pc+23        ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R2=pkt_end()\n23: (bf) r3 = r1                      ; R1=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=pkt(id=1,off=14,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n24: (07) r3 += 20                     ; R3_w=pkt(id=1,off=34,r=14,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n25: (2d) if r3 > r2 goto pc+20        ; R2=pkt_end() R3_w=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; __u16 dport = bpf_ntohs(tcp->dest);\n26: (69) r6 = *(u16 *)(r1 +2)         ; R1=pkt(id=1,off=14,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R6_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n27: (bf) r1 = r6                      ; R1_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R6_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n28: (dc) r1 = be64 r1                 ; R1_w=scalar()\n29: (77) r1 >>= 53                    ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=2047,var_off=(0x0; 0x7ff))\n; __u32 word_idx = dport >> 5;   /* port / 32 */\n30: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=2047,var_off=(0x0; 0x7ff)) R10=fp0 fp-8=mmmm????\n31: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u16 dport = bpf_ntohs(tcp->dest);\n32: (07) r2 += -4                     ; R2_w=fp-4\n; __u32 *val = bpf_map_lookup_elem(&port_bitmap, &word_idx);\n33: (18) r1 = 0xff2125b8bd5b8000      ; R1_w=map_ptr(map=port_bitmap,ks=4,vs=4)\n35: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=3,map=port_bitmap,ks=4,vs=4)\n36: (bf) r1 = r0                      ; R0=map_value_or_null(id=3,map=port_bitmap,ks=4,vs=4) R1_w=map_value_or_null(id=3,map=port_bitmap,ks=4,vs=4)\n37: (b7) r0 = 2                       ; R0_w=2\n; if (!val)\n38: (15) if r1 == 0x0 goto pc+7       ; R1_w=map_value(map=port_bitmap,ks=4,vs=4)\n; \n39: (dc) r6 = be16 r6                 ; R6_w=scalar()\n; if (*val & (1U << bit_idx))\n40: (57) r6 &= 31                     ; R6_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=31,var_off=(0x0; 0x1f))\n; if (*val & (1U << bit_idx))\n41: (61) r1 = *(u32 *)(r1 +0)         ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; \n42: (7f) r1 >>= r6                    ; R1_w=scalar() R6_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=31,var_off=(0x0; 0x1f))\n43: (57) r1 &= 1                      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1,var_off=(0x0; 0x1))\n44: (15) if r1 == 0x0 goto pc+1       ; R1_w=1\n45: (b7) r0 = 1                       ; R0=1\n; }\n46: (95) exit\n\nfrom 44 to 46: safe\n\nfrom 38 to 46: safe\n\nfrom 25 to 46: safe\n\nfrom 22 to 46: safe\n\nfrom 20 to 46: safe\n\nfrom 15 to 46: safe\n\nfrom 13 to 46: safe\n\nfrom 10 to 46: safe\n\nfrom 5 to 46: safe\nverification time 355 usec\nstack depth 8\nprocessed 55 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 3\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 7,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "pass_default_bitmap",
+        "description": "Pass when port not set in bitmap",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_port_22",
+        "description": "Pass port 22",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_udp",
+        "description": "Pass UDP port 22",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_high_port",
+        "description": "Pass high TCP port 65000",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_icmp",
+        "description": "Pass ICMP",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Pass ARP frame",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_trunc",
+        "description": "Pass truncated header safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

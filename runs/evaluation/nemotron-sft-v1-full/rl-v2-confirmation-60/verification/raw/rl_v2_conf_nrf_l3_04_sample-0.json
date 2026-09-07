@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_nrf_l3_04",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l3_04/sample-0.c",
+  "source_sha256": "fad755b590646d0e66ae6c3249160b0dde6c876c7059b7f2f3cf5b4582615b37",
+  "timestamp": "2026-09-06T20:18:29.616279+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l3_04/sample-0.c:44:22: error: call to undeclared function 'bpf_lpm_trie_lookup'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   44 |     __u32 *ifindex = bpf_lpm_trie_lookup(&redirect_route_4, &key, sizeof(key), 0);\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l3_04/sample-0.c:44:12: error: incompatible integer to pointer conversion initializing '__u32 *' (aka 'unsigned int *') with an expression of type 'int' [-Wint-conversion]\n   44 |     __u32 *ifindex = bpf_lpm_trie_lookup(&redirect_route_4, &key, sizeof(key), 0);\n      |            ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l3_04/sample-0.c:44:22: error: call to undeclared function 'bpf_lpm_trie_lookup'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   44 |     __u32 *ifindex = bpf_lpm_trie_lookup(&redirect_route_4, &key, sizeof(key), 0);\n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l3_04/sample-0.c:44:12: error: incompatible integer to pointer conversion initializing '__u32 *' (aka 'unsigned int *') with an expression of type 'int' [-Wint-conversion]\n   44 |     __u32 *ifindex = bpf_lpm_trie_lookup(&redirect_route_4, &key, sizeof(key), 0);\n      |            ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated."
+}

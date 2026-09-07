@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_nrf_l3_04",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_04/sample-0.c",
+  "source_sha256": "385a775241d3934c8ca6a083efda9d2e9187994a55ff15d86b252d830c417fe8",
+  "timestamp": "2026-09-06T20:18:14.578718+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_04/sample-0.c:37:19: error: call to undeclared function 'bpf_lpm_lookup'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   37 |     __u8 *route = bpf_lpm_lookup(&dev_route_table_4, &key, sizeof(key), 0);\n      |                   ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_04/sample-0.c:37:35: error: use of undeclared identifier 'dev_route_table_4'\n   37 |     __u8 *route = bpf_lpm_lookup(&dev_route_table_4, &key, sizeof(key), 0);\n      |                                   ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_04/sample-0.c:37:19: error: call to undeclared function 'bpf_lpm_lookup'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   37 |     __u8 *route = bpf_lpm_lookup(&dev_route_table_4, &key, sizeof(key), 0);\n      |                   ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_nrf_l3_04/sample-0.c:37:35: error: use of undeclared identifier 'dev_route_table_4'\n   37 |     __u8 *route = bpf_lpm_lookup(&dev_route_table_4, &key, sizeof(key), 0);\n      |                                   ^\n2 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_007_coap_method_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l1_007_coap_method_telemetry/sample-0.c",
+  "source_sha256": "ef26e801a0e92844bc2779c60222cb2adb3cd3b9c57b37ffc3b95e2c0f533f8a",
+  "timestamp": "2026-09-06T20:17:50.294095+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l1_007_coap_method_telemetry/sample-0.c:38:13: error: no member named 'dport' in 'struct iphdr'\n   38 |     if (ip->dport != bpf_htons(5683))\n      |         ~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l1_007_coap_method_telemetry/sample-0.c:38:13: error: no member named 'dport' in 'struct iphdr'\n   38 |     if (ip->dport != bpf_htons(5683))\n      |         ~~  ^\n1 error generated."
+}

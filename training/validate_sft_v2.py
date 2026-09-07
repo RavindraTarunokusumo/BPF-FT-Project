@@ -50,11 +50,14 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from training.model_profiles import get_model_profile
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-DEFAULT_MODEL_NAME = "Qwen/Qwen3-8B"
-DEFAULT_RENDERER_NAME = "qwen3_disable_thinking"
-DEFAULT_MAX_LENGTH = 4096
+DEFAULT_PROFILE = get_model_profile("nemotron-3.5-lightning")
+DEFAULT_MODEL_NAME = DEFAULT_PROFILE.model_name
+DEFAULT_RENDERER_NAME = DEFAULT_PROFILE.renderer_name
+DEFAULT_MAX_LENGTH = DEFAULT_PROFILE.max_sequence_length
 
 ALLOWED_ROLES = {"system", "user", "assistant"}
 ALLOWED_EXAMPLE_TYPES = {"synthesis", "repair"}
@@ -1066,11 +1069,17 @@ def main() -> None:
     parser.add_argument("--frozen-dir", type=Path, default=DEFAULT_FROZEN_DIR, help="Path to frozen v2 directory")
     parser.add_argument("--quality-report-out", type=Path, default=DEFAULT_QUALITY_REPORT, help="Output quality report JSON path")
     parser.add_argument("--leakage-report-out", type=Path, default=DEFAULT_LEAKAGE_REPORT, help="Output leakage report JSON path")
-    parser.add_argument("--model-name", type=str, default=DEFAULT_MODEL_NAME, help="Model ID for tokenization")
-    parser.add_argument("--renderer-name", type=str, default=DEFAULT_RENDERER_NAME, help="Renderer name for prompt formatting")
-    parser.add_argument("--max-length", type=int, default=DEFAULT_MAX_LENGTH, help="Maximum sequence length limit")
+    parser.add_argument("--model-profile", type=str, default="nemotron-3.5-lightning", help="Model profile to use (e.g. nemotron-3.5-lightning or qwen3-8b)")
+    parser.add_argument("--model-name", type=str, default=None, help="Model ID for tokenization (overrides profile)")
+    parser.add_argument("--renderer-name", type=str, default=None, help="Renderer name for prompt formatting (overrides profile)")
+    parser.add_argument("--max-length", type=int, default=None, help="Maximum sequence length limit (overrides profile)")
     parser.add_argument("--no-tokens", action="store_true", help="Skip exact tokenization length measurement")
     args = parser.parse_args()
+
+    prof = get_model_profile(args.model_profile)
+    model_name = args.model_name or prof.model_name
+    renderer_name = args.renderer_name or prof.renderer_name
+    max_length = args.max_length or prof.max_sequence_length
 
     try:
         run_master_sft_v2_validation(
@@ -1078,9 +1087,9 @@ def main() -> None:
             frozen_dir=args.frozen_dir,
             quality_report_path=args.quality_report_out,
             leakage_report_path=args.leakage_report_out,
-            model_name=args.model_name,
-            renderer_name=args.renderer_name,
-            max_length=args.max_length,
+            model_name=model_name,
+            renderer_name=renderer_name,
+            max_length=max_length,
             check_tokens=not args.no_tokens,
         )
     except ValidationError as e:

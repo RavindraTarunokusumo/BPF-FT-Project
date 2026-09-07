@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_007_ipv6_nd_spoof_guard",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c",
+  "source_sha256": "1189fa9b78c4dfd486bdb196c36a1c822d4c9d1e0c87e91f11cd4113a04acf01",
+  "timestamp": "2026-09-05T20:40:28.608644+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:19:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n   19 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_007_ipv6_nd_spoof_guard/sample-0.c:19:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n   19 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated."
+}

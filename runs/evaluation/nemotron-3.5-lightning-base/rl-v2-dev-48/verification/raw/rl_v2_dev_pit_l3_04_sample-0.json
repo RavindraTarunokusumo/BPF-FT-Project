@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_pit_l3_04",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c",
+  "source_sha256": "08c43d0c2cfa8476e10bd15621d2204d9aaa5d3896859e56a5bc34583bfea444",
+  "timestamp": "2026-09-05T20:40:46.456022+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c:27:25: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   27 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c:40:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   40 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c:53:17: error: call to undeclared function 'bpf_ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   53 |     __u16 win = bpf_ntohs(tcp->window);\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c:67:27: error: use of undeclared identifier 'win_dist_04'\n   67 |     __sync_fetch_and_add(&win_dist_04[bucket], 1);\n      |                           ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c:27:25: error: call to undeclared function 'bpf_htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   27 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c:40:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   40 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c:53:17: error: call to undeclared function 'bpf_ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   53 |     __u16 win = bpf_ntohs(tcp->window);\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_04/sample-0.c:67:27: error: use of undeclared identifier 'win_dist_04'\n   67 |     __sync_fetch_and_add(&win_dist_04[bucket], 1);\n      |                           ^\n4 errors generated."
+}

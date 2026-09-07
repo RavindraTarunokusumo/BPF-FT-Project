@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "syn_pfs_l1_005_mpls_bos_filter",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l1_005_mpls_bos_filter/sample-0.c",
+  "source_sha256": "2430c4696de5cc6d837e689b1edd1422c74de1d83c0dc1b1c47ee2d503d627a6",
+  "timestamp": "2026-09-05T20:40:25.328831+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l1_005_mpls_bos_filter/sample-0.c:7:10: fatal error: 'bpf/ctx/skb.h' file not found\n    7 | #include <bpf/ctx/skb.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l1_005_mpls_bos_filter/sample-0.c:7:10: fatal error: 'bpf/ctx/skb.h' file not found\n    7 | #include <bpf/ctx/skb.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated."
+}

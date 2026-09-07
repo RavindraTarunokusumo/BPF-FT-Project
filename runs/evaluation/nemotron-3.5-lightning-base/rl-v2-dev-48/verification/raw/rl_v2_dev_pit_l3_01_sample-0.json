@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_pit_l3_01",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_01/sample-0.c",
+  "source_sha256": "cd9d5239e0891a988d758150bad1af4bc54f0d4f9b29bc5b70b0c7ee6b0437e4",
+  "timestamp": "2026-09-05T20:40:50.938015+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_01/sample-0.c:27:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   27 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_01/sample-0.c:37:17: error: call to undeclared function 'bpf_ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   37 |     __u16 win = bpf_ntohs(tcp->window);\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_01/sample-0.c:56:27: error: use of undeclared identifier 'win_dist_01'\n   56 |     __sync_fetch_and_add(&win_dist_01[bucket], 1);\n      |                           ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_01/sample-0.c:27:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   27 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_01/sample-0.c:37:17: error: call to undeclared function 'bpf_ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   37 |     __u16 win = bpf_ntohs(tcp->window);\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48/candidates/rl_v2_dev_pit_l3_01/sample-0.c:56:27: error: use of undeclared identifier 'win_dist_01'\n   56 |     __sync_fetch_and_add(&win_dist_01[bucket], 1);\n      |                           ^\n3 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_009_srv6_path_latency_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l3_009_srv6_path_latency_telemetry/sample-0.c",
+  "source_sha256": "6547f74d125c257b78f4ec7e80bec5808ade8d3251f9b31ce3a928940ad43434",
+  "timestamp": "2026-09-06T20:17:47.082242+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l3_009_srv6_path_latency_telemetry/sample-0.c:55:28: error: no member named 'in6_u' in 'struct ipv6hdr'\n   55 |         path_hash ^= ipv6->s6_addr32[i];\n      |                      ~~~~  ^\n/usr/include/linux/in6.h:44:20: note: expanded from macro 's6_addr32'\n   44 | #define s6_addr32               in6_u.u6_addr32\n      |                                 ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l3_009_srv6_path_latency_telemetry/sample-0.c:55:28: error: no member named 'in6_u' in 'struct ipv6hdr'\n   55 |         path_hash ^= ipv6->s6_addr32[i];\n      |                      ~~~~  ^\n/usr/include/linux/in6.h:44:20: note: expanded from macro 's6_addr32'\n   44 | #define s6_addr32               in6_u.u6_addr32\n      |                                 ^\n1 error generated."
+}

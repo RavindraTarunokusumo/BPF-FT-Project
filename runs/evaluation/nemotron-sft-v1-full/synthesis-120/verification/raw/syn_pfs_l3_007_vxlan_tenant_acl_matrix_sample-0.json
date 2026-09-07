@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_007_vxlan_tenant_acl_matrix",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c",
+  "source_sha256": "895e3435866531083e81f0026cd866fcdbdb8a87307286fe1d193015ff1270bf",
+  "timestamp": "2026-09-06T20:17:50.492060+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:88:17: error: no member named 'prefix' in 'struct bpf_lpm_trie_key'\n   88 |         key_lpm.prefix[p - (void *)&inner_ip->saddr] = *p++;\n      |         ~~~~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:88:26: error: '__u8 *' (aka 'unsigned char *') and 'void *' are not pointers to compatible types\n   88 |         key_lpm.prefix[p - (void *)&inner_ip->saddr] = *p++;\n      |                        ~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:88:17: error: no member named 'prefix' in 'struct bpf_lpm_trie_key'\n   88 |         key_lpm.prefix[p - (void *)&inner_ip->saddr] = *p++;\n      |         ~~~~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_007_vxlan_tenant_acl_matrix/sample-0.c:88:26: error: '__u8 *' (aka 'unsigned char *') and 'void *' are not pointers to compatible types\n   88 |         key_lpm.prefix[p - (void *)&inner_ip->saddr] = *p++;\n      |                        ~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated."
+}

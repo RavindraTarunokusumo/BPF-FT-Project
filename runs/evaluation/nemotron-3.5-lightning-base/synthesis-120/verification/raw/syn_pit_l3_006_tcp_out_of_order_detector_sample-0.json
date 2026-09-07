@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_006_tcp_out_of_order_detector",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_006_tcp_out_of_order_detector/sample-0.c",
+  "source_sha256": "608ff335e0026698ba5835e4bbaffcf92dcfe00d1f6d6eeaa56dde0175b60b15",
+  "timestamp": "2026-09-05T20:40:29.608767+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_006_tcp_out_of_order_detector/sample-0.c:2:10: fatal error: 'linux/if/ether.h' file not found\n    2 | #include <linux/if/ether.h>\n      |          ^~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l3_006_tcp_out_of_order_detector/sample-0.c:2:10: fatal error: 'linux/if/ether.h' file not found\n    2 | #include <linux/if/ether.h>\n      |          ^~~~~~~~~~~~~~~~~~\n1 error generated."
+}

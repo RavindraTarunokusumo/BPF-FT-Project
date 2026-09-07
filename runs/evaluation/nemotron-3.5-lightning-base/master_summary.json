@@ -1,0 +1,452 @@
+{
+  "timestamp": "2026-09-05T20:41:17.203282+00:00",
+  "model_profile": "nemotron-3.5-lightning",
+  "model_name": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+  "revision": "a9904d24bcc1d289a1950fa9d2b978c47cf903b9",
+  "license": "OpenMDW-1.1",
+  "total_suites_evaluated": 6,
+  "suites": {
+    "calibration-36": {
+      "verification_mode": "empirical",
+      "rollout_dir": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36",
+      "total_tasks": 36,
+      "total_candidates": 36,
+      "num_samples_per_task": 1,
+      "metrics": {
+        "output_compliance_rate": 1.0,
+        "compilation_pass_rate": 0.0,
+        "kernel_verifier_pass_rate": 0.0,
+        "behavioral_pass_rate": 0.0,
+        "pass_at_1": {
+          "passed_tasks": 0,
+          "total_tasks": 36,
+          "rate": 0.0
+        },
+        "pass_at_4": "N/A"
+      },
+      "breakdowns": {
+        "by_category": {
+          "network_routing_forwarding": {
+            "total": 9,
+            "compliant": 9,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "packet_filtering_security": {
+            "total": 9,
+            "compliant": 9,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "packet_inspection_telemetry": {
+            "total": 9,
+            "compliant": 9,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "protocol_transformation": {
+            "total": 9,
+            "compliant": 9,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        },
+        "by_difficulty": {
+          "level_1": {
+            "total": 12,
+            "compliant": 12,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "level_2": {
+            "total": 12,
+            "compliant": 12,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "level_3": {
+            "total": 12,
+            "compliant": 12,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        }
+      },
+      "verification_host": {
+        "kernel": "Linux 6.8.0-106-generic x86_64",
+        "clang": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+        "bpftool": "bpftool v7.4.0",
+        "libbpf": "libbpf v1.4"
+      },
+      "candidate_set_hash": "7bdef1af80bb3bc964c61f756085b4566d14396241fad6031f42e460a111b85d",
+      "raw_results_hash": "ae49b8bffe172653663c6b25a680968a1e2f2f9bb9217418b5afd9f7cd1c9fc0"
+    },
+    "synthesis-120": {
+      "verification_mode": "empirical",
+      "rollout_dir": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120",
+      "total_tasks": 120,
+      "total_candidates": 120,
+      "num_samples_per_task": 1,
+      "metrics": {
+        "output_compliance_rate": 0.9166666666666666,
+        "compilation_pass_rate": 0.008333333333333333,
+        "kernel_verifier_pass_rate": 0.0,
+        "behavioral_pass_rate": 0.0,
+        "pass_at_1": {
+          "passed_tasks": 0,
+          "total_tasks": 120,
+          "rate": 0.0
+        },
+        "pass_at_4": "N/A"
+      },
+      "breakdowns": {
+        "by_category": {
+          "network_routing_forwarding": {
+            "total": 30,
+            "compliant": 28,
+            "compile": 1,
+            "verifier": 0,
+            "passed": 0
+          },
+          "packet_filtering_security": {
+            "total": 30,
+            "compliant": 28,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "packet_inspection_telemetry": {
+            "total": 30,
+            "compliant": 27,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "protocol_transformation": {
+            "total": 30,
+            "compliant": 27,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        },
+        "by_difficulty": {
+          "level_1": {
+            "total": 40,
+            "compliant": 38,
+            "compile": 1,
+            "verifier": 0,
+            "passed": 0
+          },
+          "level_2": {
+            "total": 40,
+            "compliant": 38,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "level_3": {
+            "total": 40,
+            "compliant": 34,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        }
+      },
+      "verification_host": {
+        "kernel": "Linux 6.8.0-106-generic x86_64",
+        "clang": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+        "bpftool": "bpftool v7.4.0",
+        "libbpf": "libbpf v1.4"
+      },
+      "candidate_set_hash": "0ccd57e2969f5522837c808b05e10864cc723e66b1ffa17139c4c5f05e59dbe0",
+      "raw_results_hash": "ab4f684ecb907bf40c0d6fa746d362379a4afc2b2c334117763f0d345f6dc897"
+    },
+    "repair-120": {
+      "verification_mode": "empirical",
+      "rollout_dir": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120",
+      "total_tasks": 120,
+      "total_candidates": 120,
+      "num_samples_per_task": 1,
+      "metrics": {
+        "output_compliance_rate": 1.0,
+        "compilation_pass_rate": 0.825,
+        "kernel_verifier_pass_rate": 0.825,
+        "behavioral_pass_rate": 0.6583333333333333,
+        "pass_at_1": {
+          "passed_tasks": 79,
+          "total_tasks": 120,
+          "rate": 0.6583333333333333
+        },
+        "pass_at_4": "N/A"
+      },
+      "breakdowns": {
+        "by_category": {
+          "network_routing_forwarding": {
+            "total": 30,
+            "compliant": 30,
+            "compile": 23,
+            "verifier": 23,
+            "passed": 16
+          },
+          "packet_filtering_security": {
+            "total": 30,
+            "compliant": 30,
+            "compile": 27,
+            "verifier": 27,
+            "passed": 21
+          },
+          "packet_inspection_telemetry": {
+            "total": 30,
+            "compliant": 30,
+            "compile": 27,
+            "verifier": 27,
+            "passed": 23
+          },
+          "protocol_transformation": {
+            "total": 30,
+            "compliant": 30,
+            "compile": 22,
+            "verifier": 22,
+            "passed": 19
+          }
+        },
+        "by_difficulty": {
+          "level_1": {
+            "total": 40,
+            "compliant": 40,
+            "compile": 34,
+            "verifier": 34,
+            "passed": 24
+          },
+          "level_2": {
+            "total": 40,
+            "compliant": 40,
+            "compile": 35,
+            "verifier": 35,
+            "passed": 31
+          },
+          "level_3": {
+            "total": 40,
+            "compliant": 40,
+            "compile": 30,
+            "verifier": 30,
+            "passed": 24
+          }
+        }
+      },
+      "verification_host": {
+        "kernel": "Linux 6.8.0-106-generic x86_64",
+        "clang": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+        "bpftool": "bpftool v7.4.0",
+        "libbpf": "libbpf v1.4"
+      },
+      "candidate_set_hash": "68f5822e6c893dd3ba74704a10159cdba55ccd01c7df9e52356675253bbe9d50",
+      "raw_results_hash": "b071d27546e358fd80c2914f07a5dace38ffd4aaf869f375ecd0762a8bd01d11"
+    },
+    "rl-v2-dev-48": {
+      "verification_mode": "empirical",
+      "rollout_dir": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-dev-48",
+      "total_tasks": 48,
+      "total_candidates": 48,
+      "num_samples_per_task": 1,
+      "metrics": {
+        "output_compliance_rate": 1.0,
+        "compilation_pass_rate": 0.0,
+        "kernel_verifier_pass_rate": 0.0,
+        "behavioral_pass_rate": 0.0,
+        "pass_at_1": {
+          "passed_tasks": 0,
+          "total_tasks": 48,
+          "rate": 0.0
+        },
+        "pass_at_4": "N/A"
+      },
+      "breakdowns": {
+        "by_category": {
+          "unknown": {
+            "total": 48,
+            "compliant": 48,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        },
+        "by_difficulty": {
+          "unknown": {
+            "total": 48,
+            "compliant": 48,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        }
+      },
+      "verification_host": {
+        "kernel": "Linux 6.8.0-106-generic x86_64",
+        "clang": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+        "bpftool": "bpftool v7.4.0",
+        "libbpf": "libbpf v1.4"
+      },
+      "candidate_set_hash": "2c3864ee71abdd22f1b34ebed7e56714476abd7c457cb07ad30ef745398cfd92",
+      "raw_results_hash": "a1bedc757c8ae155cb6e1161a95315d213bae253bb5d21aac24f6a71f3f995b3"
+    },
+    "rl-v2-confirmation-60": {
+      "verification_mode": "empirical",
+      "rollout_dir": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60",
+      "total_tasks": 60,
+      "total_candidates": 60,
+      "num_samples_per_task": 1,
+      "metrics": {
+        "output_compliance_rate": 1.0,
+        "compilation_pass_rate": 0.0,
+        "kernel_verifier_pass_rate": 0.0,
+        "behavioral_pass_rate": 0.0,
+        "pass_at_1": {
+          "passed_tasks": 0,
+          "total_tasks": 60,
+          "rate": 0.0
+        },
+        "pass_at_4": "N/A"
+      },
+      "breakdowns": {
+        "by_category": {
+          "unknown": {
+            "total": 60,
+            "compliant": 60,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        },
+        "by_difficulty": {
+          "unknown": {
+            "total": 60,
+            "compliant": 60,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        }
+      },
+      "verification_host": {
+        "kernel": "Linux 6.8.0-106-generic x86_64",
+        "clang": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+        "bpftool": "bpftool v7.4.0",
+        "libbpf": "libbpf v1.4"
+      },
+      "candidate_set_hash": "bc841f8632422a7cde195a546c1ecd5296c62eb71c36b0677077e374dbc4ebb7",
+      "raw_results_hash": "0b4fa2a97d7979ca149c549ae9913c180a894c3db02ff45dba1d4ba7008ca062"
+    },
+    "sensitivity-12": {
+      "verification_mode": "empirical",
+      "rollout_dir": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12",
+      "total_tasks": 12,
+      "total_candidates": 12,
+      "num_samples_per_task": 1,
+      "metrics": {
+        "output_compliance_rate": 0.8333333333333334,
+        "compilation_pass_rate": 0.0,
+        "kernel_verifier_pass_rate": 0.0,
+        "behavioral_pass_rate": 0.0,
+        "pass_at_1": {
+          "passed_tasks": 0,
+          "total_tasks": 12,
+          "rate": 0.0
+        },
+        "pass_at_4": "N/A"
+      },
+      "breakdowns": {
+        "by_category": {
+          "network_routing_forwarding": {
+            "total": 3,
+            "compliant": 3,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "packet_filtering_security": {
+            "total": 3,
+            "compliant": 3,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "packet_inspection_telemetry": {
+            "total": 3,
+            "compliant": 3,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "protocol_transformation": {
+            "total": 3,
+            "compliant": 1,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        },
+        "by_difficulty": {
+          "level_1": {
+            "total": 4,
+            "compliant": 4,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "level_2": {
+            "total": 4,
+            "compliant": 3,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          },
+          "level_3": {
+            "total": 4,
+            "compliant": 3,
+            "compile": 0,
+            "verifier": 0,
+            "passed": 0
+          }
+        }
+      },
+      "verification_host": {
+        "kernel": "Linux 6.8.0-106-generic x86_64",
+        "clang": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+        "bpftool": "bpftool v7.4.0",
+        "libbpf": "libbpf v1.4"
+      },
+      "candidate_set_hash": "8f34a4a717b51be19526b3434ba4b736dc73a2f64b4ea0aaa7af53e927d85e6e",
+      "raw_results_hash": "6bbe48ae6f104cb24384e3b2016e514f16789cb8dabd5d1bb8d98c37acc5c022"
+    }
+  },
+  "protected_combined": {
+    "passed": 79,
+    "total": 276,
+    "rate": 0.286231884057971,
+    "target_gate": "143/276 (SFT gate)",
+    "qwen_sft_v2_baseline": "137/276 (49.6%)",
+    "qwen_base_baseline": "14/276 (5.1%)"
+  },
+  "mcnemar_vs_qwen_sft_v2": {
+    "common_tasks": 384,
+    "contingency": {
+      "n00_both_fail": 185,
+      "n01_nemotron_recovered": 7,
+      "n10_nemotron_regressed": 120,
+      "n11_both_pass": 72
+    },
+    "mcnemar_stat": 98.77165354330708,
+    "p_value": 1.1142593600922467e-27,
+    "net_gain": -113
+  }
+}

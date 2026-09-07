@@ -1,0 +1,29 @@
+{
+  "run_id": "nemotron-sft-canary-run-d-rank64-lr4e4",
+  "fingerprint": "e900085963c3",
+  "model_profile": "nemotron-3.5-lightning",
+  "model_name": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+  "renderer_name": "nemotron3_ultra_disable_thinking",
+  "recipe_name": "bpf_guardian_nemotron_sft_v1",
+  "license": "OpenMDW-1.1",
+  "revision": "a9904d24bcc1d289a1950fa9d2b978c47cf903b9",
+  "learning_rate": 0.0004,
+  "lr_schedule": "cosine",
+  "num_epochs": 1,
+  "lora_rank": 64,
+  "batch_size": 32,
+  "max_length": 4096,
+  "save_every": 20,
+  "eval_every": 10,
+  "tinker_version": "0.27.0",
+  "tinker_cookbook_version": "0.5.5",
+  "train_sha256": "4f412ba3db76ffd687458fb22359a55ad2ea6de4959546b8c5ae5b842f7e8f38",
+  "val_sha256": "f8b0f2679dd38d7b0154e56f563b9a9894e5c8a13ec2317ba82e1ebd1e07c7e0",
+  "token_estimates": {
+    "train_tokens_per_epoch": 1409263,
+    "val_tokens_per_eval": 167171,
+    "total_train_tokens": 1409263,
+    "estimated_train_cost_usd": 0.62007572,
+    "estimated_val_eval_cost_usd": 0.032598345
+  }
+}

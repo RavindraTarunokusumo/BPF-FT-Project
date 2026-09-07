@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "syn_ptr_l3_001_vxlan_encap_push",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c",
+  "source_sha256": "393726bb8779b8cb5a4b986cecd70fc44b9bf943bc245d639a675c27f325a83b",
+  "timestamp": "2026-09-05T20:40:25.278062+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:138:5: error: call to undeclared function 'bpf_probe_write_kernel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  138 |     bpf_probe_write_kernel(outer_eth->h_dest, inner_src, ETH_ALEN);\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:152:5: error: unterminated /* comment\n  152 |     /* Calculate offset for outer IP header.\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:189:28: error: expected '}'\n  189 |      * [ Headroom (50 bytes\n      |                            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:51:1: note: to match this '{'\n   51 | {\n      | ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:138:5: error: call to undeclared function 'bpf_probe_write_kernel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  138 |     bpf_probe_write_kernel(outer_eth->h_dest, inner_src, ETH_ALEN);\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:152:5: error: unterminated /* comment\n  152 |     /* Calculate offset for outer IP header.\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:189:28: error: expected '}'\n  189 |      * [ Headroom (50 bytes\n      |                            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l3_001_vxlan_encap_push/sample-0.c:51:1: note: to match this '{'\n   51 | {\n      | ^\n3 errors generated."
+}

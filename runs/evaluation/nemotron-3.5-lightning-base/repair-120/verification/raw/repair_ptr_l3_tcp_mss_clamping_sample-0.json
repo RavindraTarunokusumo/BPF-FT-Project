@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "repair_ptr_l3_tcp_mss_clamping",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_tcp_mss_clamping/sample-0.c",
+  "source_sha256": "3ee716eb25fad03fcbc57f59280a4f043cbc54e964426451c339da0a3e742a53",
+  "timestamp": "2026-09-05T20:40:34.689129+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_tcp_mss_clamping/sample-0.c:56:50: error: too few arguments to function call, expected 5, have 2\n   56 |                 bpf_l3_csum_replace(&ip->check, 0);\n      |                 ~~~~~~~~~~~~~~~~~~~              ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_tcp_mss_clamping/sample-0.c:57:37: warning: incompatible pointer types passing '__sum16 *' (aka 'unsigned short *') to parameter of type 'struct __sk_buff *' [-Wincompatible-pointer-types]\n   57 |                 bpf_l4_csum_replace(&tcp->check, 0, \n      |                                     ^~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_tcp_mss_clamping/sample-0.c:58:37: error: incompatible pointer to integer conversion passing '__u16 *' (aka 'unsigned short *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   58 |                                     (__u16 *)tcp, \n      |                                     ^~~~~~~~~~~~\n1 warning and 2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_tcp_mss_clamping/sample-0.c:56:50: error: too few arguments to function call, expected 5, have 2\n   56 |                 bpf_l3_csum_replace(&ip->check, 0);\n      |                 ~~~~~~~~~~~~~~~~~~~              ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_tcp_mss_clamping/sample-0.c:57:37: warning: incompatible pointer types passing '__sum16 *' (aka 'unsigned short *') to parameter of type 'struct __sk_buff *' [-Wincompatible-pointer-types]\n   57 |                 bpf_l4_csum_replace(&tcp->check, 0, \n      |                                     ^~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_tcp_mss_clamping/sample-0.c:58:37: error: incompatible pointer to integer conversion passing '__u16 *' (aka 'unsigned short *') to parameter of type '__u64' (aka 'unsigned long long') [-Wint-conversion]\n   58 |                                     (__u16 *)tcp, \n      |                                     ^~~~~~~~~~~~\n1 warning and 2 errors generated."
+}

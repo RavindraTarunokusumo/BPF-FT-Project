@@ -1,0 +1,46 @@
+{
+  "task_id": "rl_n3_conf_pfs_l2_01",
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_family": "conf_pfs_l2_tcp_xmas",
+  "template_family": "xdp_tcp_flags_filter",
+  "semantic_signature": "pfs_l2_flags_tcp_xmas",
+  "split": "confirmation",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that inspects network traffic and must drop TCP Xmas scan probes where FIN, PSH, and URG flags are simultaneously asserted. Forward all other packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet header bounds against data_end",
+    "Verify IPv4 header bounds and confirm protocol is IPPROTO_TCP",
+    "Safely validate variable IPv4 header length (ip->ihl * 4)",
+    "Verify TCP header bounds against data_end",
+    "Drop packet with XDP_DROP if (tcp->fin && tcp->psh && tcp->urg)",
+    "Return XDP_PASS for non-matching or malformed traffic",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "drop_xmas",
+      "description": "Xmas scan FIN+PSH+URG dropped",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005029fffff7db0000",
+      "expected_action": "XDP_DROP",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_syn",
+      "description": "Normal SYN passes",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_arp",
+      "description": "ARP passes",
+      "packet_hex": "52540012345652540065432108060001080006040001525400123456c0a8010a000000000000c0a80114",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "phase": "phase_n3",
+  "expected_fixture_count": 3,
+  "task_sha256": "13661ee615c13aeb08e9963dff35d7ec39d957b6260a467bc0bb2435d9f665ef"
+}

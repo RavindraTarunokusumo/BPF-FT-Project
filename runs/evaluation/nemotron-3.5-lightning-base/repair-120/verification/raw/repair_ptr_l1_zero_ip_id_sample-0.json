@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "repair_ptr_l1_zero_ip_id",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l1_zero_ip_id/sample-0.c",
+  "source_sha256": "db897cd0131e694b2aafb33e866969e3216794dbd00eee0ccbff4582bf3652d5",
+  "timestamp": "2026-09-05T20:40:43.428916+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l1_zero_ip_id/sample-0.c:32:68: error: too few arguments to function call, expected 5, have 4\n   32 |     ip->check = bpf_csum_diff(ip->check, 0, sizeof(struct iphdr), 0);\n      |                 ~~~~~~~~~~~~~                                      ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l1_zero_ip_id/sample-0.c:32:68: error: too few arguments to function call, expected 5, have 4\n   32 |     ip->check = bpf_csum_diff(ip->check, 0, sizeof(struct iphdr), 0);\n      |                 ~~~~~~~~~~~~~                                      ^\n1 error generated."
+}

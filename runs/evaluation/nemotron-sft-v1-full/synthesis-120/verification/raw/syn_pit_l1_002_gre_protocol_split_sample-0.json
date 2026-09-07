@@ -1,0 +1,65 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_002_gre_protocol_split",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l1_002_gre_protocol_split/sample-0.c",
+  "source_sha256": "b662e96f9376826ee0bc2abe7a70b33c65d99cfc7d3d19a2b6ed0cd940dd8902",
+  "timestamp": "2026-09-06T20:17:45.351866+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_hsou7yuq/candidate.o\nlibbpf: elf: section(3) xdp, size 272, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_syn_pit_l1_002_gre_protocol_split' at insn offset 0 (0 bytes), code size 34 insns (272 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_hsou7yuq/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1321, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 352, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'gre_split_map': at sec_idx 5, offset 0.\nlibbpf: map 'gre_split_map': found type = 6.\nlibbpf: map 'gre_split_map': found key [8], sz = 4.\nlibbpf: map 'gre_split_map': found value [11], sz = 8.\nlibbpf: map 'gre_split_map': found max_entries = 3.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #25 against 'gre_split_map'\nlibbpf: prog 'xdp_telemetry_syn_pit_l1_002_gre_protocol_split': found map 0 (gre_split_map, sec 5, off 0) for insn #25\nlibbpf: map 'gre_split_map': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_syn_pit_l1_002_gre_protocol_split': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+27         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (71) r4 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (4f) r4 |= r3                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r4 != 0x8 goto pc+22       ; R4_w=8\n; if ((void *)(ip + 1) > data_end)\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n; if ((void *)(ip + 1) > data_end)\n12: (2d) if r3 > r2 goto pc+19        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; if (ip->protocol != 47)\n13: (71) r4 = *(u8 *)(r1 +23)         ; R1=pkt(r=34) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != 47)\n14: (55) if r4 != 0x2f goto pc+17     ; R4_w=47\n; if ((void *)(p + 1) > data_end)\n15: (07) r1 += 35                     ; R1_w=pkt(off=35,r=34)\n; if ((void *)(p + 1) > data_end)\n16: (2d) if r1 > r2 goto pc+15        ; R1_w=pkt(off=35,r=35) R2=pkt_end()\n; if (*p == 0x08)\n17: (71) r2 = *(u8 *)(r3 +0)          ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=34,r=35)\n18: (b7) r1 = 1                       ; R1_w=1\n19: (55) if r2 != 0x8 goto pc+1       ; R2_w=8\n20: (b7) r1 = 0                       ; R1=0\n21: (67) r1 <<= 1                     ; R1_w=0\n; \n22: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 22 first_idx 21 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 21: (67) r1 <<= 1\nmark_precise: frame0: parent state regs=r1 stack=:  R1_rw=P0 R2_w=8 R3=pkt(off=34,r=35) R4_w=47 R10=fp0\nmark_precise: frame0: last_idx 20 first_idx 12 subseq_idx 21 \nmark_precise: frame0: regs=r1 stack= before 20: (b7) r1 = 0\n23: R1_w=0 R10=fp0 fp-8=0000????\n23: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n24: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&gre_split_map, &key);\n25: (18) r1 = 0xff2125b90b890a00      ; R1_w=map_ptr(map=gre_split_map,ks=4,vs=8)\n27: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=1,map=gre_split_map,ks=4,vs=8)\n; if (cnt)\n28: (15) if r0 == 0x0 goto pc+3       ; R0_w=map_value(map=gre_split_map,ks=4,vs=8)\n; *cnt += 1;\n29: (79) r1 = *(u64 *)(r0 +0)         ; R0_w=map_value(map=gre_split_map,ks=4,vs=8) R1_w=scalar()\n30: (07) r1 += 1                      ; R1_w=scalar()\n31: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=gre_split_map,ks=4,vs=8) R1=scalar()\n; }\n32: (b7) r0 = 2                       ; R0_w=2\n33: (95) exit\n\nfrom 28 to 32: safe\n\nfrom 19 to 21: R1_w=1 R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=34,r=35) R4_w=47 R10=fp0\n21: R1_w=1 R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=34,r=35) R4_w=47 R10=fp0\n; if (*p == 0x08)\n21: (67) r1 <<= 1                     ; R1_w=2\n; \n22: (63) *(u32 *)(r10 -4) = r1        ; R1_w=2 R10=fp0 fp-8=mmmm????\n23: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n24: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&gre_split_map, &key);\n25: (18) r1 = 0xff2125b90b890a00      ; R1_w=map_ptr(map=gre_split_map,ks=4,vs=8)\n27: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=gre_split_map,ks=4,vs=8)\n; if (cnt)\n28: (15) if r0 == 0x0 goto pc+3       ; R0=map_value(map=gre_split_map,ks=4,vs=8)\n; *cnt += 1;\n29: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=gre_split_map,ks=4,vs=8) R1_w=scalar()\n30: (07) r1 += 1                      ; R1_w=scalar()\n31: (7b) *(u64 *)(r0 +0) = r1\n32: safe\n\nfrom 28 to 32: safe\n\nfrom 16 to 32: safe\n\nfrom 14 to 32: safe\n\nfrom 12 to 32: safe\n\nfrom 9 to 32: safe\n\nfrom 4 to 32: safe\nverification time 287 usec\nstack depth 8\nprocessed 51 insns (limit 1000000) max_states_per_insn 1 total_states 4 peak_states 4 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 5,
+    "total_tests": 5,
+    "details": [
+      {
+        "name": "gre_ipv4_pass",
+        "description": "GRE carrying IPv4 increments slot 0 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "gre_ipv6_pass",
+        "description": "GRE carrying IPv6 increments slot 1 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "gre_other_pass",
+        "description": "GRE carrying other protocol increments slot 2 and returns XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "non_gre_udp_pass",
+        "description": "Non-GRE UDP packet passes without incrementing GRE map",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_gre_pass",
+        "description": "Truncated GRE packet passes safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

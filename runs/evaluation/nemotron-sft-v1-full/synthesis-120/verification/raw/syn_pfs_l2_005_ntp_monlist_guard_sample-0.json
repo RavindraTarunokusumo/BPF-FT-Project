@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_005_ntp_monlist_guard",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c",
+  "source_sha256": "b1b199ad92ba4a284e72d69e1e91fd5909f06f8ed4edb0509e64dbb073ba38ec",
+  "timestamp": "2026-09-06T20:17:52.485775+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c:13:5: error: unknown type name '__be8'\n   13 |     __be8 li_vn_mode;\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c:14:5: error: unknown type name '__be8'\n   14 |     __be8 stratum;\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c:15:5: error: unknown type name '__be8'\n   15 |     __be8 poll;\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c:16:5: error: unknown type name '__be8'\n   16 |     __be8 precision;\n      |     ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c:13:5: error: unknown type name '__be8'\n   13 |     __be8 li_vn_mode;\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c:14:5: error: unknown type name '__be8'\n   14 |     __be8 stratum;\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c:15:5: error: unknown type name '__be8'\n   15 |     __be8 poll;\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l2_005_ntp_monlist_guard/sample-0.c:16:5: error: unknown type name '__be8'\n   16 |     __be8 precision;\n      |     ^\n4 errors generated."
+}

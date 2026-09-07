@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "syn_nrf_l1_004_vxlan_vni_reflector",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_004_vxlan_vni_reflector/sample-0.c",
+  "source_sha256": "5d11003bd82f6429b962b44a869048dabc73000a1bec00555017b7cf50a42862",
+  "timestamp": "2026-09-06T20:17:53.685098+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_004_vxlan_vni_reflector/sample-0.c:61:17: error: use of undeclared identifier 'tmp_saddr'\n   61 |     ip->daddr = tmp_saddr; // Need to save original\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_004_vxlan_vni_reflector/sample-0.c:64:17: error: use of undeclared identifier 'tmp_port'\n   64 |     udp->dest = tmp_port;\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_004_vxlan_vni_reflector/sample-0.c:66:5: error: call to undeclared function 'csum_ip_hdr'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   66 |     csum_ip_hdr(ip);\n      |     ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_004_vxlan_vni_reflector/sample-0.c:61:17: error: use of undeclared identifier 'tmp_saddr'\n   61 |     ip->daddr = tmp_saddr; // Need to save original\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_004_vxlan_vni_reflector/sample-0.c:64:17: error: use of undeclared identifier 'tmp_port'\n   64 |     udp->dest = tmp_port;\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_nrf_l1_004_vxlan_vni_reflector/sample-0.c:66:5: error: call to undeclared function 'csum_ip_hdr'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   66 |     csum_ip_hdr(ip);\n      |     ^\n3 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_2",
+  "task_id": "syn_pit_l2_007_icmpv6_nd_telemetry",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c",
+  "source_sha256": "0b4849a1cb1a05796ae805b38433f70179ac9b4eb54459bdae5b8604160bc5cf",
+  "timestamp": "2026-09-06T20:17:42.497743+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:39:23: error: arithmetic on a pointer to an incomplete type 'struct icmp6hdr'\n   39 |     if ((void *)(icmp + 1) > data_end)\n      |                  ~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:38:12: note: forward declaration of 'struct icmp6hdr'\n   38 |     struct icmp6hdr *icmp = (void *)(ip + 1);\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:42:22: error: incomplete definition of type 'struct icmp6hdr'\n   42 |     __u32 key = (icmp->icmp_type - 133);\n      |                  ~~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:38:12: note: forward declaration of 'struct icmp6hdr'\n   38 |     struct icmp6hdr *icmp = (void *)(ip + 1);\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:39:23: error: arithmetic on a pointer to an incomplete type 'struct icmp6hdr'\n   39 |     if ((void *)(icmp + 1) > data_end)\n      |                  ~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:38:12: note: forward declaration of 'struct icmp6hdr'\n   38 |     struct icmp6hdr *icmp = (void *)(ip + 1);\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:42:22: error: incomplete definition of type 'struct icmp6hdr'\n   42 |     __u32 key = (icmp->icmp_type - 133);\n      |                  ~~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l2_007_icmpv6_nd_telemetry/sample-0.c:38:12: note: forward declaration of 'struct icmp6hdr'\n   38 |     struct icmp6hdr *icmp = (void *)(ip + 1);\n      |            ^\n2 errors generated."
+}

@@ -1,0 +1,82 @@
+{
+  "verification_mode": "empirical",
+  "rollout_dir": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36",
+  "total_tasks": 36,
+  "total_candidates": 36,
+  "num_samples_per_task": 1,
+  "metrics": {
+    "output_compliance_rate": 1.0,
+    "compilation_pass_rate": 0.0,
+    "kernel_verifier_pass_rate": 0.0,
+    "behavioral_pass_rate": 0.0,
+    "pass_at_1": {
+      "passed_tasks": 0,
+      "total_tasks": 36,
+      "rate": 0.0
+    },
+    "pass_at_4": "N/A"
+  },
+  "breakdowns": {
+    "by_category": {
+      "network_routing_forwarding": {
+        "total": 9,
+        "compliant": 9,
+        "compile": 0,
+        "verifier": 0,
+        "passed": 0
+      },
+      "packet_filtering_security": {
+        "total": 9,
+        "compliant": 9,
+        "compile": 0,
+        "verifier": 0,
+        "passed": 0
+      },
+      "packet_inspection_telemetry": {
+        "total": 9,
+        "compliant": 9,
+        "compile": 0,
+        "verifier": 0,
+        "passed": 0
+      },
+      "protocol_transformation": {
+        "total": 9,
+        "compliant": 9,
+        "compile": 0,
+        "verifier": 0,
+        "passed": 0
+      }
+    },
+    "by_difficulty": {
+      "level_1": {
+        "total": 12,
+        "compliant": 12,
+        "compile": 0,
+        "verifier": 0,
+        "passed": 0
+      },
+      "level_2": {
+        "total": 12,
+        "compliant": 12,
+        "compile": 0,
+        "verifier": 0,
+        "passed": 0
+      },
+      "level_3": {
+        "total": 12,
+        "compliant": 12,
+        "compile": 0,
+        "verifier": 0,
+        "passed": 0
+      }
+    }
+  },
+  "verification_host": {
+    "kernel": "Linux 6.8.0-106-generic x86_64",
+    "clang": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+    "bpftool": "bpftool v7.4.0",
+    "libbpf": "libbpf v1.4"
+  },
+  "candidate_set_hash": "7bdef1af80bb3bc964c61f756085b4566d14396241fad6031f42e460a111b85d",
+  "raw_results_hash": "ae49b8bffe172653663c6b25a680968a1e2f2f9bb9217418b5afd9f7cd1c9fc0"
+}

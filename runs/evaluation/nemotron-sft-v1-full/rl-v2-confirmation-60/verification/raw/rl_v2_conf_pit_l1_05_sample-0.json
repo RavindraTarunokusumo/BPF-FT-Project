@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_pit_l1_05",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c",
+  "source_sha256": "e2248f7b922563e46a4833109532aac25374703cb045f5529652732fe892a265",
+  "timestamp": "2026-09-06T20:18:33.444688+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:57:39: error: no member named 'values' in 'struct (unnamed at /root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:12:1)'; did you mean 'value'?\n   57 |     __sync_fetch_and_add(&tcp_flags_5.values[key], 1);\n      |                                       ^~~~~~\n      |                                       value\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:16:12: note: 'value' declared here\n   16 |     __type(value, __u64);\n      |            ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:57:39: error: no member named 'values' in 'struct (unnamed at /root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:12:1)'; did you mean 'value'?\n   57 |     __sync_fetch_and_add(&tcp_flags_5.values[key], 1);\n      |                                       ^~~~~~\n      |                                       value\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l1_05/sample-0.c:16:12: note: 'value' declared here\n   16 |     __type(value, __u64);\n      |            ^\n1 error generated."
+}

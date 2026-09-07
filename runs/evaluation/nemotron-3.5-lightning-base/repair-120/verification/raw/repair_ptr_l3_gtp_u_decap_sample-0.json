@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "repair_ptr_l3_gtp_u_decap",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_gtp_u_decap/sample-0.c",
+  "source_sha256": "ad0a2d6a7f755e316826effbea49dbcc120b4c161036a5a553870cc7d8472afa",
+  "timestamp": "2026-09-05T20:40:34.535426+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_gtp_u_decap/sample-0.c:19:21: error: arithmetic on a pointer to an incomplete type 'struct iphdr'\n   19 |     if ((void *)(ip + 1) > data_end)\n      |                  ~~ ^\n/usr/include/bpf/bpf_helper_defs.h:44:8: note: forward declaration of 'struct iphdr'\n   44 | struct iphdr;\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_gtp_u_decap/sample-0.c:21:11: error: incomplete definition of type 'struct iphdr'\n   21 |     if (ip->protocol != IPPROTO_UDP) // IPPROTO_UDP now declared via <linux/in.h>\n      |         ~~^\n/usr/include/bpf/bpf_helper_defs.h:44:8: note: forward declaration of 'struct iphdr'\n   44 | struct iphdr;\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_gtp_u_decap/sample-0.c:25:38: error: arithmetic on a pointer to an incomplete type 'struct iphdr'\n   25 |     struct udphdr *udp = (void *)(ip + 1);\n      |                                   ~~ ^\n/usr/include/bpf/bpf_helper_defs.h:44:8: note: forward declaration of 'struct iphdr'\n   44 | struct iphdr;\n      |        ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_gtp_u_decap/sample-0.c:19:21: error: arithmetic on a pointer to an incomplete type 'struct iphdr'\n   19 |     if ((void *)(ip + 1) > data_end)\n      |                  ~~ ^\n/usr/include/bpf/bpf_helper_defs.h:44:8: note: forward declaration of 'struct iphdr'\n   44 | struct iphdr;\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_gtp_u_decap/sample-0.c:21:11: error: incomplete definition of type 'struct iphdr'\n   21 |     if (ip->protocol != IPPROTO_UDP) // IPPROTO_UDP now declared via <linux/in.h>\n      |         ~~^\n/usr/include/bpf/bpf_helper_defs.h:44:8: note: forward declaration of 'struct iphdr'\n   44 | struct iphdr;\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l3_gtp_u_decap/sample-0.c:25:38: error: arithmetic on a pointer to an incomplete type 'struct iphdr'\n   25 |     struct udphdr *udp = (void *)(ip + 1);\n      |                                   ~~ ^\n/usr/include/bpf/bpf_helper_defs.h:44:8: note: forward declaration of 'struct iphdr'\n   44 | struct iphdr;\n      |        ^\n3 errors generated."
+}

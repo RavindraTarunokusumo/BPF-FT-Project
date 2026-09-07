@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_004_gtpu_teid_rewrite",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_004_gtpu_teid_rewrite/sample-0.c",
+  "source_sha256": "0bada999ecb714f61488eb40fe10d797163c30336456ed4e13a751ee3461c12b",
+  "timestamp": "2026-09-05T20:40:28.037099+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_004_gtpu_teid_rewrite/sample-0.c:5:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n    5 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_004_gtpu_teid_rewrite/sample-0.c:5:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n    5 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated."
+}

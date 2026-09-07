@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_1",
+  "task_id": "syn_pfs_l1_003_gre_checksum_drop",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l1_003_gre_checksum_drop/sample-0.c",
+  "source_sha256": "c9eee54d710d81dbc8da90d37d6bcb03c37b8534ec59c152d52920ed7668b336",
+  "timestamp": "2026-09-05T20:40:26.917518+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l1_003_gre_checksum_drop/sample-0.c:4:10: fatal error: 'linux/gre.h' file not found\n    4 | #include <linux/gre.h>\n      |          ^~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l1_003_gre_checksum_drop/sample-0.c:4:10: fatal error: 'linux/gre.h' file not found\n    4 | #include <linux/gre.h>\n      |          ^~~~~~~~~~~~~\n1 error generated."
+}

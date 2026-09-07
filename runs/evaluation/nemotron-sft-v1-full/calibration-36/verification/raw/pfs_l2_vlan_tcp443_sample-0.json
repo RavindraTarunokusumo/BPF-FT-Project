@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "pfs_l2_vlan_tcp443",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c",
+  "source_sha256": "bb38df85815db9b51610dbddfb356bfd35547e103a7b8125513d90eab7c5c58c",
+  "timestamp": "2026-09-06T20:17:39.314311+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:23:27: error: arithmetic on a pointer to an incomplete type 'struct vlan_hdr'\n   23 |         if ((void *)(vlan + 1) > data_end)\n      |                      ~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:22:16: note: forward declaration of 'struct vlan_hdr'\n   22 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:25:17: error: incomplete definition of type 'struct vlan_hdr'\n   25 |         if (vlan->h_vlan_encapsulated_proto == bpf_htons(ETH_P_IP)) {\n      |             ~~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:22:16: note: forward declaration of 'struct vlan_hdr'\n   22 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:26:46: error: arithmetic on a pointer to an incomplete type 'struct vlan_hdr'\n   26 |             struct iphdr *ip = (void *)(vlan + 1);\n      |                                         ~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:22:16: note: forward declaration of 'struct vlan_hdr'\n   22 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:23:27: error: arithmetic on a pointer to an incomplete type 'struct vlan_hdr'\n   23 |         if ((void *)(vlan + 1) > data_end)\n      |                      ~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:22:16: note: forward declaration of 'struct vlan_hdr'\n   22 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:25:17: error: incomplete definition of type 'struct vlan_hdr'\n   25 |         if (vlan->h_vlan_encapsulated_proto == bpf_htons(ETH_P_IP)) {\n      |             ~~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:22:16: note: forward declaration of 'struct vlan_hdr'\n   22 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:26:46: error: arithmetic on a pointer to an incomplete type 'struct vlan_hdr'\n   26 |             struct iphdr *ip = (void *)(vlan + 1);\n      |                                         ~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l2_vlan_tcp443/sample-0.c:22:16: note: forward declaration of 'struct vlan_hdr'\n   22 |         struct vlan_hdr *vlan = (void *)(eth + 1);\n      |                ^\n3 errors generated."
+}

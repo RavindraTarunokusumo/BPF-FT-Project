@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_pfs_l2_02",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l2_02/sample-0.c",
+  "source_sha256": "025daaa0cefe71bd40f0fd2c3a7703425b24576dc03d9bd1bd029f4c83ecd5cf",
+  "timestamp": "2026-09-06T20:18:37.867876+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l2_02/sample-0.c:42:14: error: no member named 'flags' in 'struct tcphdr'\n   42 |     if (tcp->flags == 0)\n      |         ~~~  ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l2_02/sample-0.c:42:14: error: no member named 'flags' in 'struct tcphdr'\n   42 |     if (tcp->flags == 0)\n      |         ~~~  ^\n1 error generated."
+}

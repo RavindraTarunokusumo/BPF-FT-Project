@@ -1,0 +1,51 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "repair_pit_l1_ingress_port_stat",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pit_l1_ingress_port_stat/sample-0.c",
+  "source_sha256": "28eee685db923d18f877853ec475b47a6a8a3df6556293b8106224731b909a00",
+  "timestamp": "2026-09-05T20:40:43.558926+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_xvmnqvll/candidate.o\nlibbpf: elf: section(3) xdp, size 112, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry' at insn offset 0 (0 bytes), code size 14 insns (112 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_xvmnqvll/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1080, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 192, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'iface_stats': at sec_idx 5, offset 0.\nlibbpf: map 'iface_stats': found type = 6.\nlibbpf: map 'iface_stats': found key [6], sz = 4.\nlibbpf: map 'iface_stats': found value [9], sz = 8.\nlibbpf: map 'iface_stats': found max_entries = 64.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #5 against 'iface_stats'\nlibbpf: prog 'xdp_telemetry': found map 0 (iface_stats, sec 5, off 0) for insn #5\nlibbpf: map 'iface_stats': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; __u32 ifindex = ctx->ingress_ifindex & 63;   /* bound to 0..63 */\n0: (61) r1 = *(u32 *)(r1 +12)         ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 ifindex = ctx->ingress_ifindex & 63;   /* bound to 0..63 */\n1: (57) r1 &= 63                      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=63,var_off=(0x0; 0x3f))\n; __u32 ifindex = ctx->ingress_ifindex & 63;   /* bound to 0..63 */\n2: (63) *(u32 *)(r10 -4) = r1         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=63,var_off=(0x0; 0x3f)) R10=fp0 fp-8=mmmm????\n3: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0\n; \n4: (07) r2 += -4                      ; R2_w=fp-4\n; cnt = bpf_map_lookup_elem(&iface_stats, &ifindex);\n5: (18) r1 = 0xff2125b89bb49000       ; R1_w=map_ptr(map=iface_stats,ks=4,vs=8)\n7: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=iface_stats,ks=4,vs=8)\n; if (!cnt) {\n8: (15) if r0 == 0x0 goto pc+3        ; R0_w=map_value(map=iface_stats,ks=4,vs=8)\n; (*cnt) += 1;   /* safe increment after NULL check */\n9: (79) r1 = *(u64 *)(r0 +0)          ; R0_w=map_value(map=iface_stats,ks=4,vs=8) R1_w=scalar()\n10: (07) r1 += 1                      ; R1_w=scalar()\n11: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=iface_stats,ks=4,vs=8) R1=scalar()\n; }\n12: (b7) r0 = 2                       ; R0_w=2\n13: (95) exit\n\nfrom 8 to 12: safe\nverification time 343 usec\nstack depth 8\nprocessed 14 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 0\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 3,
+    "total_tests": 3,
+    "details": [
+      {
+        "name": "pass_tcp",
+        "description": "Count TCP packet on ingress interface",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_udp",
+        "description": "Count UDP packet on ingress interface",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "Count ARP frame on ingress interface",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "repair_nrf_l3_ecmp_hash_load_balancer",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c",
+  "source_sha256": "ebe0d8e39f4acd082a8ca0aefbec28c9f37993f26f941af01b15524a353a4399",
+  "timestamp": "2026-09-06T20:18:08.787186+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:19: error: use of undeclared identifier 'saddr'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                   ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:27: error: use of undeclared identifier 'daddr'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                           ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:35: error: use of undeclared identifier 'sport'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                                   ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:43: error: use of undeclared identifier 'dport'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                                           ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:51: error: use of undeclared identifier 'proto'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                                                   ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:19: error: use of undeclared identifier 'saddr'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                   ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:27: error: use of undeclared identifier 'daddr'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                           ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:35: error: use of undeclared identifier 'sport'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                                   ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:43: error: use of undeclared identifier 'dport'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                                           ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_ecmp_hash_load_balancer/sample-0.c:44:51: error: use of undeclared identifier 'proto'\n   44 |     __u32 hash = (saddr ^ daddr ^ sport ^ dport ^ proto);\n      |                                                   ^\n5 errors generated."
+}

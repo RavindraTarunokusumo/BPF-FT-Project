@@ -1,0 +1,44 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_pfs_l3_01",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_01/sample-0.c",
+  "source_sha256": "893fdb0d5953b158f07de57bfab8cb9bc3fdd487ebb4aa70d324867b04e78eca",
+  "timestamp": "2026-09-06T20:18:31.836982+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_3j8tv1t4/candidate.o\nlibbpf: elf: section(3) xdp, size 328, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_rl_v2_conf_pfs_l3_01' at insn offset 0 (0 bytes), code size 41 insns (328 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_3j8tv1t4/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1544, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 448, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'port_quota_map': at sec_idx 5, offset 0.\nlibbpf: map 'port_quota_map': found type = 1.\nlibbpf: map 'port_quota_map': found key [8], sz = 2.\nlibbpf: map 'port_quota_map': found value [11], sz = 8.\nlibbpf: map 'port_quota_map': found max_entries = 10000.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #29 against 'port_quota_map'\nlibbpf: prog 'xdp_rl_v2_conf_pfs_l3_01': found map 0 (port_quota_map, sec 5, off 0) for insn #29\nlibbpf: map 'port_quota_map': created successfully, fd=4\nlibbpf: prog 'xdp_rl_v2_conf_pfs_l3_01': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_rl_v2_conf_pfs_l3_01(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r3 = *(u32 *)(r1 +0)          ; R1=ctx() R3_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r1 = r3                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r1 > r2 goto pc+34         ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r4 = *(u8 *)(r3 +13)          ; R3_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r4 <<= 8                      ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r5 = *(u8 *)(r3 +12)          ; R3_w=pkt(r=14) R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r4 |= r5                      ; R4_w=scalar() R5_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r4 != 0x8 goto pc+29      ; R4_w=8\n11: (bf) r4 = r3                      ; R3_w=pkt(r=14) R4_w=pkt(r=14)\n12: (07) r4 += 34                     ; R4=pkt(off=34,r=14)\n13: (2d) if r4 > r2 goto pc+26        ; R2=pkt_end() R4=pkt(off=34,r=34)\n; if (ip->protocol != IPPROTO_TCP)\n14: (71) r3 = *(u8 *)(r3 +23)         ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol != IPPROTO_TCP)\n15: (55) if r3 != 0x6 goto pc+24      ; R3_w=6\n; unsigned int ip_hdr_len = ip->ihl * 4;\n16: (71) r3 = *(u8 *)(r1 +0)          ; R1=pkt(off=14,r=34) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; unsigned int ip_hdr_len = ip->ihl * 4;\n17: (67) r3 <<= 2                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1020,var_off=(0x0; 0x3fc))\n18: (57) r3 &= 60                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n19: (b7) r4 = 20                      ; R4_w=20\n; if (ip_hdr_len < sizeof(struct iphdr))\n20: (2d) if r4 > r3 goto pc+19        ; R3_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R4_w=20\n; struct tcphdr *tcp = (void *)ip + ip_hdr_len;\n21: (0f) r1 += r3\nmark_precise: frame0: last_idx 21 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r3 stack= before 20: (2d) if r4 > r3 goto pc+19\nmark_precise: frame0: regs=r3,r4 stack= before 19: (b7) r4 = 20\nmark_precise: frame0: regs=r3 stack= before 18: (57) r3 &= 60\nmark_precise: frame0: regs=r3 stack= before 17: (67) r3 <<= 2\nmark_precise: frame0: regs=r3 stack= before 16: (71) r3 = *(u8 *)(r1 +0)\n22: R1_w=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=scalar(smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(tcp + 1) > data_end)\n22: (bf) r3 = r1                      ; R1_w=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c)) R3_w=pkt(id=1,off=14,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n23: (07) r3 += 20                     ; R3=pkt(id=1,off=34,r=0,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; if ((void *)(tcp + 1) > data_end)\n24: (2d) if r3 > r2 goto pc+15        ; R2=pkt_end() R3=pkt(id=1,off=34,r=34,smin=umin=smin32=umin32=20,smax=umax=smax32=umax32=60,var_off=(0x0; 0x3c))\n; __u16 dest = tcp->dest;\n25: (69) r1 = *(u16 *)(r1 +2)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n; __u16 dest = tcp->dest;\n26: (6b) *(u16 *)(r10 -2) = r1        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-8=mm??????\n27: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u16 dest = tcp->dest;\n28: (07) r2 += -2                     ; R2_w=fp-2\n; __u64 *cnt = bpf_map_lookup_elem(&port_quota_map, &dest);\n29: (18) r1 = 0xff2125b906b37c00      ; R1_w=map_ptr(map=port_quota_map,ks=2,vs=8)\n31: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=2,map=port_quota_map,ks=2,vs=8)\n32: (bf) r1 = r0                      ; R0=map_value_or_null(id=2,map=port_quota_map,ks=2,vs=8) R1=map_value_or_null(id=2,map=port_quota_map,ks=2,vs=8)\n; if (cnt) {\n33: (15) if r1 == 0x0 goto pc+5       ; R1=map_value(map=port_quota_map,ks=2,vs=8)\n34: (b7) r0 = 1                       ; R0_w=1\n; __sync_fetch_and_add(cnt, 1);\n35: (b7) r2 = 1                       ; R2_w=1\n36: (db) lock *(u64 *)(r1 +0) += r2   ; R1=map_value(map=port_quota_map,ks=2,vs=8) R2_w=1\n; if (*cnt > 1000)\n37: (79) r1 = *(u64 *)(r1 +0)         ; R1_w=scalar()\n; if (*cnt > 1000)\n38: (25) if r1 > 0x3e8 goto pc+1      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=1000,var_off=(0x0; 0x3ff))\n39: (b7) r0 = 2                       ; R0_w=2\n; }\n40: (95) exit\n\nfrom 38 to 40: R0=1 R1=scalar(umin=1001) R2=1 R10=fp0 fp-8=mm??????\n40: R0=1 R1=scalar(umin=1001) R2=1 R10=fp0 fp-8=mm??????\n40: (95) exit\n\nfrom 33 to 39: R0=0 R1=0 R10=fp0 fp-8=mm??????\n39: R0=0 R1=0 R10=fp0 fp-8=mm??????\n; if (*cnt > 1000)\n39: (b7) r0 = 2\n40: safe\n\nfrom 24 to 40: safe\n\nfrom 20 to 40: safe\n\nfrom 15 to 40: safe\n\nfrom 13 to 40: safe\n\nfrom 10 to 40: safe\n\nfrom 5 to 40: safe\nverification time 313 usec\nstack depth 8\nprocessed 49 insns (limit 1000000) max_states_per_insn 0 total_states 4 peak_states 4 mark_read 3\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_untracked",
+        "description": "Untracked client passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "ARP passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

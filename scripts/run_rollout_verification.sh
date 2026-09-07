@@ -90,16 +90,32 @@ for idx, c_file in enumerate(c_files, start=1):
     rel = task_spec.get('relative_path', f'{cat}/{diff}/{task_id}')
     
     # Load detailed test specs if available across possible benchmark locations
+    found_tests = False
     for test_candidate in [
         Path(f'data/calibration/{cat}/{diff}/{task_id}/tests.json'),
         Path(f'data/benchmark/synthesis/{rel}/tests.json'),
         Path(f'data/benchmark/repair/{rel}/tests.json'),
         Path(f'data/benchmark/synthesis/{cat}/{diff}/{task_id}/tests.json'),
         Path(f'data/benchmark/repair/{cat}/{diff}/{task_id}/tests.json'),
+        Path(f'data/rl/v2/dev/{cat}/{diff}/{task_id}/tests.json'),
+        Path(f'data/rl/v2/confirmation/{cat}/{diff}/{task_id}/tests.json'),
+        Path(f'data/rl/v2/canary/{cat}/{diff}/{task_id}/tests.json'),
+        Path(f'data/rl/v2/train/{cat}/{diff}/{task_id}/tests.json'),
     ]:
         if test_candidate.is_file():
             try:
                 test_data = json.loads(test_candidate.read_text(encoding='utf-8'))
+                task_spec['tests'] = test_data.get('tests') or test_data.get('test_cases', [])
+                found_tests = True
+                break
+            except Exception:
+                pass
+
+    if not found_tests and not task_spec.get('tests'):
+        # Fallback recursive search for task_id/tests.json in data/
+        for match in Path('data').rglob(f'{task_id}/tests.json'):
+            try:
+                test_data = json.loads(match.read_text(encoding='utf-8'))
                 task_spec['tests'] = test_data.get('tests') or test_data.get('test_cases', [])
                 break
             except Exception:

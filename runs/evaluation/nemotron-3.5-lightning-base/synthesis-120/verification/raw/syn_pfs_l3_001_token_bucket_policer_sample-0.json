@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_001_token_bucket_policer",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c",
+  "source_sha256": "859b10cdd006ef42d850521b13d0d10bb73b1fe89a2088e8445e6eb8f29591e5",
+  "timestamp": "2026-09-05T20:40:27.227482+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:42:35: error: use of undeclared identifier 'ETH_P_IP'\n   42 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |                                   ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:42:35: error: use of undeclared identifier 'ETH_P_IP'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:42:35: error: use of undeclared identifier 'ETH_P_IP'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:42:35: error: use of undeclared identifier 'ETH_P_IP'\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:42:35: error: use of undeclared identifier 'ETH_P_IP'\n   42 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |                                   ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:42:35: error: use of undeclared identifier 'ETH_P_IP'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:42:35: error: use of undeclared identifier 'ETH_P_IP'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:42:35: error: use of undeclared identifier 'ETH_P_IP'\n4 errors generated."
+}

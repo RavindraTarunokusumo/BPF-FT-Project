@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_1",
+  "task_id": "syn_pit_l1_003_mpls_depth_counter",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c",
+  "source_sha256": "d2240f1971ecec4a7d05f13f8b660cfc1e84318cacda5b1b20a28c24c2dea3c9",
+  "timestamp": "2026-09-05T20:40:24.258930+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:7:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n    7 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pit_l1_003_mpls_depth_counter/sample-0.c:7:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n    7 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated."
+}

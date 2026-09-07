@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_1",
+  "task_id": "syn_nrf_l1_009_dns_cache_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l1_009_dns_cache_redirect/sample-0.c",
+  "source_sha256": "6ef92f88675dc0ff5daa7db711b11e2850391eea66848d01d1f2dccf7f9a054b",
+  "timestamp": "2026-09-05T20:40:29.955440+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l1_009_dns_cache_redirect/sample-0.c:12:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n   12 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l1_009_dns_cache_redirect/sample-0.c:12:10: fatal error: 'bpf/ctx/sk_buff.h' file not found\n   12 | #include <bpf/ctx/sk_buff.h>\n      |          ^~~~~~~~~~~~~~~~~~~\n1 error generated."
+}

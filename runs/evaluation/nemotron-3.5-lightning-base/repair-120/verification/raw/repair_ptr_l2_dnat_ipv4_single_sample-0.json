@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "repair_ptr_l2_dnat_ipv4_single",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c",
+  "source_sha256": "76b7a26de1989a7157fe3969cfc6444e99c88f2e4bad44c7a50eaa454153e297",
+  "timestamp": "2026-09-05T20:40:36.471820+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:28:12: error: call to undeclared function 'csum_unfold'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   28 |     csum = csum_unfold(csum); /* fold high 16 bits into low 16 */\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:29:37: error: expected ')'\n   29 |     csum += (__u16)(~(__be16)old_dst;   /* add old destination (one's complement) */\n      |                                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:29:20: note: to match this '('\n   29 |     csum += (__u16)(~(__be16)old_dst;   /* add old destination (one's complement) */\n      |                    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:30:37: error: expected ')'\n   30 |     csum += (__u16)(~(__be16)new_dst;   /* add new destination (one's complement) */\n      |                                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:30:20: note: to match this '('\n   30 |     csum += (__u16)(~(__be16)new_dst;   /* add new destination (one's complement) */\n      |                    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:31:12: error: call to undeclared function 'csum_fold'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   31 |     csum = csum_fold(csum);   /* fold back to 16 bits */\n      |            ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:28:12: error: call to undeclared function 'csum_unfold'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   28 |     csum = csum_unfold(csum); /* fold high 16 bits into low 16 */\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:29:37: error: expected ')'\n   29 |     csum += (__u16)(~(__be16)old_dst;   /* add old destination (one's complement) */\n      |                                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:29:20: note: to match this '('\n   29 |     csum += (__u16)(~(__be16)old_dst;   /* add old destination (one's complement) */\n      |                    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:30:37: error: expected ')'\n   30 |     csum += (__u16)(~(__be16)new_dst;   /* add new destination (one's complement) */\n      |                                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:30:20: note: to match this '('\n   30 |     csum += (__u16)(~(__be16)new_dst;   /* add new destination (one's complement) */\n      |                    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_dnat_ipv4_single/sample-0.c:31:12: error: call to undeclared function 'csum_fold'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   31 |     csum = csum_fold(csum);   /* fold back to 16 bits */\n      |            ^\n4 errors generated."
+}

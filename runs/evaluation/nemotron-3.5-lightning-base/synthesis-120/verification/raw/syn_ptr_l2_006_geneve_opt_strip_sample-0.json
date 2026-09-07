@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_006_geneve_opt_strip",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c",
+  "source_sha256": "9cfdc64def275d963937c56281f6b3a374444672743e0f7e77f9adbc45eeef35",
+  "timestamp": "2026-09-05T20:40:26.547329+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:5: error: expected parameter declarator\n   16 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:4: note: to match this '('\n   16 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   16 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:11: error: expected ';' after top level declarator\n   16 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:32:22: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   32 |         if (eth->h_proto != htons(ETH_P_IP))\n      |                             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:60:11: error: no member named 'opt_len' in 'struct genevehdr'\n   60 |         if (gen->opt_len > 0)\n      |             ~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:61:8: error: no member named 'opt_len' in 'struct genevehdr'\n   61 |                 gen->opt_len = 0;\n      |                 ~~~  ^\n7 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:5: error: expected parameter declarator\n   16 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:4: note: to match this '('\n   16 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n   16 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:16:11: error: expected ';' after top level declarator\n   16 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:32:22: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   32 |         if (eth->h_proto != htons(ETH_P_IP))\n      |                             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:60:11: error: no member named 'opt_len' in 'struct genevehdr'\n   60 |         if (gen->opt_len > 0)\n      |             ~~~  ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_006_geneve_opt_strip/sample-0.c:61:8: error: no member named 'opt_len' in 'struct genevehdr'\n   61 |                 gen->opt_len = 0;\n      |                 ~~~  ^\n7 errors generated."
+}

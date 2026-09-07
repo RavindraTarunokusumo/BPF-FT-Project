@@ -1,0 +1,93 @@
+{
+  "application_category": "packet_inspection_telemetry",
+  "difficulty": "level_3",
+  "task_id": "syn_pit_l3_003_vxlan_flow_matrix",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pit_l3_003_vxlan_flow_matrix/sample-0.c",
+  "source_sha256": "7a407831bd75e4ab89b9a5db0c0bf91854af3a98a01cca8ae46669941e845a6d",
+  "timestamp": "2026-09-06T20:17:53.044722+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_0q3fnaqn/candidate.o\nlibbpf: elf: section(3) xdp, size 520, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_vxlan_telemetry_syn_pit_l3_003_vxlan_flow_matrix' at insn offset 0 (0 bytes), code size 65 insns (520 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 27, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_0q3fnaqn/candidate.o is GPL\nlibbpf: elf: section(17) .BTF, size 2179, link 0, flags 0, type=1\nlibbpf: elf: section(19) .BTF.ext, size 736, link 0, flags 0, type=1\nlibbpf: elf: section(27) .symtab, size 480, link 1, flags 0, type=2\nlibbpf: looking for externs among 20 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'vxlan_matrix_map': at sec_idx 5, offset 0.\nlibbpf: map 'vxlan_matrix_map': found type = 1.\nlibbpf: map 'vxlan_matrix_map': found key [8], sz = 20.\nlibbpf: map 'vxlan_matrix_map': found value [19], sz = 16.\nlibbpf: map 'vxlan_matrix_map': found max_entries = 2048.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #55 against 'vxlan_matrix_map'\nlibbpf: prog 'xdp_vxlan_telemetry_syn_pit_l3_003_vxlan_flow_matrix': found map 0 (vxlan_matrix_map, sec 5, off 0) for insn #55\nlibbpf: map 'vxlan_matrix_map': created successfully, fd=4\nlibbpf: prog 'xdp_vxlan_telemetry_syn_pit_l3_003_vxlan_flow_matrix': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r6 = *(u32 *)(r1 +4)          ; R1=ctx() R6_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r7 = *(u32 *)(r1 +0)          ; R1=ctx() R7_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r1 = r7                       ; R1_w=pkt(r=0) R7_w=pkt(r=0)\n3: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r1 > r6 goto pc+58         ; R1_w=pkt(off=14,r=14) R6_w=pkt_end()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r1 = *(u8 *)(r7 +12)          ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7_w=pkt(r=14)\n6: (71) r2 = *(u8 *)(r7 +13)          ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7_w=pkt(r=14)\n7: (67) r2 <<= 8                      ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (4f) r2 |= r1                      ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2_w=scalar()\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r2 != 0x8 goto pc+53       ; R2_w=8\n; if ((void *)(ip + 1) > data_end)\n10: (bf) r1 = r7                      ; R1_w=pkt(r=14) R7_w=pkt(r=14)\n11: (07) r1 += 34                     ; R1=pkt(off=34,r=14)\n; if ((void *)(ip + 1) > data_end)\n12: (2d) if r1 > r6 goto pc+50        ; R1=pkt(off=34,r=34) R6=pkt_end()\n; if (ip->protocol == IPPROTO_UDP) {\n13: (71) r1 = *(u8 *)(r7 +23)         ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=34)\n; if (ip->protocol == IPPROTO_UDP) {\n14: (55) if r1 != 0x11 goto pc+21     ; R1_w=17\n; if ((void *)(udp + 1) > data_end)\n15: (bf) r1 = r7                      ; R1_w=pkt(r=34) R7=pkt(r=34)\n16: (07) r1 += 42                     ; R1_w=pkt(off=42,r=34)\n; if ((void *)(udp + 1) > data_end)\n17: (2d) if r1 > r6 goto pc+45        ; R1_w=pkt(off=42,r=42) R6=pkt_end()\n; if (udp->dest == bpf_htons(4789)) {\n18: (69) r1 = *(u16 *)(r7 +36)        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=42)\n; if (udp->dest == bpf_htons(4789)) {\n19: (69) r2 = *(u16 *)(r7 +34)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=42)\n20: (b7) r3 = 0                       ; R3_w=0\n; struct vxlan_flow_key key = {};\n21: (63) *(u32 *)(r10 -8) = r3        ; R3_w=0 R10=fp0 fp-8=????0\n; if (udp->dest == bpf_htons(4789)) {\n22: (bf) r3 = r2                      ; R2_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3_w=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n23: (67) r3 <<= 8                     ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff00,var_off=(0x0; 0xffff00))\n24: (57) r3 &= 16711680               ; R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000))\n25: (15) if r1 == 0xb512 goto pc+1    ; R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n26: (b7) r3 = 0                       ; R3_w=0\n; key.vni = vni;\n27: (63) *(u32 *)(r10 -24) = r3       ; R3_w=0 R10=fp0 fp-24=????0\n; key.src_ip = ip->saddr;\n28: (61) r3 = *(u32 *)(r7 +26)        ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=42)\n; key.src_ip = ip->saddr;\n29: (63) *(u32 *)(r10 -20) = r3       ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-24=mmmmmmmm\n; key.dst_ip = ip->daddr;\n30: (61) r3 = *(u32 *)(r7 +30)        ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=42)\n31: (b7) r4 = 17                      ; R4_w=17\n; key.proto = ip->protocol;\n32: (73) *(u8 *)(r10 -8) = r4         ; R4_w=17 R10=fp0 fp-8=????mmm17\n; key.dst_ip = ip->daddr;\n33: (63) *(u32 *)(r10 -16) = r3       ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-16=????scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; key.src_port = udp->source;\n34: (6b) *(u16 *)(r10 -12) = r2       ; R2=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-16=??mmmmmm\n35: (05) goto pc+16\n; \n52: (6b) *(u16 *)(r10 -10) = r1       ; R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-16=mmmmmmmm\n53: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; struct flow_stats *stats = bpf_map_lookup_elem(&vxlan_matrix_map, &key);\n54: (07) r2 += -24                    ; R2_w=fp-24\n55: (18) r1 = 0xff2125b8e1ef2800      ; R1_w=map_ptr(map=vxlan_matrix_ma,ks=20,vs=16)\n57: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=2,map=vxlan_matrix_ma,ks=20,vs=16)\n; if (stats) {\n58: (15) if r0 == 0x0 goto pc+4       ; R0_w=map_value(map=vxlan_matrix_ma,ks=20,vs=16)\n59: (b7) r1 = 1                       ; R1_w=1\n; __sync_fetch_and_add(&stats->pkts, 1);\n60: (db) lock *(u64 *)(r0 +0) += r1   ; R0_w=map_value(map=vxlan_matrix_ma,ks=20,vs=16) R1_w=1\n; __sync_fetch_and_add(&stats->bytes, (__u64)data_end - (__u64)data);\n61: (1f) r6 -= r7                     ; R6_w=scalar() R7=pkt(r=42)\n; __sync_fetch_and_add(&stats->bytes, (__u64)data_end - (__u64)data);\n62: (db) lock *(u64 *)(r0 +8) += r6   ; R0=map_value(map=vxlan_matrix_ma,ks=20,vs=16) R6=scalar()\n; }\n63: (b7) r0 = 2                       ; R0_w=2\n64: (95) exit\n\nfrom 58 to 63: safe\n\nfrom 25 to 27: R1=0xb512 R2=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000)) R6=pkt_end() R7=pkt(r=42) R10=fp0 fp-8=????0\n27: R1=0xb512 R2=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000)) R6=pkt_end() R7=pkt(r=42) R10=fp0 fp-8=????0\n; key.vni = vni;\n27: (63) *(u32 *)(r10 -24) = r3       ; R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000)) R10=fp0 fp-24=????scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff0000,var_off=(0x0; 0xff0000))\n; key.src_ip = ip->saddr;\n28: (61) r3 = *(u32 *)(r7 +26)        ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=42)\n; key.src_ip = ip->saddr;\n29: (63) *(u32 *)(r10 -20) = r3       ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-24=mmmmmmmm\n; key.dst_ip = ip->daddr;\n30: (61) r3 = *(u32 *)(r7 +30)        ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=42)\n31: (b7) r4 = 17                      ; R4_w=17\n; key.proto = ip->protocol;\n32: (73) *(u8 *)(r10 -8) = r4         ; R4_w=17 R10=fp0 fp-8=????mmm17\n; key.dst_ip = ip->daddr;\n33: (63) *(u32 *)(r10 -16) = r3       ; R3_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-16=????scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; key.src_port = udp->source;\n34: (6b) *(u16 *)(r10 -12) = r2       ; R2=scalar(id=1,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-16=??mmmmmm\n35: (05) goto pc+16\n52: safe\n\nfrom 17 to 63: safe\n\nfrom 14 to 36: R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=8 R6=pkt_end() R7=pkt(r=34) R10=fp0\n36: R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=8 R6=pkt_end() R7=pkt(r=34) R10=fp0\n36: (b7) r2 = 0                       ; R2_w=0\n; key.vni = vni;\n37: (63) *(u32 *)(r10 -8) = r2        ; R2_w=0 R10=fp0 fp-8=????0\n38: (7b) *(u64 *)(r10 -16) = r2       ; R2_w=0 R10=fp0 fp-16_w=0\n39: (7b) *(u64 *)(r10 -24) = r2       ; R2_w=0 R10=fp0 fp-24_w=0\n; key.src_ip = ip->saddr;\n40: (61) r2 = *(u32 *)(r7 +26)        ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=34)\n; key.src_ip = ip->saddr;\n41: (63) *(u32 *)(r10 -20) = r2       ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-24_w=mmmmmmmm\n; key.dst_ip = ip->daddr;\n42: (61) r2 = *(u32 *)(r7 +30)        ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=34)\n; key.dst_ip = ip->daddr;\n43: (63) *(u32 *)(r10 -16) = r2       ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-16_w=mmmmscalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; key.proto = ip->protocol;\n44: (73) *(u8 *)(r10 -8) = r1         ; R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0 fp-8=????mmmscalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (ip->protocol == IPPROTO_TCP) {\n45: (55) if r1 != 0x6 goto pc+7       ; R1=6\n; if ((void *)(tcp + 1) > data_end)\n46: (bf) r1 = r7                      ; R1_w=pkt(r=34) R7=pkt(r=34)\n47: (07) r1 += 54                     ; R1_w=pkt(off=54,r=34)\n; if ((void *)(tcp + 1) > data_end)\n48: (2d) if r1 > r6 goto pc+14        ; R1_w=pkt(off=54,r=54) R6=pkt_end()\n; key.src_port = tcp->source;\n49: (69) r1 = *(u16 *)(r7 +34)        ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=54)\n; key.src_port = tcp->source;\n50: (6b) *(u16 *)(r10 -12) = r1       ; R1_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-16_w=mmmmmmmm\n; key.dst_port = tcp->dest;\n51: (69) r1 = *(u16 *)(r7 +36)\n52: safe\n\nfrom 48 to 63: safe\n\nfrom 45 to 53: R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R6=pkt_end() R7=pkt(r=34) R10=fp0 fp-8=????mmmscalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) fp-16=mmmmscalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) fp-24=mmmmmmmm\n53: R1=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R2=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R6=pkt_end() R7=pkt(r=34) R10=fp0 fp-8=????mmmscalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) fp-16=mmmmscalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) fp-24=mmmmmmmm\n; \n53: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; struct flow_stats *stats = bpf_map_lookup_elem(&vxlan_matrix_map, &key);\n54: (07) r2 += -24                    ; R2_w=fp-24\n55: (18) r1 = 0xff2125b8e1ef2800      ; R1_w=map_ptr(map=vxlan_matrix_ma,ks=20,vs=16)\n57: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=3,map=vxlan_matrix_ma,ks=20,vs=16)\n; if (stats) {\n58: (15) if r0 == 0x0 goto pc+4       ; R0_w=map_value(map=vxlan_matrix_ma,ks=20,vs=16)\n59: (b7) r1 = 1                       ; R1_w=1\n; __sync_fetch_and_add(&stats->pkts, 1);\n60: (db) lock *(u64 *)(r0 +0) += r1   ; R0_w=map_value(map=vxlan_matrix_ma,ks=20,vs=16) R1_w=1\n; __sync_fetch_and_add(&stats->bytes, (__u64)data_end - (__u64)data);\n61: (1f) r6 -= r7                     ; R6_w=scalar() R7=pkt(r=34)\n; __sync_fetch_and_add(&stats->bytes, (__u64)data_end - (__u64)data);\n62: (db) lock *(u64 *)(r0 +8) += r6\n63: safe\n\nfrom 58 to 63: safe\n\nfrom 12 to 63: safe\n\nfrom 9 to 63: safe\n\nfrom 4 to 63: safe\nverification time 513 usec\nstack depth 24\nprocessed 92 insns (limit 1000000) max_states_per_insn 0 total_states 6 peak_states 6 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 9,
+    "total_tests": 9,
+    "details": [
+      {
+        "name": "vxlan_flow1_pass",
+        "description": "VXLAN inner flow 1 recorded in flow matrix and passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vxlan_flow1_pkt2_pass",
+        "description": "Second packet of flow 1 increments packets/bytes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vxlan_flow2_vni200_pass",
+        "description": "Flow with different VNI (200) creates distinct flow entry",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "vxlan_inner_udp_pass",
+        "description": "VXLAN inner UDP flow recorded",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "non_vxlan_udp_pass",
+        "description": "Non-VXLAN UDP passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "direct_tcp_pass",
+        "description": "Direct TCP passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "ipv6_pass",
+        "description": "IPv6 frame passes",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "truncated_vxlan_pass",
+        "description": "Truncated VXLAN frame passes safely",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

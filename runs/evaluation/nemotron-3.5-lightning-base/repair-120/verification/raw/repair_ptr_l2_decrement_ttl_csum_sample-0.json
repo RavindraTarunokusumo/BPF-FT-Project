@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "repair_ptr_l2_decrement_ttl_csum",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_decrement_ttl_csum/sample-0.c",
+  "source_sha256": "6648bfc4103ce4e5b036cc0de20b8d0da9a4f24864ff0f82c40a0d9e738ed81c",
+  "timestamp": "2026-09-05T20:40:42.112248+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_decrement_ttl_csum/sample-0.c:38:53: error: too many arguments to function call, expected 2, have 3\n   38 |     ip->check = bpf_csum_update(&ip->check, 0x0100, 0);\n      |                 ~~~~~~~~~~~~~~~                     ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_ptr_l2_decrement_ttl_csum/sample-0.c:38:53: error: too many arguments to function call, expected 2, have 3\n   38 |     ip->check = bpf_csum_update(&ip->check, 0x0100, 0);\n      |                 ~~~~~~~~~~~~~~~                     ^\n1 error generated."
+}

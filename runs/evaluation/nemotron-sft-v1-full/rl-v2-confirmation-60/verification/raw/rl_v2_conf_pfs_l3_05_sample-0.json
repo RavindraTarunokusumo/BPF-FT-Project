@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_pfs_l3_05",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_05/sample-0.c",
+  "source_sha256": "ff6a8113fcbad257b40d6efbc558addb9301127739d6d21c72c2656464073041",
+  "timestamp": "2026-09-06T20:18:30.283880+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_05/sample-0.c:29:38: error: use of undeclared identifier 'mac_ip_auth_map'\n   29 |     __u8 *mac = bpf_map_lookup_elem(&mac_ip_auth_map, &ip->saddr);\n      |                                      ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pfs_l3_05/sample-0.c:29:38: error: use of undeclared identifier 'mac_ip_auth_map'\n   29 |     __u8 *mac = bpf_map_lookup_elem(&mac_ip_auth_map, &ip->saddr);\n      |                                      ^\n1 error generated."
+}

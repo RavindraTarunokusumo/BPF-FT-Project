@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_008_mpls_te_backup_path_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c",
+  "source_sha256": "78119deae12b2147a71693aa84b5fe5551f2afef347373a823db1cc350a2f7a2",
+  "timestamp": "2026-09-05T20:40:29.034588+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:48:23: error: call to undeclared function 'bpff_ntohl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   48 |         __u32 label = bpff_ntohl(mpls->label_exp_s_flags) >> 12;\n      |                       ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:56:64: error: too many arguments to function call, expected 2, have 3\n   56 |             status = bpf_map_lookup_elem(&te_health_map, &key, NULL);\n      |                      ~~~~~~~~~~~~~~~~~~~                       ^~~~\n/usr/include/bpf/bpf_helpers.h:70:14: note: expanded from macro 'NULL'\n   70 | #define NULL ((void *)0)\n      |              ^~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:62:21: error: call to undeclared function 'bpf_xdp_redirect_map'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   62 |                     bpf_xdp_redirect_map(ctx, &te_health_map, 90, 0);\n      |                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:69:21: error: call to undeclared function 'bpf_xdp_redirect_map'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   69 |                     bpf_xdp_redirect_map(ctx, &te_health_map, 91, 0);\n      |                     ^\n4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:48:23: error: call to undeclared function 'bpff_ntohl'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   48 |         __u32 label = bpff_ntohl(mpls->label_exp_s_flags) >> 12;\n      |                       ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:56:64: error: too many arguments to function call, expected 2, have 3\n   56 |             status = bpf_map_lookup_elem(&te_health_map, &key, NULL);\n      |                      ~~~~~~~~~~~~~~~~~~~                       ^~~~\n/usr/include/bpf/bpf_helpers.h:70:14: note: expanded from macro 'NULL'\n   70 | #define NULL ((void *)0)\n      |              ^~~~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:62:21: error: call to undeclared function 'bpf_xdp_redirect_map'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   62 |                     bpf_xdp_redirect_map(ctx, &te_health_map, 90, 0);\n      |                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_008_mpls_te_backup_path_router/sample-0.c:69:21: error: call to undeclared function 'bpf_xdp_redirect_map'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   69 |                     bpf_xdp_redirect_map(ctx, &te_health_map, 91, 0);\n      |                     ^\n4 errors generated."
+}

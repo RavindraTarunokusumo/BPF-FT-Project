@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_nrf_l2_01",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c",
+  "source_sha256": "1af1eed505aa8352ecaa2d13a3773491f0b9e667545b0656d2f92ecfb3532eb9",
+  "timestamp": "2026-09-06T20:18:31.333511+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:31:9: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]\n   31 |         eth->h_dest[1] = 0x54;\n      |         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:29:5: note: previous statement is here\n   29 |     if (hash & 1)\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:36:5: error: expected expression\n   36 |     else\n      |     ^\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:31:9: warning: misleading indentation; statement is not part of the previous 'if' [-Wmisleading-indentation]\n   31 |         eth->h_dest[1] = 0x54;\n      |         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:29:5: note: previous statement is here\n   29 |     if (hash & 1)\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:36:5: error: expected expression\n   36 |     else\n      |     ^\n1 warning and 1 error generated."
+}

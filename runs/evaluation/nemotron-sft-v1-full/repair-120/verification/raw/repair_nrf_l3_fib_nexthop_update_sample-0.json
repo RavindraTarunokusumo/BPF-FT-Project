@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "repair_nrf_l3_fib_nexthop_update",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c",
+  "source_sha256": "5095fb37fe697c71146197ab7df2ed4ba43d9238cfc789ce3fdc64e665ad6965",
+  "timestamp": "2026-09-06T20:18:00.915773+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:14:8: error: redefinition of 'bpf_fib_lookup'\n   14 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/repair-120/candidates/repair_nrf_l3_fib_nexthop_update/sample-0.c:14:8: error: redefinition of 'bpf_fib_lookup'\n   14 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\n1 error generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_005_vxlan_vni_egress_dispatcher",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c",
+  "source_sha256": "b5129a93e23d466013b033f15bd03859b11de93786fb585c4841954f472557d6",
+  "timestamp": "2026-09-05T20:40:29.457756+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:5:10: fatal error: 'linux/vxlan.h' file not found\n    5 | #include <linux/vxlan.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_005_vxlan_vni_egress_dispatcher/sample-0.c:5:10: fatal error: 'linux/vxlan.h' file not found\n    5 | #include <linux/vxlan.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated."
+}

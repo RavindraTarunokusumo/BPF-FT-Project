@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "repair_nrf_l3_flow_affinity_table",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c",
+  "source_sha256": "8562e5119729defa4da40eeb6af8f1d1531cf2c9860e873a96bb74f2e1f9bbf1",
+  "timestamp": "2026-09-05T20:40:42.156656+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:42:16: error: use of undeclared identifier 'max'\n   42 | #pragma unroll max 4\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:42:20: warning: extra tokens at end of '#pragma unroll' - ignored [-Wignored-pragmas]\n   42 | #pragma unroll max 4\n      |                    ^\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:42:16: error: use of undeclared identifier 'max'\n   42 | #pragma unroll max 4\n      |                ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_flow_affinity_table/sample-0.c:42:20: warning: extra tokens at end of '#pragma unroll' - ignored [-Wignored-pragmas]\n   42 | #pragma unroll max 4\n      |                    ^\n1 warning and 1 error generated."
+}

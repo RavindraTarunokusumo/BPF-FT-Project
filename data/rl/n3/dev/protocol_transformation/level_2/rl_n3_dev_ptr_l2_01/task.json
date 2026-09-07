@@ -1,0 +1,37 @@
+{
+  "task_id": "rl_n3_dev_ptr_l2_01",
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_family": "dev_ptr_l2_vlan_retag_dev01",
+  "template_family": "xdp_vlan_retag",
+  "semantic_signature": "ptr_l2_retag_100_200",
+  "split": "dev",
+  "learning_mode": "synthesis",
+  "instruction": "Write an XDP program that must rewrite VLAN tag 100 to VLAN 200 in-place without head adjustment. Modify the TCI field in-place without adjusting packet head. Forward all packets with XDP_PASS.",
+  "requirements": [
+    "Verify Ethernet and 802.1Q header bounds against data_end",
+    "Check if eth->h_proto == ETH_P_8021Q and vlan_id == 100",
+    "Overwrite vlan->h_vlan_TCI in-place preserving priority bits and setting VID to 200",
+    "Return XDP_PASS unconditionally",
+    "SEC(\"xdp\") entry point and GPL license declaration"
+  ],
+  "tests": [
+    {
+      "name": "pass_retagged",
+      "description": "VLAN 100 retagged to 200 and passed",
+      "packet_hex": "52540012345652540065432181000064080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    },
+    {
+      "name": "pass_untagged",
+      "description": "Untagged passed unmodified",
+      "packet_hex": "525400123456525400654321080045000028123400004006e52dc0a8010ac0a8011430390050000003e8000000005002fffff8020000",
+      "expected_action": "XDP_PASS",
+      "weight": 1.0
+    }
+  ],
+  "phase": "phase_n3",
+  "expected_fixture_count": 2,
+  "task_sha256": "9ed6daade318c776714e95e68ff240b72c7b849c480d3a1ea44aa090c0b34e80"
+}

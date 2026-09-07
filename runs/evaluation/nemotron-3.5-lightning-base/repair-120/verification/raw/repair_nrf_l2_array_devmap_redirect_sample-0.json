@@ -1,0 +1,46 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "repair_nrf_l2_array_devmap_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l2_array_devmap_redirect/sample-0.c",
+  "source_sha256": "e87f09c6acec62409468bb74958f0f3dddbe003ff521e74686796a8b8c3637a9",
+  "timestamp": "2026-09-05T20:40:42.039879+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_tt4qx5ii/candidate.o\nlibbpf: elf: section(3) xdp, size 88, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_forward' at insn offset 0 (0 bytes), code size 11 insns (88 bytes)\nlibbpf: elf: section(4) .relxdp, size 16, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_tt4qx5ii/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1032, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 176, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 360, link 1, flags 0, type=2\nlibbpf: looking for externs among 15 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'tx_devmap': at sec_idx 5, offset 0.\nlibbpf: map 'tx_devmap': found type = 14.\nlibbpf: map 'tx_devmap': found key [6], sz = 4.\nlibbpf: map 'tx_devmap': found value [6], sz = 4.\nlibbpf: map 'tx_devmap': found max_entries = 4.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #5 against 'tx_devmap'\nlibbpf: prog 'xdp_forward': found map 0 (tx_devmap, sec 5, off 0) for insn #5\nlibbpf: map 'tx_devmap': created successfully, fd=4\nlibbpf: prog 'xdp_forward': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_forward(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (07) r1 += 14                      ; R1_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r1 > r2 goto pc+5          ; R1_w=pkt(off=14,r=14) R2_w=pkt_end()\n; return bpf_redirect_map(&tx_devmap, 0, 0);\n5: (18) r1 = 0xff2125b887794c00       ; R1_w=map_ptr(map=tx_devmap,ks=4,vs=4)\n7: (b7) r2 = 0                        ; R2_w=0\n8: (b7) r3 = 0                        ; R3_w=0\n9: (85) call bpf_redirect_map#51      ; R0=scalar()\n; }\n10: (95) exit\n\nfrom 4 to 10: safe\nverification time 61 usec\nstack depth 0\nprocessed 11 insns (limit 1000000) max_states_per_insn 0 total_states 1 peak_states 1 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_redirect_tcp",
+        "description": "Redirect frame through DEVMAP key 0",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_ABORTED",
+        "stderr": ""
+      },
+      {
+        "name": "pass_redirect_arp",
+        "description": "Redirect ARP frame through DEVMAP key 0",
+        "pass": false,
+        "expected": "XDP_REDIRECT",
+        "actual": "XDP_ABORTED",
+        "stderr": ""
+      }
+    ]
+  },
+  "passed": false,
+  "diagnostic": "Behavioral tests failed:\nTest 'pass_redirect_tcp' failed: expected XDP_REDIRECT (4), got XDP_ABORTED (0)\nTest 'pass_redirect_arp' failed: expected XDP_REDIRECT (4), got XDP_ABORTED (0)"
+}

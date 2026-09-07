@@ -1,0 +1,44 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_pit_l3_03",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-confirmation-60/candidates/rl_v2_conf_pit_l3_03/sample-0.c",
+  "source_sha256": "031c0c5b9394a57ae11e59db86b86efaeee3cb43f47a8f3a16d7c07177d8ac7c",
+  "timestamp": "2026-09-06T20:18:35.577028+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_emjdgb4c/candidate.o\nlibbpf: elf: section(3) xdp, size 296, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_rl_v2_conf_pit_l3_03' at insn offset 0 (0 bytes), code size 37 insns (296 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_emjdgb4c/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1439, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 320, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'flow_time_03': at sec_idx 5, offset 0.\nlibbpf: map 'flow_time_03': found type = 9.\nlibbpf: map 'flow_time_03': found key [8], sz = 4.\nlibbpf: map 'flow_time_03': found value [11], sz = 16.\nlibbpf: map 'flow_time_03': found max_entries = 10000.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #17 against 'flow_time_03'\nlibbpf: prog 'xdp_telemetry_rl_v2_conf_pit_l3_03': found map 0 (flow_time_03, sec 5, off 0) for insn #17\nlibbpf: sec '.relxdp': relo #1: insn #31 against 'flow_time_03'\nlibbpf: prog 'xdp_telemetry_rl_v2_conf_pit_l3_03': found map 0 (flow_time_03, sec 5, off 0) for insn #31\nlibbpf: map 'flow_time_03': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_rl_v2_conf_pit_l3_03': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+30         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+25       ; R3_w=8\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n12: (2d) if r3 > r2 goto pc+22        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 key = ip->saddr;\n13: (61) r1 = *(u32 *)(r1 +26)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 key = ip->saddr;\n14: (63) *(u32 *)(r10 -4) = r1        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n15: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 key = ip->saddr;\n16: (07) r2 += -4                     ; R2_w=fp-4\n; struct flow_timing *timing = bpf_map_lookup_elem(&flow_time_03, &key);\n17: (18) r1 = 0xff2125b8e1ef1800      ; R1_w=map_ptr(map=flow_time_03,ks=4,vs=16)\n19: (85) call bpf_map_lookup_elem#1   ; R0_w=map_value_or_null(id=1,map=flow_time_03,ks=4,vs=16)\n20: (bf) r6 = r0                      ; R0_w=map_value_or_null(id=1,map=flow_time_03,ks=4,vs=16) R6_w=map_value_or_null(id=1,map=flow_time_03,ks=4,vs=16)\n; __u64 now = bpf_ktime_get_ns();\n21: (85) call bpf_ktime_get_ns#5      ; R0=scalar()\n; if (timing) {\n22: (15) if r6 == 0x0 goto pc+2       ; R6=map_value(map=flow_time_03,ks=4,vs=16)\n; timing->last_seen = now;\n23: (7b) *(u64 *)(r6 +8) = r0         ; R0=scalar() R6=map_value(map=flow_time_03,ks=4,vs=16)\n24: (05) goto pc+10\n; }\n35: (b7) r0 = 2                       ; R0_w=2\n36: (95) exit\n\nfrom 22 to 25: R0=scalar() R6=0 R10=fp0 fp-8=mmmm????\n25: R0=scalar() R6=0 R10=fp0 fp-8=mmmm????\n; struct flow_timing initial = {\n25: (7b) *(u64 *)(r10 -16) = r0       ; R0=scalar() R10=fp0 fp-16_w=mmmmmmmm\n26: (7b) *(u64 *)(r10 -24) = r0       ; R0=scalar() R10=fp0 fp-24_w=mmmmmmmm\n27: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n28: (07) r2 += -4                     ; R2_w=fp-4\n29: (bf) r3 = r10                     ; R3_w=fp0 R10=fp0\n30: (07) r3 += -24                    ; R3_w=fp-24\n; bpf_map_update_elem(&flow_time_03, &key, &initial, BPF_ANY);\n31: (18) r1 = 0xff2125b8e1ef1800      ; R1_w=map_ptr(map=flow_time_03,ks=4,vs=16)\n33: (b7) r4 = 0                       ; R4_w=0\n34: (85) call bpf_map_update_elem#2   ; R0=scalar()\n; }\n35: (b7) r0 = 2                       ; R0_w=2\n36: (95) exit\n\nfrom 12 to 35: safe\n\nfrom 9 to 35: safe\n\nfrom 4 to 35: safe\nverification time 307 usec\nstack depth 24\nprocessed 40 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_ip",
+        "description": "Timestamp tracked and passed",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "ARP passed unmodified",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

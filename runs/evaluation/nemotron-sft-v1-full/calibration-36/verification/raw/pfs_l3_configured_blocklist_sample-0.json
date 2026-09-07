@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "pfs_l3_configured_blocklist",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_configured_blocklist/sample-0.c",
+  "source_sha256": "fef04e976d0b36b7e067cab692b95d2cec5a3b08cb17d33edab076dad53fe643",
+  "timestamp": "2026-09-06T20:17:37.215010+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_configured_blocklist/sample-0.c:51:11: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   51 |     __u32 rule_id = bpf_map_lookup_elem(&blocklist_lpm_map, &key);\n      |           ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/pfs_l3_configured_blocklist/sample-0.c:51:11: error: incompatible pointer to integer conversion initializing '__u32' (aka 'unsigned int') with an expression of type 'void *' [-Wint-conversion]\n   51 |     __u32 rule_id = bpf_map_lookup_elem(&blocklist_lpm_map, &key);\n      |           ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated."
+}

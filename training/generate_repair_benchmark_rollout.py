@@ -103,6 +103,8 @@ async def run_repair_benchmark_rollout(
     seed: int = 42,
     max_tokens: int = 2048,
     mock: bool = False,
+    top_p: Optional[float] = None,
+    concurrency: int = 4,
 ) -> Dict[str, Any]:
     benchmark_index = benchmark_index.resolve()
     output_dir = output_dir.resolve()
@@ -139,10 +141,13 @@ async def run_repair_benchmark_rollout(
     prompts_records: List[Dict[str, Any]] = []
 
     stop_seqs = renderer.get_stop_sequences()
-
     bench_base = benchmark_index.parent
 
-    for idx, task_meta in enumerate(tasks, start=1):
+    sem = asyncio.Semaphore(concurrency)
+    completed = 0
+
+    async def process_task(task_meta: Dict[str, Any]):
+        nonlocal completed
         task_id = task_meta["task_id"]
         category = task_meta.get("application_category", "packet_filtering_security")
         difficulty = task_meta.get("difficulty", "level_1")
@@ -193,17 +198,21 @@ async def run_repair_benchmark_rollout(
             token_ids = [100, 200, 300]
             finish_reason = "STOP_SEQUENCE"
         else:
-            sampling_params = tinker.SamplingParams(
-                max_tokens=max_tokens,
-                temperature=temperature,
-                seed=seed,
-                stop=stop_seqs,
-            )
-            sample_result = await sampling_client.sample_async(
-                prompt=prompt_model_input,
-                num_samples=1,
-                sampling_params=sampling_params,
-            )
+            sampling_kwargs: Dict[str, Any] = {
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+                "seed": seed,
+                "stop": stop_seqs,
+            }
+            if top_p is not None:
+                sampling_kwargs["top_p"] = top_p
+            sampling_params = tinker.SamplingParams(**sampling_kwargs)
+            async with sem:
+                sample_result = await sampling_client.sample_async(
+                    prompt=prompt_model_input,
+                    num_samples=1,
+                    sampling_params=sampling_params,
+                )
             sampled_seq = sample_result.sequences[0]
             token_ids = list(sampled_seq.tokens)
             raw_text = renderer.tokenizer.decode(token_ids)
@@ -231,16 +240,23 @@ async def run_repair_benchmark_rollout(
             "finish_reason": finish_reason,
             "compliance": compliance,
         }
-        generation_records.append(record)
 
-        prompts_records.append({
+        prompt_rec = {
             "task_id": task_id,
             "prompt_hash": prompt_hash,
             "messages": messages,
-        })
+        }
 
-        if idx % 10 == 0 or idx == len(tasks):
-            print(f"    Progress: {idx}/{len(tasks)} repair benchmark tasks generated.", flush=True)
+        completed += 1
+        if completed % 10 == 0 or completed == len(tasks):
+            print(f"    Progress: {completed}/{len(tasks)} repair benchmark tasks generated.", flush=True)
+
+        return record, prompt_rec
+
+    results = await asyncio.gather(*(process_task(t) for t in tasks))
+    for rec, prec in results:
+        generation_records.append(rec)
+        prompts_records.append(prec)
 
     # Write prompts.jsonl and generation_records.jsonl
     (output_dir / "prompts.jsonl").write_text(
@@ -278,21 +294,27 @@ def main():
     parser = argparse.ArgumentParser(description="Generate 120-task repair benchmark rollout via Tinker")
     parser.add_argument("--benchmark-index", type=Path, default=PROJECT_ROOT / "data" / "benchmark" / "repair" / "index.jsonl")
     parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--model-name", type=str, default=DEFAULT_MODEL_NAME)
+    parser.add_argument("--model-profile", type=str, default="nemotron-3.5-lightning", help="Model profile (e.g. nemotron-3.5-lightning or qwen3-8b)")
+    parser.add_argument("--model-name", type=str, default=None, help="Model ID override")
     parser.add_argument("--sampler-checkpoint", type=str, default=None)
-    parser.add_argument("--renderer-name", type=str, default=DEFAULT_RENDERER_NAME)
+    parser.add_argument("--renderer-name", type=str, default=None, help="Renderer name override")
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max-tokens", type=int, default=2048)
     parser.add_argument("--mock", action="store_true")
 
     args = parser.parse_args()
+    from training.model_profiles import get_model_profile
+    prof = get_model_profile(args.model_profile)
+    model_name = args.model_name or prof.model_name
+    renderer_name = args.renderer_name or prof.renderer_name
+
     asyncio.run(run_repair_benchmark_rollout(
         benchmark_index=args.benchmark_index,
         output_dir=args.output_dir,
-        model_name=args.model_name,
+        model_name=model_name,
         sampler_checkpoint=args.sampler_checkpoint,
-        renderer_name=args.renderer_name,
+        renderer_name=renderer_name,
         temperature=args.temperature,
         seed=args.seed,
         max_tokens=args.max_tokens,
@@ -302,3 +324,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

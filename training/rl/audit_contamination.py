@@ -509,20 +509,21 @@ def run_contamination_audit(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Audit RL v2 tasks for benchmark and cross-split contamination")
-    parser.add_argument("--v2-dir", type=str, default="data/rl/v2", help="Path to data/rl/v2 directory")
-    parser.add_argument("--output", type=str, default="data/rl/v2/contamination_audit.json", help="Output audit report path")
+    parser = argparse.ArgumentParser(description="Audit RL tasks for benchmark and cross-split contamination")
+    parser.add_argument("--v2-dir", "--target-dir", dest="target_dir", type=str, default="data/rl/v2", help="Path to target RL dataset directory")
+    parser.add_argument("--output", type=str, default=None, help="Output audit report path")
     parser.add_argument("--fail-on-overlap", action="store_true", help="Exit with code 1 if any contamination is detected")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
-    v2_base = Path(args.v2_dir)
+    target_base = Path(args.target_dir)
+    prefix = target_base.name
     rl_splits = {
-        "rl_v2_canary": v2_base / "canary",
-        "rl_v2_train": v2_base / "train",
-        "rl_v2_dev": v2_base / "dev",
-        "rl_v2_confirmation": v2_base / "confirmation",
+        f"rl_{prefix}_canary": target_base / "canary",
+        f"rl_{prefix}_train": target_base / "train",
+        f"rl_{prefix}_dev": target_base / "dev",
+        f"rl_{prefix}_confirmation": target_base / "confirmation",
     }
 
     protected_splits = {
@@ -534,7 +535,7 @@ def main():
 
     report = run_contamination_audit(rl_splits, protected_splits)
 
-    out_path = Path(args.output)
+    out_path = Path(args.output) if args.output else target_base / "contamination_audit.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     logger.info("Contamination audit report saved to %s", out_path)

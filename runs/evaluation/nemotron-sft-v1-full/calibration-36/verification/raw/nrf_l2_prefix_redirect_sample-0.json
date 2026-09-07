@@ -1,0 +1,79 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "nrf_l2_prefix_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l2_prefix_redirect/sample-0.c",
+  "source_sha256": "2dc36c2cd17f1b58e700b542a437db93c4c5d6fead0e23ba5292c11cf4703126",
+  "timestamp": "2026-09-06T20:17:37.698824+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_yqf9rlw8/candidate.o\nlibbpf: elf: section(3) xdp, size 424, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_route_nrf_l2_prefix_redirect' at insn offset 0 (0 bytes), code size 53 insns (424 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_yqf9rlw8/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1291, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 384, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 456, link 1, flags 0, type=2\nlibbpf: looking for externs among 19 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'prefix_config': at sec_idx 5, offset 0.\nlibbpf: map 'prefix_config': found type = 2.\nlibbpf: map 'prefix_config': found key [6], sz = 4.\nlibbpf: map 'prefix_config': found value [6], sz = 4.\nlibbpf: map 'prefix_config': found max_entries = 2.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #25 against 'prefix_config'\nlibbpf: prog 'xdp_route_nrf_l2_prefix_redirect': found map 0 (prefix_config, sec 5, off 0) for insn #25\nlibbpf: sec '.relxdp': relo #1: insn #43 against 'prefix_config'\nlibbpf: prog 'xdp_route_nrf_l2_prefix_redirect': found map 0 (prefix_config, sec 5, off 0) for insn #43\nlibbpf: map 'prefix_config': created successfully, fd=4\nlibbpf: prog 'xdp_route_nrf_l2_prefix_redirect': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; int xdp_route_nrf_l2_prefix_redirect(struct xdp_md *ctx) {\n0: (b7) r0 = 2                        ; R0_w=2\n; void *data_end = (void *)(long)ctx->data_end;\n1: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n2: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n3: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n4: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n5: (2d) if r3 > r2 goto pc+46         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n6: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n7: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n8: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n9: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n10: (55) if r3 != 0x8 goto pc+41      ; R3_w=8\n11: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n12: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n13: (2d) if r3 > r2 goto pc+38        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 dst = bpf_ntohl(ip->daddr);\n14: (61) r1 = *(u32 *)(r1 +30)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n15: (dc) r1 = be32 r1                 ; R1_w=scalar()\n16: (18) r2 = 0xff000000              ; R2_w=0xff000000\n; if ((dst & 0xFF000000) == 0x0A000000) {\n18: (bf) r3 = r1                      ; R1_w=scalar(id=1) R3_w=scalar(id=1)\n19: (5f) r3 &= r2                     ; R2_w=0xff000000 R3_w=scalar(smin=0,smax=umax=umax32=0xff000000,smax32=0x7f000000,var_off=(0x0; 0xff000000))\n; if ((dst & 0xFF000000) == 0x0A000000) {\n20: (55) if r3 != 0xa000000 goto pc+12        ; R3_w=0xa000000\n21: (b7) r1 = 0                       ; R1_w=0\n; __u32 ifindex = 0;\n22: (63) *(u32 *)(r10 -4) = r1\nmark_precise: frame0: last_idx 22 first_idx 13 subseq_idx -1 \nmark_precise: frame0: regs=r1 stack= before 21: (b7) r1 = 0\n23: R1_w=0 R10=fp0 fp-8=0000????\n23: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n24: (07) r2 += -4                     ; R2_w=fp-4\n; if (bpf_map_lookup_elem(&prefix_config, &ifindex) == 0 && ifindex > 0)\n25: (18) r1 = 0xff2125b89938ac00      ; R1_w=map_ptr(map=prefix_config,ks=4,vs=4)\n27: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=2,map=prefix_config,ks=4,vs=4)\n; if (bpf_map_lookup_elem(&prefix_config, &ifindex) == 0 && ifindex > 0)\n28: (55) if r0 != 0x0 goto pc+2       ; R0=0\n29: (61) r1 = *(u32 *)(r10 -4)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n30: (55) if r1 != 0x0 goto pc+19      ; R1_w=0\n31: (b7) r0 = 2                       ; R0_w=2\n32: (05) goto pc+19\n; }\n52: (95) exit\n\nfrom 30 to 50: R0=0 R1_w=scalar(smin=umin=umin32=1,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n50: R0=0 R1_w=scalar(smin=umin=umin32=1,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n; \n50: (b7) r2 = 0                       ; R2_w=0\n51: (85) call bpf_redirect#23         ; R0=scalar()\n; }\n52: (95) exit\n\nfrom 28 to 31: R0=map_value(map=prefix_config,ks=4,vs=4) R10=fp0 fp-8=mmmm????\n31: R0=map_value(map=prefix_config,ks=4,vs=4) R10=fp0 fp-8=mmmm????\n; if (bpf_map_lookup_elem(&prefix_config, &ifindex) == 0 && ifindex > 0)\n31: (b7) r0 = 2                       ; R0_w=2\n32: (05) goto pc+19\n52: safe\n\nfrom 20 to 33: R0=2 R1_w=scalar(id=1) R2_w=0xff000000 R3_w=scalar(smin=0,smax=umax=umax32=0xff000000,smax32=0x7f000000,var_off=(0x0; 0xff000000)) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n33: R0=2 R1_w=scalar(id=1) R2_w=0xff000000 R3_w=scalar(smin=0,smax=umax=umax32=0xff000000,smax32=0x7f000000,var_off=(0x0; 0xff000000)) R4=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R10=fp0\n33: (18) r2 = 0xfff00000              ; R2_w=0xfff00000\n; } else if ((dst & 0xFFF00000) == 0xAC100000) {\n35: (5f) r1 &= r2                     ; R1_w=scalar(smin=0,smax=umax=umax32=0xfff00000,smax32=0x7ff00000,var_off=(0x0; 0xfff00000)) R2_w=0xfff00000\n36: (18) r2 = 0xac100000              ; R2_w=0xac100000\n; } else if ((dst & 0xFFF00000) == 0xAC100000) {\n38: (5d) if r1 != r2 goto pc+13       ; R1_w=0xac100000 R2_w=0xac100000\n39: (b7) r1 = 1                       ; R1_w=1\n; __u32 ifindex = 1;\n40: (63) *(u32 *)(r10 -8) = r1        ; R1_w=1 R10=fp0 fp-8=????1\n41: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n42: (07) r2 += -8                     ; R2_w=fp-8\n; if (bpf_map_lookup_elem(&prefix_config, &ifindex) == 0 && ifindex > 0)\n43: (18) r1 = 0xff2125b89938ac00      ; R1_w=map_ptr(map=prefix_config,ks=4,vs=4)\n45: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=3,map=prefix_config,ks=4,vs=4)\n; if (bpf_map_lookup_elem(&prefix_config, &ifindex) == 0 && ifindex > 0)\n46: (55) if r0 != 0x0 goto pc+2       ; R0=0\n47: (61) r1 = *(u32 *)(r10 -8)        ; R1_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=????mmmm\n48: (55) if r1 != 0x0 goto pc+1       ; R1_w=0\n49: (05) goto pc-19\n; if (bpf_map_lookup_elem(&prefix_config, &ifindex) == 0 && ifindex > 0)\n31: (b7) r0 = 2                       ; R0_w=2\n32: (05) goto pc+19\n52: safe\n\nfrom 48 to 50: R0=0 R1_w=scalar(smin=umin=umin32=1,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=????mmmm\n50: R0=0 R1_w=scalar(smin=umin=umin32=1,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=????mmmm\n; \n50: (b7) r2 = 0                       ; R2_w=0\n51: (85) call bpf_redirect#23\n52: safe\n\nfrom 46 to 49: R0=map_value(map=prefix_config,ks=4,vs=4) R10=fp0 fp-8=????mmmm\n49: R0=map_value(map=prefix_config,ks=4,vs=4) R10=fp0 fp-8=????mmmm\n; if (bpf_map_lookup_elem(&prefix_config, &ifindex) == 0 && ifindex > 0)\n49: (05) goto pc-19\n; if (bpf_map_lookup_elem(&prefix_config, &ifindex) == 0 && ifindex > 0)\n31: (b7) r0 = 2                       ; R0_w=2\n32: (05) goto pc+19\n52: safe\n\nfrom 38 to 52: safe\n\nfrom 13 to 52: safe\n\nfrom 10 to 52: safe\n\nfrom 5 to 52: safe\nverification time 444 usec\nstack depth 8\nprocessed 66 insns (limit 1000000) max_states_per_insn 0 total_states 5 peak_states 5 mark_read 2\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 7,
+    "total_tests": 7,
+    "details": [
+      {
+        "name": "prefix10_default_pass",
+        "description": "10.1.2.3 packet with unconfigured map defaults to XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "prefix172_default_pass",
+        "description": "172.16.5.6 packet with unconfigured map defaults to XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "prefix192_pass",
+        "description": "192.168.1.1 packet (no match) must return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "public_ip_pass",
+        "description": "8.8.8.8 packet (no match) must return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "arp_pass",
+        "description": "ARP frame must return XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "prefix10_boundary_pass",
+        "description": "10.255.255.255 packet defaults to XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "prefix172_boundary_pass",
+        "description": "172.31.255.255 packet defaults to XDP_PASS",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

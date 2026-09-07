@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "repair_nrf_l3_fib_ttl_decrement",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c",
+  "source_sha256": "73ad23446eb77c4d92da4231da368586a6a7ee02713590b401c3b4801c2d10e6",
+  "timestamp": "2026-09-05T20:40:33.272942+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:8:8: error: redefinition of 'bpf_fib_lookup'\n    8 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:81:22: error: call to undeclared function 'bpf_csum_fold'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   81 |         ip->check = ~bpf_csum_fold(bpf_csum_diff(0, 0, 0, ip)); \n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:81:61: error: too few arguments to function call, expected 5, have 4\n   81 |         ip->check = ~bpf_csum_fold(bpf_csum_diff(0, 0, 0, ip)); \n      |                                    ~~~~~~~~~~~~~            ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:8:8: error: redefinition of 'bpf_fib_lookup'\n    8 | struct bpf_fib_lookup {\n      |        ^\n/usr/include/linux/bpf.h:7052:8: note: previous definition is here\n 7052 | struct bpf_fib_lookup {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:81:22: error: call to undeclared function 'bpf_csum_fold'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   81 |         ip->check = ~bpf_csum_fold(bpf_csum_diff(0, 0, 0, ip)); \n      |                      ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_nrf_l3_fib_ttl_decrement/sample-0.c:81:61: error: too few arguments to function call, expected 5, have 4\n   81 |         ip->check = ~bpf_csum_fold(bpf_csum_diff(0, 0, 0, ip)); \n      |                                    ~~~~~~~~~~~~~            ^\n3 errors generated."
+}

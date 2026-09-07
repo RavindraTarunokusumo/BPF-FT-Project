@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_007_flow_cache_fast_path_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c",
+  "source_sha256": "ebb8cbaf6e199e30696ee12630fb430d40eb18f7c7a2e6a312016c33fbf0f75f",
+  "timestamp": "2026-09-05T20:40:25.652887+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:36:56: error: variable has incomplete type 'struct bpf_map_def'\n   36 | struct bpf_map_def __attribute__((section(\"map_def\"))) flow_cache_map = {\n      |                                                        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:36:8: note: forward declaration of 'struct bpf_map_def'\n   36 | struct bpf_map_def __attribute__((section(\"map_def\"))) flow_cache_map = {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:62:16: warning: comparison of distinct pointer types ('struct iphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   62 |     if (ip + 1 > data_end)\n      |         ~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:66:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   66 |     if (ip->protocol != IPPROTO_TCP && ip->protocol != IPPROTO_UDP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:66:56: error: use of undeclared identifier 'IPPROTO_UDP'\n   66 |     if (ip->protocol != IPPROTO_TCP && ip->protocol != IPPROTO_UDP)\n      |                                                        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:82:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   82 |     if (ip->protocol == IPPROTO_TCP) {\n      |                         ^\n1 warning and 4 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:36:56: error: variable has incomplete type 'struct bpf_map_def'\n   36 | struct bpf_map_def __attribute__((section(\"map_def\"))) flow_cache_map = {\n      |                                                        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:36:8: note: forward declaration of 'struct bpf_map_def'\n   36 | struct bpf_map_def __attribute__((section(\"map_def\"))) flow_cache_map = {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:62:16: warning: comparison of distinct pointer types ('struct iphdr *' and 'void *') [-Wcompare-distinct-pointer-types]\n   62 |     if (ip + 1 > data_end)\n      |         ~~~~~~ ^ ~~~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:66:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   66 |     if (ip->protocol != IPPROTO_TCP && ip->protocol != IPPROTO_UDP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:66:56: error: use of undeclared identifier 'IPPROTO_UDP'\n   66 |     if (ip->protocol != IPPROTO_TCP && ip->protocol != IPPROTO_UDP)\n      |                                                        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_007_flow_cache_fast_path_router/sample-0.c:82:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   82 |     if (ip->protocol == IPPROTO_TCP) {\n      |                         ^\n1 warning and 4 errors generated."
+}

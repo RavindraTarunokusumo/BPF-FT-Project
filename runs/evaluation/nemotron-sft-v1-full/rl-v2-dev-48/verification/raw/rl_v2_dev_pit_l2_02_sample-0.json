@@ -1,0 +1,44 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_dev_pit_l2_02",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/rl-v2-dev-48/candidates/rl_v2_dev_pit_l2_02/sample-0.c",
+  "source_sha256": "2b9acc3cdc672ed13e9fd5f6534c185cb8ec6076681a2e61a54be8544284e73c",
+  "timestamp": "2026-09-06T20:18:21.297790+00:00",
+  "compile": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "",
+    "returncode": 0
+  },
+  "verifier": {
+    "pass": true,
+    "stdout": "",
+    "stderr": "libbpf: loading object from /tmp/bpf_val_vyd7dcgk/candidate.o\nlibbpf: elf: section(3) xdp, size 304, link 0, flags 6, type=1\nlibbpf: sec 'xdp': found program 'xdp_telemetry_rl_v2_dev_pit_l2_02' at insn offset 0 (0 bytes), code size 38 insns (304 bytes)\nlibbpf: elf: section(4) .relxdp, size 32, link 26, flags 40, type=9\nlibbpf: elf: section(5) .maps, size 32, link 0, flags 3, type=1\nlibbpf: elf: section(6) license, size 4, link 0, flags 3, type=1\nlibbpf: license of /tmp/bpf_val_vyd7dcgk/candidate.o is GPL\nlibbpf: elf: section(16) .BTF, size 1287, link 0, flags 0, type=1\nlibbpf: elf: section(18) .BTF.ext, size 320, link 0, flags 0, type=1\nlibbpf: elf: section(26) .symtab, size 384, link 1, flags 0, type=2\nlibbpf: looking for externs among 16 symbols...\nlibbpf: collected 0 externs total\nlibbpf: map 'dst_bytes_02': at sec_idx 5, offset 0.\nlibbpf: map 'dst_bytes_02': found type = 9.\nlibbpf: map 'dst_bytes_02': found key [8], sz = 4.\nlibbpf: map 'dst_bytes_02': found value [11], sz = 8.\nlibbpf: map 'dst_bytes_02': found max_entries = 10000.\nlibbpf: sec '.relxdp': collecting relocation for section(3) 'xdp'\nlibbpf: sec '.relxdp': relo #0: insn #20 against 'dst_bytes_02'\nlibbpf: prog 'xdp_telemetry_rl_v2_dev_pit_l2_02': found map 0 (dst_bytes_02, sec 5, off 0) for insn #20\nlibbpf: sec '.relxdp': relo #1: insn #32 against 'dst_bytes_02'\nlibbpf: prog 'xdp_telemetry_rl_v2_dev_pit_l2_02': found map 0 (dst_bytes_02, sec 5, off 0) for insn #32\nlibbpf: map 'dst_bytes_02': created successfully, fd=4\nlibbpf: prog 'xdp_telemetry_rl_v2_dev_pit_l2_02': -- BEGIN PROG LOAD LOG --\nfunc#0 @0\n0: R1=ctx() R10=fp0\n; void *data_end = (void *)(long)ctx->data_end;\n0: (61) r2 = *(u32 *)(r1 +4)          ; R1=ctx() R2_w=pkt_end()\n; void *data = (void *)(long)ctx->data;\n1: (61) r1 = *(u32 *)(r1 +0)          ; R1_w=pkt(r=0)\n; if ((void *)(eth + 1) > data_end)\n2: (bf) r3 = r1                       ; R1_w=pkt(r=0) R3_w=pkt(r=0)\n3: (07) r3 += 14                      ; R3_w=pkt(off=14,r=0)\n; if ((void *)(eth + 1) > data_end)\n4: (2d) if r3 > r2 goto pc+31         ; R2_w=pkt_end() R3_w=pkt(off=14,r=14)\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n5: (71) r3 = *(u8 *)(r1 +13)          ; R1_w=pkt(r=14) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n6: (67) r3 <<= 8                      ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))\n7: (71) r4 = *(u8 *)(r1 +12)          ; R1_w=pkt(r=14) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n8: (4f) r3 |= r4                      ; R3_w=scalar() R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))\n; if (eth->h_proto != bpf_htons(ETH_P_IP))\n9: (55) if r3 != 0x8 goto pc+26       ; R3_w=8\n10: (bf) r3 = r1                      ; R1_w=pkt(r=14) R3_w=pkt(r=14)\n11: (07) r3 += 34                     ; R3=pkt(off=34,r=14)\n12: (2d) if r3 > r2 goto pc+23        ; R2=pkt_end() R3=pkt(off=34,r=34)\n; __u32 key = ip->daddr;\n13: (61) r2 = *(u32 *)(r1 +30)        ; R1=pkt(r=34) R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))\n; __u32 key = ip->daddr;\n14: (63) *(u32 *)(r10 -4) = r2        ; R2_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R10=fp0 fp-8=mmmm????\n; __u64 len = bpf_ntohs(ip->tot_len);\n15: (69) r6 = *(u16 *)(r1 +16)        ; R1=pkt(r=34) R6_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))\n16: (dc) r6 = be16 r6                 ; R6_w=scalar()\n; __u64 len = bpf_ntohs(ip->tot_len);\n17: (7b) *(u64 *)(r10 -16) = r6       ; R6_w=scalar() R10=fp0 fp-16_w=mmmmmmmm\n18: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; __u32 key = ip->daddr;\n19: (07) r2 += -4                     ; R2_w=fp-4\n; __u64 *cnt = bpf_map_lookup_elem(&dst_bytes_02, &key);\n20: (18) r1 = 0xff2125b906b34c00      ; R1_w=map_ptr(map=dst_bytes_02,ks=4,vs=8)\n22: (85) call bpf_map_lookup_elem#1   ; R0=map_value_or_null(id=1,map=dst_bytes_02,ks=4,vs=8)\n; if (cnt)\n23: (15) if r0 == 0x0 goto pc+4       ; R0=map_value(map=dst_bytes_02,ks=4,vs=8)\n; *cnt += len;\n24: (79) r1 = *(u64 *)(r0 +0)         ; R0=map_value(map=dst_bytes_02,ks=4,vs=8) R1_w=scalar()\n25: (0f) r1 += r6                     ; R1_w=scalar() R6=scalar()\n26: (7b) *(u64 *)(r0 +0) = r1         ; R0=map_value(map=dst_bytes_02,ks=4,vs=8) R1_w=scalar()\n27: (05) goto pc+8\n; }\n36: (b7) r0 = 2                       ; R0_w=2\n37: (95) exit\n\nfrom 23 to 28: R0=0 R6=scalar() R10=fp0 fp-8=mmmm???? fp-16=mmmmmmmm\n28: R0=0 R6=scalar() R10=fp0 fp-8=mmmm???? fp-16=mmmmmmmm\n; *cnt += len;\n28: (bf) r2 = r10                     ; R2_w=fp0 R10=fp0\n; bpf_map_update_elem(&dst_bytes_02, &key, &len, BPF_ANY);\n29: (07) r2 += -4                     ; R2_w=fp-4\n30: (bf) r3 = r10                     ; R3_w=fp0 R10=fp0\n31: (07) r3 += -16                    ; R3_w=fp-16\n32: (18) r1 = 0xff2125b906b34c00      ; R1_w=map_ptr(map=dst_bytes_02,ks=4,vs=8)\n34: (b7) r4 = 0                       ; R4_w=0\n35: (85) call bpf_map_update_elem#2   ; R0=scalar()\n; }\n36: (b7) r0 = 2                       ; R0_w=2\n37: (95) exit\n\nfrom 12 to 36: safe\n\nfrom 9 to 36: safe\n\nfrom 4 to 36: safe\nverification time 258 usec\nstack depth 16\nprocessed 41 insns (limit 1000000) max_states_per_insn 0 total_states 3 peak_states 3 mark_read 1\n-- END PROG LOAD LOG --\n",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": true,
+    "passed_tests": 2,
+    "total_tests": 2,
+    "details": [
+      {
+        "name": "pass_ip",
+        "description": "IPv4 bytes accumulated and passed",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      },
+      {
+        "name": "pass_arp",
+        "description": "ARP passed unmodified",
+        "pass": true,
+        "expected": "XDP_PASS",
+        "actual": "XDP_PASS"
+      }
+    ]
+  },
+  "passed": true,
+  "diagnostic": null
+}

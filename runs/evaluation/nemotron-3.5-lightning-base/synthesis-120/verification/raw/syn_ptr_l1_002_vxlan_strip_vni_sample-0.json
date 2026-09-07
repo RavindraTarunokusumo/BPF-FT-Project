@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "syn_ptr_l1_002_vxlan_strip_vni",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_002_vxlan_strip_vni/sample-0.c",
+  "source_sha256": "fde06db0b12c8626fc4831344df57b6cc998651b7c54039963c913836dea0496",
+  "timestamp": "2026-09-05T20:40:25.027797+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_002_vxlan_strip_vni/sample-0.c:20:10: fatal error: 'linux/vxlan.h' file not found\n   20 | #include <linux/vxlan.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l1_002_vxlan_strip_vni/sample-0.c:20:10: fatal error: 'linux/vxlan.h' file not found\n   20 | #include <linux/vxlan.h>\n      |          ^~~~~~~~~~~~~~~\n1 error generated."
+}

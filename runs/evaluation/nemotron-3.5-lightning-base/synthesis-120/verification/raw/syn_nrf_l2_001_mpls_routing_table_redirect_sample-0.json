@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_2",
+  "task_id": "syn_nrf_l2_001_mpls_routing_table_redirect",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c",
+  "source_sha256": "e7a4572442e1facf5dfffc241ac86c2ccdef6848c21e1f50191e49e6e3a4f777",
+  "timestamp": "2026-09-05T20:40:26.001994+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c:20:53: error: variable has incomplete type 'struct bpf_map_def'\n   20 | struct bpf_map_def __attribute__((section(\"maps\"))) mpls_route_map = {\n      |                                                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c:20:8: note: forward declaration of 'struct bpf_map_def'\n   20 | struct bpf_map_def __attribute__((section(\"maps\"))) mpls_route_map = {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c:58:29: error: arithmetic on a pointer to an incomplete type 'struct mpls_label'\n   58 |     if ((void *)(mpls_label + 1) > data_end)\n      |                  ~~~~~~~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c:49:12: note: forward declaration of 'struct mpls_label'\n   49 |     struct mpls_label *mpls_label;\n      |            ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c:20:53: error: variable has incomplete type 'struct bpf_map_def'\n   20 | struct bpf_map_def __attribute__((section(\"maps\"))) mpls_route_map = {\n      |                                                     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c:20:8: note: forward declaration of 'struct bpf_map_def'\n   20 | struct bpf_map_def __attribute__((section(\"maps\"))) mpls_route_map = {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c:58:29: error: arithmetic on a pointer to an incomplete type 'struct mpls_label'\n   58 |     if ((void *)(mpls_label + 1) > data_end)\n      |                  ~~~~~~~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l2_001_mpls_routing_table_redirect/sample-0.c:49:12: note: forward declaration of 'struct mpls_label'\n   49 |     struct mpls_label *mpls_label;\n      |            ^\n2 errors generated."
+}

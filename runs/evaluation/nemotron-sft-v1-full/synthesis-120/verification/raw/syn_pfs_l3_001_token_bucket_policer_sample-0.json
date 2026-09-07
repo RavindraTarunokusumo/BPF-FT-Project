@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_3",
+  "task_id": "syn_pfs_l3_001_token_bucket_policer",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c",
+  "source_sha256": "2a03a8a63e2f30fab87763c586ae645439aa8eaf3cd0b1019991915e3acfcdb6",
+  "timestamp": "2026-09-06T20:17:49.298264+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:43:29: error: subscripted value is not an array, pointer, or vector\n   43 |         state = &policer_map[src_ip];\n      |                  ~~~~~~~~~~~^~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:46:25: error: use of undeclared identifier 'BURST_CAPACITY'\n   46 |         state->tokens = BURST_CAPACITY;\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:51:41: error: use of undeclared identifier 'RATE_BYTES_PER_SEC'\n   51 |     __u64 tokens_to_add = (elapsed_ns * RATE_BYTES_PER_SEC) / 1000000000000ULL;\n      |                                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:54:29: error: use of undeclared identifier 'BURST_CAPACITY'\n   54 |         if (state->tokens > BURST_CAPACITY)\n      |                             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:55:29: error: use of undeclared identifier 'BURST_CAPACITY'\n   55 |             state->tokens = BURST_CAPACITY;\n      |                             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:60:19: error: use of undeclared identifier 'BURST_CAPACITY'\n   60 |     if (pkt_len > BURST_CAPACITY) {\n      |                   ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:43:29: error: subscripted value is not an array, pointer, or vector\n   43 |         state = &policer_map[src_ip];\n      |                  ~~~~~~~~~~~^~~~~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:46:25: error: use of undeclared identifier 'BURST_CAPACITY'\n   46 |         state->tokens = BURST_CAPACITY;\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:51:41: error: use of undeclared identifier 'RATE_BYTES_PER_SEC'\n   51 |     __u64 tokens_to_add = (elapsed_ns * RATE_BYTES_PER_SEC) / 1000000000000ULL;\n      |                                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:54:29: error: use of undeclared identifier 'BURST_CAPACITY'\n   54 |         if (state->tokens > BURST_CAPACITY)\n      |                             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:55:29: error: use of undeclared identifier 'BURST_CAPACITY'\n   55 |             state->tokens = BURST_CAPACITY;\n      |                             ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/synthesis-120/candidates/syn_pfs_l3_001_token_bucket_policer/sample-0.c:60:19: error: use of undeclared identifier 'BURST_CAPACITY'\n   60 |     if (pkt_len > BURST_CAPACITY) {\n      |                   ^\n6 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "nrf_l3_fib_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_fib_router/sample-0.c",
+  "source_sha256": "e86c3daa7e3e0e73a1cfdcdec1ff0db46dd124fa696e9bf7f742a32dc66cbf4c",
+  "timestamp": "2026-09-06T20:17:36.869442+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_fib_router/sample-0.c:42:16: error: no member named 'protocol' in 'struct bpf_fib_lookup'\n   42 |     fib_params.protocol = ip->protocol;\n      |     ~~~~~~~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_fib_router/sample-0.c:51:50: error: no member named 'dest_hwaddr' in 'struct bpf_fib_lookup'\n   51 |         __builtin_memcpy(eth->h_dest, fib_params.dest_hwaddr, ETH_ALEN);\n      |                                       ~~~~~~~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_fib_router/sample-0.c:52:52: error: no member named 'src_hwaddr' in 'struct bpf_fib_lookup'\n   52 |         __builtin_memcpy(eth->h_source, fib_params.src_hwaddr, ETH_ALEN);\n      |                                         ~~~~~~~~~~ ^\n3 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_fib_router/sample-0.c:42:16: error: no member named 'protocol' in 'struct bpf_fib_lookup'\n   42 |     fib_params.protocol = ip->protocol;\n      |     ~~~~~~~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_fib_router/sample-0.c:51:50: error: no member named 'dest_hwaddr' in 'struct bpf_fib_lookup'\n   51 |         __builtin_memcpy(eth->h_dest, fib_params.dest_hwaddr, ETH_ALEN);\n      |                                       ~~~~~~~~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-sft-v1-full/calibration-36/candidates/nrf_l3_fib_router/sample-0.c:52:52: error: no member named 'src_hwaddr' in 'struct bpf_fib_lookup'\n   52 |         __builtin_memcpy(eth->h_source, fib_params.src_hwaddr, ETH_ALEN);\n      |                                         ~~~~~~~~~~ ^\n3 errors generated."
+}

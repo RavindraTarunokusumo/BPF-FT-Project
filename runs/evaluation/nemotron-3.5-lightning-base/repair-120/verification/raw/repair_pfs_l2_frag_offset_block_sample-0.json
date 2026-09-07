@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "repair_pfs_l2_frag_offset_block",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_frag_offset_block/sample-0.c",
+  "source_sha256": "0a92ebc9256129ce113948807c8931b45fa5581cd5dd491395ff8d35679a12b2",
+  "timestamp": "2026-09-05T20:40:42.926140+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_frag_offset_block/sample-0.c:24:5: error: use of undeclared identifier 'u16'\n   24 |     u16 frag_off = bpf_ntohs(frag);\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_frag_offset_block/sample-0.c:28:9: error: use of undeclared identifier 'frag_off'\n   28 |     if (frag_off & (0x2000 | 0x1FFF))\n      |         ^\n2 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_frag_offset_block/sample-0.c:24:5: error: use of undeclared identifier 'u16'\n   24 |     u16 frag_off = bpf_ntohs(frag);\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_frag_offset_block/sample-0.c:28:9: error: use of undeclared identifier 'frag_off'\n   28 |     if (frag_off & (0x2000 | 0x1FFF))\n      |         ^\n2 errors generated."
+}

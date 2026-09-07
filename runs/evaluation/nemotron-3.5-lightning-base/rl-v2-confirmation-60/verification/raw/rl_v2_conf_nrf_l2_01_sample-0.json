@@ -1,0 +1,29 @@
+{
+  "application_category": "unknown",
+  "difficulty": "unknown",
+  "task_id": "rl_v2_conf_nrf_l2_01",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c",
+  "source_sha256": "05d8b2d01b76a55988292ad156b6929a5829dac2d55bbdbadbde52595b6eb262",
+  "timestamp": "2026-09-05T20:41:02.685571+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:5: error: expected parameter declarator\n    6 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:4: note: to match this '('\n    6 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n    6 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:11: error: expected ';' after top level declarator\n    6 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:18:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   18 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n5 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:5: error: expected parameter declarator\n    6 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:4: note: to match this '('\n    6 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n    6 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:6:11: error: expected ';' after top level declarator\n    6 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/rl-v2-confirmation-60/candidates/rl_v2_conf_nrf_l2_01/sample-0.c:18:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   18 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n5 errors generated."
+}

@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "repair_pfs_l2_multicast_drop",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_multicast_drop/sample-0.c",
+  "source_sha256": "90b4f2e2d4230853222a0c3379c544063307a159063c37bb3286b4a2d4624f9f",
+  "timestamp": "2026-09-05T20:40:37.662610+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_multicast_drop/sample-0.c:43:23: error: subscripted value is not an array, pointer, or vector\n   43 |         if ((ip->daddr[0] & 0xF0) == 0xE0)\n      |              ~~~~~~~~~^~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/repair-120/candidates/repair_pfs_l2_multicast_drop/sample-0.c:43:23: error: subscripted value is not an array, pointer, or vector\n   43 |         if ((ip->daddr[0] & 0xF0) == 0xE0)\n      |              ~~~~~~~~~^~\n1 error generated."
+}

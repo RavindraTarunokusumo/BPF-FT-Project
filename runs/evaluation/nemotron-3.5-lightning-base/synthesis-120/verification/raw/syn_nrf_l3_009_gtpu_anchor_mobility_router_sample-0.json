@@ -1,0 +1,29 @@
+{
+  "application_category": "network_routing_forwarding",
+  "difficulty": "level_3",
+  "task_id": "syn_nrf_l3_009_gtpu_anchor_mobility_router",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c",
+  "source_sha256": "1d5460db18ae54fa34d77c351ac0ec76331a93ab18529156f504d97cc49d2eaf",
+  "timestamp": "2026-09-05T20:40:27.393448+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:5:10: fatal error: 'bpf/ctx.h' file not found\n    5 | #include <bpf/ctx.h>\n      |          ^~~~~~~~~~~\n1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_nrf_l3_009_gtpu_anchor_mobility_router/sample-0.c:5:10: fatal error: 'bpf/ctx.h' file not found\n    5 | #include <bpf/ctx.h>\n      |          ^~~~~~~~~~~\n1 error generated."
+}

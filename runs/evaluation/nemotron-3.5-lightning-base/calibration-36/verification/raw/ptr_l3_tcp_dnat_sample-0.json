@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_3",
+  "task_id": "ptr_l3_tcp_dnat",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c",
+  "source_sha256": "0cca5d2ee494e600558c19efe540a0f41f1319f0099673047495b8199153fbe1",
+  "timestamp": "2026-09-05T20:40:21.490116+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:26:22: error: arithmetic on a pointer to an incomplete type 'struct eth_hdr'\n   26 |     if ((void *)(eth + 1) > data_end)\n      |                  ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:20:12: note: forward declaration of 'struct eth_hdr'\n   20 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:30:12: error: incomplete definition of type 'struct eth_hdr'\n   30 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |         ~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:20:12: note: forward declaration of 'struct eth_hdr'\n   20 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:33:31: error: arithmetic on a pointer to an incomplete type 'struct eth_hdr'\n   33 |     ip = (struct iphdr *)(eth + 1);\n      |                           ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:20:12: note: forward declaration of 'struct eth_hdr'\n   20 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:38:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   38 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:75:17: error: call to undeclared function 'bpf_ip_fast_csum'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   75 |     ip->check = bpf_ip_fast_csum((void *)ip, ip->ihl * 4);\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:86:18: error: call to undeclared function 'bpf_tcp_checksum_compute'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   86 |     tcp->check = bpf_tcp_checksum_compute(ctx, (void *)tcp, tcp->doff * 4);\n      |                  ^\n6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:26:22: error: arithmetic on a pointer to an incomplete type 'struct eth_hdr'\n   26 |     if ((void *)(eth + 1) > data_end)\n      |                  ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:20:12: note: forward declaration of 'struct eth_hdr'\n   20 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:30:12: error: incomplete definition of type 'struct eth_hdr'\n   30 |     if (eth->h_proto != bpf_htons(ETH_P_IP))\n      |         ~~~^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:20:12: note: forward declaration of 'struct eth_hdr'\n   20 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:33:31: error: arithmetic on a pointer to an incomplete type 'struct eth_hdr'\n   33 |     ip = (struct iphdr *)(eth + 1);\n      |                           ~~~ ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:20:12: note: forward declaration of 'struct eth_hdr'\n   20 |     struct eth_hdr *eth;\n      |            ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:38:25: error: use of undeclared identifier 'IPPROTO_TCP'\n   38 |     if (ip->protocol != IPPROTO_TCP)\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:75:17: error: call to undeclared function 'bpf_ip_fast_csum'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   75 |     ip->check = bpf_ip_fast_csum((void *)ip, ip->ihl * 4);\n      |                 ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/calibration-36/candidates/ptr_l3_tcp_dnat/sample-0.c:86:18: error: call to undeclared function 'bpf_tcp_checksum_compute'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   86 |     tcp->check = bpf_tcp_checksum_compute(ctx, (void *)tcp, tcp->doff * 4);\n      |                  ^\n6 errors generated."
+}

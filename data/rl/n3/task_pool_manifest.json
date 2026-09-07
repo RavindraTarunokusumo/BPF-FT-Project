@@ -1,0 +1,27 @@
+{
+  "dataset_name": "BPF-Guardian RLVR Phase N3 Task Pool",
+  "phase": "phase_n3",
+  "total_tasks": 264,
+  "splits": {
+    "canary": {
+      "task_count": 12,
+      "manifest_sha256": "6df565ff86c0eb9dede176ecbab5acddc2c1cf82d9f0a1b53b6d94f2871bf296",
+      "index_sha256": "0d78cd321f3e406222b0efa5bd005c5b95cd424101b140325d1f97fd06ad8e8f"
+    },
+    "train": {
+      "task_count": 144,
+      "manifest_sha256": "ef3c5cccbad4956264d038c5eae6fb87fdbe442de4701f6d332002bab2b43368",
+      "index_sha256": "2ae4d9c68c64e672fdce468c9895a834338f936381571b5c089532ee7cfb7bf5"
+    },
+    "dev": {
+      "task_count": 48,
+      "manifest_sha256": "d2719cc3085d18eec153e81ebbdb61837d6a0cb4a419642c71febac77203ddbe",
+      "index_sha256": "ac8bd3ea49c3002260dd62a2de5a319eab2505ee85827a960e547629ae0d3bf4"
+    },
+    "confirmation": {
+      "task_count": 60,
+      "manifest_sha256": "ce870fcf8d8c8b2dd005a5455402c0baeb61a135462dedb3b244874c94889ab6",
+      "index_sha256": "0d48f026cba2113e064ea4f18b21a85d02ea1394399fbb955f3b96ac947866a3"
+    }
+  }
+}

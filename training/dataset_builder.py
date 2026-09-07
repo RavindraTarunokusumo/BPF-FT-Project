@@ -26,6 +26,8 @@ from tinker_cookbook.supervised.types import (
     SupervisedDataset,
 )
 
+from training.model_profiles import ModelProfile, get_model_profile
+
 DEFAULT_TRAIN_PATH = Path("data/sft/frozen/v1/train.jsonl")
 DEFAULT_VALIDATION_PATH = Path("data/sft/frozen/v1/validation.jsonl")
 
@@ -145,15 +147,21 @@ class FrozenSFTDatasetBuilder(ChatDatasetBuilder):
 def get_default_dataset_builder(
     train_file: Path = DEFAULT_TRAIN_PATH,
     validation_file: Path = DEFAULT_VALIDATION_PATH,
-    model_name: str = "Qwen/Qwen3-8B",
-    renderer_name: str = "qwen3_disable_thinking",
-    max_length: int = 4096,
+    model_name: Optional[str] = None,
+    renderer_name: Optional[str] = None,
+    max_length: Optional[int] = None,
     batch_size: int = 32,
+    profile: Optional[Union[str, ModelProfile]] = None,
 ) -> FrozenSFTDatasetBuilder:
+    active_profile = get_model_profile(profile)
+    resolved_model = model_name or active_profile.model_name
+    resolved_renderer = renderer_name or active_profile.renderer_name
+    resolved_max_length = max_length or active_profile.max_sequence_length
+
     common_config = ChatDatasetBuilderCommonConfig(
-        model_name_for_tokenizer=model_name,
-        renderer_name=renderer_name,
-        max_length=max_length,
+        model_name_for_tokenizer=resolved_model,
+        renderer_name=resolved_renderer,
+        max_length=resolved_max_length,
         batch_size=batch_size,
         train_on_what=renderers.TrainOnWhat.LAST_ASSISTANT_MESSAGE,
     )

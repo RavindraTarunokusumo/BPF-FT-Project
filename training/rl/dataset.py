@@ -13,7 +13,8 @@ from typing import Any, Dict, List, Optional, Sequence, Set
 import chz
 from tinker_cookbook.rl.types import EnvGroupBuilder, RLDataset, RLDatasetBuilder
 
-from training.rl.bpf_env import BPFEnvGroupBuilder
+from training.rl.bpf_env import BPFEnvGroupBuilder, TwoTurnBPFEnvGroupBuilder
+from training.rl.config import DEFAULT_RENDERER_NAME
 from training.rl.sampler import BPFPrioritySampler
 
 logger = logging.getLogger("bpf_guardian_rl.dataset")
@@ -90,17 +91,19 @@ def load_tasks_from_dir(tasks_dir: Path) -> List[Dict[str, Any]]:
 
 
 class BPFRLDataset(RLDataset):
-    """Dataset producing batches of BPFEnvGroupBuilder instances."""
+    """Dataset producing batches of BPFEnvGroupBuilder or TwoTurnBPFEnvGroupBuilder instances."""
 
     def __init__(
         self,
         tasks: List[Dict[str, Any]],
         group_size: int = 4,
-        renderer_name: str = "qwen3_disable_thinking",
+        renderer_name: str = DEFAULT_RENDERER_NAME,
         records_dir: str = "runs/tinker/qwen3-8b-bpf-rl-v1/verifier_records",
         batch_size: int = 2,
         sampler: Optional[BPFPrioritySampler] = None,
         sampler_state_path: Optional[str] = None,
+        two_turn: bool = False,
+        model_profile_name: str = "nemotron-3.5-lightning",
     ):
         self.tasks = tasks
         self.group_size = group_size
@@ -109,6 +112,8 @@ class BPFRLDataset(RLDataset):
         self.batch_size = max(1, batch_size)
         self.sampler = sampler
         self.sampler_state_path = sampler_state_path
+        self.two_turn = two_turn
+        self.model_profile_name = model_profile_name
 
     def get_batch(self, index: int) -> Sequence[EnvGroupBuilder]:
         n = len(self.tasks)
@@ -122,6 +127,22 @@ class BPFRLDataset(RLDataset):
         else:
             batch_tasks = [self.tasks[(index * self.batch_size + i) % n] for i in range(self.batch_size)]
             batch_probs = [1.0 / n] * len(batch_tasks)
+
+        if self.two_turn:
+            return [
+                TwoTurnBPFEnvGroupBuilder(
+                    task=task,
+                    group_size=self.group_size,
+                    model_profile_name=self.model_profile_name,
+                    renderer_name=self.renderer_name,
+                    records_dir=self.records_dir,
+                    group_index=index * self.batch_size + i,
+                    sampler=self.sampler,
+                    sampler_state_path=self.sampler_state_path,
+                    task_sampling_prob=batch_probs[i],
+                )
+                for i, task in enumerate(batch_tasks)
+            ]
 
         return [
             BPFEnvGroupBuilder(
@@ -148,12 +169,14 @@ class BPFRLDatasetBuilder(RLDatasetBuilder):
     train_dir: str = "data/rl/v1/train"
     dev_dir: str | None = "data/rl/v1/dev"
     group_size: int = 4
-    renderer_name: str = "qwen3_disable_thinking"
+    renderer_name: str = DEFAULT_RENDERER_NAME
     records_dir: str = "runs/tinker/qwen3-8b-bpf-rl-v1/verifier_records"
     batch_size: int = 2
     use_priority_sampler: bool = True
     sampler_seed: int = 42
     sampler_state_path: str | None = None
+    two_turn: bool = False
+    model_profile_name: str = "nemotron-3.5-lightning"
 
     async def __call__(self) -> tuple[RLDataset, RLDataset | None]:
         train_path = Path(self.train_dir)
@@ -195,6 +218,8 @@ class BPFRLDatasetBuilder(RLDatasetBuilder):
             batch_size=self.batch_size,
             sampler=sampler,
             sampler_state_path=self.sampler_state_path,
+            two_turn=self.two_turn,
+            model_profile_name=self.model_profile_name,
         )
 
         dev_dataset: Optional[RLDataset] = None
@@ -225,6 +250,8 @@ class BPFRLDatasetBuilder(RLDatasetBuilder):
                     batch_size=self.batch_size,
                     sampler=None,
                     sampler_state_path=None,
+                    two_turn=self.two_turn,
+                    model_profile_name=self.model_profile_name,
                 )
 
         return train_dataset, dev_dataset

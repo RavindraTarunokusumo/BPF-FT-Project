@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_1",
+  "task_id": "ptr_l1_swap_mac",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c",
+  "source_sha256": "64303f65108924ff710fc60ab3aea59a49365e0557bcc0ed66bcb0cd1f5d6b70",
+  "timestamp": "2026-09-05T20:41:16.389957+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:5: error: expected parameter declarator\n    8 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:4: note: to match this '('\n    8 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n    8 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:11: error: expected ';' after top level declarator\n    8 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:39:5: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   39 |     memcpy(tmp, eth->h_dest, 6);\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:39:5: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:56:16: error: expected ';' after top level declarator\n   56 | char _license[] SEC(\"license\") = \"GPL\";\n      |                ^\n      |                ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:56:6: warning: tentative array definition assumed to have one element\n   56 | char _license[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 6 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:5: error: expected parameter declarator\n    8 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:4: note: to match this '('\n    8 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n    8 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:8:11: error: expected ';' after top level declarator\n    8 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:39:5: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   39 |     memcpy(tmp, eth->h_dest, 6);\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:39:5: note: include the header <string.h> or explicitly provide a declaration for 'memcpy'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:56:16: error: expected ';' after top level declarator\n   56 | char _license[] SEC(\"license\") = \"GPL\";\n      |                ^\n      |                ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/sensitivity-12/candidates/ptr_l1_swap_mac/sample-0.c:56:6: warning: tentative array definition assumed to have one element\n   56 | char _license[] SEC(\"license\") = \"GPL\";\n      |      ^\n1 warning and 6 errors generated."
+}

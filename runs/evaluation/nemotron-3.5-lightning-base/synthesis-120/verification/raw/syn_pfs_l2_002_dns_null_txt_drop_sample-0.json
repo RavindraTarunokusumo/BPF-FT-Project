@@ -1,0 +1,29 @@
+{
+  "application_category": "packet_filtering_security",
+  "difficulty": "level_2",
+  "task_id": "syn_pfs_l2_002_dns_null_txt_drop",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c",
+  "source_sha256": "25f5567296a26ddb2a23db8ce8fab661696f763407a940c007c73782120bdb8b",
+  "timestamp": "2026-09-05T20:40:26.703655+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:60:8: error: redefinition of 'iphdr'\n   60 | struct iphdr {\n      |        ^\n/usr/include/linux/ip.h:87:8: note: previous definition is here\n   87 | struct iphdr {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:94:8: error: redefinition of 'udphdr'\n   94 | struct udphdr {\n      |        ^\n/usr/include/linux/udp.h:23:8: note: previous definition is here\n   23 | struct udphdr {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:5: error: expected parameter declarator\n  112 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:4: note: to match this '('\n  112 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n  112 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:11: error: expected ';' after top level declarator\n  112 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:124:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  124 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:157:9: error: call to undeclared function 'ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  157 |     if (ntohs(dns->qdcount) < 1)\n      |         ^\n8 errors generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:60:8: error: redefinition of 'iphdr'\n   60 | struct iphdr {\n      |        ^\n/usr/include/linux/ip.h:87:8: note: previous definition is here\n   87 | struct iphdr {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:94:8: error: redefinition of 'udphdr'\n   94 | struct udphdr {\n      |        ^\n/usr/include/linux/udp.h:23:8: note: previous definition is here\n   23 | struct udphdr {\n      |        ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:5: error: expected parameter declarator\n  112 | SEC(\"xdp\")\n      |     ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:5: error: expected ')'\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:4: note: to match this '('\n  112 | SEC(\"xdp\")\n      |    ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:1: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]\n  112 | SEC(\"xdp\")\n      | ^\n      | int\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:112:11: error: expected ';' after top level declarator\n  112 | SEC(\"xdp\")\n      |           ^\n      |           ;\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:124:25: error: call to undeclared function 'htons'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  124 |     if (eth->h_proto != htons(ETH_P_IP))\n      |                         ^\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_pfs_l2_002_dns_null_txt_drop/sample-0.c:157:9: error: call to undeclared function 'ntohs'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  157 |     if (ntohs(dns->qdcount) < 1)\n      |         ^\n8 errors generated."
+}

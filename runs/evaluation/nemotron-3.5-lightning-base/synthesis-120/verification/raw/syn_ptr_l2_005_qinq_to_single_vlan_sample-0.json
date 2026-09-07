@@ -1,0 +1,29 @@
+{
+  "application_category": "protocol_transformation",
+  "difficulty": "level_2",
+  "task_id": "syn_ptr_l2_005_qinq_to_single_vlan",
+  "candidate_id": "sample-0",
+  "source_path": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_005_qinq_to_single_vlan/sample-0.c",
+  "source_sha256": "089aac3a8b250c6755ccd1f856dbdc778a97cd2b60e983114733a765cf5b90fa",
+  "timestamp": "2026-09-05T20:40:25.602179+00:00",
+  "compile": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_005_qinq_to_single_vlan/sample-0.c:14:29: warning: comparison of integers of different signs: 'unsigned long' and 'int' [-Wsign-compare]\n   14 |         if (offset + sizeof(__u16) > len)\n      |             ~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_005_qinq_to_single_vlan/sample-0.c:46:37: error: use of undeclared identifier 'VLAN_ETH_HLEN'\n   46 |         if (data + sizeof(struct ethhdr) + VLAN_ETH_HLEN > data_end)\n      |                                            ^\n1 warning and 1 error generated.\n",
+    "returncode": 1
+  },
+  "verifier": {
+    "pass": false,
+    "stdout": "",
+    "stderr": "",
+    "log": ""
+  },
+  "behavioral": {
+    "pass": false,
+    "passed_tests": 0,
+    "total_tests": 0,
+    "details": []
+  },
+  "passed": false,
+  "diagnostic": "Compilation failed:\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_005_qinq_to_single_vlan/sample-0.c:14:29: warning: comparison of integers of different signs: 'unsigned long' and 'int' [-Wsign-compare]\n   14 |         if (offset + sizeof(__u16) > len)\n      |             ~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~\n/root/BPF-FT-Project/runs/evaluation/nemotron-3.5-lightning-base/synthesis-120/candidates/syn_ptr_l2_005_qinq_to_single_vlan/sample-0.c:46:37: error: use of undeclared identifier 'VLAN_ETH_HLEN'\n   46 |         if (data + sizeof(struct ethhdr) + VLAN_ETH_HLEN > data_end)\n      |                                            ^\n1 warning and 1 error generated."
+}
