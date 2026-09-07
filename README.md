@@ -163,6 +163,10 @@ Every generated XDP program undergoes strict 4-stage validation:
 └── pyproject.toml                       # Python project configuration & dependencies
 ```
 
+## Acknowledgements
+
+- **Compute**: Fine-tuned and evaluated via [Thinking Machines](https://thinkingmachines.ai/).
+
 ---
 
 ## Citation
