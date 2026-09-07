@@ -1,5 +1,6 @@
 # BPF-Guardian: Verified In-Kernel eBPF/XDP Generation & Multi-Turn RLVR
 
+[![Live Showcase](https://img.shields.io/badge/Live%20Showcase-GitHub%20Pages-emerald?logo=github)](https://ravindratarunokusumo.github.io/BPF-FT-Project/)
 [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model%20(PEFT%20LoRA)-blue)](https://huggingface.co/rvindra/nemotron-3.5-lightning-bpf-guardian)
 [![Hugging Face SFT Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-bpf--guardian--sft-green)](https://huggingface.co/datasets/rvindra/bpf-guardian-sft)
 [![Hugging Face RL Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-bpf--guardian--rl-orange)](https://huggingface.co/datasets/rvindra/bpf-guardian-rl)
@@ -11,7 +12,8 @@
 
 Trained on [`nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16`](https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16) through a rigorous family-heldout SFT curriculum and **two-turn diagnostic-guided RLVR** with a live Linux kernel verifier loop, BPF-Guardian establishes the state of the art on in-kernel network code generation with **+90.3% relative gain** over prior dense baselines.
 
-> **Explore the Interactive Visual Showcase**: Open [`docs/index.html`](docs/index.html) (or `index.html`) in your browser to inspect interactive workflows, architecture diagrams, datasets, and live kernel verification logs.
+> 🚀 **Interactive Visual Showcase**: <a href="https://ravindratarunokusumo.github.io/BPF-FT-Project/" target="_blank"><strong>Launch Live Architecture & Workflow Dashboard ↗</strong></a>  
+> *(Opens live interactive dashboard in a new tab &bull; Alternative mirror: <a href="https://htmlpreview.github.io/?https://github.com/RavindraTarunokusumo/BPF-FT-Project/blob/experiment/nemotron-3.5-lightning/docs/index.html" target="_blank">HTMLPreview</a> &bull; Source: [`docs/index.html`](docs/index.html))*
 
 ---
 
