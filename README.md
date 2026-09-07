@@ -29,7 +29,7 @@ Every rollout and evaluation is verified against a real Linux Kernel (`6.8.0-106
 | **N3 Stratified Dev Suite** | 48 tasks | &mdash; | 18 / 48 (37.5%) | 24 / 48 (50.0%) | **23 / 48 (47.9%)** | **+27.7%** |
 | **Total Combined Evaluation Suite** | **276 tasks** | 79 / 276 (28.6%) | 137 / 276 (49.6%) | **168 / 276 (60.9%)** | **172 / 276 (62.3%)** | **+25.6%** |
 
-*Paired McNemar test on combined benchmark confirms statistical significance ($p = 1.38 \times 10^{-5}$, $p < 0.0001$).*
+*Paired McNemar test on combined benchmark confirms statistical significance* ($p = 1.38 \times 10^{-5}$, $p < 0.0001$)
 
 ---
 
