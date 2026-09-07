@@ -78,9 +78,9 @@ pipeline_tag: text-generation
 
 # Nemotron-3.5-Lightning-30B BPF-Guardian: Verified In-Kernel eBPF/XDP Generation
 
-**Nemotron-3.5-Lightning-30B BPF-Guardian** is a specialized PEFT LoRA adapter for `nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16`, trained and verified against live Linux In-Kernel Verifiers (`BPF_PROG_LOAD`) and dynamic packet execution harnesses (`BPF_PROG_TEST_RUN`) on Linux Kernel `6.8.0-106-generic`.
+**Nemotron-3.5-Lightning-30B BPF-Guardian** is a specialized eBPF/XDP coding model and PEFT LoRA adapter for `nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16`, trained and verified against live Linux In-Kernel Verifiers (`BPF_PROG_LOAD`) and dynamic packet execution harnesses (`BPF_PROG_TEST_RUN`) on Linux Kernel `6.8.0-106-generic`.
 
-It establishes the state of the art on verifiable eBPF/XDP network program synthesis and diagnostic-guided repair, outperforming dense 8B baselines by **+90.3% relative gain** on protected synthesis benchmarks.
+It achieves our best result to date on the project's held-out in-kernel eBPF/XDP benchmark, outperforming dense 8B baselines by **+90.3% relative gain** on protected synthesis benchmarks.
 
 > 🚀 **Interactive Visual Showcase**: [Launch Live Architecture & Workflow Dashboard ↗](https://ravindratarunokusumo.github.io/BPF-FT-Project/)  
 > *(Displays live interactive pipeline diagrams, dataset breakdowns, benchmark figures, and in-kernel test logs)*
@@ -99,7 +99,7 @@ It establishes the state of the art on verifiable eBPF/XDP network program synth
 
 ## Performance Highlights (Live Linux Kernel 6.8 VPS Execution)
 
-| Evaluation Benchmark | Benchmark Size | Base Nemotron 30B | Prior SOTA (Qwen3-8B SFT v2) | Nemotron BPF-Guardian SFT v1 | Nemotron BPF-Guardian RL (Solve@2) | Relative Improvement |
+| Evaluation Benchmark | Benchmark Size | Base Nemotron 30B | Prior Baseline (Qwen3-8B SFT v2) | Nemotron BPF-Guardian SFT v1 | Nemotron BPF-Guardian RL (Solve@2) | Relative Improvement |
 |---|---:|---:|---:|---:|---:|---:|
 | **Protected Private Synthesis** | 120 tasks | 0 / 120 (0.0%) | 31 / 120 (25.8%) | 54 / 120 (45.0%) | **59 / 120 (49.2%)** | **+90.3%** |
 | **Protected Standalone Repair** | 120 tasks | 79 / 120 (65.8%) | 85 / 120 (70.8%) | **91 / 120 (75.8%)** | **91 / 120 (75.8%)** | **+7.1%** |
@@ -113,8 +113,8 @@ It establishes the state of the art on verifiable eBPF/XDP network program synth
 
 ## Available Checkpoints & Branches
 
-- **`main`**: **SFT v1 Champion** checkpoint (optimized for standalone synthesis and repair, 75.8% repair pass rate, 168/276 on combined benchmark).
-- **`rl-n3`**: **Multi-Turn RL N3 Champion** checkpoint (optimized for two-turn interactive repair with compiler/verifier feedback, **49.2% Solve@2** on protected synthesis, **73.3%** on confirmation).
+- **`main`**: **Nemotron SFT v1** checkpoint (optimized for standalone synthesis and repair, 75.8% repair pass rate, 168/276 on combined benchmark).
+- **`rl-n3`**: **Nemotron RL N3** checkpoint (optimized for two-turn interactive repair with compiler/verifier feedback, **49.2% Solve@2** on protected synthesis, **73.3%** on confirmation).
 
 ---
 
@@ -180,7 +180,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
     device_map="auto"
 )
 
-# Load SFT champion (revision="main") or RL champion (revision="rl-n3")
+# Load SFT model (revision="main") or RL model (revision="rl-n3")
 model = PeftModel.from_pretrained(base_model, peft_model_id, revision="rl-n3")
 
 prompt = \"\"\"You are an expert Linux kernel eBPF developer. Write a complete, self-contained XDP C program that inspects incoming IPv4 TCP packets, extracts the destination port, and drops packets targeting port 8080.
@@ -217,7 +217,7 @@ print(tokenizer.decode(outputs[0][inputs.shape[1]:], skip_special_tokens=True))
 
 ```bibtex
 @misc{nemotron_bpf_guardian_2026,
-  author = {BPF-Guardian Research Team},
+  author = {Tarunokusumo, Ravindra},
   title = {Nemotron-3.5-Lightning BPF-Guardian: Verified In-Kernel eBPF/XDP Generation},
   year = {2026},
   publisher = {Hugging Face},

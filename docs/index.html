@@ -153,7 +153,7 @@
         </h1>
 
         <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-          State-of-the-art specialized foundation model for verifiable in-kernel networking, powered by 
+          Specialized eBPF/XDP coding model for verifiable in-kernel networking, powered by 
           <strong class="text-white font-semibold">Nemotron-3.5-Lightning-30B</strong>, 
           family-heldout SFT curriculum, and diagnostic-guided multi-turn RLVR.
         </p>
@@ -163,7 +163,7 @@
           <div class="p-5 rounded-2xl bg-dark-card border border-dark-border text-left hover:border-brand-500/40 transition-all">
             <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Protected Synthesis</div>
             <div class="text-3xl font-extrabold text-brand-400 mt-1">49.2%</div>
-            <div class="text-xs text-brand-300/80 mt-1 font-medium">▲ +90.3% vs Prior SOTA (Solve@2)</div>
+            <div class="text-xs text-brand-300/80 mt-1 font-medium">▲ +90.3% vs Prior Baseline (Solve@2)</div>
           </div>
           <div class="p-5 rounded-2xl bg-dark-card border border-dark-border text-left hover:border-brand-500/40 transition-all">
             <div class="text-xs text-slate-400 uppercase font-bold tracking-wider">Standalone Repair</div>
@@ -203,7 +203,7 @@
       <div class="rounded-2xl bg-dark-card border border-dark-border p-4 sm:p-6 overflow-hidden glow-accent">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <h3 class="text-base font-semibold text-white flex items-center gap-2">
-            Primary Suite Benchmark Comparison: Base vs Prior SOTA vs SFT vs RL
+            Primary Suite Benchmark Comparison: Base vs Prior Baseline vs SFT vs RL
           </h3>
           <div class="flex items-center gap-2">
             <button id="view-interactive-btn" onclick="toggleMainChart('svg')" class="px-3 py-1 rounded-lg bg-brand-500/20 text-brand-300 border border-brand-500/40 text-xs font-semibold transition-all">
@@ -272,11 +272,11 @@
     <rect x="65" y="68" width="13" height="13" rx="3" fill="#475569" stroke="#64748B" stroke-width="1.2" />
     <text x="83" y="79" fill="#E2E8F0">Base Model (Nemotron 30B)</text>
     <rect x="262.0" y="68" width="13" height="13" rx="3" fill="#6366F1" stroke="#818CF8" stroke-width="1.2" />
-    <text x="280.0" y="79" fill="#E2E8F0">Prior SOTA (Qwen3-8B SFT v2)</text>
-    <rect x="478.79999999999995" y="68" width="13" height="13" rx="3" fill="#059669" stroke="#10B981" stroke-width="1.2" />
-    <text x="496.79999999999995" y="79" fill="#E2E8F0">Nemotron SFT v1 Champion</text>
-    <rect x="669.1999999999999" y="68" width="13" height="13" rx="3" fill="#34D399" stroke="#6EE7B7" stroke-width="1.2" />
-    <text x="687.1999999999999" y="79" fill="#E2E8F0">Nemotron RL N3 Champion (Ours)</text>
+    <text x="280.0" y="79" fill="#E2E8F0">Prior Baseline (Qwen3-8B SFT v2)</text>
+    <rect x="505.2" y="68" width="13" height="13" rx="3" fill="#059669" stroke="#10B981" stroke-width="1.2" />
+    <text x="523.2" y="79" fill="#E2E8F0">Nemotron SFT v1</text>
+    <rect x="636.2" y="68" width="13" height="13" rx="3" fill="#34D399" stroke="#6EE7B7" stroke-width="1.2" />
+    <text x="654.2" y="79" fill="#E2E8F0">Nemotron RL N3 (Ours)</text>
   </g>
   <!-- Bars & Value Labels -->
   <!-- Category: Protected Private Synthesis -->
@@ -284,15 +284,15 @@
     <rect class="chart-bar" x="96.5" y="416.0" width="36" height="4.0" rx="4" fill="#475569" stroke="#64748B" stroke-width="1.4" style="color: #64748B;" />
     <text class="chart-bar-label" x="114.5" y="410.0" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">0.0%</text>
   </g>
-  <g class="chart-bar-item" data-model="Prior SOTA (Qwen3-8B SFT v2)" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="25.8%" data-count="31 / 120 (25.8%)" data-badge="Prior dense 8B baseline" data-color="#818CF8" tabindex="0">
+  <g class="chart-bar-item" data-model="Prior Baseline (Qwen3-8B SFT v2)" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="25.8%" data-count="31 / 120 (25.8%)" data-badge="Prior dense 8B baseline" data-color="#818CF8" tabindex="0">
     <rect class="chart-bar" x="138.5" y="337.4" width="36" height="82.6" rx="4" fill="#6366F1" stroke="#818CF8" stroke-width="1.4" style="color: #818CF8;" />
     <text class="chart-bar-label" x="156.5" y="329.4" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">25.8%</text>
   </g>
-  <g class="chart-bar-item" data-model="Nemotron SFT v1 Champion" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="40.0%" data-count="48 / 120 (40.0%)" data-badge="+55.0% relative over prior SOTA" data-color="#10B981" tabindex="0">
+  <g class="chart-bar-item" data-model="Nemotron SFT v1" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="40.0%" data-count="48 / 120 (40.0%)" data-badge="+55.0% relative over prior baseline" data-color="#10B981" tabindex="0">
     <rect class="chart-bar" x="180.5" y="292.0" width="36" height="128.0" rx="4" fill="#059669" stroke="#10B981" stroke-width="1.4" style="color: #10B981;" />
     <text class="chart-bar-label" x="198.5" y="284.0" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">40.0%</text>
   </g>
-  <g class="chart-bar-item" data-model="Nemotron RL N3 Champion (Ours)" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="44.2%" data-count="53 / 120 (44.2%)" data-badge="+71.3% relative gain (Pass@1)" data-color="#6EE7B7" tabindex="0">
+  <g class="chart-bar-item" data-model="Nemotron RL N3 (Ours)" data-suite="Protected Private Synthesis (120 Tasks, Pass@1)" data-val="44.2%" data-count="53 / 120 (44.2%)" data-badge="+71.3% relative gain (Pass@1)" data-color="#6EE7B7" tabindex="0">
     <rect class="chart-bar" x="222.5" y="278.6" width="36" height="141.4" rx="4" fill="url(#rl-bar-grad)" stroke="#6EE7B7" stroke-width="1.4" style="color: #6EE7B7;" />
     <text class="chart-bar-label" x="240.5" y="270.6" text-anchor="middle" fill="#6EE7B7" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="bold">44.2%</text>
   </g>
@@ -303,15 +303,15 @@
     <rect class="chart-bar" x="321.5" y="416.0" width="36" height="4.0" rx="4" fill="#475569" stroke="#64748B" stroke-width="1.4" style="color: #64748B;" />
     <text class="chart-bar-label" x="339.5" y="410.0" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">0.0%</text>
   </g>
-  <g class="chart-bar-item" data-model="Prior SOTA (Qwen3-8B SFT v2)" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="28.3%" data-count="34 / 120 (28.3%)" data-badge="Single-turn + repair retry" data-color="#818CF8" tabindex="0">
+  <g class="chart-bar-item" data-model="Prior Baseline (Qwen3-8B SFT v2)" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="28.3%" data-count="34 / 120 (28.3%)" data-badge="Single-turn + repair retry" data-color="#818CF8" tabindex="0">
     <rect class="chart-bar" x="363.5" y="329.4" width="36" height="90.6" rx="4" fill="#6366F1" stroke="#818CF8" stroke-width="1.4" style="color: #818CF8;" />
     <text class="chart-bar-label" x="381.5" y="321.4" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">28.3%</text>
   </g>
-  <g class="chart-bar-item" data-model="Nemotron SFT v1 Champion" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="45.8%" data-count="55 / 120 (45.8%)" data-badge="+61.8% relative over prior SOTA" data-color="#10B981" tabindex="0">
+  <g class="chart-bar-item" data-model="Nemotron SFT v1" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="45.8%" data-count="55 / 120 (45.8%)" data-badge="+61.8% relative over prior baseline" data-color="#10B981" tabindex="0">
     <rect class="chart-bar" x="405.5" y="273.4" width="36" height="146.6" rx="4" fill="#059669" stroke="#10B981" stroke-width="1.4" style="color: #10B981;" />
     <text class="chart-bar-label" x="423.5" y="265.4" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">45.8%</text>
   </g>
-  <g class="chart-bar-item" data-model="Nemotron RL N3 Champion (Ours)" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="49.2%" data-count="59 / 120 (49.2%)" data-badge="▲ +90.3% Relative Gain (Solve@2)" data-color="#6EE7B7" tabindex="0">
+  <g class="chart-bar-item" data-model="Nemotron RL N3 (Ours)" data-suite="Protected Synthesis (120 Tasks, Solve@2 Multi-Turn)" data-val="49.2%" data-count="59 / 120 (49.2%)" data-badge="▲ +90.3% Relative Gain (Solve@2)" data-color="#6EE7B7" tabindex="0">
     <rect class="chart-bar" x="447.5" y="262.6" width="36" height="157.4" rx="4" fill="url(#rl-bar-grad)" stroke="#6EE7B7" stroke-width="1.4" style="color: #6EE7B7;" />
     <text class="chart-bar-label" x="465.5" y="254.6" text-anchor="middle" fill="#6EE7B7" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="bold">49.2%</text>
   </g>
@@ -322,15 +322,15 @@
     <rect class="chart-bar" x="546.5" y="313.4" width="36" height="106.6" rx="4" fill="#475569" stroke="#64748B" stroke-width="1.4" style="color: #64748B;" />
     <text class="chart-bar-label" x="564.5" y="305.4" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">33.3%</text>
   </g>
-  <g class="chart-bar-item" data-model="Prior SOTA (Qwen3-8B SFT v2)" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="55.0%" data-count="33 / 60 (55.0%)" data-badge="Prior dense 8B baseline" data-color="#818CF8" tabindex="0">
+  <g class="chart-bar-item" data-model="Prior Baseline (Qwen3-8B SFT v2)" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="55.0%" data-count="33 / 60 (55.0%)" data-badge="Prior dense 8B baseline" data-color="#818CF8" tabindex="0">
     <rect class="chart-bar" x="588.5" y="244.0" width="36" height="176.0" rx="4" fill="#6366F1" stroke="#818CF8" stroke-width="1.4" style="color: #818CF8;" />
     <text class="chart-bar-label" x="606.5" y="236.0" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">55.0%</text>
   </g>
-  <g class="chart-bar-item" data-model="Nemotron SFT v1 Champion" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="70.0%" data-count="42 / 60 (70.0%)" data-badge="+27.3% relative over prior SOTA" data-color="#10B981" tabindex="0">
+  <g class="chart-bar-item" data-model="Nemotron SFT v1" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="70.0%" data-count="42 / 60 (70.0%)" data-badge="+27.3% relative over prior baseline" data-color="#10B981" tabindex="0">
     <rect class="chart-bar" x="630.5" y="196.0" width="36" height="224.0" rx="4" fill="#059669" stroke="#10B981" stroke-width="1.4" style="color: #10B981;" />
     <text class="chart-bar-label" x="648.5" y="188.0" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">70.0%</text>
   </g>
-  <g class="chart-bar-item" data-model="Nemotron RL N3 Champion (Ours)" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="73.3%" data-count="44 / 60 (73.3%)" data-badge="▲ +33.3% Relative Gain" data-color="#6EE7B7" tabindex="0">
+  <g class="chart-bar-item" data-model="Nemotron RL N3 (Ours)" data-suite="Confirmation Benchmark (60 Unseen Tasks)" data-val="73.3%" data-count="44 / 60 (73.3%)" data-badge="▲ +33.3% Relative Gain" data-color="#6EE7B7" tabindex="0">
     <rect class="chart-bar" x="672.5" y="185.4" width="36" height="234.6" rx="4" fill="url(#rl-bar-grad)" stroke="#6EE7B7" stroke-width="1.4" style="color: #6EE7B7;" />
     <text class="chart-bar-label" x="690.5" y="177.4" text-anchor="middle" fill="#6EE7B7" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="bold">73.3%</text>
   </g>
@@ -341,15 +341,15 @@
     <rect class="chart-bar" x="771.5" y="328.5" width="36" height="91.5" rx="4" fill="#475569" stroke="#64748B" stroke-width="1.4" style="color: #64748B;" />
     <text class="chart-bar-label" x="789.5" y="320.5" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">28.6%</text>
   </g>
-  <g class="chart-bar-item" data-model="Prior SOTA (Qwen3-8B SFT v2)" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="49.6%" data-count="137 / 276 (49.6%)" data-badge="Prior combined benchmark" data-color="#818CF8" tabindex="0">
+  <g class="chart-bar-item" data-model="Prior Baseline (Qwen3-8B SFT v2)" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="49.6%" data-count="137 / 276 (49.6%)" data-badge="Prior combined benchmark" data-color="#818CF8" tabindex="0">
     <rect class="chart-bar" x="813.5" y="261.3" width="36" height="158.7" rx="4" fill="#6366F1" stroke="#818CF8" stroke-width="1.4" style="color: #818CF8;" />
     <text class="chart-bar-label" x="831.5" y="253.3" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">49.6%</text>
   </g>
-  <g class="chart-bar-item" data-model="Nemotron SFT v1 Champion" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="60.9%" data-count="168 / 276 (60.9%)" data-badge="+31 net solved tasks" data-color="#10B981" tabindex="0">
+  <g class="chart-bar-item" data-model="Nemotron SFT v1" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="60.9%" data-count="168 / 276 (60.9%)" data-badge="+31 net solved tasks" data-color="#10B981" tabindex="0">
     <rect class="chart-bar" x="855.5" y="225.1" width="36" height="194.9" rx="4" fill="#059669" stroke="#10B981" stroke-width="1.4" style="color: #10B981;" />
     <text class="chart-bar-label" x="873.5" y="217.1" text-anchor="middle" fill="#F8FAFC" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="600">60.9%</text>
   </g>
-  <g class="chart-bar-item" data-model="Nemotron RL N3 Champion (Ours)" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="62.3%" data-count="172 / 276 (62.3%)" data-badge="▲ +35 Net Solved Tasks (p < 0.0001)" data-color="#6EE7B7" tabindex="0">
+  <g class="chart-bar-item" data-model="Nemotron RL N3 (Ours)" data-suite="Combined Protected Suite (276 Comprehensive Tasks)" data-val="62.3%" data-count="172 / 276 (62.3%)" data-badge="▲ +35 Net Solved Tasks (p < 0.0001)" data-color="#6EE7B7" tabindex="0">
     <rect class="chart-bar" x="897.5" y="220.6" width="36" height="199.4" rx="4" fill="url(#rl-bar-grad)" stroke="#6EE7B7" stroke-width="1.4" style="color: #6EE7B7;" />
     <text class="chart-bar-label" x="915.5" y="212.6" text-anchor="middle" fill="#6EE7B7" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="bold">62.3%</text>
   </g>
@@ -410,7 +410,7 @@
         <div class="p-4 sm:p-6 border-b border-dark-border flex justify-between items-center">
           <div>
             <h3 class="text-base font-bold text-white">Full Live VPS Kernel 6.8 Empirical Scorecard</h3>
-            <p class="text-xs text-slate-400">Statistically paired McNemar significance comparisons against prior SOTA</p>
+            <p class="text-xs text-slate-400">Statistically paired McNemar significance comparisons against prior baseline</p>
           </div>
           <span class="px-3 py-1 bg-brand-500/10 text-brand-300 border border-brand-500/30 rounded-full text-xs font-semibold">T = 0.0 Deterministic</span>
         </div>
@@ -421,7 +421,7 @@
                 <th class="px-5 py-3.5">Evaluation Benchmark</th>
                 <th class="px-4 py-3.5 text-center">Suite Size</th>
                 <th class="px-4 py-3.5 text-center">Base Nemotron 30B</th>
-                <th class="px-4 py-3.5 text-center">Prior SOTA (Qwen3-8B)</th>
+                <th class="px-4 py-3.5 text-center">Prior Baseline (Qwen3-8B)</th>
                 <th class="px-4 py-3.5 text-center text-emerald-400">Nemotron SFT v1</th>
                 <th class="px-4 py-3.5 text-center text-brand-300 font-bold bg-brand-500/5">Nemotron RL N3 (Ours)</th>
                 <th class="px-4 py-3.5 text-right text-brand-400">Relative Gain</th>
@@ -700,7 +700,7 @@
         <div class="p-6 rounded-2xl bg-dark-card border border-dark-border space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-semibold">Branch: main</span>
-            <span class="text-xs text-emerald-400 font-semibold">SFT v1 Champion</span>
+            <span class="text-xs text-emerald-400 font-semibold">Nemotron SFT v1</span>
           </div>
           <h3 class="text-lg font-bold text-white">nemotron-3.5-lightning-bpf-guardian</h3>
           <p class="text-xs text-slate-400 leading-relaxed">
@@ -715,11 +715,11 @@
         <div class="p-6 rounded-2xl bg-dark-card border border-brand-500/40 glow-accent space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono px-2.5 py-1 rounded bg-brand-500/20 text-brand-300 font-semibold">Branch: rl-n3</span>
-            <span class="text-xs text-brand-400 font-semibold">RL N3 Champion</span>
+            <span class="text-xs text-brand-400 font-semibold">Nemotron RL N3</span>
           </div>
           <h3 class="text-lg font-bold text-white">Multi-Turn Repair RLVR</h3>
           <p class="text-xs text-slate-400 leading-relaxed">
-            Trained with two-turn live in-kernel reward loop. Achieves <strong>49.2% Solve@2</strong> on Protected Synthesis (+90.3% over prior SOTA) and <strong>73.3%</strong> on Confirmation.
+            Trained with two-turn live in-kernel reward loop. Achieves <strong>49.2% Solve@2</strong> on Protected Synthesis (+90.3% over prior baseline) and <strong>73.3%</strong> on Confirmation.
           </p>
           <div class="text-xs font-mono text-brand-300 bg-dark-surface p-3 rounded-lg border border-brand-500/30">
             revision="rl-n3" &bull; 1.47 GB Safetensors
@@ -777,7 +777,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
     torch_dtype=torch.bfloat16,
     device_map=<span class="text-emerald-300">"auto"</span>
 )
-<span class="text-slate-500"># Load SFT champion (revision="main") or RL champion (revision="rl-n3")</span>
+<span class="text-slate-500"># Load SFT model (revision="main") or RL model (revision="rl-n3")</span>
 model = PeftModel.from_pretrained(base_model, peft_id, revision=<span class="text-emerald-300">"rl-n3"</span>)
 
 prompt = <span class="text-emerald-300">"""You are an expert Linux kernel eBPF developer. Write a complete, self-contained XDP C program that inspects incoming IPv4 TCP packets, extracts the destination port, and drops packets targeting port 8080. Output ONLY raw C source code."""</span>
@@ -914,7 +914,7 @@ Running fixture 03: Maglev hash lookup collision probe...
         <h3 class="text-base font-bold text-white">BibTeX Citation</h3>
         <pre class="bg-dark-bg p-4 rounded-xl border border-dark-border font-mono text-xs text-slate-300 overflow-x-auto">
 @misc{nemotron_bpf_guardian_2026,
-  author = {BPF-Guardian Research Team},
+  author = {Tarunokusumo, Ravindra},
   title = {Nemotron-3.5-Lightning BPF-Guardian: Verified In-Kernel eBPF/XDP Generation},
   year = {2026},
   publisher = {Hugging Face},

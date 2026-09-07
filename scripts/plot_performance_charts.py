@@ -69,7 +69,7 @@ def plot_4panel_progression():
             "ax": axes[0, 0],
             "title": "A. Protected Private Synthesis (120 Tasks)",
             "subtitle": "Raw eBPF/XDP program generation from scratch",
-            "models": ["Base Model\n(Nemotron 30B)", "Prior SOTA\n(Qwen3-8B SFT)", "SFT Champion\n(Nemotron SFT v1)", "RL Champion\n(Multi-Turn RL N3)"],
+            "models": ["Base Model\n(Nemotron 30B)", "Prior Baseline\n(Qwen3-8B SFT)", "Nemotron SFT v1", "Nemotron RL N3"],
             "values": [0.0, 25.83, 45.0, 49.17],
             "counts": ["0 / 120", "31 / 120", "54 / 120", "59 / 120"],
             "colors": [COLOR_BASE, COLOR_PRIOR, COLOR_SFT, COLOR_RL],
@@ -80,29 +80,29 @@ def plot_4panel_progression():
             "ax": axes[0, 1],
             "title": "B. Standalone Repair Benchmark (120 Tasks)",
             "subtitle": "Repairing in-kernel verifier & compilation failures",
-            "models": ["Base Model\n(Nemotron 30B)", "Prior SOTA\n(Qwen3-8B SFT)", "SFT Champion\n(Nemotron SFT v1)", "RL Champion\n(Multi-Turn RL N3)"],
+            "models": ["Base Model\n(Nemotron 30B)", "Prior Baseline\n(Qwen3-8B SFT)", "Nemotron SFT v1", "Nemotron RL N3"],
             "values": [65.83, 70.83, 75.83, 75.83],
             "counts": ["79 / 120", "85 / 120", "91 / 120", "91 / 120"],
             "colors": [COLOR_BASE, COLOR_PRIOR, COLOR_SFT, COLOR_RL],
-            "badge": "State of the Art (75.8%)",
+            "badge": "Best Result (75.8%)",
             "ylim": 105,
         },
         {
             "ax": axes[1, 0],
             "title": "C. Confirmation Benchmark (60 Tasks)",
             "subtitle": "Held-out unseen network functions verification",
-            "models": ["Base Model\n(Nemotron 30B)", "Prior SOTA\n(Qwen3-8B SFT)", "SFT Champion\n(Nemotron SFT v1)", "RL Champion\n(Multi-Turn RL N3)"],
+            "models": ["Base Model\n(Nemotron 30B)", "Prior Baseline\n(Qwen3-8B SFT)", "Nemotron SFT v1", "Nemotron RL N3"],
             "values": [33.33, 55.0, 70.0, 73.33],
             "counts": ["20 / 60", "33 / 60", "42 / 60", "44 / 60"],
             "colors": [COLOR_BASE, COLOR_PRIOR, COLOR_SFT, COLOR_RL],
-            "badge": "+33.3% vs Prior SOTA",
+            "badge": "+33.3% vs Prior Baseline",
             "ylim": 100,
         },
         {
             "ax": axes[1, 1],
             "title": "D. Combined Protected Benchmark (276 Tasks)",
             "subtitle": "Comprehensive end-to-end evaluation suite",
-            "models": ["Base Model\n(Nemotron 30B)", "Prior SOTA\n(Qwen3-8B SFT)", "SFT Champion\n(Nemotron SFT v1)", "RL Champion\n(Multi-Turn RL N3)"],
+            "models": ["Base Model\n(Nemotron 30B)", "Prior Baseline\n(Qwen3-8B SFT)", "Nemotron SFT v1", "Nemotron RL N3"],
             "values": [28.62, 49.64, 60.87, 62.32],
             "counts": ["79 / 276", "137 / 276", "168 / 276", "172 / 276"],
             "colors": [COLOR_BASE, COLOR_PRIOR, COLOR_SFT, COLOR_RL],
@@ -217,7 +217,7 @@ def plot_4panel_progression():
     plt.figtext(
         0.5,
         0.962,
-        "Generational Progression: Base Model  →  SFT Champion  →  Multi-Turn RLVR  |  Live Linux Kernel 6.8 VPS Evaluation",
+        "Generational Progression: Base Model  →  Nemotron SFT v1  →  Multi-Turn RLVR  |  Live Linux Kernel 6.8 VPS Evaluation",
         fontsize=12,
         color=COLOR_RL,
         ha="center",
@@ -257,9 +257,9 @@ def plot_hero_progression():
 
     # Bars
     rects1 = ax.bar(x - 1.5 * width, base_scores, width, label="Base Model (Nemotron 30B)", color=COLOR_BASE, edgecolor=BORDER_COLOR, linewidth=1.2)
-    rects2 = ax.bar(x - 0.5 * width, prior_sota, width, label="Prior SOTA (Qwen3-8B SFT v2)", color=COLOR_PRIOR, edgecolor=BORDER_COLOR, linewidth=1.2)
-    rects3 = ax.bar(x + 0.5 * width, sft_scores, width, label="Nemotron SFT v1 Champion", color=COLOR_SFT, edgecolor=BORDER_COLOR, linewidth=1.2)
-    rects4 = ax.bar(x + 1.5 * width, rl_scores, width, label="Nemotron RL N3 Champion (Ours)", color=COLOR_RL, edgecolor=COLOR_RL_GLOW, linewidth=2.0)
+    rects2 = ax.bar(x - 0.5 * width, prior_sota, width, label="Prior Baseline (Qwen3-8B SFT v2)", color=COLOR_PRIOR, edgecolor=BORDER_COLOR, linewidth=1.2)
+    rects3 = ax.bar(x + 0.5 * width, sft_scores, width, label="Nemotron SFT v1", color=COLOR_SFT, edgecolor=BORDER_COLOR, linewidth=1.2)
+    rects4 = ax.bar(x + 1.5 * width, rl_scores, width, label="Nemotron RL N3 (Ours)", color=COLOR_RL, edgecolor=COLOR_RL_GLOW, linewidth=2.0)
 
     # Title & Subtitle
     ax.set_title("BPF-Guardian Benchmark Performance Across Training Stages", fontsize=16, fontweight="bold", color=TEXT_WHITE, pad=32, loc="left")

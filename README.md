@@ -8,9 +8,9 @@
 [![In-Kernel Verified](https://img.shields.io/badge/Verifier-BPF__PROG__TEST__RUN-emerald)](#live-in-kernel-verification-pipeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**BPF-Guardian** is an open-source framework and specialized foundation model for synthesizing, verifying, and repairing Linux In-Kernel **eBPF / XDP (eXpress Data Path)** network programs. 
+**BPF-Guardian** is an open-source framework and specialized eBPF/XDP coding model for synthesizing, verifying, and repairing Linux In-Kernel **eBPF / XDP (eXpress Data Path)** network programs. 
 
-Trained on [`nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16`](https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16) through a rigorous family-heldout SFT curriculum and **two-turn diagnostic-guided RLVR** with a live Linux kernel verifier loop, BPF-Guardian establishes the state of the art on in-kernel network code generation with **+90.3% relative gain** over prior dense baselines.
+Trained on [`nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16`](https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16) through a rigorous family-heldout SFT curriculum and **two-turn diagnostic-guided RLVR** with a live Linux kernel verifier loop, BPF-Guardian achieves our best result to date on the project's held-out in-kernel eBPF/XDP benchmark with **+90.3% relative gain** over prior dense baselines.
 
 > 🚀 **Interactive Visual Showcase**: <a href="https://ravindratarunokusumo.github.io/BPF-FT-Project/" target="_blank"><strong>Launch Live Architecture & Workflow Dashboard (<code>docs/index.html</code>) ↗</strong></a>  
 > *(Clicking <a href="https://ravindratarunokusumo.github.io/BPF-FT-Project/" target="_blank"><strong><code>docs/index.html</code></strong></a> opens the fully rendered dashboard in a new tab &bull; Mirror: <a href="https://htmlpreview.github.io/?https://github.com/RavindraTarunokusumo/BPF-FT-Project/blob/experiment/nemotron-3.5-lightning/docs/index.html" target="_blank">HTMLPreview</a> &bull; Raw code: <a href="https://github.com/RavindraTarunokusumo/BPF-FT-Project/blob/experiment/nemotron-3.5-lightning/docs/index.html" target="_blank">GitHub file view</a>)*
@@ -23,7 +23,7 @@ Trained on [`nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16`](https://hugging
 
 Every rollout and evaluation is verified against a real Linux Kernel (`6.8.0-106-generic`) on dedicated host infrastructure using `clang-18 -target bpf -O2`, `bpftool prog load`, and dynamic socket injection via `BPF_PROG_TEST_RUN`. **Zero mock verifiers are used.**
 
-| Evaluation Benchmark | Suite Size | Base Nemotron 30B | Prior SOTA (Qwen3-8B SFT v2) | Nemotron SFT v1 | Nemotron RL N3 (Solve@2) | Relative Improvement |
+| Evaluation Benchmark | Suite Size | Base Nemotron 30B | Prior Baseline (Qwen3-8B SFT v2) | Nemotron SFT v1 | Nemotron RL N3 (Solve@2) | Relative Improvement |
 |:---|---:|---:|---:|---:|---:|---:|
 | **Protected Private Synthesis** | 120 tasks | 0 / 120 (0.0%) | 31 / 120 (25.8%) | 54 / 120 (45.0%) | **59 / 120 (49.2%)** | **+90.3%** |
 | **Protected Standalone Repair** | 120 tasks | 79 / 120 (65.8%) | 85 / 120 (70.8%) | **91 / 120 (75.8%)** | **91 / 120 (75.8%)** | **+7.1%** |
@@ -52,8 +52,8 @@ All model weights and datasets are published under user namespace [`rvindra`](ht
 - **Format**: Standard Hugging Face PEFT LoRA adapter (`1.47 GB` safetensors).
 - **LoRA Configuration**: Rank 32, Alpha 64, targeting all attention and MLP projections (`q_proj`, `k_proj`, `v_proj`, `o_proj`, `gate_proj`, `up_proj`, `down_proj`).
 - **Available Branches**:
-  - `main`: **SFT v1 Champion** (Peak standalone repair: **75.8%** pass rate, 168/276 on combined benchmark).
-  - `rl-n3`: **RL N3 Multi-Turn Repair Champion** (Optimized for two-turn interactive repair: **49.2% Solve@2** on protected synthesis, **73.3%** on confirmation).
+  - `main`: **Nemotron SFT v1** (Peak standalone repair: **75.8%** pass rate, 168/276 on combined benchmark).
+  - `rl-n3`: **Nemotron RL N3** (Optimized for two-turn interactive repair: **49.2% Solve@2** on protected synthesis, **73.3%** on confirmation).
 
 ### 2. SFT Dataset: [`rvindra/bpf-guardian-sft`](https://huggingface.co/datasets/rvindra/bpf-guardian-sft)
 - **2,320 total examples** (1,913 train / 407 validation across 1,360 unique task specifications).
@@ -85,7 +85,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
     device_map="auto"
 )
 
-# Load SFT champion (revision="main") or RL multi-turn champion (revision="rl-n3")
+# Load SFT model (revision="main") or RL model (revision="rl-n3")
 model = PeftModel.from_pretrained(base_model, peft_model_id, revision="rl-n3")
 
 # Task prompt
@@ -175,7 +175,7 @@ Every generated XDP program undergoes strict 4-stage validation:
 
 ```bibtex
 @misc{nemotron_bpf_guardian_2026,
-  author = {BPF-Guardian Research Team},
+  author = {Tarunokusumo, Ravindra},
   title = {Nemotron-3.5-Lightning BPF-Guardian: Verified In-Kernel eBPF/XDP Generation},
   year = {2026},
   publisher = {Hugging Face},

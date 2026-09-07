@@ -82,7 +82,7 @@ new_benchmark_content = f"""    <!-- SECTION 1: VISUAL PERFORMANCE SHOWCASE -->
       <div class="rounded-2xl bg-dark-card border border-dark-border p-4 sm:p-6 overflow-hidden glow-accent">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <h3 class="text-base font-semibold text-white flex items-center gap-2">
-            Primary Suite Benchmark Comparison: Base vs Prior SOTA vs SFT vs RL
+            Primary Suite Benchmark Comparison: Base vs Prior Baseline vs SFT vs RL
           </h3>
           <div class="flex items-center gap-2">
             <button id="view-interactive-btn" onclick="toggleMainChart('svg')" class="px-3 py-1 rounded-lg bg-brand-500/20 text-brand-300 border border-brand-500/40 text-xs font-semibold transition-all">
@@ -322,8 +322,22 @@ js_script = """  <script>
   </script>
 """
 
-if "function copyPythonCode()" not in raw_html:
-    raw_html = raw_html.replace("</body>", js_script + "\n</body>")
+# 6. Apply modest terminology replacements requested across page
+replacements = [
+    ("State-of-the-art specialized foundation model for verifiable in-kernel networking", "Specialized eBPF/XDP coding model for verifiable in-kernel networking"),
+    ("specialized foundation model", "specialized eBPF/XDP coding model"),
+    ("▲ +90.3% vs Prior SOTA (Solve@2)", "▲ +90.3% vs Prior Baseline (Solve@2)"),
+    ("Statistically paired McNemar significance comparisons against prior SOTA", "Statistically paired McNemar significance comparisons against prior baseline"),
+    ('<th class="px-4 py-3.5 text-center">Prior SOTA (Qwen3-8B)</th>', '<th class="px-4 py-3.5 text-center">Prior Baseline (Qwen3-8B)</th>'),
+    ('(+90.3% over prior SOTA)', '(+90.3% over prior baseline)'),
+    ('<span class="text-xs text-emerald-400 font-semibold">SFT v1 Champion</span>', '<span class="text-xs text-emerald-400 font-semibold">Nemotron SFT v1</span>'),
+    ('<span class="text-xs text-brand-400 font-semibold">RL N3 Champion</span>', '<span class="text-xs text-brand-400 font-semibold">Nemotron RL N3</span>'),
+    ('# Load SFT champion (revision="main") or RL champion (revision="rl-n3")', '# Load SFT model (revision="main") or RL model (revision="rl-n3")'),
+    ('author = {BPF-Guardian Research Team},', 'author = {Tarunokusumo, Ravindra},'),
+]
+
+for old, new in replacements:
+    raw_html = raw_html.replace(old, new)
 
 # Write to both docs/index.html and index.html
 DOCS_HTML.write_text(raw_html, encoding="utf-8")

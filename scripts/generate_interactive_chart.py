@@ -11,9 +11,9 @@ def build_svg_chart():
             "cx": 177.5,
             "bars": [
                 {"model": "Base Model (Nemotron 30B)", "val": 0.0, "count": "0 / 120 (0.0%)", "fill": "#475569", "stroke": "#64748B", "badge": "Untuned zero-shot baseline"},
-                {"model": "Prior SOTA (Qwen3-8B SFT v2)", "val": 25.8, "count": "31 / 120 (25.8%)", "fill": "#6366F1", "stroke": "#818CF8", "badge": "Prior dense 8B baseline"},
-                {"model": "Nemotron SFT v1 Champion", "val": 40.0, "count": "48 / 120 (40.0%)", "fill": "#059669", "stroke": "#10B981", "badge": "+55.0% relative over prior SOTA"},
-                {"model": "Nemotron RL N3 Champion (Ours)", "val": 44.2, "count": "53 / 120 (44.2%)", "fill": "#34D399", "stroke": "#6EE7B7", "badge": "+71.3% relative gain (Pass@1)"}
+                {"model": "Prior Baseline (Qwen3-8B SFT v2)", "val": 25.8, "count": "31 / 120 (25.8%)", "fill": "#6366F1", "stroke": "#818CF8", "badge": "Prior dense 8B baseline"},
+                {"model": "Nemotron SFT v1", "val": 40.0, "count": "48 / 120 (40.0%)", "fill": "#059669", "stroke": "#10B981", "badge": "+55.0% relative over prior baseline"},
+                {"model": "Nemotron RL N3 (Ours)", "val": 44.2, "count": "53 / 120 (44.2%)", "fill": "#34D399", "stroke": "#6EE7B7", "badge": "+71.3% relative gain (Pass@1)"}
             ]
         },
         {
@@ -22,9 +22,9 @@ def build_svg_chart():
             "cx": 402.5,
             "bars": [
                 {"model": "Base Model (Nemotron 30B)", "val": 0.0, "count": "0 / 120 (0.0%)", "fill": "#475569", "stroke": "#64748B", "badge": "Untuned zero-shot baseline"},
-                {"model": "Prior SOTA (Qwen3-8B SFT v2)", "val": 28.3, "count": "34 / 120 (28.3%)", "fill": "#6366F1", "stroke": "#818CF8", "badge": "Single-turn + repair retry"},
-                {"model": "Nemotron SFT v1 Champion", "val": 45.8, "count": "55 / 120 (45.8%)", "fill": "#059669", "stroke": "#10B981", "badge": "+61.8% relative over prior SOTA"},
-                {"model": "Nemotron RL N3 Champion (Ours)", "val": 49.2, "count": "59 / 120 (49.2%)", "fill": "#34D399", "stroke": "#6EE7B7", "badge": "▲ +90.3% Relative Gain (Solve@2)"}
+                {"model": "Prior Baseline (Qwen3-8B SFT v2)", "val": 28.3, "count": "34 / 120 (28.3%)", "fill": "#6366F1", "stroke": "#818CF8", "badge": "Single-turn + repair retry"},
+                {"model": "Nemotron SFT v1", "val": 45.8, "count": "55 / 120 (45.8%)", "fill": "#059669", "stroke": "#10B981", "badge": "+61.8% relative over prior baseline"},
+                {"model": "Nemotron RL N3 (Ours)", "val": 49.2, "count": "59 / 120 (49.2%)", "fill": "#34D399", "stroke": "#6EE7B7", "badge": "▲ +90.3% Relative Gain (Solve@2)"}
             ]
         },
         {
@@ -33,9 +33,9 @@ def build_svg_chart():
             "cx": 627.5,
             "bars": [
                 {"model": "Base Model (Nemotron 30B)", "val": 33.3, "count": "20 / 60 (33.3%)", "fill": "#475569", "stroke": "#64748B", "badge": "Zero-shot baseline"},
-                {"model": "Prior SOTA (Qwen3-8B SFT v2)", "val": 55.0, "count": "33 / 60 (55.0%)", "fill": "#6366F1", "stroke": "#818CF8", "badge": "Prior dense 8B baseline"},
-                {"model": "Nemotron SFT v1 Champion", "val": 70.0, "count": "42 / 60 (70.0%)", "fill": "#059669", "stroke": "#10B981", "badge": "+27.3% relative over prior SOTA"},
-                {"model": "Nemotron RL N3 Champion (Ours)", "val": 73.3, "count": "44 / 60 (73.3%)", "fill": "#34D399", "stroke": "#6EE7B7", "badge": "▲ +33.3% Relative Gain"}
+                {"model": "Prior Baseline (Qwen3-8B SFT v2)", "val": 55.0, "count": "33 / 60 (55.0%)", "fill": "#6366F1", "stroke": "#818CF8", "badge": "Prior dense 8B baseline"},
+                {"model": "Nemotron SFT v1", "val": 70.0, "count": "42 / 60 (70.0%)", "fill": "#059669", "stroke": "#10B981", "badge": "+27.3% relative over prior baseline"},
+                {"model": "Nemotron RL N3 (Ours)", "val": 73.3, "count": "44 / 60 (73.3%)", "fill": "#34D399", "stroke": "#6EE7B7", "badge": "▲ +33.3% Relative Gain"}
             ]
         },
         {
@@ -44,9 +44,9 @@ def build_svg_chart():
             "cx": 852.5,
             "bars": [
                 {"model": "Base Model (Nemotron 30B)", "val": 28.6, "count": "79 / 276 (28.6%)", "fill": "#475569", "stroke": "#64748B", "badge": "Combined zero-shot baseline"},
-                {"model": "Prior SOTA (Qwen3-8B SFT v2)", "val": 49.6, "count": "137 / 276 (49.6%)", "fill": "#6366F1", "stroke": "#818CF8", "badge": "Prior combined benchmark"},
-                {"model": "Nemotron SFT v1 Champion", "val": 60.9, "count": "168 / 276 (60.9%)", "fill": "#059669", "stroke": "#10B981", "badge": "+31 net solved tasks"},
-                {"model": "Nemotron RL N3 Champion (Ours)", "val": 62.3, "count": "172 / 276 (62.3%)", "fill": "#34D399", "stroke": "#6EE7B7", "badge": "▲ +35 Net Solved Tasks (p < 0.0001)"}
+                {"model": "Prior Baseline (Qwen3-8B SFT v2)", "val": 49.6, "count": "137 / 276 (49.6%)", "fill": "#6366F1", "stroke": "#818CF8", "badge": "Prior combined benchmark"},
+                {"model": "Nemotron SFT v1", "val": 60.9, "count": "168 / 276 (60.9%)", "fill": "#059669", "stroke": "#10B981", "badge": "+31 net solved tasks"},
+                {"model": "Nemotron RL N3 (Ours)", "val": 62.3, "count": "172 / 276 (62.3%)", "fill": "#34D399", "stroke": "#6EE7B7", "badge": "▲ +35 Net Solved Tasks (p < 0.0001)"}
             ]
         }
     ]
@@ -96,9 +96,9 @@ def build_svg_chart():
     lines.append('  <!-- Series Legend -->')
     legend_items = [
         ("Base Model (Nemotron 30B)", "#475569", "#64748B"),
-        ("Prior SOTA (Qwen3-8B SFT v2)", "#6366F1", "#818CF8"),
-        ("Nemotron SFT v1 Champion", "#059669", "#10B981"),
-        ("Nemotron RL N3 Champion (Ours)", "#34D399", "#6EE7B7")
+        ("Prior Baseline (Qwen3-8B SFT v2)", "#6366F1", "#818CF8"),
+        ("Nemotron SFT v1", "#059669", "#10B981"),
+        ("Nemotron RL N3 (Ours)", "#34D399", "#6EE7B7")
     ]
     cur_lx = 65
     lines.append('  <g class="chart-legend" font-size="11" font-family="\'Inter\', sans-serif">')
