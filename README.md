@@ -12,8 +12,8 @@
 
 Trained on [`nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16`](https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16) through a rigorous family-heldout SFT curriculum and **two-turn diagnostic-guided RLVR** with a live Linux kernel verifier loop, BPF-Guardian establishes the state of the art on in-kernel network code generation with **+90.3% relative gain** over prior dense baselines.
 
-> 🚀 **Interactive Visual Showcase**: <a href="https://ravindratarunokusumo.github.io/BPF-FT-Project/" target="_blank"><strong>Launch Live Architecture & Workflow Dashboard ↗</strong></a>  
-> *(Opens live interactive dashboard in a new tab &bull; Alternative mirror: <a href="https://htmlpreview.github.io/?https://github.com/RavindraTarunokusumo/BPF-FT-Project/blob/experiment/nemotron-3.5-lightning/docs/index.html" target="_blank">HTMLPreview</a> &bull; Source: [`docs/index.html`](docs/index.html))*
+> 🚀 **Interactive Visual Showcase**: <a href="https://ravindratarunokusumo.github.io/BPF-FT-Project/" target="_blank"><strong>Launch Live Architecture & Workflow Dashboard (<code>docs/index.html</code>) ↗</strong></a>  
+> *(Clicking <a href="https://ravindratarunokusumo.github.io/BPF-FT-Project/" target="_blank"><strong><code>docs/index.html</code></strong></a> opens the fully rendered dashboard in a new tab &bull; Mirror: <a href="https://htmlpreview.github.io/?https://github.com/RavindraTarunokusumo/BPF-FT-Project/blob/experiment/nemotron-3.5-lightning/docs/index.html" target="_blank">HTMLPreview</a> &bull; Raw code: <a href="https://github.com/RavindraTarunokusumo/BPF-FT-Project/blob/experiment/nemotron-3.5-lightning/docs/index.html" target="_blank">GitHub file view</a>)*
 
 ---
 
