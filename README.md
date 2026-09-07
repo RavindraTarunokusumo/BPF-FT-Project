@@ -165,6 +165,15 @@ Every generated XDP program undergoes strict 4-stage validation:
 └── pyproject.toml                       # Python project configuration & dependencies
 ```
 
+## Notes on AI
+
+This project was **primarily** conducted using AI:
+- **Model training**
+- **Dataset generation**
+- **Scripting and coding**
+
+---
+
 ## Acknowledgements
 
 - **Compute**: Fine-tuned and evaluated via [Thinking Machines](https://thinkingmachines.ai/).
