@@ -19,3 +19,4 @@ runs/tinker/**/ref_val_records/
 runs/tinker/**/*.log
 runs/tinker/**/code.diff
 runs/evaluation/**/records/
+build/
